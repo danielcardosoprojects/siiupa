@@ -1,0 +1,967 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>xlsTableFilter 1.0 Demo</title>
+		
+		<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/themes/redmond/jquery-ui.min.css" rel="stylesheet" type="text/css">
+		<link href="css/xlstablefilter.css" rel="stylesheet" type="text/css">
+
+		<style type="text/css">
+			body,  {
+				font-family: verdana, arial;
+				font-size: 10pt;
+				text-align: center;
+			}
+			
+			div, td, th {
+				font-family: verdana, arial;
+				font-size: 10pt;
+				text-align: left;
+			}
+
+			table {
+				padding: 0px;
+				border-collapse: collapse;
+				border-spacing: 0px;
+				width: 100%;
+			}
+			
+			h2 {
+				background-color: #F2F7FC;
+				margin: 0px;
+				padding: 4px 0px 4px 8px;
+			}
+			
+			pre {
+				background-color: #eeeeee;	
+				display: none;
+			}
+			
+			.header {
+				width: 800px;
+				margin: auto;	
+			}
+			
+			.exampleDiv {
+    			border: 1px solid #999999;
+    			width: 800px;
+    			margin: 25px auto;
+			}
+			
+			.viewcode {
+				float: right;
+				cursor: pointer;
+				padding: 5px;
+			}
+			
+			.description {
+				font-style: italic;
+				margin-bottom: 10px;
+				padding: 4px 4px 4px 8px;	
+			}
+			
+			#divRowsDisplay {
+				padding: 3px;	
+				text-align: right;
+			}
+			
+			.tblGrid th {
+				background-color: #DDDDDD;
+				border: 1px solid #FFFFFF;
+				font-size: 10pt;
+				font-weight: bold;
+				padding: 3px;
+				vertical-align: bottom;
+			}
+			.tblGrid tr:first-child th {
+				border-top: 1px solid #DDDDDD;
+				border-left: 1px solid #DDDDDD;
+			}
+			.tblGrid th:last-child {
+				border-right: 1px solid #DDDDDD;
+			}
+			.tblGrid td {
+				border: 1px solid #CCCCCC;
+				font-size: 10pt;
+				max-width: 300px;
+				overflow: hidden;
+				text-align: center;
+				white-space: nowrap;
+				padding: 3px;
+			}
+			.tblGrid tr td:first-child {
+				border-left: 1px solid #dddddd;
+			}
+			.tblGrid tr td:last-child {
+				border-right: 1px solid #dddddd;
+			}
+			.tblGrid tr:last-child td {
+				border-bottom: 1px solid #dddddd;
+			}
+		</style>
+
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
+		<script type="text/javascript" src="js/jquery.xlstablefilter.js"></script>
+		
+	</head>
+	<body>
+		<div class="header">
+			<h1>xlsTableFilter 1.0 Demo</h1>
+			<p>Excel style filters on a table. To filter on a column, click the column header.</p>
+		</div>
+
+		<div class="exampleDiv">
+		<div class="viewcode" onclick="$('#example1Code').show()">View Code</div>
+		<h2>Example 1. Basic Table Filter</h2>
+		<div class="description">A simple filter, case insensitive, using build in checkboxes.
+			
+		<pre id="example1Code">
+<code>
+&lt;script type="text/javascript"&gt;
+&lt;!--
+$(function() {
+	$("#example1").xlsTableFilter();
+});
+//--&gt;
+&lt;/script&gt;
+</code>
+		</pre>
+		</div>
+		<table id="example1" class="tblGrid">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Major</th>
+					<th>Gender</th>
+					<th>English</th>
+					<th>French</th>
+					<th>Calculus</th>
+					<th>Geometry</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Student01</td>
+					<td>Languages</td>
+					<td>male</td>
+					<td>80</td>
+					<td>70</td>
+					<td>75</td>
+					<td>80</td>
+				</tr>
+				<tr>
+					<td>Student02</td>
+					<td>Mathematics</td>
+					<td>male</td>
+					<td>90</td>
+					<td>88</td>
+					<td>100</td>
+					<td>90</td>
+
+				</tr>
+				<tr>
+					<td>Student03</td>
+					<td>Languages</td>
+					<td>female</td>
+					<td>85</td>
+					<td>95</td>
+
+					<td>80</td>
+					<td>85</td>
+				</tr>
+				<tr>
+					<td>Student04</td>
+					<td>Fine Arts</td>
+					<td>male</td>
+
+					<td>60</td>
+					<td>55</td>
+					<td>100</td>
+					<td>100</td>
+				</tr>
+				<tr>
+					<td>Student05</td>
+
+					<td>Languages</td>
+					<td>female</td>
+					<td>68</td>
+					<td>80</td>
+					<td>95</td>
+					<td>80</td>
+
+				</tr>
+				<tr>
+					<td>Student06</td>
+					<td>Mathematics</td>
+					<td>male</td>
+					<td>100</td>
+					<td>99</td>
+
+					<td>100</td>
+					<td>90</td>
+				</tr>
+				<tr>
+					<td>Student07</td>
+					<td>Fine Arts</td>
+					<td>male</td>
+
+					<td>85</td>
+					<td>68</td>
+					<td>90</td>
+					<td>90</td>
+				</tr>
+				<tr>
+					<td>Student08</td>
+
+					<td>Languages</td>
+					<td>male</td>
+					<td>100</td>
+					<td>90</td>
+					<td>90</td>
+					<td>85</td>
+
+				</tr>
+				<tr>
+					<td>Student09</td>
+					<td>Mathematics</td>
+					<td>male</td>
+					<td>80</td>
+					<td>50</td>
+
+					<td>65</td>
+					<td>75</td>
+				</tr>
+				<tr>
+					<td>Student10</td>
+					<td>Languages</td>
+					<td>male</td>
+
+					<td>85</td>
+					<td>100</td>
+					<td>100</td>
+					<td>90</td>
+				</tr>
+				<tr>
+					<td>Student11</td>
+
+					<td>Languages</td>
+					<td>male</td>
+					<td>86</td>
+					<td>85</td>
+					<td>100</td>
+					<td>100</td>
+
+				</tr>
+				<tr>
+					<td>Student12</td>
+					<td>Mathematics</td>
+					<td>female</td>
+					<td>100</td>
+					<td>75</td>
+
+					<td>70</td>
+					<td>85</td>
+				</tr>
+				<tr>
+					<td>Student13</td>
+					<td>Languages</td>
+					<td>female</td>
+
+					<td>100</td>
+					<td>80</td>
+					<td>100</td>
+					<td>90</td>
+				</tr>
+				<tr>
+					<td>Student14</td>
+
+					<td>Languages</td>
+					<td>female</td>
+					<td>50</td>
+					<td>45</td>
+					<td>55</td>
+					<td>90</td>
+
+				</tr>
+				<tr>
+					<td>Student15</td>
+					<td>Languages</td>
+					<td>male</td>
+					<td>95</td>
+					<td>35</td>
+
+					<td>100</td>
+					<td>90</td>
+				</tr>
+				<tr>
+					<td>Student16</td>
+					<td>Languages</td>
+					<td>female</td>
+
+					<td>100</td>
+					<td>50</td>
+					<td>30</td>
+					<td>70</td>
+				</tr>
+				<tr>
+					<td>Student17</td>
+
+					<td>Languages</td>
+					<td>female</td>
+					<td>80</td>
+					<td>100</td>
+					<td>55</td>
+					<td>65</td>
+
+				</tr>
+				<tr>
+					<td>Student18</td>
+					<td>Mathematics</td>
+					<td>male</td>
+					<td>30</td>
+					<td>49</td>
+
+					<td>55</td>
+					<td>75</td>
+				</tr>
+				<tr>
+					<td>Student19</td>
+					<td>Languages</td>
+					<td>male</td>
+
+					<td>68</td>
+					<td>90</td>
+					<td>88</td>
+					<td>70</td>
+				</tr>
+				<tr>
+					<td>Student20</td>
+
+					<td>Mathematics</td>
+					<td>male</td>
+					<td>40</td>
+					<td>45</td>
+					<td>40</td>
+					<td>80</td>
+
+				</tr>
+				<tr>
+					<td>Student21</td>
+					<td>Languages</td>
+					<td>male</td>
+					<td>50</td>
+					<td>45</td>
+
+					<td>100</td>
+					<td>100</td>
+				</tr>
+				<tr>
+					<td>Student22</td>
+					<td>Mathematics</td>
+					<td>male</td>
+
+					<td>100</td>
+					<td>99</td>
+					<td>100</td>
+					<td>90</td>
+				</tr>
+				<tr>
+					<td>Student23</td>
+
+					<td>Languages</td>
+					<td>female</td>
+					<td>85</td>
+					<td>80</td>
+					<td>80</td>
+					<td>80</td>
+
+				</tr>
+			</tbody>
+		</table>
+		
+		<script type="text/javascript">
+		<!--
+		$(function() {
+			$("#example1").xlsTableFilter();
+		});
+		//-->
+		</script>
+		</div>
+		
+		
+		
+		
+		
+		
+		<div class="exampleDiv">
+		<div class="viewcode" onclick="$('#example2Code').show()">View Code</div>
+		<h2>Example 2. Custom Checkbox Table Filter</h2>
+		<div class="description">A filter, case insensitive, using styled checkboxes.
+			
+		<pre id="example2Code">
+<code>
+&lt;script type="text/javascript"&gt;
+&lt;!--
+$(function() {
+	$("#example2").xlsTableFilter({
+		checkStyle: "custom"
+	});
+});
+//--&gt;
+&lt;/script&gt;
+</code>
+		</pre>
+		</div>
+		<table id="example2" class="tblGrid">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Major</th>
+					<th>Gender</th>
+					<th>English</th>
+					<th>French</th>
+					<th>Calculus</th>
+					<th>Geometry</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Student01</td>
+					<td>Languages</td>
+					<td>male</td>
+					<td>80</td>
+					<td>70</td>
+					<td>75</td>
+					<td>80</td>
+				</tr>
+				<tr>
+					<td>Student02</td>
+					<td>Mathematics</td>
+					<td>male</td>
+					<td>90</td>
+					<td>88</td>
+					<td>100</td>
+					<td>90</td>
+
+				</tr>
+				<tr>
+					<td>Student03</td>
+					<td>Languages</td>
+					<td>female</td>
+					<td>85</td>
+					<td>95</td>
+
+					<td>80</td>
+					<td>85</td>
+				</tr>
+				<tr>
+					<td>Student04</td>
+					<td>Languages</td>
+					<td>male</td>
+
+					<td>60</td>
+					<td>55</td>
+					<td>100</td>
+					<td>100</td>
+				</tr>
+				<tr>
+					<td>Student05</td>
+
+					<td>Languages</td>
+					<td>female</td>
+					<td>68</td>
+					<td>80</td>
+					<td>95</td>
+					<td>80</td>
+
+				</tr>
+				<tr>
+					<td>Student06</td>
+					<td>Mathematics</td>
+					<td>male</td>
+					<td>100</td>
+					<td>99</td>
+
+					<td>100</td>
+					<td>90</td>
+				</tr>
+				<tr>
+					<td>Student07</td>
+					<td>Mathematics</td>
+					<td>male</td>
+
+					<td>85</td>
+					<td>68</td>
+					<td>90</td>
+					<td>90</td>
+				</tr>
+				<tr>
+					<td>Student08</td>
+
+					<td>Languages</td>
+					<td>male</td>
+					<td>100</td>
+					<td>90</td>
+					<td>90</td>
+					<td>85</td>
+
+				</tr>
+				<tr>
+					<td>Student09</td>
+					<td>Mathematics</td>
+					<td>male</td>
+					<td>80</td>
+					<td>50</td>
+
+					<td>65</td>
+					<td>75</td>
+				</tr>
+				<tr>
+					<td>Student10</td>
+					<td>Languages</td>
+					<td>male</td>
+
+					<td>85</td>
+					<td>100</td>
+					<td>100</td>
+					<td>90</td>
+				</tr>
+				<tr>
+					<td>Student11</td>
+
+					<td>Languages</td>
+					<td>male</td>
+					<td>86</td>
+					<td>85</td>
+					<td>100</td>
+					<td>100</td>
+
+				</tr>
+				<tr>
+					<td>Student12</td>
+					<td>Mathematics</td>
+					<td>female</td>
+					<td>100</td>
+					<td>75</td>
+
+					<td>70</td>
+					<td>85</td>
+				</tr>
+				<tr>
+					<td>Student13</td>
+					<td>Languages</td>
+					<td>female</td>
+
+					<td>100</td>
+					<td>80</td>
+					<td>100</td>
+					<td>90</td>
+				</tr>
+				<tr>
+					<td>Student14</td>
+
+					<td>Languages</td>
+					<td>female</td>
+					<td>50</td>
+					<td>45</td>
+					<td>55</td>
+					<td>90</td>
+
+				</tr>
+				<tr>
+					<td>Student15</td>
+					<td>Languages</td>
+					<td>male</td>
+					<td>95</td>
+					<td>35</td>
+
+					<td>100</td>
+					<td>90</td>
+				</tr>
+				<tr>
+					<td>Student16</td>
+					<td>Languages</td>
+					<td>female</td>
+
+					<td>100</td>
+					<td>50</td>
+					<td>30</td>
+					<td>70</td>
+				</tr>
+				<tr>
+					<td>Student17</td>
+
+					<td>Languages</td>
+					<td>female</td>
+					<td>80</td>
+					<td>100</td>
+					<td>55</td>
+					<td>65</td>
+
+				</tr>
+				<tr>
+					<td>Student18</td>
+					<td>Mathematics</td>
+					<td>male</td>
+					<td>30</td>
+					<td>49</td>
+
+					<td>55</td>
+					<td>75</td>
+				</tr>
+				<tr>
+					<td>Student19</td>
+					<td>Languages</td>
+					<td>male</td>
+
+					<td>68</td>
+					<td>90</td>
+					<td>88</td>
+					<td>70</td>
+				</tr>
+				<tr>
+					<td>Student20</td>
+
+					<td>Mathematics</td>
+					<td>male</td>
+					<td>40</td>
+					<td>45</td>
+					<td>40</td>
+					<td>80</td>
+
+				</tr>
+				<tr>
+					<td>Student21</td>
+					<td>Languages</td>
+					<td>male</td>
+					<td>50</td>
+					<td>45</td>
+
+					<td>100</td>
+					<td>100</td>
+				</tr>
+				<tr>
+					<td>Student22</td>
+					<td>Mathematics</td>
+					<td>male</td>
+
+					<td>100</td>
+					<td>99</td>
+					<td>100</td>
+					<td>90</td>
+				</tr>
+				<tr>
+					<td>Student23</td>
+
+					<td>Languages</td>
+					<td>female</td>
+					<td>85</td>
+					<td>80</td>
+					<td>80</td>
+					<td>80</td>
+
+				</tr>
+			</tbody>
+		</table>
+		
+		<script type="text/javascript">
+		<!--
+		$(function() {
+			$("#example2").xlsTableFilter({
+				checkStyle: "custom"
+			});
+		});
+		//-->
+		</script>
+		</div>
+		
+		
+		
+		
+		<div class="exampleDiv">
+		<div class="viewcode" onclick="$('#example3Code').show()">View Code</div>
+		<h2>Example 3. Table Filter with Displayed Rows</h2>
+		<div class="description">A filter, case insensitive, using styled checkboxes and printing the number of rows displayed.
+			
+		<pre id="example3Code">
+<code>
+&lt;script type="text/javascript"&gt;
+&lt;!--
+$(function() {
+	$("#example3").xlsTableFilter({
+		checkStyle: "custom",
+		rowsDisplay: "divRowsDisplay"
+	});
+});
+//--&gt;
+&lt;/script&gt;
+</code>
+		</pre>
+		</div>
+		<div id="divRowsDisplay"></div>
+		<table id="example3" class="tblGrid">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Major</th>
+					<th>Gender</th>
+					<th>English</th>
+					<th>French</th>
+					<th>Calculus</th>
+					<th>Geometry</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>Student01</td>
+					<td>Languages</td>
+					<td>male</td>
+					<td>80</td>
+					<td>70</td>
+					<td>75</td>
+					<td>80</td>
+				</tr>
+				<tr>
+					<td>Student02</td>
+					<td>Mathematics</td>
+					<td>male</td>
+					<td>90</td>
+					<td>88</td>
+					<td>100</td>
+					<td>90</td>
+
+				</tr>
+				<tr>
+					<td>Student03</td>
+					<td>Languages</td>
+					<td>female</td>
+					<td>85</td>
+					<td>95</td>
+
+					<td>80</td>
+					<td>85</td>
+				</tr>
+				<tr>
+					<td>Student04</td>
+					<td>Languages</td>
+					<td>male</td>
+
+					<td>60</td>
+					<td>55</td>
+					<td>100</td>
+					<td>100</td>
+				</tr>
+				<tr>
+					<td>Student05</td>
+
+					<td>Languages</td>
+					<td>female</td>
+					<td>68</td>
+					<td>80</td>
+					<td>95</td>
+					<td>80</td>
+
+				</tr>
+				<tr>
+					<td>Student06</td>
+					<td>Mathematics</td>
+					<td>male</td>
+					<td>100</td>
+					<td>99</td>
+
+					<td>100</td>
+					<td>90</td>
+				</tr>
+				<tr>
+					<td>Student07</td>
+					<td>Mathematics</td>
+					<td>male</td>
+
+					<td>85</td>
+					<td>68</td>
+					<td>90</td>
+					<td>90</td>
+				</tr>
+				<tr>
+					<td>Student08</td>
+
+					<td>Languages</td>
+					<td>male</td>
+					<td>100</td>
+					<td>90</td>
+					<td>90</td>
+					<td>85</td>
+
+				</tr>
+				<tr>
+					<td>Student09</td>
+					<td>Mathematics</td>
+					<td>male</td>
+					<td>80</td>
+					<td>50</td>
+
+					<td>65</td>
+					<td>75</td>
+				</tr>
+				<tr>
+					<td>Student10</td>
+					<td>Languages</td>
+					<td>male</td>
+
+					<td>85</td>
+					<td>100</td>
+					<td>100</td>
+					<td>90</td>
+				</tr>
+				<tr>
+					<td>Student11</td>
+
+					<td>Languages</td>
+					<td>male</td>
+					<td>86</td>
+					<td>85</td>
+					<td>100</td>
+					<td>100</td>
+
+				</tr>
+				<tr>
+					<td>Student12</td>
+					<td>Mathematics</td>
+					<td>female</td>
+					<td>100</td>
+					<td>75</td>
+
+					<td>70</td>
+					<td>85</td>
+				</tr>
+				<tr>
+					<td>Student13</td>
+					<td>Languages</td>
+					<td>female</td>
+
+					<td>100</td>
+					<td>80</td>
+					<td>100</td>
+					<td>90</td>
+				</tr>
+				<tr>
+					<td>Student14</td>
+
+					<td>Languages</td>
+					<td>female</td>
+					<td>50</td>
+					<td>45</td>
+					<td>55</td>
+					<td>90</td>
+
+				</tr>
+				<tr>
+					<td>Student15</td>
+					<td>Languages</td>
+					<td>male</td>
+					<td>95</td>
+					<td>35</td>
+
+					<td>100</td>
+					<td>90</td>
+				</tr>
+				<tr>
+					<td>Student16</td>
+					<td>Languages</td>
+					<td>female</td>
+
+					<td>100</td>
+					<td>50</td>
+					<td>30</td>
+					<td>70</td>
+				</tr>
+				<tr>
+					<td>Student17</td>
+
+					<td>Languages</td>
+					<td>female</td>
+					<td>80</td>
+					<td>100</td>
+					<td>55</td>
+					<td>65</td>
+
+				</tr>
+				<tr>
+					<td>Student18</td>
+					<td>Mathematics</td>
+					<td>male</td>
+					<td>30</td>
+					<td>49</td>
+
+					<td>55</td>
+					<td>75</td>
+				</tr>
+				<tr>
+					<td>Student19</td>
+					<td>Languages</td>
+					<td>male</td>
+
+					<td>68</td>
+					<td>90</td>
+					<td>88</td>
+					<td>70</td>
+				</tr>
+				<tr>
+					<td>Student20</td>
+
+					<td>Mathematics</td>
+					<td>male</td>
+					<td>40</td>
+					<td>45</td>
+					<td>40</td>
+					<td>80</td>
+
+				</tr>
+				<tr>
+					<td>Student21</td>
+					<td>Languages</td>
+					<td>male</td>
+					<td>50</td>
+					<td>45</td>
+
+					<td>100</td>
+					<td>100</td>
+				</tr>
+				<tr>
+					<td>Student22</td>
+					<td>Mathematics</td>
+					<td>male</td>
+
+					<td>100</td>
+					<td>99</td>
+					<td>100</td>
+					<td>90</td>
+				</tr>
+				<tr>
+					<td>Student23</td>
+
+					<td>Languages</td>
+					<td>female</td>
+					<td>85</td>
+					<td>80</td>
+					<td>80</td>
+					<td>80</td>
+
+				</tr>
+			</tbody>
+		</table>
+		
+		<script type="text/javascript">
+		<!--
+		$(function() {
+			$("#example3").xlsTableFilter({
+				checkStyle: "custom",
+				rowsDisplay: "divRowsDisplay"
+			});
+		});
+		//-->
+		</script>
+		</div>
+	</body>
+</html>

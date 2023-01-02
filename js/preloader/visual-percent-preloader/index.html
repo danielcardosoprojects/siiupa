@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>jQuery Percent Page Preloader Example</title>
+<link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<style>
+  html,* { font-family: 'Inter'; box-sizing: border-box; }
+body { background-color: #fafafa; line-height:1.6;}
+.lead { font-size: 1.5rem; font-weight: 300; }
+.container { margin: 100px auto; max-width: 960px; }
+.btn { padding: 1.25rem; border: 0; border-radius: 3px; background-color: #4F46E5; color: #fff; cursor: pointer; }
+</style>
+<link rel="stylesheet" href="percent-preloader.css" />
+</head>
+
+<body>
+<div class="container">
+  <h1>jQuery Percent Page Preloader Example</h1>
+  <div id="carbon-block"></div>
+<div><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2783044520727903"
+     crossorigin="anonymous"></script>
+<!-- jQuery_demo -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-2783044520727903"
+     data-ad-slot="2780937993"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script></div>
+  <p class="lead">A simple, lightweight jQuery visual preloader plugin that displays the loading progress of the current page in percentage.</p>
+  <img src="https://source.unsplash.com/HwtWJ5LraB8/960x700" />
+</div>
+<div class="preloader">
+  <div class="inner">
+    <span class="percentage"><span id="percentage">15</span>%</span>
+  </div>
+  <div class="loader-progress" id="loader-progress"> </div>
+</div>
+<div class="transition-overlay"></div>
+<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+<script src="percent-preloader.js"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1VDDWMRSTH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-1VDDWMRSTH');
+</script>
+<script>
+try {
+  fetch(new Request("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", { method: 'HEAD', mode: 'no-cors' })).then(function(response) {
+    return true;
+  }).catch(function(e) {
+    var carbonScript = document.createElement("script");
+    carbonScript.src = "//cdn.carbonads.com/carbon.js?serve=CK7DKKQU&placement=wwwjqueryscriptnet";
+    carbonScript.id = "_carbonads_js";
+    document.getElementById("carbon-block").appendChild(carbonScript);
+  });
+} catch (error) {
+  console.log(error);
+}
+</script>
+</body>
+</html>

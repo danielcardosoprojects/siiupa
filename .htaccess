@@ -1,0 +1,65 @@
+﻿<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteRule ^adm\/?$ index.php?setor=adm [L]
+RewriteRule ^adm\/([a-z,0-9,A-Z,_-]+)/?$ index.php?setor=adm&sub=$1 [L]
+RewriteRule ^adm/rh/perfil/([a-z,0-9,A-Z,_-]+)$ index.php?setor=adm&sub=rh&subsub=perfil&id=$1 [L]
+RewriteRule ^adm/rh/folha/([a-z,0-9,A-Z,_-]+)$ index.php?setor=adm&sub=rh&subsub=rhfolhaexibe&id=$1
+RewriteRule ^adm/rh/folha/([a-z,0-9,A-Z,_-]+)#?/?([a-z,0-9,A-Z,_-]+)?$ index.php?setor=adm&sub=rh&subsub=rhfolhaexibe&id=$1#$2 [L]
+RewriteRule ^css\/([a-z,0-9,A-Z,_-]+)$ css/$1 [L]
+
+RewriteRule ^farmacia\/?$ index.php?setor=farm [L]
+RewriteRule ^farmacia\/([a-z,0-9,A-Z,_-]+)/$ index.php?setor=farm&sub=$1 [L]
+RewriteRule ^farmacia\estoque/?$ index.php?setor=farm&sub=estoque [L]
+RewriteRule ^farmacia/estoque/filtra/classe-([a-z,0-9,A-Z,_-]+)?$ index.php?setor=farm&sub=estoque&fclasse=$1
+
+RewriteRule ^farmacia/estoque/filtra/genero-([a-z,0-9,A-Z,_-]+)?$ index.php?setor=farm&sub=estoque&fgenero=$1
+
+RewriteRule ^farmacia/lote$ index.php?setor=farm&sub=lote [L]
+
+RewriteRule ^farmacia/movimento/entrada$ index.php?setor=farm&sub=movimentoentrada [L]
+RewriteRule ^farmacia/movimento/entrada/envia$ index.php?setor=farm&sub=entradamovimento [L]
+
+RewriteRule ^farmacia/movimentos?/$ index.php?setor=farm&sub=movimentos [L]
+RewriteRule ^farmacia/movimentos/([a-z,0-9,A-Z,_-]+)-a-([a-z,0-9,A-Z,_-]+)&([a-z,0-9,A-Z,_-]+)&([a-z,0-9,A-Z,_-]+)&([A-Za-zÀ-ü0-9,_-]+)?\/?$ index.php?setor=farm&sub=movimentos&datainicio=$1&datafim=$2&tipo=$3&generoOpt=$4&textobusca=$5 [NC]
+RewriteRule ^farmacia/movimento/saida$ index.php?setor=farm&sub=movimentosaida [L]
+RewriteRule ^farmacia/movimento/saida/envia$ index.php?setor=farm&sub=saidamovimento [L]
+
+RewriteRule ^farmacia/cadastrarmovimento$ farmacia/paginafarm_cadastramovimento.php [L]	
+RewriteRule ^farmacia/cadastramovimento/([a-z,0-9,A-Z,_-]+)?$ index.php$1 [L]
+
+
+RewriteRule ^farmacia/item-entrada/([A-Za-zÀ-ü0-9,_-]+)$ index.php?setor=farm&sub=item-entrada&acao=$1 [L]	
+
+
+RewriteRule ^farmacia/cadastraritem$ farmacia/paginafarm_item.php [L]
+
+RewriteRule ^farmacia/profissional$ farmacia/paginafarm_profissional.php [L]
+
+RewriteRule ^farmacia/registra/profissional/([a-z,0-9,A-Z,_-]+)?$ farmacia/paginafarm_inserebd.php?acao=$1 [L]
+
+RewriteRule ^farmacia/pagina/([a-z,0-9,A-Z,_-]+)?$ index.php?setor=farm&pagina=$1 [L]
+RewriteRule ^farmacia/pagina/([a-z,0-9,A-Z,_-]+)/quantidade/([a-z,0-9,A-Z,_-]+)?$ index.php?setor=farm&pagina=$1&quantidade=$2 [L]
+
+RewriteRule ^farmacia/pagina/([a-z,0-9,A-Z,_-]+)?$ index.php?setor=farm&pagina=$1 [L]
+RewriteRule ^farmacia/ranking/?$ index.php?setor=farm&sub=ranking [L]
+RewriteRule ^farmacia/validade/?$ index.php?setor=farm&sub=validade [L]
+
+
+RewriteRule ^farmacia/setor$ farmacia/paginafarm_setor.php [L]
+RewriteRule ^farmacia/setor/novo$ farmacia/paginafarm_setor_novo.php [L]
+RewriteRule ^farmacia/setor/registra/novo/?$ farmacia/paginafarm_inserebd.php?acao=novosetor [L]
+RewriteRule ^farmacia/setor/registra/edita/?$ farmacia/paginafarm_inserebd.php?acao=editasetor [L]
+
+RewriteRule ^farmacia/item$ farmacia/paginafarm_item.php [L]
+
+RewriteRule ^farmacia/item-detalhe/([a-z,0-9,A-Z,_]+)-([a-z,0-9,A-Z,_-]+)$ index.php?setor=farm&sub=item_detalhe&id=$1&texto=$2 [L]
+
+RewriteRule ^farmacia/item/novo$ farmacia/paginafarm_item_formulario.php?acao=novoItem [L]
+RewriteRule ^farmacia/item/edita/([a-z,0-9,A-ZZ,_-]+)$ farmacia/paginafarm_item_formulario.php?acao=editaItem&iditem=$1 [L]
+
+RewriteRule ^farmacia/item/atualiza-lote/?$ farmacia/paginafarm_inserebd.php?acao=atualizalote [L]
+
+RewriteRule ^farmacia/bdjson/([a-z,0-9,A-Z,_-]+)?$ farmacia/paginafarm_bdjson.php?acao=$1 [L]
+RewriteRule ^farmacia/bd$ farmacia/paginafarm_inserebd.php [L]
+
+</IfModule>

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="pt-br"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Enviado dados via GET e POST</title>
+
+    <link rel="shortcut icon" type="images/gif" href="http://devfuria.com.br/php/assets/imagens/favicon.ico">
+
+    <meta name="description" content="Estamos no navegador criando dois tipos de requisições GET e POST">
+
+    <meta name="author" content="">
+
+    <link rel="stylesheet" href="Enviado%20dados%20via%20GET%20e%20POST_arquivos/css.css">
+    <!-- <link rel="stylesheet" href="/assets/font-awesome.min.css" > -->
+    <link rel="stylesheet" href="Enviado%20dados%20via%20GET%20e%20POST_arquivos/bootstrap.css">
+    <link rel="stylesheet" href="Enviado%20dados%20via%20GET%20e%20POST_arquivos/pygmentize-highlight.css">
+    <link rel="stylesheet" href="Enviado%20dados%20via%20GET%20e%20POST_arquivos/highlight-github.css">
+    <link rel="stylesheet" href="Enviado%20dados%20via%20GET%20e%20POST_arquivos/index.css">
+
+    <!--
+
+    include others css
+
+    <link  rel="stylesheet" media="screen" href="/assets/foo/style.css" >
+
+    -->
+
+    <script>(function addTranscript() {
+  function debounce(callback, wait, immediate = false) {
+    let timeout = null;
+
+    return function () {
+      const callNow = immediate && !timeout;
+      const next = () => callback.apply(this, arguments);
+
+      clearTimeout(timeout);
+      timeout = setTimeout(next, wait);
+
+      if (callNow) {
+        next();
+      }
+    };
+  }
+
+  function waitFor(selector, callback, timeout) {
+    const element = document.querySelector(selector);
+    if (element) {
+      callback(element);
+    } else {
+      if (timeout) {
+        return window.setTimeout(() => {
+          return window.requestAnimationFrame(() => {
+            waitFor(selector, callback);
+          });
+        }, timeout);
+      }
+      return window.requestAnimationFrame(() => {
+        waitFor(selector, callback);
+      });
+    }
+  }
+
+  function onVideoChange(cb) {
+    const debouncedCallback = debounce(cb, 200);
+    waitFor(
+      "ytd-player",
+      function handlePlayer(player) {
+        const video = document.querySelector(".html5-main-video");
+        if (!video) {
+          setTimeout(() => handlePlayer(player), 1000);
+          return;
+        }
+        debouncedCallback();
+        const observer = new MutationObserver(debouncedCallback);
+        observer.observe(video, {
+          childList: false,
+          subtree: false,
+          attributes: true,
+        });
+      },
+      100
+    );
+  }
+
+  function renderTranscript() {
+    const player = document.querySelector("ytd-player")?.getPlayer();
+    if (!player) {
+      return;
+    }
+
+    const { isLive, video_id } = player.getVideoData();
+    const options = player.getOptions();
+    const hasCaptions = options.includes("captions");
+
+    if (!hasCaptions || isLive) {
+      document.querySelector("#transcript-info")?.remove();
+      return;
+    }
+
+    document.querySelector("#transcript-info")?.remove();
+
+    const wrapper = document.createElement("div");
+    wrapper.id = `transcript-info`;
+    wrapper.style = `
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 8px;
+    `.replace("\n", " ");
+
+    const a = document.createElement("a");
+    a.setAttribute("href", `https://video-insights.com/en/video/${video_id}`);
+    a.setAttribute("target", "_blank");
+    a.setAttribute(
+      "style",
+      `
+        color: var(--yt-spec-call-to-action);
+        background-color: transparent;
+        text-transform: uppercase;
+        border: 1px solid var(--yt-spec-call-to-action);
+        padding: var(--yt-button-padding-minus-border);
+        width: var(--yt-paper-button-width, auto);
+        height: var(--yt-paper-button-height, auto);
+        border-radius: inherit;
+        text-align: center;
+        min-width: var(--yt-paper-button-min-width, var(--ytd-paper-button-min-width, 5.14em));
+        font-size: var(--yt-paper-button-font-size, inherit);
+        transition: var(--shadow-transition_-_transition);
+        margin: var(--yt-button-margin, 0 0.29em);
+        text-transform: uppercase;
+        vertical-align: middle;
+        white-space: nowrap;
+        font-size: var(--ytd-tab-system_-_font-size);
+        font-weight: var(--ytd-tab-system_-_font-weight);
+        letter-spacing: var(--ytd-tab-system_-_letter-spacing);
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: var(--yt-paper-button-min-width, var(--ytd-paper-button-min-width, 5.14em));
+        cursor: pointer;
+        -webkit-font-smoothing: var(--paper-font-common-base_-_-webkit-font-smoothing);
+      `.replace(/(\r\n|\n|\r|\s)/gm, "")
+    );
+    a.appendChild(document.createTextNode("Transcript "));
+    wrapper.appendChild(a);
+
+    const root = document.querySelector("ytd-video-owner-renderer");
+    root?.appendChild(wrapper);
+  }
+
+  onVideoChange(renderTranscript);
+})()</script></head>
+    <body>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+
+          
+          <ol class="breadcrumb navbar-static-top">
+              <li><a href="http://devfuria.com.br/">devfuria.com.br</a></li>
+              <li><a href="http://devfuria.com.br/php">php</a></li>
+              <li class="active">enviando-dados-via-get-post</li>
+          </ol>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-info alert-dismissible text-center" role="alert">
+    <p><small>divulgando nosso <a href="https://www.youtube.com/user/DevFuria">canal do youtube</a></small></p>
+
+    <iframe src="Enviado%20dados%20via%20GET%20e%20POST_arquivos/nDAgK4V438c.htm" allow="autoplay; encrypted-media" allowfullscreen="" width="560" height="315" frameborder="0"></iframe>
+    <p>Se <a href="https://www.youtube.com/user/DevFuria?sub_confirmation=1">inscreva em nosso canal</a> para não perder nenhuma novidade</p>
+</div>
+
+
+    <article class="container">
+      <div class="row">
+        <div class="col-sm-offset-2 col-md-8">
+          <div class="page-header">
+            <h1>Enviado dados via GET e POST <br><small>Estamos no navegador criando dois tipos de requisições GET e POST</small></h1>
+          </div>
+          <h2 id="post">POST</h2>
+
+<p>Criar uma requisição do tipo POST depende de um <strong>formulário web</strong>, se você entende um pouco de HTML, irá se sentir mais
+à vontade.</p>
+
+<p>Dentro da tag <code class="language-plaintext highlighter-rouge">form</code> temos duas propriedades importantes.</p>
+
+<ul>
+  <li>action</li>
+  <li>method</li>
+</ul>
+
+<p>A <code class="language-plaintext highlighter-rouge">action</code> será o script de destino, quer dizer para onde enviamos os dados e <code class="language-plaintext highlighter-rouge">method</code> será o método <strong>get</strong> ou <strong>post</strong>.</p>
+
+<p>Cada campo (input) que inserimos gera um par <code class="language-plaintext highlighter-rouge">nome=valor</code>.</p>
+
+<p>A propriedade <code class="language-plaintext highlighter-rouge">name</code> será o nome e a propriedade <code class="language-plaintext highlighter-rouge">value</code> será o valor.</p>
+
+<p>Apenas uma observação, o que o usuário digitar nas “inputs” será armazenado e sobrescrito na propriedade <code class="language-plaintext highlighter-rouge">value</code>. Se o
+usuário não digitar nada, o valor inicial será considerado. Inclusive se não tiver valor definido para <code class="language-plaintext highlighter-rouge">value</code> e o
+usuário não digitar nada o servidor receberá <code class="language-plaintext highlighter-rouge">""</code> (<strong>string de comprimento zero</strong>).</p>
+
+<p>Tente localizar o que eu acabei de lhe dizer no formulário abaixo (arquivo <code class="language-plaintext highlighter-rouge">index.html</code>).</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code class="hljs xml"><span class="cp"><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span></span>
+<span class="nt"><span class="hljs-tag">&lt;<span class="hljs-name">html</span></span></span><span class="hljs-tag"> </span><span class="na"><span class="hljs-tag"><span class="hljs-attr">lang</span>=</span></span><span class="s"><span class="hljs-tag"><span class="hljs-string">"pt-br"</span></span></span><span class="nt"><span class="hljs-tag">&gt;</span></span>
+    <span class="nt"><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span></span>
+        <span class="nt"><span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span></span> Nosso singelo formulário <span class="nt"><span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span></span>
+        <span class="nt"><span class="hljs-tag">&lt;<span class="hljs-name">meta</span></span></span><span class="hljs-tag"> </span><span class="na"><span class="hljs-tag"><span class="hljs-attr">charset</span>=</span></span><span class="s"><span class="hljs-tag"><span class="hljs-string">"utf-8"</span></span></span><span class="nt"><span class="hljs-tag">&gt;</span></span>
+    <span class="nt"><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span></span>
+    <span class="nt"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span></span>
+
+        <span class="nt"><span class="hljs-tag">&lt;<span class="hljs-name">form</span></span></span><span class="hljs-tag"> </span><span class="na"><span class="hljs-tag"><span class="hljs-attr">action</span>=</span></span><span class="s"><span class="hljs-tag"><span class="hljs-string">"destino.php"</span></span></span><span class="hljs-tag"> </span><span class="na"><span class="hljs-tag"><span class="hljs-attr">method</span>=</span></span><span class="s"><span class="hljs-tag"><span class="hljs-string">"post"</span></span></span><span class="nt"><span class="hljs-tag">&gt;</span></span>
+            <span class="nt"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span></span>
+                Name:  <span class="nt"><span class="hljs-tag">&lt;<span class="hljs-name">input</span></span></span><span class="hljs-tag"> </span><span class="na"><span class="hljs-tag"><span class="hljs-attr">type</span>=</span></span><span class="s"><span class="hljs-tag"><span class="hljs-string">"text"</span></span></span><span class="hljs-tag"> </span><span class="na"><span class="hljs-tag"><span class="hljs-attr">name</span>=</span></span><span class="s"><span class="hljs-tag"><span class="hljs-string">"username"</span></span></span><span class="hljs-tag"> </span><span class="na"><span class="hljs-tag"><span class="hljs-attr">value</span>=</span></span><span class="s"><span class="hljs-tag"><span class="hljs-string">"João da Silva"</span></span></span><span class="hljs-tag"> </span><span class="nt"><span class="hljs-tag">/&gt;</span></span>
+            <span class="nt"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span>
+            <span class="nt"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span></span>
+                Email: <span class="nt"><span class="hljs-tag">&lt;<span class="hljs-name">input</span></span></span><span class="hljs-tag"> </span><span class="na"><span class="hljs-tag"><span class="hljs-attr">type</span>=</span></span><span class="s"><span class="hljs-tag"><span class="hljs-string">"text"</span></span></span><span class="hljs-tag"> </span><span class="na"><span class="hljs-tag"><span class="hljs-attr">name</span>=</span></span><span class="s"><span class="hljs-tag"><span class="hljs-string">"email"</span></span></span><span class="hljs-tag">  </span><span class="na"><span class="hljs-tag"><span class="hljs-attr">value</span>=</span></span><span class="s"><span class="hljs-tag"><span class="hljs-string">"joao@dasilva.com"</span></span></span><span class="hljs-tag"> </span><span class="nt"><span class="hljs-tag">/&gt;</span></span>
+            <span class="nt"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span>
+            <span class="nt"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span></span>
+                <span class="nt"><span class="hljs-tag">&lt;<span class="hljs-name">input</span></span></span><span class="hljs-tag"> </span><span class="na"><span class="hljs-tag"><span class="hljs-attr">type</span>=</span></span><span class="s"><span class="hljs-tag"><span class="hljs-string">"submit"</span></span></span><span class="hljs-tag"> </span><span class="na"><span class="hljs-tag"><span class="hljs-attr">value</span>=</span></span><span class="s"><span class="hljs-tag"><span class="hljs-string">"Submit me!"</span></span></span><span class="hljs-tag"> </span><span class="nt"><span class="hljs-tag">/&gt;</span></span>
+            <span class="nt"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span>
+        <span class="nt"><span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span></span>
+
+    <span class="nt"><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span></span>
+<span class="nt"><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></span>
+</code></pre></div></div>
+
+<p>Precisamos criar nosso arquivo de destino <code class="language-plaintext highlighter-rouge">destino.php</code>e, então, inserir o conteúdo abaixo.</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code class="hljs xml"><span class="cp"><span class="php"><span class="hljs-meta">&lt;?php</span></span></span><span class="php">
+</span><span class="nb"><span class="php">var_dump</span></span><span class="p"><span class="php">(</span></span><span class="nv"><span class="php">$_POST</span></span><span class="p"><span class="php">);</span></span><span class="php">
+</span><span class="cp"><span class="php"><span class="hljs-meta">?&gt;</span></span></span>
+</code></pre></div></div>
+
+<p>Abra o arquivo index.html em um navegador qulaquer e clique no botão “Submit me”, você deve estar vendo a seguinte informação:</p>
+
+<p><img src="Enviado%20dados%20via%20GET%20e%20POST_arquivos/var-dump-requisicao.png" alt="&quot;Figura ilustrando uma pequena requisição HTTP&quot;" title="Figura ilustrando uma pequena requisição HTTP"></p>
+
+<p>Como <code class="language-plaintext highlighter-rouge">$_POST</code> é um <a href="">array</a> podemos alterar o script PHP para:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-variable">$_POST</span>[<span class="hljs-string">'username'</span>]; // <span class="hljs-built_in">print</span> João da Silva
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">$_POST</span>[<span class="hljs-string">'email'</span>];    // <span class="hljs-built_in">print</span> joao@dasilva.com
+</code></pre></div></div>
+
+<h2 id="get-via-formulário">GET (via formulário)</h2>
+
+<p>Para criar uma requisição GET altere a propriedade <code class="language-plaintext highlighter-rouge">method</code> para “get” do nosso HTML.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code class="hljs xml">...
+<span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">action</span>=<span class="hljs-string">"destino.php"</span> <span class="hljs-attr">method</span>=<span class="hljs-string">"get"</span>&gt;</span>
+...
+</code></pre></div></div>
+
+<p>E, obviamente, altere o script PHP como mostrado abaixo:</p>
+
+<div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code class="hljs xml"><span class="cp"><span class="php"><span class="hljs-meta">&lt;?php</span></span></span><span class="php">
+</span><span class="nb"><span class="php">var_dump</span></span><span class="p"><span class="php">(</span></span><span class="nv"><span class="php">$_GET</span></span><span class="p"><span class="php">);</span></span><span class="php">
+</span><span class="cp"><span class="php"><span class="hljs-meta">?&gt;</span></span></span>
+</code></pre></div></div>
+
+<p>Temos o mesmo resultado, veja a figura:</p>
+
+<p><img src="Enviado%20dados%20via%20GET%20e%20POST_arquivos/var-dump-requisicao.png" alt="&quot;Figura ilustrando uma pequena requisição HTTP&quot;" title="Figura ilustrando uma pequena requisição HTTP"></p>
+
+<p>Logo, também podemos fazes isto:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-variable">$_GET</span>[<span class="hljs-string">'username'</span>]; // <span class="hljs-built_in">print</span> João da Silva
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">$_GET</span>[<span class="hljs-string">'email'</span>];    // <span class="hljs-built_in">print</span> joao@dasilva.com
+</code></pre></div></div>
+
+<h2 id="get-via-url">GET (via URL)</h2>
+
+<p>A requisição do tipo GET não depende exclusivamente de um formulário, ela pode ser feita através de um <strong>link</strong> (URL).</p>
+
+<p>Vamos começar com a <strong>URL</strong> que aponta para seu script.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code class="hljs bash">/<span class="hljs-built_in">local</span>/onde/esta/seu/script.php
+</code></pre></div></div>
+
+<p>O sinal de interrogação separa o script dos dados.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code class="hljs css"><span class="hljs-selector-tag">script</span><span class="hljs-selector-class">.php</span> ? <span class="hljs-selector-tag">dados</span>
+</code></pre></div></div>
+
+<p>Os dados nos separamos com o par nome=valor.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code class="hljs">script.php?nome1=valor1
+</code></pre></div></div>
+
+<p>Tendo mais de um par, utilizamos o sinal <code class="language-plaintext highlighter-rouge">&amp;</code> para separá-los.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code class="hljs">script.php?nome1=valor1&amp;nome2=valor2
+</code></pre></div></div>
+
+<p>Tente memorizar o esquema abaixo.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code class="hljs">script ?  par1  &amp;  par2  &amp;  par3  &amp; etc..
+</code></pre></div></div>
+
+<p>Em nosso exemplo, a URL ficaria assim:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code class="hljs perl">destino.php?nome=Joao da Silva&amp;email=joado@dasilva.com
+</code></pre></div></div>
+
+<p>Se você acertou o caminho do script verá que o resultado continua idêntico.</p>
+
+<p><img src="Enviado%20dados%20via%20GET%20e%20POST_arquivos/var-dump-requisicao.png" alt="&quot;Figura ilustrando uma pequena requisição HTTP&quot;" title="Figura ilustrando uma pequena requisição HTTP"></p>
+
+<p>E ainda podemos fazer isto:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code class="hljs bash"><span class="hljs-built_in">echo</span> <span class="hljs-variable">$_GET</span>[<span class="hljs-string">'username'</span>]; // <span class="hljs-built_in">print</span> João da Silva
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">$_GET</span>[<span class="hljs-string">'email'</span>];    // <span class="hljs-built_in">print</span> joao@dasilva.com
+</code></pre></div></div>
+
+<p>Podemos concluir que o GET pode ser disparado através de um formulário html e também através de uma URL.</p>
+
+<p>Isso significa que podemos criar <a href="http://devfuria.com.br/html-css/ancoras/">âncoras</a> com URL igual a que acabamos de criar.</p>
+
+<p>Altere o HTML como demonstrado abaixo, repare que eu apaguei o formulário e inseri uma âncora com nossa URL.</p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code class="hljs xml"><span class="cp"><span class="hljs-meta">&lt;!DOCTYPE html&gt;</span></span>
+<span class="nt"><span class="hljs-tag">&lt;<span class="hljs-name">html</span></span></span><span class="hljs-tag"> </span><span class="na"><span class="hljs-tag"><span class="hljs-attr">lang</span>=</span></span><span class="s"><span class="hljs-tag"><span class="hljs-string">"pt-br"</span></span></span><span class="nt"><span class="hljs-tag">&gt;</span></span>
+    <span class="nt"><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span></span>
+        <span class="nt"><span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span></span> Nosso singelo formulário <span class="nt"><span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span></span>
+        <span class="nt"><span class="hljs-tag">&lt;<span class="hljs-name">meta</span></span></span><span class="hljs-tag"> </span><span class="na"><span class="hljs-tag"><span class="hljs-attr">charset</span>=</span></span><span class="s"><span class="hljs-tag"><span class="hljs-string">"utf-8"</span></span></span><span class="nt"><span class="hljs-tag">&gt;</span></span>
+    <span class="nt"><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span></span>
+    <span class="nt"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span></span>
+
+        <span class="nt"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span></span>
+            <span class="nt"><span class="hljs-tag">&lt;<span class="hljs-name">a</span></span></span><span class="hljs-tag"> </span><span class="na"><span class="hljs-tag"><span class="hljs-attr">href</span>=</span></span><span class="s"><span class="hljs-tag"><span class="hljs-string">"destino.php?nome=Joao da Silva&amp;email=joado@dasilva.com"</span></span></span><span class="nt"><span class="hljs-tag">&gt;</span></span>Submit me!<span class="nt"><span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span></span>
+        <span class="nt"><span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></span>
+
+    <span class="nt"><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span></span>
+<span class="nt"><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></span>
+</code></pre></div></div>
+
+<p>Obs: Para que o HTML continue válido é preciso substituir os sinais <code class="language-plaintext highlighter-rouge">&amp;</code> por <code class="language-plaintext highlighter-rouge">&amp;amp;</code>.</p>
+
+<h2 id="exercício">Exercício</h2>
+
+<p>1) Experimente cada um dos exemplos que ensinamos em sua própria máquina, tenha a certeza de que entendeu o que está
+acontecendo e de como funciona o processo:</p>
+
+<ul>
+  <li>exemplo POST via formulário</li>
+  <li>exemplo GET via formulário</li>
+  <li>exemplo GET via link (âncora)</li>
+</ul>
+
+<p>2) Agora faça pequenas alterações, acrescente um campo qualquer e veja sua nova versão funcionando.</p>
+
+
+        </div>
+      </div>
+    </article>
+
+    <hr>
+
+    <footer id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <ul class="social-links">
+                    <li>
+                        <a href="https://github.com/devfuria" class="wow fadeInUp" data-wow-delay=".1s" target="_blank">
+                            <i class="fa fa-github-square">g</i>
+                        </a>
+                    </li>
+                </ul>
+                <p>
+                    Este obra está licenciado sob a
+                    <a rel="license" href="http://creativecommons.org/licenses/by/4.0/" target="_blank">
+                        Creative Commons Atribuição 4.0 Internacional
+                    </a>.
+                </p>
+                <p>
+                    <a href="http://devfuria.com.br/">www.devfuria.com.br</a>
+                </p>
+                <p>
+                    desde 2012
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+    
+<script type="text/javascript" async="" src="Enviado%20dados%20via%20GET%20e%20POST_arquivos/analytics.js"></script><script src="Enviado%20dados%20via%20GET%20e%20POST_arquivos/jquery-2.js"></script>
+
+<script src="Enviado%20dados%20via%20GET%20e%20POST_arquivos/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<script src="Enviado%20dados%20via%20GET%20e%20POST_arquivos/index.js"></script>
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async="" src="Enviado%20dados%20via%20GET%20e%20POST_arquivos/js"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-63607155-1');
+</script>
+
+
+
+    
+</body></html>

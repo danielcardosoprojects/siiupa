@@ -1,0 +1,16 @@
+A JQuery UI plugin that create an excel style filter dialog on a table containing headers
+
+Dependencies:
+	jQuery 1.9.1
+	jQuery UI 1.10.2
+
+Examples: 
+$('table').xlsTableFilter();
+Create a simple xlsTableFilter interface.
+ 
+$('table').xlsTableFilter({ ignoreColumns: [0, 3, 5] });
+Create an xlsTableFilter interface and but do not make the first, fourth, and sixth column headers filterable.
+
+$('table').tablesorter({ checkStyle: "custom", rowsDisplay: "filterDisplay" });     
+Create an xlsTableFilter interface and use custom checkboxes defined in the xlsTableFilter css style sheet.  Print 
+ the number of rows displayed in an html element with the id "filterDisplay".

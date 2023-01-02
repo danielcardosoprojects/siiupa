@@ -1,0 +1,1 @@
+SELECT func.nome, cargo.funcao_upa, fl.adc_not, fl.ext_6, fl.ext_12, fl.ext_24, fl.acionamento, fl.obs FROM db_rh.tb_folha AS fl INNER JOIN db_rh.tb_funcionario AS func ON (fl.fk_funcionario = func.id) INNER JOIN db_rh.tb_cargo AS cargo ON (func.fk_cargo = cargo.id)

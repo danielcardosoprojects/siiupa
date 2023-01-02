@@ -1,0 +1,25 @@
+O controle de estoque da Farmácia será composta de 04 tabelas
+Tabela Item
+Tabela Movimento
+Tabela Categoria
+Tabela Setor
+
+O medicamento/material será cadastrado na tabela Item, podendo o a quantidade ser 0 ou já iniciar com um estoque qualquer.
+
+Na tabela setor serão cadastradados os setores de Origem e Destino das medicações. Por exemplo:  Um movimento de entrada de medicação na Unidade terá como origem o CAF e o destino a Farmácia. Um movimento de saíde terá como origem a Farmácia e destino o Posto de Enfermagem.
+
+Na tabela Categoria, serão criadas as categorias de medicação.
+
+Na tabela de Movimento serão cadastradas as entradas e saídas de material e medicação. Esta tabela faz conexão de chave estrangeira com todas as demais tabelas.
+
+Movimento: 
+• "id" será automatico
+• "item_fk" será buscado coletado o id na tabela Item.
+• "tipo" será *entrada* ou *saída*.
+• "setor_origem_fk"  e "setor_dest_fk" será coletado o *id* na tabelma Setor.
+• "datahora" será informado pelo cadastrador.
+• "criadoem" será automático.
+• "observação" será de livre preenchimento.
+• "quantidade" será a quantidade que está *entrando* ou *saindo*.
+• "novoestoque" irá coletar a "quantidade" da tabela Item e fará o calculo (quantidade_item - quantidade_movimento). Este valor ficará cadastro em "novoestoque" e atualizará a "quantidade" na tabela Item.
+• "estoqueanterior" irá coletar a quantidade da Tabela Item antes da atualização.
