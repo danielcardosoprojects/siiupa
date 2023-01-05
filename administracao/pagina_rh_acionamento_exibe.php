@@ -28,12 +28,16 @@
                 <span class="data">📅 <?php echo $data_acionamento->format('d/m/Y'); ?></span>
                 <span class="choraria">⏰<?php echo $resultado_acionamento->qtd_horas; ?></span>
                 <?php
-                if ($resultado_acionamento->turno == "diurno") {
+                 if ($resultado_acionamento->turno == "diurno") {
                     $classeTurno = "diurno";
                     $iconeTurno = "☀️ ";
                 } elseif ($resultado_acionamento->turno == "noturno") {
                     $classeTurno = "noturno";
                     $iconeTurno = "🌙 ";
+                } elseif ($resultado_acionamento->turno == "undefined") {
+                    $classeTurno = "plantao_24h";
+                    $iconeTurno = "🚑 🚀";
+                    $resultado_acionamento->turno = "";
                 } else {
                     $classeTurno = "plantao_24h";
                     $iconeTurno = "🌇 ";

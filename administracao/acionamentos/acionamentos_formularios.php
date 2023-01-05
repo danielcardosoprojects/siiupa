@@ -97,6 +97,10 @@ if ($acao == 'cria') {
     $diurno = "checked";
     $noturno = "";
     $plantao_24h = "";
+  } else {
+    $diurno = "";
+    $noturno = "";
+    $plantao_24h = "";
   }
 
   $acionamentoobs = $_GET['acionamentoobs'];

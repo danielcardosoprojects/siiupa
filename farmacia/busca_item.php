@@ -90,6 +90,16 @@ include("../bd/conectabd.php");
             <div class="exclusao_item" data-linha="linha_item_exclusao_${id_item_selecionado}"><img src="/siiupa/imagens/icones/lixeira.svg" width="20px"></div>
             </td>
             <tr id="linha_item_exclusao_${id_item_selecionado}_lote">
+            
+            //CAMPO FABRICANTE/MARCA
+
+            <td>Fabricante/Marca:</td>
+            <td>
+            <input name="arrayitem[${id_item_selecionado}][nomeproduto]" id="nomeproduto_${id_item_selecionado}" type="text" class="form-control">
+            </td>
+
+            //....
+
             <td>Lote:</td>
             <td>
             <input name="arrayitem[${id_item_selecionado}][lote]" id="lote_${id_item_selecionado}" type="text" class="form-control"  aria-describedby="inputGroup-sizing-sm">
@@ -97,6 +107,12 @@ include("../bd/conectabd.php");
             <td>Validade:</td>
             <td>
             <input name="arrayitem[${id_item_selecionado}][validade]" id="validade_${id_item_selecionado}" type="date" class="form-control">
+            </td>
+
+            //barcode direto no Lote (estoque)
+            <td>Barcode:</td>
+            <td>
+            <input name="arrayitem[${id_item_selecionado}][barcode]" id="barcode_${id_item_selecionado}" type="text" class="form-control">
             </td>
             
 

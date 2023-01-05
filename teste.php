@@ -10,9 +10,12 @@ $a = array(
 foreach ($a as $k => $v) {
     echo "\$a[$k] => $v.\n";
     echo "<br>";
+    if($v == 2){
+        break;
+    }
 }
 
-
+echo "opa";
 ?>
 
 <script>cores = ["Verde", "Amarelo", "Azul", "Branco"];

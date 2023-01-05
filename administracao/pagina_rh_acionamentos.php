@@ -3,6 +3,34 @@
     <img src="imagens/icones/person_add.svg">
     Cadastrar novo ACIONAMENTO</a>
 <hr>
+
+<?php
+
+$sqlTiposAcionamentos = "SELECT * FROM db_rh.tb_acionamentos;";
+$tiposAcionamentos = new BD;
+$rTAcions = $tiposAcionamentos->consulta($sqlTiposAcionamentos);
+echo "<div class='tiposAcionamentos'>";
+echo "<a href='/siiupa/?setor=adm&sub=rh&subsub=acionamentos' class='btn btn-outline-dark'>Tudo</a>";
+foreach($rTAcions as $rTAcion){
+    $acionamento = utf8_encode($rTAcion->acionamento);
+    echo "<a href='/siiupa/?setor=adm&sub=rh&subsub=acionamentos&tipoAcionamento=$rTAcion->id' class='btn btn-outline-dark'>$acionamento</a>";
+    $titulosAcionamentos[$rTAcion->id] = $acionamento;
+
+}
+echo "</div>";
+
+if(isset($_GET['tipoAcionamento'])){
+    $idTipoAcionamento = $_GET['tipoAcionamento'];
+    $andTipoAcionamento = "WHERE ac.fk_acionamentos = '$idTipoAcionamento'";
+    $tipoTitulosAcionamentos = $titulosAcionamentos[$idTipoAcionamento];
+    $tituloTipoAcionamento = "Exibindo: $tipoTitulosAcionamentos"."s ⬇️";
+} else {
+    $andTipoAcionamento = '';
+    $tituloTipoAcionamento = "Exibindo: tudo ⬇️";
+}
+echo "<h2 class='tituloTiposAcionamentos'>$tituloTipoAcionamento</h2>";
+
+?>
 <strong>Busca Acionamento:</strong>
 <form id="pesquisaAcionamentos">
     <input id="entrada" class="form-control" type="txt" placeholder="O que você quer buscar?">
@@ -13,8 +41,10 @@
 <div id="box_grande">
 
     <?php
+    
+  
     $consulta_acionamento = new BD;
-    $sqlConsulta_Acionamento = "SELECT ac.*, f.nome, acs.acionamento, acs.id as acionamentosId, f.fk_cargo as cargoId, cargo.funcao_upa FROM db_rh.tb_acionamento as ac inner join db_rh.tb_funcionario as f on (ac.fk_funcionario = f.id) inner join db_rh.tb_cargo as cargo on (f.fk_cargo = cargo.id) inner join db_rh.tb_acionamentos as acs on(ac.fk_acionamentos = acs.id) ORDER BY ac.id DESC";
+    $sqlConsulta_Acionamento = "SELECT ac.*, f.nome, acs.acionamento, acs.id as acionamentosId, f.fk_cargo as cargoId, cargo.funcao_upa FROM db_rh.tb_acionamento as ac inner join db_rh.tb_funcionario as f on (ac.fk_funcionario = f.id) inner join db_rh.tb_cargo as cargo on (f.fk_cargo = cargo.id) inner join db_rh.tb_acionamentos as acs on(ac.fk_acionamentos = acs.id) $andTipoAcionamento ORDER BY ac.id DESC";
     $resultadoConsulta_Acionamento = $consulta_acionamento->consulta($sqlConsulta_Acionamento);
 
     foreach ($resultadoConsulta_Acionamento as $resultado_acionamento) {
@@ -40,6 +70,10 @@
                 } elseif ($resultado_acionamento->turno == "noturno") {
                     $classeTurno = "noturno";
                     $iconeTurno = "🌙 ";
+                } elseif ($resultado_acionamento->turno == "undefined") {
+                    $classeTurno = "plantao_24h";
+                    $iconeTurno = "🚑 🚀";
+                    $resultado_acionamento->turno = "";
                 } else {
                     $classeTurno = "plantao_24h";
                     $iconeTurno = "🌇 ";
@@ -243,6 +277,19 @@
     });
 </script>
 <style>
+    .tiposAcionamentos{
+        display:flex;
+        gap: 5px;
+        color: #000;
+    }
+    .tituloTiposAcionamentos{
+        margin-top: 5px;
+        width:100%;         
+        color: #fff;
+        background-color: #003399;
+        text-align:center;
+        align-items: center;
+    }
     .acionamentoEtiqueta {
         color: transparent;
         font-size: 0px;

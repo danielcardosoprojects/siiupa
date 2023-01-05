@@ -16,7 +16,7 @@ if ($acao == 'entradamovimento') {
 
     $idUsuario = $_SESSION['idUsuario'];
 
-    $tipo_movimento = $_POST['tipo_movimento'];
+    $tipo_movimento = $_POST['tipo_movimento']; 
     $origem = $_POST['origem'];
     $destino = $_POST['destino'];
     var_dump($destino);
@@ -34,16 +34,17 @@ if ($acao == 'entradamovimento') {
     }
 
 
-
+    //captura todos os itens do movimento e faz um loop
     $itens = $_POST['arrayitem'];
     foreach ($itens as $item) {
 
 
         $item_fk = $item['id'];
         $categoria = $item['categoria'];
-        $qtd = $item['qtd'];
-        $qtd_total = $qtd;
-
+        $qtd = $item['qtd']; //quantidade a ser movimentada
+        $qtd_total = $qtd; //guarda a quantidade que foi movimentada
+        $qtd_total_solicitada = $qtd; //guarda de novo a quantidade que foi movimentada
+        
         $estoque = new BD;
         $sqlE = "SELECT sum(estoque) as qtd_atual FROM db_farmacia.tb_farmestoque  where item_fk = '$item_fk'";
 
@@ -68,15 +69,19 @@ if ($acao == 'entradamovimento') {
 
         //Caso seja entrada, soma. Caso seja saida, subtrai.
         if ($tipo_movimento == "entrada") {
+            $estoqueAnterior = intval($qtd_atual);
             $novoEstoque = intval($qtd_atual) + intval($qtd);
-            $estoqueAnterior = intval($qtd_atual);
+            
         } else {
-            $novoEstoque = intval($qtd_atual) - intval($qtd);
             $estoqueAnterior = intval($qtd_atual);
+            $novoEstoque = intval($qtd_atual) - intval($qtd);
+            
         }
 
+        $nomeproduto = utf8_encode($item['nomeproduto']);
         $lote = $item['lote'];
         $validade = $item['validade'];
+        $barcode_lote = $item['barcode'];
 
 
 
@@ -95,7 +100,7 @@ if ($acao == 'entradamovimento') {
         if ($consultaLote->rowCount() == 0) {
             $novoLote = new BD;
             
-            $sqlNovoLote = "INSERT INTO db_farmacia.tb_farmestoque(id, item_fk, lote, data_validade, estoque, user, chave) VALUES (NULL, $item_fk, '$lote', '$validade', $qtd, $idUsuario, '$chave')";
+            $sqlNovoLote = "INSERT INTO db_farmacia.tb_farmestoque(id, item_fk, nome_produto, lote, barcode, data_validade, estoque, user, chave) VALUES (NULL, $item_fk, '$nomeproduto', '$lote', '$barcode_lote', '$validade', $qtd, $idUsuario, '$chave')";
             echo $sqlNovoLote;
             $novoLote = $novoLote->conecta();
             $cadastraLote = $novoLote->prepare($sqlNovoLote);
@@ -116,7 +121,14 @@ if ($acao == 'entradamovimento') {
                 $qtd_nova = $loteObj['estoque'] + $qtd;
             }
             $sqlAttLote = "UPDATE db_farmacia.tb_farmestoque SET estoque='$qtd_nova', updated_at='$atualizado_em', chave='$chave' where lote='$lote' and item_fk='$item_fk'";
-            //colocar aqui o registro de estorno
+            $sqlPegaIdDesteLote = "SELECT id FROM db_farmacia.tb_farmestoque where lote='$lote' and item_fk='$item_fk'";
+            $pegaIdDesteLote = new BD;
+            $pegaIdDesteLote->consulta($sqlPegaIdDesteLote);
+            foreach ($pegaIdDesteLote as $idDesteLote){
+            $registroEstorno .= "'$idDesteLote->id':'$qtd',";
+
+            }
+
             echo $sqlAttLote;
             $atualizaLote = $atualizaLote->conecta();
             $attLote = $atualizaLote->prepare($sqlAttLote);
@@ -137,7 +149,7 @@ if ($acao == 'entradamovimento') {
         if ($consultChave != 0) {
 
             $busca = new BD;
-            $sql = "INSERT INTO db_farmacia.tb_farmmovimento (`profissional_fk`, `id`, `item_fk`, `tipo`, `setor_origem_fk`, `setor_dest_fk`, `datahora`, `observacao`, `quantidade`, `novoestoque`, `estoqueanterior`, `usuario`) VALUES ($profissional, NULL, '$item_fk', '$tipo_movimento', '$origem', '$destino', '$datahora', NULL, '$qtd', '$novoEstoque', '$estoqueAnterior', '$idUsuario')";
+            $sql = "INSERT INTO db_farmacia.tb_farmmovimento (`profissional_fk`, `id`, `item_fk`, `tipo`, `setor_origem_fk`, `setor_dest_fk`, `datahora`, `observacao`, `quantidade`, `novoestoque`, `estoqueanterior`, `usuario`) VALUES ($profissional, NULL, '$item_fk', '$tipo_movimento', '$origem', '$destino', '$datahora', NULL, '$qtd_total_solicitada', '$novoEstoque', '$estoqueAnterior', '$idUsuario')";
             echo $sql;
 
             $busca = $busca->conecta();
@@ -193,6 +205,7 @@ if ($acao == 'entradamovimento') {
         $item_fk = $item['id'];
         $categoria = $item['categoria'];
         $qtd = $item['qtd'];
+        $qtd_total_solicitada = $qtd;
 
         $estoque = new BD;
         $sqlE = "SELECT sum(estoque) as qtd_atual FROM db_farmacia.tb_farmestoque  where item_fk = '$item_fk'";
@@ -209,10 +222,11 @@ if ($acao == 'entradamovimento') {
         }
 
         //trata se for nulo para inteiro 0
-
+        
         if ($qtd_atual == '' || $qtd_atual == null) {
             $qtd_atual = '0';
         }
+        
 
 
 
@@ -234,7 +248,7 @@ if ($acao == 'entradamovimento') {
         var_dump($organizaLotes);
         foreach ($organizaLotes as $cadaLote) {
             $qtd_total = $qtd;
-            if ($cadaLote->estoque >= $qtd) {
+            if ($cadaLote->estoque >= $qtd_total) {
                 $saidaLote = new BD;
                 $sqlSaidaLotes = "UPDATE db_farmacia.tb_farmestoque SET estoque = estoque-$qtd, chave='$chave' WHERE lote='$cadaLote->lote' and item_fk='$item_fk'";
 
@@ -269,7 +283,7 @@ if ($acao == 'entradamovimento') {
         if ($consultChave != 0) {
 
             $busca = new BD;
-            $sql = "INSERT INTO db_farmacia.tb_farmmovimento (`profissional_fk`, `id`, `item_fk`, `tipo`, `setor_origem_fk`, `setor_dest_fk`, `datahora`, `observacao`, `quantidade`, `novoestoque`, `estoqueanterior`, `usuario`) VALUES ($profissional, NULL, '$item_fk', '$tipo_movimento', '$origem', '$destino', '$datahora', NULL, '$qtd_total', '$novoEstoque ', '$estoqueAnterior', '$idUsuario')";
+            $sql = "INSERT INTO db_farmacia.tb_farmmovimento (`profissional_fk`, `id`, `item_fk`, `tipo`, `setor_origem_fk`, `setor_dest_fk`, `datahora`, `observacao`, `quantidade`, `novoestoque`, `estoqueanterior`, `usuario`) VALUES ($profissional, NULL, '$item_fk', '$tipo_movimento', '$origem', '$destino', '$datahora', NULL, '$qtd_total_solicitada', '$novoEstoque ', '$estoqueAnterior', '$idUsuario')";
 
 
             $busca = $busca->conecta();
@@ -475,7 +489,31 @@ if ($acao == 'entradamovimento') {
     $fB = new BD;
     $puxaNomeLote = $fB->consulta($feedBack);
     echo utf8_encode($puxaNomeLote[0]->lote);
-} else {
+}  elseif ($acao == "atualizalotebarcode") {
+    $idLote = $_POST['idlote'];
+    $barcode = utf8_decode($_POST['barcode']);
+    $sqlAttNomeLote = "UPDATE db_farmacia.tb_farmestoque SET barcode = '$barcode' WHERE (id = '$idLote')";
+    //echo $sqlAttNomeLote;
+    $conAttNomeLote = new BD;
+    $attNomeLote = $conAttNomeLote->consulta($sqlAttNomeLote);
+
+    $feedBack = "SELECT barcode FROM db_farmacia.tb_farmestoque WHERE id='$idLote'";
+    $fB = new BD;
+    $puxaNomeLote = $fB->consulta($feedBack);
+    echo utf8_encode($puxaNomeLote[0]->barcode);
+} elseif ($acao == "atualizalotenomeproduto") {
+    $idLote = $_POST['idlote'];
+    $nomeproduto = utf8_decode($_POST['nomeproduto']);
+    $sqlAttNomeLote = "UPDATE db_farmacia.tb_farmestoque SET nome_produto = '$nomeproduto' WHERE (id = '$idLote')";
+    //echo $sqlAttNomeLote;
+    $conAttNomeLote = new BD;
+    $attNomeLote = $conAttNomeLote->consulta($sqlAttNomeLote);
+
+    $feedBack = "SELECT nome_produto FROM db_farmacia.tb_farmestoque WHERE id='$idLote'";
+    $fB = new BD;
+    $puxaNomeLote = $fB->consulta($feedBack);
+    echo utf8_encode($puxaNomeLote[0]->nome_produto);
+}else {
     echo "Desviou";
     echo $acao;
 }

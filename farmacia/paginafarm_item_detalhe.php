@@ -87,15 +87,16 @@ $conLote = new BD;
 $sqlConLote = "SELECT *, DATE_FORMAT(data_validade, '%d/%m/%Y') as dataValBr FROM db_farmacia.tb_farmestoque where item_fk = '$item->id' order by data_validade ASC";
 $lotes = $conLote->consulta($sqlConLote);
 
-echo "<table class='table table-sm'><thead><th>Produto</th><th>Lote</th><th>Validade</th><th>QTD</th><th>Barcode</th><tbody>";
+echo "<table class='table table-sm'><thead><th>Fabricante/Marca</th><th>Lote</th><th>Validade</th><th>QTD</th><th>Barcode</th><tbody>";
 $total = '';
 foreach ($lotes as $lote) {
     $nomeLote = utf8_encode($lote->lote);
+    $nomeProduto = utf8_encode($lote->nome_produto);
     echo "<tr>";
-    echo "<td>$lote->nome_produto</td>";
+    echo "<td id='nomeproduto_$lote->id' data-nomeproduto='$nomeProduto'><span>$nomeProduto</span><a href='#' class='editaNomeProduto' data-idlote='$lote->id'><img class='lapis' src='/siiupa/imagens/icones/edita.png' alt='Editar'></a></td>";
     echo "<td id='lote_$lote->id'>$lote->id →Lote: <span>$nomeLote</span><a href='#' class='editaLote' data-idlote='$lote->id'><img class='lapis' src='/siiupa/imagens/icones/edita.png' alt='Editar'></a></td>";
     echo "<td id='val_$lote->id' data-val='$lote->data_validade'>Val: <span>$lote->dataValBr</span><a href='#' class='editaValidade' data-idlote='$lote->id'><img class='lapis' src='/siiupa/imagens/icones/edita.png' alt='Editar'></a></td><td>Qtd: $lote->estoque</td>";
-    echo "<td>$lote->barcode</td>";
+    echo "<td id='barcode_$lote->id' data-barcode='$lote->barcode'><span>$lote->barcode</span><a href='#' class='editaBarcode' data-idlote='$lote->id'><img class='lapis' src='/siiupa/imagens/icones/edita.png' alt='Editar'></a></td>";
     echo "</tr>";
     $total += $lote->estoque;
     //print_r($lote);
@@ -134,7 +135,8 @@ $queryString = filter_input(INPUT_SERVER, 'QUERY_STRING');
 
 $inicio = $pc - 1;
 $inicio = $inicio * $total_reg;
-$query = "SELECT m.id as idmovimento, DATE_FORMAT(m.datahora,'%d\/%m\/%Y %H:%i'), m.tipo, m.quantidade, m.setor_origem_fk as Origem, m.setor_dest_fk as Destino, m.usuario as usuario_id, i.nome, s.setor as Setor1, s2.setor as Setor2, u.usuario as usuarioNome FROM db_farmacia.tb_farmmovimento AS m INNER JOIN db_farmacia.tb_farmitem AS i ON (m.item_fk = i.id) INNER JOIN db_farmacia.tb_farmsetor AS s ON (m.setor_origem_fk = s.id) INNER JOIN db_farmacia.tb_farmsetor AS s2 ON (m.setor_dest_fk = s2.id) INNER JOIN login.usuarios AS u on (m.usuario = u.id) where m.item_fk = '$id_item' ORDER BY m.id DESC";
+$query = "SELECT m.novoestoque, m.id as idmovimento, DATE_FORMAT(m.datahora,'%d\/%m\/%Y %H:%i'), m.tipo, m.quantidade, m.setor_origem_fk as Origem, m.setor_dest_fk as Destino, m.usuario as usuario_id, i.nome, s.setor as Setor1, s2.setor as Setor2, u.usuario as usuarioNome FROM db_farmacia.tb_farmmovimento AS m INNER JOIN db_farmacia.tb_farmitem AS i ON (m.item_fk = i.id) INNER JOIN db_farmacia.tb_farmsetor AS s ON (m.setor_origem_fk = s.id) INNER JOIN db_farmacia.tb_farmsetor AS s2 ON (m.setor_dest_fk = s2.id) INNER JOIN login.usuarios AS u on (m.usuario = u.id) where m.item_fk = '$id_item' ORDER BY m.id DESC";
+//echo $query;
 //echo $query;
 
 
@@ -153,6 +155,7 @@ echo "
             <th scope='col'>DATA $tableSorter</th>
             <th scope='col'>MOVIMENTO</th>
             <th scope='col'>QTD</th>
+            <th scope='col' title='Novo estoque'>NE</th>
             <th scope='col'>ITEM</th>
             <th scope='col'>ORIGEM</th>
             <th scope='col'>DESTINO</th>
@@ -163,7 +166,7 @@ echo "
 
 if ($stmt = $conn->prepare("$query LIMIT $inicio,$total_reg")) {
     $stmt->execute();
-    $stmt->bind_result($idmovimento, $datahora, $tipo, $quantidade, $Origem, $Destino, $usuario, $nome, $Setor1, $Setor2, $usuarioNome);
+    $stmt->bind_result($mnovoestoque,$idmovimento, $datahora, $tipo, $quantidade, $Origem, $Destino, $usuario, $nome, $Setor1, $Setor2, $usuarioNome);
     while ($stmt->fetch()) {
         if ($tipo == 'saida') {
 
@@ -182,6 +185,7 @@ if ($stmt = $conn->prepare("$query LIMIT $inicio,$total_reg")) {
                 <th scope='row'>$datahora</th>
                 <td>$tipoBolha $tipo</td>
                 <td>$quantidade</td>
+                <td title='Novo estoque'>$mnovoestoque</td>
                 <td>$nome</td>
                 <td>$Setor1</td>
                 <td>$Setor2</td>
