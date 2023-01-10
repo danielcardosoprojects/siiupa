@@ -84,7 +84,7 @@ echo "<span class='btn btn-sm btn-secondary'>ID: $item->id | Código de Barras: 
 
 
 $conLote = new BD;
-$sqlConLote = "SELECT *, DATE_FORMAT(data_validade, '%d/%m/%Y') as dataValBr FROM db_farmacia.tb_farmestoque where item_fk = '$item->id' order by data_validade ASC";
+$sqlConLote = "SELECT *, DATE_FORMAT(data_validade, '%d/%m/%Y') as dataValBr FROM db_farmacia.tb_farmestoque where item_fk = '$item->id' and estoque > 0 order by data_validade ASC";
 $lotes = $conLote->consulta($sqlConLote);
 
 echo "<table class='table table-sm'><thead><th>Fabricante/Marca</th><th>Lote</th><th>Validade</th><th>QTD</th><th>Barcode</th><tbody>";

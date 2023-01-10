@@ -222,8 +222,8 @@ echo "</div>";
 
 <?php
 
-$query = "SELECT DATE_FORMAT(m.datahora,'%d\/%m\/%Y %H:%i'), m.tipo, sum(m.quantidade) as quantidade, m.setor_origem_fk as Origem, m.setor_dest_fk as Destino, m.usuario as usuario_id, i.nome, s.setor as Setor1, s2.setor as Setor2, u.usuario as usuarioNome, m.item_fk FROM db_farmacia.tb_farmmovimento AS m INNER JOIN db_farmacia.tb_farmitem AS i ON (m.item_fk = i.id) INNER JOIN db_farmacia.tb_farmsetor AS s ON (m.setor_origem_fk = s.id) INNER JOIN db_farmacia.tb_farmsetor AS s2 ON (m.setor_dest_fk = s2.id) INNER JOIN login.usuarios AS u on (m.usuario = u.id) where m.datahora between '$datainicio 00:00:00' and '$datafim 23:59:59'  $andTipo $andGenero and i.nome like '%$textoBusca%' group by tipo, m.item_fk, m.datahora order BY m.datahora, i.nome  ASC ";
-//echo $query;
+$query = "SELECT m.novoestoque, m.estoqueanterior, DATE_FORMAT(m.datahora,'%d\/%m\/%Y %H:%i'), m.tipo, sum(m.quantidade) as quantidade, m.setor_origem_fk as Origem, m.setor_dest_fk as Destino, m.usuario as usuario_id, i.nome, s.setor as Setor1, s2.setor as Setor2, u.usuario as usuarioNome, m.item_fk FROM db_farmacia.tb_farmmovimento AS m INNER JOIN db_farmacia.tb_farmitem AS i ON (m.item_fk = i.id) INNER JOIN db_farmacia.tb_farmsetor AS s ON (m.setor_origem_fk = s.id) INNER JOIN db_farmacia.tb_farmsetor AS s2 ON (m.setor_dest_fk = s2.id) INNER JOIN login.usuarios AS u on (m.usuario = u.id) where m.datahora between '$datainicio 00:00:00' and '$datafim 23:59:59'  $andTipo $andGenero and i.nome like '%$textoBusca%' group by tipo, m.item_fk, m.datahora order BY m.datahora, i.nome  ASC ";
+// echo $query;
 
 $todosResultadosBusca = mysqli_query($conn, $query);
 $tr = $todosResultadosBusca->num_rows; // verifica o número total de registros
@@ -264,9 +264,13 @@ echo "
 
 if ($stmt = $conn->prepare("$query LIMIT $inicio,$total_reg")) {
   $stmt->execute();
-  $stmt->bind_result($datahora, $tipo, $quantidade, $Origem, $Destino, $usuario, $nome, $Setor1, $Setor2, $usuarioNome, $item_fk);
+  $stmt->bind_result($novoestoque, $estoqueanterior, $datahora, $tipo, $quantidade, $Origem, $Destino, $usuario, $nome, $Setor1, $Setor2, $usuarioNome, $item_fk);
   while ($stmt->fetch()) {
-
+    if($tipo=="entrada"){
+      $qtd_movimentada = intval($novoestoque)-intval($estoqueanterior);
+    } elseif($tipo=="saida"){
+      $qtd_movimentada = intval($estoqueanterior)-intval($novoestoque);
+    }
 
     if ($tipo == 'saida') {
       $tipoBS = 'table-danger';
@@ -281,7 +285,7 @@ if ($stmt = $conn->prepare("$query LIMIT $inicio,$total_reg")) {
           <tr class='$tipoBS'>
           <td scope='row'><small>$datahora</small></td>
           <td>$tipoBolha $tipo</td>
-          <td>$quantidade</td>
+          <td>$qtd_movimentada</td>
           <td><a class='linksMovimento' href='$linkItemDetalha'>$nome <img src='/siiupa/imagens/icones/info.fw.png'></a></td>
           <td>$Setor1</td>
           <td>$Setor2</td>

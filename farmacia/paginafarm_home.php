@@ -56,7 +56,7 @@ if ($_SESSION['nivel'] == 2 || $_SESSION['nivel'] == 1) {
   //echo $queryString;
   $inicio = $pc - 1;
   $inicio = $inicio * $total_reg;
-  $query = "SELECT m.novoestoque, m.estoqueanterior, DATE_FORMAT(m.datahora,'%d\/%m\/%Y %H:%i'), m.tipo, m.quantidade, m.setor_origem_fk as Origem, m.setor_dest_fk as Destino, m.usuario as usuario_id, i.nome, s.setor as Setor1, s2.setor as Setor2, u.usuario as usuarioNome, m.item_fk FROM db_farmacia.tb_farmmovimento AS m INNER JOIN db_farmacia.tb_farmitem AS i ON (m.item_fk = i.id) INNER JOIN db_farmacia.tb_farmsetor AS s ON (m.setor_origem_fk = s.id) INNER JOIN db_farmacia.tb_farmsetor AS s2 ON (m.setor_dest_fk = s2.id) INNER JOIN login.usuarios AS u on (m.usuario = u.id) ORDER BY m.id DESC";
+  $query = "SELECT  m.estoqueanterior,m.novoestoque, DATE_FORMAT(m.datahora,'%d\/%m\/%Y %H:%i'), m.tipo, m.quantidade, m.setor_origem_fk as Origem, m.setor_dest_fk as Destino, m.usuario as usuario_id, i.nome, s.setor as Setor1, s2.setor as Setor2, u.usuario as usuarioNome, m.item_fk FROM db_farmacia.tb_farmmovimento AS m INNER JOIN db_farmacia.tb_farmitem AS i ON (m.item_fk = i.id) INNER JOIN db_farmacia.tb_farmsetor AS s ON (m.setor_origem_fk = s.id) INNER JOIN db_farmacia.tb_farmsetor AS s2 ON (m.setor_dest_fk = s2.id) INNER JOIN login.usuarios AS u on (m.usuario = u.id) ORDER BY m.id DESC";
 
   $todosResultadosBusca = mysqli_query($conn, $query);
   $tr = $todosResultadosBusca->num_rows; // verifica o número total de registros
@@ -72,7 +72,7 @@ if ($_SESSION['nivel'] == 2 || $_SESSION['nivel'] == 1) {
     <tr>
       <th scope='col'>DATA</th>
       <th scope='col'>MOVIMENTO</th>
-      <th scope='col'>QUANTIDADE</th>
+      <th scope='col'>QTD</th>
       <th scope='col' title='Novo estoque'>NE</th>
       <th scope='col'>ITEM</th>
       <th scope='col'>ORIGEM</th>
@@ -107,7 +107,7 @@ if ($_SESSION['nivel'] == 2 || $_SESSION['nivel'] == 1) {
           <tr class='$tipoBS'>
           <th scope='row'>$datahora</th>
           <td>$tipoBolha $tipo</td>
-          <td>$quantidade (DIF: $qtd_correto)</td>
+          <td>$qtd_correto</td>
           <td title='Novo estoque'>$novoestoque</td>
           <td><a class='linksMovimento' href='$linkItemDetalha'>$nome <img src='/siiupa/imagens/icones/info.fw.png'></a></td>
           <td>$Setor1</td>

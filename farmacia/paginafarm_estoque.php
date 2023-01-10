@@ -269,7 +269,7 @@ if ($stmt = $conn->prepare($query)) {
   ";
 
     $conLote = new BD;
-    $sqlConLote = "SELECT *, DATE_FORMAT(data_validade, '%d/%m/%Y') as dataValBr FROM db_farmacia.tb_farmestoque where item_fk = '$itemid'/* and estoque > 0*/";
+    $sqlConLote = "SELECT *, DATE_FORMAT(data_validade, '%d/%m/%Y') as dataValBr FROM db_farmacia.tb_farmestoque where item_fk = '$itemid' and estoque > 0";
     $lotes = $conLote->consulta($sqlConLote);
 
     foreach ($lotes as $lote) {

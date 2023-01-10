@@ -246,6 +246,9 @@ $bt_intermitente = "btn-outline-primary";
 $bt_administrativo = "btn-outline-primary";
 $bt_enfermagem = "btn-outline-primary";
 $bt_odontologos = "btn-outline-primary";
+$bt_enfermeiros = "btn-outline-primary";
+$bt_tenfermagem = "btn-outline-primary";
+
 
 //prepara o link de filtro
 if (isset($_GET['vinculo'])) {
@@ -297,6 +300,16 @@ if (isset($_GET['folha_setor'])) {
         $setor_mostra = " - ENFERMAGEM";
         $bt_enfermagem = "btn-primary";
     }
+    if ($_GET['folha_setor'] == "enfermeiros") {
+        $setor_separa = "AND func.fk_setor IN ('17')";
+        $setor_mostra = " - ENFERMEIROS";
+        $bt_enfermeiros = "btn-primary";
+    }
+    if ($_GET['folha_setor'] == "tenfermagem") {
+        $setor_separa = "AND func.fk_setor IN ('21')";
+        $setor_mostra = " - TEC. Enfermagem";
+        $bt_tenfermagem = "btn-primary";
+    }
     if ($_GET['folha_setor'] == "odontologiaSuperior") {
         $setor_separa = "AND func.fk_setor IN ('12')";
         $setor_mostra = " - <span class='tituloSetor'>Odontologia</span>";
@@ -319,6 +332,8 @@ Vínculo: <a class="btn btn-outline-primary" href="?setor=adm&sub=rh&subsub=rhfo
 Setor:
 <a class="btn <?php echo $bt_administrativo; ?>" href="?setor=adm&sub=rh&subsub=rhfolhaexibe&id=<?php echo $_GET['id']; ?>&vinculo=<?php echo $vinculo_link; ?>&folha_setor=administrativo">ADMINISTRATIVO</a>
 <a class="btn <?php echo $bt_enfermagem ?>" href="?setor=adm&sub=rh&subsub=rhfolhaexibe&id=<?php echo $_GET['id']; ?>&vinculo=<?php echo $vinculo_link; ?>&folha_setor=enfermagem">ENFERMAGEM</a>
+<a class="btn <?php echo $bt_enfermeiros ?>" href="?setor=adm&sub=rh&subsub=rhfolhaexibe&id=<?php echo $_GET['id']; ?>&vinculo=<?php echo $vinculo_link; ?>&folha_setor=enfermeiros">Enfermeiros</a>
+<a class="btn <?php echo $bt_tenfermagem ?>" href="?setor=adm&sub=rh&subsub=rhfolhaexibe&id=<?php echo $_GET['id']; ?>&vinculo=<?php echo $vinculo_link; ?>&folha_setor=tenfermagem">Tec. Enfermagem</a>
 <a class="btn <?php echo $bt_odontologos ?>" href="?setor=adm&sub=rh&subsub=rhfolhaexibe&id=<?php echo $_GET['id']; ?>&vinculo=<?php echo $vinculo_link; ?>&folha_setor=odontologiaSuperior">ODONTÓLOGOS</a>
 
 </br>
