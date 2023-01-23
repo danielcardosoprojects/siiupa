@@ -17,7 +17,7 @@ function atualizaArray($banco, $tabela, $camposValores, $id)
     }
 
     $update .= " WHERE id='$id'";
-    echo $update;
+
     $editaBd = new BD;
     $editaBd->conecta();
 
@@ -28,14 +28,27 @@ function atualizaArray($banco, $tabela, $camposValores, $id)
     $password = "apuapu";
     $bd = new PDO("mysql:host=$servername;dbname=$database", "$username", "$password");
     $busca = $bd->prepare($update);
+ 
 
     $result = $busca->execute();
     $resultado = $busca->fetchAll(PDO::FETCH_ASSOC);
-    var_dump($result);
+    if($result){
+        foreach($camposValores as $valor){
+            echo "$valor";
+        } 
+    } else{
+        echo "erro!";
+    }
 }
 
-$array = ["titulo" => "Editou titulo", "descricao" => "Descricaos tbm"];
-atualizaArray("db_rh", "tb_historico", $array, "107");
+$banco = $_POST['banco'];
+$tabela = $_POST['tabela'];
+$dados = json_decode($_POST['camposValores']);
+$id = $_POST['id'];
+
+
+atualizaArray($banco, $tabela, $dados, $id);
+
 // Recebe os dados enviados em formato JSON
 $json_data = json_decode(file_get_contents('php://input'), true);
   //var_dump($json_data);

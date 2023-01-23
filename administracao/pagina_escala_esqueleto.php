@@ -88,10 +88,20 @@
             overflow: hidden;
             padding-left: 5px;
         }
+        .linha_escala {
+            text-align:center;
+        }
 
         .link-oculto {
             color: #000;
             text-decoration: none;
+            margin:0;
+        }
+        .excluiservidor {
+            cursor:pointer;
+        }
+        .visita_perfil {
+            cursor:pointer;
         }
 
         #ferias {
@@ -139,6 +149,7 @@
             color: #5f5f5f;
             cursor: default;
             border-color: #0d6efd;
+            
         }
 
         @keyframes changeBackgroundColor {
@@ -667,10 +678,10 @@
         $tab->tpopulalinha('PREFEITURA MUNICIPAL DE CASTANHAL<br>SECRETARIA MUNICIPAL DE SAÚDE-SESMA<br>COORDENAÇÃO DE URGÊNCIA E EMERGÊNCIA<br>UPA III - GOVERNADOR ALMIR GABRIEL', $mesclalinhas = '3');
         $tab->tpopulalinha('<img src="/siiupa/imagens/upa_hor_logo.JPG" height="45px">');
         $tab->tfechalinha();
-        $tab->tabrelinha();
-        $tab->tpopulalinha('<img src="/siiupa/imagens/pmc_logo.PNG" height="45px">', $mesclalinhas = '4');
-        $tab->tpopulalinha('');
-        $tab->tfechalinha();
+        // $tab->tabrelinha();
+        // $tab->tpopulalinha('<img src="/siiupa/imagens/pmc_logo.PNG" height="45px">', $mesclalinhas = '4');
+        // $tab->tpopulalinha('');
+        // $tab->tfechalinha();
         $tab->tabrelinha();
         $tab->tpopulalinha('');
         $tab->tfechalinha();
@@ -685,10 +696,15 @@
 
         ?>
         <table class="table caption-top  table-bordered table-hover" id="tabela_escala">
-            <caption class="border-bottom-0 caption">
+            <caption class="border-bottom-0 caption" id="titulo_escala">
 
                 <?php echo strtoupper($resultado[0]->setor . " - " . $mesext . " - " . $resultado[0]->ano); ?>
             </caption>
+            <script type="text/javascript" >
+
+$('html head').find('title').text('SIUPA - '+$('#titulo_escala').text());
+
+</script>
             <thead id="tabelathead">
                 <tr>
                     <th scope="col" style="background-color:#fff;width:auto;">Escala <button id="editar_posicoes"></button></th>
@@ -750,7 +766,7 @@
 
 
 
-                $sqlserv = "SELECT c.funcao_upa, c.titulo, f.fk_cargo, f.nome, ef.* FROM db_rh.tb_escala_funcionario as ef INNER JOIN db_rh.tb_funcionario AS f ON (ef.fk_funcionario = f.id) INNER JOIN db_rh.tb_cargo AS c ON (f.fk_cargo = c.id) WHERE ef.fk_escala=$idescala order by ef.posicao ASC, f.nome ASC, ef.id ASC";
+                $sqlserv = "SELECT f.conselho_tipo, f.conselho_n, c.funcao_upa, c.titulo, f.fk_cargo, f.nome, ef.* FROM db_rh.tb_escala_funcionario as ef INNER JOIN db_rh.tb_funcionario AS f ON (ef.fk_funcionario = f.id) INNER JOIN db_rh.tb_cargo AS c ON (f.fk_cargo = c.id) WHERE ef.fk_escala=$idescala order by ef.posicao ASC, f.nome ASC, ef.id ASC";
                 $buscaserv = new BD;
                 $resultadoserv = $buscaserv->consulta($sqlserv);
                 $feriaslegenda = "";
@@ -769,11 +785,16 @@
                     $nome = reduzirNome($serv->nome, 50);
                     $primeiroNome = reduzirNome($serv->nome, 5);
 
+                    //var_dump($serv);
+                    //FOMARTA CONSELHO E NUMERO SE TIVER
+                    if($serv->conselho_tipo != NULL){
+                        $dados_conselho = "/ $serv->conselho_tipo:$serv->conselho_n";
+                    } else {
+                        $dados_conselho = "";
+                    }
 
 
-
-
-                    $nomeexemplo = "<tr id='$serv->id' class='linha_escala' data-idposicao='$serv->id'><th scope='row' class='editafuncionario table-sm $serv->id' data-idef='$serv->id' data-idf='$serv->fk_funcionario' data-nomeservidor='$nome' data-posicao='$serv->posicao'><a href='#' id='$serv->id' class='link-oculto'>" . utf8_encode($nome) . "</a><span class='cargo_servidor'>$serv->titulo</span><span class='excluiservidor' data-idef='$serv->id'><span class='ui-icon 	ui-icon-trash'></span></span></th>";
+                    $nomeexemplo = "<tr id='$serv->id' class='linha_escala' data-idposicao='$serv->id'><th scope='row' class='editafuncionario table-sm $serv->id' data-idef='$serv->id' data-idf='$serv->fk_funcionario' data-nomeservidor='$nome' data-posicao='$serv->posicao'><a href='#' id='$serv->id' class='link-oculto'>" . utf8_encode($nome) . "</a><br><span class='cargo_servidor'>".utf8_encode($serv->titulo)." $dados_conselho</span><a title='Visitar perfil' target='_blank' href='?setor=adm&sub=rh&subsub=perfil&id=$serv->fk_funcionario'><span class='ui-icon ui-icon-person'></span></a><span title='Excluir da escala, não pode ser desfeito' class='excluiservidor' data-idef='$serv->id'><span class='ui-icon 	ui-icon-trash'></span></span></th>";
                     echo $nomeexemplo;
                     $data = "$ano-$mes-$dia";
                     $qtddias = date("t", strtotime($data));

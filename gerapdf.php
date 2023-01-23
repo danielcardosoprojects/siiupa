@@ -14,8 +14,8 @@ $cargo = $_GET['cargo'];
 $vinculo = $_GET['vinculo'];
 
 if(isset($_GET['setor'])) {
-  $setor = "freq/".$_GET['setor'];
-  $pasta = $GET['setor'];
+  $setor = $_GET['setor'];
+  $pasta = $_GET['setor'];
 } else{
   $setor = "freq";
 }
@@ -34,6 +34,22 @@ $html = file_get_contents($modelo);
 $mpdf->WriteHTML($html,0);
 
 $mpdf->Output("$setor/Freq $nomefunc $mes .pdf", 'I');
+die;
+// Pasta a ser verificada
+$folder = "freq/2023/$setor";
+
+// Verifica se a pasta existe
+if (!is_dir($folder)) {
+    // Cria a pasta
+    mkdir($folder);
+    // echo "A pasta $folder foi criada com sucesso.";
+} else {
+    // echo "A pasta $folder já existe.";
+}
+
+$mpdf->Output("freq/2023/$setor/Freq $nomefunc $mes .pdf", \Mpdf\Output\Destination::FILE);
+
+
 
 
   ?>

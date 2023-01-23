@@ -21,16 +21,39 @@ $(function () {
     });
 
     $('#gerarFrequencias').click(function () {
-        $.alert({
-            title: 'Desabilitado!',
-            content: 'Para imprimir a frequência de um usuário específico, abra primeiramente o perfil do servidor!',
-        });
-        servidores.forEach(function (array) {
+        // $.alert({
+        //     title: 'Desabilitado!',
+        //     content: 'Para imprimir a frequência de um usuário específico, abra primeiramente o perfil do servidor!',
+        // });
+        servidoresJson = "{";
+        contVirgula = 0;
+        servidores_freq.map(function (array) {
+
+            if(contVirgula>0){
+                virgulaDentro = ",";
+            } else {
+                virgulaDentro = "";
+            }
+            func = `${virgulaDentro}"${array.nome}":{"matricula":"${array.matricula}", "admissao":"${array.admissao}", "nome": "${array.nome}", "cargo":"${array.cargo}","vinculo":"${array.vinculo}","mes":1,"setor":"${array.setor}"}`;
+            contVirgula++;
+
+            
+            servidoresJson += (func);
+            //prompt("teste",servidoresJson);
 
 
-            console.log(array.nome);
-            // $.get("gerapdf.php?&matricula=" + array.matricula + "&admissao=" + array.admissao + "&nome=" + array.nome + "&cargo=" + array.cargo + "&vinculo=" + array.vinculo + "&mes=1" + "&setor=" + array.setor);
+
+
+            //$.get("gerapdf.php?&matricula=" + array.matricula + "&admissao=" + array.admissao + "&nome=" + array.nome + "&cargo=" + array.cargo + "&vinculo=" + array.vinculo + "&mes=1" + "&setor=" + array.setor);
         });
+
+        servidoresJson = servidoresJson + "}";
+        
+        data_freq = {
+            dado:servidoresJson
+        }
+        $.post("gerapdf_varias.php", data_freq);
+        // data?json=${encodeURI(servidoresJson)}`).then(function(){alert("Sucesso!")});
     });
 
     $("#tabela_funcionarios").tablesorter();
@@ -68,7 +91,7 @@ $(function () {
 
     $(".edita").dblclick(function () {
         let celula = $(this);
-        
+
         let idfunc = celula.data('idfunc');
         let campo = celula.data('campo');
         let valor = celula.data('valor');
@@ -80,13 +103,13 @@ $(function () {
             var keyCode = e.keyCode;
             if (keyCode == '13') {
                 let input = $(this);
-                
+
                 let idfunc = input.data('idfunc');
                 let campo = input.data('campo');
                 let valornovo = input.val();
                 console.log(`id: ${idfunc}, campo: ${campo}, valor novo: ${valornovo}`);
-                
-                
+
+
                 linkatt = '/siiupa/administracao/perfil/atualiza_perfil.php?id=' + idfunc + '&campo=' + campo + '&valor=' + valornovo;
                 console.log(linkatt);
 
@@ -97,18 +120,18 @@ $(function () {
                     celula.html(data);
 
                 });
-                
+
             }
         });
     });
 
 });//fim do function que carrega o script após o carregamento da página
-$(document).ready( function () {
+$(document).ready(function () {
     $('#tabela_funcionarios').DataTable({
-        "dom":'<"top"<"teste"f><"teste"l>ip>rt<"bottom"p><"clear">',
-        "lengthMenu": [ [10, 25, 50, -1], [10, 25, 50, "Tudo"] ],
+        "dom": '<"top"<"teste"f><"teste"l>ip>rt<"bottom"p><"clear">',
+        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Tudo"]],
         language: {
-                        url:"/siiupa/js/dataTables/pt-BR.json"
-          }
+            url: "/siiupa/js/dataTables/pt-BR.json"
+        }
     });
-} );
+});
