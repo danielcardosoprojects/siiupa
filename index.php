@@ -90,7 +90,7 @@ include('../conexao/verifica_login.php');
 
 
 
-			background-color: #001933;
+			background-color: #33A7FF;
 
 			text-align: center;
 			padding: 10px;
@@ -267,7 +267,7 @@ include('../conexao/verifica_login.php');
 
 
 	<!-- Footer -->
-	<footer class="bg-dark text-center text-white">
+	<footer class="bg-secondary text-center text-white">
 		<!-- Grid container -->
 		<div class="container p-4">
 			<!-- Section: Social media -->

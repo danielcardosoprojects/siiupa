@@ -1,6 +1,5 @@
 <script type="text/javascript" src="/siiupa/js/script.js"></script>
 <script>
-    
     $(function() {
         $('.dropdown-toggle').dropdown();
         $('#buscanome').focus();
@@ -169,17 +168,18 @@
         float: right;
         margin-left: 5px;
     }
+
     .bt_menu_rh {
         border-radius: 20rem;
     }
 </style>
 
 <div style="text-align:left;">
-    <h1 text-color="#fff" style="float:left">Recursos Humanos 
-    <small><a href="administracao/leimunicipal003991999.pdf" target="_blank" class="lei">LEI MUNICIPAL Nº 003/99 <img width="20px" src="/siiupa/imagens/icones/pdf.svg"></a></small>
-    <small><a href="https://transparencia.layoutsistemas.com.br/servidores/resumo?codigo_entidade=441402" target="_blank" class="lei">Transparência Saúde <img width="20px" src="/siiupa/imagens/icones/layoutonline.png"></a></small>
-    <small><a href="https://sites.google.com/castanhal.pa.gov.br/diariooficialdecastanhal/inicio" target="_blank" class="lei">Diário Oficial <img width="20px" src="/siiupa/imagens/icones/diario.jpg"></a></small>
-</h1>
+    <h1 text-color="#fff" style="float:left">Recursos Humanos
+        <small><a href="administracao/leimunicipal003991999.pdf" target="_blank" class="lei">LEI MUNICIPAL Nº 003/99 <img width="20px" src="/siiupa/imagens/icones/pdf.svg"></a></small>
+        <small><a href="https://transparencia.layoutsistemas.com.br/servidores/resumo?codigo_entidade=441402" target="_blank" class="lei">Transparência Saúde <img width="20px" src="/siiupa/imagens/icones/layoutonline.png"></a></small>
+        <small><a href="https://sites.google.com/castanhal.pa.gov.br/diariooficialdecastanhal/inicio" target="_blank" class="lei">Diário Oficial <img width="20px" src="/siiupa/imagens/icones/diario.jpg"></a></small>
+    </h1>
 
     <div class="noticias_linha">
         <?php
@@ -265,17 +265,17 @@
                 <img src="/siiupa/imagens/icones/ferias3.svg" width="20">
                 Férias</a>
 
-           
 
-                    <a href="?setor=adm&sub=rh&subsub=alimentacao" id="bAlimentacao" class="btn btn-sm">
-                        <img src="/siiupa/imagens/icones/restaurant.svg">
-                        Lista de Alimentação</a>
 
-                    <a href="?setor=adm&sub=rh&subsub=listaepi" id="bListaEpi" class="">
-                        <img src="/siiupa/imagens/icones/mascara.svg" width="36px">
-                        Lista de EPI</a>
+            <a href="?setor=adm&sub=rh&subsub=alimentacao" id="bAlimentacao" class="btn btn-sm">
+                <img src="/siiupa/imagens/icones/restaurant.svg">
+                Lista de Alimentação</a>
 
-         
+            <a href="?setor=adm&sub=rh&subsub=listaepi" id="bListaEpi" class="">
+                <img src="/siiupa/imagens/icones/mascara.svg" width="36px">
+                Lista de EPI</a>
+
+
 
 
 
@@ -321,7 +321,8 @@
 
         if ($subsub == null) {
 
-            include_once('pagina_rh_home.php');
+            // include_once('pagina_rh_home.php');
+            echo "<script>$(document).ready(function() {loadPage('pagina_rh_home');});</script>";
         } elseif ($subsub == 'perfil') {
 
             include_once('pagina_rh_perfil.php');
@@ -340,10 +341,13 @@
         } elseif ($subsub == 'alimentacao') {
             include_once('pagina_rh_alimentacao.php');
         } elseif ($subsub == 'atestados') {
-            include_once('pagina_rh_atestados.php');
+            // include_once('pagina_rh_atestados.php');
+            echo "<script>$(document).ready(function() {loadPage('pagina_rh_atestados');});</script>";
         } elseif ($subsub == 'acionamentos') {
-            include_once('pagina_rh_acionamentos.php');
-        }elseif ($subsub == 'acionamento_exibe') {
+            // include_once('pagina_rh_acionamentos.php');
+            echo "<script>$(document).ready(function() {loadPage('pagina_rh_acionamentos');});</script>";
+
+        } elseif ($subsub == 'acionamento_exibe') {
             include_once('pagina_rh_acionamento_exibe.php');
         } elseif ($subsub == 'perfil_criar') {
             include_once('pagina_rh_perfil_criar.php');
@@ -364,3 +368,12 @@
 
 </div>
 </div>
+<script>
+    async function loadPage(page) {
+
+        $('#subsubconteudo').load(`/siiupa/administracao/${page}.php`);
+
+
+
+    }
+</script>

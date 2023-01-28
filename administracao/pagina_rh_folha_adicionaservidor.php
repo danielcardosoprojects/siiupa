@@ -60,8 +60,11 @@
     }
 </style>
 <script>
+    $(document).ready(function() {
+    $("#obs_textarea").jqte();
+    });
     $(function() {
-
+        
 
         $(".accordionescalas").accordion({
             collapsible: true,
@@ -375,7 +378,7 @@ if (isset($_GET['acao'])) {
                     <td><input type="text" maxlength="4" size="2" class="transferencia att_valor" name="transferencia" data-valor="' . $dados->valor_transferencia . '" value="%s"></td>
                     <td><input type="text" maxlength="4" size="2" class="fixos att_valor" name="fixos" value="%s"></td>
                     <td>R$ <input type="text" maxlength="5" size="5" class="valor_total" name="valor_total" value="%s" readonly></td>
-                    <tr><td></td><td></td><td id="obs_cel">OBSERVAÇÃO:</td><td colspan="8"><textarea name="obs">%s</textarea></td></tr>
+                    <tr><td></td><td></td><td id="obs_cel">OBSERVAÇÃO:</td><td colspan="8"><textarea id="obs_textarea" name="obs">%s</textarea></td></tr>
 
                 </tr>', $dados->nome, $dados->funcao_upa, $marca_adc_not, $ext_6, $ext_12, $ext_24, $acionamento, $transferencia, $fixos, $valor_total, $obs);
 

@@ -88,20 +88,23 @@
             overflow: hidden;
             padding-left: 5px;
         }
+
         .linha_escala {
-            text-align:center;
+            text-align: center;
         }
 
         .link-oculto {
             color: #000;
             text-decoration: none;
-            margin:0;
+            margin: 0;
         }
+
         .excluiservidor {
-            cursor:pointer;
+            cursor: pointer;
         }
+
         .visita_perfil {
-            cursor:pointer;
+            cursor: pointer;
         }
 
         #ferias {
@@ -149,7 +152,7 @@
             color: #5f5f5f;
             cursor: default;
             border-color: #0d6efd;
-            
+
         }
 
         @keyframes changeBackgroundColor {
@@ -174,12 +177,13 @@
     <script>
         $(function() {
             $('.excluiservidor').click(function() {
+                verificaStatus();
                 var exclui = $(this);
+                console.log(this);
                 $.notify(
-                    "Excluído", {
-                        position: "left"
-                    }
-                );
+                            "Aguarde...", {
+                                position: "l"
+                            });
                 var linkdeleta = "administracao/escalas/editaservidor_bd.php?acao=deleta" + "&idef=" + $(this).data('idef');
 
                 //var confirmadelete = confirm("Ao excluir este(a) servidor(a) as informações dele(a) referente aos dias de escala serão perdidas.");
@@ -188,12 +192,19 @@
                     var urlescala = (location.search);
                     var recarregaescala = 'administracao/pagina_escala_exibe.php' + urlescala;
                     $("#dialogconfig").dialog("close");
-                    $('#subconteudo').load(recarregaescala);
+                    $('#subconteudo').load(recarregaescala, () => {
+                        $.notify(
+                            "Excluído", {
+                                position: "left"
+                            });
+                    });
 
                 });
 
-
             });
+
+
+
             $("#tabela_escala tbody").sortable().disableSelection();
 
 
@@ -236,7 +247,15 @@
             var tab;
             var prox;
 
+            function verificaStatus() {
+                if ($("#statusEscala").val() == "oficial") {
+                    $.alert("A escala precisa estar com o status de RASCUNHO para ser editável.");
+                    pause;
+                }
+            }
+
             function edita(celula) {
+                verificaStatus();
 
                 // var editadia = $(this);
 
@@ -469,6 +488,7 @@
 
 
             $('#legenda').dblclick(function() {
+                verificaStatus();
                 var legenda = $(this);
                 var idescala = legenda.data('ide');
                 var exemplosLegenda = "Exemplos:<br>M - Manhã 6h<br>T - Tarde 6h<br>N² - Noite 6h<br>P - Plantão 24h <br>D - Diurno 12h<br>N - Noturno 12h<br>F² - Ponto Facultativo<br>F³ - Feriado<br>";
@@ -480,8 +500,15 @@
 
                 $('#attlegenda').click(function() {
                     var txtlegenda = $('textarea').val();
-                    var linklegenda = "administracao/escalas/atualizalegenda.php?id=" + idescala + "&legenda=" + encodeURI(txtlegenda);
-                    $('#replacelegendas').load(linklegenda);
+                    var linklegenda = "administracao/escalas/atualizalegenda.php?id=" + idescala + "&legenda=" + txtlegenda;
+                    dataLegenda = {
+                        id: idescala,
+                        legenda: txtlegenda
+                    }
+                    $.post(linklegenda, dataLegenda, (data)=>{
+                        $('#replacelegendas').html(data);
+
+                    });
                     var urlescala = (location.search);
 
                     var recarregaescala = 'administracao/pagina_escala_exibe.php' + urlescala;
@@ -700,11 +727,9 @@
 
                 <?php echo strtoupper($resultado[0]->setor . " - " . $mesext . " - " . $resultado[0]->ano); ?>
             </caption>
-            <script type="text/javascript" >
-
-$('html head').find('title').text('SIUPA - '+$('#titulo_escala').text());
-
-</script>
+            <script type="text/javascript">
+                $('html head').find('title').text('SIUPA - ' + $('#titulo_escala').text());
+            </script>
             <thead id="tabelathead">
                 <tr>
                     <th scope="col" style="background-color:#fff;width:auto;">Escala <button id="editar_posicoes"></button></th>
@@ -787,14 +812,14 @@ $('html head').find('title').text('SIUPA - '+$('#titulo_escala').text());
 
                     //var_dump($serv);
                     //FOMARTA CONSELHO E NUMERO SE TIVER
-                    if($serv->conselho_tipo != NULL){
+                    if ($serv->conselho_tipo != NULL) {
                         $dados_conselho = "/ $serv->conselho_tipo:$serv->conselho_n";
                     } else {
                         $dados_conselho = "";
                     }
 
 
-                    $nomeexemplo = "<tr id='$serv->id' class='linha_escala' data-idposicao='$serv->id'><th scope='row' class='editafuncionario table-sm $serv->id' data-idef='$serv->id' data-idf='$serv->fk_funcionario' data-nomeservidor='$nome' data-posicao='$serv->posicao'><a href='#' id='$serv->id' class='link-oculto'>" . utf8_encode($nome) . "</a><br><span class='cargo_servidor'>".utf8_encode($serv->titulo)." $dados_conselho</span><a title='Visitar perfil' target='_blank' href='?setor=adm&sub=rh&subsub=perfil&id=$serv->fk_funcionario'><span class='ui-icon ui-icon-person'></span></a><span title='Excluir da escala, não pode ser desfeito' class='excluiservidor' data-idef='$serv->id'><span class='ui-icon 	ui-icon-trash'></span></span></th>";
+                    $nomeexemplo = "<tr id='$serv->id' class='linha_escala' data-idposicao='$serv->id'><th scope='row' class='editafuncionario table-sm $serv->id' data-idef='$serv->id' data-idf='$serv->fk_funcionario' data-nomeservidor='$nome' data-posicao='$serv->posicao'><a href='#' id='$serv->id' class='link-oculto'>" . utf8_encode($nome) . "</a><br><span class='cargo_servidor'>" . utf8_encode($serv->titulo) . " $dados_conselho</span><a title='Visitar perfil' target='_blank' href='?setor=adm&sub=rh&subsub=perfil&id=$serv->fk_funcionario'><span class='ui-icon ui-icon-person'></span></a><span title='Excluir da escala, não pode ser desfeito' class='excluiservidor' data-idef='$serv->id'><span class='ui-icon 	ui-icon-trash'></span></span></th>";
                     echo $nomeexemplo;
                     $data = "$ano-$mes-$dia";
                     $qtddias = date("t", strtotime($data));
@@ -864,7 +889,7 @@ $('html head').find('title').text('SIUPA - '+$('#titulo_escala').text());
                         if ($legendaescala == "") {
                             $legendaescala = "<br><br>";
                         }
-                        echo utf8_encode($legendaescala); ?>
+                        echo $legendaescala; ?>
 
                     </div>
                 </div>

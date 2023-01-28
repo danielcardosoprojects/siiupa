@@ -1,3 +1,9 @@
+
+<?php
+include_once('../bd/conectabd.php');
+session_start();
+include_once('../bd/nivel.php');
+?>
 <h3>Acionamentos</h3>
 <a href="?setor=adm&sub=rh&subsub=atestados" id="cadastraNovo" class="btn btn-outline-success">
     <img src="imagens/icones/person_add.svg">

@@ -2,8 +2,8 @@
 include_once('../../bd/conectabd.php');
 $busca = new BD;
 
-$id = $_GET['id'];
-$valor= $_GET['legenda'];
+$id = $_POST['id'];
+$valor= $_POST['legenda'];
 $sql = "UPDATE db_rh.tb_escalas SET legenda='$valor' WHERE id=$id";
 
 

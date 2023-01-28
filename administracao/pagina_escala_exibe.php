@@ -4,6 +4,13 @@
         color: #000 !important;
     }
 
+    .ui-dialog {
+        position: fixed;
+        z-index: 1000;
+        left: 70%;
+        top: 1rem;
+    }
+
     #dialogAnota {
 
         position: fixed;
@@ -14,7 +21,7 @@
     }
 
     #form-busca-servidores {
-        display:flex;
+        display: flex;
         flex-direction: column;
         gap: 10px;
     }
@@ -34,12 +41,15 @@ if ($oficial == "sim") {
     $bt_rascunho = "btn btn-outline-warning";
     $done_oficial = "";
     $done_rascunho = "d-none";
+    $statusEscala = "<input id='statusEscala' type='hidden' value='oficial'/>";
 } else {
     $bt_oficial = "btn btn-outline-success";
     $bt_rascunho = "btn btn-warning";
     $done_oficial = "d-none";
     $done_rascunho = "";
+    $statusEscala = "<input id='statusEscala'type='hidden' value='rascunho'/>";
 }
+echo $statusEscala;
 ?>
 <a href='?setor=adm&sub=rh&subsub=escalas' class='btn-outline-dark'>
     <span class="ui-icon ui-icon-caret-1-w"></span>Voltar às Escalas</a> |
@@ -226,7 +236,7 @@ foreach ($resultado as $escalas) {
             <input type="submit" class="" id="btaddservidor" value="BUSCAR">
             <a id="btAddTodos2" class="form-control btn btn-info d-none">Adicionar Todos </a>
     </form>
-    
+
     <div id="dialogaddresultadobusca">
         <caption>Busque pelo nome</caption>
     </div>
@@ -242,6 +252,20 @@ foreach ($resultado as $escalas) {
 </div>
 
 <div id="dialogAnota" title="Bloco de Notas" class="modal">
-    <textarea name="" id="" cols="30" rows="10"></textarea>
+    <textarea name="txtNotepad" id="txtNotepad" cols="30" rows="10" onkeydown="saveNotepad()"></textarea>
 </div>
-<script src="/siiupa/administracao/pagina_escala_exibe.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#txtNotepad").val($.session.get('txtNotepad'));
+    });
+
+
+
+    function saveNotepad() {
+        let txtNotepad = $("#txtNotepad").val();
+        $.session.set('txtNotepad', txtNotepad);
+        console.log(txtNotepad);
+    }
+</script>
+<script src="/siiupa/js/jquery.session.js" defer></script>
+<script src="/siiupa/administracao/pagina_escala_exibe.js?v=1"></script>

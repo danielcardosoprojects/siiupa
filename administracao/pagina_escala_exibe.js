@@ -6,6 +6,12 @@ $(function() {
         $("#dialogAnota").dialog({
             appendTo: "window"
         });
+        $(".ui-dialog").css({
+            'position': 'fixed',
+            'top': '10px',
+            'right': '0',    
+            'z-index': '999'
+        });
     });
 
 

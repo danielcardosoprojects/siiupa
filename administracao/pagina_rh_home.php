@@ -1,3 +1,8 @@
+<?php
+include_once('../bd/conectabd.php');
+session_start();
+include_once('../bd/nivel.php');
+?>
 <style>
     .contagem_cargos {
         display: flex;

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Profile and Notifications Dropdowns</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+</head>
+
+<body>
+    <div id="notification-icon"><img src="/siiupa/imagens/icones/bell.svg" width="24px;">
+        <span id="notification-count"></span>
+        <i class="fa fa-bell"></i>
+    </div>
+
+    <div id="notification-popup">
+        <ul id="notification-list"></ul>
+    </div>
+    <style>
+        #notification-icon {
+            position: relative;
+            cursor: pointer;
+            
+        }
+
+        #notification-count {
+            position: absolute;
+          
+            background: red;
+            color: white;
+            padding: 3px 7px;
+            border-radius: 50%;
+            font-size: 12px;
+            font-weight: bold;
+            display: none;
+        }
+
+        #notification-popup {
+            position: absolute;
+            top: 40px;
+           
+            width: 300px;
+            background: white;
+            border: 1px solid gray;
+            padding: 10px;
+            display: none;
+        }
+
+        #notification-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+    <script>
+        
+        var notificationCount = 0;
+
+        // Exemplo de notificações
+        var notifications = [
+            { id: 1, message: "<a href='#'>Notificação 1</a>" },
+            { id: 2, message: "Notificação 2" },
+            { id: 3, message: "Notificação 3" }
+        ];
+        addNotification('teste');
+
+        // Função para
+        function addNotification(message) {
+            notificationCount++;
+            var notificationId = (new Date()).getTime();
+            notifications.push({ id: notificationId, message: message });
+            updateNotificationCount();
+            updateNotificationList();
+        }
+
+        // Função para atualizar o contador de notificações
+        function updateNotificationCount() {
+            $("#notification-count").text(notificationCount);
+            if (notificationCount > 0) {
+                $("#notification-count").show();
+            } else {
+                $("#notification-count").hide();
+            }
+        }
+
+        // Função para atualizar a lista de notificações
+        function updateNotificationList() {
+            $("#notification-list").empty();
+            for (var i = 0; i < notifications.length; i++) {
+                var notification = notifications[i];
+                $("#notification-list").append("<li>" + notification.message + "</li>");
+            }
+        }
+
+        // Evento de clique para abrir/fechar a janela de notificações
+        $("#notification-icon").click(function () {
+            $("#notification-popup").toggle();
+        });
+    </script>
+</body>
+
+</html>

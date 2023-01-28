@@ -1,5 +1,8 @@
+
 <?php
-@include_once('../bd/conectabd.php');
+include_once('../bd/conectabd.php');
+session_start();
+include_once('../bd/nivel.php');
 ?>
 <h3>Afastamentos</h3>
 

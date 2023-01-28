@@ -171,6 +171,8 @@ echo "</div>";
 
 
 ?>
+
+<div id="inOut_itens"></div>
 <script type="text/javascript">
   $(document).ready( function () {
     $('#ultimosMovimentos').DataTable({
@@ -265,11 +267,16 @@ echo "
 if ($stmt = $conn->prepare("$query LIMIT $inicio,$total_reg")) {
   $stmt->execute();
   $stmt->bind_result($novoestoque, $estoqueanterior, $datahora, $tipo, $quantidade, $Origem, $Destino, $usuario, $nome, $Setor1, $Setor2, $usuarioNome, $item_fk);
+
+  $somaQtdEntrada = 0;
+  $somaQtdSaida = 0;
   while ($stmt->fetch()) {
     if($tipo=="entrada"){
       $qtd_movimentada = intval($novoestoque)-intval($estoqueanterior);
+      $somaQtdEntrada += $qtd_movimentada;
     } elseif($tipo=="saida"){
       $qtd_movimentada = intval($estoqueanterior)-intval($novoestoque);
+      $somaQtdSaida += $qtd_movimentada;
     }
 
     if ($tipo == 'saida') {
@@ -297,6 +304,9 @@ if ($stmt = $conn->prepare("$query LIMIT $inicio,$total_reg")) {
 }
 echo '</tbody>
 </table>';
+
+echo "<input type='hidden' id='somaQtdSaida' value='Saídas: $somaQtdSaida'>";
+echo "<input type='hidden' id='somaQtdEntrada' value='Entradas: $somaQtdEntrada'>";
 
 $queryString = filter_input(INPUT_SERVER, 'QUERY_STRING');
 
@@ -338,3 +348,10 @@ if ($pc < $tp) {
 
 
 ?>
+<script>
+  $(document).ready(function() {
+    let saida = $("#somaQtdSaida").val();
+    let entrada = $("#somaQtdEntrada").val();
+    $("#inOut_itens").html(`<h4>Soma quantidades: ${saida} / ${entrada}</h4>`);
+});
+</script>
