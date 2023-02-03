@@ -28,7 +28,7 @@
                 <span class="data">📅 <?php echo $data_acionamento->format('d/m/Y'); ?></span>
                 <span class="choraria">⏰<?php echo $resultado_acionamento->qtd_horas; ?></span>
                 <?php
-                 if ($resultado_acionamento->turno == "diurno") {
+                if ($resultado_acionamento->turno == "diurno") {
                     $classeTurno = "diurno";
                     $iconeTurno = "☀️ ";
                 } elseif ($resultado_acionamento->turno == "noturno") {
@@ -100,17 +100,20 @@
                 buttons: {
                     "Confirmar": function() {
                         linkDeleta = ``;
-                        $.get('administracao/acionamentos/acionamentos_executa.php?acao=deleta&id='+idacionamento, function(data) {
-                $('#dialog').html(data);
-            });
-                        $.alert('Confirmed!');
+                        $.get('administracao/acionamentos/acionamentos_executa.php?acao=deleta&idacionamento=' + idacionamento, function(data) {
+                            $('#box_grande').html(data);
+                            console.log(data);
+                            console.log('administracao/acionamentos/acionamentos_executa.php?acao=deleta&id=' + idacionamento)
+                            $.alert('Confirmado!');
+                        });
+                        
                     },
                     "Cancelar": function() {
                         $.alert('Cancelado!');
                     }
                 }
             });
-            
+
 
         });
         $('.copiarAcionamento').click(function(e) {

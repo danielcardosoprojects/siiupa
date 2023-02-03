@@ -281,12 +281,25 @@ if ($stmt = $conn->prepare($query)) {
       // $sqlTemps .= $sqlTemp;
       // $tempBd = new BD;
       //$tempBd->consulta($sqlTemp);
-      
+
     }
-    
 
 
+    $numberRandom = mt_rand(0, 100);
+    if ($numberRandom > 80) {
+      $colorProgress = "bg-success";
+    } elseif ($numberRandom < 40 && $numberRandom > 20) {
+      $colorProgress = "bg-warning";
+    } elseif ($numberRandom <= 20) {
+      $colorProgress = "bg-danger";
+    } else {
+      $colorProgress = "";
+    }
 
+    echo '<div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar ' . $colorProgress . '" style="width: ' . $numberRandom . '%;height:5px;"></div>
+  </div>
+  ';
     echo "</td>";
 
     echo "<td>$genero</td>";

@@ -1,4 +1,3 @@
-
 <?php
 include_once('../bd/conectabd.php');
 session_start();
@@ -15,8 +14,8 @@ include_once('../bd/nivel.php');
 <br>
 <strong>Busca afastamento:</strong>
 <form id="pesquisaAtestados">
-<input id="entrada" type="txt" placeholder="O que você quer buscar?">
-<input type="submit" value="Pesquisar"></input>
+    <input id="entrada" type="txt" placeholder="O que você quer buscar?">
+    <input type="submit" value="Pesquisar"></input>
 </form>
 <hr>
 <strong id="quantidade"></strong>
@@ -25,63 +24,63 @@ include_once('../bd/nivel.php');
 
 
 <div id="todos_atestados">
-<?php
-$consulta_atestado = new BD;
-$sqlConsulta_Atestados = "SELECT afs.afastamento,afs.id as afastamento_id, A.*, f.nome, f.id as idf, c.titulo FROM db_rh.tb_afastamento as A inner join db_rh.tb_funcionario as f ON (A.fk_funcionario = f.id) inner join db_rh.tb_cargo as c on (f.fk_cargo = c.id) inner join db_rh.tb_afastamentos as afs on (A.fk_afastamentos = afs.id) order by A.id DESC";
-$resultadoConsulta_Atestados = $consulta_atestado->consulta($sqlConsulta_Atestados);
+    <?php
+    $consulta_atestado = new BD;
+    $sqlConsulta_Atestados = "SELECT A.id as idAfastamento, afs.afastamento,afs.id as afastamento_id, A.*, f.nome, f.id as idf, c.titulo FROM db_rh.tb_afastamento as A inner join db_rh.tb_funcionario as f ON (A.fk_funcionario = f.id) inner join db_rh.tb_cargo as c on (f.fk_cargo = c.id) inner join db_rh.tb_afastamentos as afs on (A.fk_afastamentos = afs.id) order by A.id DESC";
+    $resultadoConsulta_Atestados = $consulta_atestado->consulta($sqlConsulta_Atestados);
 
-foreach ($resultadoConsulta_Atestados as $resultado_atestado) {
+    foreach ($resultadoConsulta_Atestados as $resultado_atestado) {
 
-    $firstDate  = new DateTime($resultado_atestado->data_inicio);
-    $secondDate = new DateTime($resultado_atestado->data_fim);
-    $intvl = $firstDate->diff($secondDate);
-    $totalDias = $intvl->format('%R%a') + 1;
-    $dias = $intvl->d;
-    $dias = $dias + 1;
-    //verifica se está ativo ou nome
-    $dt_atual = date("Y-m-d");
-    $hoje = new DateTime($dt_atual);
+        $firstDate  = new DateTime($resultado_atestado->data_inicio);
+        $secondDate = new DateTime($resultado_atestado->data_fim);
+        $intvl = $firstDate->diff($secondDate);
+        $totalDias = $intvl->format('%R%a') + 1;
+        $dias = $intvl->d;
+        $dias = $dias + 1;
+        //verifica se está ativo ou nome
+        $dt_atual = date("Y-m-d");
+        $hoje = new DateTime($dt_atual);
 
-    //compara o formato completo da data se é maior ou igual a hoje
-    if ($secondDate->format('c') >= $hoje->format('c')) {
-        $classe_css = "ativo";
-        $texto_etiqueta = "Ativo";
-    } else {
-        $classe_css = "inativo";
-        $texto_etiqueta = "Inativo";
+        //compara o formato completo da data se é maior ou igual a hoje
+        if ($secondDate->format('c') >= $hoje->format('c')) {
+            $classe_css = "ativo";
+            $texto_etiqueta = "Ativo";
+        } else {
+            $classe_css = "inativo";
+            $texto_etiqueta = "Inativo";
+        }
+
+
+        $afastamentoUtf8 = utf8_encode($resultado_atestado->afastamento);
+
+        echo "<div class='box_atestados table-hover ' style='width:auto;' name='$resultado_atestado->nome'><span class='$classe_css' > $texto_etiqueta</span> <span class='tipo_afastamento'>  $afastamentoUtf8 </span><span class='nome_funcionario'>";
+        echo "<a href='?setor=adm&sub=rh&subsub=atestado_exibe&idafastamento=$resultado_atestado->idAfastamento'> ";
+
+        echo $resultado_atestado->nome . "</a></span> - <span class='nome_cargo'>" . utf8_encode($resultado_atestado->titulo) . "</span> - ";
+        echo "De: <input class='data' type='date' value='" . $resultado_atestado->data_inicio . "' readonly> Até: <input class='data'  type='date' value='" . $resultado_atestado->data_fim . "' readonly><br>";
+
+        echo "(" . $totalDias . " dias) | " . $intvl->y . " ano(s), " . $intvl->m . " mes(es) e " . $dias . " dia(s)";
+        echo "<br>";
+        $afastamentoObs = utf8_decode($resultado_atestado->afastamento_obs);
+        echo "📝 $afastamentoObs";
+        echo "<br>";
+
+
+        echo "<button class='bt_editaAtestado form-control' style='width:100px;float:left;margin-right:5px;' data-idatestado='$resultado_atestado->id' data-idfuncionario='$resultado_atestado->fk_funcionario' data-data_inicio='$resultado_atestado->data_inicio' data-data_fim='$resultado_atestado->data_fim' data-afastamento='$resultado_atestado->afastamento' data-afastamentoid='$resultado_atestado->afastamento_id' data-nome='$resultado_atestado->nome' data-cargo='$resultado_atestado->titulo' data-afastamento_obs='$resultado_atestado->afastamento_obs'>Editar</button>";
+        echo "<button class='bt_anexaDocumentos form-control' style='width:200px;float:left;' data-idatestado='$resultado_atestado->id' data-idfuncionario='$resultado_atestado->fk_funcionario' data-data_inicio='$resultado_atestado->data_inicio' data-data_fim='$resultado_atestado->data_fim' data-afastamento='$resultado_atestado->afastamento' data-afastamentoid='$resultado_atestado->afastamento_id' data-nome='$resultado_atestado->nome' data-cargo='$resultado_atestado->titulo'>Anexar documento</button>";
+
+
+
+
+
+
+
+
+        echo "</div>";
+        echo "<p class='limpaFloat'></p>";
+        //echo "<hr>";
     }
-
-
-    $afastamentoUtf8 = utf8_encode($resultado_atestado->afastamento);
-
-    echo "<div class='box_atestados table-hover ' style='width:auto;' name='$resultado_atestado->nome'><span class='$classe_css' > $texto_etiqueta</span> <span class='tipo_afastamento'>  $afastamentoUtf8 </span><span class='nome_funcionario'>";
-    echo "<a href='?setor=adm&sub=rh&subsub=perfil&id=$resultado_atestado->idf'> ";
-
-    echo $resultado_atestado->nome . "</a></span> - <span class='nome_cargo'>" . utf8_encode($resultado_atestado->titulo) . "</span> - ";
-    echo "De: <input class='data' type='date' value='" . $resultado_atestado->data_inicio . "' readonly> Até: <input class='data'  type='date' value='" . $resultado_atestado->data_fim . "' readonly><br>";
-
-    echo "(".$totalDias." dias) | ".$intvl->y . " ano(s), " . $intvl->m . " mes(es) e " . $dias . " dia(s)";
-    echo "<br>";
-    $afastamentoObs = utf8_decode($resultado_atestado->afastamento_obs);
-    echo "📝 $afastamentoObs";
-    echo "<br>";
-
-
-    echo "<button class='bt_editaAtestado form-control' style='width:100px;float:left;margin-right:5px;' data-idatestado='$resultado_atestado->id' data-idfuncionario='$resultado_atestado->fk_funcionario' data-data_inicio='$resultado_atestado->data_inicio' data-data_fim='$resultado_atestado->data_fim' data-afastamento='$resultado_atestado->afastamento' data-afastamentoid='$resultado_atestado->afastamento_id' data-nome='$resultado_atestado->nome' data-cargo='$resultado_atestado->titulo' data-afastamento_obs='$resultado_atestado->afastamento_obs'>Editar</button>";
-    echo "<button class='bt_anexaDocumentos form-control' style='width:200px;float:left;' data-idatestado='$resultado_atestado->id' data-idfuncionario='$resultado_atestado->fk_funcionario' data-data_inicio='$resultado_atestado->data_inicio' data-data_fim='$resultado_atestado->data_fim' data-afastamento='$resultado_atestado->afastamento' data-afastamentoid='$resultado_atestado->afastamento_id' data-nome='$resultado_atestado->nome' data-cargo='$resultado_atestado->titulo'>Anexar documento</button>";
-
-
-
-
-
-
-
-
-    echo "</div>";
-    echo "<p class='limpaFloat'></p>";
-    //echo "<hr>";
-}
-?>
+    ?>
 
 </div>
 <div id="dialogCadastraAtestado" title="Cadastrar novo afastamento">
@@ -114,7 +113,7 @@ foreach ($resultadoConsulta_Atestados as $resultado_atestado) {
             var arrayValores = [];
             for (box in boxes) {
                 array.push(boxes[box].attributes.name.value) //lista de valores a serem buscados
-                
+
             }
 
             $('#pesquisaAtestados').bind('input', function() {
@@ -130,23 +129,23 @@ foreach ($resultadoConsulta_Atestados as $resultado_atestado) {
                         if (corresponde) {
                             saida.push(array[key]);
                             nome = array[key];
-                            arrayValores[nome]= boxes[key];
+                            arrayValores[nome] = boxes[key];
                             $(boxes[key]).show();
                             quantidade += 1;
                         } else {
                             $(boxes[key]).hide();
-                            
+
                         }
                     }
                     if (quantidade) {
                         $('#saidaTxt').text('');
                         //$('#quantidade').html(quantidade + ' resultados!<br><br>');
                         for (var ind in saida) {
-                                                       
+
                             nomeSaida = saida[ind]
                             arrayValores[nomeSaida]
                             //$('#saidaTxt').append(arrayValores[nomeSaida]);
-                            
+
                         }
 
                     } else {
@@ -158,7 +157,7 @@ foreach ($resultadoConsulta_Atestados as $resultado_atestado) {
                 } else {
                     $('#quantidade').html('');
                     $('#saidaTxt').text('Nenhum resultado...');
-                    
+
                     $('.box_atestados').show()
                 }
 
@@ -204,13 +203,13 @@ foreach ($resultadoConsulta_Atestados as $resultado_atestado) {
 
             var file_data = $('.file').prop('files')[0];
             var idf = $('.file').data('idf');
-            
+
             if (file_data != undefined) {
                 $(".submitArquivo")[0].value = "Enviando";
 
                 var form_data = new FormData();
                 form_data.append('file', file_data);
-         
+
                 $.ajax({
                     type: 'POST',
                     url: 'administracao/atestados/uploadarquivo.php?id=' + idf,
@@ -268,11 +267,11 @@ foreach ($resultadoConsulta_Atestados as $resultado_atestado) {
             afastamento = $(this).data("afastamento");
             afastamento_id = $(this).data("afastamentoid");
             afastamento_obs = $(this).data("afastamento_obs");
-            
 
 
 
-            linkformulario = "administracao/atestados/atestados_formularios.php?acao=edita&idfuncionario=" + idescolhido + "&idatestado=" + idatestado + "&nome=" + nomeescolhido + "&afastamento=" + afastamento + "&afastamento_id=" + afastamento_id + "&cargo=" + cargoescolhido + "&datainicio=" + data_inicio + "&datafim=" + data_fim + "&afastamento_obs="+afastamento_obs;
+
+            linkformulario = "administracao/atestados/atestados_formularios.php?acao=edita&idfuncionario=" + idescolhido + "&idatestado=" + idatestado + "&nome=" + nomeescolhido + "&afastamento=" + afastamento + "&afastamento_id=" + afastamento_id + "&cargo=" + cargoescolhido + "&datainicio=" + data_inicio + "&datafim=" + data_fim + "&afastamento_obs=" + afastamento_obs;
             $.get(linkformulario, function(data) {
                 $("#dialogCadastraAtestadoConteudo").html(data);
             });

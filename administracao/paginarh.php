@@ -349,6 +349,8 @@
 
         } elseif ($subsub == 'acionamento_exibe') {
             include_once('pagina_rh_acionamento_exibe.php');
+        }elseif ($subsub == 'atestado_exibe') {
+            include_once('pagina_rh_atestados_exibe.php');
         } elseif ($subsub == 'perfil_criar') {
             include_once('pagina_rh_perfil_criar.php');
         } elseif ($subsub == "rhfolhas") {

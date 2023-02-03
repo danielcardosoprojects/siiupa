@@ -1,4 +1,12 @@
 <style>
+  .badge {
+    padding: 2px 5px;
+    background-color: #ccc;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 12px;
+    border-radius: 3px;
+}
   .saida {
     background-color: #ffc2b1;
     border: 1px solid #400000;
@@ -118,7 +126,7 @@ if (isset($_GET['generoOpt'])) {
   $generoOpt = '';
 }
 if (isset($_GET['textobusca'])) {
-  $textoBusca = $_GET['textobusca'];
+  $textoBusca = str_replace('_', ' ', $_GET['textobusca']);
 } else {
   $textoBusca = '';
 }
@@ -164,7 +172,7 @@ foreach ($resultListaGeneros as $listaGenero) {
 echo "</div>";
 echo "</div>";
 
-echo "Nome: <input type'text' name='textoBusca' id='textoBusca' value='$textoBusca'>";
+echo "Nome ou ID do item: <input type'text' name='textoBusca' id='textoBusca' value='$textoBusca'>";
 
 echo "<button id='filtraData' class='btn btn-primary'>Filtrar</button>";
 echo "</div>";
@@ -172,21 +180,41 @@ echo "</div>";
 
 ?>
 
-<div id="inOut_itens"></div>
+<div id="inOut_itens" class="alert alert-info" role="alert"></div>
+
+<button class="btn btn-outline-success" id="exportar_movimentos"><img src="../../imagens/icones/excel.svg" width="20px"/> Exportar para excel</button>
 <script type="text/javascript">
-  $(document).ready( function () {
+  $('#exportar_movimentos').click(function (e) {
+        e.preventDefault();
+        tabela = $.find('#ultimosMovimentos');
+        //console.log(tabela[0]);
+        $("#ultimosMovimentos").table2excel({
+            filename: "filtro_movimentos.xls"
+        });
+    });
+
+      function replaceSpaces(str) {
+  return str.replace(/ /g, "_");
+}
+  $(document).ready(function() {
+
+
     $('#ultimosMovimentos').DataTable({
       language: {
-                        url:"/siiupa/js/dataTables/pt-BR.json"
-          },
-          "lengthMenu": [ [25, 50, -1], [25, 50, "Todos"] ],
+        url: "/siiupa/js/dataTables/pt-BR.json"
+      },
+      "lengthMenu": [
+        [25, 50, -1],
+        [25, 50, "Todos"]
+      ],
     });
-} );
+  });
+
   function filtraData() {
     datainicio = $("#datainicio").val();
     datafim = $("#datafim").val();
     generoOpt = $("input[name='optGenChk']:checked").val();
-    textoBusca = $("#textoBusca").val();
+    textoBusca = encodeURI(replaceSpaces($("#textoBusca").val()));
 
 
     chkEntrada = $("#chkEntrada")[0].checked;
@@ -214,17 +242,16 @@ echo "</div>";
 
   //pesquisa se apertar o botão filtrar ou se aperta enter no input nome
   $("#filtraData").click(filtraData);
-  $("#textoBusca").keyup(function(e){
-    if(e.keyCode == 13)
-    {
+  $("#textoBusca").keyup(function(e) {
+    if (e.keyCode == 13) {
       filtraData();
     }
-});
+  });
 </script>
 
 <?php
 
-$query = "SELECT m.novoestoque, m.estoqueanterior, DATE_FORMAT(m.datahora,'%d\/%m\/%Y %H:%i'), m.tipo, sum(m.quantidade) as quantidade, m.setor_origem_fk as Origem, m.setor_dest_fk as Destino, m.usuario as usuario_id, i.nome, s.setor as Setor1, s2.setor as Setor2, u.usuario as usuarioNome, m.item_fk FROM db_farmacia.tb_farmmovimento AS m INNER JOIN db_farmacia.tb_farmitem AS i ON (m.item_fk = i.id) INNER JOIN db_farmacia.tb_farmsetor AS s ON (m.setor_origem_fk = s.id) INNER JOIN db_farmacia.tb_farmsetor AS s2 ON (m.setor_dest_fk = s2.id) INNER JOIN login.usuarios AS u on (m.usuario = u.id) where m.datahora between '$datainicio 00:00:00' and '$datafim 23:59:59'  $andTipo $andGenero and i.nome like '%$textoBusca%' group by tipo, m.item_fk, m.datahora order BY m.datahora, i.nome  ASC ";
+$query = "SELECT m.novoestoque, m.estoqueanterior, DATE_FORMAT(m.datahora,'%d\/%m\/%Y %H:%i'), m.tipo, sum(m.quantidade) as quantidade, m.setor_origem_fk as Origem, m.setor_dest_fk as Destino, m.usuario as usuario_id, i.nome, s.setor as Setor1, s2.setor as Setor2, u.usuario as usuarioNome, m.item_fk FROM db_farmacia.tb_farmmovimento AS m INNER JOIN db_farmacia.tb_farmitem AS i ON (m.item_fk = i.id) INNER JOIN db_farmacia.tb_farmsetor AS s ON (m.setor_origem_fk = s.id) INNER JOIN db_farmacia.tb_farmsetor AS s2 ON (m.setor_dest_fk = s2.id) INNER JOIN login.usuarios AS u on (m.usuario = u.id) where m.datahora between '$datainicio 00:00:00' and '$datafim 23:59:59'  $andTipo $andGenero and (i.nome like '%$textoBusca%' or i.id like '%$textoBusca%') group by tipo, m.item_fk, m.datahora order BY m.datahora, i.nome  ASC ";
 // echo $query;
 
 $todosResultadosBusca = mysqli_query($conn, $query);
@@ -271,11 +298,11 @@ if ($stmt = $conn->prepare("$query LIMIT $inicio,$total_reg")) {
   $somaQtdEntrada = 0;
   $somaQtdSaida = 0;
   while ($stmt->fetch()) {
-    if($tipo=="entrada"){
-      $qtd_movimentada = intval($novoestoque)-intval($estoqueanterior);
+    if ($tipo == "entrada") {
+      $qtd_movimentada = intval($novoestoque) - intval($estoqueanterior);
       $somaQtdEntrada += $qtd_movimentada;
-    } elseif($tipo=="saida"){
-      $qtd_movimentada = intval($estoqueanterior)-intval($novoestoque);
+    } elseif ($tipo == "saida") {
+      $qtd_movimentada = intval($estoqueanterior) - intval($novoestoque);
       $somaQtdSaida += $qtd_movimentada;
     }
 
@@ -293,7 +320,7 @@ if ($stmt = $conn->prepare("$query LIMIT $inicio,$total_reg")) {
           <td scope='row'><small>$datahora</small></td>
           <td>$tipoBolha $tipo</td>
           <td>$qtd_movimentada</td>
-          <td><a class='linksMovimento' href='$linkItemDetalha'>$nome <img src='/siiupa/imagens/icones/info.fw.png'></a></td>
+          <td><a class='linksMovimento' href='$linkItemDetalha' title='Id: $item_fk'>$nome <img src='/siiupa/imagens/icones/info.fw.png'><span class='badge'>ID: $item_fk</span></a></td>
           <td>$Setor1</td>
           <td>$Setor2</td>
           <td>$usuarioNome</td>
@@ -353,5 +380,5 @@ if ($pc < $tp) {
     let saida = $("#somaQtdSaida").val();
     let entrada = $("#somaQtdEntrada").val();
     $("#inOut_itens").html(`<h4>Soma quantidades: ${saida} / ${entrada}</h4>`);
-});
+  });
 </script>

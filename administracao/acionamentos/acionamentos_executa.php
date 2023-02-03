@@ -71,7 +71,10 @@ if (isset($_GET['acao'])) {
         $sqlDeletaAcionamento = "DELETE FROM db_rh.tb_acionamento WHERE (id = '$idacionamento');";
         $deletaAcionamento = new BD;
         $rDeleta = $deletaAcionamento->consulta($sqlDeletaAcionamento);
-        echo "Deletado!";
+        echo '<div class="alert alert-primary" role="alert">
+        Deletado!
+      </div>
+      ';
 
 
     }
