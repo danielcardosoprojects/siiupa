@@ -296,10 +296,10 @@ if ($stmt = $conn->prepare($query)) {
       $colorProgress = "";
     }
 
-    echo '<div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-    <div class="progress-bar ' . $colorProgress . '" style="width: ' . $numberRandom . '%;height:5px;"></div>
-  </div>
-  ';
+  //   echo '<div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+  //   <div class="progress-bar ' . $colorProgress . '" style="width: ' . $numberRandom . '%;height:5px;"></div>
+  // </div>
+  // ';
     echo "</td>";
 
     echo "<td>$genero</td>";
