@@ -352,7 +352,7 @@ if ($status_folha == "aberta") {
 
 <form id="pesquisaAtestados" class="form">
     <strong>Buscar nome:</strong>
-    <input id="#" type="txt" placeholder="Digite o nome que deseja buscar" class="form-control">
+    <input id="entrada" type="txt" placeholder="Digite o nome que deseja buscar" class="form-control">
 </form>
 <strong id="quantidade"></strong>
 <span id="saidaTxt"></span><br><br>
