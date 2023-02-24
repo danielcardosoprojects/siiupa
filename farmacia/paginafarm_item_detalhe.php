@@ -17,7 +17,10 @@
 </style>
 
 <?php
+header('Content-Type: text/html; charset=utf-8');
 require 'vendor/autoload.php';
+
+
 
 // This will output the barcode as HTML output to display in the browser
 
@@ -37,8 +40,8 @@ $sqlCategorias = "SELECT * FROM db_farmacia.tb_farmcategoria";
 $resultCategorias = $consultaCategorias->consulta($sqlCategorias);
 $categorias = [];
 foreach ($resultCategorias as $rCat) {
-    $textCat = utf8_encode($rCat->categoria);
-    $categorias[$rCat->id] = utf8_encode($rCat->categoria);
+    $textCat = ($rCat->categoria);
+    $categorias[$rCat->id] = ($rCat->categoria);
 }
 
 //carrega os generos
@@ -63,7 +66,7 @@ function exibeCategoriasBt($categoria, $categorias)
 
 
 
-$item->nome = utf8_encode($item->nome);
+$item->nome = $item->nome;
 
 
     $btUnir = "<button id='unirItem' class='btn btn-sm btn-info' data-esse='$item->id'>Unir a este</button>";
@@ -88,17 +91,17 @@ $sqlConLote = "SELECT *, DATE_FORMAT(data_validade, '%d/%m/%Y') as dataValBr FRO
 $lotes = $conLote->consulta($sqlConLote);
 
 echo "<table class='table table-sm'><thead><th>Fabricante/Marca</th><th>Lote</th><th>Validade</th><th>QTD</th><th>Barcode</th><tbody>";
-$total = '';
+$total = 0;
 foreach ($lotes as $lote) {
-    $nomeLote = utf8_encode($lote->lote);
-    $nomeProduto = utf8_encode($lote->nome_produto);
+    $nomeLote = ($lote->lote);
+    $nomeProduto = ($lote->nome_produto);
     echo "<tr>";
     echo "<td id='nomeproduto_$lote->id' data-nomeproduto='$nomeProduto'><span>$nomeProduto</span><a href='#' class='editaNomeProduto' data-idlote='$lote->id'><img class='lapis' src='/siiupa/imagens/icones/edita.png' alt='Editar'></a></td>";
     echo "<td id='lote_$lote->id'>$lote->id →Lote: <span>$nomeLote</span><a href='#' class='editaLote' data-idlote='$lote->id'><img class='lapis' src='/siiupa/imagens/icones/edita.png' alt='Editar'></a></td>";
     echo "<td id='val_$lote->id' data-val='$lote->data_validade'>Val: <span>$lote->dataValBr</span><a href='#' class='editaValidade' data-idlote='$lote->id'><img class='lapis' src='/siiupa/imagens/icones/edita.png' alt='Editar'></a></td><td>Qtd: $lote->estoque</td>";
     echo "<td id='barcode_$lote->id' data-barcode='$lote->barcode'><span>$lote->barcode</span><a href='#' class='editaBarcode' data-idlote='$lote->id'><img class='lapis' src='/siiupa/imagens/icones/edita.png' alt='Editar'></a></td>";
     echo "</tr>";
-    $total += $lote->estoque;
+    $total += intval($lote->estoque);
     //print_r($lote);
 
 }
