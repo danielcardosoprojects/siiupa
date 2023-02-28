@@ -1,6 +1,7 @@
 <?php
-
+@session_start();
 @include_once('../bd/conectabd.php');
+// @include_once('../bd/nivel.php');
 
 ?>
 <html>
@@ -70,6 +71,9 @@
         #assinatura {
             text-align: center;
             width: 100%;
+        }
+        .assinaturas {
+            display:flex;
         }
 
         #footer {
@@ -678,7 +682,7 @@
             $anoExt = pega('anoExt');
             $tituloPagina = "Escala " . $setorExt . " - " . $mesExt . " " . $anoExt;
 
-            echo "<script>document.title = '$tituloPagina';window.print();//window.close();</script>";
+            
         }
         if (isset($_GET['id'])) {
             $idescala = $_GET['id'];
@@ -725,7 +729,14 @@
         <table class="table caption-top  table-bordered table-hover" id="tabela_escala">
             <caption class="border-bottom-0 caption" id="titulo_escala">
 
-                <?php echo strtoupper($resultado[0]->setor . " - " . $mesext . " - " . $resultado[0]->ano); ?>
+                <?php
+                $tituloPagina = strtoupper($resultado[0]->setor . " - " . $mesext . " - " . $resultado[0]->ano); 
+                echo strtoupper($resultado[0]->setor . " - " . $mesext . " - " . $resultado[0]->ano); 
+                if(!isset($_GET['oficial'])){
+                echo "<script>document.title='$tituloPagina';window.print();//window.close();</script>";
+        
+                }
+                 ?>
             </caption>
             <script type="text/javascript">
                 $('html head').find('title').text('SIUPA - ' + $('#titulo_escala').text());
@@ -752,7 +763,7 @@
                         $fds = date("w", strtotime($data->data));
 
                         if ($fds == 0 || $fds == 6) {
-                            $corfds = " background-color:#ccc";
+                            $corfds = " background-color:#ff9933";
                         } else {
                             $corfds = " background-color:#fff";
                         }
@@ -774,7 +785,7 @@
                         $diadasemana = $data->diasemana();
                         $fds = date("w", strtotime($data->data));
                         if ($fds == 0 || $fds == 6) {
-                            $corfds = " background-color:#ccc";
+                            $corfds = " background-color:#ff9933";
                         } else {
                             $corfds = " background-color:#fff";
                         }
@@ -912,7 +923,10 @@
 
         <div id='assinatura'>
             <div class='atualizado'>Atualizado em: <?php echo $atualizado; ?></div>
+            <div class='assinaturas'>
             <div>_____________________________<br>Assinatura Responsável</div>
+            <div>_____________________________<br>Assinatura Responsável</div>
+            </div>
         </div>
 
     </div>
