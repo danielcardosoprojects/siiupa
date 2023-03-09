@@ -246,6 +246,7 @@ $bt_intermitente = "btn-outline-primary";
 $bt_administrativo = "btn-outline-primary";
 $bt_enfermagem = "btn-outline-primary";
 $bt_odontologos = "btn-outline-primary";
+$bt_rx = "btn-outline-primary";
 $bt_enfermeiros = "btn-outline-primary";
 $bt_tenfermagem = "btn-outline-primary";
 
@@ -315,6 +316,11 @@ if (isset($_GET['folha_setor'])) {
         $setor_mostra = " - <span class='tituloSetor'>Odontologia</span>";
         $bt_odontologos = "btn-primary";
     }
+    if ($_GET['folha_setor'] == "raiox") {
+        $setor_separa = "AND func.fk_setor IN ('10')";
+        $setor_mostra = " - <span class='tituloSetor'>Raio-x</span>";
+        $bt_rx = "btn-primary";
+    }
 } else {
     $setor_separa = "";
     $setor_mostra = "";
@@ -335,6 +341,7 @@ Setor:
 <a class="btn <?php echo $bt_enfermeiros ?>" href="?setor=adm&sub=rh&subsub=rhfolhaexibe&id=<?php echo $_GET['id']; ?>&vinculo=<?php echo $vinculo_link; ?>&folha_setor=enfermeiros">Enfermeiros</a>
 <a class="btn <?php echo $bt_tenfermagem ?>" href="?setor=adm&sub=rh&subsub=rhfolhaexibe&id=<?php echo $_GET['id']; ?>&vinculo=<?php echo $vinculo_link; ?>&folha_setor=tenfermagem">Tec. Enfermagem</a>
 <a class="btn <?php echo $bt_odontologos ?>" href="?setor=adm&sub=rh&subsub=rhfolhaexibe&id=<?php echo $_GET['id']; ?>&vinculo=<?php echo $vinculo_link; ?>&folha_setor=odontologiaSuperior">ODONTÓLOGOS</a>
+<a class="btn <?php echo $bt_rx ?>" href="?setor=adm&sub=rh&subsub=rhfolhaexibe&id=<?php echo $_GET['id']; ?>&vinculo=<?php echo $vinculo_link; ?>&folha_setor=raiox">Raio-X</a>
 
 </br>
 
