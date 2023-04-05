@@ -57,6 +57,9 @@ echo $statusEscala;
 <a class="btn btn-outline-dark" href='administracao/pagina_escala_esqueleto.php?id=<?php echo $idescala ?>' target='_blank'>
     <span class="ui-icon ui-icon-print"></span>Imprimir</a>
 
+    <a class="btn btn-outline-dark" href='/siiupa/administracao/escalas/escala_calendario.php?id=<?php echo "$idescala&month=$mes&year=$ano" ?>' target='_blank'>
+    <span class="ui-icon ui-icon-document"></span>Calendário</a>
+
 <a class="btn btn-outline-dark" href='gerapdf_escala.php?id=<?php echo $idescala ?>' target='_blank'>
     <span class="ui-icon ui-icon-document"></span>Gerar PDF</a>
 
