@@ -1,3 +1,5 @@
+
+
 <script type="text/javascript" src="/siiupa/vendor/select2/select2/dist/js/select2.min.js"></script>
 <link rel="stylesheet" href="/siiupa/vendor/select2/select2/dist/css/select2.min.css">
 
@@ -12,6 +14,7 @@
 	}
 </style>
 <?php
+
 if (!isset($_SESSION['nivel'])) {
 	echo "<div class='btn-light'><h1>Você não possui nível de autorização para esta área.</h1><br><img src='/siiupa/imagens/icones/policial.svg' width='300px'></div>";
 

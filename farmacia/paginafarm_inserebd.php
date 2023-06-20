@@ -136,7 +136,7 @@ if ($acao == 'entradamovimento') {
         }
 
         //busca chave unica para garantir que o estoque realmente foi atualizado e só então registra o movimento
-
+        
         $bChave = new BD;
         $sqlChave = "SELECT chave FROM db_farmacia.tb_farmestoque where chave='$chave'";
 
@@ -270,14 +270,17 @@ if ($acao == 'entradamovimento') {
 
 
         //busca chave unica para garantir que o estoque realmente foi atualizado e só então registra o movimento
-
+        echo "teste";
         $bChave = new BD;
         $sqlChave = "SELECT chave FROM db_farmacia.tb_farmestoque where chave='$chave'";
-
+        echo "teste";
         $bChave = $bChave->conecta();
-        $consultChave = $bChave->prepare($sqlLote);
+        echo "teste";
+        $consultChave = $bChave->prepare($sqlChave);
+        echo "testex";
         $consultChave->execute();
 
+        echo "teste";
         var_dump($consultChave->rowCount());
 
         if ($consultChave != 0) {
@@ -285,11 +288,12 @@ if ($acao == 'entradamovimento') {
             $busca = new BD;
             $sql = "INSERT INTO db_farmacia.tb_farmmovimento (`profissional_fk`, `id`, `item_fk`, `tipo`, `setor_origem_fk`, `setor_dest_fk`, `datahora`, `observacao`, `quantidade`, `novoestoque`, `estoqueanterior`, `usuario`) VALUES ($profissional, NULL, '$item_fk', '$tipo_movimento', '$origem', '$destino', '$datahora', NULL, '$qtd_total_solicitada', '$novoEstoque ', '$estoqueAnterior', '$idUsuario')";
 
-
+            
             $busca = $busca->conecta();
             $insere = $busca->prepare($sql);
             $insere->execute();
         }
+        
     }
     echo "<script>window.location.href='/siiupa/farmacia';</script>";
 } elseif ($acao == "cadastraProfissional") {

@@ -1,10 +1,12 @@
-﻿<!DOCTYPE html>
-<html>
-<?php header('Content-type: text/html; charset=utf-8');
+﻿<?php 
+header('Content-Type: text/html; charset=utf-8');
 include("bd/conectabd.php");
 include('../conexao/verifica_login.php');
 
 ?>
+
+<!DOCTYPE html>
+<html>
 
 
 <head>
