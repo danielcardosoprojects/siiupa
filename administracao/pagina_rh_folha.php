@@ -57,102 +57,7 @@ class Tabela
 } ?>
 
 <script type="text/javascript" src="/siiupa/js/script.js"></script>
-<script>
-    $(function() {
-        $(document).ready(function() {
-            var busca = null;
-            var boxes = $(".box_nomes"); //boxes onde contem os dados a serem pesquisados
-            boxes = boxes.toArray();
-            var array = [];
-            var arrayValores = [];
-            for (box in boxes) {
-                array.push(boxes[box].attributes.name.value) //lista de valores a serem buscados
 
-            }
-
-            $('#pesquisaAtestados').bind('input', function() {
-                busca = $('#entrada').val().toLowerCase();
-
-                if (busca !== '') {
-                    var corresponde = false;
-                    var saida = Array();
-                    var quantidade = 0;
-                    for (var key in array) {
-
-                        corresponde = array[key].toLowerCase().indexOf(busca) >= 0;
-                        if (corresponde) {
-                            saida.push(array[key]);
-                            nome = array[key];
-                            arrayValores[nome] = boxes[key];
-                            $(boxes[key]).show();
-                            quantidade += 1;
-                        } else {
-                            $(boxes[key]).hide();
-
-                        }
-                    }
-                    if (quantidade) {
-                        $('#saidaTxt').text('');
-                        $('#quantidade').html(quantidade + ' resultados!<br><br>');
-                        for (var ind in saida) {
-
-                            nomeSaida = saida[ind]
-                            arrayValores[nomeSaida]
-                            //$('#saidaTxt').append(arrayValores[nomeSaida]);
-
-                        }
-
-                    } else {
-                        $('#quantidade').html('');
-                        $('#saidaTxt').text('Nenhum resultado...');
-                        $('.box_nomes').show();
-                    }
-
-                } else {
-                    $('#quantidade').html('');
-                    $('#saidaTxt').text('Nenhum resultado...');
-
-                    $('.box_nomes').show()
-                }
-
-
-
-
-            });
-        });
-        $(window).scrollTop($('#inicio_folha').offset().top);
-        $("#imprimirfolha").click(function() {
-            var elem = $('#folha_impressao');
-            var mywindow = window.open('', 'PRINT', 'height=400,width=600');
-
-            mywindow.document.write('<html><head><title>' + document.title + '</title>');
-            mywindow.document.write('<link rel="stylesheet" href="bootstrap-5.0.0-beta3-dist/css/bootstrap.min.css">');
-            mywindow.document.write('</head><body >');
-            //mywindow.document.write('<img src="imagens/siiupa.png">');
-
-            mywindow.document.write(elem.html());
-            mywindow.document.write('</body></html>');
-
-            mywindow.document.close(); // necessary for IE >= 10
-            mywindow.focus(); // necessary for IE >= 10*/
-
-            mywindow.print();
-            // mywindow.close();
-
-
-            return true;
-        });
-
-        $('#exportar_excel_folha').click(function(e) {
-            e.preventDefault();
-
-            $(".Tabela_folha").table2excel({
-                filename: $("#titulo_folha").data("titulo") + ".xls", // do include extension
-                preserveColors: true
-            });
-        });
-    });
-</script>
 
 <style type="text/css">
     .aberta {
@@ -349,16 +254,23 @@ Setor:
 <?php
 if ($status_folha == "aberta") {
     ?>
-<a href="?setor=adm&sub=rh&subsub=rhfolhaadicionaservidor&idfolha=<?php echo $_GET['id']; ?>" id="bcadastrarFUNCIONARIO" class="btn btn-success">
+<!-- <a href="?setor=adm&sub=rh&subsub=rhfolhaadicionaservidor&idfolha=<?php echo $_GET['id']; ?>" id="btAddServidor2" id-antigo="bcadastrarFUNCIONARIO" class="btn btn-success">
     <img src="/siiupa/imagens/icones/personadd.svg">
     Adicionar servidor nesta folha
+</a> -->
+
+
+<a class="btn btn-success" id="btAddServidor" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+<img src="/siiupa/imagens/icones/personadd.svg">
+    Adicionar servidor nesta folha
 </a>
+
 <?php
 }
 ?>
-
+<hr/>
 <form id="pesquisaAtestados" class="form">
-    <strong>Buscar nome:</strong>
+    <strong>Buscar servidores já adicionados:</strong>
     <input id="entrada" type="txt" placeholder="Digite o nome que deseja buscar" class="form-control">
 </form>
 <strong id="quantidade"></strong>
@@ -536,7 +448,27 @@ echo '</tbody>
 
 
 echo "</div>"; ///                   FECHA AREA DE IMPRESSAO    
+?>
 
+
+
+<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Adicionar Servidor</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div id="offCanvas">
+        
+     
+
+    </div>
+    <div id="servCanvas"></div>
+
+   
+  </div>
+</div>
+<?php
 function mes($entrada)
 {
     switch ($entrada) {
@@ -568,3 +500,108 @@ function mes($entrada)
     return $entrada;
 }
 ?>
+<script>
+    function loadCanvas(link){
+                $("#servCanvas").load(link);
+            }
+    $(function() {
+        $(document).ready(function() {
+            $("#btAddServidor").click(function(e){
+                e.preventDefault();
+                loadCanvas('administracao/pagina_rh_folha_adicionaservidor.php?idfolha=<?=$idfolha?>')
+            });
+            
+            
+            var busca = null;
+            var boxes = $(".box_nomes"); //boxes onde contem os dados a serem pesquisados
+            boxes = boxes.toArray();
+            var array = [];
+            var arrayValores = [];
+            for (box in boxes) {
+                array.push(boxes[box].attributes.name.value) //lista de valores a serem buscados
+
+            }
+
+            $('#pesquisaAtestados').bind('input', function() {
+                busca = $('#entrada').val().toLowerCase();
+
+                if (busca !== '') {
+                    var corresponde = false;
+                    var saida = Array();
+                    var quantidade = 0;
+                    for (var key in array) {
+
+                        corresponde = array[key].toLowerCase().indexOf(busca) >= 0;
+                        if (corresponde) {
+                            saida.push(array[key]);
+                            nome = array[key];
+                            arrayValores[nome] = boxes[key];
+                            $(boxes[key]).show();
+                            quantidade += 1;
+                        } else {
+                            $(boxes[key]).hide();
+
+                        }
+                    }
+                    if (quantidade) {
+                        $('#saidaTxt').text('');
+                        $('#quantidade').html(quantidade + ' resultados!<br><br>');
+                        for (var ind in saida) {
+
+                            nomeSaida = saida[ind]
+                            arrayValores[nomeSaida]
+                            //$('#saidaTxt').append(arrayValores[nomeSaida]);
+
+                        }
+
+                    } else {
+                        $('#quantidade').html('');
+                        $('#saidaTxt').text('Nenhum resultado...');
+                        $('.box_nomes').show();
+                    }
+
+                } else {
+                    $('#quantidade').html('');
+                    $('#saidaTxt').text('Nenhum resultado...');
+
+                    $('.box_nomes').show()
+                }
+
+
+
+
+            });
+        });
+        $(window).scrollTop($('#inicio_folha').offset().top);
+        $("#imprimirfolha").click(function() {
+            var elem = $('#folha_impressao');
+            var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+
+            mywindow.document.write('<html><head><title>' + document.title + '</title>');
+            mywindow.document.write('<link rel="stylesheet" href="bootstrap-5.0.0-beta3-dist/css/bootstrap.min.css">');
+            mywindow.document.write('</head><body >');
+            //mywindow.document.write('<img src="imagens/siiupa.png">');
+
+            mywindow.document.write(elem.html());
+            mywindow.document.write('</body></html>');
+
+            mywindow.document.close(); // necessary for IE >= 10
+            mywindow.focus(); // necessary for IE >= 10*/
+
+            mywindow.print();
+            // mywindow.close();
+
+
+            return true;
+        });
+
+        $('#exportar_excel_folha').click(function(e) {
+            e.preventDefault();
+
+            $(".Tabela_folha").table2excel({
+                filename: $("#titulo_folha").data("titulo") + ".xls", // do include extension
+                preserveColors: true
+            });
+        });
+    });
+</script>

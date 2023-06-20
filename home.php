@@ -25,6 +25,7 @@
                          <br>
                          <a href="/siiupa/?setor=adm&sub=rh" class="btn btn-sm btn-light">Servidores</a>
                          <a href="/siiupa/?setor=adm&sub=rh&subsub=escalas" class="btn btn-sm btn-light">Escalas</a>
+                         <a href="/siiupa/?setor=adm&sub=rh&subsub=folhas" class="btn btn-sm btn-light">Folhas</a>
                          <a href="/siiupa/?setor=adm&sub=rh&subsub=atestados" class="btn btn-sm btn-light">Afastamentos</a>
                          <a href="/siiupa/?setor=adm&sub=rh&subsub=acionamentos" class="btn btn-sm btn-light">Acionamentos</a>
                          <a href="/siiupa/?setor=adm&sub=rh&subsub=ferias" class="btn btn-sm btn-light">Férias</a>

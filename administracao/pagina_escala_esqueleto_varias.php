@@ -540,8 +540,8 @@
         </div>
 
         <div id='assinatura'>
-            <div class='atualizado'>Atualizado em: <?php echo $atualizado; ?></div>
-            <div>_____________________________<br>Assinatura Responsável</div>
+            <!-- <div class='atualizado'>Atualizado em: <?php echo $atualizado; ?></div> -->
+            <div><br/><br/>_____________________________<br>Assinatura Responsável</div>
         </div>
 
     </div>

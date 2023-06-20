@@ -125,7 +125,8 @@
             var nome = $('#nome').val();
             var idfolha = $('#idfolha').val();
             var link = '?setor=adm&sub=rh&subsub=rhfolhaadicionaservidor&nome=' + nome + '&idfolha=' + idfolha;
-            window.location.replace(link);
+            loadCanvas('administracao/pagina_rh_folha_adicionaservidor.php?nome=' + nome + '&idfolha=' + idfolha)
+            // window.location.replace(link);
             return false;
         });
         $("#btenviar").click(function(e) {
@@ -133,21 +134,12 @@
             var nome = $('#nome').val();
             var idfolha = $('#idfolha').val();
 
-
-
-
-
             var link = '?setor=adm&sub=rh&subsub=rhfolhaadicionaservidor&nome=' + nome + '&idfolha=' + idfolha;
-            window.location.replace(link);
-            //var link2 = '?setor=adm&sub=rhperfil&id='+id;
-            // window.history.pushState('page2', 'Title', linkh);
-            console.log(link);
-            //sessionStorage.setItem('linkanterior', link);
-            //$('#subconteudo').load(link);
-            // window.location.replace(link2);
+            
+            loadCanvas('administracao/pagina_rh_folha_adicionaservidor.php?nome=' + nome + '&idfolha=' + idfolha)
+            // window.location.replace(link);
+            //  console.log(link);
 
-
-            // $("#buscanome").val() = buscanome;
 
         });
 
@@ -696,7 +688,7 @@ if (isset($_GET['acao'])) {
     echo "<h4>Folha de Pagamento </br>$mes/$ano</h4>";
 ?>
 
-    <h1>Adicionar servidor</h1>
+    <!-- <h1>Adicionar servidor</h1> -->
 
     <form action="" method="" id="buscaNome">
         <input type="hidden" value="<?php echo $_GET['idfolha']; ?>" name="idfolha" id="idfolha" action="?setor=adm&sub=rh&subsub=rhfolhaadicionaservidor">
@@ -709,6 +701,8 @@ if (isset($_GET['acao'])) {
                 <img src=" imagens/icones/cancelar.svg" width="15px">
                 Cancelar</a>
             <a class="btn btn-success" id="btenviar"><img src="imagens/icones/buscar.svg" width="30px"> Buscar</img></a>
+            
+
 
         </div>
 
@@ -734,7 +728,7 @@ if (isset($_GET['acao'])) {
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th scope="col">AÇÃO</th>
+                    <!-- <th scope="col">AÇÃO</th> -->
                     <th scope="col">ID</th>
                     <th scope="col">NOME</th>
                     <th scope="col">CARGO</th>
@@ -754,7 +748,7 @@ if (isset($_GET['acao'])) {
 
 
                         echo "<tr>";
-                        echo "<td><span class='material-icons'>account_circle</span></td>";
+                        // echo "<td><span class='material-icons'>account_circle</span></td>";
                         echo "<th scope='row'><a class='abreperfil' href='?setor=adm&sub=rh&subsub=rhfolhaadicionaservidor&acao=seleciona&idservidor=$dados->idfuncionario&idfolha=$dados->idfolha&subacao=adicionar'>$dados->idfuncionario</a></th>";
                         echo "<td>$dados->nome  <a  class='copiarNome' data-text='$dados->nome' href='#'><i><span class='material-icons'>content_copy</span></i></a></td>";
                         echo "<td>$dados->fk_cargo - $dados->cargo</td>";

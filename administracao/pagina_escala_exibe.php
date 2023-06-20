@@ -104,6 +104,7 @@ foreach ($resultado as $escalas) {
 
 @include_once("../bd/conectabd.php");
 ?>
+<p>Ferramentas: <a href="#" id="excluir_varios">Excluir vários</a></p>
 <div id="carregaesqueleto">
 
     <?php
@@ -262,6 +263,11 @@ foreach ($resultado as $escalas) {
         $("#txtNotepad").val($.session.get('txtNotepad'));
     });
 
+    $("#excluir_varios").click((e)=>{
+        e.preventDefault();
+        $(".seleciona_exclusao").show();
+    });
+    
 
 
     function saveNotepad() {

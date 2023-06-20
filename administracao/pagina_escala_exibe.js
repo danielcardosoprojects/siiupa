@@ -1,4 +1,7 @@
 $(function() {
+
+    //exibe os checkbox de exclusao
+    
     
     $("#blocodenotas").click((e) => {
         e.preventDefault();
