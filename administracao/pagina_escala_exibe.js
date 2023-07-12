@@ -5,16 +5,17 @@ $(function() {
     
     $("#blocodenotas").click((e) => {
         e.preventDefault();
-        $("#dialogAnota").dialog();
-        $("#dialogAnota").dialog({
-            appendTo: "window"
-        });
-        $(".ui-dialog").css({
-            'position': 'fixed',
-            'top': '10px',
-            'right': '0',    
-            'z-index': '999'
-        });
+        // $("#dialogAnota").dialog();
+        // $("#dialogAnota").dialog({
+        //     appendTo: "window"
+        // });
+        // $(".ui-dialog").css({
+        //     'position': 'fixed',
+        //     'top': '10px',
+        //     'right': '0',    
+        //     'z-index': '999'
+        // });
+        document.getElementById('bloco-de-notas').style.display = 'block';
     });
 
 

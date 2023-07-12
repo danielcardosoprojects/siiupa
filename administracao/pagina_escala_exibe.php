@@ -94,9 +94,45 @@
     #cancelar_exclusao {
         background-color: #f00;
     }
+
+
+    #bloco-de-notas {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  width: 300px;
+  height: 300px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  display:none;
+}
+
+#barra-superior {
+  background-color: #f2f2f2;
+  padding: 5px;
+  cursor: move;
+}
+
+#tituloBloco {
+  font-weight: bold;
+}
+
+#botao-fechar {
+  float: right;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+#conteudoBloco {
+  padding: 10px;
+  width:100%;
+  height: 100%;
+}
 </style>
 <?php
 @include_once("../bd/conectabd.php");
+
 $idescala = $_GET['id'];
 
 $mes = $_GET['mes'];
@@ -333,6 +369,14 @@ STATUS:
 <div id="dialogAnota" title="Bloco de Notas" class="modal">
     <textarea name="txtNotepad" id="txtNotepad" cols="30" rows="10" onkeydown="saveNotepad()"></textarea>
 </div>
+
+<div id="bloco-de-notas">
+  <div id="barra-superior">
+    <span id="tituloBloco">Bloco de Notas</span>
+    <button id="botao-fechar">X</button>
+  </div>
+  <textarea id="conteudoBloco" contenteditable="true"></textarea>
+</div>
 <script>
     $(document).ready(function() {
 
@@ -411,6 +455,145 @@ STATUS:
         $.session.set('txtNotepad', txtNotepad);
         console.log(txtNotepad);
     }
+
+// Função para permitir a movimentação do bloco de notas
+// Função para tornar o bloco de notas arrastável, evitando arrastar ao selecionar o texto no textarea
+function tornarArrastavel(elemento) {
+  var posicaoInicial = { x: 0, y: 0 };
+  var posicaoAtual = { x: 0, y: 0 };
+  var arrastando = false;
+  var selecionandoTexto = false;
+
+  // Verificar se o usuário está selecionando texto no textarea
+  elemento.addEventListener('mousedown', function(event) {
+    selecionandoTexto = event.target === elemento;
+  });
+
+  elemento.addEventListener('mousedown', iniciarArrastar);
+  elemento.addEventListener('mouseup', pararArrastar);
+  elemento.addEventListener('mousemove', arrastar);
+
+  function iniciarArrastar(event) {
+    if (!selecionandoTexto) {
+      arrastando = true;
+      posicaoInicial.x = event.clientX - posicaoAtual.x;
+      posicaoInicial.y = event.clientY - posicaoAtual.y;
+    }
+  }
+
+  function pararArrastar() {
+    arrastando = false;
+    selecionandoTexto = false;
+  }
+
+  function arrastar(event) {
+    if (arrastando && !selecionandoTexto) {
+      event.preventDefault();
+      posicaoAtual.x = event.clientX - posicaoInicial.x;
+      posicaoAtual.y = event.clientY - posicaoInicial.y;
+      elemento.style.left = posicaoAtual.x + 'px';
+      elemento.style.top = posicaoAtual.y + 'px';
+    }
+  }
+}
+
+// Obter referência ao bloco de notas e torná-lo arrastável
+var blocoDeNotas = document.getElementById('bloco-de-notas');
+var conteudoBloco = document.getElementById('conteudoBloco');
+tornarArrastavel(blocoDeNotas);
+
+// Impedir arrastar quando o usuário estiver selecionando o texto no textarea
+conteudoBloco.addEventListener('mousedown', function(event) {
+  event.stopPropagation();
+});
+
+
+// Obter referência ao bloco de notas e torná-lo arrastável
+var blocoDeNotas = document.getElementById('bloco-de-notas');
+tornarArrastavel(blocoDeNotas);
+
+// Evento para fechar o bloco de notas
+var botaoFechar = document.getElementById('botao-fechar');
+botaoFechar.addEventListener('click', function() {
+    var idServidorUsuario = <?php echo $_SESSION['idServidorUsuario']; ?>;
+  var url = "/siiupa/api/rh/api.php/records/tb_funcionario/" + idServidorUsuario;
+
+  var dados = {
+    notepad_ativo: 0
+  };
+
+  // Converter o valor de notepad_ativo para número inteiro
+  var dadosString = JSON.stringify(dados);
+  dadosString = dadosString.replace(/"notepad_ativo":0/, '"notepad_ativo":0.0');
+
+  // Enviar a requisição PUT usando o Axios para alterar o valor de notepad_ativo para 0
+  axios.put(url, dadosString)
+    .then(response => {
+      console.log("Valor de notepad_ativo alterado para 0");
+      document.getElementById('bloco-de-notas').style.display = 'none'; // Oculta o bloco de notas após alteração
+    })
+    .catch(error => {
+      console.error("Erro ao alterar o valor de notepad_ativo:", error);
+    });
+});
+
+// Obter referências aos elementos relevantes
+var conteudoBloco = document.getElementById('conteudoBloco');
+
+// Evento para salvar o conteúdo ao digitar
+conteudoBloco.addEventListener('input', function() {
+    $("#bloco-de-notas").notify("Salvando", "info");
+  var idServidorUsuario = <?php echo $_SESSION['idServidorUsuario']; ?>;
+  var url = "/siiupa/api/rh/api.php/records/tb_funcionario/" + idServidorUsuario;
+
+  var dados = {
+    notepad: conteudoBloco.value,
+    notepad_ativo: 1
+  };
+
+  // Enviar a requisição PUT usando o Axios
+  axios.put(url, JSON.stringify(dados))
+    .then(response => {
+      
+      $("#bloco-de-notas").notify("Salvo!", "success");
+    })
+    .catch(error => {
+        $("#bloco-de-notas").notify("Não foi possível salvar! Cuidado, copie os dados para não perdê-los", "error");
+    });
+});
+// Obter referência ao elemento do conteúdo do bloco de notas
+var conteudoBloco = document.getElementById('conteudoBloco');
+
+// Função para carregar o conteúdo do bloco de notas
+function carregarConteudoBloco() {
+  var idServidorUsuario = <?php echo $_SESSION['idServidorUsuario']; ?>;
+  var url = "/siiupa/api/rh/api.php/records/tb_funcionario/" + idServidorUsuario;
+
+  // Enviar a requisição GET usando o Axios
+  axios.get(url)
+    .then(response => {
+      var dados = response.data;
+
+      if (dados) {
+        // Definir o valor do textarea com base nos dados retornados
+        conteudoBloco.value = dados.notepad;
+
+        // Verificar o valor de notepad_ativo para exibir ou ocultar o bloco de notas
+        if (dados.notepad_ativo === 1) {
+          document.getElementById('bloco-de-notas').style.display = 'block';
+        } else {
+          document.getElementById('bloco-de-notas').style.display = 'none';
+        }
+      }
+    })
+    .catch(error => {
+      console.error("Erro ao carregar o conteúdo:", error);
+    });
+}
+
+// Chamar a função para carregar o conteúdo do bloco de notas ao carregar a página
+window.addEventListener('load', carregarConteudoBloco);
+
 </script>
 <script src="/siiupa/js/jquery.session.js" defer></script>
 <script src="/siiupa/administracao/pagina_escala_exibe.js?v=1"></script>
