@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tabela de Funcionários</title>
+    <meta charset="UTF-8">
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <table id="funcionariosTable">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>CBO</th>
+                <th>FK Cargo</th>
+                <th>Carga Horária Semanal</th>
+                <th>Conselho Tipo</th>
+                <th>Conselho N</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+       function formatCPF(cpf) {
+  const cpfRegex = /(\d{3})(\d{3})(\d{3})(\d{2})/;
+  if (cpf && cpf.length === 11 && cpf.match(/^\d+$/)) {
+    return cpf.replace(cpfRegex, '$1.$2.$3-$4');
+  }
+  return cpf;
+}
+
+        axios.get('https://siupa.online/siiupa/api/rh/api.php/records/tb_funcionario?filter=status,eq,ativo&join=tb_cargo')
+            .then(function (response) {
+                var funcionarios = response.data.records;
+                var tableBody = document.querySelector('#funcionariosTable tbody');
+
+                funcionarios.forEach(function (funcionario) {
+                    console.log(funcionario);
+                    var row = document.createElement('tr');
+                    var nomeCell = document.createElement('td');
+                    nomeCell.textContent = funcionario.nome;
+                    row.appendChild(nomeCell);
+
+                    var cpfCell = document.createElement('td');
+                    cpfCell.textContent = formatCPF(funcionario.cpf);
+                    row.appendChild(cpfCell);
+
+                    var cargoCBO = document.createElement('td');
+                    cargoCBO.textContent = funcionario.fk_cargo.cbo;
+                    row.appendChild(cargoCBO);
+
+                    var fkCargoCell = document.createElement('td');
+                    fkCargoCell.textContent = funcionario.fk_cargo.titulo;
+                    row.appendChild(fkCargoCell);
+
+                    var cargaHorariaCell = document.createElement('td');
+                    cargaHorariaCell.textContent = funcionario.fk_cargo.carga_horaria / 4;
+                    row.appendChild(cargaHorariaCell);
+
+                    var conselhoTipoCell = document.createElement('td');
+                    conselhoTipoCell.textContent = funcionario.conselho_tipo;
+                    row.appendChild(conselhoTipoCell);
+
+                    var conselhoNCell = document.createElement('td');
+                    conselhoNCell.textContent = funcionario.conselho_n;
+                    row.appendChild(conselhoNCell);
+
+                    tableBody.appendChild(row);
+                });
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+    </script>
+</body>
+</html>

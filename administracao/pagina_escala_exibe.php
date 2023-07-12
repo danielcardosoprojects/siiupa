@@ -1,4 +1,27 @@
 <style>
+    #addservidor {
+        display: inline-block;
+        padding: 5px 20px;
+        background-color: #28a745;
+        color: #fff;
+        text-decoration: none;
+        border: none;
+        border-radius: 4px;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    #addservidor:hover {
+        background-color: #218838;
+    }
+
+    #addservidor:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.3);
+    }
+
     .caption {
         text-align: center;
         color: #000 !important;
@@ -24,6 +47,52 @@
         display: flex;
         flex-direction: column;
         gap: 10px;
+    }
+
+    /* Estilo para o link "Excluir Vários" */
+    #excluir_varios {
+        display: inline-block;
+        padding: 5px 20px;
+        background-color: #f00;
+        color: #fff;
+        text-decoration: none;
+        border: none;
+        border-radius: 4px;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    #excluir_varios:hover {
+        background-color: #0056b3;
+    }
+
+    #excluir_varios:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.3);
+    }
+
+    /* Estilo para o botão "Confirmar" e "Cancelar" */
+    #confirmar_exclusao,
+    #cancelar_exclusao {
+        display: none;
+        padding: 10px 20px;
+
+        color: #fff;
+        text-decoration: none;
+        border-radius: 4px;
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
+    #confirmar_exclusao {
+        background-color: #4caf50;
+        margin-left: 5px;
+    }
+
+    #cancelar_exclusao {
+        background-color: #f00;
     }
 </style>
 <?php
@@ -51,36 +120,6 @@ if ($oficial == "sim") {
 }
 echo $statusEscala;
 ?>
-<a href='?setor=adm&sub=rh&subsub=escalas' class='btn-outline-dark'>
-    <span class="ui-icon ui-icon-caret-1-w"></span>Voltar às Escalas</a> |
-
-<a class="btn btn-outline-dark" href='administracao/pagina_escala_esqueleto.php?id=<?php echo $idescala ?>' target='_blank'>
-    <span class="ui-icon ui-icon-print"></span>Imprimir</a>
-
-    <a class="btn btn-outline-dark" href='/siiupa/administracao/escalas/escala_calendario.php?id=<?php echo "$idescala&month=$mes&year=$ano" ?>' target='_blank'>
-    <span class="ui-icon ui-icon-document"></span>Calendário</a>
-
-<a class="btn btn-outline-dark" href='gerapdf_escala.php?id=<?php echo $idescala ?>' target='_blank'>
-    <span class="ui-icon ui-icon-document"></span>Gerar PDF</a>
-
-<a class="btn btn-outline-dark" href='administracao/pagina_escala_esqueleto_excel.php?id=<?php echo $idescala ?>&setor_titulo=<?php echo $setor_titulo; ?>' target='_blank'>
-    <span class="ui-icon ui-icon-print"></span>Gerar Excel</a>
-
-
-<button type="button" class="btn btn btn-outline-dark" id="addservidor">
-    <span class="ui-icon ui-icon-person"></span>Adicionar Servidor</button>
-
-<a class="btn btn-outline-dark" href='#' id="blocodenotas">
-    <span class="ui-icon ui-icon-print"></span>Bloco de notas</a>
-STATUS:
-<div id="load_status_escala" class="spinner-border text-primary d-none" role="status">
-
-</div>
-<a id="bt_esc_oficial" data-oficial="sim" data-idescala="<?php echo $idescala; ?>" data-mes="<?php echo $mes; ?>" data-ano="<?php echo $ano; ?>" class="<?php echo $bt_oficial; ?> bt_oficial" href='#' target='_blank'>
-    <img id='done-oficial' src='imagens/icones/done.svg' class='<?php echo $done_oficial; ?>'>OFICIAL</a>
-
-<a id="bt_esc_rascunho" data-oficial="nao" data-idescala="<?php echo $idescala; ?>" data-mes="<?php echo $mes; ?>" data-ano="<?php echo $ano; ?>" class="<?php echo $bt_rascunho; ?> bt_oficial" href='#' target='_blank'>
-    <img id='done-rascunho' src='imagens/icones/done.svg' class='<?php echo $done_rascunho; ?>'>RASCUNHO</a>
 <?php
 $outrasMes = $_GET['mes'];
 $outrasAno = $_GET['ano'];
@@ -88,7 +127,7 @@ $outrasAno = $_GET['ano'];
 $sql = "SELECT es.id, es.mes, es.ano, s.setor, es.oficial FROM db_rh.tb_escalas as es inner join db_rh.tb_setor as s on (es.fk_setor = s.id) WHERE es.ano = '$outrasAno' AND es.mes = '$outrasMes' ORDER BY s.setor ASC";
 $busca = new BD;
 $resultado = $busca->consulta($sql);
-echo "<hr>";
+
 echo "<span class='btn btn-info btn-sm'>Outras escalas deste mês ($outrasMes/$outrasAno): </span> ";
 foreach ($resultado as $escalas) {
     if ($escalas->oficial == 'sim') {
@@ -103,8 +142,44 @@ foreach ($resultado as $escalas) {
 }
 
 @include_once("../bd/conectabd.php");
+echo "<hr>";
 ?>
-<p>Ferramentas: <a href="#" id="excluir_varios">Excluir vários</a></p>
+<a href='?setor=adm&sub=rh&subsub=escalas' class='btn-outline-dark'>
+    <span class="ui-icon ui-icon-caret-1-w"></span>Voltar às Escalas</a> |
+
+<a class="btn btn-outline-dark" href='administracao/pagina_escala_esqueleto.php?id=<?php echo $idescala ?>' target='_blank'>
+    <span class="ui-icon ui-icon-print"></span>Imprimir</a>
+
+<a class="btn btn-outline-dark" href='/siiupa/administracao/escalas/escala_calendario.php?id=<?php echo "$idescala&month=$mes&year=$ano" ?>' target='_blank'>
+    <span class="ui-icon ui-icon-document"></span>Calendário</a>
+
+<a class="btn btn-outline-dark" href='gerapdf_escala.php?id=<?php echo $idescala ?>' target='_blank'>
+    <span class="ui-icon ui-icon-document"></span>Gerar PDF</a>
+
+<a class="btn btn-outline-dark" href='administracao/pagina_escala_esqueleto_excel.php?id=<?php echo $idescala ?>&setor_titulo=<?php echo $setor_titulo; ?>' target='_blank'>
+    <span class="ui-icon ui-icon-print"></span>Gerar Excel</a>
+
+
+
+<a class="btn btn-outline-dark" href='#' id="blocodenotas">
+    <span class="ui-icon ui-icon-print"></span>Bloco de notas</a>
+STATUS:
+<div id="load_status_escala" class="spinner-border text-primary d-none" role="status">
+
+</div>
+<a id="bt_esc_oficial" data-oficial="sim" data-idescala="<?php echo $idescala; ?>" data-mes="<?php echo $mes; ?>" data-ano="<?php echo $ano; ?>" class="<?php echo $bt_oficial; ?> bt_oficial" href='#' target='_blank'>
+    <img id='done-oficial' src='imagens/icones/done.svg' class='<?php echo $done_oficial; ?>'>OFICIAL</a>
+
+<a id="bt_esc_rascunho" data-oficial="nao" data-idescala="<?php echo $idescala; ?>" data-mes="<?php echo $mes; ?>" data-ano="<?php echo $ano; ?>" class="<?php echo $bt_rascunho; ?> bt_oficial" href='#' target='_blank'>
+    <img id='done-rascunho' src='imagens/icones/done.svg' class='<?php echo $done_rascunho; ?>'>RASCUNHO</a>
+<hr />
+<p>Ferramentas:
+    <span type="button" class="btn btn btn-outline-dark" id="addservidor">
+        ➕ Adicionar Servidor</span>
+    <span id="excluir_varios">Excluir vários</span><span id="confirmar_exclusao" title="Confirmar exclusão" style='display:none'>✅</span><span id="cancelar_exclusao" style='display:none' title="Cancelar exclusão">❌</span>
+</p>
+
+
 <div id="carregaesqueleto">
 
     <?php
@@ -260,14 +335,75 @@ foreach ($resultado as $escalas) {
 </div>
 <script>
     $(document).ready(function() {
+
         $("#txtNotepad").val($.session.get('txtNotepad'));
     });
 
-    $("#excluir_varios").click((e)=>{
+    $("#excluir_varios").click((e) => {
         e.preventDefault();
         $(".seleciona_exclusao").show();
+        $("#confirmar_exclusao").show();
+        $("#cancelar_exclusao").show();
     });
-    
+
+    $("#cancelar_exclusao").click(() => {
+        // Ocultar elementos e redefinir seleção
+        $(".seleciona_exclusao").prop("checked", false);
+        $(".seleciona_exclusao").hide();
+        $("#confirmar_exclusao").hide();
+        $("#cancelar_exclusao").hide();
+        $.notify(
+                    "Nada excluído", {
+                        position: 'left',
+                        className: 'info'
+                    });
+    });
+
+    $("#confirmar_exclusao").click(() => {
+        $.notify(
+            "Excluindo", {
+                position: "left"
+            });
+        var elementos = $(".seleciona_exclusao:checked");
+        var idsExclusao = [];
+
+        elementos.each(function() {
+            var valor = $(this).val();
+            idsExclusao.push(valor);
+        });
+
+        var urlExclusao = "/siiupa/api/rh/api.php/records/tb_escala_funcionario/" + idsExclusao.join(",");
+
+        console.log(urlExclusao);
+        // Enviar a requisição de exclusão usando o Axios
+        axios.delete(urlExclusao)
+            .then(response => {
+                console.log("Registros excluídos com sucesso!");
+                var urlescala = (location.search);
+                var recarregaescala = 'administracao/pagina_escala_exibe.php' + urlescala;
+                
+                $('#subconteudo').load(recarregaescala, () => {
+                    $.notify(
+                        "Sucesso, exclusões realizadas.", {
+                            position: "left",
+                            className: 'success'
+                        });
+                });
+            })
+            .catch(error => {
+
+                $.notify(
+                    "Erro: Nada excluído", {
+                        position: 'left',
+                        className: 'info'
+                    });
+            });
+
+        // Ocultar elementos e redefinir seleção
+        $(".seleciona_exclusao").hide();
+        $("#confirmar_exclusao").hide();
+        $("#cancelar_exclusao").hide();
+    });
 
 
     function saveNotepad() {
@@ -278,3 +414,4 @@ foreach ($resultado as $escalas) {
 </script>
 <script src="/siiupa/js/jquery.session.js" defer></script>
 <script src="/siiupa/administracao/pagina_escala_exibe.js?v=1"></script>
+<script src="/siiupa/js/axios/axios.min.js" defer></script>

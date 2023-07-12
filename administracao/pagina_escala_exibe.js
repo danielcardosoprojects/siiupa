@@ -91,8 +91,8 @@ $(function() {
         
         $('#dialogaddresultadobusca').load(urlbusca,
             function() {
-                $(".escolhido").click(function() {
-
+                $(".escolhido").click(function(e) {
+                    e.preventDefault();
                     var urlescala = (location.search);
 
 

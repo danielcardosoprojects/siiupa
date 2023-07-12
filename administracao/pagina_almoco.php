@@ -137,12 +137,12 @@ if ($stmt = $conn->prepare($query)) {
     echo "<tr>";
     echo "<td COLSPAN='2' class='total'>2</td>";
     echo "</tr>";
-    $totalgeral = $totalgeral + 2 + 1;
+    $totalgeral = $totalgeral + 2 + 2;
     //fim guarda
 
      //BIOMEDIOCOS PADRÕES
      echo "<thead>";
-     echo "<th>BIOMÉDICO(A)    </th>";
+     echo "<th>OUTROS    </th>";
      echo "<th></th>";
      echo "</thead>";
      echo "<tbody>";
@@ -151,8 +151,24 @@ if ($stmt = $conn->prepare($query)) {
      echo "<td class='ass'></td>";
      echo "</tr>";
 
-     //fimbiomedico
+     echo "<tr>";
+     echo "<td>MOTORISTA</td>";
+     echo "<td class='ass'></td>";
+     echo "</tr>";
 
+     echo "<tr>";
+     echo "<td COLSPAN='2' class='total'>2</td>";
+     echo "</tr>";
+     echo "</tbody>";
+       echo "<br/>";
+     //fimbiomedico
+     echo "<thead>";
+     echo "<th>Total    </th>";
+     echo "<th></th>";
+     echo "</thead>";
+
+
+     echo "<tbody>";
     echo "<tr>";
     echo "<td COLSPAN='2' class='total'>Total geral: $totalgeral</td>";
     $totalAlmoco = $totalgeral;
@@ -234,20 +250,29 @@ if ($stmt = $conn->prepare($query)) {
 
     //BIOMEDIOCOS PADRÕES
     echo "<thead>";
-    echo "<th>BIOMÉDICO(A)    </th>";
+    echo "<th>Outros(A)    </th>";
     echo "<th></th>";
     echo "</thead>";
     echo "<tbody>";
     echo "<tr>";
-    echo "<td>BIOMÉDICO(A)</td>";
+    echo "<td>Biomédico(A)(PRO-ANALISYS)</td>";
+    echo "<td class='ass'></td>";
+    echo "</tr>";
+    
+    echo "<tr>";
+    echo "<td>Motorista(HMC)</td>";
     echo "<td class='ass'></td>";
     echo "</tr>";
    
     echo "<tr>";
-    echo "<td COLSPAN='2' class='total'>1</td>";
+    echo "<td COLSPAN='2' class='total'>2</td>";
     echo "</tr>";
-    $totalgeral = $totalgeral + 2 + 1;
+    $totalgeral = $totalgeral + 2 + 2;
     //fim guarda
+    echo "<thead>";
+    echo "<th>Total    </th>";
+    echo "<th></th>";
+    echo "</thead>";
 
     echo "<tr>";
     echo "<td COLSPAN='2' class='total'>Total geral: $totalgeral</td>";
