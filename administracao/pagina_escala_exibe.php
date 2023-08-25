@@ -97,38 +97,38 @@
 
 
     #bloco-de-notas {
-  position: absolute;
-  top: 50px;
-  left: 50px;
-  width: 300px;
-  height: 300px;
-  border: 1px solid #ccc;
-  background-color: #fff;
-  display:none;
-}
+        position: absolute;
+        top: 50px;
+        left: 50px;
+        width: 300px;
+        height: 300px;
+        border: 1px solid #ccc;
+        background-color: #fff;
+        display: none;
+    }
 
-#barra-superior {
-  background-color: #f2f2f2;
-  padding: 5px;
-  cursor: move;
-}
+    #barra-superior {
+        background-color: #f2f2f2;
+        padding: 5px;
+        cursor: move;
+    }
 
-#tituloBloco {
-  font-weight: bold;
-}
+    #tituloBloco {
+        font-weight: bold;
+    }
 
-#botao-fechar {
-  float: right;
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-}
+    #botao-fechar {
+        float: right;
+        border: none;
+        background-color: transparent;
+        cursor: pointer;
+    }
 
-#conteudoBloco {
-  padding: 10px;
-  width:100%;
-  height: 100%;
-}
+    #conteudoBloco {
+        padding: 10px;
+        width: 100%;
+        height: 100%;
+    }
 </style>
 <?php
 @include_once("../bd/conectabd.php");
@@ -259,33 +259,93 @@ STATUS:
             </h2>
             <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
                 <div class="accordion-body">
-
-                    <code>Agosto</code>
-                    <br>
-                    15/ago/22 - Feriado Estadual - segunda - Adesão do Pará à Independência - LEI N° 5.999,DE 10/09/1996
-                    <br><br>
-                    <code>Setembro</code>
-
-                    <br>07/set/22 - Ponto Facultativo - quarta - Independência do Brasil - leis 662, 06/04/1949, e 10.607, 19/12/2002
-                    <br><br>
-                    <code>Outubro</code>
-
-                    <br>12/out/22 - Feriado Nacional - quarta - N S Aparecida – Padroeira do Brasil - Lei no 6.802,de 30/06/1980
-                    <br>15/out/22 - Feriado Escolar - Sábado - Dia do Professor – Dec. Fed. 52.682, de14/10/1963.
-                    <br>17/out/22 - Ponto Facultativo - segunda - Pós Romaria de N S de Nazaré
-                    <br>28/out/22 - Ponto Facultativo - sexta - Dia do Servidor Púbico – Lei Mun. 003/99, Art. 218
-                    <br><br>
-                    <code>Novembro</code>
-
-                    <br>02/nov/22 - Feriado Nacional - quarta - Dia de Finados - Lei no 10.607, de 19 de dezembro de 2002
-                    <br>15/nov/22 - Feriado Nacional - terça - Proclamação da República - Lei no 10.607, de 19 de dezembro de 2002
-                    <br><br>
-                    <code>Dezembro</code>
-
-                    <br>08/dez/22 - Feriado Municipal - Quinta - Imaculada Conceição - Lei 026/83, 27/12/83
-                    <br>24/dez/22 - Ponto Facultativo - sábado - Vésperas do Natal
-                    <br>25/dez/22 - Feriado Nacional - domingo - Natal - Lei no 10.607, de 19 de dezembro de 2002
-                    <br>31/dez/22 - Ponto Facultativo - sábado - Vésperas de Ano Novo
+                <ul>
+        <li>
+            <strong>15 de agosto de 2023</strong>
+            <ul>
+                <li>Terça</li>
+                <li>Adesão do Pará à Independência - LEI N° 5.999, DE 10/09/1996 Feriado Estadual</li>
+            </ul>
+        </li>
+        <li>
+            <strong>7 de setembro de 2023</strong>
+            <ul>
+                <li>Quinta</li>
+                <li>Independência do Brasil - leis 662, 06/04/1949, e 10.607, 19/12/2002 Feriado Nacional</li>
+            </ul>
+        </li>
+        <li>
+            <strong>12 de outubro de 2023</strong>
+            <ul>
+                <li>Quinta</li>
+                <li>N S Aparecida – Padroeira do Brasil - Lei no 6.802, de 30/06/1980 Feriado Nacional</li>
+            </ul>
+        </li>
+        <li>
+            <strong>15 de outubro de 2023</strong>
+            <ul>
+                <li>Domingo</li>
+                <li>Dia do Professor – Dec. Fed. 52.682, de 14/10/1963. Feriado Escolar</li>
+                <li>Romaria XXXXXXXXXX</li>
+            </ul>
+        </li>
+        <li>
+            <strong>16 de outubro de 2023</strong>
+            <ul>
+                <li>Segunda</li>
+                <li>Pós Romaria de N S de Nazaré Ponto Facultativo</li>
+            </ul>
+        </li>
+        <li>
+            <strong>28 de outubro de 2023</strong>
+            <ul>
+                <li>Sábado</li>
+                <li>Dia do Servidor Público – Lei Mun. 003/99, Art. 218 Ponto Facultativo</li>
+            </ul>
+        </li>
+        <li>
+            <strong>2 de novembro de 2023</strong>
+            <ul>
+                <li>Quinta</li>
+                <li>Dia de Finados - Lei no 10.607, de 19 de dezembro de 2002 Feriado Nacional</li>
+            </ul>
+        </li>
+        <li>
+            <strong>15 de novembro de 2023</strong>
+            <ul>
+                <li>Quarta</li>
+                <li>Proclamação da República - Lei no 10.607, de 19 de dezembro de 2002 Feriado Nacional</li>
+            </ul>
+        </li>
+        <li>
+            <strong>8 de dezembro de 2023</strong>
+            <ul>
+                <li>Sexta</li>
+                <li>Imaculada Conceição - Lei 026/83, 27/12/83 Feriado Municipal</li>
+            </ul>
+        </li>
+        <li>
+            <strong>24 de dezembro de 2023</strong>
+            <ul>
+                <li>Domingo</li>
+                <li>Véspera de Natal Ponto Facultativo</li>
+            </ul>
+        </li>
+        <li>
+            <strong>25 de dezembro de 2023</strong>
+            <ul>
+                <li>Segunda</li>
+                <li>Natal Lei n°10.607, de 19 de dezembro de 2022 Feriado Nacional</li>
+            </ul>
+        </li>
+        <li>
+            <strong>31 de dezembro de 2023</strong>
+            <ul>
+                <li>Domingo</li>
+                <li>Véspera de Ano Novo Ponto Facultativo</li>
+            </ul>
+        </li>
+    </ul>
                 </div>
             </div>
         </div>
@@ -371,11 +431,11 @@ STATUS:
 </div>
 
 <div id="bloco-de-notas">
-  <div id="barra-superior">
-    <span id="tituloBloco">Bloco de Notas</span>
-    <button id="botao-fechar">X</button>
-  </div>
-  <textarea id="conteudoBloco" contenteditable="true"></textarea>
+    <div id="barra-superior">
+        <span id="tituloBloco">Bloco de Notas</span>
+        <button id="botao-fechar">X</button>
+    </div>
+    <textarea id="conteudoBloco" contenteditable="true"></textarea>
 </div>
 <script>
     $(document).ready(function() {
@@ -397,10 +457,10 @@ STATUS:
         $("#confirmar_exclusao").hide();
         $("#cancelar_exclusao").hide();
         $.notify(
-                    "Nada excluído", {
-                        position: 'left',
-                        className: 'info'
-                    });
+            "Nada excluído", {
+                position: 'left',
+                className: 'info'
+            });
     });
 
     $("#confirmar_exclusao").click(() => {
@@ -425,7 +485,7 @@ STATUS:
                 console.log("Registros excluídos com sucesso!");
                 var urlescala = (location.search);
                 var recarregaescala = 'administracao/pagina_escala_exibe.php' + urlescala;
-                
+
                 $('#subconteudo').load(recarregaescala, () => {
                     $.notify(
                         "Sucesso, exclusões realizadas.", {
@@ -456,144 +516,150 @@ STATUS:
         console.log(txtNotepad);
     }
 
-// Função para permitir a movimentação do bloco de notas
-// Função para tornar o bloco de notas arrastável, evitando arrastar ao selecionar o texto no textarea
-function tornarArrastavel(elemento) {
-  var posicaoInicial = { x: 0, y: 0 };
-  var posicaoAtual = { x: 0, y: 0 };
-  var arrastando = false;
-  var selecionandoTexto = false;
+    // Função para permitir a movimentação do bloco de notas
+    // Função para tornar o bloco de notas arrastável, evitando arrastar ao selecionar o texto no textarea
+    function tornarArrastavel(elemento) {
+        var posicaoInicial = {
+            x: 0,
+            y: 0
+        };
+        var posicaoAtual = {
+            x: 0,
+            y: 0
+        };
+        var arrastando = false;
+        var selecionandoTexto = false;
 
-  // Verificar se o usuário está selecionando texto no textarea
-  elemento.addEventListener('mousedown', function(event) {
-    selecionandoTexto = event.target === elemento;
-  });
+        // Verificar se o usuário está selecionando texto no textarea
+        elemento.addEventListener('mousedown', function(event) {
+            selecionandoTexto = event.target === elemento;
+        });
 
-  elemento.addEventListener('mousedown', iniciarArrastar);
-  elemento.addEventListener('mouseup', pararArrastar);
-  elemento.addEventListener('mousemove', arrastar);
+        elemento.addEventListener('mousedown', iniciarArrastar);
+        elemento.addEventListener('mouseup', pararArrastar);
+        elemento.addEventListener('mousemove', arrastar);
 
-  function iniciarArrastar(event) {
-    if (!selecionandoTexto) {
-      arrastando = true;
-      posicaoInicial.x = event.clientX - posicaoAtual.x;
-      posicaoInicial.y = event.clientY - posicaoAtual.y;
-    }
-  }
-
-  function pararArrastar() {
-    arrastando = false;
-    selecionandoTexto = false;
-  }
-
-  function arrastar(event) {
-    if (arrastando && !selecionandoTexto) {
-      event.preventDefault();
-      posicaoAtual.x = event.clientX - posicaoInicial.x;
-      posicaoAtual.y = event.clientY - posicaoInicial.y;
-      elemento.style.left = posicaoAtual.x + 'px';
-      elemento.style.top = posicaoAtual.y + 'px';
-    }
-  }
-}
-
-// Obter referência ao bloco de notas e torná-lo arrastável
-var blocoDeNotas = document.getElementById('bloco-de-notas');
-var conteudoBloco = document.getElementById('conteudoBloco');
-tornarArrastavel(blocoDeNotas);
-
-// Impedir arrastar quando o usuário estiver selecionando o texto no textarea
-conteudoBloco.addEventListener('mousedown', function(event) {
-  event.stopPropagation();
-});
-
-
-// Obter referência ao bloco de notas e torná-lo arrastável
-var blocoDeNotas = document.getElementById('bloco-de-notas');
-tornarArrastavel(blocoDeNotas);
-
-// Evento para fechar o bloco de notas
-var botaoFechar = document.getElementById('botao-fechar');
-botaoFechar.addEventListener('click', function() {
-    var idServidorUsuario = <?php echo $_SESSION['idServidorUsuario']; ?>;
-  var url = "/siiupa/api/rh/api.php/records/tb_funcionario/" + idServidorUsuario;
-
-  var dados = {
-    notepad_ativo: 0
-  };
-
-  // Converter o valor de notepad_ativo para número inteiro
-  var dadosString = JSON.stringify(dados);
-  dadosString = dadosString.replace(/"notepad_ativo":0/, '"notepad_ativo":0.0');
-
-  // Enviar a requisição PUT usando o Axios para alterar o valor de notepad_ativo para 0
-  axios.put(url, dadosString)
-    .then(response => {
-      console.log("Valor de notepad_ativo alterado para 0");
-      document.getElementById('bloco-de-notas').style.display = 'none'; // Oculta o bloco de notas após alteração
-    })
-    .catch(error => {
-      console.error("Erro ao alterar o valor de notepad_ativo:", error);
-    });
-});
-
-// Obter referências aos elementos relevantes
-var conteudoBloco = document.getElementById('conteudoBloco');
-
-// Evento para salvar o conteúdo ao digitar
-conteudoBloco.addEventListener('input', function() {
-    $("#bloco-de-notas").notify("Salvando", "info");
-  var idServidorUsuario = <?php echo $_SESSION['idServidorUsuario']; ?>;
-  var url = "/siiupa/api/rh/api.php/records/tb_funcionario/" + idServidorUsuario;
-
-  var dados = {
-    notepad: conteudoBloco.value,
-    notepad_ativo: 1
-  };
-
-  // Enviar a requisição PUT usando o Axios
-  axios.put(url, JSON.stringify(dados))
-    .then(response => {
-      
-      $("#bloco-de-notas").notify("Salvo!", "success");
-    })
-    .catch(error => {
-        $("#bloco-de-notas").notify("Não foi possível salvar! Cuidado, copie os dados para não perdê-los", "error");
-    });
-});
-// Obter referência ao elemento do conteúdo do bloco de notas
-var conteudoBloco = document.getElementById('conteudoBloco');
-
-// Função para carregar o conteúdo do bloco de notas
-function carregarConteudoBloco() {
-  var idServidorUsuario = <?php echo $_SESSION['idServidorUsuario']; ?>;
-  var url = "/siiupa/api/rh/api.php/records/tb_funcionario/" + idServidorUsuario;
-
-  // Enviar a requisição GET usando o Axios
-  axios.get(url)
-    .then(response => {
-      var dados = response.data;
-
-      if (dados) {
-        // Definir o valor do textarea com base nos dados retornados
-        conteudoBloco.value = dados.notepad;
-
-        // Verificar o valor de notepad_ativo para exibir ou ocultar o bloco de notas
-        if (dados.notepad_ativo === 1) {
-          document.getElementById('bloco-de-notas').style.display = 'block';
-        } else {
-          document.getElementById('bloco-de-notas').style.display = 'none';
+        function iniciarArrastar(event) {
+            if (!selecionandoTexto) {
+                arrastando = true;
+                posicaoInicial.x = event.clientX - posicaoAtual.x;
+                posicaoInicial.y = event.clientY - posicaoAtual.y;
+            }
         }
-      }
-    })
-    .catch(error => {
-      console.error("Erro ao carregar o conteúdo:", error);
+
+        function pararArrastar() {
+            arrastando = false;
+            selecionandoTexto = false;
+        }
+
+        function arrastar(event) {
+            if (arrastando && !selecionandoTexto) {
+                event.preventDefault();
+                posicaoAtual.x = event.clientX - posicaoInicial.x;
+                posicaoAtual.y = event.clientY - posicaoInicial.y;
+                elemento.style.left = posicaoAtual.x + 'px';
+                elemento.style.top = posicaoAtual.y + 'px';
+            }
+        }
+    }
+
+    // Obter referência ao bloco de notas e torná-lo arrastável
+    var blocoDeNotas = document.getElementById('bloco-de-notas');
+    var conteudoBloco = document.getElementById('conteudoBloco');
+    tornarArrastavel(blocoDeNotas);
+
+    // Impedir arrastar quando o usuário estiver selecionando o texto no textarea
+    conteudoBloco.addEventListener('mousedown', function(event) {
+        event.stopPropagation();
     });
-}
 
-// Chamar a função para carregar o conteúdo do bloco de notas ao carregar a página
-window.addEventListener('load', carregarConteudoBloco);
 
+    // Obter referência ao bloco de notas e torná-lo arrastável
+    var blocoDeNotas = document.getElementById('bloco-de-notas');
+    tornarArrastavel(blocoDeNotas);
+
+    // Evento para fechar o bloco de notas
+    var botaoFechar = document.getElementById('botao-fechar');
+    botaoFechar.addEventListener('click', function() {
+        document.getElementById('bloco-de-notas').style.display = 'none';
+        var idServidorUsuario = <?php echo $_SESSION['idServidorUsuario']; ?>;
+        var url = "/siiupa/api/rh/api.php/records/tb_funcionario/" + idServidorUsuario;
+
+        var dados = {
+            notepad_ativo: 0
+        };
+
+        // Converter o valor de notepad_ativo para número inteiro
+        var dadosString = JSON.stringify(dados);
+        console.log(dadosString);
+
+        // Enviar a requisição PUT usando o Axios para alterar o valor de notepad_ativo para 0
+        axios.put(url, dadosString)
+            .then(response => {
+                console.log("Valor de notepad_ativo alterado para 0");
+                document.getElementById('bloco-de-notas').style.display = 'none'; // Oculta o bloco de notas após alteração
+            })
+            .catch(error => {
+                console.error("Erro ao alterar o valor de notepad_ativo:", error);
+            });
+    });
+
+    // Obter referências aos elementos relevantes
+    var conteudoBloco = document.getElementById('conteudoBloco');
+
+    // Evento para salvar o conteúdo ao digitar
+    conteudoBloco.addEventListener('input', function() {
+        $("#bloco-de-notas").notify("Salvando", "info");
+        var idServidorUsuario = <?php echo $_SESSION['idServidorUsuario']; ?>;
+        var url = "/siiupa/api/rh/api.php/records/tb_funcionario/" + idServidorUsuario;
+
+        var dados = {
+            notepad: conteudoBloco.value,
+            notepad_ativo: 1
+        };
+
+        // Enviar a requisição PUT usando o Axios
+        axios.put(url, JSON.stringify(dados))
+            .then(response => {
+
+                $("#bloco-de-notas").notify("Salvo!", "success");
+            })
+            .catch(error => {
+                $("#bloco-de-notas").notify("Não foi possível salvar! Cuidado, copie os dados para não perdê-los", "error");
+            });
+    });
+    // Obter referência ao elemento do conteúdo do bloco de notas
+    var conteudoBloco = document.getElementById('conteudoBloco');
+
+    // Função para carregar o conteúdo do bloco de notas
+    function carregarConteudoBloco() {
+        var idServidorUsuario = <?php echo $_SESSION['idServidorUsuario']; ?>;
+        var url = "/siiupa/api/rh/api.php/records/tb_funcionario/" + idServidorUsuario;
+
+        // Enviar a requisição GET usando o Axios
+        axios.get(url)
+            .then(response => {
+                var dados = response.data;
+
+                if (dados) {
+                    // Definir o valor do textarea com base nos dados retornados
+                    conteudoBloco.value = dados.notepad;
+
+                    // Verificar o valor de notepad_ativo para exibir ou ocultar o bloco de notas
+                    if (dados.notepad_ativo === 1) {
+                        document.getElementById('bloco-de-notas').style.display = 'block';
+                    } else {
+                        document.getElementById('bloco-de-notas').style.display = 'none';
+                    }
+                }
+            })
+            .catch(error => {
+                console.error("Erro ao carregar o conteúdo:", error);
+            });
+    }
+
+    // Chamar a função para carregar o conteúdo do bloco de notas ao carregar a página
+    window.addEventListener('load', carregarConteudoBloco);
 </script>
 <script src="/siiupa/js/jquery.session.js" defer></script>
 <script src="/siiupa/administracao/pagina_escala_exibe.js?v=1"></script>

@@ -20,7 +20,7 @@ RewriteRule ^farmacia/movimento/entrada$ index.php?setor=farm&sub=movimentoentra
 RewriteRule ^farmacia/movimento/entrada/envia$ index.php?setor=farm&sub=entradamovimento [L]
 
 RewriteRule ^farmacia/movimentos?/$ index.php?setor=farm&sub=movimentos [L]
-RewriteRule ^farmacia/movimentos/([a-z,0-9,A-Z,_-]+)-a-([a-z,0-9,A-Z,_-]+)&([a-z,0-9,A-Z,_-]+)&([a-z,0-9,A-Z,_-]+)&([A-Za-zÀ-ü0-9,_-]+)?\/?$ index.php?setor=farm&sub=movimentos&datainicio=$1&datafim=$2&tipo=$3&generoOpt=$4&textobusca=$5 [NC]
+RewriteRule ^farmacia/movimentos/([a-z,0-9,A-Z,_-]+)-a-([a-z,0-9,A-Z,_-]+)&([a-z,0-9,A-Z,_-]+)&([a-z,0-9,A-Z,_-]+)&?([A-Za-zÀ-ü0-9,_-]*)?&?([A-Za-zÀ-ü0-9,_-]*)?/?$ index.php?setor=farm&sub=movimentos&datainicio=$1&datafim=$2&tipo=$3&generoOpt=$4&textobusca=$5&categoria=$6 [NC]
 RewriteRule ^farmacia/movimento/saida$ index.php?setor=farm&sub=movimentosaida [L]
 RewriteRule ^farmacia/movimento/saida/envia$ index.php?setor=farm&sub=saidamovimento [L]
 

@@ -191,8 +191,7 @@ if (isset($_GET['vinculo'])) {
         $vinculo_separa = "AND func.vinculo NOT IN ('EFETIVO','TEMPORARIO','COMISSIONADO-TEMP')";
         $vinculo_mostra = "ACIONAMENTO - ÓBITO EM DOMICÍLIO";
         $bt_intermitente = "btn-primary";
-    } 
-    
+    }
 }
 //busca o setor se tiver
 if (isset($_GET['folha_setor'])) {
@@ -253,22 +252,22 @@ Setor:
 </br>
 <?php
 if ($status_folha == "aberta") {
-    ?>
-<!-- <a href="?setor=adm&sub=rh&subsub=rhfolhaadicionaservidor&idfolha=<?php echo $_GET['id']; ?>" id="btAddServidor2" id-antigo="bcadastrarFUNCIONARIO" class="btn btn-success">
+?>
+    <!-- <a href="?setor=adm&sub=rh&subsub=rhfolhaadicionaservidor&idfolha=<?php echo $_GET['id']; ?>" id="btAddServidor2" id-antigo="bcadastrarFUNCIONARIO" class="btn btn-success">
     <img src="/siiupa/imagens/icones/personadd.svg">
     Adicionar servidor nesta folha
 </a> -->
 
 
-<a class="btn btn-success" id="btAddServidor" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
-<img src="/siiupa/imagens/icones/personadd.svg">
-    Adicionar servidor nesta folha
-</a>
+    <a class="btn btn-success" id="btAddServidor" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+        <img src="/siiupa/imagens/icones/personadd.svg">
+        Adicionar servidor nesta folha
+    </a>
 
 <?php
 }
 ?>
-<hr/>
+<hr />
 <form id="pesquisaAtestados" class="form">
     <strong>Buscar servidores já adicionados:</strong>
     <input id="entrada" type="txt" placeholder="Digite o nome que deseja buscar" class="form-control">
@@ -306,9 +305,11 @@ echo "<div id='folha_impressao' style='font-size:12px'>"; ///                   
         width: 33% !important;
 
     }
-.tituloSetor{
-    font-size:22px;
-}
+
+    .tituloSetor {
+        font-size: 22px;
+    }
+
     .logo_direito {
         text-align: right !important;
     }
@@ -406,7 +407,8 @@ if ($stmt = $conn->prepare($query)) {
         $valor_total = ($ext_6 * ($valor_plantao / 2)) + ($ext_12 * $valor_plantao) + ($ext_24 * ($valor_plantao * 2)) + ($valor_acionamento * $acionamento) + ($valor_transferencia * $transferencia) + $fixos;
 
         if ($status_folha == "aberta") {
-            $link_para_alterar = "?setor=adm&sub=rh&subsub=rhfolhaadicionaservidor&acao=seleciona&idservidor=$func_id&idfolha=$idfolha&subacao=alterar";
+            // $link_para_alterar = "?setor=adm&sub=rh&subsub=rhfolhaadicionaservidor&acao=seleciona&idservidor=$func_id&idfolha=$idfolha&subacao=alterar";
+            $link_para_alterar = "/siiupa/administracao/pagina_rh_folha_adicionaservidor.php?setor=adm&sub=rh&subsub=rhfolhaadicionaservidor&acao=seleciona&idservidor=$func_id&idfolha=$idfolha&subacao=alterar";
         } else {
             $link_para_alterar = 'javascript:alert("Folha fechada. Alteração não permitida.");';
         }
@@ -416,7 +418,7 @@ if ($stmt = $conn->prepare($query)) {
         <tr class='align-middle box_nomes' name='%s'>
         <td>%s</td>
        
-        <td id='%s'><a href='%s'class='text-dark text-decoration-none'>%s</a></td>
+        <td id='%s'><a href='%s#offcanvasExample'class='btEditaServidor text-dark text-decoration-none' data-bs-toggle='offcanvas' role='button' aria-controls='offcanvasExample'>%s</a></td>
         <td>%s</td>
         <td>%s</td>
         <td>%s</td>
@@ -452,21 +454,21 @@ echo "</div>"; ///                   FECHA AREA DE IMPRESSAO
 
 
 
-<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-  <div class="offcanvas-header">
-    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Adicionar Servidor</h5>
-    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-    <div id="offCanvas">
-        
-     
+<div class="offcanvas offcanvas-end w-75" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Editar Servidor</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div id="offCanvas">
+           
+
+
+        </div>
+        <div id="servCanvas"></div>
+
 
     </div>
-    <div id="servCanvas"></div>
-
-   
-  </div>
 </div>
 <?php
 function mes($entrada)
@@ -501,17 +503,25 @@ function mes($entrada)
 }
 ?>
 <script>
-    function loadCanvas(link){
-                $("#servCanvas").load(link);
-            }
+    function loadCanvas(link) {
+        $("#servCanvas").html(' <div class="spinner-border text-primary" role="status"></div>');
+        $("#servCanvas").load(link);
+    }
     $(function() {
         $(document).ready(function() {
-            $("#btAddServidor").click(function(e){
+            $("#btAddServidor").click(function(e) {
                 e.preventDefault();
-                loadCanvas('administracao/pagina_rh_folha_adicionaservidor.php?idfolha=<?=$idfolha?>')
+                loadCanvas('administracao/pagina_rh_folha_adicionaservidor.php?idfolha=<?= $idfolha ?>')
             });
-            
-            
+
+
+            $(".btEditaServidor").click(function(e) {
+                e.preventDefault();
+                console.log(this.href);
+                loadCanvas(this.href)
+            });
+
+
             var busca = null;
             var boxes = $(".box_nomes"); //boxes onde contem os dados a serem pesquisados
             boxes = boxes.toArray();

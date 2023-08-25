@@ -270,6 +270,7 @@ if ($stmt = $conn->prepare($query)) {
 
     $conLote = new BD;
     $sqlConLote = "SELECT *, DATE_FORMAT(data_validade, '%d/%m/%Y') as dataValBr FROM db_farmacia.tb_farmestoque where item_fk = '$itemid' and estoque > 0";
+
     $lotes = $conLote->consulta($sqlConLote);
 
     foreach ($lotes as $lote) {
@@ -296,10 +297,10 @@ if ($stmt = $conn->prepare($query)) {
       $colorProgress = "";
     }
 
-  //   echo '<div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
-  //   <div class="progress-bar ' . $colorProgress . '" style="width: ' . $numberRandom . '%;height:5px;"></div>
-  // </div>
-  // ';
+    //   echo '<div class="progress" role="progressbar" aria-label="Basic example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+    //   <div class="progress-bar ' . $colorProgress . '" style="width: ' . $numberRandom . '%;height:5px;"></div>
+    // </div>
+    // ';
     echo "</td>";
 
     echo "<td>$genero</td>";
@@ -322,19 +323,47 @@ if ($stmt = $conn->prepare($query)) {
 
     echo "<td>$categoria1$categoria2$categoria3$categoria4</td>";
 
+
+    //consulta e soma o estoque
     $consultaEstoque = new BD;
     $sqlConsultaEstoque = "SELECT sum(estoque) as estoque FROM db_farmacia.tb_farmestoque where item_fk='$itemid' AND estoque>0 order by data_validade ASC;";
 
     $totalEstoque = $consultaEstoque->consulta($sqlConsultaEstoque);
-
+    $qtd_ultimoMovimento = 0;
     foreach ($totalEstoque as $estoque) {
       if ($estoque->estoque == '') {
         $qtd_estoque = 0;
       } else {
         $qtd_estoque = $estoque->estoque;
       }
+
+      //consulta o ultimo movimento e pega o novo estoque, para comparar
+      $conUltimoMovimento = new BD;
+      $sqlUltimoMovimento = "SELECT novoestoque FROM db_farmacia.tb_farmmovimento where item_fk='$itemid' ORDER BY criadoem DESC limit 0,1;";
+      $resultadoUltimoMovimento = $conUltimoMovimento->consulta($sqlUltimoMovimento);
+      foreach ($resultadoUltimoMovimento as $ultimoMovimento) {
+        
+        if ($ultimoMovimento == '') {
+          $qtd_ultimoMovimento = 0;
+        } else {
+          $qtd_ultimoMovimento = $ultimoMovimento->novoestoque;
+        }
+
+        if ($qtd_estoque != $qtd_ultimoMovimento) {
+          $alerta_diferenca = "<div class='progress-bar bg-danger' style='width: 100%;height:5px;'></div>";
+        } else {
+          $alerta_diferenca = "<div class='progress-bar success' style='width: 100%;height:5px;'></div>";
+        }
+      }
+
+
+
+      // | $qtd_ultimoMovimento
+      // $alerta_diferenca
+
       echo "
-    <td>$qtd_estoque</td>
+    <td>$qtd_estoque  
+    </td>
     ";
     }
 

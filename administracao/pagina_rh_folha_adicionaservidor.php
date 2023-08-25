@@ -749,7 +749,7 @@ if (isset($_GET['acao'])) {
 
                         echo "<tr>";
                         // echo "<td><span class='material-icons'>account_circle</span></td>";
-                        echo "<th scope='row'><a class='abreperfil' href='?setor=adm&sub=rh&subsub=rhfolhaadicionaservidor&acao=seleciona&idservidor=$dados->idfuncionario&idfolha=$dados->idfolha&subacao=adicionar'>$dados->idfuncionario</a></th>";
+                        echo "<th scope='row'><a class='abreperfil' href='/siiupa/administracao/pagina_rh_folha_adicionaservidor.php?setor=adm&sub=rh&subsub=rhfolhaadicionaservidor&acao=seleciona&idservidor=$dados->idfuncionario&idfolha=$dados->idfolha&subacao=adicionar'>$dados->idfuncionario</a></th>";
                         echo "<td>$dados->nome  <a  class='copiarNome' data-text='$dados->nome' href='#'><i><span class='material-icons'>content_copy</span></i></a></td>";
                         echo "<td>$dados->fk_cargo - $dados->cargo</td>";
                         echo "<td>$dados->setor</td>";
@@ -760,9 +760,17 @@ if (isset($_GET['acao'])) {
                 } else {
                     echo "0 results";
                 }
+                
                 mysqli_close($conn);
 
                 ?>
+                <script>
+                    $(".abreperfil").click(function(e){
+                        e.preventDefault();
+                        // console.log(this.href);
+                        loadCanvas(this.href)
+                    });
+                </script>
             </tbody>
         </table>
 

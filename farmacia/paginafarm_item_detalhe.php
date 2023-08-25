@@ -88,6 +88,7 @@ echo "<span class='btn btn-sm btn-secondary'>ID: $item->id | Código de Barras: 
 
 $conLote = new BD;
 $sqlConLote = "SELECT *, DATE_FORMAT(data_validade, '%d/%m/%Y') as dataValBr FROM db_farmacia.tb_farmestoque where item_fk = '$item->id' and estoque > 0 order by data_validade ASC";
+echo $sqlConLote;
 $lotes = $conLote->consulta($sqlConLote);
 
 echo "<table class='table table-sm'><thead><th>Fabricante/Marca</th><th>Lote</th><th>Validade</th><th>QTD</th><th>Barcode</th><tbody>";
@@ -139,6 +140,7 @@ $queryString = filter_input(INPUT_SERVER, 'QUERY_STRING');
 $inicio = $pc - 1;
 $inicio = $inicio * $total_reg;
 $query = "SELECT m.novoestoque, m.id as idmovimento, DATE_FORMAT(m.datahora,'%d\/%m\/%Y %H:%i'), m.tipo, m.quantidade, m.setor_origem_fk as Origem, m.setor_dest_fk as Destino, m.usuario as usuario_id, i.nome, s.setor as Setor1, s2.setor as Setor2, u.usuario as usuarioNome FROM db_farmacia.tb_farmmovimento AS m INNER JOIN db_farmacia.tb_farmitem AS i ON (m.item_fk = i.id) INNER JOIN db_farmacia.tb_farmsetor AS s ON (m.setor_origem_fk = s.id) INNER JOIN db_farmacia.tb_farmsetor AS s2 ON (m.setor_dest_fk = s2.id) INNER JOIN login.usuarios AS u on (m.usuario = u.id) where m.item_fk = '$id_item' ORDER BY m.id DESC";
+echo $query;
 //echo $query;
 //echo $query;
 

@@ -76,6 +76,15 @@ $queryString = filter_input(INPUT_SERVER, 'QUERY_STRING');
 // echo $pc;
 //echo $queryString;
 
+if (isset($_GET['categoria'])) {
+  $categoriaRecebida = $_GET['categoria'];
+  if($categoriaRecebida != ''){
+    $andCategoria = "AND (i.categoria_fk = '$categoriaRecebida' OR i.categoria2_fk = '$categoriaRecebida' OR i.categoria3_fk = '$categoriaRecebida' OR i.categoria4_fk = '$categoriaRecebida')";
+    
+  } else {
+    $andCategoria = "";
+  }
+}
 
 $inicio = $pc - 1;
 $inicio = $inicio * $total_reg;
@@ -170,6 +179,48 @@ foreach ($resultListaGeneros as $listaGenero) {
   echo "<span><label><input class='form-check-input' type='radio' name='optGenChk' value='$idGenero' $chkGen> $nomeGenero $este</label></span>";
 }
 echo "</div>";
+
+?>
+ 
+    <select id="categoria" onchange="carregarDescricao()">
+        <option value="">Selecione uma categoria...</option>
+    </select>
+
+    <div id="descricao"></div>
+    <script>
+        function carregarCategorias() {
+            const select = document.getElementById('categoria');
+            fetch('/siiupa/api/farmacia/api/records/tb_farmcategoria?order=categoria,asc')
+                .then(response => response.json())
+                .then(data => {
+                    data.records.forEach(item => {
+                        const option = document.createElement('option');
+                        option.value = item.id;
+                        option.text = item.categoria;
+                        select.appendChild(option);
+                    });
+                })
+                .catch(error => console.error('Erro ao carregar as categorias:', error));
+        }
+
+        function carregarDescricao() {
+            const categoriaId = document.getElementById('categoria').value;
+            if (categoriaId === '') {
+                document.getElementById('descricao').innerText = '';
+                return;
+            }
+
+            fetch(`/siiupa/api/farmacia/api/records/tb_farmcategoria/${categoriaId}`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('descricao').innerText = data.descricao;
+                })
+                .catch(error => console.error('Erro ao carregar a descrição:', error));
+        }
+
+        carregarCategorias();
+    </script>
+<?php
 echo "</div>";
 
 echo "Nome ou ID do item: <input type'text' name='textoBusca' id='textoBusca' value='$textoBusca'>";
@@ -215,6 +266,7 @@ echo "</div>";
     datafim = $("#datafim").val();
     generoOpt = $("input[name='optGenChk']:checked").val();
     textoBusca = encodeURI(replaceSpaces($("#textoBusca").val()));
+    categoria = $("#categoria").val();
 
 
     chkEntrada = $("#chkEntrada")[0].checked;
@@ -233,7 +285,7 @@ echo "</div>";
     if (datainicio != "" && datafim != "") {
       if (datainicio <= datafim) {
 
-        window.location.href = `/siiupa/farmacia/movimentos/${datainicio}-a-${datafim}&${tipo}&${generoOpt}&${textoBusca}`;
+        window.location.href = `/siiupa/farmacia/movimentos/${datainicio}-a-${datafim}&${tipo}&${generoOpt}&${textoBusca}&${categoria}`;
       } else {
         $.alert("A data final deve ser maior ou igual a data inicial.");
       }
@@ -251,10 +303,11 @@ echo "</div>";
 
 <?php
 
-$query = "SELECT m.novoestoque, m.estoqueanterior, DATE_FORMAT(m.datahora,'%d\/%m\/%Y %H:%i'), m.tipo, sum(m.quantidade) as quantidade, m.setor_origem_fk as Origem, m.setor_dest_fk as Destino, m.usuario as usuario_id, i.nome, s.setor as Setor1, s2.setor as Setor2, u.usuario as usuarioNome, m.item_fk FROM db_farmacia.tb_farmmovimento AS m INNER JOIN db_farmacia.tb_farmitem AS i ON (m.item_fk = i.id) INNER JOIN db_farmacia.tb_farmsetor AS s ON (m.setor_origem_fk = s.id) INNER JOIN db_farmacia.tb_farmsetor AS s2 ON (m.setor_dest_fk = s2.id) INNER JOIN login.usuarios AS u on (m.usuario = u.id) where m.datahora between '$datainicio 00:00:00' and '$datafim 23:59:59'  $andTipo $andGenero and (i.nome like '%$textoBusca%' or i.id like '%$textoBusca%') group by tipo, m.item_fk, m.datahora order BY m.datahora, i.nome  ASC ";
-// echo $query;
+$query = "SELECT m.novoestoque, m.estoqueanterior, DATE_FORMAT(m.datahora,'%d\/%m\/%Y %H:%i'), m.tipo, sum(m.quantidade) as quantidade, m.setor_origem_fk as Origem, m.setor_dest_fk as Destino, m.usuario as usuario_id, i.nome, i.categoria_fk, i.categoria2_fk, i.categoria3_fk, i.categoria4_fk, s.setor as Setor1, s2.setor as Setor2, u.usuario as usuarioNome, m.item_fk FROM db_farmacia.tb_farmmovimento AS m INNER JOIN db_farmacia.tb_farmitem AS i ON (m.item_fk = i.id) INNER JOIN db_farmacia.tb_farmsetor AS s ON (m.setor_origem_fk = s.id) INNER JOIN db_farmacia.tb_farmsetor AS s2 ON (m.setor_dest_fk = s2.id) INNER JOIN login.usuarios AS u on (m.usuario = u.id) where m.datahora between '$datainicio 00:00:00' and '$datafim 23:59:59'  $andTipo $andGenero $andCategoria AND (i.nome like '%$textoBusca%' or i.id like '%$textoBusca%') group by tipo, m.item_fk, m.datahora order BY m.datahora, i.nome  ASC ";
+  // echo $query;
 
 $todosResultadosBusca = mysqli_query($conn, $query);
+// var_dump($todosResultadosBusca);
 $tr = $todosResultadosBusca->num_rows; // verifica o número total de registros
 $tp = $tr / $total_reg; // verifica o número total de páginas
 
@@ -293,7 +346,7 @@ echo "
 
 if ($stmt = $conn->prepare("$query LIMIT $inicio,$total_reg")) {
   $stmt->execute();
-  $stmt->bind_result($novoestoque, $estoqueanterior, $datahora, $tipo, $quantidade, $Origem, $Destino, $usuario, $nome, $Setor1, $Setor2, $usuarioNome, $item_fk);
+  $stmt->bind_result($novoestoque, $estoqueanterior, $datahora, $tipo, $quantidade, $Origem, $Destino, $usuario, $nome, $categoria_fk, $categoria2_fk, $categoria3_fk, $categoria4_fk, $Setor1, $Setor2, $usuarioNome, $item_fk);
 
   $somaQtdEntrada = 0;
   $somaQtdSaida = 0;
