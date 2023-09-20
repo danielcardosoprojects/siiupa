@@ -53,32 +53,32 @@ include("../../bd/conectabd.php");
         background-color: lightblue;
     }
 
-    .Keya,
-    .Keyb,
-    .Keyc,
-    .Keyd,
-    .Keye,
-    .Keyf,
-    .Keyg,
-    .Keyh,
-    .Keyi,
-    .Keyj,
-    .Keyk,
-    .Keyl,
-    .Keym,
-    .Keyn,
-    .Keyo,
-    .Keyp,
-    .Keyq,
-    .Keyr,
-    .Keys,
-    .Keyt,
-    .Keyu,
-    .Keyv,
-    .Keyw,
-    .Keyx,
-    .Keyy,
-    .Keyz,
+    .KeyA,
+    .KeyB,
+    .KeyC,
+    .KeyD,
+    .KeyE,
+    .KeyF,
+    .KeyG,
+    .KeyH,
+    .KeyI,
+    .KeyJ,
+    .KeyK,
+    .KeyL,
+    .KeyM,
+    .KeyN,
+    .KeyO,
+    .KeyP,
+    .KeyQ,
+    .KeyR,
+    .KeyS,
+    .KeyT,
+    .KeyU,
+    .KeyV,
+    .KeyW,
+    .KeyX,
+    .KeyY,
+    .KeyZ,
     .Numpad0,
     .Numpad1,
     .Numpad2,
@@ -93,6 +93,7 @@ include("../../bd/conectabd.php");
         background-size: 60px;
         background-repeat: no-repeat;
         background-position: center;
+        background-size: 50px 50px;
     }
 
     .KeyA {
@@ -161,6 +162,8 @@ include("../../bd/conectabd.php");
 
     .KeyQ {
         background-image: url('imagens/producao/q.png');
+
+
     }
 
     .KeyR {
@@ -569,7 +572,7 @@ include("../../bd/conectabd.php");
     </table>
     <style>
         #cadastro {
-            display:none;
+            display: none;
         }
     </style>
 
@@ -589,7 +592,7 @@ include("../../bd/conectabd.php");
             });
             tabela = $("#tabela_producao_diaria");
             i = 0;
-            letras = ["KeyQ", "Keyw", "Keye", "Keyr", "Keyt", "Keyy", "Keyu", "Keyi", "Keyo", "Keyp", "Keya", "Keys", "Keyd", "Keyf", "Keyg", "Keyh", "Keyj", "Keyk", "Keyl", "Semicolon", "Keyz", "Keyx", "Keyc", "Keyv", "Keyb", "Keyn", "Keym", "Numpad1", "Numpad2", "Numpad3", "Numpad4", "Numpad5", "Numpad6", "Numpad7", "Numpad8", "Numpad9", "Numpad0"]
+            letras = ["KeyQ", "KeyW", "KeyE", "KeyR", "KeyT", "KeyY", "KeyU", "KeyI", "KeyO", "KeyP", "KeyA", "KeyS", "KeyD", "KeyF", "KeyG", "KeyH", "KeyJ", "KeyK", "KeyL", "Semicolon", "KeyZ", "KeyX", "KeyC", "KeyV", "KeyB", "KeyN", "KeyM", "Numpad1", "Numpad2", "Numpad3", "Numpad4", "Numpad5", "Numpad6", "Numpad7", "Numpad8", "Numpad9", "Numpad0"];
             $('.box').each(function(index) {
                 letra = letras[i];
                 $(this).addClass(letra);
@@ -618,23 +621,58 @@ include("../../bd/conectabd.php");
             $("body").keypress(function(event) {
                 $("#capturaTecla").text(event.which + event.code);
                 const keyPressed = event.which;
-                const teclasAceitas = {
-                    113() {
-                        addProd("idade.0_13");
-                    },
-                    119() {
-                        addProd("idade.14_21");
-                    },
-                    101() {
-                        addProd("idade.22_59");
-                    },
-                    114() {
-                        addProd("idade.60_idoso");
-                    }
+
+                function mapearTeclas(keyCode) {
+                    const mapeamento = {
+                        113: "idade.0_13", // q
+                        119: "idade.14_21", // w
+                        101: "idade.22_59", // e
+                        114: "idade.60_idoso", // r
+                        116: "sexo.feminino", // t
+                        121: "sexo.masculino", // y
+                        117: "CRISE_HIPERTENSIVA", // u
+                        105: "COM_CARTAO_SUS", // i
+                        111: "SEM_CARTAO_SUS", // o
+                        112: "COM_CLASSIFICACAO", // p
+                        97: "SEM_CLASSIFICACAO", // a
+                        115: "PA", // s
+                        100: "PULSOFC", // d
+                        102: "FR", // f
+                        103: "INALACAO", // g
+                        104: "GLICEMIA", // h
+                        106: "TEMPERATURA", // j
+                        107: "PESO", // k
+                        108: "SURTO_PSICOTICO", // l
+                        231: "HEMOPA", // ç
+                        122: "SUSIPE", // z
+                        120: "MEDICAMENTOS", // x
+                        99: "CONSULTA_MEDICO", // c
+                        118: "CONSULTA_ENFERMEIRO", // v
+                        98: "CONSULTA_SERVICO_SOCIAL", // b
+                        110: "ACIDTRANSITO.MOTO_X_CARRO", // n
+                        109: "ACIDTRANSITO.MOTO_X_MOTO", // m
+                        49: "ACIDTRANSITO.MOTO_X_VEICULO_GRANDE", // 1
+                        50: "ACIDTRANSITO.MOTO_-_QUEDA", // 2
+                        51: "ACIDTRANSITO.MOTO_-_OUTROS", // 3
+                        52: "ACIDTRANSITO.VEICULO_GRANDE", // 4
+                        53: "ACIDTRANSITO.CARRO_-_CAPOTAMENTO", // 5
+                        54: "ACIDTRANSITO.CARRO_X_CARRO", // 6
+                        55: "ACIDTRANSITO.CARRO_X_VEICULO_GRANDE", // 7
+                        56: "ACIDTRANSITO.CARRO_OUTROS", // 8
+                        57: "ACIDTRANSITO.ATROPELAMENTO", // 9
+                        48: "QUEDA.BICICLETA" // 0
+                        // Adicione mais mapeamentos aqui, se necessário
+                    };
+
+                    return mapeamento[keyCode] || false;
                 }
-                const executaTecla = teclasAceitas[keyPressed];
-                if (executaTecla) {
-                    executaTecla();
+                const valorMapeado = mapearTeclas(keyPressed);
+                console.log(valorMapeado);
+                //const executaTecla = mapearTeclas[keyPressed];
+                if (valorMapeado) {
+                    addProd(valorMapeado);
+                } else {
+                    console.log("Tecla não mapeada");
                 }
 
 

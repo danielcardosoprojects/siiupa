@@ -162,6 +162,20 @@ include('../conexao/verifica_login.php');
 				transform: rotate(1turn);
 			}
 		}
+
+		   /* Estilo para o alerta */
+		   .alert {
+            background-color: #f44336; /* Cor de fundo vermelha */
+            color: white; /* Cor do texto branco */
+            padding: 10px; /* Espaçamento interno */
+            text-align: center; /* Alinhamento do texto */
+        }
+
+        /* Estilo para o link dentro do alerta */
+        .alert a {
+            color: white; /* Cor do link branco */
+            text-decoration: underline; /* Sublinhado no link */
+        }
 	</style>
 	<script>
 		$(document).on({
@@ -200,6 +214,9 @@ include('../conexao/verifica_login.php');
 </head>
 
 <body>
+<div class="alert">
+        Atenção, a partir de 20/09/2023 o novo endereço do sistema será <a href="https://siupa.top" target="_blank">https://siupa.top</a>
+    </div>
 	<div id="carregador"></div>
 
 	<!-- COLOQUE A DIV "loading" ACIMA DE TODO O CONTEUDO DO SITE (ABAIXO DA <body>) -->

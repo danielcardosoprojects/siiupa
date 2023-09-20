@@ -55,9 +55,9 @@ $vinculo = $_GET['vinculo'];
 
 ?>
 
-<div style='background-color:red;position: absolute; top: 60px;  right: 60px;'><barcode code="<?php echo $nomefunc; ?>" type="QR" class="barcode" size="0.8" error="M" disableborder="1" /></div>
+<!-- <div style='background-color:red;position: absolute; top: 60px;  right: 60px;'><barcode code="<?php echo $nomefunc; ?>" type="QR" class="barcode" size="0.8" error="M" disableborder="1" /></div> -->
 <div style="text-align:center;">
-    <img src="/siiupa/mpdf/modelo/frequencia/brasao.JPG" witdh="50%"><br />
+    <img src="/siiupa/mpdf/modelo/frequencia/logo_horizontal.png" height="60px"><br />
     <strong>PREFEITURA DO MUNICIPIO DE CASTANHAL <br />
         SECRETARIA MUNICIPAL DE SAÚDE<br />
         Folha de registro de comparecimento<br />
@@ -68,7 +68,10 @@ $vinculo = $_GET['vinculo'];
 
     Matricula : <strong><?php echo $matricula; ?></strong><span style="color:white;">____________________</span>Data de Admissão: <strong><?php echo $admissao; ?></strong><br />
     Nome: <strong><?php echo strtoupper($nomefunc); ?></strong> <span style="color:white;">______</span>Cargo/Função: <strong><?php echo $cargo; ?></strong><br />
-    Lotação : <strong>UPA <?php echo $vinculo; ?></strong> <span style="color:white;">_____________</span>Unidade: <strong>UPA</strong>
+    Lotação : 
+    <strong>UPA <?php echo $vinculo; ?></strong>
+    <span style="color:white;">_____________</span>Unidade: 
+    <strong>UPA</strong>
 
 </div>
 <table style="border-color:black;">

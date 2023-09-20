@@ -61,10 +61,10 @@
 </style>
 <script>
     $(document).ready(function() {
-    $("#obs_textarea").jqte();
+        $("#obs_textarea").jqte();
     });
     $(function() {
-        
+
 
         $(".accordionescalas").accordion({
             collapsible: true,
@@ -116,29 +116,51 @@
 
 
         });
+        $(".abreperfil").click(function(e) {
+            e.preventDefault();
+            // console.log(this.href);
+            loadCanvas(this.href);
+            console.log(this);
+        });
 
 
+
+
+        function formatStringToURL(inputString) {
+            // Passo 1: Remove acentos
+            const withoutAccents = inputString
+                .normalize("NFD") // Normaliza a string para decompor os caracteres acentuados em não acentuados
+                .replace(/[\u0300-\u036f]/g, ""); // Remove os caracteres acentuados
+
+            // Passo 2: Remove pontuação
+            const withoutPunctuation = withoutAccents.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "");
+
+            // Passo 3: Substitui espaços em branco por '+'
+            const formattedString = withoutPunctuation.replace(/\s+/g, '+');
+
+            // Passo 4: Certifique-se de que a string esteja em formato apropriado
+            // (por exemplo, remova caracteres inválidos se necessário)
+
+            return formattedString;
+        }
 
         $("#buscaNome").submit(function() {
-
-
             var nome = $('#nome').val();
             var idfolha = $('#idfolha').val();
-            var link = '?setor=adm&sub=rh&subsub=rhfolhaadicionaservidor&nome=' + nome + '&idfolha=' + idfolha;
-            loadCanvas('administracao/pagina_rh_folha_adicionaservidor.php?nome=' + nome + '&idfolha=' + idfolha)
+            
+            loadCanvas('administracao/pagina_rh_folha_adicionaservidor.php?nome=' + formatStringToURL(nome) + '&idfolha=' + idfolha)
             // window.location.replace(link);
             return false;
         });
+        /// esses dois fazem a mesma coisa, um é quando aperta enter e o outro é quando clica em buscar
         $("#btenviar").click(function(e) {
             e.preventDefault();
             var nome = $('#nome').val();
             var idfolha = $('#idfolha').val();
-
-            var link = '?setor=adm&sub=rh&subsub=rhfolhaadicionaservidor&nome=' + nome + '&idfolha=' + idfolha;
-            
-            loadCanvas('administracao/pagina_rh_folha_adicionaservidor.php?nome=' + nome + '&idfolha=' + idfolha)
+           
+            loadCanvas('administracao/pagina_rh_folha_adicionaservidor.php?nome=' + formatStringToURL(nome) + '&idfolha=' + idfolha)
             // window.location.replace(link);
-            //  console.log(link);
+
 
 
         });
@@ -290,7 +312,7 @@ if (isset($_GET['acao'])) {
                             $stmtalterar->bind_result($fl_id, $nome, $funcao_upa, $adc_not, $ext_6, $ext_12, $ext_24, $acionamento, $transferencia, $fixos, $obs, $valor_plantao, $valor_acionamento);
                             $acao = "<input type='hidden' name='acao' value='altera'>";
                             while ($stmtalterar->fetch()) {
-                                
+
                                 if ($adc_not == "SIM") {
                                     $marca_adc_not = "checked";
                                 } else {
@@ -355,7 +377,7 @@ if (isset($_GET['acao'])) {
                 <td></td>
                 <td></td>
                 </tr>";
-                $valor_total= "";
+                $valor_total = "";
                 printf('
         
                     <tr>
@@ -700,8 +722,8 @@ if (isset($_GET['acao'])) {
             <a href="?setor=adm&sub=rh&subsub=rhfolhaexibe&id=<?php echo $_GET['idfolha']; ?>" id="bcancela" class="btn btn-danger"">
                 <img src=" imagens/icones/cancelar.svg" width="15px">
                 Cancelar</a>
-            <a class="btn btn-success" id="btenviar"><img src="imagens/icones/buscar.svg" width="30px"> Buscar</img></a>
-            
+            <a class="btn btn-success" id="btenviar" href="#offcanvasExample"><img src="imagens/icones/buscar.svg" width="30px"> Buscar</img></a>
+
 
 
         </div>
@@ -749,7 +771,7 @@ if (isset($_GET['acao'])) {
 
                         echo "<tr>";
                         // echo "<td><span class='material-icons'>account_circle</span></td>";
-                        echo "<th scope='row'><a class='abreperfil' href='/siiupa/administracao/pagina_rh_folha_adicionaservidor.php?setor=adm&sub=rh&subsub=rhfolhaadicionaservidor&acao=seleciona&idservidor=$dados->idfuncionario&idfolha=$dados->idfolha&subacao=adicionar'>$dados->idfuncionario</a></th>";
+                        echo "<th scope='row'><a class='abreperfil' href='/siiupa/administracao/pagina_rh_folha_adicionaservidor.php?setor=adm&sub=rh&subsub=rhfolhaadicionaservidor&acao=seleciona&idservidor=$dados->idfuncionario&idfolha=$dados->idfolha&subacao=adicionar#offcanvasExample'>$dados->idfuncionario</a></th>";
                         echo "<td>$dados->nome  <a  class='copiarNome' data-text='$dados->nome' href='#'><i><span class='material-icons'>content_copy</span></i></a></td>";
                         echo "<td>$dados->fk_cargo - $dados->cargo</td>";
                         echo "<td>$dados->setor</td>";
@@ -760,16 +782,12 @@ if (isset($_GET['acao'])) {
                 } else {
                     echo "0 results";
                 }
-                
+
                 mysqli_close($conn);
 
                 ?>
                 <script>
-                    $(".abreperfil").click(function(e){
-                        e.preventDefault();
-                        // console.log(this.href);
-                        loadCanvas(this.href)
-                    });
+
                 </script>
             </tbody>
         </table>
