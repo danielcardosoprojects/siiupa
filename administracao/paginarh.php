@@ -179,6 +179,7 @@
         <small><a href="administracao/leimunicipal003991999.pdf" target="_blank" class="lei">LEI MUNICIPAL Nº 003/99 <img width="20px" src="/siiupa/imagens/icones/pdf.svg"></a></small>
         <small><a href="https://transparencia.layoutsistemas.com.br/servidores/resumo?codigo_entidade=441402" target="_blank" class="lei">Transparência Saúde <img width="20px" src="/siiupa/imagens/icones/layoutonline.png"></a></small>
         <small><a href="https://sites.google.com/castanhal.pa.gov.br/diariooficialdecastanhal/inicio" target="_blank" class="lei">Diário Oficial <img width="20px" src="/siiupa/imagens/icones/diario.jpg"></a></small>
+        <small><a href="http://cnes2.datasus.gov.br/Exibe_Ficha_Estabelecimento.asp?VCo_Unidade=1502407474423&VListar=1&VEstado=15&VMun=150240" target="_blank" class="lei">Site do CNES<img width="20px" src="/siiupa/imagens/icones/diario.jpg"></a></small>
     </h1>
 
     <div class="noticias_linha">

@@ -258,7 +258,7 @@ include_once('../bd/nivel.php');
                 <!-- <th scope="col">SETOR<img src="imagens/tablesorter.svg"></th>-->
                 <th scope="col">VINCULO<img src="/siiupa/imagens/tablesorter.svg"></th>
                 <!-- <th scope="col">Férias 2022<img src="/siiupa/imagens/tablesorter.svg"></th> -->
-                <th scope="col">Férias 2023</th>
+                <th scope="col">Férias 2024</th>
 
                 <!-- <th scope="col">Data Inicio</th> -->
                 <!-- <th scope="col">Data Fim</th> -->
@@ -283,7 +283,7 @@ include_once('../bd/nivel.php');
                     $dados = (object) $rownomes;
 
                     //from tb_ferias
-                    $queryf = "SELECT ferias.id, func.nome, c.titulo, s.setor, DATE_FORMAT(ferias.datainicio, '%d\/%m\/%Y'), DATE_FORMAT(ferias.datafim, '%d\/%m\/%Y'), ferias.ref_mes, ferias.ref_ano, func.vinculo, ferias.observacao FROM db_rh.tb_ferias AS ferias INNER JOIN db_rh.tb_funcionario AS func ON (ferias.fk_funcionario = func.id) INNER JOIN db_rh.tb_cargo AS C ON (func.fk_cargo = c.id) INNER JOIN db_rh.tb_setor AS s ON (func.fk_setor = s.id) WHERE func.status='ATIVO' AND ref_ano = 2022 AND ferias.fk_funcionario = '$dados->idfuncionario'";
+                    $queryf = "SELECT ferias.id, func.nome, c.titulo, s.setor, DATE_FORMAT(ferias.datainicio, '%d\/%m\/%Y'), DATE_FORMAT(ferias.datafim, '%d\/%m\/%Y'), ferias.ref_mes, ferias.ref_ano, func.vinculo, ferias.observacao FROM db_rh.tb_ferias AS ferias INNER JOIN db_rh.tb_funcionario AS func ON (ferias.fk_funcionario = func.id) INNER JOIN db_rh.tb_cargo AS C ON (func.fk_cargo = c.id) INNER JOIN db_rh.tb_setor AS s ON (func.fk_setor = s.id) WHERE func.status='ATIVO' AND ref_ano = 2024 AND ferias.fk_funcionario = '$dados->idfuncionario'";
 
                     if ($stmtf = $conn->prepare($queryf)) {
                         $stmtf->execute();
@@ -361,7 +361,7 @@ include_once('../bd/nivel.php');
                     // echo "<td>$ref_mes</td>";
                     echo "<td>";
                     $ferias23 = new BD;
-                    $sqlF23 = "SELECT * FROM db_rh.tb_ferias where fk_funcionario = '$dados->idfuncionario' and ref_ano = '2023';";
+                    $sqlF23 = "SELECT * FROM db_rh.tb_ferias where fk_funcionario = '$dados->idfuncionario' and ref_ano = '2024';";
                     $rF23 = $ferias23->consulta($sqlF23);
                     foreach ($rF23 as $ferias23) {
                         echo mes($ferias23->ref_mes) . '<br>';
@@ -374,6 +374,7 @@ include_once('../bd/nivel.php');
                     // echo "<td class='edita' data-idfunc='$dados->idfuncionario' data-campo='CNES' data-valor='$dados->CNES'>$dados->CNES</td>";
 
                     echo "<td>$dados->CNES</td>";
+                    
 
                     echo "</tr>";
                     $contalinha++;

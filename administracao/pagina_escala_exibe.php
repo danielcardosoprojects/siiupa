@@ -131,6 +131,7 @@
     }
 </style>
 <?php
+
 @include_once("../bd/conectabd.php");
 
 $idescala = $_GET['id'];

@@ -18,6 +18,7 @@ if (isset($_GET['ano_ferias'])) {
 <div style="display:flex;gap:20px;">
   <h1><a class="btn btn-lg btn-outline-success" href="/siiupa/?setor=adm&sub=rh&subsub=ferias&ano_ferias=2022">2022</a></h1>
   <h1><a class="btn btn-lg btn-outline-success" href="/siiupa/?setor=adm&sub=rh&subsub=ferias&ano_ferias=2023">2023</a></h1>
+  <h1><a class="btn btn-lg btn-outline-success" href="/siiupa/?setor=adm&sub=rh&subsub=ferias&ano_ferias=2024">2024</a></h1>
 </div>
 <?php
 
@@ -346,7 +347,7 @@ $tabela->fechaThead();
 
 
 //$query = "SELECT func.nome, c.titulo, s.setor, DATE_FORMAT(ferias.datainicio, '%d\/%m\/%Y'), DATE_FORMAT(ferias.datafim, '%d\/%m\/%Y'), ferias.ref_mes, ferias.ref_ano, func.vinculo, ferias.observacao FROM db_rh.tb_ferias AS ferias INNER JOIN db_rh.tb_funcionario AS func ON (ferias.fk_funcionario = func.id) INNER JOIN db_rh.tb_cargo AS C ON (func.fk_cargo = c.id) INNER JOIN db_rh.tb_setor AS s ON (func.fk_setor = s.id) WHERE func.status='ATIVO' $fitrasetor ORDER BY s.setor, ref_mes, c.titulo, nome ASC";
-$query = "SELECT ferias.id, func.nome, c.titulo, s.setor, DATE_FORMAT(ferias.datainicio, '%d\/%m\/%Y'), DATE_FORMAT(ferias.datafim, '%d\/%m\/%Y'), ferias.ref_mes, ferias.ref_ano, func.vinculo, ferias.observacao FROM db_rh.tb_ferias AS ferias INNER JOIN db_rh.tb_funcionario AS func ON (ferias.fk_funcionario = func.id) INNER JOIN db_rh.tb_cargo AS C ON (func.fk_cargo = c.id) INNER JOIN db_rh.tb_setor AS s ON (func.fk_setor = s.id) WHERE func.status='ATIVO' AND ferias.ref_ano ='$ano_ferias'/* AND NOT (func.fk_setor = '17' OR func.fk_setor = '21') */ $fitrasetor ORDER BY ref_ano ASC, ref_mes ASC, func.nome ASC";
+$query = "SELECT ferias.id, func.nome, c.titulo, s.setor, DATE_FORMAT(ferias.datainicio, '%d\/%m\/%Y'), DATE_FORMAT(ferias.datafim, '%d\/%m\/%Y'), ferias.ref_mes, ferias.ref_ano, func.vinculo, ferias.observacao FROM db_rh.tb_ferias AS ferias INNER JOIN db_rh.tb_funcionario AS func ON (ferias.fk_funcionario = func.id) INNER JOIN db_rh.tb_cargo AS C ON (func.fk_cargo = c.id) INNER JOIN db_rh.tb_setor AS s ON (func.fk_setor = s.id) WHERE func.status='ATIVO' /*AND func.vinculo IN('TEMPORARIO')*/ AND ferias.ref_ano ='$ano_ferias'/* AND NOT (func.fk_setor = '17' OR func.fk_setor = '21') */ $fitrasetor ORDER BY ref_ano ASC, ref_mes ASC, func.nome ASC";
 //echo $query;
 
 if ($stmt = $conn->prepare($query)) {
@@ -385,7 +386,7 @@ foreach ($grupomes as $anomes) {
   $mes_nome = substr($mes_nome, 4);
   $ano = substr(key($grupomes), 0, 4);
   $mesano = mes($mes_nome) . substr(key($grupomes), 0, 4);
-  echo "<h3 class='card-title' name='" . mes($mes_nome) . "'>" . mes($mes_nome) . " - " . substr(key($grupomes), 0, 4) . "</h3>";
+  echo "<h3 style='background-color:#000;color:#fff;padding:3px 5px;text-transform: uppercase;' class='card-title' name='" . mes($mes_nome) . "'>" . mes($mes_nome) . " - " . substr(key($grupomes), 0, 4) . "</h3>";
 
   $tabela->abreTabela('tabelaFerias', $class = 'table table-striped table-bordered table-hover border-dark', $mesano);
 

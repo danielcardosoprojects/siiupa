@@ -11,7 +11,8 @@ include_once('../bd/nivel.php');
 <hr>
 
 <?php
-
+$ipLocal = $_SERVER['SERVER_ADDR'];
+echo "IP local do servidor: " . $ipLocal;
 $sqlTiposAcionamentos = "SELECT * FROM db_rh.tb_acionamentos;";
 $tiposAcionamentos = new BD;
 $rTAcions = $tiposAcionamentos->consulta($sqlTiposAcionamentos);

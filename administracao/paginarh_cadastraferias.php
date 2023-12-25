@@ -136,9 +136,9 @@ if ($_GET['acao'] == 'cadastrar') {
     $dados->vinculo = $_GET['vinculo'];
  
     if ($dados->vinculo == "TEMPORARIO") {
-        $texto_obs = "_Recesso";
+        $texto_obs = "2_Recesso";
     } elseif ($dados->vinculo == "EFETIVO") {
-        $texto_obs = "_Ferias";
+        $texto_obs = "2_Ferias";
     }
     
 }
@@ -211,7 +211,7 @@ if ($_GET['acao'] == 'deleta') {
 
 
     <p>Mês de referência: <input type="text" name="ref_mes" id="ref_mes"><br /></p>
-    <p>Ano de referência: <input type="text" name="ref_ano" id="ref_ano" value="2023"><br /></p>
+    <p>Ano de referência: <input type="text" name="ref_ano" id="ref_ano" value="2024"><br /></p>
     <p><input type="submit" value="Preencher Auto" id="btpreenchedata"><br /></p>
 </form>
 <form>

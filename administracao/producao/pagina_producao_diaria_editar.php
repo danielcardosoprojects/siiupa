@@ -263,59 +263,97 @@ include("../../bd/conectabd.php");
                 <th colspan="6" class="text-center">Total de Atendimentos: </th>
             </tr>
             <tr>
-                <td class="box " data-campo="idade.0_13">Pulso BP<br>
+                <td class="box " data-campo="idade.0_13">Crise Hipertensiva<br>
                     <h3>
                         <p>0</p>
                     </h3>
                 </td>
-                <td class="box" data-campo="idade.14_21">FR<br>
+                <td class="box" data-campo="idade.14_21">PA<br>
                     <h3>
                         <p>0</p>
                     </h3>
                 </td>
-                <td class="box " data-campo="idade.22_59">TEMP<br>
+                <td class="box " data-campo="idade.22_59">PULSO/FC<br>
                     <h3>
                         <p>0</p>
                     </h3>
                 </td>
-                <td class="box r" data-campo="idade.60_idoso">Peso<br>
+                <td class="box r" data-campo="idade.60_idoso">FR<br>
                     <h3>
                         <p>0</p>
                     </h3>
                 </td>
-                <td class="box" data-campo="sexo.feminino">FEMININO<br>
+                <td class="box" data-campo="sexo.feminino">GLICEMIA<br>
                     <h3>
                         <p>0</p>
                     </h3>
                 </td>
-                <td class="box" data-campo="sexo.masculino">MASCULINO<br>
+                <td class="box" data-campo="sexo.masculino">INALAÇÃO<br>
                     <h3>
                         <p>0</p>
                     </h3>
                 </td>
             </tr>
             <tr>
-                <td class="box" data-campo="CRISE_HIPERTENSIVA">CRISE HIPERTENSIVA <br>
+                <td class="box" data-campo="CRISE_HIPERTENSIVA">TEMPERATURA<br>
                     <h3>
                         <p>0</p>
                     </h3>
                 </td>
-                <td class="box" data-campo="COM_CARTAO_SUS"> COM CARTÃO SUS<br>
+                <td class="box" data-campo="COM_CARTAO_SUS">PESO<br>
                     <h3>
                         <p>0</p>
                     </h3>
                 </td>
-                <td class="box" data-campo="SEM_CARTAO_SUS">SEM CARTÃO SUS<br>
+                </tr>
+            <tr>
+                <td class="box" data-campo="CONSULTA_MEDICO">CONSULTA MÉDICO<br>
                     <h3>
                         <p>0</p>
                     </h3>
                 </td>
-                <td class="box" data-campo="COM_CLASSIFICACAO">CLASSIFICADO<br>
+                <td class="box" data-campo="CONSULTA_ENFERMEIRO">CONSULTA ENFERMEIRO<br>
                     <h3>
                         <p>0</p>
                     </h3>
                 </td>
-                <td class="box" data-campo="SEM_CLASSIFICACAO">NÃO CLASSIFICADO<br>
+                <td class="box" data-campo="CONSULTA_SERVICO_SOCIAL">CONSULTA SERVIÇO SOCIAL<br>
+                    <h3>
+                        <p>0</p>
+                    </h3>
+                </td>
+                
+            </tr>
+            <tr>
+            <td class="box" data-campo="FR">SEM CNS<br>
+                    <h3>
+                        <p>0</p>
+                    </h3>
+                </td>
+                <td class="box" data-campo="INALACAO">SEM CLASSIFICAÇÃO<br>
+                    <h3>
+                        <p>0</p>
+                    </h3>
+                </td>
+                </tr>
+            <tr>
+                <td class="box" data-campo="GLICEMIA">Idade 0-13<br>
+                    <h3>
+                        <p>0</p>
+                    </h3>
+                </td>
+         
+                <td class="box" data-campo="TEMPERATURA">Idade 14-21<br>
+                    <h3>
+                        <p>0</p>
+                    </h3>
+                </td>
+                <td class="box" data-campo="PESO">Idade 22-59<br>
+                    <h3>
+                        <p>0</p>
+                    </h3>
+                </td>
+                <td class="box" data-campo="SURTO_PSICOTICO">Idade 60+<br>
                     <h3>
                         <p>0</p>
                     </h3>
@@ -335,38 +373,9 @@ include("../../bd/conectabd.php");
                         <p>0</p>
                     </h3>
                 </td>
-                <td class="box" data-campo="FR">FR<br>
-                    <h3>
-                        <p>0</p>
-                    </h3>
-                </td>
-                <td class="box" data-campo="INALACAO">INALAÇÃO<br>
-                    <h3>
-                        <p>0</p>
-                    </h3>
-                </td>
-                <td class="box" data-campo="GLICEMIA">GLICEMIA<br>
-                    <h3>
-                        <p>0</p>
-                    </h3>
-                </td>
-            </tr>
-            <tr>
-                <td class="box" data-campo="TEMPERATURA">TEMPERATURA<br>
-                    <h3>
-                        <p>0</p>
-                    </h3>
-                </td>
-                <td class="box" data-campo="PESO">PESO<br>
-                    <h3>
-                        <p>0</p>
-                    </h3>
-                </td>
-                <td class="box" data-campo="SURTO_PSICOTICO">SURTO PSICÓTICO<br>
-                    <h3>
-                        <p>0</p>
-                    </h3>
-                </td>
+               
+                
+                
                 <td class="box" data-campo="HEMOPA">HEMOPA<br>
                     <h3>
                         <p>0</p>
@@ -389,17 +398,17 @@ include("../../bd/conectabd.php");
                         <p>0</p>
                     </h3>
                 </td>
-                <td class="box" data-campo="CONSULTA_MEDICO">CONSULTA MÉDICO<br>
+                <td class="box" data-campo="CONSULTA_MEDICOx">CONSULTA MÉDICO<br>
                     <h3>
                         <p>0</p>
                     </h3>
                 </td>
-                <td class="box" data-campo="CONSULTA_ENFERMEIRO">CONSULTA ENFERMEIRO<br>
+                <td class="box" data-campo="CONSULTA_ENFERMEIROx">CONSULTA ENFERMEIRO<br>
                     <h3>
                         <p>0</p>
                     </h3>
                 </td>
-                <td class="box" data-campo="CONSULTA_SERVICO_SOCIAL">CONSULTA SERVIÇO SOCIAL<br>
+                <td class="box" data-campo="CONSULTA_SERVICO_SOCIALx">CONSULTA SERVIÇO SOCIAL<br>
                     <h3>
                         <p>0</p>
                     </h3>
@@ -592,7 +601,7 @@ include("../../bd/conectabd.php");
             });
             tabela = $("#tabela_producao_diaria");
             i = 0;
-            letras = ["KeyQ", "KeyW", "KeyE", "KeyR", "KeyT", "KeyY", "KeyU", "KeyI", "KeyO", "KeyP", "KeyA", "KeyS", "KeyD", "KeyF", "KeyG", "KeyH", "KeyJ", "KeyK", "KeyL", "Semicolon", "KeyZ", "KeyX", "KeyC", "KeyV", "KeyB", "KeyN", "KeyM", "Numpad1", "Numpad2", "Numpad3", "Numpad4", "Numpad5", "Numpad6", "Numpad7", "Numpad8", "Numpad9", "Numpad0"];
+            letras = ["KeyQ", "KeyW", "KeyE", "KeyR", "KeyT", "KeyY", "KeyA", "KeyS", "KeyX", "KeyC", "KeyV", "KeyF", "KeyG", "KeyH", "KeyJ", "KeyK", "KeyL", "KeyK", "KeyL", "Semicolon", "KeyZ", "KeyX", "KeyC", "KeyV", "KeyB", "KeyN", "KeyM", "Numpad1", "Numpad2", "Numpad3", "Numpad4", "Numpad5", "Numpad6", "Numpad7", "Numpad8", "Numpad9", "Numpad0"];
             $('.box').each(function(index) {
                 letra = letras[i];
                 $(this).addClass(letra);
@@ -634,8 +643,8 @@ include("../../bd/conectabd.php");
                         105: "COM_CARTAO_SUS", // i
                         111: "SEM_CARTAO_SUS", // o
                         112: "COM_CLASSIFICACAO", // p
-                        97: "SEM_CLASSIFICACAO", // a
-                        115: "PA", // s
+                        97: "CRISE_HIPERTENSIVA", // a
+                        115: "COM_CARTAO_SUS", // s
                         100: "PULSOFC", // d
                         102: "FR", // f
                         103: "INALACAO", // g
@@ -645,9 +654,9 @@ include("../../bd/conectabd.php");
                         108: "SURTO_PSICOTICO", // l
                         231: "HEMOPA", // ç
                         122: "SUSIPE", // z
-                        120: "MEDICAMENTOS", // x
-                        99: "CONSULTA_MEDICO", // c
-                        118: "CONSULTA_ENFERMEIRO", // v
+                        120: "CONSULTA_MEDICO", // x
+                        99: "CONSULTA_ENFERMEIRO", // c
+                        118: "CONSULTA_SERVICO_SOCIAL", // v
                         98: "CONSULTA_SERVICO_SOCIAL", // b
                         110: "ACIDTRANSITO.MOTO_X_CARRO", // n
                         109: "ACIDTRANSITO.MOTO_X_MOTO", // m

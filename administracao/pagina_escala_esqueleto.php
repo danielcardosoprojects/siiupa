@@ -1,4 +1,5 @@
 <?php
+
 @session_start();
 @include_once('../bd/conectabd.php');
 // @include_once('../bd/nivel.php');
@@ -902,6 +903,7 @@
                         if ($legendaescala == "") {
                             $legendaescala = "<br><br>";
                         }
+                        
                         echo $legendaescala; ?>
 
                     </div>
