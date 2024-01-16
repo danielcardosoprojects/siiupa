@@ -62,7 +62,7 @@ include_once('../bd/nivel.php');
 
 
                 <?php
-                $sqlcargos = "SELECT  * FROM tb_cargo order by descricao ASC";
+                $sqlcargos = "SELECT  * FROM u940659928_siupa.tb_cargo order by descricao ASC";
                 $resultcargos = mysqli_query($conn, $sqlcargos);
                 if (mysqli_num_rows($resultcargos) > 0) {
                     echo "<label class='floatleft'>Cargo/Função:<select id='buscafunc' name='buscafunc' class='buscafunc form-control floatleft'>
@@ -189,8 +189,8 @@ include_once('../bd/nivel.php');
     $inicio = $inicio * $total_reg;
 
     //busca tb_funcionario
-    $sqlbusca = "SELECT  DATE_FORMAT(f.data_nasc,'%d\/%m\/%Y') as data_nascbr, f.*, DATE_FORMAT(f.admissao,'%d\/%m\/%Y') as admissaoBR, f.id AS idfuncionario, c.descricao AS cargo, c.id, s.setor FROM tb_funcionario AS f INNER JOIN tb_cargo AS C ON f.fk_cargo = c.id INNER JOIN tb_setor AS s ON f.fk_setor = s.id $where $fcsql $bsetorsql $orderby";
-    // echo $sqlbusca;
+    $sqlbusca = "SELECT  DATE_FORMAT(f.data_nasc,'%d\/%m\/%Y') as data_nascbr, f.*, DATE_FORMAT(f.admissao,'%d\/%m\/%Y') as admissaoBR, f.id AS idfuncionario, c.descricao AS cargo, c.id, s.setor FROM u940659928_siupa.tb_funcionario AS f INNER JOIN u940659928_siupa.tb_cargo AS C ON f.fk_cargo = c.id INNER JOIN u940659928_siupa.tb_setor AS s ON f.fk_setor = s.id $where $fcsql $bsetorsql $orderby";
+         echo $sqlbusca;
 
     // verifica o número total de registros
     $todosResultadosBusca = mysqli_query($conn, $sqlbusca);
