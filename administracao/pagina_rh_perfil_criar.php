@@ -26,13 +26,13 @@ include_once('bd/conectabd.php');
 
             console.log(data[0].value); //use the console for debugging, F12 in Chrome, not alerts
             link_criar_perfil = 'administracao/perfil/cria_perfil.php?v=1' + link_string;
-            console.log (link_criar_perfil);
+         
             //id = ' + idfunc + ' & campo = ' + campo + ' & valor = ' + valorinput;
             $.get(link_criar_perfil, function(data) {
 
                 id_criado = data.toString();
                 link_perfil_criado = '?setor=adm&sub=rh&subsub=perfil&id='+id_criado;
-                //window.location.href =link_perfil_criado;
+                window.location.href =link_perfil_criado;
                 
                 
 

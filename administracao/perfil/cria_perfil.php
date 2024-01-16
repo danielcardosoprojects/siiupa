@@ -19,7 +19,7 @@ $fk_setor  = pega('fk_setor');
 $vinculo = pega('vinculo');
 $status = pega('status');
 
-$sql = "INSERT INTO `db_rh`.`tb_funcionario` (`nome`, `fk_cargo`, `fk_setor`, `vinculo`, `status`) VALUES ('$nome', '$fk_cargo', '$fk_setor','$vinculo','$status')";
+$sql = "INSERT INTO `u940659928_siupa`.`tb_funcionario` (`nome`, `fk_cargo`, `fk_setor`, `vinculo`, `status`) VALUES ('$nome', '$fk_cargo', '$fk_setor','$vinculo','$status')";
 
 
 $busca = $busca->conecta();
