@@ -64,7 +64,7 @@ $vinculo = $_GET['vinculo'];
     </strong><br />
 </div>
 <div style='font-size:12px;font-family: "Times New Roman", Times, serif;'>
-    Referência: <strong><?php echo GetNomeMes($mes); ?>-2023</strong><br />
+    Referência: <strong><?php echo GetNomeMes($mes); ?>-2024</strong><br />
 
     Matricula : <strong><?php echo $matricula; ?></strong><span style="color:white;">____________________</span>Data de Admissão: <strong><?php echo $admissao; ?></strong><br />
     Nome: <strong><?php echo strtoupper($nomefunc); ?></strong> <span style="color:white;">______</span>Cargo/Função: <strong><?php echo $cargo; ?></strong><br />
@@ -128,6 +128,7 @@ function GetNumeroDias($mes)
 
     if (((date('Y') % 4) == 0 and (date('Y') % 100) != 0) or (date('Y') % 400) == 0) {
         $numero_dias['02'] = 29;    // altera o numero de dias de fevereiro se o ano for bissexto
+        $numero_dias['2'] = 29;
     }
 
     return $numero_dias[$mes];
@@ -157,7 +158,7 @@ function Mostra($mes, $dia)
     $nome_mes = GetNomeMes($mes);
     $diacorrente = 0;
 
-    $diasemana = jddayofweek(cal_to_jd(CAL_GREGORIAN, $mes, $dia, 2023), 0);    // função que descobre o dia da semana
+    $diasemana = jddayofweek(cal_to_jd(CAL_GREGORIAN, $mes, $dia, 2024), 0);    // função que descobre o dia da semana
 
 
 
@@ -169,7 +170,7 @@ function DiaSemana($mes, $dia)
     } else {
         $diaa = $dia + 1;
     }
-    $diasemana = jddayofweek(cal_to_jd(CAL_GREGORIAN, $mes, $diaa, 2023), 0);    // função que descobre o dia da semana
+    $diasemana = jddayofweek(cal_to_jd(CAL_GREGORIAN, $mes, $diaa, 2024), 0);    // função que descobre o dia da semana
     $nomesemana = array(1 => '<strong>DOMINGO</strong>', 2 => 'SEGUNDA', 3 => 'TERÇA', 4 => 'QUARTA', 5 => 'QUINTA', 6 => 'SEXTA', 0 => '<strong>SÁBADO</strong>');
 
     return $nomesemana[$diasemana];
