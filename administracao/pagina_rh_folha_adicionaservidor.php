@@ -270,7 +270,7 @@ if (isset($_GET['acao'])) {
         $obs = $_GET['obs'];
 
         $query = "INSERT INTO u940659928_siupa.tb_folha (fk_funcionario, fk_folhas, adc_not, ext_6, ext_12, ext_24, acionamento, transferencia, fixos, obs) VALUES ('$idservidor' ,  '$idfolha' , '$adc_not' , '$ext_6' , '$ext_12' , '$ext_24' ,  '$acionamento', '$transferencia' , '$fixos' , '$obs')";
-        $query = "UPDATE `db_rh`.`tb_folha` SET `adc_not` = '$adc_not', `ext_6` = '$ext_6', `ext_12` = '$ext_12', `ext_24` = '$ext_24', `acionamento` = '$acionamento', `transferencia` = '$transferencia', `fixos` = '$fixos', `obs` = '$obs' WHERE (`id` = '$idlinhafolha')";
+        $query = "UPDATE `u940659928_siupa`.`tb_folha` SET `adc_not` = '$adc_not', `ext_6` = '$ext_6', `ext_12` = '$ext_12', `ext_24` = '$ext_24', `acionamento` = '$acionamento', `transferencia` = '$transferencia', `fixos` = '$fixos', `obs` = '$obs' WHERE (`id` = '$idlinhafolha')";
         if (mysqli_query($conn, $query)) {
             $last_id = mysqli_insert_id($conn);
             echo "Alterado com sucesso. Last inserted ID is: " . $last_id;
