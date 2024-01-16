@@ -16,7 +16,7 @@ include_once('../bd/nivel.php');
         <div class="contagem_cargos">
             <?php
             $bdContagemCargos = new BD;
-            $sqlCG = "SELECT c.titulo, count(c.titulo) as total, c.id FROM u940659928_siupa.tb_funcionario as f inner join u940659928_siupa.tb_cargo as c on (f.fk_cargo = c.id) where status='ATIVO' group by c.titulo";
+            $sqlCG = "SELECT c.titulo, count(c.titulo) as total, c.id FROM u940659928_siupa.tb_funcionario as f inner join u940659928_siupa.tb_cargo AS c on (f.fk_cargo = c.id) where status='ATIVO' group by c.titulo";
             $rConsultaCargos = $bdContagemCargos->consulta($sqlCG);
             foreach ($rConsultaCargos as $rCG) {
                 $tituloCG = utf8_encode($rCG->titulo);
@@ -283,7 +283,7 @@ include_once('../bd/nivel.php');
                     $dados = (object) $rownomes;
                     $conta_serv = 0;
                     //from u940659928_siupa.tb_ferias
-                    $queryf = "SELECT ferias.id, func.nome, c.titulo, s.setor, DATE_FORMAT(ferias.datainicio, '%d\/%m\/%Y'), DATE_FORMAT(ferias.datafim, '%d\/%m\/%Y'), ferias.ref_mes, ferias.ref_ano, func.vinculo, ferias.observacao FROM u940659928_siupa.tb_ferias AS ferias INNER JOIN u940659928_siupa.tb_funcionario AS func ON (ferias.fk_funcionario = func.id) INNER JOIN u940659928_siupa.tb_cargo AS C ON (func.fk_cargo = c.id) INNER JOIN u940659928_siupa.tb_setor AS s ON (func.fk_setor = s.id) WHERE func.status='ATIVO' AND ref_ano = 2024 AND ferias.fk_funcionario = '$dados->idfuncionario'";
+                    $queryf = "SELECT ferias.id, func.nome, c.titulo, s.setor, DATE_FORMAT(ferias.datainicio, '%d\/%m\/%Y'), DATE_FORMAT(ferias.datafim, '%d\/%m\/%Y'), ferias.ref_mes, ferias.ref_ano, func.vinculo, ferias.observacao FROM u940659928_siupa.tb_ferias AS ferias INNER JOIN u940659928_siupa.tb_funcionario AS func ON (ferias.fk_funcionario = func.id) INNER JOIN u940659928_siupa.tb_cargo AS c ON (func.fk_cargo = c.id) INNER JOIN u940659928_siupa.tb_setor AS s ON (func.fk_setor = s.id) WHERE func.status='ATIVO' AND ref_ano = 2024 AND ferias.fk_funcionario = '$dados->idfuncionario'";
 
                     if ($stmtf = $conn->prepare($queryf)) {
                         $stmtf->execute();

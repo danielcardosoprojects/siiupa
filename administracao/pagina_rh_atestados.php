@@ -26,7 +26,7 @@ include_once('../bd/nivel.php');
 <div id="todos_atestados">
     <?php
     $consulta_atestado = new BD;
-    $sqlConsulta_Atestados = "SELECT A.id as idAfastamento, afs.afastamento,afs.id as afastamento_id, A.*, f.nome, f.id as idf, c.titulo FROM u940659928_siupa.tb_afastamento as A inner join u940659928_siupa.tb_funcionario as f ON (A.fk_funcionario = f.id) inner join u940659928_siupa.tb_cargo as c on (f.fk_cargo = c.id) inner join u940659928_siupa.tb_afastamentos as afs on (A.fk_afastamentos = afs.id) order by A.id DESC";
+    $sqlConsulta_Atestados = "SELECT A.id as idAfastamento, afs.afastamento,afs.id as afastamento_id, A.*, f.nome, f.id as idf, c.titulo FROM u940659928_siupa.tb_afastamento as A inner join u940659928_siupa.tb_funcionario as f ON (A.fk_funcionario = f.id) inner join u940659928_siupa.tb_cargo AS c on (f.fk_cargo = c.id) inner join u940659928_siupa.tb_afastamentos as afs on (A.fk_afastamentos = afs.id) order by A.id DESC";
     $resultadoConsulta_Atestados = $consulta_atestado->consulta($sqlConsulta_Atestados);
 
     foreach ($resultadoConsulta_Atestados as $resultado_atestado) {

@@ -752,7 +752,7 @@ class Grade
 
     $idservidor = $_GET['id'];
 
-    $sqlAfastamentos = "SELECT afs.afastamento,afs.id as afastamento_id, A.*, f.nome, c.titulo FROM u940659928_siupa.tb_afastamento as A inner join u940659928_siupa.tb_funcionario as f ON (A.fk_funcionario = f.id) inner join u940659928_siupa.tb_cargo as c on (f.fk_cargo = c.id) inner join u940659928_siupa.tb_afastamentos as afs on (A.fk_afastamentos = afs.id) where A.fk_funcionario = '$idservidor' order by A.data_fim DESC";
+    $sqlAfastamentos = "SELECT afs.afastamento,afs.id as afastamento_id, A.*, f.nome, c.titulo FROM u940659928_siupa.tb_afastamento as A inner join u940659928_siupa.tb_funcionario as f ON (A.fk_funcionario = f.id) inner join u940659928_siupa.tb_cargo AS c on (f.fk_cargo = c.id) inner join u940659928_siupa.tb_afastamentos as afs on (A.fk_afastamentos = afs.id) where A.fk_funcionario = '$idservidor' order by A.data_fim DESC";
     if ($bancoAfastamentos = $conn->query($sqlAfastamentos)) {
 
         while ($dadosAfastamentos = $bancoAfastamentos->fetch_object()) {
@@ -839,7 +839,7 @@ class Grade
         echo "<td>";
         if ($resultado_acionamento->fk_afastamento != 0) {
             $consulta_afastamento = new BD;
-            $sqlConsulta_Afastamento = "SELECT f.nome as nomeAfastado, c.titulo as tituloCargo, afs.afastamento, af.id as idAfastado, af.data_inicio, af.data_fim FROM u940659928_siupa.tb_afastamento as af inner join u940659928_siupa.tb_funcionario as f on (af.fk_funcionario = f.id) inner join u940659928_siupa.tb_afastamentos as afs on (af.fk_afastamentos = afs.id) inner join u940659928_siupa.tb_cargo as c on (f.fk_cargo = c.id) WHERE af.id='$resultado_acionamento->fk_afastamento'";
+            $sqlConsulta_Afastamento = "SELECT f.nome as nomeAfastado, c.titulo as tituloCargo, afs.afastamento, af.id as idAfastado, af.data_inicio, af.data_fim FROM u940659928_siupa.tb_afastamento as af inner join u940659928_siupa.tb_funcionario as f on (af.fk_funcionario = f.id) inner join u940659928_siupa.tb_afastamentos as afs on (af.fk_afastamentos = afs.id) inner join u940659928_siupa.tb_cargo AS c on (f.fk_cargo = c.id) WHERE af.id='$resultado_acionamento->fk_afastamento'";
 
             $resultadoConsultaAfastamento = $consulta_afastamento->consulta($sqlConsulta_Afastamento);
             ////////////////////////////////// var_dump($resultadoAfastamento);

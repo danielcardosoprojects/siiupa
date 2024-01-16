@@ -14,7 +14,7 @@ if ($acao == 'busca') {
 
     $buscanome = $nome; //preg_replace('/[^[:alnum:]_]/', '',$nome);
     $bdaddservidor = new BD;
-    $sqladdservidor = "SELECT c.titulo, f.* FROM u940659928_siupa.tb_funcionario as f INNER JOIN u940659928_siupa.tb_cargo as c ON (f.fk_cargo = c.id) WHERE f.nome like '%$buscanome%' AND (f.status = 'ATIVO' OR f.status = 'TERCEIRIZADO') $sqlsetor ORDER BY f.nome ASC";
+    $sqladdservidor = "SELECT c.titulo, f.* FROM u940659928_siupa.tb_funcionario as f INNER JOIN u940659928_siupa.tb_cargo AS c ON (f.fk_cargo = c.id) WHERE f.nome like '%$buscanome%' AND (f.status = 'ATIVO' OR f.status = 'TERCEIRIZADO') $sqlsetor ORDER BY f.nome ASC";
     $resultadoaddservidor = $bdaddservidor->consulta($sqladdservidor);
     echo "<input type='hidden' value='$chave' id='chaveAddServ'>";
     echo "<table class='table table-bordered table-striped table-hover' style='font-size:29px !important'><theady><th>Nome</th><th>Cargo</th></theady><tbody>";
