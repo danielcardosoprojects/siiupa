@@ -277,11 +277,11 @@ include_once('../bd/nivel.php');
 
 
             $contalinha = ($pc - 1) * 10 + 1;
-            $conta_serv = 0;
+            
             if (mysqli_num_rows($resultbusca) > 0) {
                 while ($rownomes = mysqli_fetch_assoc($resultbusca)) {
                     $dados = (object) $rownomes;
-
+                    $conta_serv = 0;
                     //from tb_ferias
                     $queryf = "SELECT ferias.id, func.nome, c.titulo, s.setor, DATE_FORMAT(ferias.datainicio, '%d\/%m\/%Y'), DATE_FORMAT(ferias.datafim, '%d\/%m\/%Y'), ferias.ref_mes, ferias.ref_ano, func.vinculo, ferias.observacao FROM u940659928_siupa.tb_ferias AS ferias INNER JOIN u940659928_siupa.tb_funcionario AS func ON (ferias.fk_funcionario = func.id) INNER JOIN u940659928_siupa.tb_cargo AS C ON (func.fk_cargo = c.id) INNER JOIN u940659928_siupa.tb_setor AS s ON (func.fk_setor = s.id) WHERE func.status='ATIVO' AND ref_ano = 2024 AND ferias.fk_funcionario = '$dados->idfuncionario'";
 
