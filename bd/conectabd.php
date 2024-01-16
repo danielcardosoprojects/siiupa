@@ -24,9 +24,9 @@ if (!mysqli_set_charset($conn, 'utf8')) {
 class BD
 {
    var $servername = "localhost";
-   var $database = "db_rh";
-   var $username = "root";
-   var $password = "apuapu";
+   var $database = "u940659928_siupa";
+   var $username = "u940659928_siupa";
+   var $password = "4jHd@myhRDEBL@7";
    function conecta()
    {
       $bd = new PDO("mysql:host=$this->servername;dbname=$this->database", "$this->username", "$this->password");
