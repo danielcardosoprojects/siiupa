@@ -360,7 +360,7 @@
 <!--------------------------------------------------- SUCESSO --------------------------------------------------->
 <div class="alert alert-success" role="alert">
     <?php
-    // $sql = "SELECT * FROM tb_funcionario";
+    // $sql = "SELECT * FROM u940659928_siupa.tb_funcionario";
     if (isset($_GET["where"])) {
         $gw = $_GET['where'];
         $where = "WHERE f.nome LIKE '%" . $gw . "%'";
@@ -1164,7 +1164,7 @@ class Grade
 
 
     /* HISTORICO */
-    $sqlhist = "SELECT  * FROM tb_historico WHERE fk_funcionario = $perfil->id ORDER BY data_registro DESC";
+    $sqlhist = "SELECT  * FROM u940659928_siupa.tb_historico WHERE fk_funcionario = $perfil->id ORDER BY data_registro DESC";
     $resulthist = mysqli_query($conn, $sqlhist);
 
     echo "<div class='alert alert-success' role='alert'>";

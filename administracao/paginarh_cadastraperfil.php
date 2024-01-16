@@ -41,7 +41,7 @@ include("funcoesphpadm.php");
 </script>
 <div class="alert alert-success" role="alert">
     <?php
-    // $sql = "SELECT * FROM tb_funcionario";
+    // $sql = "SELECT * FROM u940659928_siupa.tb_funcionario";
     if (isset($_GET["where"])) {
         $gw = $_GET['where'];
         $where = "WHERE f.nome LIKE '%" . $gw . "%'";
@@ -61,7 +61,7 @@ include("funcoesphpadm.php");
 
 
     $orderby = "ORDER BY id desc";
-    $sql = "SELECT  f.*, c.titulo AS cargo, s.setor FROM tb_funcionario AS f INNER JOIN tb_cargo AS C ON f.fk_cargo = c.id INNER JOIN tb_setor AS s ON f.fk_setor = s.id $where $orderby";
+    $sql = "SELECT  f.*, c.titulo AS cargo, s.setor FROM u940659928_siupa.tb_funcionario AS f INNER JOIN u940659928_siupa.tb_cargo AS C ON f.fk_cargo = c.id INNER JOIN u940659928_siupa.tb_setor AS s ON f.fk_setor = s.id $where $orderby";
     $result = mysqli_query($conn, $sql);
 
     echo mysqli_num_rows($result) . " resultado(s).";
@@ -177,7 +177,7 @@ pulalinha(1);
 
 $formulario->selectinicia("fk_cargo");
 
-$sqlcargo = "SELECT  * FROM tb_cargo";
+$sqlcargo = "SELECT  * FROM u940659928_siupa.tb_cargo";
 $resultcargo = mysqli_query($conn, $sqlcargo);
 
 if (mysqli_num_rows($resultcargo) > 0) {
@@ -201,7 +201,7 @@ pulalinha(1);
 
 $formulario->selectinicia("fk_setor");
 
-$sqlsetor = "SELECT  * FROM tb_setor";
+$sqlsetor = "SELECT  * FROM u940659928_siupa.tb_setor";
 $resultsetor = mysqli_query($conn, $sqlsetor);
 
 if (mysqli_num_rows($resultsetor) > 0) {
@@ -351,7 +351,7 @@ echo '<input type="submit" value="ENVIAR">';
 $formulario->fimForm();
 
 /* HISTORICO */
-$sqlhist = "SELECT  * FROM tb_historico WHERE fk_funcionario = $perfil->id ORDER BY data_registro DESC";
+$sqlhist = "SELECT  * FROM u940659928_siupa.tb_historico WHERE fk_funcionario = $perfil->id ORDER BY data_registro DESC";
 $resulthist = mysqli_query($conn, $sqlhist);
 
 echo "<div class='alert alert-success' role='alert'>";

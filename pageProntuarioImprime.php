@@ -2,7 +2,7 @@
 <?php
 @require_once("conectabd.php");
 $idpaciente = $_GET['id_paciente'];
-$sql = "SELECT * FROM tb_cadastro WHERE id_paciente='$idpaciente'";
+$sql = "SELECT * FROM u940659928_siupa.tb_cadastro WHERE id_paciente='$idpaciente'";
     $res = mysqli_query($conectaobd,$sql);
 
 //Exibe as linhas encontradas na consulta 

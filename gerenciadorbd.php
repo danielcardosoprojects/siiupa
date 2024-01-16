@@ -10,7 +10,7 @@ $camposcadastra = "nomecompleto,nomedamae,idade,datadenascimento,sexo,telefone1,
 
 $cadastravalores = "'$nomecompleto','$nomedamae','$idade',str_to_date('$datadenascimento', '%d/%m/%Y'),'$sexo','$telefone1','$telefone2','$telefone3','$rg','$cpf','$cartaosus','$responsavel','$enderecoRua','$enderecoNumero','$enderecoPerimetro','$enderecoBairro','$municipio','$tipoacompanhante','$veiopor'";
 
-$sql = "INSERT INTO tb_cadastro ($camposcadastra) VALUES($cadastravalores)"; 
+$sql = "INSERT INTO u940659928_siupa.tb_cadastro ($camposcadastra) VALUES($cadastravalores)"; 
  
  if ($res = mysqlexecuta($conectaobd,$sql)) // testando se o $insert esta verdadeiro = se a inserção aconteceu
  {

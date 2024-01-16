@@ -288,7 +288,7 @@ if (isset($_GET['acao'])) {
 
 
         $idselecionado = $_GET['idservidor'];
-        $sqlbusca = "SELECT  f.*, f.id AS idfuncionario, c.funcao_upa, c.valor_plantao, c.valor_acionamento, c.valor_transferencia, c.id, s.setor FROM tb_funcionario AS f INNER JOIN tb_cargo AS C ON f.fk_cargo = c.id INNER JOIN tb_setor AS s ON f.fk_setor = s.id WHERE f.id='$idselecionado'";
+        $sqlbusca = "SELECT  f.*, f.id AS idfuncionario, c.funcao_upa, c.valor_plantao, c.valor_acionamento, c.valor_transferencia, c.id, s.setor FROM u940659928_siupa.tb_funcionario AS f INNER JOIN u940659928_siupa.tb_cargo AS c ON f.fk_cargo = c.id INNER JOIN u940659928_siupa.tb_setor AS s ON f.fk_setor = s.id WHERE f.id='$idselecionado'";
         $resultbusca = mysqli_query($conn, $sqlbusca);
         if (mysqli_num_rows($resultbusca) > 0) {
             while ($rownomes = mysqli_fetch_assoc($resultbusca)) {
@@ -737,7 +737,7 @@ if (isset($_GET['acao'])) {
         } else {
             $where = "WHERE status='ATIVO'";
         }
-        $sqlbusca = "SELECT  f.*, f.id AS idfuncionario, c.descricao AS cargo, c.id, s.setor FROM tb_funcionario AS f INNER JOIN tb_cargo AS C ON f.fk_cargo = c.id INNER JOIN tb_setor AS s ON f.fk_setor = s.id $where  ";
+        $sqlbusca = "SELECT  f.*, f.id AS idfuncionario, c.descricao AS cargo, c.id, s.setor FROM u940659928_siupa.tb_funcionario AS f INNER JOIN u940659928_siupa.tb_cargo AS C ON f.fk_cargo = c.id INNER JOIN u940659928_siupa.tb_setor AS s ON f.fk_setor = s.id $where  ";
         $resultbusca = mysqli_query($conn, $sqlbusca);
 
 

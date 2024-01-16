@@ -133,7 +133,7 @@ include_once('../bd/nivel.php');
     </div>
 
     <?php
-    // $sql = "SELECT * FROM tb_funcionario";
+    // $sql = "SELECT * FROM u940659928_siupa.tb_funcionario";
     if (isset($_GET["nome"])) {
         $gw = $_GET['nome'];
         $where = "WHERE f.nome LIKE '%" . $gw . "%' AND status = 'ATIVO'";
@@ -188,7 +188,7 @@ include_once('../bd/nivel.php');
     $inicio = $pc - 1;
     $inicio = $inicio * $total_reg;
 
-    //busca tb_funcionario
+    //busca u940659928_siupa.tb_funcionario
     $sqlbusca = "SELECT  DATE_FORMAT(f.data_nasc,'%d\/%m\/%Y') as data_nascbr, f.*, DATE_FORMAT(f.admissao,'%d\/%m\/%Y') as admissaoBR, f.id AS idfuncionario, c.descricao AS cargo, c.id, s.setor FROM u940659928_siupa.tb_funcionario AS f INNER JOIN u940659928_siupa.tb_cargo AS c ON f.fk_cargo = c.id INNER JOIN u940659928_siupa.tb_setor AS s ON f.fk_setor = s.id $where $fcsql $bsetorsql $orderby";
         // echo $sqlbusca;
 
@@ -282,7 +282,7 @@ include_once('../bd/nivel.php');
                 while ($rownomes = mysqli_fetch_assoc($resultbusca)) {
                     $dados = (object) $rownomes;
                     $conta_serv = 0;
-                    //from tb_ferias
+                    //from u940659928_siupa.tb_ferias
                     $queryf = "SELECT ferias.id, func.nome, c.titulo, s.setor, DATE_FORMAT(ferias.datainicio, '%d\/%m\/%Y'), DATE_FORMAT(ferias.datafim, '%d\/%m\/%Y'), ferias.ref_mes, ferias.ref_ano, func.vinculo, ferias.observacao FROM u940659928_siupa.tb_ferias AS ferias INNER JOIN u940659928_siupa.tb_funcionario AS func ON (ferias.fk_funcionario = func.id) INNER JOIN u940659928_siupa.tb_cargo AS C ON (func.fk_cargo = c.id) INNER JOIN u940659928_siupa.tb_setor AS s ON (func.fk_setor = s.id) WHERE func.status='ATIVO' AND ref_ano = 2024 AND ferias.fk_funcionario = '$dados->idfuncionario'";
 
                     if ($stmtf = $conn->prepare($queryf)) {

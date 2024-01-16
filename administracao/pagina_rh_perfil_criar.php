@@ -44,7 +44,7 @@ echo "<div id='area_criar'>";
 echo "<form class='form-control required' id='form_cria_perfil'>";
 echo "Nome:<input type='text' name='nome' class='form-control required'><br><br>";
 
-$sqlcargos = "SELECT  * FROM tb_cargo order by descricao ASC";
+$sqlcargos = "SELECT  * FROM u940659928_siupa.tb_cargo order by descricao ASC";
 $resultcargos = mysqli_query($conn, $sqlcargos);
 if (mysqli_num_rows($resultcargos) > 0) {
     echo "<label class=''>Cargo/Função:<select id='buscafunc' name='fk_cargo' class='buscafunc form-control floatleft' required>

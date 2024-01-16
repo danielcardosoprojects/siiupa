@@ -12,7 +12,7 @@ const connection = mysql.createConnection({
 
 // Rota para buscar dados
 router.get('/dados', (req, res) => {
-  connection.query('SELECT * FROM tb_historico', (error, results) => {
+  connection.query('SELECT * FROM u940659928_siupa.tb_historico', (error, results) => {
     if (error) {
       res.status(500).json({ error: 'Erro ao buscar dados.' });
     } else {

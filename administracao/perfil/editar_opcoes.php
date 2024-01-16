@@ -82,7 +82,7 @@ if ($campo == 'vinculo') {
 
     echo "
     <select name='edit$campo' id='edit$campo' class='form-control'>";
-    $sqlcargos = "SELECT  * FROM tb_cargo order by descricao ASC";
+    $sqlcargos = "SELECT  * FROM u940659928_siupa.tb_cargo order by descricao ASC";
     $resultcargos = mysqli_query($conn, $sqlcargos);
     if (mysqli_num_rows($resultcargos) > 0) {
 
@@ -120,7 +120,7 @@ if ($campo == 'vinculo') {
 
     echo "
     <select name='edit$campo' id='edit$campo' class='form-control'>";
-    $sqlsetor = "SELECT  * FROM tb_setor order by setor ASC";
+    $sqlsetor = "SELECT  * FROM u940659928_siupa.tb_setor order by setor ASC";
     $resultsetor = mysqli_query($conn, $sqlsetor);
     if (mysqli_num_rows($resultsetor) > 0) {
 

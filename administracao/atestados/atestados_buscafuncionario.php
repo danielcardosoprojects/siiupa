@@ -15,7 +15,7 @@
             include_once('../../bd/conectabd.php');
 
 
-            $sqlsetor = "SELECT  * FROM tb_setor order by setor ASC";
+            $sqlsetor = "SELECT  * FROM u940659928_siupa.tb_setor order by setor ASC";
             $resultsetor = mysqli_query($conn, $sqlsetor);
             if (mysqli_num_rows($resultsetor) > 0) {
 

@@ -49,7 +49,7 @@ if (isset($_GET['acao'])) {
         $acionamento_obs = utf8_decode($acionamento_obs);
         
         $att = new BD;
-        $sql = "UPDATE u940659928_siupa.tb_acionamento SET fk_acionamentos='$fk_acionamentos', fk_afastamento='$fk_afastamento', data_acionamento='$data_acionamento', qtd_horas='$qtd_horas', turno='$turno', valor='$valor', acionamento_obs='$acionamento_obs'  WHERE tb_acionamento.id='$idacionamento'";
+        $sql = "UPDATE u940659928_siupa.tb_acionamento SET fk_acionamentos='$fk_acionamentos', fk_afastamento='$fk_afastamento', data_acionamento='$data_acionamento', qtd_horas='$qtd_horas', turno='$turno', valor='$valor', acionamento_obs='$acionamento_obs'  WHERE u940659928_siupa.tb_acionamento.id='$idacionamento'";
         
         $busca = $att->conecta();
         $insere = $busca->prepare($sql);

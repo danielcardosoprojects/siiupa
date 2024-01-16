@@ -18,7 +18,7 @@ require_once("conectabd.php");
 
 	<table id="tabelapacientes" class="tblGrid" cellpadding="1" cellspacing="0" bordercolor="#000;" border="1" width="100%" style="border-collapse: collapse">
 		<?php
-		$sql = "SELECT * FROM tb_cadastro ORDER BY id_paciente DESC";
+		$sql = "SELECT * FROM u940659928_siupa.tb_cadastro ORDER BY id_paciente DESC";
 		$res = mysqli_query($conectaobd, $sql);
 
 		//Exibe as linhas encontradas na consulta 

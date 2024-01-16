@@ -146,7 +146,7 @@ class BD
 
 /*
 
-$sql = "SELECT * FROM tb_setor";
+$sql = "SELECT * FROM u940659928_siupa.tb_setor";
          $result = mysqli_query($conn, $sql);
 
          if (mysqli_num_rows($result) > 0) {
