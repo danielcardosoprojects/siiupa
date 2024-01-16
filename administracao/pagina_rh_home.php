@@ -277,7 +277,7 @@ include_once('../bd/nivel.php');
 
 
             $contalinha = ($pc - 1) * 10 + 1;
-
+            $conta_serv = 0;
             if (mysqli_num_rows($resultbusca) > 0) {
                 while ($rownomes = mysqli_fetch_assoc($resultbusca)) {
                     $dados = (object) $rownomes;
