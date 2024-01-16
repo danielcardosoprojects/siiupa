@@ -66,7 +66,7 @@ if (!isset($_GET['acao'])) {
         </script>
     <?php
     } elseif ($acao == "editar") {
-        $query = "SELECT id, profissional, funcao, n_conselho FROM db_farmacia.tb_farmprofissional";
+        $query = "SELECT id, profissional, funcao, n_conselho FROM u940659928_siupa.tb_farmprofissional";
 
         echo "<script>
                 function editaProfissional(seleciona, e ){

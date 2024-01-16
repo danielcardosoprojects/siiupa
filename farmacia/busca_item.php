@@ -166,7 +166,7 @@ include("../bd/conectabd.php");
 
         <?php
 
-        $query = "SELECT I.id, I.nome, I.descricao, I.categoria_fk, I.quantidade, C.categoria, I.barcode FROM db_farmacia.tb_farmitem as I INNER JOIN db_farmacia.tb_farmcategoria as C on (I.categoria_fk = C.id)";
+        $query = "SELECT I.id, I.nome, I.descricao, I.categoria_fk, I.quantidade, C.categoria, I.barcode FROM u940659928_siupa.tb_farmitem as I INNER JOIN u940659928_siupa.tb_farmcategoria as C on (I.categoria_fk = C.id)";
 
         if ($stmt = $conn->prepare($query)) {
             $stmt->execute();
@@ -175,7 +175,7 @@ include("../bd/conectabd.php");
 
                 //Consulta todos os estoques, somando dos lotes
                 $estoque = new BD;
-                $sqlEstoque = "SELECT sum(estoque) as estoque FROM db_farmacia.tb_farmestoque where item_fk='$id' AND estoque>0 order by data_validade ASC";
+                $sqlEstoque = "SELECT sum(estoque) as estoque FROM u940659928_siupa.tb_farmestoque where item_fk='$id' AND estoque>0 order by data_validade ASC";
                 $estoque = $estoque->consulta($sqlEstoque);
 
 

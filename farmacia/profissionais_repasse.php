@@ -370,7 +370,7 @@ foreach($array->Planilha1 as $profissional){
         $n_conselho = "";
     }
   
-    $sql = "INSERT INTO db_farmacia.tb_farmprofissional (profissional, funcao, n_conselho) VALUES ('$profissional->profissional', '$profissional->funcao', '$n_conselho')";    ;
+    $sql = "INSERT INTO u940659928_siupa.tb_farmprofissional (profissional, funcao, n_conselho) VALUES ('$profissional->profissional', '$profissional->funcao', '$n_conselho')";    ;
     $repassa = $repassa_prof->consulta($sql);
     
     

@@ -78,7 +78,7 @@ include("../bd/conectabd.php");
                     <h4>Origem</h4>
                     <?php
 
-                    $query = "SELECT id, setor FROM db_farmacia.tb_farmsetor order by setor ASC";
+                    $query = "SELECT id, setor FROM u940659928_siupa.tb_farmsetor order by setor ASC";
 
 
                     echo "<select name='origem' class='form-control'>";
@@ -107,7 +107,7 @@ include("../bd/conectabd.php");
                     <h4>Destino</h4>
                     <?php
 
-                    $query = "SELECT id, setor FROM db_farmacia.tb_farmsetor;";
+                    $query = "SELECT id, setor FROM u940659928_siupa.tb_farmsetor;";
 
                     echo "<select name='destino' class='form-control'>";
                     echo "<option value='0'>Nenhum</opion>";
@@ -140,7 +140,7 @@ include("../bd/conectabd.php");
 
             <?php
 
-            $query = "SELECT id, profissional FROM db_farmacia.tb_farmprofissional";
+            $query = "SELECT id, profissional FROM u940659928_siupa.tb_farmprofissional";
 
 
             if ($stmt = $conn->prepare($query)) {
@@ -259,7 +259,7 @@ include("../bd/conectabd.php");
             </script>
             <?php
 
-            $query = "SELECT I.id, I.nome, I.descricao, I.categoria_fk, I.quantidade, C.categoria FROM db_farmacia.tb_farmitem as I INNER JOIN db_farmacia.tb_farmcategoria as C on (I.categoria_fk = C.id)";
+            $query = "SELECT I.id, I.nome, I.descricao, I.categoria_fk, I.quantidade, C.categoria FROM u940659928_siupa.tb_farmitem as I INNER JOIN u940659928_siupa.tb_farmcategoria as C on (I.categoria_fk = C.id)";
 
             if ($stmt = $conn->prepare($query)) {
                 $stmt->execute();

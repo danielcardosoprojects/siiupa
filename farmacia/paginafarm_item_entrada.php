@@ -27,7 +27,7 @@ switch (pegaGet('acao')) {
 <div id="subsubconteudo"></div>
 <?php
 $bd = new BD;
-$sql = "SELECT id, nome FROM db_farmacia.tb_farmitem";
+$sql = "SELECT id, nome FROM u940659928_siupa.tb_farmitem";
 $bdResult = $bd->consulta($sql);
 ?>
 

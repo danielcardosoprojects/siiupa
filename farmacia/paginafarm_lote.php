@@ -5,7 +5,7 @@
 </style>
 <?php
 $consultaLotes = new BD;
-$sqlLotes = "SELECT e.id, i.nome, e.lote, count(e.lote) as qtd FROM db_farmacia.tb_farmestoque as e inner join db_farmacia.tb_farmitem as i on (e.item_fk = i.id) group by lote;";
+$sqlLotes = "SELECT e.id, i.nome, e.lote, count(e.lote) as qtd FROM u940659928_siupa.tb_farmestoque as e inner join u940659928_siupa.tb_farmitem as i on (e.item_fk = i.id) group by lote;";
 $rLotes = $consultaLotes->consulta($sqlLotes);
 
 echo "<table>";
@@ -26,7 +26,7 @@ foreach ($rLotes as $lote) {
         echo "<tr>";
         echo "<td colspan='2'>";
         $consultaItens = new BD;
-        $sqlCItens = "SELECT e.item_fk, i.nome, e.lote FROM db_farmacia.tb_farmestoque as e inner join db_farmacia.tb_farmitem as i on (e.item_fk = i.id) where lote='$lote->lote'";
+        $sqlCItens = "SELECT e.item_fk, i.nome, e.lote FROM u940659928_siupa.tb_farmestoque as e inner join u940659928_siupa.tb_farmitem as i on (e.item_fk = i.id) where lote='$lote->lote'";
         $rCItens = $consultaItens->consulta($sqlCItens);
         foreach ($rCItens as $itens){
             $nome = utf8_encode($itens->nome);

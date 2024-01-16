@@ -31,12 +31,12 @@ $id_item = $_GET['id'];
 
 //consulta o Item
 $consultaItem = new BD;
-$sqlItem = "SELECT * FROM db_farmacia.tb_farmitem where id='$id_item'";
+$sqlItem = "SELECT * FROM u940659928_siupa.tb_farmitem where id='$id_item'";
 $resultItem = $consultaItem->consulta($sqlItem);
 
 //carrega as categorias
 $consultaCategorias = new BD;
-$sqlCategorias = "SELECT * FROM db_farmacia.tb_farmcategoria";
+$sqlCategorias = "SELECT * FROM u940659928_siupa.tb_farmcategoria";
 $resultCategorias = $consultaCategorias->consulta($sqlCategorias);
 $categorias = [];
 foreach ($resultCategorias as $rCat) {
@@ -87,7 +87,7 @@ echo "<span class='btn btn-sm btn-secondary'>ID: $item->id | Código de Barras: 
 
 
 $conLote = new BD;
-$sqlConLote = "SELECT *, DATE_FORMAT(data_validade, '%d/%m/%Y') as dataValBr FROM db_farmacia.tb_farmestoque where item_fk = '$item->id' and estoque > 0 order by data_validade ASC";
+$sqlConLote = "SELECT *, DATE_FORMAT(data_validade, '%d/%m/%Y') as dataValBr FROM u940659928_siupa.tb_farmestoque where item_fk = '$item->id' and estoque > 0 order by data_validade ASC";
 echo $sqlConLote;
 $lotes = $conLote->consulta($sqlConLote);
 
@@ -139,7 +139,7 @@ $queryString = filter_input(INPUT_SERVER, 'QUERY_STRING');
 
 $inicio = $pc - 1;
 $inicio = $inicio * $total_reg;
-$query = "SELECT m.novoestoque, m.id as idmovimento, DATE_FORMAT(m.datahora,'%d\/%m\/%Y %H:%i'), m.tipo, m.quantidade, m.setor_origem_fk as Origem, m.setor_dest_fk as Destino, m.usuario as usuario_id, i.nome, s.setor as Setor1, s2.setor as Setor2, u.usuario as usuarioNome FROM db_farmacia.tb_farmmovimento AS m INNER JOIN db_farmacia.tb_farmitem AS i ON (m.item_fk = i.id) INNER JOIN db_farmacia.tb_farmsetor AS s ON (m.setor_origem_fk = s.id) INNER JOIN db_farmacia.tb_farmsetor AS s2 ON (m.setor_dest_fk = s2.id) INNER JOIN login.usuarios AS u on (m.usuario = u.id) where m.item_fk = '$id_item' ORDER BY m.id DESC";
+$query = "SELECT m.novoestoque, m.id as idmovimento, DATE_FORMAT(m.datahora,'%d\/%m\/%Y %H:%i'), m.tipo, m.quantidade, m.setor_origem_fk as Origem, m.setor_dest_fk as Destino, m.usuario as usuario_id, i.nome, s.setor as Setor1, s2.setor as Setor2, u.usuario as usuarioNome FROM u940659928_siupa.tb_farmmovimento AS m INNER JOIN u940659928_siupa.tb_farmitem AS i ON (m.item_fk = i.id) INNER JOIN u940659928_siupa.tb_farmsetor AS s ON (m.setor_origem_fk = s.id) INNER JOIN u940659928_siupa.tb_farmsetor AS s2 ON (m.setor_dest_fk = s2.id) INNER JOIN login.usuarios AS u on (m.usuario = u.id) where m.item_fk = '$id_item' ORDER BY m.id DESC";
 echo $query;
 //echo $query;
 //echo $query;

@@ -85,7 +85,7 @@ include("../bd/conectabd.php");
                     <h4>Origem</h4>
                     <?php
 
-                    $query = "SELECT id, setor FROM db_farmacia.tb_farmsetor  where setor='Farmacia'";
+                    $query = "SELECT id, setor FROM u940659928_siupa.tb_farmsetor  where setor='Farmacia'";
 
 
                     echo "<select name='origem' class='form-control select2_farmacia'>";
@@ -114,7 +114,7 @@ include("../bd/conectabd.php");
                     <h4>Destino</h4>
                     <?php
 
-                    $query = "SELECT id, setor FROM db_farmacia.tb_farmsetor order by setor ASC";
+                    $query = "SELECT id, setor FROM u940659928_siupa.tb_farmsetor order by setor ASC";
 
                     echo "<select name='destino' class='form-control select2_farmacia'>";
                     echo "<option value='0'>Nenhum</opion>";
@@ -147,7 +147,7 @@ include("../bd/conectabd.php");
 
             <?php
 
-            $query = "SELECT id, profissional FROM db_farmacia.tb_farmprofissional order by profissional ASC";
+            $query = "SELECT id, profissional FROM u940659928_siupa.tb_farmprofissional order by profissional ASC";
 
 
             if ($stmt = $conn->prepare($query)) {
@@ -288,7 +288,7 @@ include("../bd/conectabd.php");
             </script>
             <?php
 
-            $query = "SELECT I.id, I.nome, I.descricao, I.categoria_fk, I.quantidade, C.categoria, I.barcode FROM db_farmacia.tb_farmitem as I INNER JOIN db_farmacia.tb_farmcategoria as C on (I.categoria_fk = C.id)";
+            $query = "SELECT I.id, I.nome, I.descricao, I.categoria_fk, I.quantidade, C.categoria, I.barcode FROM u940659928_siupa.tb_farmitem as I INNER JOIN u940659928_siupa.tb_farmcategoria as C on (I.categoria_fk = C.id)";
 
             if ($stmt = $conn->prepare($query)) {
                 $stmt->execute();
@@ -297,7 +297,7 @@ include("../bd/conectabd.php");
 
                     //Consulta todos os estoques, somando dos lotes
                     $estoque = new BD;
-                    $sqlEstoque = "SELECT sum(estoque) as estoque FROM db_farmacia.tb_farmestoque where item_fk='$id' AND estoque>0 order by data_validade ASC";
+                    $sqlEstoque = "SELECT sum(estoque) as estoque FROM u940659928_siupa.tb_farmestoque where item_fk='$id' AND estoque>0 order by data_validade ASC";
                     $estoque = $estoque->consulta($sqlEstoque);
 
 

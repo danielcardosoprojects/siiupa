@@ -1,7 +1,7 @@
 <?php
 $tableSorter = "<img src='/siiupa/imagens/tablesorter.svg'>";
 
-$sqlRanking = "SELECT i.id, count(tipo) as contTipo, sum(m.quantidade) as qtd, i.nome FROM db_farmacia.tb_farmmovimento as m inner join db_Farmacia.tb_farmitem as i on (m.item_fk = i.id) where tipo='saida' and (datahora between '2022-10-01 00:00:00' and '2022-11-25 23:59:59') group by i.nome order by contTipo DESC;";
+$sqlRanking = "SELECT i.id, count(tipo) as contTipo, sum(m.quantidade) as qtd, i.nome FROM u940659928_siupa.tb_farmmovimento as m inner join u940659928_siupa.tb_farmitem as i on (m.item_fk = i.id) where tipo='saida' and (datahora between '2022-10-01 00:00:00' and '2022-11-25 23:59:59') group by i.nome order by contTipo DESC;";
 //echo $sqlRanking;
 $conRanking = new BD;
 $resultRanking = $conRanking->consulta($sqlRanking);

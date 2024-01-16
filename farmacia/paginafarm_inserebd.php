@@ -46,7 +46,7 @@ if ($acao == 'entradamovimento') {
         $qtd_total_solicitada = $qtd; //guarda de novo a quantidade que foi movimentada
         
         $estoque = new BD;
-        $sqlE = "SELECT sum(estoque) as qtd_atual FROM db_farmacia.tb_farmestoque  where item_fk = '$item_fk'";
+        $sqlE = "SELECT sum(estoque) as qtd_atual FROM u940659928_siupa.tb_farmestoque  where item_fk = '$item_fk'";
 
 
 
@@ -90,7 +90,7 @@ if ($acao == 'entradamovimento') {
 
         //LOTE Verifica se o lote já existe. Se existir irá atualizar o lote, se não existe irá criar novo.
         $buscaLote = new BD;
-        $sqlLote = "SELECT estoque FROM db_farmacia.tb_farmestoque where lote='$lote' and item_fk='$item_fk'";
+        $sqlLote = "SELECT estoque FROM u940659928_siupa.tb_farmestoque where lote='$lote' and item_fk='$item_fk'";
 
         $buscaLote = $buscaLote->conecta();
         $consultaLote = $buscaLote->prepare($sqlLote);
@@ -100,12 +100,12 @@ if ($acao == 'entradamovimento') {
         if ($consultaLote->rowCount() == 0) {
             $novoLote = new BD;
             
-            $sqlNovoLote = "INSERT INTO db_farmacia.tb_farmestoque(id, item_fk, nome_produto, lote, barcode, data_validade, estoque, user, chave) VALUES (NULL, $item_fk, '$nomeproduto', '$lote', '$barcode_lote', '$validade', $qtd, $idUsuario, '$chave')";
+            $sqlNovoLote = "INSERT INTO u940659928_siupa.tb_farmestoque(id, item_fk, nome_produto, lote, barcode, data_validade, estoque, user, chave) VALUES (NULL, $item_fk, '$nomeproduto', '$lote', '$barcode_lote', '$validade', $qtd, $idUsuario, '$chave')";
             echo $sqlNovoLote;
             $novoLote = $novoLote->conecta();
             $cadastraLote = $novoLote->prepare($sqlNovoLote);
             $cadastraLote->execute();
-            $sqlPegaIdDesteLote = "SELECT id FROM db_farmacia.tb_farmestoque where chave = '$chave'";
+            $sqlPegaIdDesteLote = "SELECT id FROM u940659928_siupa.tb_farmestoque where chave = '$chave'";
             $pegaIdDesteLote = new BD;
             $pegaIdDesteLote->consulta($sqlPegaIdDesteLote);
             foreach ($pegaIdDesteLote as $idDesteLote){
@@ -120,8 +120,8 @@ if ($acao == 'entradamovimento') {
                 var_dump($loteObj);
                 $qtd_nova = $loteObj['estoque'] + $qtd;
             }
-            $sqlAttLote = "UPDATE db_farmacia.tb_farmestoque SET estoque='$qtd_nova', updated_at='$atualizado_em', chave='$chave' where lote='$lote' and item_fk='$item_fk'";
-            $sqlPegaIdDesteLote = "SELECT id FROM db_farmacia.tb_farmestoque where lote='$lote' and item_fk='$item_fk'";
+            $sqlAttLote = "UPDATE u940659928_siupa.tb_farmestoque SET estoque='$qtd_nova', updated_at='$atualizado_em', chave='$chave' where lote='$lote' and item_fk='$item_fk'";
+            $sqlPegaIdDesteLote = "SELECT id FROM u940659928_siupa.tb_farmestoque where lote='$lote' and item_fk='$item_fk'";
             $pegaIdDesteLote = new BD;
             $pegaIdDesteLote->consulta($sqlPegaIdDesteLote);
             foreach ($pegaIdDesteLote as $idDesteLote){
@@ -138,7 +138,7 @@ if ($acao == 'entradamovimento') {
         //busca chave unica para garantir que o estoque realmente foi atualizado e só então registra o movimento
         
         $bChave = new BD;
-        $sqlChave = "SELECT chave FROM db_farmacia.tb_farmestoque where chave='$chave'";
+        $sqlChave = "SELECT chave FROM u940659928_siupa.tb_farmestoque where chave='$chave'";
 
         $bChave = $bChave->conecta();
         $consultChave = $bChave->prepare($sqlLote);
@@ -149,7 +149,7 @@ if ($acao == 'entradamovimento') {
         if ($consultChave != 0) {
 
             $busca = new BD;
-            $sql = "INSERT INTO db_farmacia.tb_farmmovimento (`profissional_fk`, `id`, `item_fk`, `tipo`, `setor_origem_fk`, `setor_dest_fk`, `datahora`, `observacao`, `quantidade`, `novoestoque`, `estoqueanterior`, `usuario`) VALUES ($profissional, NULL, '$item_fk', '$tipo_movimento', '$origem', '$destino', '$datahora', NULL, '$qtd_total_solicitada', '$novoEstoque', '$estoqueAnterior', '$idUsuario')";
+            $sql = "INSERT INTO u940659928_siupa.tb_farmmovimento (`profissional_fk`, `id`, `item_fk`, `tipo`, `setor_origem_fk`, `setor_dest_fk`, `datahora`, `observacao`, `quantidade`, `novoestoque`, `estoqueanterior`, `usuario`) VALUES ($profissional, NULL, '$item_fk', '$tipo_movimento', '$origem', '$destino', '$datahora', NULL, '$qtd_total_solicitada', '$novoEstoque', '$estoqueAnterior', '$idUsuario')";
             echo $sql;
 
             $busca = $busca->conecta();
@@ -160,7 +160,7 @@ if ($acao == 'entradamovimento') {
         //Atualiza o estoque
         $attE = new BD;
 
-        $sqlAttE = "UPDATE db_farmacia.tb_farmitem SET quantidade='$novoEstoque' WHERE id=$item_fk";
+        $sqlAttE = "UPDATE u940659928_siupa.tb_farmitem SET quantidade='$novoEstoque' WHERE id=$item_fk";
 
 
 
@@ -208,7 +208,7 @@ if ($acao == 'entradamovimento') {
         $qtd_total_solicitada = $qtd;
 
         $estoque = new BD;
-        $sqlE = "SELECT sum(estoque) as qtd_atual FROM db_farmacia.tb_farmestoque  where item_fk = '$item_fk'";
+        $sqlE = "SELECT sum(estoque) as qtd_atual FROM u940659928_siupa.tb_farmestoque  where item_fk = '$item_fk'";
 
 
 
@@ -241,7 +241,7 @@ if ($acao == 'entradamovimento') {
         var_dump($item);
 
         $buscaLotes = new BD;
-        $sqlBuscaLotes = "SELECT * FROM db_farmacia.tb_farmestoque where item_fk='$item_fk' AND estoque>0 order by data_validade ASC;";
+        $sqlBuscaLotes = "SELECT * FROM u940659928_siupa.tb_farmestoque where item_fk='$item_fk' AND estoque>0 order by data_validade ASC;";
 
 
         $organizaLotes = $buscaLotes->consulta($sqlBuscaLotes);
@@ -250,7 +250,7 @@ if ($acao == 'entradamovimento') {
             $qtd_total = $qtd;
             if ($cadaLote->estoque >= $qtd_total) {
                 $saidaLote = new BD;
-                $sqlSaidaLotes = "UPDATE db_farmacia.tb_farmestoque SET estoque = estoque-$qtd, chave='$chave' WHERE lote='$cadaLote->lote' and item_fk='$item_fk'";
+                $sqlSaidaLotes = "UPDATE u940659928_siupa.tb_farmestoque SET estoque = estoque-$qtd, chave='$chave' WHERE lote='$cadaLote->lote' and item_fk='$item_fk'";
 
                 $saidaLote = $saidaLote->conecta();
                 $attSaidaLote = $saidaLote->prepare($sqlSaidaLotes);
@@ -259,7 +259,7 @@ if ($acao == 'entradamovimento') {
             } else {
                 $qtd = $qtd - $cadaLote->estoque;
                 $saidaLote = new BD;
-                $sqlSaidaLotes = "UPDATE db_farmacia.tb_farmestoque SET estoque = 0, chave='$chave' WHERE lote='$cadaLote->lote' and item_fk='$item_fk'";
+                $sqlSaidaLotes = "UPDATE u940659928_siupa.tb_farmestoque SET estoque = 0, chave='$chave' WHERE lote='$cadaLote->lote' and item_fk='$item_fk'";
 
                 $saidaLote = $saidaLote->conecta();
                 $attSaidaLote = $saidaLote->prepare($sqlSaidaLotes);
@@ -272,7 +272,7 @@ if ($acao == 'entradamovimento') {
         //busca chave unica para garantir que o estoque realmente foi atualizado e só então registra o movimento
         echo "teste";
         $bChave = new BD;
-        $sqlChave = "SELECT chave FROM db_farmacia.tb_farmestoque where chave='$chave'";
+        $sqlChave = "SELECT chave FROM u940659928_siupa.tb_farmestoque where chave='$chave'";
         echo "teste";
         $bChave = $bChave->conecta();
         echo "teste";
@@ -286,7 +286,7 @@ if ($acao == 'entradamovimento') {
         if ($consultChave != 0) {
 
             $busca = new BD;
-            $sql = "INSERT INTO db_farmacia.tb_farmmovimento (`profissional_fk`, `id`, `item_fk`, `tipo`, `setor_origem_fk`, `setor_dest_fk`, `datahora`, `observacao`, `quantidade`, `novoestoque`, `estoqueanterior`, `usuario`) VALUES ($profissional, NULL, '$item_fk', '$tipo_movimento', '$origem', '$destino', '$datahora', NULL, '$qtd_total_solicitada', '$novoEstoque ', '$estoqueAnterior', '$idUsuario')";
+            $sql = "INSERT INTO u940659928_siupa.tb_farmmovimento (`profissional_fk`, `id`, `item_fk`, `tipo`, `setor_origem_fk`, `setor_dest_fk`, `datahora`, `observacao`, `quantidade`, `novoestoque`, `estoqueanterior`, `usuario`) VALUES ($profissional, NULL, '$item_fk', '$tipo_movimento', '$origem', '$destino', '$datahora', NULL, '$qtd_total_solicitada', '$novoEstoque ', '$estoqueAnterior', '$idUsuario')";
 
             
             $busca = $busca->conecta();
@@ -304,7 +304,7 @@ if ($acao == 'entradamovimento') {
 
 
     $addProfissional = new BD;
-    $queryAddProfissional = "INSERT INTO db_farmacia.tb_farmprofissional (profissional, funcao, n_conselho) VALUES ('$nome', '$cargo', '$conselho')";
+    $queryAddProfissional = "INSERT INTO u940659928_siupa.tb_farmprofissional (profissional, funcao, n_conselho) VALUES ('$nome', '$cargo', '$conselho')";
 
 
     $addProfissional = $addProfissional->conecta();
@@ -320,7 +320,7 @@ if ($acao == 'entradamovimento') {
     $conselho = $_POST['conselho'];
     $attProfissional = new BD;
 
-    $queryAttProfissional = "UPDATE db_farmacia.tb_farmprofissional SET profissional = '$nome', funcao = '$cargo', n_conselho='$conselho' WHERE (id = '$idProfissional')";
+    $queryAttProfissional = "UPDATE u940659928_siupa.tb_farmprofissional SET profissional = '$nome', funcao = '$cargo', n_conselho='$conselho' WHERE (id = '$idProfissional')";
 
     $attProfissional = $attProfissional->conecta();
     $executa = $attProfissional->prepare($queryAttProfissional);
@@ -331,7 +331,7 @@ if ($acao == 'entradamovimento') {
     $setor = $_POST['setor'];
 
     $addSetor = new BD;
-    $queryAddSetor = "INSERT INTO db_farmacia.tb_farmsetor (setor) VALUES ('$setor')";
+    $queryAddSetor = "INSERT INTO u940659928_siupa.tb_farmsetor (setor) VALUES ('$setor')";
 
 
     $addSetor = $addSetor->conecta();
@@ -344,7 +344,7 @@ if ($acao == 'entradamovimento') {
     $idSetor = $_POST['id'];
 
     $attSetor = new BD;
-    $queryAttSetor = "UPDATE db_farmacia.tb_farmsetor SET setor = '$setor' WHERE (id = '$idSetor')";
+    $queryAttSetor = "UPDATE u940659928_siupa.tb_farmsetor SET setor = '$setor' WHERE (id = '$idSetor')";
 
     $attSetor = $attSetor->conecta();
     $executa = $attSetor->prepare($queryAttSetor);
@@ -355,7 +355,7 @@ if ($acao == 'entradamovimento') {
     $novoGenero = $_POST['novoGenero'];
 
     $attSetor = new BD;
-    $query = "INSERT INTO db_farmacia.tb_farmgenero (genero) VALUES ('$novoGenero')";
+    $query = "INSERT INTO u940659928_siupa.tb_farmgenero (genero) VALUES ('$novoGenero')";
 
     $attSetor->insere($query);
 
@@ -364,7 +364,7 @@ if ($acao == 'entradamovimento') {
     $novaCategoria = utf8_decode($_POST['novaCategoria']);
 
     $attSetor = new BD;
-    $query = "INSERT INTO db_farmacia.tb_farmcategoria (categoria) VALUES ('$novaCategoria')";
+    $query = "INSERT INTO u940659928_siupa.tb_farmcategoria (categoria) VALUES ('$novaCategoria')";
 
     $attSetor->insere($query);
 
@@ -393,7 +393,7 @@ if ($acao == 'entradamovimento') {
     $unidade = '';
     $quantidade = 0;
 
-    $query = "INSERT INTO db_farmacia.tb_farmitem (nome, categoria_fk, categoria2_fk, categoria3_fk, categoria4_fk, genero_fk, barcode, unidade, quantidade) VALUES ('$nome', '$categoria_fk', '$categoria2_fk', '$categoria3_fk', '$categoria4_fk', '$genero_fk', '$barcode', '$unidade', '$quantidade')";
+    $query = "INSERT INTO u940659928_siupa.tb_farmitem (nome, categoria_fk, categoria2_fk, categoria3_fk, categoria4_fk, genero_fk, barcode, unidade, quantidade) VALUES ('$nome', '$categoria_fk', '$categoria2_fk', '$categoria3_fk', '$categoria4_fk', '$genero_fk', '$barcode', '$unidade', '$quantidade')";
 
     $addItem->insere($query);
 
@@ -416,7 +416,7 @@ if ($acao == 'entradamovimento') {
     //$nome = strtr($nome_ant, $caracteres_sem_acento);
     $nome = $nome_ant;
     $nome_antigo_banco = new BD;
-    $sqlNomeAntigo = "SELECT nome, historico_nome FROM db_farmacia.tb_farmitem where id='$iditem';";
+    $sqlNomeAntigo = "SELECT nome, historico_nome FROM u940659928_siupa.tb_farmitem where id='$iditem';";
     $nomes_antigos = $nome_antigo_banco->consulta($sqlNomeAntigo);
     $historico_nome_att = $nomes_antigos[0]->nome . ";" . $nomes_antigos[0]->historico_nome;
 
@@ -433,8 +433,8 @@ if ($acao == 'entradamovimento') {
     $quantidade = 0;
 
 
-    //$query = "INSERT INTO db_farmacia.tb_farmitem (nome, categoria_fk, genero_fk, barcode, unidade, quantidade) VALUES ('$nome', '$categoria_fk', '$genero_fk', '$barcode', '$unidade', '$quantidade')";
-    $query = "UPDATE db_farmacia.tb_farmitem SET nome='$nome', categoria_fk='$categoria_fk', categoria2_fk='$categoria2_fk', categoria3_fk='$categoria3_fk', categoria4_fk='$categoria4_fk', genero_fk='$genero_fk', barcode='$barcode', unidade='$unidade', historico_nome='$historico_nome_att' where id='$iditem'";
+    //$query = "INSERT INTO u940659928_siupa.tb_farmitem (nome, categoria_fk, genero_fk, barcode, unidade, quantidade) VALUES ('$nome', '$categoria_fk', '$genero_fk', '$barcode', '$unidade', '$quantidade')";
+    $query = "UPDATE u940659928_siupa.tb_farmitem SET nome='$nome', categoria_fk='$categoria_fk', categoria2_fk='$categoria2_fk', categoria3_fk='$categoria3_fk', categoria4_fk='$categoria4_fk', genero_fk='$genero_fk', barcode='$barcode', unidade='$unidade', historico_nome='$historico_nome_att' where id='$iditem'";
 
     $attItem = new BD;
     $attItem = $attItem->conecta();
@@ -445,13 +445,13 @@ if ($acao == 'entradamovimento') {
 } elseif ($acao == "uniritem") {
     $esse = $_GET['esse'];
     $outro = $_GET['outro'];
-    //UPDATE `db_farmacia`.`tb_farmmovimento` SET `item_fk` = '68' WHERE `item_fk` = '69');
-    //UPDATE `db_farmacia`.`tb_farmestoque` SET `item_fk` = '690]' WHERE `item_fk` = '21');
-    //DELETE FROM `db_farmacia`.`tb_farmitem` WHERE (`id` = '331');
+    //UPDATE `u940659928_siupa`.`tb_farmmovimento` SET `item_fk` = '68' WHERE `item_fk` = '69');
+    //UPDATE `u940659928_siupa`.`tb_farmestoque` SET `item_fk` = '690]' WHERE `item_fk` = '21');
+    //DELETE FROM `u940659928_siupa`.`tb_farmitem` WHERE (`id` = '331');
 
-    $attMov = "UPDATE db_farmacia.tb_farmmovimento SET item_fk = '$esse' WHERE item_fk = '$outro';";
-    $attEst = "UPDATE db_farmacia.tb_farmestoque SET item_fk = '$esse' WHERE item_fk = '$outro';";
-    $delItem = "DELETE FROM db_farmacia.tb_farmitem WHERE id = '$outro';";
+    $attMov = "UPDATE u940659928_siupa.tb_farmmovimento SET item_fk = '$esse' WHERE item_fk = '$outro';";
+    $attEst = "UPDATE u940659928_siupa.tb_farmestoque SET item_fk = '$esse' WHERE item_fk = '$outro';";
+    $delItem = "DELETE FROM u940659928_siupa.tb_farmitem WHERE id = '$outro';";
 
     $unirM = new BD;
     $unirM = $unirM->conecta();
@@ -473,47 +473,47 @@ if ($acao == 'entradamovimento') {
     $idLote = $_POST['idlote'];
     $data = $_POST['datavalidade'];
 
-    $sqlAttVal = "UPDATE db_farmacia.tb_farmestoque SET data_validade = '$data' WHERE (id = '$idLote')";
+    $sqlAttVal = "UPDATE u940659928_siupa.tb_farmestoque SET data_validade = '$data' WHERE (id = '$idLote')";
     $attVal = new BD;
     $rVal = $attVal->consulta($sqlAttVal);
 
-    $feedBack = "SELECT data_validade FROM db_farmacia.tb_farmestoque WHERE id = '$idLote'";
+    $feedBack = "SELECT data_validade FROM u940659928_siupa.tb_farmestoque WHERE id = '$idLote'";
     $fB = new BD;
     $dataValidadeNova = $fB->consulta($feedBack);
     echo $dataValidadeNova[0]->data_validade;
 } elseif ($acao == "atualizalotenome") {
     $idLote = $_POST['idlote'];
     $nome = utf8_decode($_POST['nomelote']);
-    $sqlAttNomeLote = "UPDATE db_farmacia.tb_farmestoque SET lote = '$nome' WHERE (id = '$idLote')";
+    $sqlAttNomeLote = "UPDATE u940659928_siupa.tb_farmestoque SET lote = '$nome' WHERE (id = '$idLote')";
     //echo $sqlAttNomeLote;
     $conAttNomeLote = new BD;
     $attNomeLote = $conAttNomeLote->consulta($sqlAttNomeLote);
 
-    $feedBack = "SELECT lote FROM db_farmacia.tb_farmestoque WHERE id='$idLote'";
+    $feedBack = "SELECT lote FROM u940659928_siupa.tb_farmestoque WHERE id='$idLote'";
     $fB = new BD;
     $puxaNomeLote = $fB->consulta($feedBack);
     echo utf8_encode($puxaNomeLote[0]->lote);
 }  elseif ($acao == "atualizalotebarcode") {
     $idLote = $_POST['idlote'];
     $barcode = utf8_decode($_POST['barcode']);
-    $sqlAttNomeLote = "UPDATE db_farmacia.tb_farmestoque SET barcode = '$barcode' WHERE (id = '$idLote')";
+    $sqlAttNomeLote = "UPDATE u940659928_siupa.tb_farmestoque SET barcode = '$barcode' WHERE (id = '$idLote')";
     //echo $sqlAttNomeLote;
     $conAttNomeLote = new BD;
     $attNomeLote = $conAttNomeLote->consulta($sqlAttNomeLote);
 
-    $feedBack = "SELECT barcode FROM db_farmacia.tb_farmestoque WHERE id='$idLote'";
+    $feedBack = "SELECT barcode FROM u940659928_siupa.tb_farmestoque WHERE id='$idLote'";
     $fB = new BD;
     $puxaNomeLote = $fB->consulta($feedBack);
     echo utf8_encode($puxaNomeLote[0]->barcode);
 } elseif ($acao == "atualizalotenomeproduto") {
     $idLote = $_POST['idlote'];
     $nomeproduto = utf8_decode($_POST['nomeproduto']);
-    $sqlAttNomeLote = "UPDATE db_farmacia.tb_farmestoque SET nome_produto = '$nomeproduto' WHERE (id = '$idLote')";
+    $sqlAttNomeLote = "UPDATE u940659928_siupa.tb_farmestoque SET nome_produto = '$nomeproduto' WHERE (id = '$idLote')";
     //echo $sqlAttNomeLote;
     $conAttNomeLote = new BD;
     $attNomeLote = $conAttNomeLote->consulta($sqlAttNomeLote);
 
-    $feedBack = "SELECT nome_produto FROM db_farmacia.tb_farmestoque WHERE id='$idLote'";
+    $feedBack = "SELECT nome_produto FROM u940659928_siupa.tb_farmestoque WHERE id='$idLote'";
     $fB = new BD;
     $puxaNomeLote = $fB->consulta($feedBack);
     echo utf8_encode($puxaNomeLote[0]->nome_produto);

@@ -5,7 +5,7 @@ $val = new BD;
 
 $data = new DateTime();
 $hoje = $data->format('Y-m-d');
-$sqlVal = "SELECT date_format(e.data_validade, '%d/%m/%Y') as validade, e.lote, e.estoque, i.nome, i.id FROM db_farmacia.tb_farmestoque as e inner join db_farmacia.tb_farmitem as i on (e.item_fk = i.id) where e.estoque > 0 and data_validade <= '$hoje' order by validade ASC;";
+$sqlVal = "SELECT date_format(e.data_validade, '%d/%m/%Y') as validade, e.lote, e.estoque, i.nome, i.id FROM u940659928_siupa.tb_farmestoque as e inner join u940659928_siupa.tb_farmitem as i on (e.item_fk = i.id) where e.estoque > 0 and data_validade <= '$hoje' order by validade ASC;";
 //echo $sqlVal;
 
 

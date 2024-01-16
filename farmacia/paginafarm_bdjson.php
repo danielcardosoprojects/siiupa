@@ -7,7 +7,7 @@ include("../bd/conectabd.php");
 $acao = $_GET['acao'];
 if ($acao == "carregaCategoria") {
 
-    $query = "SELECT id, categoria FROM db_farmacia.tb_farmcategoria order by categoria ASC";
+    $query = "SELECT id, categoria FROM u940659928_siupa.tb_farmcategoria order by categoria ASC";
 
     $json = new BD;
 
@@ -24,7 +24,7 @@ if ($acao == "carregaCategoria") {
 
     echo json_encode($arr);
 } elseif ($acao == "carregaGenero") {
-    $query = "SELECT id, genero FROM db_farmacia.tb_farmgenero";
+    $query = "SELECT id, genero FROM u940659928_siupa.tb_farmgenero";
     $json = new BD;
 
     $json = $json->consultaArray($query);
@@ -143,7 +143,7 @@ if ($acao == "carregaCategoria") {
     curl_close($curl);
 } elseif ($acao = "carregaItem") {
     $iditem = $_GET['iditem'];
-    $sql = "SELECT * FROM db_farmacia.tb_farmitem WHERE id='$iditem'";
+    $sql = "SELECT * FROM u940659928_siupa.tb_farmitem WHERE id='$iditem'";
     
     $json = new BD;
     $json = $json->consultaArray($sql);

@@ -39,7 +39,7 @@
     <?php
 
 
-    $sqlClasses = "SELECT c.id, c.categoria, count(c.categoria) as cat_qtd FROM db_farmacia.tb_farmitem as i inner join db_farmacia.tb_farmcategoria as c on (categoria_fk = c.id OR categoria2_fk = c.id  OR categoria3_fk = c.id  OR categoria4_fk = c.id) group by c.categoria order by c.categoria ASC";
+    $sqlClasses = "SELECT c.id, c.categoria, count(c.categoria) as cat_qtd FROM u940659928_siupa.tb_farmitem as i inner join u940659928_siupa.tb_farmcategoria as c on (categoria_fk = c.id OR categoria2_fk = c.id  OR categoria3_fk = c.id  OR categoria4_fk = c.id) group by c.categoria order by c.categoria ASC";
     $conClasses = new BD;
     $classesFiltra = $conClasses->consulta($sqlClasses);
 
@@ -229,7 +229,7 @@ if (isset($_GET['fgenero'])) {
   $fgenero = '';
   $gwhere = '';
 }
-$query = "SELECT i.id as itemid, i.nome, g.genero, c.categoria, i.categoria_fk, i.categoria2_fk, i.categoria3_fk, i.categoria4_fk, i.quantidade, i.barcode FROM db_farmacia.tb_farmitem as i INNER JOIN db_farmacia.tb_farmcategoria as c ON (i.categoria_fk = c.id) INNER JOIN db_farmacia.tb_farmgenero as g ON (i.genero_fk = g.id) $where $gwhere order by nome ASC";
+$query = "SELECT i.id as itemid, i.nome, g.genero, c.categoria, i.categoria_fk, i.categoria2_fk, i.categoria3_fk, i.categoria4_fk, i.quantidade, i.barcode FROM u940659928_siupa.tb_farmitem as i INNER JOIN u940659928_siupa.tb_farmcategoria as c ON (i.categoria_fk = c.id) INNER JOIN u940659928_siupa.tb_farmgenero as g ON (i.genero_fk = g.id) $where $gwhere order by nome ASC";
 //echo $query;
 
 setlocale(LC_TIME, 'pt_BR', 'pt_BR.utf-8', 'pt_BR.utf-8', 'portuguese');
@@ -269,7 +269,7 @@ if ($stmt = $conn->prepare($query)) {
   ";
 
     $conLote = new BD;
-    $sqlConLote = "SELECT *, DATE_FORMAT(data_validade, '%d/%m/%Y') as dataValBr FROM db_farmacia.tb_farmestoque where item_fk = '$itemid' and estoque > 0";
+    $sqlConLote = "SELECT *, DATE_FORMAT(data_validade, '%d/%m/%Y') as dataValBr FROM u940659928_siupa.tb_farmestoque where item_fk = '$itemid' and estoque > 0";
 
     $lotes = $conLote->consulta($sqlConLote);
 
@@ -278,7 +278,7 @@ if ($stmt = $conn->prepare($query)) {
 
 
       //CONVERTER OS NOMES DOS ITENS PARA OS LOTES-ESTOQUES
-      // $sqlTemp = "UPDATE db_farmacia.tb_farmestoque SET nome_produto = '$nome', barcode = '$barcode' WHERE (id = '$lote->id');";
+      // $sqlTemp = "UPDATE u940659928_siupa.tb_farmestoque SET nome_produto = '$nome', barcode = '$barcode' WHERE (id = '$lote->id');";
       // $sqlTemps .= $sqlTemp;
       // $tempBd = new BD;
       //$tempBd->consulta($sqlTemp);
@@ -326,7 +326,7 @@ if ($stmt = $conn->prepare($query)) {
 
     //consulta e soma o estoque
     $consultaEstoque = new BD;
-    $sqlConsultaEstoque = "SELECT sum(estoque) as estoque FROM db_farmacia.tb_farmestoque where item_fk='$itemid' AND estoque>0 order by data_validade ASC;";
+    $sqlConsultaEstoque = "SELECT sum(estoque) as estoque FROM u940659928_siupa.tb_farmestoque where item_fk='$itemid' AND estoque>0 order by data_validade ASC;";
 
     $totalEstoque = $consultaEstoque->consulta($sqlConsultaEstoque);
     $qtd_ultimoMovimento = 0;
@@ -339,7 +339,7 @@ if ($stmt = $conn->prepare($query)) {
 
       //consulta o ultimo movimento e pega o novo estoque, para comparar
       $conUltimoMovimento = new BD;
-      $sqlUltimoMovimento = "SELECT novoestoque FROM db_farmacia.tb_farmmovimento where item_fk='$itemid' ORDER BY criadoem DESC limit 0,1;";
+      $sqlUltimoMovimento = "SELECT novoestoque FROM u940659928_siupa.tb_farmmovimento where item_fk='$itemid' ORDER BY criadoem DESC limit 0,1;";
       $resultadoUltimoMovimento = $conUltimoMovimento->consulta($sqlUltimoMovimento);
       foreach ($resultadoUltimoMovimento as $ultimoMovimento) {
         

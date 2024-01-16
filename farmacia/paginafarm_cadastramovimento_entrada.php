@@ -96,7 +96,7 @@ include("../bd/conectabd.php");
                     <h4>Origem</h4>
                     <?php
 
-                    $query = "SELECT id, setor FROM db_farmacia.tb_farmsetor order by setor ASC";
+                    $query = "SELECT id, setor FROM u940659928_siupa.tb_farmsetor order by setor ASC";
 
 
                     echo "<select name='origem' class='form-control select2_farmacia'>";
@@ -125,7 +125,7 @@ include("../bd/conectabd.php");
                     <h4>Destino</h4>
                     <?php
 
-                    $query = "SELECT id, setor FROM db_farmacia.tb_farmsetor where setor='Farmacia';";
+                    $query = "SELECT id, setor FROM u940659928_siupa.tb_farmsetor where setor='Farmacia';";
 
                     echo "<select name='destino' class='form-control'>";
                     echo "<option value='4' selected>Farmacia</option>";
@@ -158,7 +158,7 @@ include("../bd/conectabd.php");
 
             <?php
 
-            $query = "SELECT id, profissional FROM db_farmacia.tb_farmprofissional";
+            $query = "SELECT id, profissional FROM u940659928_siupa.tb_farmprofissional";
 
 
             if ($stmt = $conn->prepare($query)) {

@@ -8,7 +8,7 @@ include_once("../bd/conectabd.php");
 
     <?php
 
-$query = "SELECT * FROM db_farmacia.tb_farmsetor";
+$query = "SELECT * FROM u940659928_siupa.tb_farmsetor";
 
 
 if ($stmt = $conn->prepare($query)) {

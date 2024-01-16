@@ -4,7 +4,7 @@ use SimpleCrud\Fields\Datetime;
 
 include_once("../bd/conectabd.php");
 
-$sql = "SELECT id, nome FROM db_farmacia.tb_farmitem";
+$sql = "SELECT id, nome FROM u940659928_siupa.tb_farmitem";
 
 $a = new BD;
 $a = $a->conecta();
@@ -27,7 +27,7 @@ foreach($b as $c){
     
 
 
-    $query = "UPDATE db_farmacia.tb_farmitem SET nome='$nome'where id='$id'";
+    $query = "UPDATE u940659928_siupa.tb_farmitem SET nome='$nome'where id='$id'";
 
     echo $query."<br>";
     /*

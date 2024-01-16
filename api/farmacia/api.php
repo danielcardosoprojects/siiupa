@@ -12420,9 +12420,9 @@ namespace Tqdev\PhpCrudApi {
         'driver' => 'mysql',
         'address' => 'localhost',
         'port' => '3306',
-        'username' => 'root',
-        'password' => 'apuapu',
-        'database' => 'db_farmacia',
+        'username' => 'u940659928_siupa',
+        'password' => '4jHd@myhRDEBL@7',
+        'database' => 'u940659928_siupa',
         'debug' => false
     ]);
     $request = RequestFactory::fromGlobals();
