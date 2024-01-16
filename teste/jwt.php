@@ -35,6 +35,7 @@ print_r($headers);
 
 $decoded_array = (array) $decoded;
 
+
 /**
  * You can add a leeway to account for when there is a clock skew times between
  * the signing and verifying servers. It is recommended that this leeway should
@@ -44,4 +45,5 @@ $decoded_array = (array) $decoded;
  */
 JWT::$leeway = 60; // $leeway in seconds
 $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
+print_r($decoded);
 ?>
