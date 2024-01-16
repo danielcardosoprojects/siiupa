@@ -1,9 +1,9 @@
 <?php
 
 $servername = "localhost";
-$database = "db_rh";
-$username = "root";
-$password = "apuapu";
+$database = "u940659928_siupa";
+$username = "u940659928_siupa";
+$password = "4jHd@myhRDEBL@7";
 // Create connection
 
 global $conn;
