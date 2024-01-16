@@ -82,7 +82,7 @@ include_once('../../bd/conectabd.php');
     <div class="flexbox">
         <?php
         $nomeBd = new BD;
-        $sqlNome = "SELECT id, nome FROM db_rh.tb_funcionario WHERE status='ATIVO' order by nome ASC;";
+        $sqlNome = "SELECT id, nome FROM u940659928_siupa.tb_funcionario WHERE status='ATIVO' order by nome ASC;";
         $nomes = $nomeBd->consulta($sqlNome);
         //var_dump($nomes);
         $i = 0;

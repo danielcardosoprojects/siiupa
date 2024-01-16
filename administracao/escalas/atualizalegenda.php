@@ -4,7 +4,7 @@ $busca = new BD;
 
 $id = $_POST['id'];
 $valor= $_POST['legenda'];
-$sql = "UPDATE db_rh.tb_escalas SET legenda='$valor' WHERE id=$id";
+$sql = "UPDATE u940659928_siupa.tb_escalas SET legenda='$valor' WHERE id=$id";
 
 
 $busca = $busca->conecta();

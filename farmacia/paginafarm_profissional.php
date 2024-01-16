@@ -23,7 +23,7 @@ if (!isset($_GET['acao'])) {
         <select name="" class=" form-control floatleft" id="cargoProfissional">
             <option value="">Selecionar</option>
             <?php
-            $query = "SELECT descricao FROM db_rh.tb_cargo ORDER BY DESCRICAO ASC";
+            $query = "SELECT descricao FROM u940659928_siupa.tb_cargo ORDER BY DESCRICAO ASC";
 
 
             if ($stmt = $conn->prepare($query)) {
@@ -101,7 +101,7 @@ if (!isset($_GET['acao'])) {
 
         echo "Cargo: <select id='editaCargoProfissional'  class='form-control'>";
         echo "<option value='" . $_POST['cargo'] . "'>" . $_POST['cargo'] . "</option>";
-        $query = "SELECT descricao FROM db_rh.tb_cargo ORDER BY DESCRICAO ASC";
+        $query = "SELECT descricao FROM u940659928_siupa.tb_cargo ORDER BY DESCRICAO ASC";
 
 
         if ($stmt = $conn->prepare($query)) {

@@ -101,7 +101,7 @@ include_once('tabelas.php');
 
 
 
-    $sql = "SELECT * FROM db_rh.tb_escalas GROUP BY ano desc, mes desc  ";
+    $sql = "SELECT * FROM u940659928_siupa.tb_escalas GROUP BY ano desc, mes desc  ";
     $busca = new BD;
     $resultado = $busca->consulta($sql);
     $mesext = new Data;
@@ -122,7 +122,7 @@ include_once('tabelas.php');
         <a target='_blank' href='/siiupa/administracao/pagina_escala_esqueleto_varias_seleciona.php?mes=$escalas->mes&ano=$escalas->ano'>Selecionar para impressão</a>
           <p>";
 
-        $sqlmes =  "SELECT s.setor, e.* FROM db_rh.tb_escalas AS e INNER JOIN db_rh.tb_setor as s ON(e.fk_setor = s.id) WHERE e.mes=$escalas->mes AND e.ano=$escalas->ano ORDER BY s.setor ASC";
+        $sqlmes =  "SELECT s.setor, e.* FROM u940659928_siupa.tb_escalas AS e INNER JOIN u940659928_siupa.tb_setor as s ON(e.fk_setor = s.id) WHERE e.mes=$escalas->mes AND e.ano=$escalas->ano ORDER BY s.setor ASC";
         $buscames = new BD;
         $resultadomes = $buscames->consulta($sqlmes);
 
@@ -160,7 +160,7 @@ include_once('tabelas.php');
     echo '</script>';
 
 
-    //$sql = "DELETE FROM db_rh.tb_escalas WHERE id=4";
+    //$sql = "DELETE FROM u940659928_siupa.tb_escalas WHERE id=4";
 
     //$busca = $busca->conecta();
     //$insere = $busca->prepare($sql);

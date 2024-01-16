@@ -70,7 +70,7 @@ if (isset($_GET['ano'])) {
 }
 
 echo "<div><h2>LISTA ALMOÇO $tdia/$mes/$ano</h2></div>";
-$query = "SELECT s.setor, f.nome, ef.id FROM db_rh.tb_escala_funcionario AS ef INNER JOIN db_rh.tb_funcionario AS f ON (ef.fk_funcionario = f.id) INNER JOIN db_rh.tb_setor as s ON (f.fk_setor = s.id) Where ef.mes=$mes and ef.ano=$ano and (ef.$dia like '%D%' OR ef.$dia like '%P%') ORDER BY s.setor ASC, f.nome ASC";
+$query = "SELECT s.setor, f.nome, ef.id FROM u940659928_siupa.tb_escala_funcionario AS ef INNER JOIN u940659928_siupa.tb_funcionario AS f ON (ef.fk_funcionario = f.id) INNER JOIN u940659928_siupa.tb_setor as s ON (f.fk_setor = s.id) Where ef.mes=$mes and ef.ano=$ano and (ef.$dia like '%D%' OR ef.$dia like '%P%') ORDER BY s.setor ASC, f.nome ASC";
 
 
 if ($stmt = $conn->prepare($query)) {
@@ -152,7 +152,7 @@ echo '<div class="pagebreak"> </div>';
 $totalgeral = 0;
 $i = "";
 echo "<div><h2>LISTA JANTA $tdia/$mes/2021</h2></div>";
-$query = "SELECT s.setor, f.nome, ef.id FROM db_rh.tb_escala_funcionario AS ef INNER JOIN db_rh.tb_funcionario AS f ON (ef.fk_funcionario = f.id) INNER JOIN db_rh.tb_setor as s ON (f.fk_setor = s.id) Where ef.mes=$mes and (ef.$dia like '%N%' OR ef.$dia like '%P%') ORDER BY s.setor ASC, f.nome ASC";
+$query = "SELECT s.setor, f.nome, ef.id FROM u940659928_siupa.tb_escala_funcionario AS ef INNER JOIN u940659928_siupa.tb_funcionario AS f ON (ef.fk_funcionario = f.id) INNER JOIN u940659928_siupa.tb_setor as s ON (f.fk_setor = s.id) Where ef.mes=$mes and (ef.$dia like '%N%' OR ef.$dia like '%P%') ORDER BY s.setor ASC, f.nome ASC";
 
 
 if ($stmt = $conn->prepare($query)) {

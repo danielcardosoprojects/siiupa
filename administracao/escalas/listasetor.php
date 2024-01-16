@@ -4,7 +4,7 @@ if (isset($_GET['acao'])) {
     $acao = $_GET['acao'];
     if ($acao == 'criar') {
         $bdsetores = new BD;
-        $sqlsetores  = "SELECT  * FROM db_rh.tb_setor GROUP BY setor ASC";
+        $sqlsetores  = "SELECT  * FROM u940659928_siupa.tb_setor GROUP BY setor ASC";
         $resultadosetores  = $bdsetores->consulta($sqlsetores);
         echo "<select class='setor form-control'>";
         foreach ($resultadosetores as $setores) {
@@ -40,7 +40,7 @@ if (isset($_GET['acao'])) {
         $att = new BD;
 
 
-        $sql = "INSERT INTO db_rh.tb_escalas (fk_setor, mes, ano, oficial, created_at) VALUES ($idsetor, $mes, $ano, 'nao', '$criadoem')";
+        $sql = "INSERT INTO u940659928_siupa.tb_escalas (fk_setor, mes, ano, oficial, created_at) VALUES ($idsetor, $mes, $ano, 'nao', '$criadoem')";
 
 
         $busca = $att->conecta();

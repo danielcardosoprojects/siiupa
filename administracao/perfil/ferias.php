@@ -8,7 +8,7 @@ class ferias
 $ferias = new ferias;
 $ferias->idServidor = $_GET['id'];
 
-$query = "SELECT DATE_FORMAT(datainicio, '%d\/%m\/%Y'), DATE_FORMAT(datafim, '%d\/%m\/%Y'), ref_mes, ref_ano, observacao, id FROM db_rh.tb_ferias WHERE fk_funcionario = $ferias->idServidor";
+$query = "SELECT DATE_FORMAT(datainicio, '%d\/%m\/%Y'), DATE_FORMAT(datafim, '%d\/%m\/%Y'), ref_mes, ref_ano, observacao, id FROM u940659928_siupa.tb_ferias WHERE fk_funcionario = $ferias->idServidor";
             echo '
 <table class="table table-bordered">
         <thead>

@@ -219,7 +219,7 @@ echo "<h5>".$_GET['idef'] . " - " . $nomeservidor . "</h5>";
             <?php
             //vai buscar as férias desse servidor nesse periodo
             $bdconsferias = new BD;
-            $sqlconsferias = "SELECT DATE_FORMAT(f.datainicio, '%d/%m/%Y') as inicio, DATE_FORMAT(f.datafim, '%d/%m/%Y') as fim , f.* FROM db_rh.tb_ferias AS f WHERE f.fk_funcionario = $idf";
+            $sqlconsferias = "SELECT DATE_FORMAT(f.datainicio, '%d/%m/%Y') as inicio, DATE_FORMAT(f.datafim, '%d/%m/%Y') as fim , f.* FROM u940659928_siupa.tb_ferias AS f WHERE f.fk_funcionario = $idf";
             $resultadoconsferias = $bdconsferias->consulta($sqlconsferias);
 
             foreach ($resultadoconsferias as $consferias) {

@@ -47,7 +47,7 @@ class BD
 
       return $resultado;
 
-      //$sql = "SELECT * FROM db_rh.tb_escalas";
+      //$sql = "SELECT * FROM u940659928_siupa.tb_escalas";
       //$busca = new BD;
       //$resultado = $busca->consulta($sql);
       //echo "<pre>";foreach($resultado as $escala){
@@ -67,7 +67,7 @@ class BD
 
       return $resultado;
 
-      //$sql = "SELECT * FROM db_rh.tb_escalas";
+      //$sql = "SELECT * FROM u940659928_siupa.tb_escalas";
       //$busca = new BD;
       //$resultado = $busca->consulta($sql);
       //echo "<pre>";foreach($resultado as $escala){
@@ -101,7 +101,7 @@ class BD
       
       return $retornoJSON;
 
-      //$sql = "SELECT * FROM db_rh.tb_escalas";
+      //$sql = "SELECT * FROM u940659928_siupa.tb_escalas";
       //$busca = new BD;
       //$resultado = $busca->consulta($sql);
       //echo "<pre>";foreach($resultado as $escala){
@@ -126,8 +126,8 @@ class BD
    }
    //PARA INSERIR OU UPDATE É
    //$busca = new BD;
-   //$sql = "INSERT INTO db_rh.tb_escalas (fk_setor,ano,mes,status) VALUES (?,?,?,?)";
-   //$sql = "UPDATE db_rh.tb_escalas SET fk_setor=?,ano=?,mes=?,status=? WHERE id=4";
+   //$sql = "INSERT INTO u940659928_siupa.tb_escalas (fk_setor,ano,mes,status) VALUES (?,?,?,?)";
+   //$sql = "UPDATE u940659928_siupa.tb_escalas SET fk_setor=?,ano=?,mes=?,status=? WHERE id=4";
 
    //$busca = $busca->conecta();
    //$insere = $busca->prepare($sql);

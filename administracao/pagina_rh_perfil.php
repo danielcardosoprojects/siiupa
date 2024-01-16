@@ -752,7 +752,7 @@ class Grade
 
     $idservidor = $_GET['id'];
 
-    $sqlAfastamentos = "SELECT afs.afastamento,afs.id as afastamento_id, A.*, f.nome, c.titulo FROM db_rh.tb_afastamento as A inner join db_rh.tb_funcionario as f ON (A.fk_funcionario = f.id) inner join db_rh.tb_cargo as c on (f.fk_cargo = c.id) inner join db_rh.tb_afastamentos as afs on (A.fk_afastamentos = afs.id) where A.fk_funcionario = '$idservidor' order by A.data_fim DESC";
+    $sqlAfastamentos = "SELECT afs.afastamento,afs.id as afastamento_id, A.*, f.nome, c.titulo FROM u940659928_siupa.tb_afastamento as A inner join u940659928_siupa.tb_funcionario as f ON (A.fk_funcionario = f.id) inner join u940659928_siupa.tb_cargo as c on (f.fk_cargo = c.id) inner join u940659928_siupa.tb_afastamentos as afs on (A.fk_afastamentos = afs.id) where A.fk_funcionario = '$idservidor' order by A.data_fim DESC";
     if ($bancoAfastamentos = $conn->query($sqlAfastamentos)) {
 
         while ($dadosAfastamentos = $bancoAfastamentos->fetch_object()) {
@@ -816,7 +816,7 @@ class Grade
     echo "<tbody>";
 
     $consulta_acionamento = new BD;
-    $sqlConsulta_Acionamento = "SELECT ac.*, f.nome, acs.acionamento FROM db_rh.tb_acionamento as ac inner join db_rh.tb_funcionario as f on (ac.fk_funcionario = f.id) inner join db_rh.tb_acionamentos as acs on(ac.fk_acionamentos = acs.id) WHERE ac.fk_funcionario = '$idservidor' ORDER BY ac.id DESC";
+    $sqlConsulta_Acionamento = "SELECT ac.*, f.nome, acs.acionamento FROM u940659928_siupa.tb_acionamento as ac inner join u940659928_siupa.tb_funcionario as f on (ac.fk_funcionario = f.id) inner join u940659928_siupa.tb_acionamentos as acs on(ac.fk_acionamentos = acs.id) WHERE ac.fk_funcionario = '$idservidor' ORDER BY ac.id DESC";
     $resultadoConsulta_Acionamento = $consulta_acionamento->consulta($sqlConsulta_Acionamento);
 
     foreach ($resultadoConsulta_Acionamento as $resultado_acionamento) {
@@ -839,7 +839,7 @@ class Grade
         echo "<td>";
         if ($resultado_acionamento->fk_afastamento != 0) {
             $consulta_afastamento = new BD;
-            $sqlConsulta_Afastamento = "SELECT f.nome as nomeAfastado, c.titulo as tituloCargo, afs.afastamento, af.id as idAfastado, af.data_inicio, af.data_fim FROM db_rh.tb_afastamento as af inner join db_rh.tb_funcionario as f on (af.fk_funcionario = f.id) inner join db_rh.tb_afastamentos as afs on (af.fk_afastamentos = afs.id) inner join db_rh.tb_cargo as c on (f.fk_cargo = c.id) WHERE af.id='$resultado_acionamento->fk_afastamento'";
+            $sqlConsulta_Afastamento = "SELECT f.nome as nomeAfastado, c.titulo as tituloCargo, afs.afastamento, af.id as idAfastado, af.data_inicio, af.data_fim FROM u940659928_siupa.tb_afastamento as af inner join u940659928_siupa.tb_funcionario as f on (af.fk_funcionario = f.id) inner join u940659928_siupa.tb_afastamentos as afs on (af.fk_afastamentos = afs.id) inner join u940659928_siupa.tb_cargo as c on (f.fk_cargo = c.id) WHERE af.id='$resultado_acionamento->fk_afastamento'";
 
             $resultadoConsultaAfastamento = $consulta_afastamento->consulta($sqlConsulta_Afastamento);
             ////////////////////////////////// var_dump($resultadoAfastamento);
@@ -894,7 +894,7 @@ class Grade
         <tbody>
         ';
 
-    $query = "SELECT fls.ref_mes, fls.ref_ano, fl.fk_folhas, fl.id as id_linha, func.id,func.nome, cargo.funcao_upa, fl.adc_not, fl.ext_6, fl.ext_12, fl.ext_24, fl.acionamento, fl.transferencia, fl.fixos, fl.obs, cargo.valor_plantao, cargo.valor_acionamento, cargo.valor_transferencia FROM db_rh.tb_folha AS fl INNER JOIN db_rh.tb_funcionario AS func ON (fl.fk_funcionario = func.id) inner join db_rh.tb_folhas as fls on (fl.fk_folhas = fls.id) INNER JOIN db_rh.tb_cargo AS cargo ON (func.fk_cargo = cargo.id) WHERE fk_funcionario = '$perfil->id' ORDER BY id_linha DESC";
+    $query = "SELECT fls.ref_mes, fls.ref_ano, fl.fk_folhas, fl.id as id_linha, func.id,func.nome, cargo.funcao_upa, fl.adc_not, fl.ext_6, fl.ext_12, fl.ext_24, fl.acionamento, fl.transferencia, fl.fixos, fl.obs, cargo.valor_plantao, cargo.valor_acionamento, cargo.valor_transferencia FROM u940659928_siupa.tb_folha AS fl INNER JOIN u940659928_siupa.tb_funcionario AS func ON (fl.fk_funcionario = func.id) inner join u940659928_siupa.tb_folhas as fls on (fl.fk_folhas = fls.id) INNER JOIN u940659928_siupa.tb_cargo AS cargo ON (func.fk_cargo = cargo.id) WHERE fk_funcionario = '$perfil->id' ORDER BY id_linha DESC";
 
     function trataNaoNumericos($naoNumericos)
     {

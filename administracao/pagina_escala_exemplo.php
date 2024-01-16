@@ -344,7 +344,7 @@ include_once('../bd/conectabd.php');
 
 
 
-                $sqlserv = "SELECT f.nome, ef.* FROM db_rh.tb_escala_funcionario as ef INNER JOIN db_rh.tb_funcionario AS f ON (ef.fk_funcionario = f.id)";
+                $sqlserv = "SELECT f.nome, ef.* FROM u940659928_siupa.tb_escala_funcionario as ef INNER JOIN u940659928_siupa.tb_funcionario AS f ON (ef.fk_funcionario = f.id)";
                 $buscaserv = new BD;
                 $resultadoserv = $buscaserv->consulta($sqlserv);
 

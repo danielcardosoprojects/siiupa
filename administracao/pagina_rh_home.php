@@ -16,7 +16,7 @@ include_once('../bd/nivel.php');
         <div class="contagem_cargos">
             <?php
             $bdContagemCargos = new BD;
-            $sqlCG = "SELECT c.titulo, count(c.titulo) as total, c.id FROM db_rh.tb_funcionario as f inner join db_rh.tb_cargo as c on (f.fk_cargo = c.id) where status='ATIVO' group by c.titulo";
+            $sqlCG = "SELECT c.titulo, count(c.titulo) as total, c.id FROM u940659928_siupa.tb_funcionario as f inner join u940659928_siupa.tb_cargo as c on (f.fk_cargo = c.id) where status='ATIVO' group by c.titulo";
             $rConsultaCargos = $bdContagemCargos->consulta($sqlCG);
             foreach ($rConsultaCargos as $rCG) {
                 $tituloCG = utf8_encode($rCG->titulo);
@@ -24,7 +24,7 @@ include_once('../bd/nivel.php');
             }
 
             $bdContagemSetores = new BD;
-            $sqlCS = "SELECT s.id, s.setor, count(s.setor) as totalS FROM db_rh.tb_funcionario as f inner join db_rh.tb_setor as s on(f.fk_setor = s.id) where status='ATIVO' group by s.setor;";
+            $sqlCS = "SELECT s.id, s.setor, count(s.setor) as totalS FROM u940659928_siupa.tb_funcionario as f inner join u940659928_siupa.tb_setor as s on(f.fk_setor = s.id) where status='ATIVO' group by s.setor;";
             $rConsultaSetores = $bdContagemSetores->consulta($sqlCS);
             foreach ($rConsultaSetores as $rCS) {
                 $tituloCS = utf8_encode($rCS->setor);
@@ -97,7 +97,7 @@ include_once('../bd/nivel.php');
                     echo "</select></label>";
                 }
                 $bdsetores = new BD;
-                $sqlsetores  = "SELECT  * FROM db_rh.tb_setor GROUP BY setor ASC";
+                $sqlsetores  = "SELECT  * FROM u940659928_siupa.tb_setor GROUP BY setor ASC";
                 $resultadosetores  = $bdsetores->consulta($sqlsetores);
                 echo "<label>Setor:<select id='setorbusca' name='setorbusca' class='setorbusca form-control'>
         <option value='undefined'>TODOS</option>";
@@ -283,7 +283,7 @@ include_once('../bd/nivel.php');
                     $dados = (object) $rownomes;
 
                     //from tb_ferias
-                    $queryf = "SELECT ferias.id, func.nome, c.titulo, s.setor, DATE_FORMAT(ferias.datainicio, '%d\/%m\/%Y'), DATE_FORMAT(ferias.datafim, '%d\/%m\/%Y'), ferias.ref_mes, ferias.ref_ano, func.vinculo, ferias.observacao FROM db_rh.tb_ferias AS ferias INNER JOIN db_rh.tb_funcionario AS func ON (ferias.fk_funcionario = func.id) INNER JOIN db_rh.tb_cargo AS C ON (func.fk_cargo = c.id) INNER JOIN db_rh.tb_setor AS s ON (func.fk_setor = s.id) WHERE func.status='ATIVO' AND ref_ano = 2024 AND ferias.fk_funcionario = '$dados->idfuncionario'";
+                    $queryf = "SELECT ferias.id, func.nome, c.titulo, s.setor, DATE_FORMAT(ferias.datainicio, '%d\/%m\/%Y'), DATE_FORMAT(ferias.datafim, '%d\/%m\/%Y'), ferias.ref_mes, ferias.ref_ano, func.vinculo, ferias.observacao FROM u940659928_siupa.tb_ferias AS ferias INNER JOIN u940659928_siupa.tb_funcionario AS func ON (ferias.fk_funcionario = func.id) INNER JOIN u940659928_siupa.tb_cargo AS C ON (func.fk_cargo = c.id) INNER JOIN u940659928_siupa.tb_setor AS s ON (func.fk_setor = s.id) WHERE func.status='ATIVO' AND ref_ano = 2024 AND ferias.fk_funcionario = '$dados->idfuncionario'";
 
                     if ($stmtf = $conn->prepare($queryf)) {
                         $stmtf->execute();
@@ -361,7 +361,7 @@ include_once('../bd/nivel.php');
                     // echo "<td>$ref_mes</td>";
                     echo "<td>";
                     $ferias23 = new BD;
-                    $sqlF23 = "SELECT * FROM db_rh.tb_ferias where fk_funcionario = '$dados->idfuncionario' and ref_ano = '2024';";
+                    $sqlF23 = "SELECT * FROM u940659928_siupa.tb_ferias where fk_funcionario = '$dados->idfuncionario' and ref_ano = '2024';";
                     $rF23 = $ferias23->consulta($sqlF23);
                     foreach ($rF23 as $ferias23) {
                         echo mes($ferias23->ref_mes) . '<br>';

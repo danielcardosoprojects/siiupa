@@ -36,7 +36,7 @@ $form->pula(4);
 $tabela = new Tabela();
 
 
-$query = "SELECT nome, id  FROM db_rh.tb_funcionario";
+$query = "SELECT nome, id  FROM u940659928_siupa.tb_funcionario";
 
 $tabela->abreTabela('tabelafunc', 'table  table-bordered  border-primary');
 $tabela->abreThead();

@@ -13,7 +13,7 @@ if (isset($_GET['acao'])) {
         $data_fim = $_GET['datafim'];
         $afastamento_obs = utf8_encode($_GET['afastamento_obs']);
         $add = new BD;
-        $sql = "INSERT INTO db_rh.tb_afastamento (fk_funcionario, fk_afastamentos, data_inicio, data_fim, afastamento_obs) VALUES ('$fk_funcionario', '$fk_afastamentos','$data_inicio', '$data_fim', '$afastamento_obs')";
+        $sql = "INSERT INTO u940659928_siupa.tb_afastamento (fk_funcionario, fk_afastamentos, data_inicio, data_fim, afastamento_obs) VALUES ('$fk_funcionario', '$fk_afastamentos','$data_inicio', '$data_fim', '$afastamento_obs')";
 
 
         $busca = $add->conecta();
@@ -32,8 +32,8 @@ if (isset($_GET['acao'])) {
         $afastamento_obs = utf8_encode($_GET['afastamento_obs']);
 
         $add = new BD;
-        $sql = "UPDATE db_rh.tb_afastamento SET data_inicio='$data_inicio', data_fim='$data_fim', fk_afastamentos = '$fk_afastamentos', afastamento_obs = '$afastamento_obs' WHERE id=$id_atestado";
-        //$sql = "INSERT INTO db_rh.tb_afastamento (fk_funcionario, data_inicio, data_fim) VALUES ('$fk_funcionario', '$data_inicio', '$data_fim')";
+        $sql = "UPDATE u940659928_siupa.tb_afastamento SET data_inicio='$data_inicio', data_fim='$data_fim', fk_afastamentos = '$fk_afastamentos', afastamento_obs = '$afastamento_obs' WHERE id=$id_atestado";
+        //$sql = "INSERT INTO u940659928_siupa.tb_afastamento (fk_funcionario, data_inicio, data_fim) VALUES ('$fk_funcionario', '$data_inicio', '$data_fim')";
 
 
         $busca = $add->conecta();
@@ -42,7 +42,7 @@ if (isset($_GET['acao'])) {
         
         echo "<div style='background-color:#12C06A;text-align:center;color:#fff;'><h2>ATUALIZADO COM SUCESO!</h2><img src='imagens/icones/sucesso.gif' width='90%'> </div>";
     }elseif($acao== "consulta_afastamentos"){
-        $query = "SELECT * FROM db_rh.tb_afastamentos";
+        $query = "SELECT * FROM u940659928_siupa.tb_afastamentos";
 
 
 if ($stmt = $conn->prepare($query)) {

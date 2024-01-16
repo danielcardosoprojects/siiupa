@@ -25,7 +25,7 @@ $array = json_decode($json, true);
 foreach($array as $valor) {
     $dia = key($array);
 //    $valor = $dia;
-    $sql = "UPDATE db_rh.tb_escala_funcionario SET $dia='$valor' WHERE id=$id";
+    $sql = "UPDATE u940659928_siupa.tb_escala_funcionario SET $dia='$valor' WHERE id=$id";
     
     
     

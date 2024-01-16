@@ -9,7 +9,7 @@ foreach ($_REQUEST["posicoes"] as $chave => $valor) {
     // $arr[3] será atualizado com cada valor de $arr...
 
 
-    $sql = "UPDATE db_rh.tb_escala_funcionario SET posicao=$chave WHERE id=$valor";
+    $sql = "UPDATE u940659928_siupa.tb_escala_funcionario SET posicao=$chave WHERE id=$valor";
     
     
  

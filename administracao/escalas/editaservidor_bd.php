@@ -8,7 +8,7 @@ if ($acao == 'linhabranca') {
 
     $idef = $_GET['idef'];
     $valor = $_GET['valor'];
-    $sql = "UPDATE db_rh.tb_escala_funcionario SET posbranco='$valor' WHERE id=$idef";
+    $sql = "UPDATE u940659928_siupa.tb_escala_funcionario SET posbranco='$valor' WHERE id=$idef";
 
 
     $busca = $busca->conecta();
@@ -22,7 +22,7 @@ if ($acao == 'posicao') {
 
     $idef = $_GET['idef'];
     $valor = $_GET['valor'];
-    $sql = "UPDATE db_rh.tb_escala_funcionario SET posicao='$valor' WHERE id=$idef";
+    $sql = "UPDATE u940659928_siupa.tb_escala_funcionario SET posicao='$valor' WHERE id=$idef";
 
 
     $busca = $busca->conecta();
@@ -38,7 +38,7 @@ if($acao =='deleta'){
 
     $idef = $_GET['idef'];
 ;
-    $sql = "DELETE FROM db_rh.tb_escala_funcionario WHERE id=$idef";
+    $sql = "DELETE FROM u940659928_siupa.tb_escala_funcionario WHERE id=$idef";
 
 
     $busca = $busca->conecta();
@@ -54,7 +54,7 @@ if($acao == 'ferias'){
     $idef = $_GET['idef'];
     $diainicio = $_GET['inicio'];
     $diafim = $_GET['fim'];
-    $sql = "UPDATE db_rh.tb_escala_funcionario SET ferias_inicio='$diainicio', ferias_fim='$diafim' WHERE id=$idef";
+    $sql = "UPDATE u940659928_siupa.tb_escala_funcionario SET ferias_inicio='$diainicio', ferias_fim='$diafim' WHERE id=$idef";
 
 
     $busca = $busca->conecta();
@@ -71,7 +71,7 @@ if($acao == 'licenca'){
     $diainicio = $_GET['inicio'];
     $diafim = $_GET['fim'];
     $texto_licenca = $_GET['textolicenca'];
-    $sql = "UPDATE db_rh.tb_escala_funcionario SET licenca_inicio='$diainicio', licenca_fim='$diafim', licenca_texto='$texto_licenca' WHERE id=$idef";
+    $sql = "UPDATE u940659928_siupa.tb_escala_funcionario SET licenca_inicio='$diainicio', licenca_fim='$diafim', licenca_texto='$texto_licenca' WHERE id=$idef";
 
 
     $busca = $busca->conecta();

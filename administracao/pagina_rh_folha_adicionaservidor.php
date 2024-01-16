@@ -240,7 +240,7 @@ if (isset($_GET['acao'])) {
         $valor_total = $_GET['valor_total'];
         $obs = $_GET['obs'];
 
-        $query = "INSERT INTO db_rh.tb_folha (fk_funcionario, fk_folhas, adc_not, ext_6, ext_12, ext_24, acionamento, transferencia, fixos, obs) VALUES ('$idservidor' ,  '$idfolha' , '$adc_not' , '$ext_6' , '$ext_12' , '$ext_24' ,  '$acionamento' , '$transferencia','$fixos' , '$obs')";
+        $query = "INSERT INTO u940659928_siupa.tb_folha (fk_funcionario, fk_folhas, adc_not, ext_6, ext_12, ext_24, acionamento, transferencia, fixos, obs) VALUES ('$idservidor' ,  '$idfolha' , '$adc_not' , '$ext_6' , '$ext_12' , '$ext_24' ,  '$acionamento' , '$transferencia','$fixos' , '$obs')";
         if (mysqli_query($conn, $query)) {
             $last_id = mysqli_insert_id($conn);
             echo "New record created successfully. Last inserted ID is: " . $last_id;
@@ -269,7 +269,7 @@ if (isset($_GET['acao'])) {
         $valor_total = $_GET['valor_total'];
         $obs = $_GET['obs'];
 
-        $query = "INSERT INTO db_rh.tb_folha (fk_funcionario, fk_folhas, adc_not, ext_6, ext_12, ext_24, acionamento, transferencia, fixos, obs) VALUES ('$idservidor' ,  '$idfolha' , '$adc_not' , '$ext_6' , '$ext_12' , '$ext_24' ,  '$acionamento', '$transferencia' , '$fixos' , '$obs')";
+        $query = "INSERT INTO u940659928_siupa.tb_folha (fk_funcionario, fk_folhas, adc_not, ext_6, ext_12, ext_24, acionamento, transferencia, fixos, obs) VALUES ('$idservidor' ,  '$idfolha' , '$adc_not' , '$ext_6' , '$ext_12' , '$ext_24' ,  '$acionamento', '$transferencia' , '$fixos' , '$obs')";
         $query = "UPDATE `db_rh`.`tb_folha` SET `adc_not` = '$adc_not', `ext_6` = '$ext_6', `ext_12` = '$ext_12', `ext_24` = '$ext_24', `acionamento` = '$acionamento', `transferencia` = '$transferencia', `fixos` = '$fixos', `obs` = '$obs' WHERE (`id` = '$idlinhafolha')";
         if (mysqli_query($conn, $query)) {
             $last_id = mysqli_insert_id($conn);
@@ -306,7 +306,7 @@ if (isset($_GET['acao'])) {
                     if ($subacao == 'alterar') {
                         //echo "Subacao alterar";
                         $acao = "<input type='hidden' name='acao' value='altera'>";
-                        $queryalterar = "SELECT fl.id, func.nome, cargo.funcao_upa, fl.adc_not, fl.ext_6, fl.ext_12, fl.ext_24, fl.acionamento, fl.transferencia, fl.fixos, fl.obs, cargo.valor_plantao, cargo.valor_acionamento FROM db_rh.tb_folha AS fl INNER JOIN db_rh.tb_funcionario AS func ON (fl.fk_funcionario = func.id) INNER JOIN db_rh.tb_cargo AS cargo ON (func.fk_cargo = cargo.id) WHERE fl.fk_folhas = '$idfolha' AND fl.fk_funcionario = $idselecionado";
+                        $queryalterar = "SELECT fl.id, func.nome, cargo.funcao_upa, fl.adc_not, fl.ext_6, fl.ext_12, fl.ext_24, fl.acionamento, fl.transferencia, fl.fixos, fl.obs, cargo.valor_plantao, cargo.valor_acionamento FROM u940659928_siupa.tb_folha AS fl INNER JOIN u940659928_siupa.tb_funcionario AS func ON (fl.fk_funcionario = func.id) INNER JOIN u940659928_siupa.tb_cargo AS cargo ON (func.fk_cargo = cargo.id) WHERE fl.fk_folhas = '$idfolha' AND fl.fk_funcionario = $idselecionado";
                         if ($stmtalterar = $conn->prepare($queryalterar)) {
                             $stmtalterar->execute();
                             $stmtalterar->bind_result($fl_id, $nome, $funcao_upa, $adc_not, $ext_6, $ext_12, $ext_24, $acionamento, $transferencia, $fixos, $obs, $valor_plantao, $valor_acionamento);
@@ -431,7 +431,7 @@ if (isset($_GET['acao'])) {
 
                 $idservidor = $_GET['idservidor'];
 
-                $sqlAfastamentos = "SELECT afs.afastamento,afs.id as afastamento_id, A.*, f.nome, c.titulo FROM db_rh.tb_afastamento as A inner join db_rh.tb_funcionario as f ON (A.fk_funcionario = f.id) inner join db_rh.tb_cargo as c on (f.fk_cargo = c.id) inner join db_rh.tb_afastamentos as afs on (A.fk_afastamentos = afs.id) where A.fk_funcionario = '$idservidor' order by A.data_fim DESC";
+                $sqlAfastamentos = "SELECT afs.afastamento,afs.id as afastamento_id, A.*, f.nome, c.titulo FROM u940659928_siupa.tb_afastamento as A inner join u940659928_siupa.tb_funcionario as f ON (A.fk_funcionario = f.id) inner join u940659928_siupa.tb_cargo as c on (f.fk_cargo = c.id) inner join u940659928_siupa.tb_afastamentos as afs on (A.fk_afastamentos = afs.id) where A.fk_funcionario = '$idservidor' order by A.data_fim DESC";
                 if ($bancoAfastamentos = $conn->query($sqlAfastamentos)) {
 
                     while ($dadosAfastamentos = $bancoAfastamentos->fetch_object()) {
@@ -483,7 +483,7 @@ if (isset($_GET['acao'])) {
                 echo "<tbody>";
 
                 $consulta_acionamento = new BD;
-                $sqlConsulta_Acionamento = "SELECT ac.*, f.nome, acs.acionamento FROM db_rh.tb_acionamento as ac inner join db_rh.tb_funcionario as f on (ac.fk_funcionario = f.id) inner join db_rh.tb_acionamentos as acs on(ac.fk_acionamentos = acs.id) WHERE ac.fk_funcionario = '$idservidor' ORDER BY ac.id DESC";
+                $sqlConsulta_Acionamento = "SELECT ac.*, f.nome, acs.acionamento FROM u940659928_siupa.tb_acionamento as ac inner join u940659928_siupa.tb_funcionario as f on (ac.fk_funcionario = f.id) inner join u940659928_siupa.tb_acionamentos as acs on(ac.fk_acionamentos = acs.id) WHERE ac.fk_funcionario = '$idservidor' ORDER BY ac.id DESC";
                 $resultadoConsulta_Acionamento = $consulta_acionamento->consulta($sqlConsulta_Acionamento);
 
                 foreach ($resultadoConsulta_Acionamento as $resultado_acionamento) {
@@ -506,7 +506,7 @@ if (isset($_GET['acao'])) {
                     echo "<td>";
                     if ($resultado_acionamento->fk_afastamento != 0) {
                         $consulta_afastamento = new BD;
-                        $sqlConsulta_Afastamento = "SELECT f.nome as nomeAfastado, c.titulo as tituloCargo, afs.afastamento, af.id as idAfastado, af.data_inicio, af.data_fim FROM db_rh.tb_afastamento as af inner join db_rh.tb_funcionario as f on (af.fk_funcionario = f.id) inner join db_rh.tb_afastamentos as afs on (af.fk_afastamentos = afs.id) inner join db_rh.tb_cargo as c on (f.fk_cargo = c.id) WHERE af.id='$resultado_acionamento->fk_afastamento'";
+                        $sqlConsulta_Afastamento = "SELECT f.nome as nomeAfastado, c.titulo as tituloCargo, afs.afastamento, af.id as idAfastado, af.data_inicio, af.data_fim FROM u940659928_siupa.tb_afastamento as af inner join u940659928_siupa.tb_funcionario as f on (af.fk_funcionario = f.id) inner join u940659928_siupa.tb_afastamentos as afs on (af.fk_afastamentos = afs.id) inner join u940659928_siupa.tb_cargo as c on (f.fk_cargo = c.id) WHERE af.id='$resultado_acionamento->fk_afastamento'";
 
                         $resultadoConsultaAfastamento = $consulta_afastamento->consulta($sqlConsulta_Afastamento);
                         ////////////////////////////////// var_dump($resultadoAfastamento);
@@ -556,7 +556,7 @@ if (isset($_GET['acao'])) {
                     echo $i;
                     echo '</th>';
                 }
-                $query = "SELECT s.setor, e.legenda as legendas, ef.d1, ef.* FROM db_rh.tb_escala_funcionario as ef inner join (db_rh.tb_escalas as e) on (fk_escala = e.id) inner join (db_rh.tb_setor as s) on (e.fk_setor = s.id) where ef.fk_funcionario = $id_servidor order by ef.id desc";
+                $query = "SELECT s.setor, e.legenda as legendas, ef.d1, ef.* FROM u940659928_siupa.tb_escala_funcionario as ef inner join (u940659928_siupa.tb_escalas as e) on (fk_escala = e.id) inner join (u940659928_siupa.tb_setor as s) on (e.fk_setor = s.id) where ef.fk_funcionario = $id_servidor order by ef.id desc";
 
                 echo '</thead><tbody>';
                 if ($banco_escalas = $conn->query($query)) {
@@ -617,7 +617,7 @@ if (isset($_GET['acao'])) {
                             <tbody>
                             ';
                 $idfolha_aberta = $idfolha;
-                $query = "SELECT fls.ref_mes, fls.ref_ano, fl.fk_folhas, fl.id as id_linha, func.id,func.nome, cargo.funcao_upa, fl.adc_not, fl.ext_6, fl.ext_12, fl.ext_24, fl.acionamento, fl.transferencia, fl.fixos, fl.obs, cargo.valor_plantao, cargo.valor_acionamento, cargo.valor_transferencia FROM db_rh.tb_folha AS fl INNER JOIN db_rh.tb_funcionario AS func ON (fl.fk_funcionario = func.id) inner join db_rh.tb_folhas as fls on (fl.fk_folhas = fls.id) INNER JOIN db_rh.tb_cargo AS cargo ON (func.fk_cargo = cargo.id) WHERE fk_funcionario = '$dados->idfuncionario' ORDER BY id_linha DESC";
+                $query = "SELECT fls.ref_mes, fls.ref_ano, fl.fk_folhas, fl.id as id_linha, func.id,func.nome, cargo.funcao_upa, fl.adc_not, fl.ext_6, fl.ext_12, fl.ext_24, fl.acionamento, fl.transferencia, fl.fixos, fl.obs, cargo.valor_plantao, cargo.valor_acionamento, cargo.valor_transferencia FROM u940659928_siupa.tb_folha AS fl INNER JOIN u940659928_siupa.tb_funcionario AS func ON (fl.fk_funcionario = func.id) inner join u940659928_siupa.tb_folhas as fls on (fl.fk_folhas = fls.id) INNER JOIN u940659928_siupa.tb_cargo AS cargo ON (func.fk_cargo = cargo.id) WHERE fk_funcionario = '$dados->idfuncionario' ORDER BY id_linha DESC";
 
                 if ($stmt = $conn->prepare($query)) {
                     $stmt->execute();
@@ -695,7 +695,7 @@ if (isset($_GET['acao'])) {
 
     $idfolha = $_GET['idfolha'];
     //BUSCA O MES E ANO DA FOLHA SOMENTE PARA O TITULO
-    $querymesano = "SELECT fls.ref_mes, fls.ref_ano FROM db_rh.tb_folhas as fls WHERE fls.id=$idfolha";
+    $querymesano = "SELECT fls.ref_mes, fls.ref_ano FROM u940659928_siupa.tb_folhas as fls WHERE fls.id=$idfolha";
 
 
     if ($stmt = $conn->prepare($querymesano)) {

@@ -6,7 +6,7 @@ include("../bd/conectabd.php");
 
 $nome = $_GET['nome'];
 
-$sqlbusca = "SELECT * FROM db_rh.tb_funcionario where nome LIKE '%$nome%' order by nome ASC";
+$sqlbusca = "SELECT * FROM u940659928_siupa.tb_funcionario where nome LIKE '%$nome%' order by nome ASC";
 
 $resultbusca = mysqli_query($conn, $sqlbusca);
 $contalinha = 1;

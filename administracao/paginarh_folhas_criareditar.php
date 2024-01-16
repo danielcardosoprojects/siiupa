@@ -67,7 +67,7 @@ if(isset($_GET['acao'])){
         $periodoinicio=$_GET['periodoinicio'];
         $periodofim=$_GET['periodofim'];
 
-        $query = "INSERT INTO db_rh.tb_folhas (ref_mes, ref_ano, periodoinicio, periodofim) VALUES ('$ref_mes', '$ref_ano', '$periodoinicio', '$periodofim')";
+        $query = "INSERT INTO u940659928_siupa.tb_folhas (ref_mes, ref_ano, periodoinicio, periodofim) VALUES ('$ref_mes', '$ref_ano', '$periodoinicio', '$periodofim')";
         if (mysqli_query($conn, $query)) {
             $last_id = mysqli_insert_id($conn);
             echo "New record created successfully. Last inserted ID is: " . $last_id;

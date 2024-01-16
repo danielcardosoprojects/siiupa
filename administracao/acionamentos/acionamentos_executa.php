@@ -23,7 +23,7 @@ if (isset($_GET['acao'])) {
         $acionamento_obs = utf8_decode($acionamento_obs);
         
         $add = new BD;
-        $sql = "INSERT INTO db_rh.tb_acionamento (`fk_funcionario`, `fk_acionamentos`, `fk_afastamento`, `data_acionamento`, `qtd_horas`, `turno`, `valor`, `acionamento_obs`) VALUES ('$fk_funcionario', '$fk_acionamentos', '$fk_afastamento', '$data_acionamento', '$qtd_horas', '$turno', '$valor', '$acionamento_obs')";
+        $sql = "INSERT INTO u940659928_siupa.tb_acionamento (`fk_funcionario`, `fk_acionamentos`, `fk_afastamento`, `data_acionamento`, `qtd_horas`, `turno`, `valor`, `acionamento_obs`) VALUES ('$fk_funcionario', '$fk_acionamentos', '$fk_afastamento', '$data_acionamento', '$qtd_horas', '$turno', '$valor', '$acionamento_obs')";
         //INSERT INTO `db_rh`.`tb_acionamento` (`fk_funcionario`, `fk_acionamentos`, `data_acionamento`, `qtd_horas`, `turno`, `acionamento_obs`) VALUES ('14', '1', '2022-07-26', '16H', 'DIURNO', 'TESTE');
 
         $busca = $add->conecta();
@@ -49,7 +49,7 @@ if (isset($_GET['acao'])) {
         $acionamento_obs = utf8_decode($acionamento_obs);
         
         $att = new BD;
-        $sql = "UPDATE db_rh.tb_acionamento SET fk_acionamentos='$fk_acionamentos', fk_afastamento='$fk_afastamento', data_acionamento='$data_acionamento', qtd_horas='$qtd_horas', turno='$turno', valor='$valor', acionamento_obs='$acionamento_obs'  WHERE tb_acionamento.id='$idacionamento'";
+        $sql = "UPDATE u940659928_siupa.tb_acionamento SET fk_acionamentos='$fk_acionamentos', fk_afastamento='$fk_afastamento', data_acionamento='$data_acionamento', qtd_horas='$qtd_horas', turno='$turno', valor='$valor', acionamento_obs='$acionamento_obs'  WHERE tb_acionamento.id='$idacionamento'";
         
         $busca = $att->conecta();
         $insere = $busca->prepare($sql);
@@ -68,7 +68,7 @@ if (isset($_GET['acao'])) {
     } elseif($acao== "deleta"){
         $idacionamento = $_GET['idacionamento'];
 
-        $sqlDeletaAcionamento = "DELETE FROM db_rh.tb_acionamento WHERE (id = '$idacionamento');";
+        $sqlDeletaAcionamento = "DELETE FROM u940659928_siupa.tb_acionamento WHERE (id = '$idacionamento');";
         $deletaAcionamento = new BD;
         $rDeleta = $deletaAcionamento->consulta($sqlDeletaAcionamento);
         echo '<div class="alert alert-primary" role="alert">
@@ -80,7 +80,7 @@ if (isset($_GET['acao'])) {
     }
     
     elseif($acao== "consulta_afastamentos"){
-        $query = "SELECT * FROM db_rh.tb_afastamentos";
+        $query = "SELECT * FROM u940659928_siupa.tb_afastamentos";
 
 
 if ($stmt = $conn->prepare($query)) {

@@ -157,7 +157,7 @@ if ($_GET['acao'] == 'executa') {
 
     //0	8	13:29:18	INSERT INTO `db_rh`.`tb_ferias` (`fk_funcionario`, `ref_mes`, `ref_ano`) VALUES ('174', '3', '2022')	1364: Field 'datainicio' doesn't have a default value	
 
-    $query = "INSERT INTO db_rh.tb_ferias (fk_funcionario, datainicio, datafim, ref_mes, ref_ano, observacao) VALUES ('$dados->id', '$dados->datainicio', '$dados->datafim', '$dados->ref_mes', '$dados->ref_ano', '$dados->observacao')";
+    $query = "INSERT INTO u940659928_siupa.tb_ferias (fk_funcionario, datainicio, datafim, ref_mes, ref_ano, observacao) VALUES ('$dados->id', '$dados->datainicio', '$dados->datafim', '$dados->ref_mes', '$dados->ref_ano', '$dados->observacao')";
 
     if (mysqli_query($conn, $query)) {
         $last_id = mysqli_insert_id($conn);

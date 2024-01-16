@@ -32,7 +32,7 @@ if ($acao == 'cria') {
   $afastamentoId = $_GET['afastamentoId'];
   if ($afastamentoId != 0) {
     $consulta_afastamento = new BD;
-    $sqlConsulta_Afastamento = "SELECT f.nome as nomeAfastado, c.titulo as tituloCargo, afs.afastamento, af.id as idAfastado, af.data_inicio, af.data_fim FROM db_rh.tb_afastamento as af inner join db_rh.tb_funcionario as f on (af.fk_funcionario = f.id) inner join db_rh.tb_afastamentos as afs on (af.fk_afastamentos = afs.id) inner join db_rh.tb_cargo as c on (f.fk_cargo = c.id) WHERE af.id='$afastamentoId'";
+    $sqlConsulta_Afastamento = "SELECT f.nome as nomeAfastado, c.titulo as tituloCargo, afs.afastamento, af.id as idAfastado, af.data_inicio, af.data_fim FROM u940659928_siupa.tb_afastamento as af inner join u940659928_siupa.tb_funcionario as f on (af.fk_funcionario = f.id) inner join u940659928_siupa.tb_afastamentos as afs on (af.fk_afastamentos = afs.id) inner join u940659928_siupa.tb_cargo as c on (f.fk_cargo = c.id) WHERE af.id='$afastamentoId'";
 
     $resultadoConsultaAfastamento = $consulta_afastamento->consulta($sqlConsulta_Afastamento);
     ////////////////////////////////// var_dump($resultadoAfastamento);
@@ -119,7 +119,7 @@ if ($acao == 'cria') {
 
   <?php
   $consultaValor = new BD;
-  $sqlConsultaValor = "SELECT f.fk_cargo, c.valor_plantao, c.valor_transferencia FROM db_rh.tb_funcionario as f inner join db_rh.tb_cargo as c on (f.fk_cargo = c.id) WHERE f.id=$idfuncionario";
+  $sqlConsultaValor = "SELECT f.fk_cargo, c.valor_plantao, c.valor_transferencia FROM u940659928_siupa.tb_funcionario as f inner join u940659928_siupa.tb_cargo as c on (f.fk_cargo = c.id) WHERE f.id=$idfuncionario";
   // echo $sqlConsultaValor;
   $resultadoConsultaValor = $consultaValor->consulta($sqlConsultaValor);
   $valorPlantao = $resultadoConsultaValor[0]->valor_plantao;
@@ -137,7 +137,7 @@ if ($acao == 'cria') {
     <?php
     // LISTA OS TIPOS DE ACIONAMENTOS
     $consulta_acionamentos = new BD;
-    $sqlConsulta_Acionamentos = "SELECT ac.* FROM db_rh.tb_acionamentos as ac";
+    $sqlConsulta_Acionamentos = "SELECT ac.* FROM u940659928_siupa.tb_acionamentos as ac";
     $resultadoConsulta_Acionamentos = $consulta_acionamentos->consulta($sqlConsulta_Acionamentos);
 
     foreach ($resultadoConsulta_Acionamentos as $resultado_acionamentos) {

@@ -191,7 +191,7 @@
         $dataatual = new DateTime("", $dtz);
 
 
-        $query = "SELECT af.id, af.fk_funcionario, af.fk_afastamentos, f.nome, afs.afastamento, month(af.data_inicio), month(af.data_fim), af.data_fim FROM db_rh.tb_afastamento as af inner join db_rh.tb_funcionario as f on (af.fk_funcionario = f.id) inner join db_rh.tb_afastamentos as afs on (af.fk_afastamentos = afs.id) where (year(af.data_inicio) = '$anoatual' OR year(af.data_fim) = '$anoatual') AND (month(data_inicio) = $mesatual OR month(data_fim) = $mesatual)";
+        $query = "SELECT af.id, af.fk_funcionario, af.fk_afastamentos, f.nome, afs.afastamento, month(af.data_inicio), month(af.data_fim), af.data_fim FROM u940659928_siupa.tb_afastamento as af inner join u940659928_siupa.tb_funcionario as f on (af.fk_funcionario = f.id) inner join u940659928_siupa.tb_afastamentos as afs on (af.fk_afastamentos = afs.id) where (year(af.data_inicio) = '$anoatual' OR year(af.data_fim) = '$anoatual') AND (month(data_inicio) = $mesatual OR month(data_fim) = $mesatual)";
 
         $atestado_ativo = 0;
         $atestado_novo = 0;

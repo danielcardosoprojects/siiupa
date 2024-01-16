@@ -14,7 +14,7 @@ if ($acao == 'busca') {
 
     $buscanome = $nome; //preg_replace('/[^[:alnum:]_]/', '',$nome);
     $bdaddservidor = new BD;
-    $sqladdservidor = "SELECT c.titulo, f.* FROM db_rh.tb_funcionario as f INNER JOIN db_rh.tb_cargo as c ON (f.fk_cargo = c.id) WHERE f.nome like '%$buscanome%' AND (f.status = 'ATIVO' OR f.status = 'TERCEIRIZADO') $sqlsetor ORDER BY f.nome ASC";
+    $sqladdservidor = "SELECT c.titulo, f.* FROM u940659928_siupa.tb_funcionario as f INNER JOIN u940659928_siupa.tb_cargo as c ON (f.fk_cargo = c.id) WHERE f.nome like '%$buscanome%' AND (f.status = 'ATIVO' OR f.status = 'TERCEIRIZADO') $sqlsetor ORDER BY f.nome ASC";
     $resultadoaddservidor = $bdaddservidor->consulta($sqladdservidor);
     echo "<input type='hidden' value='$chave' id='chaveAddServ'>";
     echo "<table class='table table-bordered table-striped table-hover' style='font-size:29px !important'><theady><th>Nome</th><th>Cargo</th></theady><tbody>";
@@ -34,7 +34,7 @@ if ($acao == 'insere') {
     $ano = $_GET['ano'];
 
     $busca = new BD;
-    $sql = "INSERT INTO db_rh.tb_escala_funcionario (fk_escala, fk_funcionario, mes, ano) VALUES ('$id','$idservidor','$mes','$ano')";
+    $sql = "INSERT INTO u940659928_siupa.tb_escala_funcionario (fk_escala, fk_funcionario, mes, ano) VALUES ('$id','$idservidor','$mes','$ano')";
 
     $busca = $busca->conecta();
     $insere = $busca->prepare($sql);
@@ -50,7 +50,7 @@ if ($acao == 'insere') {
 
     //CONSULTA Chave PARA EVITAR DUPLICACAO
     $buscaChave = new BD;
-    $sqlBChave = "SELECT chave FROM db_rh.tb_escalas where chave='$chave'";
+    $sqlBChave = "SELECT chave FROM u940659928_siupa.tb_escalas where chave='$chave'";
 
     $buscaChave = $buscaChave->conecta();
     $consultaChave = $buscaChave->prepare($sqlBChave);
@@ -66,11 +66,11 @@ if ($acao == 'insere') {
         $virgula = ",";
     }
     $busca = new BD;
-    $sql = "INSERT INTO db_rh.tb_escala_funcionario (fk_escala, fk_funcionario, mes, ano) VALUES $values";
+    $sql = "INSERT INTO u940659928_siupa.tb_escala_funcionario (fk_escala, fk_funcionario, mes, ano) VALUES $values";
     $rBusca = $busca->consulta($sql);
 
     $attChave = new BD;
-    $sqlAttChave = "UPDATE db_rh.tb_escalas where id=$id SET chave=$chave";
+    $sqlAttChave = "UPDATE u940659928_siupa.tb_escalas where id=$id SET chave=$chave";
     $rAttChave = $attChave->consulta($sqlAttChave);
 
     echo "Adicionados todos com sucesso!";

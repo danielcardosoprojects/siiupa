@@ -75,7 +75,7 @@ document.title = "<?php echo "Lista almoço dia $dia - $mes $ano";?>";
     </script>
 <?php
 echo "<div><h2>LISTA ALMOÇO $tdia/$mes/$ano - <a href='?dia=$diax&mes=$mes&ano=$ano'>.</a></h2></div>";
-$query = "SELECT s.setor, f.nome, ef.id FROM db_rh.tb_escala_funcionario AS ef INNER JOIN db_rh.tb_funcionario AS f ON (ef.fk_funcionario = f.id) INNER JOIN db_rh.tb_setor as s ON (f.fk_setor = s.id) Where ef.oficial = 'sim' and ef.mes=$mes and ef.ano=$ano and (ef.$dia like '%D%' OR ef.$dia like '%P%'  OR ef.$dia like '%M%') and f.id NOT IN ('14', '17', '260', '201', '107', '309', '123', '216')/*exclui adm e direcao*/ ORDER BY s.setor ASC, f.nome ASC";
+$query = "SELECT s.setor, f.nome, ef.id FROM u940659928_siupa.tb_escala_funcionario AS ef INNER JOIN u940659928_siupa.tb_funcionario AS f ON (ef.fk_funcionario = f.id) INNER JOIN u940659928_siupa.tb_setor as s ON (f.fk_setor = s.id) Where ef.oficial = 'sim' and ef.mes=$mes and ef.ano=$ano and (ef.$dia like '%D%' OR ef.$dia like '%P%'  OR ef.$dia like '%M%') and f.id NOT IN ('14', '17', '260', '201', '107', '309', '123', '216')/*exclui adm e direcao*/ ORDER BY s.setor ASC, f.nome ASC";
 //echo $query;
 
 
@@ -184,7 +184,7 @@ echo '<div class="pagebreak"> </div>';
 $totalgeral = 0;
 $i = "";
 echo "<div><h2>LISTA JANTA $tdia/$mes/$ano</h2></div>";
-$query = "SELECT s.setor, f.nome, ef.id FROM db_rh.tb_escala_funcionario AS ef INNER JOIN db_rh.tb_funcionario AS f ON (ef.fk_funcionario = f.id) INNER JOIN db_rh.tb_setor as s ON (f.fk_setor = s.id) Where ef.oficial = 'sim' and ef.mes=$mes and ef.ano=$ano and (ef.$dia like '%N%' OR ef.$dia like '%P%') ORDER BY s.setor ASC, f.nome ASC";
+$query = "SELECT s.setor, f.nome, ef.id FROM u940659928_siupa.tb_escala_funcionario AS ef INNER JOIN u940659928_siupa.tb_funcionario AS f ON (ef.fk_funcionario = f.id) INNER JOIN u940659928_siupa.tb_setor as s ON (f.fk_setor = s.id) Where ef.oficial = 'sim' and ef.mes=$mes and ef.ano=$ano and (ef.$dia like '%N%' OR ef.$dia like '%P%') ORDER BY s.setor ASC, f.nome ASC";
 
 
 if ($stmt = $conn->prepare($query)) {

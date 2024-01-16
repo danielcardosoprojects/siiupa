@@ -68,7 +68,7 @@ if (isset($_GET['ano'])) {
 }
 
 echo "<div><h2>RECEBIMENTO DE EPI - DIURNO $tdia/$mes/$ano<a href='?dia=$diax&mes=$mes&ano=$ano'>.</a></h2></div>";
-$query = "SELECT s.setor, f.nome, ef.id FROM db_rh.tb_escala_funcionario AS ef INNER JOIN db_rh.tb_funcionario AS f ON (ef.fk_funcionario = f.id) INNER JOIN db_rh.tb_setor as s ON (f.fk_setor = s.id) Where ef.oficial = 'sim' and ef.mes=$mes and ef.ano=$ano and (ef.$dia like '%D%' OR ef.$dia like '%P%' OR ef.$dia like '%M%T%') ORDER BY s.setor ASC, f.nome ASC";
+$query = "SELECT s.setor, f.nome, ef.id FROM u940659928_siupa.tb_escala_funcionario AS ef INNER JOIN u940659928_siupa.tb_funcionario AS f ON (ef.fk_funcionario = f.id) INNER JOIN u940659928_siupa.tb_setor as s ON (f.fk_setor = s.id) Where ef.oficial = 'sim' and ef.mes=$mes and ef.ano=$ano and (ef.$dia like '%D%' OR ef.$dia like '%P%' OR ef.$dia like '%M%T%') ORDER BY s.setor ASC, f.nome ASC";
 
 
 if ($stmt = $conn->prepare($query)) {
@@ -146,7 +146,7 @@ echo '<div class="pagebreak"> </div>';
 $totalgeral = 0;
 $i = "";
 echo "<div><h2>RECEBIMENTO DE EPI - NOTURNO $tdia/$mes/$ano</h2></div> <a href='?dia=$diax&mes=$mes&ano=$ano'>.</a></h2></div>";
-$query = "SELECT s.setor, f.nome, ef.id FROM db_rh.tb_escala_funcionario AS ef INNER JOIN db_rh.tb_funcionario AS f ON (ef.fk_funcionario = f.id) INNER JOIN db_rh.tb_setor as s ON (f.fk_setor = s.id) Where ef.oficial = 'sim' and ef.mes=$mes and (ef.$dia like '%N%' OR ef.$dia like '%P%') ORDER BY s.setor ASC, f.nome ASC";
+$query = "SELECT s.setor, f.nome, ef.id FROM u940659928_siupa.tb_escala_funcionario AS ef INNER JOIN u940659928_siupa.tb_funcionario AS f ON (ef.fk_funcionario = f.id) INNER JOIN u940659928_siupa.tb_setor as s ON (f.fk_setor = s.id) Where ef.oficial = 'sim' and ef.mes=$mes and (ef.$dia like '%N%' OR ef.$dia like '%P%') ORDER BY s.setor ASC, f.nome ASC";
 
 
 if ($stmt = $conn->prepare($query)) {

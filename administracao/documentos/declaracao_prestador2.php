@@ -4,7 +4,7 @@ include_once('../../bd/conectabd.php');
 
 $buscanome = 'bruno'; //preg_replace('/[^[:alnum:]_]/', '',$nome);
 $bdaddservidor = new BD;
-$sqladdservidor = "SELECT c.titulo, f.* FROM db_rh.tb_funcionario as f INNER JOIN db_rh.tb_cargo as c ON (f.fk_cargo = c.id) WHERE f.fk_cargo = '20' and status='ATIVO' ORDER BY f.nome ASC";
+$sqladdservidor = "SELECT c.titulo, f.* FROM u940659928_siupa.tb_funcionario as f INNER JOIN u940659928_siupa.tb_cargo as c ON (f.fk_cargo = c.id) WHERE f.fk_cargo = '20' and status='ATIVO' ORDER BY f.nome ASC";
 $resultadoaddservidor = $bdaddservidor->consulta($sqladdservidor);
 
 

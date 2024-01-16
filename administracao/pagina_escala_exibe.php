@@ -138,7 +138,7 @@ $idescala = $_GET['id'];
 
 $mes = $_GET['mes'];
 $ano = $_GET['ano'];
-//$sql = "SELECT * FROM db_rh.tb_escalas GROUP BY ano desc, mes desc  ";
+//$sql = "SELECT * FROM u940659928_siupa.tb_escalas GROUP BY ano desc, mes desc  ";
 
 $setor_titulo = "Escala " . $_GET['setor'] . " " . $_GET['mes'] . " " . $_GET['ano'];
 $oficial = $_GET['oficial'];
@@ -161,7 +161,7 @@ echo $statusEscala;
 $outrasMes = $_GET['mes'];
 $outrasAno = $_GET['ano'];
 
-$sql = "SELECT es.id, es.mes, es.ano, s.setor, es.oficial FROM db_rh.tb_escalas as es inner join db_rh.tb_setor as s on (es.fk_setor = s.id) WHERE es.ano = '$outrasAno' AND es.mes = '$outrasMes' ORDER BY s.setor ASC";
+$sql = "SELECT es.id, es.mes, es.ano, s.setor, es.oficial FROM u940659928_siupa.tb_escalas as es inner join u940659928_siupa.tb_setor as s on (es.fk_setor = s.id) WHERE es.ano = '$outrasAno' AND es.mes = '$outrasMes' ORDER BY s.setor ASC";
 $busca = new BD;
 $resultado = $busca->consulta($sql);
 

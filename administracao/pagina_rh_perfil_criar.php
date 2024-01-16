@@ -79,7 +79,7 @@ if (mysqli_num_rows($resultcargos) > 0) {
     echo "</select></label><br><br>";
 }
 $bdsetores = new BD;
-$sqlsetores  = "SELECT  * FROM db_rh.tb_setor GROUP BY setor ASC";
+$sqlsetores  = "SELECT  * FROM u940659928_siupa.tb_setor GROUP BY setor ASC";
 $resultadosetores  = $bdsetores->consulta($sqlsetores);
 echo "<label>Setor:<select id='setorbusca' name='fk_setor' class='setorbusca form-control'>
         <option value='undefined'>TODOS</option>";

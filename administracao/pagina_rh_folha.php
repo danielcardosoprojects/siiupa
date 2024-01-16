@@ -86,7 +86,7 @@ class Tabela
 <?php
 $idfolha = $_GET['id'];
 //BUSCA O MES E ANO DA FOLHA SOMENTE PARA O TITULO
-$querymesano = "SELECT fls.ref_mes, fls.ref_ano, fls.status as status_folha FROM db_rh.tb_folhas as fls WHERE fls.id=$idfolha";
+$querymesano = "SELECT fls.ref_mes, fls.ref_ano, fls.status as status_folha FROM u940659928_siupa.tb_folhas as fls WHERE fls.id=$idfolha";
 
 
 if ($stmt = $conn->prepare($querymesano)) {
@@ -344,7 +344,7 @@ $tab->tpopulalinha("");
 $tab->tfechalinha();
 $tab->fechaTabela();
 
-$query = "SELECT fl.id as id_linha, func.id, func.matricula, func.cpf, func.vinculo, func.nome, cargo.funcao_upa, cargo.titulo, fl.adc_not, fl.ext_6, fl.ext_12, fl.ext_24, fl.acionamento, fl.transferencia, fl.fixos, fl.obs, cargo.valor_plantao, cargo.valor_acionamento, cargo.valor_transferencia FROM db_rh.tb_folha AS fl INNER JOIN db_rh.tb_funcionario AS func ON (fl.fk_funcionario = func.id) INNER JOIN db_rh.tb_cargo AS cargo ON (func.fk_cargo = cargo.id) WHERE fl.fk_folhas = '$idfolha' $vinculo_separa $setor_separa ORDER BY func.nome ASC";
+$query = "SELECT fl.id as id_linha, func.id, func.matricula, func.cpf, func.vinculo, func.nome, cargo.funcao_upa, cargo.titulo, fl.adc_not, fl.ext_6, fl.ext_12, fl.ext_24, fl.acionamento, fl.transferencia, fl.fixos, fl.obs, cargo.valor_plantao, cargo.valor_acionamento, cargo.valor_transferencia FROM u940659928_siupa.tb_folha AS fl INNER JOIN u940659928_siupa.tb_funcionario AS func ON (fl.fk_funcionario = func.id) INNER JOIN u940659928_siupa.tb_cargo AS cargo ON (func.fk_cargo = cargo.id) WHERE fl.fk_folhas = '$idfolha' $vinculo_separa $setor_separa ORDER BY func.nome ASC";
 
 if ($stmt = $conn->prepare($query)) {
     $stmt->execute();

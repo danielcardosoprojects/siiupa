@@ -321,7 +321,7 @@
             $idescala = $_GET['id'];
         } else {
         }
-        $sql = "SELECT s.setor, e.* FROM db_rh.tb_escalas AS e INNER JOIN db_rh.tb_setor AS s ON (e.fk_setor = s.id) WHERE e.id=$idescala ";
+        $sql = "SELECT s.setor, e.* FROM u940659928_siupa.tb_escalas AS e INNER JOIN u940659928_siupa.tb_setor AS s ON (e.fk_setor = s.id) WHERE e.id=$idescala ";
         $busca = new BD;
         $resultado = $busca->consulta($sql);
         $mesext = new data;
@@ -424,7 +424,7 @@
 
 
 
-                $sqlserv = "SELECT c.funcao_upa, c.titulo, f.fk_cargo, f.nome, ef.* FROM db_rh.tb_escala_funcionario as ef INNER JOIN db_rh.tb_funcionario AS f ON (ef.fk_funcionario = f.id) INNER JOIN db_rh.tb_cargo AS c ON (f.fk_cargo = c.id) WHERE ef.fk_escala=$idescala order by ef.posicao ASC, f.nome ASC, ef.id ASC";
+                $sqlserv = "SELECT c.funcao_upa, c.titulo, f.fk_cargo, f.nome, ef.* FROM u940659928_siupa.tb_escala_funcionario as ef INNER JOIN u940659928_siupa.tb_funcionario AS f ON (ef.fk_funcionario = f.id) INNER JOIN u940659928_siupa.tb_cargo AS c ON (f.fk_cargo = c.id) WHERE ef.fk_escala=$idescala order by ef.posicao ASC, f.nome ASC, ef.id ASC";
                 $buscaserv = new BD;
                 $resultadoserv = $buscaserv->consulta($sqlserv);
                 $feriaslegenda = "";
@@ -432,7 +432,7 @@
 
                     //prepara a legenda de ferias//
 
-                    $sqlferiasleg = "SELECT DATE_FORMAT(ferias.datainicio, '%d/%m/%Y') as feriasinicio, DATE_FORMAT(ferias.datafim, '%d/%m/%Y') as feriasfim,ferias.* FROM db_rh.tb_ferias as ferias WHERE ferias.fk_funcionario = '$serv->fk_funcionario' AND (MONTH(ferias.datainicio) = $mes OR MONTH(ferias.datafim) = $mes) AND ferias.ref_ano = $ano";
+                    $sqlferiasleg = "SELECT DATE_FORMAT(ferias.datainicio, '%d/%m/%Y') as feriasinicio, DATE_FORMAT(ferias.datafim, '%d/%m/%Y') as feriasfim,ferias.* FROM u940659928_siupa.tb_ferias as ferias WHERE ferias.fk_funcionario = '$serv->fk_funcionario' AND (MONTH(ferias.datainicio) = $mes OR MONTH(ferias.datafim) = $mes) AND ferias.ref_ano = $ano";
                     $buscaferiasleg = new BD;
                     $resultadoferiasleg = $buscaferiasleg->consulta($sqlferiasleg);
 

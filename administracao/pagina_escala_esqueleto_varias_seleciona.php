@@ -252,7 +252,7 @@ function mesext($entrada)
         $ano = $_GET['ano'];
 
         $escalas = new BD;
-        $sqlmes =  "SELECT s.setor, e.* FROM db_rh.tb_escalas AS e INNER JOIN db_rh.tb_setor as s ON(e.fk_setor = s.id) WHERE e.mes=$mes AND e.ano=$ano ORDER BY s.setor ASC";
+        $sqlmes =  "SELECT s.setor, e.* FROM u940659928_siupa.tb_escalas AS e INNER JOIN u940659928_siupa.tb_setor as s ON(e.fk_setor = s.id) WHERE e.mes=$mes AND e.ano=$ano ORDER BY s.setor ASC";
         $resultadomes = $escalas->consulta($sqlmes);
 
         foreach ($resultadomes as $escalasmes) {

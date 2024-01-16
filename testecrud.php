@@ -1,6 +1,6 @@
 <?php
 $bd = new PDO('mysql:host=localhost;dbname=db_rh','root','apuapu');
-$sql = "SELECT * FROM db_rh.tb_setor";
+$sql = "SELECT * FROM u940659928_siupa.tb_setor";
 $recebe = $bd->prepare($sql);
 $recebe->execute();
 echo "<pre>";

@@ -5,7 +5,7 @@ $busca = new BD;
 $id = $_GET['id'];
 $dia = $_GET['dia'];
 $valor= $_GET['valor'];
-$sql = "UPDATE db_rh.tb_escala_funcionario SET $dia='$valor' WHERE id=$id";
+$sql = "UPDATE u940659928_siupa.tb_escala_funcionario SET $dia='$valor' WHERE id=$id";
 
 
 $busca = $busca->conecta();
