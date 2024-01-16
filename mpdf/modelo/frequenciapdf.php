@@ -66,7 +66,7 @@ $vinculo = $_GET['vinculo'];
 <div style='font-size:12px;font-family: "Times New Roman", Times, serif;'>
     Referência: <strong><?php echo GetNomeMes($mes); ?>-2024</strong><br />
 
-    Matricula : <strong><?php echo $matricula; ?></strong><span style="color:white;">____________________</span>Data de Admissão: <strong><?php echo $admissao; ?></strong><br />
+    Matricula : <strong><?php //echo $matricula; ?></strong><span style="color:white;">____________________</span>Data de Admissão: <strong><?php //echo $admissao; ?></strong><br />
     Nome: <strong><?php echo strtoupper($nomefunc); ?></strong> <span style="color:white;">______</span>Cargo/Função: <strong><?php echo $cargo; ?></strong><br />
     Lotação : 
     <strong>UPA <?php echo $vinculo; ?></strong>
