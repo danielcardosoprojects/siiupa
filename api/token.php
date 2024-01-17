@@ -19,8 +19,10 @@ $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
 } catch (UnexpectedValueException $e) {
     // errors having to do with JWT signature and claims
     echo "Erro: " . $e->getMessage();
-    exit;
+    
 }
+if($decoded){
 echo json_encode($decoded);
+}
 
 ?>
