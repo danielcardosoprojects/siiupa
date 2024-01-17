@@ -1,7 +1,6 @@
 <?php
 require '../vendor/autoload.php';
 use Firebase\JWT\JWT;
-use Firebase\JWT\Key;
 
 $key = 'example_key';
 $payload = [
@@ -11,39 +10,18 @@ $payload = [
     'nbf' => 1357000000
 ];
 
-/**
- * IMPORTANT:
- * You must specify supported algorithms for your application. See
- * https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40
- * for a list of spec-compliant algorithms.
- */
-$jwt = JWT::encode($payload, $key, 'HS256');
-$decoded = JWT::decode($jwt, new Key($key, 'HS256'));
-print_r($decoded);
+$headers = [
+    'x-forwarded-for' => 'www.google.com'
+];
 
-// Pass a stdClass in as the third parameter to get the decoded header values
-$headers = new stdClass();
-$decoded = JWT::decode($jwt, new Key($key, 'HS256'), $headers);
+// Encode headers in the JWT string
+$jwt = JWT::encode($payload, $key, 'HS256', null, $headers);
 
+// Decode headers from the JWT string WITHOUT validation
+// **IMPORTANT**: This operation is vulnerable to attacks, as the JWT has not yet been verified.
+// These headers could be any value sent by an attacker.
+list($headersB64, $payloadB64, $sig) = explode('.', $jwt);
+$decoded = json_decode(base64_decode($headersB64), true);
 
-print_r($headers);
-
-/*
- NOTE: This will now be an object instead of an associative array. To get
- an associative array, you will need to cast it as such:
-*/
-
-$decoded_array = (array) $decoded;
-
-
-/**
- * You can add a leeway to account for when there is a clock skew times between
- * the signing and verifying servers. It is recommended that this leeway should
- * not be bigger than a few minutes.
- *
- * Source: http://self-issued.info/docs/draft-ietf-oauth-json-web-token.html#nbfDef
- */
-JWT::$leeway = 60; // $leeway in seconds
-$decoded = JWT::decode($jwt, new Key($key, 'HS256'));
 print_r($decoded);
 ?>
