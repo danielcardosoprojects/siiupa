@@ -12,18 +12,10 @@ if(!isset($_POST['token'])){
 }
 $jwt = $_POST['token'];
 $key = 'kljsjdlkajl#KJKL#k3j4lkj4kl2jkl34kJL$#wq423lk4jlk23JKL#@LK$';
-try {
+
 $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
 
-} catch (LogicException $e) {
-    // errors having to do with environmental setup or malformed JWT Keys
-} catch (UnexpectedValueException $e) {
-    // errors having to do with JWT signature and claims
-    http_response_code(403);
-    
-}
-if(isset($decoded)){
 echo json_encode($decoded);
-}
+
 
 ?>
