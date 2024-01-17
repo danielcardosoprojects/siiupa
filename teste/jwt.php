@@ -19,7 +19,7 @@ $payload = [
  */
 $jwt = JWT::encode($payload, $key, 'HS256');
 $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
-echo $jwt;
+//echo $jwt;
 
 // Pass a stdClass in as the third parameter to get the decoded header values
 $headers = new stdClass();
@@ -43,3 +43,6 @@ $decoded_array = (array) $decoded;
 JWT::$leeway = 60; // $leeway in seconds
 $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
 ?>
+<script>
+    sessionStorage.setItem("chave", "valor");
+    </script>
