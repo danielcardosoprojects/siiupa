@@ -44,5 +44,5 @@ JWT::$leeway = 60; // $leeway in seconds
 $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
 ?>
 <script>
-    sessionStorage.setItem("chave", "valor");
+    sessionStorage.setItem("token", "<?=$jwt;?>");
     </script>
