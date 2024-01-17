@@ -4,8 +4,9 @@ use Firebase\JWT\JWT;
 
 $key = 'example_key';
 $payload = [
-    'iss' => 'http://example.org',
-    'aud' => 'http://example.com',
+    'iss' => 'https://www.siupa.com.br',
+    'aud' => 'https://www.siupa.com.br',
+    'usuario' => 'Daniel Cardoso',
     'iat' => 1356999524,
     'nbf' => 1357000000
 ];
@@ -24,4 +25,5 @@ list($headersB64, $payloadB64, $sig) = explode('.', $jwt);
 $decoded = json_decode(base64_decode($headersB64), true);
 
 print_r($jwt);
+var_dump($decoded);
 ?>
