@@ -17,7 +17,7 @@ $payload = [
  * https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40
  * for a list of spec-compliant algorithms.
  */
-//$jwt = JWT::encode($payload, $key, 'HS256');
+$jwt = JWT::encode($payload, $key, 'HS256');
 $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
 echo json_encode($jwt);
 
