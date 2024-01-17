@@ -1,12 +1,12 @@
 <?php
-require '../vendor/autoload.php';
+require 'siiupa/vendor/autoload.php';
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
-$key = 'example_key';
+$key = 'kljsjdlkajl#KJKL#k3j4lkj4kl2jkl34kJL$#wq423lk4jlk23JKL#@LK$';
 $payload = [
-    'iss' => 'http://example.org',
-    'aud' => 'http://example.com',
+    'iss' => 'https://siupa.com.br',
+    'aud' => 'https://siupa.com.br',
     'iat' => 1356999524,
     'nbf' => 1357000000
 ];
@@ -24,7 +24,7 @@ $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
 // Pass a stdClass in as the third parameter to get the decoded header values
 $headers = new stdClass();
 $decoded = JWT::decode($jwt, new Key($key, 'HS256'), $headers);
-echo json_encode($decoded);
+//echo json_encode($decoded);
 
 /*
  NOTE: This will now be an object instead of an associative array. To get
@@ -43,6 +43,4 @@ $decoded_array = (array) $decoded;
 JWT::$leeway = 60; // $leeway in seconds
 $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
 ?>
-<script>
-    sessionStorage.setItem("token", "<?=$jwt;?>");
-    </script>
+<script>sessionStorage.setItem('token', '<?=$jwt;?>');    </script>
