@@ -1,6 +1,6 @@
 <?php
 header("Access-Control-Allow-Origin: *");
-require '/siiupa/vendor/autoload.php';
+require '../vendor/autoload.php';
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 $jwt = $_GET['token'];
