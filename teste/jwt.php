@@ -24,7 +24,7 @@ print_r($jwt);
 // Pass a stdClass in as the third parameter to get the decoded header values
 $headers = new stdClass();
 $decoded = JWT::decode($jwt, new Key($key, 'HS256'), $headers);
-print_r($headers);
+print_r($decoded);
 
 /*
  NOTE: This will now be an object instead of an associative array. To get
