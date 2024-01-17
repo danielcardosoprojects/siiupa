@@ -19,12 +19,12 @@ $payload = [
  */
 $jwt = JWT::encode($payload, $key, 'HS256');
 $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
-echo json_encode($jwt);
+echo $jwt;
 
 // Pass a stdClass in as the third parameter to get the decoded header values
 $headers = new stdClass();
 $decoded = JWT::decode($jwt, new Key($key, 'HS256'), $headers);
-//print_r($decoded);
+echo json_encode($decoded);
 
 /*
  NOTE: This will now be an object instead of an associative array. To get
