@@ -18,7 +18,7 @@ $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
     // errors having to do with environmental setup or malformed JWT Keys
 } catch (UnexpectedValueException $e) {
     // errors having to do with JWT signature and claims
-    echo "Erro: " . $e->getMessage();
+    http_response_code(403);
     
 }
 if(isset($decoded)){
