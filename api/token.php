@@ -21,7 +21,7 @@ $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
     echo "Erro: " . $e->getMessage();
     
 }
-if($decoded){
+if(isset($decoded)){
 echo json_encode($decoded);
 }
 
