@@ -3,7 +3,7 @@ header("Access-Control-Allow-Origin: *");
 require '../vendor/autoload.php';
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
-if(!$_POST['token']){
+if(!isset($_POST['token'])){
     http_response_code(403);
     exit;
 
