@@ -176,7 +176,7 @@
 
 <div style="text-align:left;">
 <script>
-    var dataToken = sessionStorage.getItem("chave");
+    var dataToken = sessionStorage.getItem("token");
     $("#tituloRH").text(dataToken);
 </script>
     <h1 text-color="#fff" style="float:left" id="tituloRH">Recursos Humanos
