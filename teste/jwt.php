@@ -23,5 +23,5 @@ $jwt = JWT::encode($payload, $key, 'HS256', null, $headers);
 list($headersB64, $payloadB64, $sig) = explode('.', $jwt);
 $decoded = json_decode(base64_decode($headersB64), true);
 
-print_r($decoded);
+print_r($jwt);
 ?>
