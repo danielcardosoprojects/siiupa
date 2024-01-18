@@ -158,7 +158,7 @@ function atualizarPosicao() {
     var novaPosicaoY = (campoPosicao.value - 24);
     if (novaPosicaoY !== posicaoY) {
         posicaoY = novaPosicaoY;
-        container.style.backgroundPosition = "-800px " + posicaoY + "px";
+        container.style.backgroundPosition = "-500px " + posicaoY + "px";
     }
 }
 
