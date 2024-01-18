@@ -190,7 +190,7 @@ echo "</div>";
     <script>
         function carregarCategorias() {
             const select = document.getElementById('categoria');
-            fetch('/siiupa/api/farmacia/api/records/tb_farmcategoria?order=categoria,asc')
+            fetch('/siiupa/api/farmacia/api.php/records/tb_farmcategoria?order=categoria,asc')
                 .then(response => response.json())
                 .then(data => {
                     data.records.forEach(item => {
@@ -210,7 +210,7 @@ echo "</div>";
                 return;
             }
 
-            fetch(`/siiupa/api/farmacia/api/records/tb_farmcategoria/${categoriaId}`)
+            fetch(`/siiupa/api/farmacia/api.php/records/tb_farmcategoria/${categoriaId}`)
                 .then(response => response.json())
                 .then(data => {
                     document.getElementById('descricao').innerText = data.descricao;
