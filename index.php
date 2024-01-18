@@ -69,7 +69,7 @@ include('../conexao/verifica_login.php');
 
 	<link rel="stylesheet" href="/siiupa/css/chartist.min.css">
 	<script src="/siiupa/js/chartist.min.js"></script>
-	<script src="/siiupa/js/graficos/chartist-plugin-pointlabels.min"></script> <!-- ROTULOS DE DADOS -->
+	<script src="/siiupa/js/graficos/chartist-plugin-pointlabels.min.js"></script> <!-- ROTULOS DE DADOS -->
 
 	<!-- DATA TABLES -->
 	<script type="text/javascript" src="/siiupa/js/dataTables/datatables.min.js"></script>
