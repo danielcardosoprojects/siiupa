@@ -72,6 +72,7 @@ function criarInput() {
     td.name = nome;
     tr.appendChild(td);
     td2.id = `td${contaLinhas}`;
+    
     td2.className = `tdLimpa`;
     tr.appendChild(td2);
     tabela.appendChild(tr);
@@ -249,3 +250,33 @@ function handleInputChange(event) {
 inputsC.forEach(input => {
     input.addEventListener('input', handleInputChange);
 });
+
+function criarJSON() {
+    // Obtém todas as células com a classe 'tdLimpa'
+    const celulas = document.querySelectorAll('.tdLimpa');
+    
+    // Inicializa um objeto vazio para armazenar o JSON
+    const jsonResult = {};
+
+    // Itera sobre cada célula
+    jsonResult['data'] = document.getElementById("dateInput").value;
+    celulas.forEach((celula) => {
+        // Obtém o ID da célula e extrai apenas o número
+        const idNumero = celula.id.replace(/\D/g, '');
+
+        // Obtém o texto dentro da célula
+        const texto = celula.textContent.trim();
+
+        // Adiciona ao JSON
+        jsonResult[idNumero] = texto;
+    });
+
+    // Converte o objeto JSON para uma string JSON
+    const jsonString = JSON.stringify(jsonResult, null, 2);
+
+    // Exibe o JSON no console (opcional)
+    console.log(jsonString);
+
+    // Retorne o JSON (opcional, dependendo do seu caso de uso)
+    return jsonString;
+}
