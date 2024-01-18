@@ -3,6 +3,7 @@ var botaoCima = document.getElementById('botao-cima');
 var botaoBaixo = document.getElementById('botao-baixo');
 var campoPosicao = document.getElementById('campo-posicao');
 var container = document.getElementById('container');
+let anguloAtual = 0;
 var posicaoY = -68;
 let texto = "";
 let contaLinhas = 1;
@@ -150,6 +151,19 @@ document.addEventListener('keydown', event => {
 
 
     }
+});
+
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'ArrowRight') {
+        // Gira um grau para a direita
+        anguloAtual += 1;
+    } else if (event.key === 'ArrowLeft') {
+        // Gira um grau para a esquerda
+        anguloAtual -= 1;
+    }
+
+    // Aplica a transformação de rotação à imagem de plano de fundo
+    container.style.transform = `rotate(${anguloAtual}deg)`;
 });
 
 
