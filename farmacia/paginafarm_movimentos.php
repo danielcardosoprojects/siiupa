@@ -304,7 +304,7 @@ echo "</div>";
 <?php
 
 $query = "SELECT m.novoestoque, m.estoqueanterior, DATE_FORMAT(m.datahora,'%d\/%m\/%Y %H:%i'), m.tipo, sum(m.quantidade) as quantidade, m.setor_origem_fk as Origem, m.setor_dest_fk as Destino, m.usuario as usuario_id, i.nome, i.categoria_fk, i.categoria2_fk, i.categoria3_fk, i.categoria4_fk, s.setor as Setor1, s2.setor as Setor2, u.usuario as usuarioNome, m.item_fk FROM u940659928_siupa.tb_farmmovimento AS m INNER JOIN u940659928_siupa.tb_farmitem AS i ON (m.item_fk = i.id) INNER JOIN u940659928_siupa.tb_farmsetor AS s ON (m.setor_origem_fk = s.id) INNER JOIN u940659928_siupa.tb_farmsetor AS s2 ON (m.setor_dest_fk = s2.id) INNER JOIN login.usuarios AS u on (m.usuario = u.id) where m.datahora between '$datainicio 00:00:00' and '$datafim 23:59:59'  $andTipo $andGenero $andCategoria AND (i.nome like '%$textoBusca%' or i.id like '%$textoBusca%') group by tipo, m.item_fk, m.datahora order BY m.datahora, i.nome  ASC ";
-  // echo $query;
+   echo $query;
 
 $todosResultadosBusca = mysqli_query($conn, $query);
 // var_dump($todosResultadosBusca);
