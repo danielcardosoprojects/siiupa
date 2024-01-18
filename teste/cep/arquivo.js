@@ -3,6 +3,7 @@ var botaoCima = document.getElementById('botao-cima');
 var botaoBaixo = document.getElementById('botao-baixo');
 var campoPosicao = document.getElementById('campo-posicao');
 var container = document.getElementById('container');
+let anguloAtual = 0;
 var posicaoY = -68;
 let texto = "";
 let contaLinhas = 1;
@@ -72,6 +73,7 @@ function criarInput() {
     td.name = nome;
     tr.appendChild(td);
     td2.id = `td${contaLinhas}`;
+
     td2.className = `tdLimpa`;
     tr.appendChild(td2);
     tabela.appendChild(tr);
@@ -151,6 +153,19 @@ document.addEventListener('keydown', event => {
     }
 });
 
+document.addEventListener('keydown', function (event) {
+    if (event.key === 'ArrowRight') {
+        // Gira um grau para a direita
+        anguloAtual += 1;
+    } else if (event.key === 'ArrowLeft') {
+        // Gira um grau para a esquerda
+        anguloAtual -= 1;
+    }
+
+    // Aplica a transformação de rotação à imagem de plano de fundo
+    container.style.transform = `rotate(${anguloAtual}deg)`;
+});
+
 
 
 
@@ -158,7 +173,7 @@ function atualizarPosicao() {
     var novaPosicaoY = (campoPosicao.value - 24);
     if (novaPosicaoY !== posicaoY) {
         posicaoY = novaPosicaoY;
-        container.style.backgroundPosition = "-597px " + posicaoY + "px";
+        container.style.backgroundPosition = "-500px " + posicaoY + "px";
     }
 }
 
@@ -249,3 +264,60 @@ function handleInputChange(event) {
 inputsC.forEach(input => {
     input.addEventListener('input', handleInputChange);
 });
+
+function criarJSON() {
+    // Obtém todas as células com a classe 'tdLimpa'
+    const celulas = document.querySelectorAll('.tdLimpa');
+
+    // Inicializa um objeto vazio para armazenar o JSON
+    const jsonResult = {};
+
+    jsonValores = {};
+
+
+    // Itera sobre cada célula
+
+    jsonResult['data'] = document.getElementById("dateInput").value;
+
+    celulas.forEach((celula) => {
+        // Obtém o ID da célula e extrai apenas o número
+        const idNumero = celula.id.replace(/\D/g, '');
+
+        // Obtém o texto dentro da célula
+        const texto = celula.textContent.trim();
+
+        // Adiciona ao JSON
+        jsonValores[idNumero] = texto;
+    });
+
+    jsonResult['bairros'] = JSON.stringify(jsonValores, null, 2);
+
+    // Converte o objeto JSON para uma string JSON
+    const jsonString = JSON.stringify(jsonResult, null, 2);
+
+    // Exibe o JSON no console (opcional)
+    console.log(jsonString);
+
+    const url = 'https://siupa.com.br/siiupa/api/api.php/records/tb_cep';
+
+    const dadosParaInserir = jsonResult;
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dadosParaInserir),
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Dados inseridos com sucesso:', data);
+        })
+        .catch(error => {
+            console.error('Erro ao inserir dados:', error);
+        });
+
+
+    // Retorne o JSON (opcional, dependendo do seu caso de uso)
+    return jsonString;
+}

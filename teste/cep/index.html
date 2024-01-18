@@ -11,11 +11,20 @@
             flex-direction: row;
 
         }
+		#container1 {
+			width: 489px;
+			height: 24px;
+			position: relative;
+			overflow: hidden;
+
+		}
 		#container {
 			width: 489px;
 			height: 24px;
 			border: 1px solid black;
-			position: relative;
+			position: absolute;
+            top: 0;
+            left: 0;
 			overflow: hidden;
 			background-image: url(202303/20230302.png);
 			background-repeat: no-repeat;
@@ -55,11 +64,14 @@
 <body>
     <div id="main">
     <div id="esquerdo">
-    <input type="date" id="dateInput" placeholder="Selecione uma data">
+    <input type="date" id="dateInput" placeholder="Selecione uma data">1
     
 
     <div id="dataAtual"></div>
+	<div id="container1">
 	<div id="container"></div>
+</div>
+
 	<button id="botao-cima">Mover para baixo</button>
 	<button id="botao-baixo">Mover para cima</button>
 	<input id="campo-posicao" type="number" value="68">
@@ -80,6 +92,7 @@
 	aperte F maiusculo pra copiar
 </div>
 <div id="direito">
+	<button onclick="criarJSON()">Gerar JSON</button>
     <table class="table table-bordered">
         <thead>
             <th>Cidade</th>
@@ -89,6 +102,8 @@
             
         </tbody>
     </table>
+	
+
 </div>
 </div>
 	<script src="arquivo.js"></script>
