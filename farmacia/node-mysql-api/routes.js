@@ -6,8 +6,8 @@ const mysql = require('mysql2');
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'apuapu',
-  database: 'db_rh'
+  password: '4jHd@myhRDEBL@7',
+  database: 'u940659928_siupa'
 });
 
 // Rota para buscar dados

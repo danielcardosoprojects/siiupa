@@ -479,7 +479,7 @@ $idunico = uniqid();
         $(`#btEditaMat_${idF}`).click(function(e) {
             let valorInput = inputEdita.val();
             dataPost = {
-                'banco': 'db_rh',
+                'banco': 'u940659928_siupa',
                 'tabela': 'tb_funcionario',
                 'camposValores': `{"matricula":"${valorInput}"}`,
                 'id': `${idF}`

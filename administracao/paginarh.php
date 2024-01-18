@@ -184,7 +184,7 @@
     </h1>
     <script>
     var dataToken = sessionStorage.getItem("token");
-    $("#tituloRH").text(dataToken);
+    //$("#tituloRH").text(dataToken);
 </script>
     <div class="noticias_linha">
         <?php
