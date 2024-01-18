@@ -73,7 +73,7 @@ function criarInput() {
     td.name = nome;
     tr.appendChild(td);
     td2.id = `td${contaLinhas}`;
-    
+
     td2.className = `tdLimpa`;
     tr.appendChild(td2);
     tabela.appendChild(tr);
@@ -153,7 +153,7 @@ document.addEventListener('keydown', event => {
     }
 });
 
-document.addEventListener('keydown', function(event) {
+document.addEventListener('keydown', function (event) {
     if (event.key === 'ArrowRight') {
         // Gira um grau para a direita
         anguloAtual += 1;
@@ -268,12 +268,17 @@ inputsC.forEach(input => {
 function criarJSON() {
     // Obtém todas as células com a classe 'tdLimpa'
     const celulas = document.querySelectorAll('.tdLimpa');
-    
+
     // Inicializa um objeto vazio para armazenar o JSON
     const jsonResult = {};
 
+    jsonValores = {};
+
+
     // Itera sobre cada célula
+
     jsonResult['data'] = document.getElementById("dateInput").value;
+
     celulas.forEach((celula) => {
         // Obtém o ID da célula e extrai apenas o número
         const idNumero = celula.id.replace(/\D/g, '');
@@ -282,14 +287,36 @@ function criarJSON() {
         const texto = celula.textContent.trim();
 
         // Adiciona ao JSON
-        jsonResult[idNumero] = texto;
+        jsonValores[idNumero] = texto;
     });
+
+    jsonResult['bairros'] = JSON.stringify(jsonValores, null, 2);
 
     // Converte o objeto JSON para uma string JSON
     const jsonString = JSON.stringify(jsonResult, null, 2);
 
     // Exibe o JSON no console (opcional)
     console.log(jsonString);
+
+    const url = 'https://siupa.com.br/siiupa/api/api.php/records/tb_cep';
+
+    const dadosParaInserir = jsonResult;
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dadosParaInserir),
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Dados inseridos com sucesso:', data);
+        })
+        .catch(error => {
+            console.error('Erro ao inserir dados:', error);
+        });
+
 
     // Retorne o JSON (opcional, dependendo do seu caso de uso)
     return jsonString;
