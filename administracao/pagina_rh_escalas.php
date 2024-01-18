@@ -39,7 +39,7 @@ include_once('tabelas.php');
         $('#btcriarescala').click(function() {
 
             $.confirm({
-                title: 'Criar escalassss',
+                title: 'Criar escalas',
                 content: 'url:administracao/escalas/listasetor.php?acao=criar',
                 columnClass: 'medium',
                 buttons: {
