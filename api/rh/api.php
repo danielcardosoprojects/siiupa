@@ -12419,7 +12419,7 @@ namespace Tqdev\PhpCrudApi {
     $config = new Config([
         'driver' => 'mysql',
         'address' => 'localhost',
-        'port' => '3306',
+        //'port' => '3306',
         'username' => 'u940659928_siupa',
         'password' => '4jHd@myhRDEBL@7',
         'database' => 'u940659928_siupa',
