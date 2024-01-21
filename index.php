@@ -220,7 +220,7 @@ include('../conexao/verifica_login.php');
 						<a href="/siiupa/?setor=adm" class="btn btn-primary">Administração</a>
 					</li>
 					<li class="nav-link active">
-						<a href="/siiupa/servidor" class="btn btn-primary">Servidor</a>
+						<a href="/siiupa/servidor/dist" class="btn btn-primary">Servidor</a>
 					</li>
 					<li class="nav-link active"> 
 						<a id="btnFarmacia" href="/siiupa/farmacia/	" class="btn btn-primary">Farmácia</a>
