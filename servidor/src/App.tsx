@@ -7,6 +7,7 @@ interface AuthData {
   nivel: string;
   idServidorUsuario: string;
   idUsuario: string;
+  token: string;
 }
 
 const App: React.FC = () => {
@@ -49,6 +50,7 @@ const App: React.FC = () => {
           <p>Nível: {authData.nivel}</p>
           <p>ID do Servidor do Usuário: {authData.idServidorUsuario}</p>
           <p>ID do Usuário: {authData.idUsuario}</p>
+          <p>ID do Usuário: {authData.token}</p>
         </div>
       ) : (
         <p>Redirecionando...</p>
