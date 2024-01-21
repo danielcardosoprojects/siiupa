@@ -18,7 +18,7 @@ const App: React.FC = () => {
       try {
         const response = await fetch('https://www.siupa.com.br/conexao/api_login.php');
         const data = await response.json();
-
+        console.log(data);
         // Define o tipo da resposta conforme a interface AuthData
        setAuthData(data as AuthData);
 
