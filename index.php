@@ -234,7 +234,7 @@ include('../conexao/verifica_login.php');
 					<span class="btn btn-outline-info">Usuário: <?php echo utf8_encode($_SESSION['nomeusuario']); ?>
 						<img src="/siiupa/imagens/icones/nivel.svg" width="20px"><?php echo $_SESSION['nivel']; ?>
 					</span>
-					<a class="btn btn-outline-info" href='/redefinirsenha.php'>Troca senha</a>
+					<a class="btn btn-outline-info" href='/conexao/redefinirsenha.php'>Troca senha</a>
 					<a class="btn btn-outline-info" href="/conexao/logout.php" id="sair">Sair</a>
 				</span>
 			</div>
