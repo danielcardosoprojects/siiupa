@@ -220,6 +220,9 @@ include('../conexao/verifica_login.php');
 						<a href="/siiupa/?setor=adm" class="btn btn-primary">Administração</a>
 					</li>
 					<li class="nav-link active">
+						<a href="/siiupa/servidor/dist" class="btn btn-primary">Servidor</a>
+					</li>
+					<li class="nav-link active"> 
 						<a id="btnFarmacia" href="/siiupa/farmacia/	" class="btn btn-primary">Farmácia</a>
 					</li>
 					<li class="nav-link active">
@@ -234,7 +237,7 @@ include('../conexao/verifica_login.php');
 					<span class="btn btn-outline-info">Usuário: <?php echo utf8_encode($_SESSION['nomeusuario']); ?>
 						<img src="/siiupa/imagens/icones/nivel.svg" width="20px"><?php echo $_SESSION['nivel']; ?>
 					</span>
-					<a class="btn btn-outline-info" href='/redefinirsenha.php'>Troca senha</a>
+					<a class="btn btn-outline-info" href='/conexao/redefinirsenha.php'>Troca senha</a>
 					<a class="btn btn-outline-info" href="/conexao/logout.php" id="sair">Sair</a>
 				</span>
 			</div>
