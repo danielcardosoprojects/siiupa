@@ -321,3 +321,38 @@ function criarJSON() {
     // Retorne o JSON (opcional, dependendo do seu caso de uso)
     return jsonString;
 }
+
+function carregaHistorico() {
+    // Obtém todas as células com a classe 'tdLimpa'
+    const historico = document.getElementById("historico");
+
+
+    const url = 'https://siupa.com.br/siiupa/api/api.php/records/tb_cep/?order=id,desc';
+
+
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        //body: JSON.stringify(dadosParaInserir),
+    })
+        .then(response => response.json())
+        .then(data => {
+            
+            data.records.forEach((dado)=>{
+                
+                historico.innerHTML = historico.innerHTML + dado.data+"<br>";
+
+            });
+        })
+        .catch(error => {
+            console.error('Erro ao inserir dados:', error);
+        });
+
+
+    // Retorne o JSON (opcional, dependendo do seu caso de uso)
+   // return jsonString;
+}
+
+carregaHistorico();
