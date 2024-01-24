@@ -312,6 +312,7 @@ function criarJSON() {
         .then(response => response.json())
         .then(data => {
             console.log('Dados inseridos com sucesso:', data);
+            location.reload();
         })
         .catch(error => {
             console.error('Erro ao inserir dados:', error);
