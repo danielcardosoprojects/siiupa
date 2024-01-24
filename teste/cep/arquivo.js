@@ -348,6 +348,19 @@ function carregaHistorico() {
             // Formatar a nova data (YYYY-MM-DD)
             var nextDate = currentDate.toISOString().split('T')[0];
             document.getElementById("dateInput").value = nextDate;
+
+            
+            var parts = nextDate.split("-");
+
+            // Criar o novo formato
+            var newFormat = parts[0] + parts[1] + '/' + parts[0] + parts[1] + parts[2] + '.png';
+
+            console.log(newFormat);
+            const minhaDiv2 = document.getElementById("container");
+            const dataAtual2 = document.getElementById("dataAtual");
+            minhaDiv2.style.backgroundImage = `url('${newFormat}')`;
+            dataAtual2.style.backgroundImage = `url('${newFormat}')`;
+
             data.records.forEach((dado) => {
 
                 historico.innerHTML = historico.innerHTML + dado.data + "<br>";
