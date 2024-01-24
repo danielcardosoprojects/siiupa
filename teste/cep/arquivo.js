@@ -339,10 +339,18 @@ function carregaHistorico() {
     })
         .then(response => response.json())
         .then(data => {
-            
-            data.records.forEach((dado)=>{
-                
-                historico.innerHTML = historico.innerHTML + dado.data+"<br>";
+            var currentDate = new Date(data.records[0].data);
+
+            // Adicionar um dia
+            currentDate.setDate(currentDate.getDate() + 1);
+
+            // Formatar a nova data (YYYY-MM-DD)
+            var nextDate = currentDate.toISOString().split('T')[0];
+            document.getElementById("dateInput").value = nextDate;
+            data.records.forEach((dado) => {
+
+                historico.innerHTML = historico.innerHTML + dado.data + "<br>";
+
 
             });
         })
@@ -352,7 +360,7 @@ function carregaHistorico() {
 
 
     // Retorne o JSON (opcional, dependendo do seu caso de uso)
-   // return jsonString;
+    // return jsonString;
 }
 
 carregaHistorico();
