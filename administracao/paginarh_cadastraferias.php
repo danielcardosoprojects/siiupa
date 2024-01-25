@@ -175,7 +175,7 @@ if ($_GET['acao'] == 'executa') {
 if ($_GET['acao'] == 'deleta') {
     $dados->idFerias =  $_GET['idferias'];
     $dados->idServidor = $_GET['id'];
-    $query = "DELETE FROM `db_rh`.`tb_ferias` WHERE (`id` = '$dados->idFerias')";
+    $query = "DELETE FROM `u940659928_siupa`.`tb_ferias` WHERE (`id` = '$dados->idFerias')";
     if (mysqli_query($conn, $query)) {
         echo "Sucesso, registro de férias excluída!";
         include("perfil/ferias.php");
