@@ -138,6 +138,7 @@ anterior.addEventListener('click', campoAnterior);
 document.addEventListener('keydown', event => {
     if (event.key === 'Enter') {
         event.preventDefault();
+        
 
         console.log(campoAtual + 1, totalCampos);
         if (campoAtual + 1 > totalCampos) {
@@ -151,6 +152,13 @@ document.addEventListener('keydown', event => {
 
 
     }
+    if (event.key === 'b') {
+        event.preventDefault();
+        if (confirm('Cadastrar??')) {
+            criarJSON();
+        }
+    }
+    
 });
 
 document.addEventListener('keydown', function (event) {
@@ -194,58 +202,63 @@ campoPosicao.addEventListener('input', function () {
 
 document.addEventListener('keypress', function (event) {
 
+
+
     if (event.keyCode == 13) {
-        console.log('oi');
+    console.log('oi');
 
 
-        campoPosicao.blur(); // desfoca o campo para que a atualização da posição funcione
-        campoPosicao.value = parseFloat(campoPosicao.value) - 24;
-        atualizarPosicao();
+    campoPosicao.blur(); // desfoca o campo para que a atualização da posição funcione
+    campoPosicao.value = parseFloat(campoPosicao.value) - 24;
+    atualizarPosicao();
+}
+if (event.keyCode == 119) {
+
+    campoPosicao.blur(); // desfoca o campo para que a atualização da posição funcione
+    campoPosicao.value = parseFloat(campoPosicao.value) + 1;
+    atualizarPosicao();
+}
+if (event.keyCode == 115) {
+
+    campoPosicao.blur(); // desfoca o campo para que a atualização da posição funcione
+    campoPosicao.value = parseFloat(campoPosicao.value) - 1;
+    atualizarPosicao();
+}
+if (event.keyCode == 97) {
+    //A
+    if (campoAtual == 0) {
+        console.log('menor');
+        return;
     }
-    if (event.keyCode == 119) {
+    campoPosicao.blur(); // desfoca o campo para que a atualização da posição funcione
+    campoPosicao.value = parseFloat(campoPosicao.value) + 24;
+    atualizarPosicao();
+    campoAtual--;
+    exibir(campoAtual);
+}
 
-        campoPosicao.blur(); // desfoca o campo para que a atualização da posição funcione
-        campoPosicao.value = parseFloat(campoPosicao.value) + 1;
-        atualizarPosicao();
-    }
-    if (event.keyCode == 115) {
+if (event.keyCode == 70) {
+    const inputs = document.querySelectorAll("input[type='number']");
+    texto = "";
+    ignora2primeiros = -1;
+    inputs.forEach((input) => {
+        ignora2primeiros++;
+        if (ignora2primeiros < 2) {
 
-        campoPosicao.blur(); // desfoca o campo para que a atualização da posição funcione
-        campoPosicao.value = parseFloat(campoPosicao.value) - 1;
-        atualizarPosicao();
-    }
-    if (event.keyCode == 97) {
-        //A
-        if (campoAtual == 0) {
-            console.log('menor');
             return;
         }
-        campoPosicao.blur(); // desfoca o campo para que a atualização da posição funcione
-        campoPosicao.value = parseFloat(campoPosicao.value) + 24;
-        atualizarPosicao();
-        campoAtual--;
-        exibir(campoAtual);
-    }
+        const nomeDoBairro = input.placeholder;
+        const valorDoInput = input.value;
+        texto += (`${valorDoInput}\n`);
+        console.log(texto);
+        navigator.clipboard.writeText(texto);
 
-    if (event.keyCode == 70) {
-        const inputs = document.querySelectorAll("input[type='number']");
-        texto = "";
-        ignora2primeiros = -1;
-        inputs.forEach((input) => {
-            ignora2primeiros++;
-            if (ignora2primeiros < 2) {
+    });
+    alert("copiado");
+}
 
-                return;
-            }
-            const nomeDoBairro = input.placeholder;
-            const valorDoInput = input.value;
-            texto += (`${valorDoInput}\n`);
-            console.log(texto);
-            navigator.clipboard.writeText(texto);
-
-        });
-        alert("copiado");
-    }
+    //APERTAR LETRA S PARA SALVAR
+    
 
 });
 const inputsC = document.querySelectorAll('input');
@@ -349,7 +362,7 @@ function carregaHistorico() {
             var nextDate = currentDate.toISOString().split('T')[0];
             document.getElementById("dateInput").value = nextDate;
 
-            
+
             var parts = nextDate.split("-");
 
             // Criar o novo formato
