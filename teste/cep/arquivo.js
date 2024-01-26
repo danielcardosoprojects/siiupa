@@ -138,7 +138,7 @@ anterior.addEventListener('click', campoAnterior);
 document.addEventListener('keydown', event => {
     if (event.key === 'Enter') {
         event.preventDefault();
-        
+
 
         console.log(campoAtual + 1, totalCampos);
         if (campoAtual + 1 > totalCampos) {
@@ -147,7 +147,7 @@ document.addEventListener('keydown', event => {
         }
 
         proximoCampo();
-        campoPosicao.value = parseFloat(campoPosicao.value) - 24;
+        campoPosicao.value = parseFloat(campoPosicao.value) - 23.6;
         atualizarPosicao();
 
 
@@ -158,7 +158,23 @@ document.addEventListener('keydown', event => {
             criarJSON();
         }
     }
-    
+
+
+    if (event.key === 'ArrowUp' || event.key ==='w') {
+        event.preventDefault();
+        campoPosicao.blur(); // desfoca o campo para que a atualização da posição funcione
+        campoPosicao.value = parseFloat(campoPosicao.value) - 1;
+        atualizarPosicao();
+    }
+
+    if (event.key === 'ArrowDown' || event.key ==='s') {
+        event.preventDefault();
+        campoPosicao.blur(); // desfoca o campo para que a atualização da posição funcione
+        campoPosicao.value = parseFloat(campoPosicao.value) + 1;
+        atualizarPosicao();
+    }
+
+
 });
 
 document.addEventListener('keydown', function (event) {
@@ -181,7 +197,7 @@ function atualizarPosicao() {
     var novaPosicaoY = (campoPosicao.value - 24);
     if (novaPosicaoY !== posicaoY) {
         posicaoY = novaPosicaoY;
-        container.style.backgroundPosition = "-500px " + posicaoY + "px";
+        container.style.backgroundPosition = "-600px " + posicaoY + "px";
     }
 }
 
@@ -205,60 +221,62 @@ document.addEventListener('keypress', function (event) {
 
 
     if (event.keyCode == 13) {
-    console.log('oi');
+        console.log('oi');
 
 
-    campoPosicao.blur(); // desfoca o campo para que a atualização da posição funcione
-    campoPosicao.value = parseFloat(campoPosicao.value) - 24;
-    atualizarPosicao();
-}
-if (event.keyCode == 119) {
-
-    campoPosicao.blur(); // desfoca o campo para que a atualização da posição funcione
-    campoPosicao.value = parseFloat(campoPosicao.value) + 1;
-    atualizarPosicao();
-}
-if (event.keyCode == 115) {
-
-    campoPosicao.blur(); // desfoca o campo para que a atualização da posição funcione
-    campoPosicao.value = parseFloat(campoPosicao.value) - 1;
-    atualizarPosicao();
-}
-if (event.keyCode == 97) {
-    //A
-    if (campoAtual == 0) {
-        console.log('menor');
-        return;
+        campoPosicao.blur(); // desfoca o campo para que a atualização da posição funcione
+        campoPosicao.value = parseFloat(campoPosicao.value) - 24;
+        atualizarPosicao();
     }
-    campoPosicao.blur(); // desfoca o campo para que a atualização da posição funcione
-    campoPosicao.value = parseFloat(campoPosicao.value) + 24;
-    atualizarPosicao();
-    campoAtual--;
-    exibir(campoAtual);
-}
+    if (event.key == 119) {
+        console.log('119');
+        campoPosicao.blur(); // desfoca o campo para que a atualização da posição funcione
+        campoPosicao.value = parseFloat(campoPosicao.value) + 1;
+        atualizarPosicao();
+    }
+    console.log(event);
+    if (event.key == 115) {
 
-if (event.keyCode == 70) {
-    const inputs = document.querySelectorAll("input[type='number']");
-    texto = "";
-    ignora2primeiros = -1;
-    inputs.forEach((input) => {
-        ignora2primeiros++;
-        if (ignora2primeiros < 2) {
-
+        campoPosicao.blur(); // desfoca o campo para que a atualização da posição funcione
+        campoPosicao.value = parseFloat(campoPosicao.value) - 1;
+        atualizarPosicao();
+    }
+    if (event.keyCode == 97 || event.key === 'a' || event.key === '-') {
+        //A
+        event.preventDefault();
+        if (campoAtual == 0) {
+            console.log('menor');
             return;
         }
-        const nomeDoBairro = input.placeholder;
-        const valorDoInput = input.value;
-        texto += (`${valorDoInput}\n`);
-        console.log(texto);
-        navigator.clipboard.writeText(texto);
+        campoPosicao.blur(); // desfoca o campo para que a atualização da posição funcione
+        campoPosicao.value = parseFloat(campoPosicao.value) + 24;
+        atualizarPosicao();
+        campoAtual--;
+        exibir(campoAtual);
+    }
 
-    });
-    alert("copiado");
-}
+    if (event.keyCode == 70) {
+        const inputs = document.querySelectorAll("input[type='number']");
+        texto = "";
+        ignora2primeiros = -1;
+        inputs.forEach((input) => {
+            ignora2primeiros++;
+            if (ignora2primeiros < 2) {
+
+                return;
+            }
+            const nomeDoBairro = input.placeholder;
+            const valorDoInput = input.value;
+            texto += (`${valorDoInput}\n`);
+            console.log(texto);
+            navigator.clipboard.writeText(texto);
+
+        });
+        alert("copiado");
+    }
 
     //APERTAR LETRA S PARA SALVAR
-    
+
 
 });
 const inputsC = document.querySelectorAll('input');
