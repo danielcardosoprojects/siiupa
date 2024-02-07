@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Filter Excel Data with Vue.js</title>
+</head>
+<body>
+    <div id="app">
+        <input type="file" @change="handleFile" accept=".xls,.xlsx" />
+        <button @click="processWorkbook">Processar Excel</button>
+        <button @click="exportToExcel">Exportar para Excel</button>
+        <table id="resultTable">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Atendimento</th>
+                    <th>Exames</th>
+                    <th>DATA_NASCIMENTO</th>
+                    <th>NOME_MAE</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="item in processedData" :key="item.ATENDIMENTO">
+                    <td>{{ item.CLIENTE }}</td>
+                    <td>{{ item.ATENDIMENTO }}</td>
+                    <td>{{ item.EXAMES }}</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button @click="exportToExcel">Exportar para Excel</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="xlsx.full.min.js"></script>
+    <script src="script-vue.js"></script>
+</body>
+</html>
