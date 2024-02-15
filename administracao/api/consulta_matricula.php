@@ -1,4 +1,5 @@
 <?php
+header('Access-Control-Allow-Origin: *');
 $fcpfn = $_GET['cpf'];
 
 
@@ -45,7 +46,7 @@ $fcpfn = $_GET['cpf'];
                         let ultimaMatricula = 0;
                         if (data.results.length == 1) {
                             ultimaMatricula = data.results[0].matricula.replace('-', '');
-                            
+
                         } else {
                             data.results.map(item => {
                                 // Realize as operações desejadas para cada item
@@ -81,6 +82,9 @@ $fcpfn = $_GET['cpf'];
             // Lide com erros aqui
             console.error('Erro na solicitação:', error);
         });
+
+
+       
 </script>
 
 <div id="matriculaRecebe"></div>
