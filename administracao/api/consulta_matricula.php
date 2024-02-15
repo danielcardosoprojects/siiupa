@@ -92,4 +92,3 @@ $fcpfn = $_GET['cpf'];
         });
 </script>
 
-<div id="matriculaRecebe"></div>
