@@ -19,7 +19,7 @@ header('Access-Control-Allow-Headers: Content-Type');
 
             data.records.forEach((item) => {
 
-                if(item.cpf == null) {
+                if (item.cpf == null) {
                     item.cpf = 11111111111;
                 }
                 consultaMatricula(item.cpf);
@@ -36,7 +36,7 @@ header('Access-Control-Allow-Headers: Content-Type');
         fetch(`http://siupa.com.br/siiupa/administracao/api/consulta_matricula.php?cpf=${ncpf}`, {
                 method: 'GET',
                 headers: {
-                 //   'Content-Type': 'application/json',
+                    //   'Content-Type': 'application/json',
                 },
                 /*body: JSON.stringify({
                      username: 'danielcardoso',
@@ -44,13 +44,13 @@ header('Access-Control-Allow-Headers: Content-Type');
                  }),*/
             })
             //.then(response => response.json())
-            .then(data => {
-                console.log(data);
+            .then(response => {
+                console.log('Resposta completa:', response);
+                return response.json();
             })
-            .catch(error => {
-                // Lide com erros aqui
-                console.error('Erro na solicitação:', error);
-            });
+            .then(data => {
+                console.log('Dados em JSON:', data);
+            })
     }
 
     function manterApenasNumeros(str) {
@@ -68,5 +68,4 @@ header('Access-Control-Allow-Headers: Content-Type');
     }
 
     // Exemplo de uso
- 
 </script>
