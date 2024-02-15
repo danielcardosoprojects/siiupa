@@ -14,7 +14,9 @@ header('Access-Control-Allow-Headers: Content-Type');
 })
 .then(response => response.json())
 .then(data => {
-    console.log(data.records[0].nome);
+    data.forEach((item) => {
+        console.log(item);
+    });
 })
 .catch(error => {
     // Lide com erros aqui
