@@ -37,7 +37,7 @@ function consultaMatricula(cpf){
         password: 'c*123c12'
     }),*/
 })
-.then(response => response.json())
+//.then(response => response.json())
 .then(data => {
     console.log(data);
 })
