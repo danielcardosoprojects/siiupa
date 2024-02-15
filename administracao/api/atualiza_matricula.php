@@ -17,8 +17,13 @@ header('Access-Control-Allow-Headers: Content-Type');
 .then(data => {
     
     data.records.forEach((item) => {
-        console.log(item.cpf);
-        consultaMatricula(item.cpf);
+
+        let ncpf = item.cpf.replace(/[^\d.-]/g, '');
+
+    // Remove múltiplos pontos e traços consecutivos
+    ncpf = ncpf.replace(/([.-])\1+/g, '$1');
+
+        consultaMatricula(ncpf);
     });
 })
 .catch(error => {
