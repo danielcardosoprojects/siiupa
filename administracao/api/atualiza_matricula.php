@@ -14,9 +14,9 @@ header('Access-Control-Allow-Headers: Content-Type');
 })
 .then(response => response.json())
 .then(data => {
-    console.log(data.records);
+    
     data.records.forEach((item) => {
-        console.log(item);
+        console.log(item.cpf);
     });
 })
 .catch(error => {
