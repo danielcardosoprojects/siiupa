@@ -1,39 +1,74 @@
 <?php
 $fcpfn = $_GET['cpf'];
+
+
 ?>
 <script>
-    const apiURL<?php echo $fcpfn; ?> = `https://apionline.layoutsistemas.com.br/api/matriculas/?cpf=<?php echo $fcpfn; ?>`;
-    const authorizationHeader<?php echo $fcpfn; ?> = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA3Mzk2NzYzLCJqdGkiOiJhODAzNmM1Zjk1Mzc0NmQzYmQyMGNjN2NhZTg4NzBhOSIsInVzZXJfaWQiOjE5MDY3M30.fxJ4r3w9Z7LjCxpySFRlKwBMnKm2dZwq40N695OR2Ts";
-
-    // Fazer uma solicitação GET usando a função fetch
-    fetch(apiURL<?php echo $fcpfn; ?>, {
-            method: "GET",
+    //geratoken
+    fetch("https://apionline.layoutsistemas.com.br/api/token/", {
+            method: 'POST',
             headers: {
-                "Authorization": authorizationHeader<?php echo $fcpfn; ?>
-            }
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: 'danielcardoso',
+                password: 'c*123c12'
+            }),
         })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`Erro na solicitação: ${response.status}`);
-            }
-            return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
-            // Verificar se a resposta foi bem-sucedida e obter o CPF
+            // Faça algo com os dados
 
-            if (data.results && data.results.length > 0) {
-                
-                data.results.map(item => {
-                    // Realize as operações desejadas para cada item
-                    // Neste exemplo, apenas adicionando uma nova propriedade
-                    console.log(item);
+            const token = data.access;
+
+
+            const apiURL<?php echo $fcpfn; ?> = `https://apionline.layoutsistemas.com.br/api/matriculas/?cpf=<?php echo $fcpfn; ?>&entidade=796`;
+            const authorizationHeader<?php echo $fcpfn; ?> = `Bearer ${token}`;
+
+            // Fazer uma solicitação GET usando a função fetch
+            fetch(apiURL<?php echo $fcpfn; ?>, {
+                    method: "GET",
+                    headers: {
+                        "Authorization": authorizationHeader<?php echo $fcpfn; ?>
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Erro na solicitação: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    // Verificar se a resposta foi bem-sucedida e obter o CPF
+
+                    if (data.results && data.results.length > 0) {
+                        let ultimaMatricula = 0;
+                        if (data.results.length == 1) {
+                            ultimaMatricula = data.results[0].matricula;
+                            console.log('2024 x: ', ultimaMatricula);
+                        } else {
+                            data.results.map(item => {
+                                // Realize as operações desejadas para cada item
+                                // Neste exemplo, apenas adicionando uma nova propriedade
+                                matriculaAtual = item.matricula.replace('-', '');
+                                if (matriculaAtual < 3000000 & matriculaAtual > ultimaMatricula) {
+                                    ultimaMatricula = matriculaAtual;
+                                }
+
+                            });
+                            console.log('2024: ', ultimaMatricula);
+                        }
+                    } else {
+                        console.log("CPF não encontrado na resposta da API.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Erro na solicitação:", error);
                 });
 
-            } else {
-                console.log("CPF não encontrado na resposta da API.");
-            }
         })
         .catch(error => {
-            console.error("Erro na solicitação:", error);
+            // Lide com erros aqui
+            console.error('Erro na solicitação:', error);
         });
 </script>
