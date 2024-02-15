@@ -36,14 +36,14 @@ header('Access-Control-Allow-Headers: Content-Type');
         fetch(`http://siupa.com.br/siiupa/administracao/api/consulta_matricula.php?cpf=${ncpf}`, {
                 method: 'GET',
                 headers: {
-                    'Content-Type': 'application/json',
+                 //   'Content-Type': 'application/json',
                 },
                 /*body: JSON.stringify({
                      username: 'danielcardoso',
                      password: 'c*123c12'
                  }),*/
             })
-            .then(response => response.json())
+            //.then(response => response.json())
             .then(data => {
                 console.log(data);
             })
