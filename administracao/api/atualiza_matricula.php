@@ -14,6 +14,7 @@ header('Access-Control-Allow-Headers: Content-Type');
 })
 .then(response => response.json())
 .then(data => {
+    console.log(data);
     data.forEach((item) => {
         console.log(item);
     });
