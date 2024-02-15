@@ -70,7 +70,7 @@ $fcpfn = $_GET['cpf'];
                         // Criando o formato desejado
                         ultimaMatricula = `${partePrincipal}-${digitoVerificador}`;
                         //console.log('2024: ', ultimaMatricula);
-                    document.getElementById("matriculaRecebe").innerHTML = `{\"ultimaMatricula\": \"${ultimaMatricula}\"}`;
+                    document.innerHTML = `{\"ultimaMatricula\": \"${ultimaMatricula}\"}`;
                     } else {
                         console.log("CPF não encontrado na resposta da API.");
                     }
