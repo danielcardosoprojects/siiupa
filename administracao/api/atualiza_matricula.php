@@ -7,7 +7,7 @@ header('Access-Control-Allow-Headers: Content-Type');
     headers: {
         'Content-Type': 'application/json',
     },
-   body: JSON.stringify({
+   /*body: JSON.stringify({
         username: 'danielcardoso',
         password: 'c*123c12'
     }),*/
