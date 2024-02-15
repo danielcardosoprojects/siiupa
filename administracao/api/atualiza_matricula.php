@@ -14,7 +14,7 @@ header('Access-Control-Allow-Headers: Content-Type');
 })
 .then(response => response.json())
 .then(data => {
-    console.log(data.records);
+    console.log(data.records[0]);
 })
 .catch(error => {
     // Lide com erros aqui
