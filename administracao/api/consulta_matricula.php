@@ -44,8 +44,8 @@ $fcpfn = $_GET['cpf'];
                     if (data.results && data.results.length > 0) {
                         let ultimaMatricula = 0;
                         if (data.results.length == 1) {
-                            ultimaMatricula = data.results[0].matricula;
-                            console.log('2024 x: ', ultimaMatricula);
+                            ultimaMatricula = data.results[0].matricula.replace('-', '');
+                            
                         } else {
                             data.results.map(item => {
                                 // Realize as operações desejadas para cada item
@@ -56,8 +56,18 @@ $fcpfn = $_GET['cpf'];
                                 }
 
                             });
-                            console.log('2024: ', ultimaMatricula);
+
                         }
+                        let matDigito = ultimaMatricula;
+
+                        // Separando os dígitos
+                        let partePrincipal = matDigito.slice(0, -1);
+                        let digitoVerificador = matDigito.slice(-1);
+
+                        // Criando o formato desejado
+                        ultimaMatricula = `${partePrincipal}-${digitoVerificador}`;
+                        //console.log('2024: ', ultimaMatricula);
+                        document.getElementById("matriculaRecebe").innerHTML = ultimaMatricula;
                     } else {
                         console.log("CPF não encontrado na resposta da API.");
                     }
@@ -72,3 +82,5 @@ $fcpfn = $_GET['cpf'];
             console.error('Erro na solicitação:', error);
         });
 </script>
+
+<div id="matriculaRecebe"></div>
