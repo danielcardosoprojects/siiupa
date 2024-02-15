@@ -19,12 +19,8 @@ header('Access-Control-Allow-Headers: Content-Type');
 
             data.records.forEach((item) => {
 
-                let ncpf = item.cpf.replace(/[^\d.-]/g, '');
 
-                // Remove múltiplos pontos e traços consecutivos
-                ncpf = ncpf.replace(/([.-])\1+/g, '$1');
-
-                consultaMatricula(ncpf);
+                consultaMatricula(item.cpf);
             });
         })
         .catch(error => {
