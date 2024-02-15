@@ -19,7 +19,9 @@ header('Access-Control-Allow-Headers: Content-Type');
 
             data.records.forEach((item) => {
 
-                console.log(item.cpf);
+                if(item.cpf == null) {
+                    item.cpf = 11111111111;
+                }
                 consultaMatricula(item.cpf);
             });
         })
