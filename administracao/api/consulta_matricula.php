@@ -1,7 +1,7 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: Content-Type');
-header('Content-Type: application/json');
+
 $fcpfn = $_GET['cpf'];
 
 
@@ -70,7 +70,13 @@ $fcpfn = $_GET['cpf'];
                         // Criando o formato desejado
                         ultimaMatricula = `${partePrincipal}-${digitoVerificador}`;
                         //console.log('2024: ', ultimaMatricula);
-                    document.getElementById("matriculaRecebe").innerHTML = `{\"ultimaMatricula\": \"${ultimaMatricula}\"}`;
+                        //document.getElementById("matriculaRecebe").innerHTML = `{\"ultimaMatricula\": \"${ultimaMatricula}\"}`;
+                        var userData = {
+                            ultimaMatricula: ultimaMatricula,
+                            
+                        };
+                        var jsonData = JSON.stringify(userData);
+                        document.write("<pre>" + jsonData + "</pre>");
                     } else {
                         console.log("CPF não encontrado na resposta da API.");
                     }
@@ -84,9 +90,6 @@ $fcpfn = $_GET['cpf'];
             // Lide com erros aqui
             console.error('Erro na solicitação:', error);
         });
-
-
-       
 </script>
 
 <div id="matriculaRecebe"></div>
