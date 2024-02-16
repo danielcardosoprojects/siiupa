@@ -4,91 +4,88 @@ header('Access-Control-Allow-Headers: Content-Type');
 
 $fcpfn = $_GET['cpf'];
 
+function gerarToken($username, $password) {
+    $url = "https://apionline.layoutsistemas.com.br/api/token/";
 
-?>
-<script>
-    //geratoken
-    fetch("https://apionline.layoutsistemas.com.br/api/token/", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                username: 'danielcardoso',
-                password: 'c*123c12'
-            }),
-        })
-        .then(response => response.json())
-        .then(data => {
-            // Faça algo com os dados
+    $data = array(
+        'username' => $username,
+        'password' => $password
+    );
 
-            const token = data.access;
+    $options = array(
+        'http' => array(
+            'header'  => "Content-type: application/json\r\n",
+            'method'  => 'POST',
+            'content' => json_encode($data)
+        )
+    );
+
+    $context  = stream_context_create($options);
+    $result = file_get_contents($url, false, $context);
+
+    if ($result === FALSE) {
+        die('Erro ao obter o token');
+    }
+
+    return json_decode($result)->access;
+}
+
+// Substitua 'danielcardoso' e 'c*123c12' pelos seus valores reais
+$username = 'danielcardoso';
+$password = 'c*123c12';
+
+// Gerar token
+$token = gerarToken($username, $password);
+
+// Substitua $fcpfn pelos seus valores reais
 
 
-            const apiURL<?php echo $fcpfn; ?> = `https://apionline.layoutsistemas.com.br/api/matriculas/?cpf=<?php echo $fcpfn; ?>&entidade=796`;
-            const authorizationHeader<?php echo $fcpfn; ?> = `Bearer ${token}`;
+// URL da API e cabeçalho de autorização
+$apiURL = "https://apionline.layoutsistemas.com.br/api/matriculas/?cpf=$fcpfn&entidade=796";
+$authorizationHeader = "Bearer $token";
 
-            // Fazer uma solicitação GET usando a função fetch
-            fetch(apiURL<?php echo $fcpfn; ?>, {
-                    method: "GET",
-                    headers: {
-                        "Authorization": authorizationHeader<?php echo $fcpfn; ?>
-                    }
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`Erro na solicitação: ${response.status}`);
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    // Verificar se a resposta foi bem-sucedida e obter o CPF
+// Fazer uma solicitação GET usando a função file_get_contents
+$response = file_get_contents($apiURL, false, stream_context_create([
+    'http' => [
+        'header' => "Authorization: $authorizationHeader\r\n"
+    ]
+]));
 
-                    if (data.results && data.results.length > 0) {
-                        let ultimaMatricula = 0;
-                        if (data.results.length == 1) {
-                            ultimaMatricula = data.results[0].matricula.replace('-', '');
+if ($response === FALSE) {
+    die('Erro na solicitação');
+}
 
-                        } else {
-                            data.results.map(item => {
-                                // Realize as operações desejadas para cada item
-                                // Neste exemplo, apenas adicionando uma nova propriedade
-                                matriculaAtual = item.matricula.replace('-', '');
-                                if (matriculaAtual < 3000000 & matriculaAtual > ultimaMatricula) {
-                                    ultimaMatricula = matriculaAtual;
-                                }
+// Manipular os dados da resposta
+$data = json_decode($response);
 
-                            });
 
-                        }
-                        let matDigito = ultimaMatricula;
+if ($data->results && count($data->results) > 0) {
+    $ultimaMatricula = 0;
 
-                        // Separando os dígitos
-                        let partePrincipal = matDigito.slice(0, -1);
-                        let digitoVerificador = matDigito.slice(-1);
+    if (count($data->results) == 1) {
+        $ultimaMatricula = str_replace('-', '', $data->results[0]->matricula);
+    } else {
+        foreach ($data->results as $item) {
+            $matriculaAtual = str_replace('-', '', $item->matricula);
 
-                        // Criando o formato desejado
-                        ultimaMatricula = `${partePrincipal}-${digitoVerificador}`;
-                        //console.log('2024: ', ultimaMatricula);
-                        //document.getElementById("matriculaRecebe").innerHTML = `{\"ultimaMatricula\": \"${ultimaMatricula}\"}`;
-                        var userData = {
-                            ultimaMatricula: ultimaMatricula,
-                            
-                        };
-                        var jsonData = JSON.stringify(userData);
-                        document.write("<pre>" + jsonData + "</pre>");
-                    } else {
-                        console.log("CPF não encontrado na resposta da API.");
-                    }
-                })
-                .catch(error => {
-                    console.error("Erro na solicitação:", error);
-                });
+            if ($matriculaAtual < 3000000 && $matriculaAtual > $ultimaMatricula) {
+                $ultimaMatricula = $matriculaAtual;
+            }
+        }
+    }
 
-        })
-        .catch(error => {
-            // Lide com erros aqui
-            console.error('Erro na solicitação:', error);
-        });
-</script>
+    // Separando os dígitos
+    $partePrincipal = substr($ultimaMatricula, 0, -1);
+    $digitoVerificador = substr($ultimaMatricula, -1);
 
+    // Criando o formato desejado
+    $ultimaMatriculaFormatada = "$partePrincipal-$digitoVerificador";
+
+    // Imprimir os dados no formato JSON
+    $userData = array('ultimaMatricula' => $ultimaMatriculaFormatada);
+    $jsonData = json_encode($userData);
+    header('Content-Type: application/json');
+    echo json_encode($userData);
+} else {
+    echo json_encode(array('error' => 'CPF não encontrado na resposta da API.'));
+}
