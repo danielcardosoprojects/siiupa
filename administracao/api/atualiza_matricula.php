@@ -49,7 +49,7 @@ header('Access-Control-Allow-Headers: Content-Type');
                 return response.json();
             })
             .then(data => {
-                console.log('Dados em JSON:', data);
+                console.log(data);
             })
     }
 
