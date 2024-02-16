@@ -4,68 +4,56 @@ header('Access-Control-Allow-Headers: Content-Type');
 
 ?>
 <script>
-    fetch("http://siupa.com.br/siiupa/api/rh/api.php/records/tb_funcionario?filter=status,eq,ativo&order=id,desc", {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            /*body: JSON.stringify({
-                 username: 'danielcardoso',
-                 password: 'c*123c12'
-             }),*/
-        })
-        .then(response => response.json())
+   const axios = require('axios');
+
+// Função para fazer a primeira solicitação usando Axios
+axios.get('http://siupa.com.br/siiupa/api/rh/api.php/records/tb_funcionario', {
+    headers: {
+        'Content-Type': 'application/json'
+    }
+})
+    .then(response => response.data)
+    .then(data => {
+        data.records.forEach(item => {
+            if (item.cpf === null) {
+                item.cpf = '11111111111';
+            }
+            consultaMatricula(item.cpf);
+        });
+    })
+    .catch(error => {
+        // Lide com erros aqui
+        console.error('Erro na solicitação:', error);
+    });
+
+// Função para fazer a segunda solicitação usando Axios
+function consultaMatricula(cpf) {
+    let ncpf = manterApenasNumeros(cpf);
+
+    axios.get(`http://siupa.com.br/siiupa/administracao/api/consulta_matricula.php?cpf=${ncpf}`)
+        .then(response => response.data)
         .then(data => {
-
-            data.records.forEach((item) => {
-
-                if (item.cpf == null) {
-                    item.cpf = 11111111111;
-                }
-                consultaMatricula(item.cpf);
-            });
+            console.log(data.ultimaMatricula);
         })
         .catch(error => {
             // Lide com erros aqui
             console.error('Erro na solicitação:', error);
         });
+}
 
+// Função para manter apenas números em uma string
+function manterApenasNumeros(str) {
+    let resultado = '';
 
-    function consultaMatricula(cpf) {
-        let ncpf = manterApenasNumeros(cpf);
-        fetch(`http://siupa.com.br/siiupa/administracao/api/consulta_matricula.php?cpf=${ncpf}`, {
-                method: 'GET',
-                headers: {
-                    //   'Content-Type': 'application/json',
-                },
-                /*body: JSON.stringify({
-                     username: 'danielcardoso',
-                     password: 'c*123c12'
-                 }),*/
-            })
-            //.then(response => response.json())
-            // .then(response => {
-            //     console.log('Resposta completa:', response);
-            //     return response.json();
-            // })
-            .then(data => {
-                console.log(data.ultimaMatricula);
-            })
-    }
+    for (let i = 0; i < str.length; i++) {
+        let caractereAtual = str.charAt(i);
 
-    function manterApenasNumeros(str) {
-        var resultado = '';
-
-        for (var i = 0; i < str.length; i++) {
-            var caractereAtual = str.charAt(i);
-
-            if (!isNaN(caractereAtual)) {
-                resultado += caractereAtual;
-            }
+        if (!isNaN(caractereAtual)) {
+            resultado += caractereAtual;
         }
-
-        return resultado;
     }
 
-    // Exemplo de uso
+    return resultado;
+}
+
 </script>
