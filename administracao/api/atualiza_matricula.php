@@ -44,12 +44,12 @@ header('Access-Control-Allow-Headers: Content-Type');
                  }),*/
             })
             //.then(response => response.json())
-            .then(response => {
-                console.log('Resposta completa:', response);
-                return response.json();
-            })
+            // .then(response => {
+            //     console.log('Resposta completa:', response);
+            //     return response.json();
+            // })
             .then(data => {
-                console.log(data);
+                console.log(data,ultimaMatricula);
             })
     }
 
