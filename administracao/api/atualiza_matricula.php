@@ -49,7 +49,7 @@ header('Access-Control-Allow-Headers: Content-Type');
             //     return response.json();
             // })
             .then(data => {
-                console.log(data,ultimaMatricula);
+                console.log(data.ultimaMatricula);
             })
     }
 
