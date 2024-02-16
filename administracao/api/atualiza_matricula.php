@@ -3,6 +3,7 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: Content-Type');
 
 ?>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
    const axios = require('axios');
 
