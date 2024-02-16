@@ -5,7 +5,8 @@ header('Access-Control-Allow-Headers: Content-Type');
 ?>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
-   const axios = require('axios');
+const axios = require('axios').default;
+
 
 // Função para fazer a primeira solicitação usando Axios
 axios.get('http://siupa.com.br/siiupa/api/rh/api.php/records/tb_funcionario', {
