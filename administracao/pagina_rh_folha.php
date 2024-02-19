@@ -449,7 +449,7 @@ consultarMatricula(<?=$fcpfn?>)
     console.log('Matrícula: ', matricula);
   })
   .catch(error => {
-    // Trate o erro conforme necessário
+    console.log('erro');
   });
 
 </script>
