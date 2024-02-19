@@ -446,6 +446,7 @@ $fcpfpontos = substr($fcpfn, 0, 3) . '.' . substr($fcpfn, 3, 3) . '.' . substr($
 
 consultarMatricula(<?=$fcpfn?>)
   .then(matricula => {
+    console.log(<?=$fcpfn?>);
     console.log('Matrícula: ', matricula);
     document.getElementById('<?php echo $fcpfn;?>').textContent = matricula;
   })
