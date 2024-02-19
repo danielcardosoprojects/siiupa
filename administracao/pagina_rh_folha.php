@@ -478,7 +478,7 @@ if ($stmt = $conn->prepare($query)) {
                     console.log(<?= $fcpfn ?>);
                     console.log('Matrícula: ', matricula);
                     document.getElementById('<?php echo $fcpfn; ?>').textContent = matricula + " - " + "<?= $func_id ?>";
-                    const idFuncionario<?= $fcpfn ?> = 14;
+                    const idFuncionario<?= $fcpfn ?> = <?=$func_id?>;
                     const dadosFuncionario<?= $fcpfn ?> = {
                         matricula: matricula
                     };
