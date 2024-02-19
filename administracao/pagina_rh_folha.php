@@ -451,7 +451,7 @@ consultarMatricula('<?=$fcpfpontos?>')
   .then(matricula => {
     console.log(<?=$fcpfn?>);
     console.log('Matrícula: ', matricula);
-    document.getElementById('<?php echo $fcpfn;?>').textContent = matricula;
+    document.getElementById('<?php echo $fcpfn;?>').textContent = matricula + " - " + "<?=$func_id?>";
   })
   .catch(error => {
     console.log('erro');
