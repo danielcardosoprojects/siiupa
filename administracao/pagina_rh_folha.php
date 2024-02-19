@@ -59,24 +59,52 @@ class Tabela
 <script type="text/javascript" src="/siiupa/js/script.js"></script>
 <script>
     function consultarMatricula(cpf) {
-  const url = `https://siupa.com.br/siiupa/administracao/api/consulta_matricula.php?cpf=${cpf}`;
+        const url = `https://siupa.com.br/siiupa/administracao/api/consulta_matricula.php?cpf=${cpf}`;
 
-  return fetch(url)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`Erro na requisição: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then(data => {
-      return data.ultimaMatricula;
-    })
-    .catch(error => {
-      console.error('Erro:', error);
-      throw error; // opcional: lançar novamente o erro para tratamento posterior
-    });
-}
-    </script>
+        return fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Erro na requisição: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                return data.ultimaMatricula;
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                throw error; // opcional: lançar novamente o erro para tratamento posterior
+            });
+    }
+
+    function atualizarDadosFuncionario(id, dadosAtualizados, metodo = 'PATCH') {
+        const url = `http://siupa.com.br/siiupa/api/rh/api.php/records/tb_funcionario/${id}`;
+
+        const opcoes = {
+            method: metodo,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(dadosAtualizados),
+        };
+
+        return fetch(url, opcoes)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Erro na requisição: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Dados Atualizados:', data);
+                return data; // opcional: retornar os dados atualizados
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                throw error; // opcional: lançar novamente o erro para tratamento posterior
+            });
+    }
+</script>
 
 
 <style type="text/css">
@@ -434,30 +462,39 @@ if ($stmt = $conn->prepare($query)) {
         } else {
             $link_para_alterar = 'javascript:alert("Folha fechada. Alteração não permitida.");';
         }
-        
-//$fcpfn = preg_replace("/[^0-9]/", "", $fcpf);
-$fcpfn = "";
-$fcpfn = strval(preg_replace("/[^0-9]/", "", $fcpf));
 
-$fcpfpontos = substr($fcpfn, 0, 3) . '.' . substr($fcpfn, 3, 3) . '.' . substr($fcpfn, 6, 3) . '-' . substr($fcpfn, 9, 2);
+        //$fcpfn = preg_replace("/[^0-9]/", "", $fcpf);
+        $fcpfn = "";
+        $fcpfn = strval(preg_replace("/[^0-9]/", "", $fcpf));
+
+        $fcpfpontos = substr($fcpfn, 0, 3) . '.' . substr($fcpfn, 3, 3) . '.' . substr($fcpfn, 6, 3) . '-' . substr($fcpfn, 9, 2);
 
 ?>
-<script>
+        <script>
+            // Exemplo de uso
 
+            consultarMatricula('<?= $fcpfpontos ?>')
+                .then(matricula => {
+                    console.log(<?= $fcpfn ?>);
+                    console.log('Matrícula: ', matricula);
+                    document.getElementById('<?php echo $fcpfn; ?>').textContent = matricula + " - " + "<?= $func_id ?>";
+                    const idFuncionario<?= $fcpfn ?> = 14;
+                    const dadosFuncionario<?= $fcpfn ?> = {
+                        matricula: matricula
+                    };
 
-// Exemplo de uso
-
-consultarMatricula('<?=$fcpfpontos?>')
-  .then(matricula => {
-    console.log(<?=$fcpfn?>);
-    console.log('Matrícula: ', matricula);
-    document.getElementById('<?php echo $fcpfn;?>').textContent = matricula + " - " + "<?=$func_id?>";
-  })
-  .catch(error => {
-    console.log('erro');
-  });
-
-</script>
+                    atualizarDadosFuncionario(idFuncionario<?= $fcpfn ?>, dadosFuncionario<?= $fcpfn ?>, 'PATCH')
+                        .then(data => {
+                            // Faça algo com os dados, se necessário
+                        })
+                        .catch(error => {
+                            // Trate o erro conforme necessário
+                        });
+                })
+                .catch(error => {
+                    console.log('erro');
+                });
+        </script>
 <?php
 
         printf("
@@ -510,7 +547,7 @@ echo "</div>"; ///                   FECHA AREA DE IMPRESSAO
     </div>
     <div class="offcanvas-body">
         <div id="offCanvas">
-           
+
 
 
         </div>
