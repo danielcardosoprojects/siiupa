@@ -422,7 +422,7 @@ $fcpfpontos = substr($fcpfn, 0, 3) . '.' . substr($fcpfn, 3, 3) . '.' . substr($
 <script>
 
 const apiURL<?php echo $fcpfn;?> = `https://apionline.layoutsistemas.com.br/api/matriculas/?cpf=<?php echo $fcpfn;?>`;
-const authorizationHeader<?php echo $fcpfn;?> = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA3Mzk4NzIwLCJqdGkiOiJhODIzMjM0Njk1MjI0ZTIzODg4NDRiN2U1M2MwYTg1OCIsInVzZXJfaWQiOjE5MDY3M30.8Od25i0016NYME5hlO45dQ1VtTgmpvEAt2c9-3uNwHg";
+const authorizationHeader<?php echo $fcpfn;?> = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA4MzU4MDMxLCJqdGkiOiJiMjlkODhkOTVkMzU0MTIxODJkNTY1ZmY3NDQ3MDIxOSIsInVzZXJfaWQiOjE5MDY3M30.6hRRBHxYU11grzKhcsFITcfgQSdVoTDhd88wx8_SwI4";
 
 // Fazer uma solicitação GET usando a função fetch
 fetch(apiURL<?php echo $fcpfn;?>, {
