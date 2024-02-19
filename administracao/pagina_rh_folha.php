@@ -420,37 +420,35 @@ $fcpfpontos = substr($fcpfn, 0, 3) . '.' . substr($fcpfn, 3, 3) . '.' . substr($
 
 ?>
 <script>
+function consultarMatricula(cpf) {
+  const url = `http://localhost/siiupa/administracao/api/consulta_matricula.php?cpf=${cpf}`;
 
-const apiURL<?php echo $fcpfn;?> = `https://apionline.layoutsistemas.com.br/api/matriculas/?cpf=<?php echo $fcpfn;?>`;
-const authorizationHeader<?php echo $fcpfn;?> = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA4MzU4MDMxLCJqdGkiOiJiMjlkODhkOTVkMzU0MTIxODJkNTY1ZmY3NDQ3MDIxOSIsInVzZXJfaWQiOjE5MDY3M30.6hRRBHxYU11grzKhcsFITcfgQSdVoTDhd88wx8_SwI4";
+  return fetch(url)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Erro na requisição: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      return data.ultimaMatricula;
+    })
+    .catch(error => {
+      console.error('Erro:', error);
+      throw error; // opcional: lançar novamente o erro para tratamento posterior
+    });
+}
 
-// Fazer uma solicitação GET usando a função fetch
-fetch(apiURL<?php echo $fcpfn;?>, {
-  method: "GET",
-  headers: {
-    "Authorization": authorizationHeader<?php echo $fcpfn;?>
-  }
-})
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(`Erro na solicitação: ${response.status}`);
-    }
-    return response.json();
-  })
-  .then(data => {
-    // Verificar se a resposta foi bem-sucedida e obter o CPF
-    console.log("<?php echo $nome;?>");
-    if (data.results && data.results.length > 0) {
-      const matricula = data.results[0].matricula;
-      console.log("CPF:", matricula);
-      document.getElementById('<?php echo $fcpfn;?>').textContent = matricula;
-    } else {
-      console.log("CPF não encontrado na resposta da API.");
-    }
+// Exemplo de uso
+const cpf = '01264210213';
+consultarMatricula(cpf)
+  .then(matricula => {
+    console.log('Matrícula: ', matricula);
   })
   .catch(error => {
-    console.error("Erro na solicitação:", error);
+    // Trate o erro conforme necessário
   });
+
 </script>
 <?php
 

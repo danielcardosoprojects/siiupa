@@ -3,6 +3,8 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Headers: Content-Type');
 
 $fcpfn = $_GET['cpf'];
+$ncpf = manterApenasNumeros($fcpfn);
+
 
 function gerarToken($username, $password) {
     $url = "https://apionline.layoutsistemas.com.br/api/token/";
@@ -29,6 +31,19 @@ function gerarToken($username, $password) {
 
     return json_decode($result)->access;
 }
+function manterApenasNumeros($str) {
+    $resultado = '';
+
+    for ($i = 0; $i < strlen($str); $i++) {
+        $caractereAtual = $str[$i];
+
+        if (is_numeric($caractereAtual)) {
+            $resultado .= $caractereAtual;
+        }
+    }
+
+    return $resultado;
+}
 
 // Substitua 'danielcardoso' e 'c*123c12' pelos seus valores reais
 $username = 'danielcardoso';
@@ -41,7 +56,7 @@ $token = gerarToken($username, $password);
 
 
 // URL da API e cabeçalho de autorização
-$apiURL = "https://apionline.layoutsistemas.com.br/api/matriculas/?cpf=$fcpfn&entidade=796";
+$apiURL = "https://apionline.layoutsistemas.com.br/api/matriculas/?cpf=$ncpf&entidade=796";
 $authorizationHeader = "Bearer $token";
 
 // Fazer uma solicitação GET usando a função file_get_contents
