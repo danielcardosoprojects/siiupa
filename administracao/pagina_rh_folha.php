@@ -78,7 +78,7 @@ class Tabela
     }
 
     function atualizarDadosFuncionario(id, dadosAtualizados, metodo = 'PATCH') {
-        const url = `http://siupa.com.br/siiupa/api/rh/api.php/records/tb_funcionario/${id}`;
+        const url = `https://siupa.com.br/siiupa/api/rh/api.php/records/tb_funcionario/${id}`;
 
         const opcoes = {
             method: metodo,
