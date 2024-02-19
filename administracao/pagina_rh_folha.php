@@ -478,18 +478,39 @@ if ($stmt = $conn->prepare($query)) {
                     console.log(<?= $fcpfn ?>);
                     console.log('Matrícula: ', matricula);
                     document.getElementById('<?php echo $fcpfn; ?>').textContent = matricula + " - " + "<?= $func_id ?>";
-                    const idFuncionario<?= $fcpfn ?> = <?=$func_id?>;
+                    const idFuncionario<?= $fcpfn ?> = <?= $func_id ?>;
                     const dadosFuncionario<?= $fcpfn ?> = {
                         matricula: matricula
                     };
 
-                    atualizarDadosFuncionario(idFuncionario<?= $fcpfn ?>, dadosFuncionario<?= $fcpfn ?>, 'PATCH')
+                    const url<?=$fcpfn?> = 'https://siupa.com.br/siiupa/api/rh/api.php/records/tb_funcionario/<?=$func_id?>';
+
+                    const dadosAtualizados<?=$fcpfn?> = {
+                        matricula: matricula
+                    };
+
+                    const opcoes<?=$fcpfn?> = {
+                        method: 'PATCH', // Método HTTP PATCH para atualização parcial
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(dadosAtualizados<?=$fcpfn?>),
+                    };
+
+                    fetch(url<?=$fcpfn?>, opcoes<?=$fcpfn?>)
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(`Erro na requisição: ${response.status}`);
+                            }
+                            return response.json();
+                        })
                         .then(data => {
-                            console.log(data);
+                            console.log('Dados Atualizados:', data);
                         })
                         .catch(error => {
-                            // Trate o erro conforme necessário
+                            console.error('Erro:', error);
                         });
+
                 })
                 .catch(error => {
                     console.log('erro');
