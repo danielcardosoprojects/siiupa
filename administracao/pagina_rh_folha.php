@@ -444,7 +444,7 @@ $fcpfpontos = substr($fcpfn, 0, 3) . '.' . substr($fcpfn, 3, 3) . '.' . substr($
 
 // Exemplo de uso
 
-consultarMatricula(cpf)
+consultarMatricula(<?=$fcpfn?>)
   .then(matricula => {
     console.log('Matrícula: ', matricula);
   })
