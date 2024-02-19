@@ -57,6 +57,26 @@ class Tabela
 } ?>
 
 <script type="text/javascript" src="/siiupa/js/script.js"></script>
+<script>
+    function consultarMatricula(cpf) {
+  const url = `http://localhost/siiupa/administracao/api/consulta_matricula.php?cpf=${cpf}`;
+
+  return fetch(url)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Erro na requisição: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      return data.ultimaMatricula;
+    })
+    .catch(error => {
+      console.error('Erro:', error);
+      throw error; // opcional: lançar novamente o erro para tratamento posterior
+    });
+}
+    </script>
 
 
 <style type="text/css">
@@ -420,27 +440,10 @@ $fcpfpontos = substr($fcpfn, 0, 3) . '.' . substr($fcpfn, 3, 3) . '.' . substr($
 
 ?>
 <script>
-function consultarMatricula(cpf) {
-  const url = `http://localhost/siiupa/administracao/api/consulta_matricula.php?cpf=${cpf}`;
 
-  return fetch(url)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`Erro na requisição: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then(data => {
-      return data.ultimaMatricula;
-    })
-    .catch(error => {
-      console.error('Erro:', error);
-      throw error; // opcional: lançar novamente o erro para tratamento posterior
-    });
-}
 
 // Exemplo de uso
-const cpf = '01264210213';
+
 consultarMatricula(cpf)
   .then(matricula => {
     console.log('Matrícula: ', matricula);
