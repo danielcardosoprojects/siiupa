@@ -485,7 +485,7 @@ if ($stmt = $conn->prepare($query)) {
 
                     atualizarDadosFuncionario(idFuncionario<?= $fcpfn ?>, dadosFuncionario<?= $fcpfn ?>, 'PATCH')
                         .then(data => {
-                            // Faça algo com os dados, se necessário
+                            console.log(data);
                         })
                         .catch(error => {
                             // Trate o erro conforme necessário
