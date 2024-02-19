@@ -471,50 +471,50 @@ if ($stmt = $conn->prepare($query)) {
 
 ?>
         <script>
-            // Exemplo de uso
+            // CONSULTAR E ATUALIZAR MATRICULAS
 
-            consultarMatricula('<?= $fcpfpontos ?>')
-                .then(matricula => {
-                    console.log(<?= $fcpfn ?>);
-                    console.log('Matrícula: ', matricula);
-                    document.getElementById('<?php echo $fcpfn; ?>').textContent = matricula + " - " + "<?= $func_id ?>";
-                    const idFuncionario<?= $fcpfn ?> = <?= $func_id ?>;
-                    const dadosFuncionario<?= $fcpfn ?> = {
-                        matricula: matricula
-                    };
+            // consultarMatricula('<?= $fcpfpontos ?>')
+            //     .then(matricula => {
+            //         console.log(<?= $fcpfn ?>);
+            //         console.log('Matrícula: ', matricula);
+            //         document.getElementById('<?php echo $fcpfn; ?>').textContent = matricula + " - " + "<?= $func_id ?>";
+            //         const idFuncionario<?= $fcpfn ?> = <?= $func_id ?>;
+            //         const dadosFuncionario<?= $fcpfn ?> = {
+            //             matricula: matricula
+            //         };
 
-                    const url<?=$fcpfn?> = 'https://siupa.com.br/siiupa/api/rh/api.php/records/tb_funcionario/<?=$func_id?>';
+            //         const url<?=$fcpfn?> = 'https://siupa.com.br/siiupa/api/rh/api.php/records/tb_funcionario/<?=$func_id?>';
 
-                    const dadosAtualizados<?=$fcpfn?> = {
-                        matricula: matricula
-                    };
+            //         const dadosAtualizados<?=$fcpfn?> = {
+            //             matricula: matricula
+            //         };
 
-                    const opcoes<?=$fcpfn?> = {
-                        method: 'PUT', // Método HTTP PATCH para atualização parcial
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(dadosAtualizados<?=$fcpfn?>),
-                    };
+            //         const opcoes<?=$fcpfn?> = {
+            //             method: 'PUT', // Método HTTP PATCH para atualização parcial
+            //             headers: {
+            //                 'Content-Type': 'application/json',
+            //             },
+            //             body: JSON.stringify(dadosAtualizados<?=$fcpfn?>),
+            //         };
 
-                    fetch(url<?=$fcpfn?>, opcoes<?=$fcpfn?>)
-                        .then(response => {
-                            if (!response.ok) {
-                                throw new Error(`Erro na requisição: ${response.status}`);
-                            }
-                            return response.json();
-                        })
-                        .then(data => {
-                            console.log('Dados Atualizados:', data);
-                        })
-                        .catch(error => {
-                            console.error('Erro:', error);
-                        });
+            //         fetch(url<?=$fcpfn?>, opcoes<?=$fcpfn?>)
+            //             .then(response => {
+            //                 if (!response.ok) {
+            //                     throw new Error(`Erro na requisição: ${response.status}`);
+            //                 }
+            //                 return response.json();
+            //             })
+            //             .then(data => {
+            //                 console.log('Dados Atualizados:', data);
+            //             })
+            //             .catch(error => {
+            //                 console.error('Erro:', error);
+            //             });
 
-                })
-                .catch(error => {
-                    console.log('erro');
-                });
+            //     })
+            //     .catch(error => {
+            //         console.log('erro');
+            //     });
         </script>
 <?php
 
@@ -522,7 +522,7 @@ if ($stmt = $conn->prepare($query)) {
         
         <tr class='align-middle box_nomes' name='%s'>
         <td>%s</td>
-        <td class='fmatricula' id='%s'></td>
+        <td class='fmatricula' id='%s'>%s</td>
         <td class='fcpf' >%s</td>       
         <td class='fvinculo'>%s</td>
         <td id='%s'><a href='%s#offcanvasExample'class='btEditaServidor text-dark text-decoration-none' data-bs-toggle='offcanvas' role='button' aria-controls='offcanvasExample'>%s</a></td>
@@ -538,7 +538,7 @@ if ($stmt = $conn->prepare($query)) {
         <td>%s</td>
         
 
-      </tr>", $nome, $i, $fcpfn,  $fcpfpontos, $fvinculo, $id_linha, $link_para_alterar, $nome, $cargoTitulo, $adc_not, $ext_6, $ext_12, $ext_24, $acionamento, $transferencia, number_format($fixos, 2, ',', '.'), number_format($valor_total, 2, ',', '.'), $obs);
+      </tr>", $nome, $i, $fcpfn,  $fmatricula, $fcpfpontos, $fvinculo, $id_linha, $link_para_alterar, $nome, $cargoTitulo, $adc_not, $ext_6, $ext_12, $ext_24, $acionamento, $transferencia, number_format($fixos, 2, ',', '.'), number_format($valor_total, 2, ',', '.'), $obs);
         $valor_geral = $valor_geral + $valor_total;
     }
     $stmt->close();
