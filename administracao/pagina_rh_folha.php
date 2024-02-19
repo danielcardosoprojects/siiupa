@@ -435,7 +435,9 @@ if ($stmt = $conn->prepare($query)) {
             $link_para_alterar = 'javascript:alert("Folha fechada. Alteração não permitida.");';
         }
         
-$fcpfn = preg_replace("/[^0-9]/", "", $fcpf);
+//$fcpfn = preg_replace("/[^0-9]/", "", $fcpf);
+$fcpfn = strval(preg_replace("/[^0-9]/", "", $fcpf));
+
 $fcpfpontos = substr($fcpfn, 0, 3) . '.' . substr($fcpfn, 3, 3) . '.' . substr($fcpfn, 6, 3) . '-' . substr($fcpfn, 9, 2);
 
 ?>
