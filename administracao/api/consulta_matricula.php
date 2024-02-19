@@ -51,7 +51,7 @@ $password = 'c*123c12';
 
 // Gerar token
 //$token = gerarToken($username, $password);
-$token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA4MzY0ODM5LCJqdGkiOiIwNzM5MmFiM2JmMmU0OWE1YWQ2YmY3ZDkwMzZhMjJkNyIsInVzZXJfaWQiOjE5MDY3M30.juBCky8xZSJHu-DucTIF7XHga2Cd483zrvIP7VmQmRA";
+$token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA4MzY2NzY5LCJqdGkiOiIyZTg5YWM3MDkyZmM0YjgxYWMwZDFjZDkxYTMzNDIwYiIsInVzZXJfaWQiOjE5MDY3M30.l4T3Xp3nvJt9RC5iZM1V3M0ASSrAPM3v-phLHge4c0Q";
 // Substitua $fcpfn pelos seus valores reais
 
 
