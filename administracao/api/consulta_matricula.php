@@ -50,14 +50,15 @@ $username = 'danielcardoso';
 $password = 'c*123c12';
 
 // Gerar token
-$token = gerarToken($username, $password);
-
+//$token = gerarToken($username, $password);
+$token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA4MzYxNDY4LCJqdGkiOiI5ODlmMjE2YzI5ZTE0YzExYWM4ZjA4NTQzOWNhMGI0OSIsInVzZXJfaWQiOjE5MDY3M30.TzMoXkhm34JVthkyv0SXcZna2Ylnmjh46zEu6uEwE5I";
 // Substitua $fcpfn pelos seus valores reais
 
 
 // URL da API e cabeçalho de autorização
 $apiURL = "https://apionline.layoutsistemas.com.br/api/matriculas/?cpf=$ncpf&entidade=796";
 $authorizationHeader = "Bearer $token";
+
 
 // Fazer uma solicitação GET usando a função file_get_contents
 $response = file_get_contents($apiURL, false, stream_context_create([
