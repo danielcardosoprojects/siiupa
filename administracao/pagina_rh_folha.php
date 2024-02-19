@@ -59,7 +59,7 @@ class Tabela
 <script type="text/javascript" src="/siiupa/js/script.js"></script>
 <script>
     function consultarMatricula(cpf) {
-  const url = `http://localhost/siiupa/administracao/api/consulta_matricula.php?cpf=${cpf}`;
+  const url = `https://siupa.com.br/siiupa/administracao/api/consulta_matricula.php?cpf=${cpf}`;
 
   return fetch(url)
     .then(response => {
