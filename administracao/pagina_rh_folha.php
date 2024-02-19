@@ -77,7 +77,7 @@ class Tabela
             });
     }
 
-    function atualizarDadosFuncionario(id, dadosAtualizados, metodo = 'PATCH') {
+    function atualizarDadosFuncionario(id, dadosAtualizados, metodo = 'PUT') {
         const url = `https://siupa.com.br/siiupa/api/rh/api.php/records/tb_funcionario/${id}`;
 
         const opcoes = {
@@ -490,7 +490,7 @@ if ($stmt = $conn->prepare($query)) {
                     };
 
                     const opcoes<?=$fcpfn?> = {
-                        method: 'PATCH', // Método HTTP PATCH para atualização parcial
+                        method: 'PUT', // Método HTTP PATCH para atualização parcial
                         headers: {
                             'Content-Type': 'application/json',
                         },
