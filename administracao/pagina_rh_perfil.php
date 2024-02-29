@@ -139,7 +139,7 @@
         $("#dialogAcionamentos").dialog({
             autoOpen: true,
             modal: true,
-            title: 'Perfil',
+            title: 'Cadastrar acionamento',
             width: 'auto'
         });
 
