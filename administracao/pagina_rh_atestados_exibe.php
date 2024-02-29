@@ -179,13 +179,13 @@ $idAfastamento = $_GET['idafastamento'];
             })
             .then(response => {
                 if (response.ok) {
-                    alert('Funcionário excluído com sucesso.');
+                    alert('Afastamento excluído com sucesso.');
 
                     // Redirecione para a nova página após a exclusão bem-sucedida
                     window.location.href = 'https://siupa.com.br/siiupa/?setor=adm&sub=rh&subsub=atestados';
 
                 } else {
-                    alert('Erro ao excluir o funcionário:', response.statusText);
+                    alert('Erro ao excluir o afastamento:', response.statusText);
                     // Adicione aqui qualquer lógica para lidar com erros
                 }
             })
@@ -194,7 +194,7 @@ $idAfastamento = $_GET['idafastamento'];
                 // Adicione aqui qualquer lógica para lidar com erros de rede
             });
         } else {
-            console.error('ID de funcionário inválido.');
+            console.error('ID de afastamento inválido.');
             // Adicione aqui qualquer lógica para lidar com id-funcionario inválido
         }
     });
