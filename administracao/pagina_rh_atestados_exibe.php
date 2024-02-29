@@ -169,9 +169,9 @@ $idAfastamento = $_GET['idafastamento'];
 
 
         // Certifique-se de que há um id-funcionario válido
-        if (idFuncionario) {
+        if (idAfastamento) {
             // Construa a URL da API com o id-funcionario
-            var apiUrl = 'https://siupa.com.br/siiupa/api/rh/api.php/records/tb_afastamento/' + idFuncionario;
+            var apiUrl = 'https://siupa.com.br/siiupa/api/rh/api.php/records/tb_afastamento/' + idAfastamento;
 
             // Envie uma solicitação DELETE para a API
             fetch(apiUrl, {
