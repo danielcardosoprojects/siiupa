@@ -35,7 +35,7 @@ $idAfastamento = $_GET['idafastamento'];
         }
 
 
-        $afastamentoUtf8 = utf8_encode($resultado_atestado->afastamento);
+        $afastamentoUtf8 = $resultado_atestado->afastamento;
 
         echo "<div class='box_atestados table-hover ' style='width:auto;' name='$resultado_atestado->nome'><span class='$classe_css' > $texto_etiqueta</span> <span class='tipo_afastamento'>  $afastamentoUtf8 </span><span class='nome_funcionario'>";
         echo "<a href='?setor=adm&sub=rh&subsub=perfil&id=$resultado_atestado->idf'> ";
