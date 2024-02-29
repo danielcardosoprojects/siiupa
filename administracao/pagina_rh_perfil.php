@@ -136,13 +136,22 @@
         });
 
         
-        $("#dialogAcionamentos").dialog({
-            autoOpen: true,
-            modal: true,
-            title: 'Cadastrar acionamento',
-            width: 'auto',
-            theme: 'supervan'
-        });
+        $("#dialogAcionamentos").confirm({
+    title: 'Encountered an error!',
+    content: 'Something went downhill, this may be serious',
+    type: 'red',
+    typeAnimated: true,
+    buttons: {
+        tryAgain: {
+            text: 'Try again',
+            btnClass: 'btn-red',
+            action: function(){
+            }
+        },
+        close: function () {
+        }
+    }
+});
 
         
         //função para capturar o valor e campo para atualizar
