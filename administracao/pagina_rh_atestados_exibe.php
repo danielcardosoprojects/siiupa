@@ -53,7 +53,7 @@ $idAfastamento = $_GET['idafastamento'];
         echo "<button class='bt_editaAtestado form-control' style='width:100px;float:left;margin-right:5px;' data-idatestado='$resultado_atestado->id' data-idfuncionario='$resultado_atestado->fk_funcionario' data-data_inicio='$resultado_atestado->data_inicio' data-data_fim='$resultado_atestado->data_fim' data-afastamento='$resultado_atestado->afastamento' data-afastamentoid='$resultado_atestado->afastamento_id' data-nome='$resultado_atestado->nome' data-cargo='$resultado_atestado->titulo' data-afastamento_obs='$resultado_atestado->afastamento_obs'>Editar</button>";
         echo "<button class='bt_anexaDocumentos form-control' style='width:200px;float:left;' data-idatestado='$resultado_atestado->id' data-idfuncionario='$resultado_atestado->fk_funcionario' data-data_inicio='$resultado_atestado->data_inicio' data-data_fim='$resultado_atestado->data_fim' data-afastamento='$resultado_atestado->afastamento' data-afastamentoid='$resultado_atestado->afastamento_id' data-nome='$resultado_atestado->nome' data-cargo='$resultado_atestado->titulo'>Anexar documento</button>";
 
-        echo "<button id=\"excluirBtn\" data-id-funcionario=\"$resultado_atestado->idf\">Excluir</button>";
+        echo "<button id=\"excluirBtn\" data-id-funcionario=\"$idAfastamento\">Excluir</button>";
 
 
 
