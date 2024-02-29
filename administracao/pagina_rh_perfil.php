@@ -1157,6 +1157,11 @@ class Grade
 
     <div id="dialogAcionamentos">Teste acionamentos</div>
     <script>
+        $("#dialogAcionamentos").dialog({
+            autoOpen: true
+        })
+    </script>
+    <script>
         // Fazendo uma requisição GET
         axios.get('https://siupa.com.br/siiupa/api/rh/api.php/records/tb_acionamento?join=tb_acionamentos&page=3,4')
             .then(response => {
