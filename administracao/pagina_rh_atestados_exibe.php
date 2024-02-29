@@ -53,7 +53,7 @@ $idAfastamento = $_GET['idafastamento'];
         echo "<button class='bt_editaAtestado form-control' style='width:100px;float:left;margin-right:5px;' data-idatestado='$resultado_atestado->id' data-idfuncionario='$resultado_atestado->fk_funcionario' data-data_inicio='$resultado_atestado->data_inicio' data-data_fim='$resultado_atestado->data_fim' data-afastamento='$resultado_atestado->afastamento' data-afastamentoid='$resultado_atestado->afastamento_id' data-nome='$resultado_atestado->nome' data-cargo='$resultado_atestado->titulo' data-afastamento_obs='$resultado_atestado->afastamento_obs'>Editar</button>";
         echo "<button class='bt_anexaDocumentos form-control' style='width:200px;float:left;' data-idatestado='$resultado_atestado->id' data-idfuncionario='$resultado_atestado->fk_funcionario' data-data_inicio='$resultado_atestado->data_inicio' data-data_fim='$resultado_atestado->data_fim' data-afastamento='$resultado_atestado->afastamento' data-afastamentoid='$resultado_atestado->afastamento_id' data-nome='$resultado_atestado->nome' data-cargo='$resultado_atestado->titulo'>Anexar documento</button>";
 
-        echo "<button id=\"excluirBtn\" data-id-funcionario=\"$idAfastamento\">Excluir</button>";
+        echo "<button id=\"excluirBtn\" data-id-afastamento=\"$idAfastamento\">Excluir</button>";
 
 
 
@@ -146,4 +146,56 @@ $idAfastamento = $_GET['idafastamento'];
     #carregaAnexos {
         font-size: 12px;
     }
+    #excluirBtn {
+            background-color: #ff4d4d; /* Vermelho do Facebook */
+            color: #fff; /* Texto branco */
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        /* Efeito de hover para o botão */
+        #excluirBtn:hover {
+            background-color: #ff6666; /* Tom mais claro de vermelho ao passar o mouse */
+        }
 </style>
+<script>
+     document.getElementById('excluirBtn').addEventListener('click', function () {
+        // Obtenha o id-afastamento do atributo data
+        var idAfastamento = this.getAttribute('data-id-afastamento');
+
+
+        // Certifique-se de que há um id-funcionario válido
+        if (idFuncionario) {
+            // Construa a URL da API com o id-funcionario
+            var apiUrl = 'https://siupa.com.br/siiupa/api/rh/api.php/records/tb_afastamento/' + idFuncionario;
+
+            // Envie uma solicitação DELETE para a API
+            fetch(apiUrl, {
+                method: 'DELETE'
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Funcionário excluído com sucesso.');
+
+                    // Redirecione para a nova página após a exclusão bem-sucedida
+                    window.location.href = 'https://siupa.com.br/siiupa/?setor=adm&sub=rh&subsub=atestados';
+
+                } else {
+                    alert('Erro ao excluir o funcionário:', response.statusText);
+                    // Adicione aqui qualquer lógica para lidar com erros
+                }
+            })
+            .catch(error => {
+                console.error('Erro na solicitação DELETE:', error);
+                // Adicione aqui qualquer lógica para lidar com erros de rede
+            });
+        } else {
+            console.error('ID de funcionário inválido.');
+            // Adicione aqui qualquer lógica para lidar com id-funcionario inválido
+        }
+    });
+</script>
