@@ -136,10 +136,10 @@
         });
 
         $.dialog({
-    title: 'Text content!',
-    content: 'Simple modal!',
-    theme: 'supervan'
-});
+            title: 'Text content!',
+            content: 'Simple modal!',
+            theme: 'supervan'
+        });
         //função para capturar o valor e campo para atualizar
         //tipo para diferenciar se precisa tratar a data ou não
         function editafunc(celula, idfunc, campo, valorinput, tipo) {
@@ -507,7 +507,9 @@ class Grade
         <img src="/siiupa/imagens/icones/houseboat.svg">
         Cadastrar Férias
     </a>
-
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalLongoExemplo">
+  Abrir modal de demonstração
+</button>
 
     <a class='btn btn-outline-secondary' target="_blank" href="/siiupa/ADMINISTRACAO/apicnes.php?id=<?php echo $perfil->id; ?>">
         <img src="/siiupa/imagens/icones/inventory.svg">
@@ -586,17 +588,17 @@ class Grade
     echo "</td>
     
             </tr>";
-            
+
 
     echo "
             
             </tbody< /table>";
-            
+
     $grade->fimcoluna();
 
 
     $grade->fimlinha();
-    echo "</table>";    
+    echo "</table>";
     echo "<div class='copiar btn btn-sm btn-grey' data-text='C:\wamp64\www\siiupa\administracao\\rh\\$perfil->id\'>Pasta Windows</div>";
 
     ?>
@@ -831,14 +833,16 @@ class Grade
         $data_acionamento = new DateTime($resultado_acionamento->data_acionamento);
 
         $dataAcionamento = $data_acionamento->format('d/m/Y');
-        
+
         if ($resultado_acionamento->turno == "diurno") {
             $turnoAcionamento = "D";
         } elseif ($resultado_acionamento->turno == "noturno") {
             $turnoAcionamento = "N";
         } elseif ($resultado_acionamento->turno == "plantao_24h") {
             $turnoAcionamento = "P";
-        } else {$turnoAcionamento = "D";}
+        } else {
+            $turnoAcionamento = "D";
+        }
         echo "<td>$resultado_acionamento->nome</td><td>$dataAcionamento</td><td class='colunaHorasAcionamento'>$resultado_acionamento->qtd_horas $turnoAcionamento</td><td class='coluna_valor'>R$ $resultado_acionamento->valor,00</td><td>" . utf8_encode($resultado_acionamento->acionamento) . "</td>";
         echo "<td>";
         if ($resultado_acionamento->fk_afastamento != 0) {
@@ -1138,19 +1142,19 @@ class Grade
     </div>
     <div id="arquivostemporarios"></div>
     <div id='testando'></div>
-<!-- Inclua o Axios no seu HTML -->
+    <!-- Inclua o Axios no seu HTML -->
 
 
-<script>
-  // Fazendo uma requisição GET
-  axios.get('https://siupa.com.br/siiupa/api/rh/api.php/records/tb_acionamento?join=tb_acionamentos&page=3,4')
-    .then(response => {
-      console.log('Dados da resposta:', response.data);
-    })
-    .catch(error => {
-      console.error('Erro na requisição:', error);
-    });
-</script>
+    <script>
+        // Fazendo uma requisição GET
+        axios.get('https://siupa.com.br/siiupa/api/rh/api.php/records/tb_acionamento?join=tb_acionamentos&page=3,4')
+            .then(response => {
+                console.log('Dados da resposta:', response.data);
+            })
+            .catch(error => {
+                console.error('Erro na requisição:', error);
+            });
+    </script>
 
     <?php
     //$path = "../rh/" . $perfil->id . "/";
@@ -1224,6 +1228,26 @@ class Grade
             </div>
 
             <div id="dialogPerfil"></div>
+            
+            <div class="modal fade" id="ModalLongoExemplo" tabindex="-1" role="dialog" aria-labelledby="TituloModalLongoExemplo" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="TituloModalLongoExemplo">Título do modal</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                            <button type="button" class="btn btn-primary">Salvar mudanças</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
     <?php
         }
     } else {
