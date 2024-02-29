@@ -1157,24 +1157,7 @@ class Grade
 
     <div id="dialogAcionamentos">Teste acionamentos</div>
     <script>
-        $("#dialogAcionamentos").dialog({
-            autoOpen: true,
-            modal: true,
-        })
-
-        function carregarPagina() {
-    axios.get('administracao/pagina_rh_perfil_acionamentos.html')
-      .then(response => {
-        // Atualize o conteúdo da sua div com os dados da resposta
-        document.getElementById('conteudo').innerHTML = response.data;
-      })
-      .catch(error => {
-        console.error('Erro na requisição:', error);
-      });
-  }
-
-  // Chame a função ao carregar a página ou quando necessário
-  carregarPagina();
+       
     </script>
     <script>
         // Fazendo uma requisição GET
