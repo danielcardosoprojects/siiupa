@@ -1138,6 +1138,19 @@ class Grade
     </div>
     <div id="arquivostemporarios"></div>
     <div id='testando'></div>
+<!-- Inclua o Axios no seu HTML -->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script>
+  // Fazendo uma requisição GET
+  axios.get('https://api.exemplo.com/dados')
+    .then(response => {
+      console.log('Dados da resposta:', response.data);
+    })
+    .catch(error => {
+      console.error('Erro na requisição:', error);
+    });
+</script>
 
     <?php
     //$path = "../rh/" . $perfil->id . "/";
