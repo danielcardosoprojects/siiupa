@@ -53,8 +53,9 @@ include_once('../bd/nivel.php');
 
         $afastamentoUtf8 = $resultado_atestado->afastamento;
 
-        echo "<div class='box_atestados table-hover ' style='width:auto;' name='$resultado_atestado->nome'><span class='$classe_css' > $texto_etiqueta</span> <span class='tipo_afastamento'>  $afastamentoUtf8 </span><br>";
+       
         echo "<span class='nome_funcionario'><a href='?setor=adm&sub=rh&subsub=atestado_exibe&idafastamento=$resultado_atestado->idAfastamento'> ";
+        echo "<div class='box_atestados table-hover ' style='width:auto;' name='$resultado_atestado->nome'><span class='$classe_css' > $texto_etiqueta</span> <span class='tipo_afastamento'>  $afastamentoUtf8 </span><br>";
 
         echo $resultado_atestado->nome . "</a></span> - <span class='nome_cargo'>" . utf8_encode($resultado_atestado->titulo) . "</span> - ";
         echo "De: <input class='data' type='date' value='" . $resultado_atestado->data_inicio . "' readonly> Até: <input class='data'  type='date' value='" . $resultado_atestado->data_fim . "' readonly><br>";
