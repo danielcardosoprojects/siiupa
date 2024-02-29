@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carregamento de Opções com Axios</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+
+<form>
+  <label for="acionamentos">Selecione um acionamento:</label>
+  <select id="acionamentos" name="acionamento">
+    <!-- As opções serão carregadas aqui -->
+  </select>
+</form>
+
+<script>
+  // Função para carregar opções usando Axios e preencher o select
+  function carregarAcionamentos() {
+    // Faça uma requisição GET à API
+    axios.get('https://siupa.com.br/siiupa/api/rh/api.php/records/tb_acionamentos')
+      .then(response => {
+        // Preencha o select com as opções retornadas
+        const select = document.getElementById('acionamentos');
+        response.data.records.forEach(acionamento => {
+          const option = document.createElement('option');
+          option.value = acionamento.id;
+          option.text = acionamento.acionamento;
+          select.appendChild(option);
+        });
+      })
+      .catch(error => {
+        console.error('Erro na requisição:', error);
+      });
+  }
+
+  // Chame a função ao carregar a página ou quando necessário
+  carregarAcionamentos();
+</script>
+
+</body>
+</html>
