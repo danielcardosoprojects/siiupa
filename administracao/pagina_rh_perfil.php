@@ -1155,7 +1155,7 @@ class Grade
     <div id='testando'></div>
     <!-- Inclua o Axios no seu HTML -->
 
-
+    <div id="dialogAcionamentos">Teste acionamentos</div>
     <script>
         // Fazendo uma requisição GET
         axios.get('https://siupa.com.br/siiupa/api/rh/api.php/records/tb_acionamento?join=tb_acionamentos&page=3,4')
@@ -1239,7 +1239,7 @@ class Grade
             </div>
 
             <div id="dialogPerfil"></div>
-            <div id="dialogAcionamentos">Teste acionamentos</div>
+            
 
     <?php
         }
