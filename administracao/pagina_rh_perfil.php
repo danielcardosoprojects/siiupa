@@ -140,7 +140,8 @@
             autoOpen: true,
             modal: true,
             title: 'Cadastrar acionamento',
-            width: 'auto'
+            width: 'auto',
+            theme: 'supervan'
         });
 
         $.dialog({
