@@ -135,7 +135,10 @@
             width: 'auto'
         });
 
-
+        $.dialog({
+    title: 'Text content!',
+    content: 'Simple modal!',
+});
         //função para capturar o valor e campo para atualizar
         //tipo para diferenciar se precisa tratar a data ou não
         function editafunc(celula, idfunc, campo, valorinput, tipo) {

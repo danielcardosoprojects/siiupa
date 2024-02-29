@@ -46,8 +46,11 @@ include('../conexao/verifica_login.php');
 	<script src="/siiupa/bootstrap-5.0.0-beta3-dist/js/bootstrap.min.js"></script>
 
 	<!-- jquery confim -->
-	<link rel="stylesheet" href="/siiupa/js/jquery-confirm.min.css">
-	<script src="/siiupa/js/jquery-confirm.min.js"></script>
+	<!-- <link rel="stylesheet" href="/siiupa/js/jquery-confirm.min.css">
+	<script src="/siiupa/js/jquery-confirm.min.js"></script> -->
+	
+	<link rel="stylesheet" href="/siiupa/widgets/jqueryconfirm/jquery-confirm.min.css">
+	<script src="/siiupa/widgets/jqueryconfirm/jquery-confirm.min.js"></script>
 
 	<!-- jquery upload -->
 
