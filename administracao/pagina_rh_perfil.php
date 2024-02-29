@@ -1139,7 +1139,7 @@ class Grade
     <div id="arquivostemporarios"></div>
     <div id='testando'></div>
 <!-- Inclua o Axios no seu HTML -->
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 
 <script>
   // Fazendo uma requisição GET
