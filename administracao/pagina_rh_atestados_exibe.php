@@ -260,7 +260,7 @@ $idAfastamento = $_GET['idafastamento'];
         /* Vermelho do Facebook */
         color: #fff;
         /* Texto branco */
-        padding: 10px 20px;
+        padding: 10px 10px;
         font-size: 16px;
         border: none;
         border-radius: 5px;
