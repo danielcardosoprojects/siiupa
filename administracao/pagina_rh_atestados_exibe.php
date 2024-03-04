@@ -195,6 +195,7 @@ $idAfastamento = $_GET['idafastamento'];
                     console.log(record.fk_funcionario.nome); // Exemplo: exibindo o registro no console
                     let nome = record.fk_funcionario.nome;
                     let idAcionamento = record.id;
+                    let qtdHoras = record.qtd_horas;
                     // String da data
                     const dataString = record.data_acionamento;
                     // Criar um objeto Date a partir da string
@@ -208,7 +209,7 @@ $idAfastamento = $_GET['idafastamento'];
 
                     // Criar um novo elemento span
                     let novoSpan = document.createElement('div');
-                    novoSpan.innerHTML = `<strong><a href="https://siupa.com.br/siiupa/?setor=adm&sub=rh&subsub=acionamento_exibe&id=${idAcionamento}">${dataBr} | ${nome}</a></strong>`; // Adicionando HTML ao span
+                    novoSpan.innerHTML = `<strong><a href="https://siupa.com.br/siiupa/?setor=adm&sub=rh&subsub=acionamento_exibe&id=${idAcionamento}">${dataBr} | ${qtdHoras} | ${nome}</a></strong>`; // Adicionando HTML ao span
 
                     // Adicionar o novo span como filho da div #acionamentosVinculados
                     divAcionamentos.appendChild(novoSpan);
