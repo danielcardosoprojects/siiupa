@@ -183,7 +183,7 @@ $idAfastamento = $_GET['idafastamento'];
                 .then(response => {
                     console.log(response.data.results);
                     // Verifica se o campo "results" está presente e é maior que zero
-                    if (response.data.results && response.data.results.length > 0) {
+                    if (response.data.results && response.data.results > 0) {
                         // Exibe um alert
                         
                         alert('existe um acionamento vinculado a este afastamento. Desvincule');
