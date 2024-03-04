@@ -67,7 +67,7 @@ $idAfastamento = $_GET['idafastamento'];
     ?>
     <div class="box_atestados table-hover">
         <h3>Acionamentos vinculados a este atestado</h3>
-        <div class="table-hover">Maria Flavia Costa Monteiro</div>
+        <div class="table-hover" id="acionamentosVinculados"></div>
     </div>
 </div>
 <style>
@@ -186,10 +186,29 @@ $idAfastamento = $_GET['idafastamento'];
                 document.getElementById('excluirBtn').addEventListener('click', function() {
                     alert('existe um acionamento vinculado a este afastamento. Desvincule primeiro.');
                 });
-
+                //EXIBIR OS ACIONAMENTOS VINCULADOS A ESTE ATESTADO, SE HOUVER
                 response.data.records.forEach(function(record) {
                     // Faça alguma operação com cada registro
                     console.log(record.fk_funcionario.nome); // Exemplo: exibindo o registro no console
+                    let nome = record.fk_funcionario.nome;
+                    let idAcionamento = record.id;
+                    // String da data
+                    const dataString = record.data_acionamento;
+                    // Criar um objeto Date a partir da string
+                    const data = new Date(dataString);
+                    // Verificar se a data é válida e formata DD/MM/AAAA
+                    const dataBr = (!isNaN(data.getTime())) ? `${data.getDate().toString().padStart(2, '0')}/${(data.getMonth() + 1).toString().padStart(2, '0')}/${data.getFullYear()}` : "Data inválida.";
+
+
+                    // Encontrar a div com o id #acionamentosVinculados
+                    let divAcionamentos = document.getElementById('acionamentosVinculados');
+
+                    // Criar um novo elemento span
+                    let novoSpan = document.createElement('span');
+                    novoSpan.innerHTML = `<strong><a href="https://siupa.com.br/siiupa/?setor=adm&sub=rh&subsub=acionamento_exibe&id=${idAcionamento}">${dataBr} | ${nome}</a></strong>`; // Adicionando HTML ao span
+
+                    // Adicionar o novo span como filho da div #acionamentosVinculados
+                    divAcionamentos.appendChild(novoSpan);
                 });
             } else {
                 alert('pode excluir');
