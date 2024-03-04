@@ -187,7 +187,7 @@ $idAfastamento = $_GET['idafastamento'];
                 alert('existe um acionamento vinculado a este afastamento. Desvincule primeiro.');
             });
 
-            consolelog(response.data.records);
+            console.log(response.data.records);
             } else {
                 alert('pode excluir');
                 document.getElementById('excluirBtn').addEventListener('click', function() {
