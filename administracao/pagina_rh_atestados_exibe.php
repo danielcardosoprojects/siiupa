@@ -183,8 +183,11 @@ $idAfastamento = $_GET['idafastamento'];
             // Verifica se o campo "results" está presente e é maior que zero
             if (response.data.results && response.data.results > 0) {
                 // Exibe um alert
+                document.getElementById('excluirBtn').addEventListener('click', function() {
+                alert('existe um acionamento vinculado a este afastamento. Desvincule primeiro.');
+            });
 
-                alert('existe um acionamento vinculado a este afastamento. Desvincule');
+            consolelog(response.data.records);
             } else {
                 alert('pode excluir');
                 document.getElementById('excluirBtn').addEventListener('click', function() {
