@@ -65,6 +65,7 @@ $idAfastamento = $_GET['idafastamento'];
         //echo "<hr>";
     }
     ?>
+    <hr>
     <div class="box_atestados table-hover border border-primary">
         <h3 class="text-primary">Acionamentos vinculados a este atestado</h3>
         <div class="table-hover" id="acionamentosVinculados"></div>
@@ -73,6 +74,105 @@ $idAfastamento = $_GET['idafastamento'];
     <?="</div>";?>
 
 </div>
+
+<script>
+    const idAfastamentoConsulta = document.getElementById("excluirBtn").getAttribute('data-id-afastamento');
+    const apiUrlVerificaFK = `https://siupa.com.br/siiupa/api/rh/api.php/records/tb_acionamento?filter=fk_afastamento,eq,${idAfastamentoConsulta}&join=tb_funcionario&page=1`;
+
+    // Realiza a consulta usando Axios
+    axios.get(apiUrlVerificaFK)
+
+        .then(response => {
+            console.log(response.data.results);
+            // Verifica se o campo "results" está presente e é maior que zero
+            if (response.data.results && response.data.results > 0) {
+                // Exibe um alert
+                document.getElementById('excluirBtn').addEventListener('click', function() {
+                    alert('existe um acionamento vinculado a este afastamento. Desvincule primeiro.');
+                });
+                //EXIBIR OS ACIONAMENTOS VINCULADOS A ESTE ATESTADO, SE HOUVER
+                response.data.records.forEach(function(record) {
+                    // Faça alguma operação com cada registro
+                    console.log(record.fk_funcionario.nome); // Exemplo: exibindo o registro no console
+                    let nome = record.fk_funcionario.nome;
+                    let idAcionamento = record.id;
+                    let qtdHoras = record.qtd_horas;
+                    let turno = record.turno;
+                    // String da data
+                    const dataString = record.data_acionamento;
+                    // Criar um objeto Date a partir da string
+                    const data = new Date(dataString);
+                    // Verificar se a data é válida e formata DD/MM/AAAA
+                    const dataBr = (!isNaN(data.getTime())) ? `${data.getDate().toString().padStart(2, '0')}/${(data.getMonth() + 1).toString().padStart(2, '0')}/${data.getFullYear()}` : "Data inválida.";
+
+
+                    // Encontrar a div com o id #acionamentosVinculados
+                    let divAcionamentos = document.getElementById('acionamentosVinculados');
+
+                    // Criar um novo elemento span
+                    let novoSpan = document.createElement('div');
+                    novoSpan.innerHTML = `<strong><a href="https://siupa.com.br/siiupa/?setor=adm&sub=rh&subsub=acionamento_exibe&id=${idAcionamento}">${dataBr} | ${qtdHoras} ${turno} | ${nome}</a></strong>`; // Adicionando HTML ao span
+
+                    // Adicionar o novo span como filho da div #acionamentosVinculados
+                    divAcionamentos.appendChild(novoSpan);
+                });
+            } else {
+                let divAcionamentos = document.getElementById('acionamentosVinculados');
+
+                    // Criar um novo elemento span
+                    let novoSpan = document.createElement('span');
+                    novoSpan.innerHTML = `Nenhum acionamento vinculado a este afastamento.`; // Adicionando HTML ao span
+
+                    // Adicionar o novo span como filho da div #acionamentosVinculados
+                    divAcionamentos.appendChild(novoSpan);
+                document.getElementById('excluirBtn').addEventListener('click', function() {
+                    // Obtenha o id-afastamento do atributo data
+                    var idAfastamento = this.getAttribute('data-id-afastamento');
+
+
+                    // Certifique-se de que há um id-funcionario válido
+                    if (idAfastamento) {
+
+                        // Construa a URL da API com o id-funcionario
+                        var apiUrl = 'https://siupa.com.br/siiupa/api/rh/api.php/records/tb_afastamento/' + idAfastamento;
+
+                        // Envie uma solicitação DELETE para a API
+                        fetch(apiUrl, {
+                                method: 'DELETE'
+                            })
+                            .then(response => {
+                                if (response.ok) {
+                                    alert('Afastamento excluído com sucesso.');
+
+                                    // Redirecione para a nova página após a exclusão bem-sucedida
+                                    window.location.href = 'https://siupa.com.br/siiupa/?setor=adm&sub=rh&subsub=atestados';
+
+                                } else {
+                                    alert('Erro ao excluir o afastamento:', response.statusText);
+                                    // Adicione aqui qualquer lógica para lidar com erros
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Erro na solicitação DELETE:', error);
+                                // Adicione aqui qualquer lógica para lidar com erros de rede
+                            });
+
+
+
+
+                    } else {
+                        console.error('ID de afastamento inválido.');
+                        // Adicione aqui qualquer lógica para lidar com id-funcionario inválido
+                    }
+                });
+
+            }
+        })
+        .catch(error => {
+            // Trata os erros, exibindo um alert com a mensagem de erro
+            alert('Erro ao consultar a API: ' + error.message);
+        });
+</script>
 <style>
     #box_grande {
         display: flex;
@@ -174,101 +274,3 @@ $idAfastamento = $_GET['idafastamento'];
         /* Tom mais claro de vermelho ao passar o mouse */
     }
 </style>
-<script>
-    const idAfastamentoConsulta = document.getElementById("excluirBtn").getAttribute('data-id-afastamento');
-    const apiUrlVerificaFK = `https://siupa.com.br/siiupa/api/rh/api.php/records/tb_acionamento?filter=fk_afastamento,eq,${idAfastamentoConsulta}&join=tb_funcionario&page=1`;
-
-    // Realiza a consulta usando Axios
-    axios.get(apiUrlVerificaFK)
-
-        .then(response => {
-            console.log(response.data.results);
-            // Verifica se o campo "results" está presente e é maior que zero
-            if (response.data.results && response.data.results > 0) {
-                // Exibe um alert
-                document.getElementById('excluirBtn').addEventListener('click', function() {
-                    alert('existe um acionamento vinculado a este afastamento. Desvincule primeiro.');
-                });
-                //EXIBIR OS ACIONAMENTOS VINCULADOS A ESTE ATESTADO, SE HOUVER
-                response.data.records.forEach(function(record) {
-                    // Faça alguma operação com cada registro
-                    console.log(record.fk_funcionario.nome); // Exemplo: exibindo o registro no console
-                    let nome = record.fk_funcionario.nome;
-                    let idAcionamento = record.id;
-                    let qtdHoras = record.qtd_horas;
-                    let turno = record.turno;
-                    // String da data
-                    const dataString = record.data_acionamento;
-                    // Criar um objeto Date a partir da string
-                    const data = new Date(dataString);
-                    // Verificar se a data é válida e formata DD/MM/AAAA
-                    const dataBr = (!isNaN(data.getTime())) ? `${data.getDate().toString().padStart(2, '0')}/${(data.getMonth() + 1).toString().padStart(2, '0')}/${data.getFullYear()}` : "Data inválida.";
-
-
-                    // Encontrar a div com o id #acionamentosVinculados
-                    let divAcionamentos = document.getElementById('acionamentosVinculados');
-
-                    // Criar um novo elemento span
-                    let novoSpan = document.createElement('div');
-                    novoSpan.innerHTML = `<strong><a href="https://siupa.com.br/siiupa/?setor=adm&sub=rh&subsub=acionamento_exibe&id=${idAcionamento}">${dataBr} | ${qtdHoras} ${turno} | ${nome}</a></strong>`; // Adicionando HTML ao span
-
-                    // Adicionar o novo span como filho da div #acionamentosVinculados
-                    divAcionamentos.appendChild(novoSpan);
-                });
-            } else {
-                let divAcionamentos = document.getElementById('acionamentosVinculados');
-
-                    // Criar um novo elemento span
-                    let novoSpan = document.createElement('span');
-                    novoSpan.innerHTML = `Nenhum acionamento vinculado a este afastamento.`; // Adicionando HTML ao span
-
-                    // Adicionar o novo span como filho da div #acionamentosVinculados
-                    divAcionamentos.appendChild(novoSpan);
-                document.getElementById('excluirBtn').addEventListener('click', function() {
-                    // Obtenha o id-afastamento do atributo data
-                    var idAfastamento = this.getAttribute('data-id-afastamento');
-
-
-                    // Certifique-se de que há um id-funcionario válido
-                    if (idAfastamento) {
-
-                        // Construa a URL da API com o id-funcionario
-                        var apiUrl = 'https://siupa.com.br/siiupa/api/rh/api.php/records/tb_afastamento/' + idAfastamento;
-
-                        // Envie uma solicitação DELETE para a API
-                        fetch(apiUrl, {
-                                method: 'DELETE'
-                            })
-                            .then(response => {
-                                if (response.ok) {
-                                    alert('Afastamento excluído com sucesso.');
-
-                                    // Redirecione para a nova página após a exclusão bem-sucedida
-                                    window.location.href = 'https://siupa.com.br/siiupa/?setor=adm&sub=rh&subsub=atestados';
-
-                                } else {
-                                    alert('Erro ao excluir o afastamento:', response.statusText);
-                                    // Adicione aqui qualquer lógica para lidar com erros
-                                }
-                            })
-                            .catch(error => {
-                                console.error('Erro na solicitação DELETE:', error);
-                                // Adicione aqui qualquer lógica para lidar com erros de rede
-                            });
-
-
-
-
-                    } else {
-                        console.error('ID de afastamento inválido.');
-                        // Adicione aqui qualquer lógica para lidar com id-funcionario inválido
-                    }
-                });
-
-            }
-        })
-        .catch(error => {
-            // Trata os erros, exibindo um alert com a mensagem de erro
-            alert('Erro ao consultar a API: ' + error.message);
-        });
-</script>
