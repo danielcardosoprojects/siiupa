@@ -207,7 +207,7 @@ $idAfastamento = $_GET['idafastamento'];
                     let divAcionamentos = document.getElementById('acionamentosVinculados');
 
                     // Criar um novo elemento span
-                    let novoSpan = document.createElement('span');
+                    let novoSpan = document.createElement('div');
                     novoSpan.innerHTML = `<strong><a href="https://siupa.com.br/siiupa/?setor=adm&sub=rh&subsub=acionamento_exibe&id=${idAcionamento}">${dataBr} | ${nome}</a></strong>`; // Adicionando HTML ao span
 
                     // Adicionar o novo span como filho da div #acionamentosVinculados
