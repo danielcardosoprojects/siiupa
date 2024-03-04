@@ -168,64 +168,65 @@ $idAfastamento = $_GET['idafastamento'];
     }
 </style>
 <script>
-    document.getElementById('excluirBtn').addEventListener('click', function() {
-        // Obtenha o id-afastamento do atributo data
-        var idAfastamento = this.getAttribute('data-id-afastamento');
+    const apiUrlVerificaFK = `https://siupa.com.br/siiupa/api/rh/api.php/records/tb_acionamento?filter=fk_afastamento,eq,${idAfastamento}&page=1`;
+
+    // Realiza a consulta usando Axios
+    axios.get(apiUrlVerificaFK)
+
+        .then(response => {
+            console.log(response.data.results);
+            // Verifica se o campo "results" está presente e é maior que zero
+            if (response.data.results && response.data.results > 0) {
+                // Exibe um alert
+
+                alert('existe um acionamento vinculado a este afastamento. Desvincule');
+            } else {
+                alert('pode excluir');
+                document.getElementById('excluirBtn').addEventListener('click', function() {
+                    // Obtenha o id-afastamento do atributo data
+                    var idAfastamento = this.getAttribute('data-id-afastamento');
 
 
-        // Certifique-se de que há um id-funcionario válido
-        if (idAfastamento) {
-            const apiUrlVerificaFK = `https://siupa.com.br/siiupa/api/rh/api.php/records/tb_acionamento?filter=fk_afastamento,eq,${idAfastamento}&page=1`;
+                    // Certifique-se de que há um id-funcionario válido
+                    if (idAfastamento) {
 
-            // Realiza a consulta usando Axios
-            axios.get(apiUrlVerificaFK)
-            
-                .then(response => {
-                    console.log(response.data.results);
-                    // Verifica se o campo "results" está presente e é maior que zero
-                    if (response.data.results && response.data.results > 0) {
-                        // Exibe um alert
-                        
-                        alert('existe um acionamento vinculado a este afastamento. Desvincule');
+                        // Construa a URL da API com o id-funcionario
+                        var apiUrl = 'https://siupa.com.br/siiupa/api/rh/api.php/records/tb_afastamento/' + idAfastamento;
+
+                        // Envie uma solicitação DELETE para a API
+                        fetch(apiUrl, {
+                                method: 'DELETE'
+                            })
+                            .then(response => {
+                                if (response.ok) {
+                                    alert('Afastamento excluído com sucesso.');
+
+                                    // Redirecione para a nova página após a exclusão bem-sucedida
+                                    window.location.href = 'https://siupa.com.br/siiupa/?setor=adm&sub=rh&subsub=atestados';
+
+                                } else {
+                                    alert('Erro ao excluir o afastamento:', response.statusText);
+                                    // Adicione aqui qualquer lógica para lidar com erros
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Erro na solicitação DELETE:', error);
+                                // Adicione aqui qualquer lógica para lidar com erros de rede
+                            });
+
+
+
+
                     } else {
-                        alert('pode excluir');
-                        // // Construa a URL da API com o id-funcionario
-                        // var apiUrl = 'https://siupa.com.br/siiupa/api/rh/api.php/records/tb_afastamento/' + idAfastamento;
-
-                        // // Envie uma solicitação DELETE para a API
-                        // fetch(apiUrl, {
-                        //         method: 'DELETE'
-                        //     })
-                        //     .then(response => {
-                        //         if (response.ok) {
-                        //             alert('Afastamento excluído com sucesso.');
-
-                        //             // Redirecione para a nova página após a exclusão bem-sucedida
-                        //             window.location.href = 'https://siupa.com.br/siiupa/?setor=adm&sub=rh&subsub=atestados';
-
-                        //         } else {
-                        //             alert('Erro ao excluir o afastamento:', response.statusText);
-                        //             // Adicione aqui qualquer lógica para lidar com erros
-                        //         }
-                        //     })
-                        //     .catch(error => {
-                        //         console.error('Erro na solicitação DELETE:', error);
-                        //         // Adicione aqui qualquer lógica para lidar com erros de rede
-                        //     });
+                        console.error('ID de afastamento inválido.');
+                        // Adicione aqui qualquer lógica para lidar com id-funcionario inválido
                     }
-                })
-                .catch(error => {
-                    // Trata os erros, exibindo um alert com a mensagem de erro
-                    alert('Erro ao consultar a API: ' + error.message);
                 });
 
-
-
-
-
-        } else {
-            console.error('ID de afastamento inválido.');
-            // Adicione aqui qualquer lógica para lidar com id-funcionario inválido
-        }
-    });
+            }
+        })
+        .catch(error => {
+            // Trata os erros, exibindo um alert com a mensagem de erro
+            alert('Erro ao consultar a API: ' + error.message);
+        });
 </script>
