@@ -214,7 +214,7 @@ $idAfastamento = $_GET['idafastamento'];
                     divAcionamentos.appendChild(novoSpan);
                 });
             } else {
-                alert('pode excluir');
+                
                 document.getElementById('excluirBtn').addEventListener('click', function() {
                     // Obtenha o id-afastamento do atributo data
                     var idAfastamento = this.getAttribute('data-id-afastamento');
