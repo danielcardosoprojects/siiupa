@@ -173,7 +173,7 @@ $idAfastamento = $_GET['idafastamento'];
 </style>
 <script>
     const idAfastamentoConsulta = document.getElementById("excluirBtn").getAttribute('data-id-afastamento');
-    const apiUrlVerificaFK = `https://siupa.com.br/siiupa/api/rh/api.php/records/tb_acionamento?filter=fk_afastamento,eq,${idAfastamentoConsulta}&page=1`;
+    const apiUrlVerificaFK = `https://siupa.com.br/siiupa/api/rh/api.php/records/tb_acionamento?filter=fk_afastamento,eq,${idAfastamentoConsulta}&join=tb_funcionario&page=1`;
 
     // Realiza a consulta usando Axios
     axios.get(apiUrlVerificaFK)
@@ -189,7 +189,7 @@ $idAfastamento = $_GET['idafastamento'];
 
                 response.data.records.forEach(function(record) {
                     // Faça alguma operação com cada registro
-                    console.log(record); // Exemplo: exibindo o registro no console
+                    console.log(record.fk_funcionario.nome); // Exemplo: exibindo o registro no console
                 });
             } else {
                 alert('pode excluir');
