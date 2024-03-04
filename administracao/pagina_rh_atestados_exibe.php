@@ -65,7 +65,10 @@ $idAfastamento = $_GET['idafastamento'];
         //echo "<hr>";
     }
     ?>
-
+<div class="box_atestados table-hover">
+    <h3>Acionamentos vinculados a este atestado</h3>
+    <div class="table-hover">Maria Flavia Costa Monteiro</div>
+</div>
 </div>
 <style>
     #box_grande {
