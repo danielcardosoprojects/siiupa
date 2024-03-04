@@ -45,7 +45,7 @@ $idAfastamento = $_GET['idafastamento'];
 
         echo "(" . $totalDias . " dias) | " . $intvl->y . " ano(s), " . $intvl->m . " mes(es) e " . $dias . " dia(s)";
         echo "<br>";
-        $afastamentoObs = utf8_decode($resultado_atestado->afastamento_obs);
+        $afastamentoObs = $resultado_atestado->afastamento_obs;
         echo "📝 $afastamentoObs";
         echo "<br>";
 
@@ -137,6 +137,7 @@ $idAfastamento = $_GET['idafastamento'];
         background-color: #fff;
         overflow: hidden;
         height: auto;
+        width: 100%;
     }
 
     .box_atestados:hover {
