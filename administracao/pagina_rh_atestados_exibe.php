@@ -65,10 +65,10 @@ $idAfastamento = $_GET['idafastamento'];
         //echo "<hr>";
     }
     ?>
-<div class="box_atestados table-hover">
-    <h3>Acionamentos vinculados a este atestado</h3>
-    <div class="table-hover">Maria Flavia Costa Monteiro</div>
-</div>
+    <div class="box_atestados table-hover">
+        <h3>Acionamentos vinculados a este atestado</h3>
+        <div class="table-hover">Maria Flavia Costa Monteiro</div>
+    </div>
 </div>
 <style>
     #box_grande {
@@ -174,7 +174,7 @@ $idAfastamento = $_GET['idafastamento'];
 <script>
     const idAfastamentoConsulta = document.getElementById("excluirBtn").getAttribute('data-id-afastamento');
     const apiUrlVerificaFK = `https://siupa.com.br/siiupa/api/rh/api.php/records/tb_acionamento?filter=fk_afastamento,eq,${idAfastamentoConsulta}&page=1`;
-    
+
     // Realiza a consulta usando Axios
     axios.get(apiUrlVerificaFK)
 
@@ -184,10 +184,13 @@ $idAfastamento = $_GET['idafastamento'];
             if (response.data.results && response.data.results > 0) {
                 // Exibe um alert
                 document.getElementById('excluirBtn').addEventListener('click', function() {
-                alert('existe um acionamento vinculado a este afastamento. Desvincule primeiro.');
-            });
+                    alert('existe um acionamento vinculado a este afastamento. Desvincule primeiro.');
+                });
 
-            console.log(response.data.records);
+                response.data.records.forEach(function(record) {
+                    // Faça alguma operação com cada registro
+                    console.log(record); // Exemplo: exibindo o registro no console
+                });
             } else {
                 alert('pode excluir');
                 document.getElementById('excluirBtn').addEventListener('click', function() {
