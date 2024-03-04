@@ -8,7 +8,7 @@ $idAfastamento = $_GET['idafastamento'];
 <div id="box_grande">
     <?php
     $consulta_atestado = new BD;
-   
+
 
     $sqlConsulta_Atestados = "SELECT afs.afastamento,afs.id as afastamento_id, A.*, f.nome, f.id as idf, c.titulo FROM u940659928_siupa.tb_afastamento as A inner join u940659928_siupa.tb_funcionario as f ON (A.fk_funcionario = f.id) inner join u940659928_siupa.tb_cargo AS c on (f.fk_cargo = c.id) inner join u940659928_siupa.tb_afastamentos as afs on (A.fk_afastamentos = afs.id) WHERE A.id = '$idAfastamento' order by A.id DESC";
     $resultadoConsulta_Atestados = $consulta_atestado->consulta($sqlConsulta_Atestados);
@@ -51,7 +51,7 @@ $idAfastamento = $_GET['idafastamento'];
 
 
         echo "<button class='bt_editaAtestado form-control' style='width:100px;float:left;margin-right:5px;' data-idatestado='$resultado_atestado->id' data-idfuncionario='$resultado_atestado->fk_funcionario' data-data_inicio='$resultado_atestado->data_inicio' data-data_fim='$resultado_atestado->data_fim' data-afastamento='$resultado_atestado->afastamento' data-afastamentoid='$resultado_atestado->afastamento_id' data-nome='$resultado_atestado->nome' data-cargo='$resultado_atestado->titulo' data-afastamento_obs='$resultado_atestado->afastamento_obs'>Editar</button>";
-        
+
 
         echo "<a id=\"excluirBtn\" data-id-afastamento=\"$idAfastamento\">Excluir</a>";
 
@@ -79,6 +79,7 @@ $idAfastamento = $_GET['idafastamento'];
         justify-content: space-around;
         padding: 4px;
     }
+
     .ativo {
         background-color: green;
         padding: .2rem .3rem;
@@ -146,53 +147,82 @@ $idAfastamento = $_GET['idafastamento'];
     #carregaAnexos {
         font-size: 12px;
     }
-    #excluirBtn {
-            background-color: #ff4d4d; /* Vermelho do Facebook */
-            color: #fff; /* Texto branco */
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
 
-        /* Efeito de hover para o botão */
-        #excluirBtn:hover {
-            background-color: #ff6666; /* Tom mais claro de vermelho ao passar o mouse */
-        }
+    #excluirBtn {
+        background-color: #ff4d4d;
+        /* Vermelho do Facebook */
+        color: #fff;
+        /* Texto branco */
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    /* Efeito de hover para o botão */
+    #excluirBtn:hover {
+        background-color: #ff6666;
+        /* Tom mais claro de vermelho ao passar o mouse */
+    }
 </style>
 <script>
-     document.getElementById('excluirBtn').addEventListener('click', function () {
+    document.getElementById('excluirBtn').addEventListener('click', function() {
         // Obtenha o id-afastamento do atributo data
         var idAfastamento = this.getAttribute('data-id-afastamento');
 
 
         // Certifique-se de que há um id-funcionario válido
         if (idAfastamento) {
-            // Construa a URL da API com o id-funcionario
-            var apiUrl = 'https://siupa.com.br/siiupa/api/rh/api.php/records/tb_afastamento/' + idAfastamento;
+            const apiUrlVerificaFK = `https://siupa.com.br/siiupa/api/rh/api.php/records/tb_acionamento?filter=fk_afastamento,eq,${idAfastamento}&page=1`;
 
-            // Envie uma solicitação DELETE para a API
-            fetch(apiUrl, {
-                method: 'DELETE'
-            })
-            .then(response => {
-                if (response.ok) {
-                    alert('Afastamento excluído com sucesso.');
+            // Realiza a consulta usando Axios
+            axios.get(apiUrl)
+            
+                .then(response => {
+                    console.log(response.data);
+                    // Verifica se o campo "results" está presente e é maior que zero
+                    if (response.data.results && response.data.results.length > 0) {
+                        // Exibe um alert
+                        
+                        alert('existe um acionamento vinculado a este afastamento. Desvincule');
+                    } else {
+                        alert('pode excluir');
+                        // // Construa a URL da API com o id-funcionario
+                        // var apiUrl = 'https://siupa.com.br/siiupa/api/rh/api.php/records/tb_afastamento/' + idAfastamento;
 
-                    // Redirecione para a nova página após a exclusão bem-sucedida
-                    window.location.href = 'https://siupa.com.br/siiupa/?setor=adm&sub=rh&subsub=atestados';
+                        // // Envie uma solicitação DELETE para a API
+                        // fetch(apiUrl, {
+                        //         method: 'DELETE'
+                        //     })
+                        //     .then(response => {
+                        //         if (response.ok) {
+                        //             alert('Afastamento excluído com sucesso.');
 
-                } else {
-                    alert('Erro ao excluir o afastamento:', response.statusText);
-                    // Adicione aqui qualquer lógica para lidar com erros
-                }
-            })
-            .catch(error => {
-                console.error('Erro na solicitação DELETE:', error);
-                // Adicione aqui qualquer lógica para lidar com erros de rede
-            });
+                        //             // Redirecione para a nova página após a exclusão bem-sucedida
+                        //             window.location.href = 'https://siupa.com.br/siiupa/?setor=adm&sub=rh&subsub=atestados';
+
+                        //         } else {
+                        //             alert('Erro ao excluir o afastamento:', response.statusText);
+                        //             // Adicione aqui qualquer lógica para lidar com erros
+                        //         }
+                        //     })
+                        //     .catch(error => {
+                        //         console.error('Erro na solicitação DELETE:', error);
+                        //         // Adicione aqui qualquer lógica para lidar com erros de rede
+                        //     });
+                    }
+                })
+                .catch(error => {
+                    // Trata os erros, exibindo um alert com a mensagem de erro
+                    alert('Erro ao consultar a API: ' + error.message);
+                });
+
+
+
+
+
         } else {
             console.error('ID de afastamento inválido.');
             // Adicione aqui qualquer lógica para lidar com id-funcionario inválido
