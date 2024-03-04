@@ -214,7 +214,14 @@ $idAfastamento = $_GET['idafastamento'];
                     divAcionamentos.appendChild(novoSpan);
                 });
             } else {
-                
+                let divAcionamentos = document.getElementById('acionamentosVinculados');
+
+                    // Criar um novo elemento span
+                    let novoSpan = document.createElement('span');
+                    novoSpan.innerHTML = `Nenhum acionamento vinculado a este afastamento.`; // Adicionando HTML ao span
+
+                    // Adicionar o novo span como filho da div #acionamentosVinculados
+                    divAcionamentos.appendChild(novoSpan);
                 document.getElementById('excluirBtn').addEventListener('click', function() {
                     // Obtenha o id-afastamento do atributo data
                     var idAfastamento = this.getAttribute('data-id-afastamento');
