@@ -168,8 +168,9 @@ $idAfastamento = $_GET['idafastamento'];
     }
 </style>
 <script>
-    const apiUrlVerificaFK = `https://siupa.com.br/siiupa/api/rh/api.php/records/tb_acionamento?filter=fk_afastamento,eq,${idAfastamento}&page=1`;
-
+    const idAfastamentoConsulta = document.getElementById("excluirBtn").getAttribute('data-id-afastamento');
+    const apiUrlVerificaFK = `https://siupa.com.br/siiupa/api/rh/api.php/records/tb_acionamento?filter=fk_afastamento,eq,${idAfastamentoConsulta}&page=1`;
+    
     // Realiza a consulta usando Axios
     axios.get(apiUrlVerificaFK)
 
