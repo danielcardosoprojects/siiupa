@@ -60,8 +60,8 @@ $idAfastamento = $_GET['idafastamento'];
 
 
 
-        echo "</div>";
-        echo "<p class='limpaFloat'></p>";
+    
+    
         //echo "<hr>";
     }
     ?>
@@ -69,6 +69,9 @@ $idAfastamento = $_GET['idafastamento'];
         <h3>Acionamentos vinculados a este atestado</h3>
         <div class="table-hover" id="acionamentosVinculados"></div>
     </div>
+
+    <?="</div>";?>
+
 </div>
 <style>
     #box_grande {
