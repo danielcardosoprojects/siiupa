@@ -40,7 +40,7 @@ $idAfastamento = $_GET['idafastamento'];
         echo "<div class='box_atestados table-hover ' style='width:auto;' name='$resultado_atestado->nome'><span class='$classe_css' > $texto_etiqueta</span> <span class='tipo_afastamento'>  $afastamentoUtf8 </span><span class='nome_funcionario'>";
         echo "<a href='?setor=adm&sub=rh&subsub=perfil&id=$resultado_atestado->idf'> ";
 
-        echo $resultado_atestado->nome . "</a></span> - <span class='nome_cargo'>" . utf8_encode($resultado_atestado->titulo) . "</span> - ";
+        echo $resultado_atestado->nome . "</a></span> - <span class='nome_cargo'>" . utf8_encode($resultado_atestado->titulo) . "</span><br>";
         echo "De: <input class='data' type='date' value='" . $resultado_atestado->data_inicio . "' readonly> Até: <input class='data'  type='date' value='" . $resultado_atestado->data_fim . "' readonly><br>";
 
         echo "(" . $totalDias . " dias) | " . $intvl->y . " ano(s), " . $intvl->m . " mes(es) e " . $dias . " dia(s)";
@@ -66,7 +66,7 @@ $idAfastamento = $_GET['idafastamento'];
     }
     ?>
     <div class="box_atestados table-hover">
-        <h3>Acionamentos vinculados a este atestado</h3>
+        <h3 class="border border-primary text-primary">Acionamentos vinculados a este atestado</h3>
         <div class="table-hover" id="acionamentosVinculados"></div>
     </div>
 
