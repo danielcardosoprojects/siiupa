@@ -181,7 +181,7 @@ $idAfastamento = $_GET['idafastamento'];
             axios.get(apiUrlVerificaFK)
             
                 .then(response => {
-                    console.log(response.data);
+                    console.log(response.data.results);
                     // Verifica se o campo "results" está presente e é maior que zero
                     if (response.data.results && response.data.results.length > 0) {
                         // Exibe um alert
