@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="UTF-8">
   <title>Copiar Dados em JSON</title>
-
-
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -95,7 +92,6 @@
     }
   </style>
 </head>
-
 <body>
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <div id="busca" draggable="true">
@@ -104,31 +100,45 @@
     <br>
     <label for="searchInput">Mes:</label>
     <input type="text" id="mesEscala">
-    <label for="searchInput">anoEscala</label>
+    <label for="searchInput">Ano:</label>
     <input type="text" id="anoEscala">
-    <label for="searchInput">Buscar Funcionario:</label>
+    <label for="searchInput">Buscar Funcionário:</label>
     <input type="text" id="searchInput" oninput="buscarUsuarios(this.value)">
     <br>
-    <label for="searchInput">Funcionario Selecionado:</label>
+    <label for="searchInput">Funcionário Selecionado:</label>
     <input type="text" id="funcSelecionado" data-idFuncionario="">
     <ul id="resultadoBusca"></ul>
   </div>
-
+  <h1>Copiar Dados em JSON</h1>
+  <label for="json">Digite os Dados em JSON:</label>
+  <textarea id="json" rows="10"></textarea>
+  <button id="copiar-tudo">Copiar Todos os Dados</button>
+  <div id="dados"></div>
   <script>
+    const jsonInput = document.getElementById('json');
+    const dadosDiv = document.getElementById('dados');
+    const copiarTudoButton = document.getElementById('copiar-tudo');
+
+    copiarTudoButton.addEventListener('click', () => {
+      jsonInput.select();
+      document.execCommand('copy');
+    });
+
+    jsonInput.addEventListener('input', () => {
+      try {
+        const dados = JSON.parse(jsonInput.value);
+        renderizarDados(dados);
+      } catch (error) {
+        dadosDiv.innerHTML = '<p style="color: red;">Erro ao analisar os dados em JSON!</p>';
+      }
+    });
+
     function buscarUsuarios(termo) {
-      // Substitua a URL da API pelo endpoint desejado
       const apiUrl = `https://www.siupa.com.br/siiupa/api/rh/api.php/records/tb_funcionario?filter=status,eq,ATIVO&filter=nome,cs,${termo}`;
-     
-
-      // Limpar resultados anteriores
       document.getElementById('resultadoBusca').innerHTML = '';
-
-      // Fazer a solicitação à API
       fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
-          // Exibir resultados na lista
-     
           const resultadoLista = document.getElementById('resultadoBusca');
           data.records.forEach(usuario => {
             const listItem = document.createElement('li');
@@ -143,147 +153,59 @@
     function selecionarUsuario(usuario) {
       document.getElementById("funcSelecionado").value = usuario.nome;
       document.getElementById("funcSelecionado").setAttribute("data-idFuncionario", usuario.id);
-      //  alert(`Usuário selecionado: ${usuario.nome}`);
-      // Você pode realizar ações adicionais com o usuário selecionado aqui
     }
-  </script>
-  <h1>Copiar Dados em JSON</h1>
-  <label for="json">Digite os Dados em JSON:</label>
-  <textarea id="json" rows="10"></textarea>
-  <button id="copiar-tudo">Copiar Todos os Dados</button>
-
-  <div id="dados"></div>
-  <script>
-    const jsonInput = document.getElementById('json');
-    const dadosDiv = document.getElementById('dados');
-    const copiarTudoButton = document.getElementById('copiar-tudo');
-
-    copiarTudoButton.addEventListener('click', function () {
-      jsonInput.select();
-      document.execCommand('copy');
-    });
 
     function renderizarDados(dados) {
       let html = '';
-      let i = 0;
-      dados.forEach(function (d) {
-        idItem = `item${i}`;
-        html += '<h2 id="item' + i + '" class="nomeFuncionarios">' + d.nome + '</h2>';
-        i++;
+      dados.forEach((d, i) => {
+        html += `<h2 id="item${i}" class="nomeFuncionarios">${d.nome}</h2>`;
         html += '<pre>{<br>';
-        Object.keys(d).forEach(function (k) {
+        Object.keys(d).forEach(k => {
           if (k !== 'nome') {
-            html += '  "' + k + '": "' + d[k] + '",<br>';
+            html += `  "${k}": "${d[k]}",<br>`;
           }
         });
         html += '}</pre>';
-
-
-        html += "<button class='copiar-item' data-dados='" + JSON.stringify(d) + "''>Copiar Estes Dados</button>";
-
+        html += `<button class='copiar-item' data-dados='${JSON.stringify(d)}'>Copiar Estes Dados</button>`;
       });
-
       dadosDiv.innerHTML = html;
       const copiarItemButtons = document.getElementsByClassName('copiar-item');
-      for (let i = 0; i < copiarItemButtons.length; i++) {
-        copiarItemButtons[i].addEventListener('click', function () {
-          let dados = JSON.parse(this.getAttribute('data-dados'));
-          let json = JSON.stringify(dados, null, 2);
-          let idEscala = document.getElementById("idEscala").value;
-          let mesEscala = document.getElementById("mesEscala").value;
-          let anoEscala = document.getElementById("anoEscala").value;
-
+      Array.from(copiarItemButtons).forEach((button, i) => {
+        button.addEventListener('click', () => {
+          const dados = JSON.parse(button.getAttribute('data-dados'));
+          const json = JSON.stringify(dados, null, 2);
           dados.fk_funcionario = parseInt(document.getElementById("funcSelecionado").getAttribute("data-idFuncionario"));
-          dados.fk_escala = parseInt(idEscala);
-          dados.mes = parseInt(mesEscala);
-          dados.ano = parseInt(anoEscala);
+          dados.fk_escala = parseInt(document.getElementById("idEscala").value);
+          dados.mes = parseInt(document.getElementById("mesEscala").value);
+          dados.ano = parseInt(document.getElementById("anoEscala").value);
           dados.posicao = 100;
-          
-          // Importar a biblioteca Axios
-          // const axios = require('axios');
-
-          // Definir a URL da API
           const apiUrlPost = 'https://www.siupa.com.br/siiupa/api/rh/api.php/records/tb_escala_funcionario';
-
-          // Definir o corpo da requisição em formato JSON
-          const corpoJson = {
-            chave1: 'valor1',
-            chave2: 'valor2',
-            // Adicione mais campos conforme necessário
-          };
-
-          // Enviar a requisição POST usando Axios
           axios.post(apiUrlPost, dados)
             .then(resposta => {
-              // Manipular a resposta da API, se necessário
               console.log('Resposta da API:', resposta.data);
             })
             .catch(erro => {
-              // Lidar com erros da requisição
               console.error('Erro na requisição:', erro.message);
             });
-
           document.getElementById("searchInput").focus();
           navigator.clipboard.writeText(json.replace(/({|})/g, ''));
-          // console.log(this);
-          this.classList.add('clicado');
-          this.textContent = "Copiado!";
-          ii = i + 1;
-          document.querySelector('#item' + ii).scrollIntoView({ behavior: "smooth" });
-
+          button.classList.add('clicado');
+          button.textContent = "Copiado!";
+          document.querySelector(`#item${i + 1}`).scrollIntoView({ behavior: "smooth" });
         });
-
-        let item = document.getElementById(`item${i}`);
-
-        // Adiciona um evento de clique ao elemento
-        item.addEventListener('click', function () {
-          preencheSearch(this.innerText);
-          let input = document.getElementById('searchInput');
-
-          // Adiciona a classe para piscar em verde
-          input.classList.add('piscar-verde');
-
-          // Remove a classe após 500ms para piscar apenas uma vez
-          setTimeout(() => {
-            input.classList.remove('piscar-verde');
-          }, 500);
-        });
-      }
+      });
     }
 
-    jsonInput.addEventListener('input', function () {
-      try {
-        const dados = JSON.parse(jsonInput.value);
-        renderizarDados(dados);
-      } catch (e) {
-        dadosDiv.innerHTML = '<p style="color: red;">Erro ao analisar os dados em JSON!</p>';
+    document.addEventListener('click', (event) => {
+      if (event.target.classList.contains('nomeFuncionarios')) {
+        preencheSearch(event.target.innerText);
+        const input = document.getElementById('searchInput');
+        input.classList.add('piscar-verde');
+        setTimeout(() => {
+          input.classList.remove('piscar-verde');
+        }, 500);
       }
     });
-
-    function preencheSearch(nome) {
-      let texto = nome;
-
-      // Dividir a string em palavras
-      let palavras = texto.split(" ");
-
-      // Pegar a primeira palavra
-      let primeiraPalavra = palavras[0];
-
-      // Pegar a segunda palavra
-      let segundaPalavra = palavras[1];
-
-      // Pegar a primeira letra da segunda palavra
-      let primeiraLetraSegundaPalavra = segundaPalavra.charAt(0);
-
-      // console.log("Primeira palavra: " + primeiraPalavra);
-
-      // console.log("Primeira letra da segunda palavra: " + primeiraLetraSegundaPalavra);
-
-      let nomeParaBuscar = document.getElementById("searchInput").value = primeiraPalavra + " " + primeiraLetraSegundaPalavra;
-      buscarUsuarios(nomeParaBuscar);
-    }
-   
   </script>
 </body>
-
 </html>
