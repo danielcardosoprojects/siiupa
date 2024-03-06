@@ -65,7 +65,7 @@
         });
         html += '}</pre>';
 
-        console.log(d);
+        
         html += "<button class='copiar-item' data-dados='" + JSON.stringify(d) + "''>Copiar Estes Dados</button>";
 
       });
@@ -75,6 +75,7 @@
         copiarItemButtons[i].addEventListener('click', function() {
           const dados = JSON.parse(this.getAttribute('data-dados'));
           const json = JSON.stringify(dados, null, 2);
+          console.log(dados);
           navigator.clipboard.writeText(json.replace(/({|})/g, ''));
           console.log(this);
           this.classList.add('clicado');
