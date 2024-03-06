@@ -76,6 +76,7 @@
         .then(response => response.json())
         .then(data => {
           // Exibir resultados na lista
+          console.log(data);
           const resultadoLista = document.getElementById('resultadoBusca');
           data.forEach(usuario => {
             const listItem = document.createElement('li');
