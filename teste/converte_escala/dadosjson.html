@@ -4,6 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <title>Copiar Dados em JSON</title>
+
+
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -53,7 +55,15 @@
 </head>
 
 <body>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <div id="busca">
+    <label for="searchInput">ID da Escala:</label>
+    <input type="text" id="idEscala">
+    <br>
+    <label for="searchInput">Mes:</label>
+    <input type="text" id="mesEscala">
+    <label for="searchInput">anoEscala</label>
+    <input type="text" id="anoEscala">
     <label for="searchInput">Buscar Funcionario:</label>
     <input type="text" id="searchInput" oninput="buscarUsuarios(this.value)">
     <br>
@@ -89,9 +99,9 @@
     }
 
     function selecionarUsuario(usuario) {
-      document.getElementById("funcSelecionado").value = usuario.username;
-      document.getElementById("funcSelecionado").setAttribute("data-idFuncionario","12");
-      alert(`Usuário selecionado: ${usuario.nome}`);
+      document.getElementById("funcSelecionado").value = usuario.nome;
+      document.getElementById("funcSelecionado").setAttribute("data-idFuncionario", usuario.id);
+    //  alert(`Usuário selecionado: ${usuario.nome}`);
       // Você pode realizar ações adicionais com o usuário selecionado aqui
     }
   </script>
@@ -99,7 +109,7 @@
   <label for="json">Digite os Dados em JSON:</label>
   <textarea id="json" rows="10"></textarea>
   <button id="copiar-tudo">Copiar Todos os Dados</button>
- 
+
   <div id="dados"></div>
   <script>
     const jsonInput = document.getElementById('json');
@@ -134,10 +144,41 @@
       for (let i = 0; i < copiarItemButtons.length; i++) {
         copiarItemButtons[i].addEventListener('click', function () {
           let dados = JSON.parse(this.getAttribute('data-dados'));
-          const json = JSON.stringify(dados, null, 2);
+          let json = JSON.stringify(dados, null, 2);
+          let idEscala = document.getElementById("idEscala").value;
+          let mesEscala = document.getElementById("mesEscala").value;
+          let anoEscala = document.getElementById("anoEscala").value;
 
-          dados.fk_funcionario =  document.getElementById("funcSelecionado").getAttribute("data-idFuncionario");
+          dados.fk_funcionario = document.getElementById("funcSelecionado").getAttribute("data-idFuncionario");
+          dados.fk_escala = parseInt(idEscala);
+          dados.mes = parseInt(mesEscala);
+          dados.ano = parseInt(anoEscala);
+          dados.posicao = 100;
           console.log(dados);
+          // Importar a biblioteca Axios
+         // const axios = require('axios');
+
+          // Definir a URL da API
+          const apiUrlPost = 'https://www.siupa.com.br/siiupa/api/rh/api.php/records/tb_escala_funcionario';
+
+          // Definir o corpo da requisição em formato JSON
+          const corpoJson = {
+            chave1: 'valor1',
+            chave2: 'valor2',
+            // Adicione mais campos conforme necessário
+          };
+
+          // Enviar a requisição POST usando Axios
+          axios.post(apiUrlPost, dados)
+            .then(resposta => {
+              // Manipular a resposta da API, se necessário
+              console.log('Resposta da API:', resposta.data);
+            })
+            .catch(erro => {
+              // Lidar com erros da requisição
+              console.error('Erro na requisição:', erro.message);
+            });
+
 
           navigator.clipboard.writeText(json.replace(/({|})/g, ''));
           console.log(this);
