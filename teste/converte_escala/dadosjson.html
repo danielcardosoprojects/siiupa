@@ -101,7 +101,7 @@
     function selecionarUsuario(usuario) {
       document.getElementById("funcSelecionado").value = usuario.nome;
       document.getElementById("funcSelecionado").setAttribute("data-idFuncionario", usuario.id);
-    //  alert(`Usuário selecionado: ${usuario.nome}`);
+      //  alert(`Usuário selecionado: ${usuario.nome}`);
       // Você pode realizar ações adicionais com o usuário selecionado aqui
     }
   </script>
@@ -125,7 +125,8 @@
       let html = '';
       let i = 0;
       dados.forEach(function (d) {
-        html += '<h2 id="item' + i + '">' + d.nome + '</h2>';
+        idItem = `item${i}`;
+        html += '<h2 id="item' + i + '" class="nomeFuncionarios">' + d.nome + '</h2>';
         i++;
         html += '<pre>{<br>';
         Object.keys(d).forEach(function (k) {
@@ -139,6 +140,7 @@
         html += "<button class='copiar-item' data-dados='" + JSON.stringify(d) + "''>Copiar Estes Dados</button>";
 
       });
+
       dadosDiv.innerHTML = html;
       const copiarItemButtons = document.getElementsByClassName('copiar-item');
       for (let i = 0; i < copiarItemButtons.length; i++) {
@@ -156,7 +158,7 @@
           dados.posicao = 100;
           console.log(dados);
           // Importar a biblioteca Axios
-         // const axios = require('axios');
+          // const axios = require('axios');
 
           // Definir a URL da API
           const apiUrlPost = 'https://www.siupa.com.br/siiupa/api/rh/api.php/records/tb_escala_funcionario';
@@ -179,7 +181,7 @@
               console.error('Erro na requisição:', erro.message);
             });
 
-
+          document.getElementById("searchInput").focus();
           navigator.clipboard.writeText(json.replace(/({|})/g, ''));
           console.log(this);
           this.classList.add('clicado');
@@ -187,6 +189,13 @@
           ii = i + 1;
           document.querySelector('#item' + ii).scrollIntoView({ behavior: "smooth" });
 
+        });
+
+        let item = document.getElementById(`item${i}`);
+
+        // Adiciona um evento de clique ao elemento
+        item.addEventListener('click', function () {
+          preencheSearch(this.innerText);
         });
       }
     }
@@ -199,6 +208,29 @@
         dadosDiv.innerHTML = '<p style="color: red;">Erro ao analisar os dados em JSON!</p>';
       }
     });
+
+    function preencheSearch(nome) {
+      let texto = nome;
+
+      // Dividir a string em palavras
+      let palavras = texto.split(" ");
+
+      // Pegar a primeira palavra
+      let primeiraPalavra = palavras[0];
+
+      // Pegar a segunda palavra
+      let segundaPalavra = palavras[1];
+
+      // Pegar a primeira letra da segunda palavra
+      let primeiraLetraSegundaPalavra = segundaPalavra.charAt(0);
+
+      console.log("Primeira palavra: " + primeiraPalavra);
+
+      console.log("Primeira letra da segunda palavra: " + primeiraLetraSegundaPalavra);
+
+      let nomeParaBuscar = document.getElementById("searchInput").value = primeiraPalavra + " " + primeiraLetraSegundaPalavra;
+      buscarUsuarios(nomeParaBuscar);
+    }
   </script>
 </body>
 
