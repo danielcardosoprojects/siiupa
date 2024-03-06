@@ -35,6 +35,39 @@
   </style>
 </head>
 <body>
+  <label for="searchInput">Buscar Usuário:</label>
+<input type="text" id="searchInput" oninput="buscarUsuarios(this.value)">
+<ul id="resultadoBusca"></ul>
+
+<script>
+  function buscarUsuarios(termo) {
+    // Substitua a URL da API pelo endpoint desejado
+    const apiUrl = `https://jsonplaceholder.typicode.com/users?username=${termo}`;
+
+    // Limpar resultados anteriores
+    document.getElementById('resultadoBusca').innerHTML = '';
+
+    // Fazer a solicitação à API
+    fetch(apiUrl)
+      .then(response => response.json())
+      .then(data => {
+        // Exibir resultados na lista
+        const resultadoLista = document.getElementById('resultadoBusca');
+        data.forEach(usuario => {
+          const listItem = document.createElement('li');
+          listItem.textContent = usuario.username;
+          listItem.addEventListener('click', () => selecionarUsuario(usuario));
+          resultadoLista.appendChild(listItem);
+        });
+      })
+      .catch(error => console.error('Erro ao buscar usuários:', error));
+  }
+
+  function selecionarUsuario(usuario) {
+    alert(`Usuário selecionado: ${usuario.username}`);
+    // Você pode realizar ações adicionais com o usuário selecionado aqui
+  }
+</script>
   <h1>Copiar Dados em JSON</h1>
   <label for="json">Digite os Dados em JSON:</label>
   <textarea id="json" rows="10"></textarea>
