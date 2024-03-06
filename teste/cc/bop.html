@@ -1,0 +1,41 @@
+a<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Próximos números</title>
+</head>
+<body>
+  <h1>Próximos números</h1>
+  <input type="text" id="numero" placeholder="Insira um número">
+  <button onclick="gerar()">Gerar</button>
+  <div id="proximos-numeros"></div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+  function gerar() {
+    // Obtém o número do campo de texto
+    const numero = document.getElementById("numero").value;
+
+    // Calcula os próximos 20 números
+    const proximosNumeros = [];
+    for (let i = 0; i < 20; i++) {
+        let proxCalc = calcularProximoNumero(numero)
+      proximosNumeros.push(proxCalc);
+    }
+
+    // Exibe os próximos números
+    document.getElementById("proximos-numeros").innerHTML = proximosNumeros.join(",");
+  }
+
+  function calcularProximoNumero(numero) {
+    // Remove o dígito verificador
+    const numeroSemDigitoVerificador = numero.slice(0, -1);
+
+    // Calcula o novo dígito verificador
+    const novoDigitoVerificador = (parseInt(numeroSemDigitoVerificador) % 7);
+
+    // Retorna o número completo
+    return `${numeroSemDigitoVerificador}${novoDigitoVerificador}`;
+  }
+</script>
+</html>

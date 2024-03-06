@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Servidores</title>
+</head>
+
+<body>
+    <h1>Lista de Servidores</h1>
+    <div class="loading" style="display: none;">
+        <img src="laoading.gif" alt="Carregando..." width="150px">
+    </div>
+    <!-- Container para exibir a lista de servidores -->
+    <div id="servidoresContainer">
+
+
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+           function showLoading() {
+        const loading = document.querySelector('.loading');
+        loading.style.display = 'block';
+    }
+    function stopLoading() {
+        const loading = document.querySelector('.loading');
+        loading.style.display = 'none';
+    }
+        const servidoresContainer = document.getElementById("servidoresContainer");
+
+        async function carregarServidores(linkApi) {
+            try {
+                const loading = document.querySelector('.loading');
+                showLoading();
+                const response = await axios.get(linkApi);
+
+                
+                const servidores = response.data.results;
+                stopLoading();
+                servidores.forEach(servidor => {
+                    const servidorElement = document.createElement("tr");
+                    servidorElement.innerHTML = `
+                      
+                            <td>${servidor.nome}</td>
+                            <td>${servidor.matricula}</td>
+                            <td>${servidor.cargo_display}</td>
+                            <td><button onclick="selecionarServidor('${servidor.matricula}')">Selecionar</button></td>
+                    
+              
+                    `;
+                    // <button onclick="selecionarServidor('${servidor.matricula}')">Selecionar</button>
+                    servidoresContainer.appendChild(servidorElement);
+                });
+            } catch (error) {
+                console.error("Erro ao carregar servidores:", error);
+            }
+        }
+        async function carregarServidores2(linkApi) {
+            try {
+                const response = await axios.get(linkApi);
+
+                const servidores = response.data.results;
+                console.log(servidores);
+
+                servidores.forEach(servidor => {
+                    const servidorElement = document.createElement("tr");
+                    servidorElement.innerHTML = `
+               
+                            <td>${servidor.nome}</td>
+                            <td>${servidor.matricula}</td>
+                            <td>${servidor.cargo_display}</td>
+                            <td><button onclick="selecionarServidor('${servidor.matricula}')">Selecionar</button></td>
+                
+                    `;
+                    servidoresContainer.appendChild(servidorElement);
+                });
+            } catch (error) {
+                console.error("Erro ao carregar servidores:", error);
+            }
+        }
+
+        function selecionarServidor(matricula, nomeServ) {
+            window.opener.document.getElementById("matriculaInput").value = matricula;
+            window.opener.document.getElementById("nomeServ").textContent = nomeServ;
+            window.opener.document.getElementById("cardsContainer").innerHTML = '';
+            window.close();
+        }
+
+        // Chamada para carregar os servidores temporários
+        let competenciaSelect = window.opener.document.getElementById("competenciaSelect").value;
+        carregarServidores(`https://apitransparencia.layoutsistemas.com.br/api/servidores/?departamento=001050&entidade=477&transparencia=${competenciaSelect}&page=1&page_size=2000`);
+        
+
+        // ... Pode repetir o processo para carregar os servidores efetivos
+        carregarServidores2(`https://apitransparencia.layoutsistemas.com.br/api/servidores/?departamento=001051&entidade=477&transparencia=${competenciaSelect}&page=1&page_size=2000`);
+    </script>
+</body>
+
+</html>
