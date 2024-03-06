@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Copiar Dados em JSON</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    pre {
+      background-color: #f5f5f5;
+      padding: 10px;
+      border-radius: 5px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    button {
+      margin-top: 10px;
+      padding: 5px 10px;
+      border-radius: 5px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #3e8e41;
+    }
+    button.clicado {
+  background-color: blue;
+}
+
+  </style>
+</head>
+<body>
+  <h1>Copiar Dados em JSON</h1>
+  <label for="json">Digite os Dados em JSON:</label>
+  <textarea id="json" rows="10"></textarea>
+  <button id="copiar-tudo">Copiar Todos os Dados</button>
+  <a href="#teste10">#1 - Habilite GZIP</a>
+  <div id="dados"></div>
+  <script>
+    const jsonInput = document.getElementById('json');
+    const dadosDiv = document.getElementById('dados');
+    const copiarTudoButton = document.getElementById('copiar-tudo');
+    
+    copiarTudoButton.addEventListener('click', function() {
+      jsonInput.select();
+      document.execCommand('copy');
+    });
+    
+    function renderizarDados(dados) {
+      let html = '';
+      let i = 0;
+      dados.forEach(function(d) {
+        html += '<h2 id="item'+i+'">' + d.nome + '</h2>';
+        i++;
+        html += '<pre>{<br>';
+        Object.keys(d).forEach(function(k) {
+          if (k !== 'nome') {
+            html += '  "' + k + '": "' + d[k] + '",<br>';
+          }
+        });
+        html += '}</pre>';
+
+        
+        html += "<button class='copiar-item' data-dados='" + JSON.stringify(d) + "''>Copiar Estes Dados</button>";
+      });
+      dadosDiv.innerHTML = html;
+      const copiarItemButtons = document.getElementsByClassName('copiar-item');
+      for (let i = 0; i < copiarItemButtons.length; i++) {
+        copiarItemButtons[i].addEventListener('click', function() {
+          const dados = JSON.parse(this.getAttribute('data-dados'));
+          const json = JSON.stringify(dados, null, 2);
+          navigator.clipboard.writeText(json.replace(/({|})/g, ''));
+          console.log(this);
+          this.classList.add('clicado');
+          this.textContent="Copiado!";
+          ii = i+1;
+          document.querySelector('#item' + ii).scrollIntoView({ behavior: "smooth" });
+
+        });
+      }
+    }
+    
+    jsonInput.addEventListener('input', function() {
+      try {
+        const dados = JSON.parse(jsonInput.value);
+        renderizarDados(dados);
+      } catch (e) {
+        dadosDiv.innerHTML = '<p style="color: red;">Erro ao analisar os dados em JSON!</p>';
+      }
+    });
+  </script>
+</body>
+</html>
