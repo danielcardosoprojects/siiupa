@@ -78,7 +78,7 @@
           // Exibir resultados na lista
           console.log(data);
           const resultadoLista = document.getElementById('resultadoBusca');
-          data.forEach(usuario => {
+          data.records.forEach(usuario => {
             const listItem = document.createElement('li');
             listItem.textContent = usuario.nome;
             listItem.addEventListener('click', () => selecionarUsuario(usuario));
