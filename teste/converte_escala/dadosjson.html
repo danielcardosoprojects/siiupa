@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <title>Copiar Dados em JSON</title>
@@ -7,6 +8,7 @@
     body {
       font-family: Arial, sans-serif;
     }
+
     pre {
       background-color: #f5f5f5;
       padding: 10px;
@@ -16,6 +18,7 @@
       font-size: 14px;
       line-height: 1.5;
     }
+
     button {
       margin-top: 10px;
       padding: 5px 10px;
@@ -25,104 +28,127 @@
       border: none;
       cursor: pointer;
     }
+
     button:hover {
       background-color: #3e8e41;
     }
-    button.clicado {
-  background-color: blue;
-}
 
+    button.clicado {
+      background-color: blue;
+    }
+
+    #busca {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #f9f9f9;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+
+    }
   </style>
 </head>
+
 <body>
-  <label for="searchInput">Buscar Usuário:</label>
-<input type="text" id="searchInput" oninput="buscarUsuarios(this.value)">
-<ul id="resultadoBusca"></ul>
+  <div id="busca">
+    <label for="searchInput">Buscar Funcionario:</label>
+    <input type="text" id="searchInput" oninput="buscarUsuarios(this.value)">
+    <br>
+    <label for="searchInput">Funcionario Selecionado:</label>
+    <input type="text" id="funcSelecionado" data-idFuncionario="">
+    <ul id="resultadoBusca"></ul>
+  </div>
 
-<script>
-  function buscarUsuarios(termo) {
-    // Substitua a URL da API pelo endpoint desejado
-    const apiUrl = `https://jsonplaceholder.typicode.com/users?username=${termo}`;
+  <script>
+    function buscarUsuarios(termo) {
+      // Substitua a URL da API pelo endpoint desejado
+      const apiUrl = `https://www.siupa.com.br/siiupa/api/rh/api.php/records/tb_funcionario?filter=status,eq,ATIVO&filter=nome,cs,${termo}`;
 
-    // Limpar resultados anteriores
-    document.getElementById('resultadoBusca').innerHTML = '';
+      // Limpar resultados anteriores
+      document.getElementById('resultadoBusca').innerHTML = '';
 
-    // Fazer a solicitação à API
-    fetch(apiUrl)
-      .then(response => response.json())
-      .then(data => {
-        // Exibir resultados na lista
-        const resultadoLista = document.getElementById('resultadoBusca');
-        data.forEach(usuario => {
-          const listItem = document.createElement('li');
-          listItem.textContent = usuario.username;
-          listItem.addEventListener('click', () => selecionarUsuario(usuario));
-          resultadoLista.appendChild(listItem);
-        });
-      })
-      .catch(error => console.error('Erro ao buscar usuários:', error));
-  }
+      // Fazer a solicitação à API
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+          // Exibir resultados na lista
+          const resultadoLista = document.getElementById('resultadoBusca');
+          data.forEach(usuario => {
+            const listItem = document.createElement('li');
+            listItem.textContent = usuario.nome;
+            listItem.addEventListener('click', () => selecionarUsuario(usuario));
+            resultadoLista.appendChild(listItem);
+          });
+        })
+        .catch(error => console.error('Erro ao buscar usuários:', error));
+    }
 
-  function selecionarUsuario(usuario) {
-    alert(`Usuário selecionado: ${usuario.username}`);
-    // Você pode realizar ações adicionais com o usuário selecionado aqui
-  }
-</script>
+    function selecionarUsuario(usuario) {
+      document.getElementById("funcSelecionado").value = usuario.username;
+      document.getElementById("funcSelecionado").setAttribute("data-idFuncionario","12");
+      alert(`Usuário selecionado: ${usuario.username}`);
+      // Você pode realizar ações adicionais com o usuário selecionado aqui
+    }
+  </script>
   <h1>Copiar Dados em JSON</h1>
   <label for="json">Digite os Dados em JSON:</label>
   <textarea id="json" rows="10"></textarea>
   <button id="copiar-tudo">Copiar Todos os Dados</button>
-  <a href="#teste10">#1 - Habilite GZIP</a>
+ 
   <div id="dados"></div>
   <script>
     const jsonInput = document.getElementById('json');
     const dadosDiv = document.getElementById('dados');
     const copiarTudoButton = document.getElementById('copiar-tudo');
-    
-    copiarTudoButton.addEventListener('click', function() {
+
+    copiarTudoButton.addEventListener('click', function () {
       jsonInput.select();
       document.execCommand('copy');
     });
-    
+
     function renderizarDados(dados) {
       let html = '';
       let i = 0;
-      dados.forEach(function(d) {
-        html += '<h2 id="item'+i+'">' + d.nome + '</h2>';
+      dados.forEach(function (d) {
+        html += '<h2 id="item' + i + '">' + d.nome + '</h2>';
         i++;
         html += '<pre>{<br>';
-        Object.keys(d).forEach(function(k) {
+        Object.keys(d).forEach(function (k) {
           if (k !== 'nome') {
             html += '  "' + k + '": "' + d[k] + '",<br>';
           }
         });
         html += '}</pre>';
 
-        
+
         html += "<button class='copiar-item' data-dados='" + JSON.stringify(d) + "''>Copiar Estes Dados</button>";
 
       });
       dadosDiv.innerHTML = html;
       const copiarItemButtons = document.getElementsByClassName('copiar-item');
       for (let i = 0; i < copiarItemButtons.length; i++) {
-        copiarItemButtons[i].addEventListener('click', function() {
+        copiarItemButtons[i].addEventListener('click', function () {
           let dados = JSON.parse(this.getAttribute('data-dados'));
           const json = JSON.stringify(dados, null, 2);
-          dados.fk_funcionario = 14;
+
+          dados.fk_funcionario =  document.getElementById("funcSelecionado").getAttribute("data-idFuncionario");
           console.log(dados);
-          
+
           navigator.clipboard.writeText(json.replace(/({|})/g, ''));
           console.log(this);
           this.classList.add('clicado');
-          this.textContent="Copiado!";
-          ii = i+1;
+          this.textContent = "Copiado!";
+          ii = i + 1;
           document.querySelector('#item' + ii).scrollIntoView({ behavior: "smooth" });
 
         });
       }
     }
-    
-    jsonInput.addEventListener('input', function() {
+
+    jsonInput.addEventListener('input', function () {
       try {
         const dados = JSON.parse(jsonInput.value);
         renderizarDados(dados);
@@ -132,4 +158,5 @@
     });
   </script>
 </body>
+
 </html>
