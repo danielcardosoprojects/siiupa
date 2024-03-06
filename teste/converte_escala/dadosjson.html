@@ -66,6 +66,7 @@
     function buscarUsuarios(termo) {
       // Substitua a URL da API pelo endpoint desejado
       const apiUrl = `https://www.siupa.com.br/siiupa/api/rh/api.php/records/tb_funcionario?filter=status,eq,ATIVO&filter=nome,cs,${termo}`;
+      console.log(apiUrl);
 
       // Limpar resultados anteriores
       document.getElementById('resultadoBusca').innerHTML = '';
@@ -89,7 +90,7 @@
     function selecionarUsuario(usuario) {
       document.getElementById("funcSelecionado").value = usuario.username;
       document.getElementById("funcSelecionado").setAttribute("data-idFuncionario","12");
-      alert(`Usuário selecionado: ${usuario.username}`);
+      alert(`Usuário selecionado: ${usuario.nome}`);
       // Você pode realizar ações adicionais com o usuário selecionado aqui
     }
   </script>
