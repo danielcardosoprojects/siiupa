@@ -65,8 +65,9 @@
         });
         html += '}</pre>';
 
-        
+        console.log(d);
         html += "<button class='copiar-item' data-dados='" + JSON.stringify(d) + "''>Copiar Estes Dados</button>";
+
       });
       dadosDiv.innerHTML = html;
       const copiarItemButtons = document.getElementsByClassName('copiar-item');
