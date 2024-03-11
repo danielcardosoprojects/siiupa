@@ -185,7 +185,7 @@
 
       dadosDiv.innerHTML = html;
       const copiarItemButtons = document.getElementsByClassName('copiar-item');
-      const funcSelecionado = document.getElementById("funcSelecionado");
+      const funcSelecionado = document.getElementById("funcSelecionado").value;
       for (let i = 0; i < copiarItemButtons.length; i++) {
         copiarItemButtons[i].addEventListener('click', function () {
           if(funcSelecionado != ""){
