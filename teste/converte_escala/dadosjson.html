@@ -185,8 +185,10 @@
 
       dadosDiv.innerHTML = html;
       const copiarItemButtons = document.getElementsByClassName('copiar-item');
+      const funcSelecionado = document.getElementById("funcSelecionado");
       for (let i = 0; i < copiarItemButtons.length; i++) {
         copiarItemButtons[i].addEventListener('click', function () {
+          if(funcSelecionado != ""){
           let dados = JSON.parse(this.getAttribute('data-dados'));
           let json = JSON.stringify(dados, null, 2);
           let idEscala = document.getElementById("idEscala").value;
@@ -228,9 +230,12 @@
           // console.log(this);
           this.classList.add('clicado');
           this.textContent = "Copiado!";
+
           ii = i + 1;
           document.querySelector('#item' + ii).scrollIntoView({ behavior: "smooth" });
-
+          } else {
+            alert("Selecione o funcionario antes.");
+          }
         });
 
         let item = document.getElementById(`item${i}`);
