@@ -185,10 +185,10 @@
 
       dadosDiv.innerHTML = html;
       const copiarItemButtons = document.getElementsByClassName('copiar-item');
-      const funcSelecionado = document.getElementById("funcSelecionado").value;
+    
       for (let i = 0; i < copiarItemButtons.length; i++) {
         copiarItemButtons[i].addEventListener('click', function () {
-          if(funcSelecionado != ""){
+          
           let dados = JSON.parse(this.getAttribute('data-dados'));
           let json = JSON.stringify(dados, null, 2);
           let idEscala = document.getElementById("idEscala").value;
@@ -207,14 +207,12 @@
           // Definir a URL da API
           const apiUrlPost = 'https://www.siupa.com.br/siiupa/api/rh/api.php/records/tb_escala_funcionario';
 
-          // Definir o corpo da requisição em formato JSON
-          const corpoJson = {
-            chave1: 'valor1',
-            chave2: 'valor2',
-            // Adicione mais campos conforme necessário
-          };
-
-          // Enviar a requisição POST usando Axios
+          // Enviar a requisição POST usando Axios`
+          let funcSelecionado = document.getElementById("funcSelecionado").value;
+          if(funcSelecionado == ""){
+            alert("Selecione o servidor antes");
+            return;
+          }
           axios.post(apiUrlPost, dados)
             .then(resposta => {
               // Manipular a resposta da API, se necessário
@@ -233,9 +231,7 @@
 
           ii = i + 1;
           document.querySelector('#item' + ii).scrollIntoView({ behavior: "smooth" });
-          } else {
-            alert("Selecione o funcionario antes.");
-          }
+        
         });
 
         let item = document.getElementById(`item${i}`);
