@@ -459,7 +459,7 @@ if ($stmt = $conn->prepare($query)) {
 
         if ($status_folha == "aberta") {
             // $link_para_alterar = "?setor=adm&sub=rh&subsub=rhfolhaadicionaservidor&acao=seleciona&idservidor=$func_id&idfolha=$idfolha&subacao=alterar";
-            $link_para_alterar = "/siiupa/administracao/pagina_rh_folha_adicionaservidor.php?setor=adm&sub=rh&subsub=rhfolhaadicionaservidor&acao=seleciona&idservidor=$func_id&idfolha=$idfolha&subacao=alterar";
+            $link_para_alterar = "/siiupa/administracao/pagina_rh_folha_adicionaservidor.php?setor=adm&sub=rh&subsub=rhfolhaadicionaservidor&acao=seleciona&idservidor=$func_id&idfolha=$idfolha&id_linha=$id_linha&subacao=alterar";
         } else {
             $link_para_alterar = 'javascript:alert("Folha fechada. Alteração não permitida.");';
         }
