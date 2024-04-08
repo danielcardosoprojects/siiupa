@@ -306,7 +306,8 @@ if (isset($_GET['acao'])) {
                     if ($subacao == 'alterar') {
                         //echo "Subacao alterar";
                         $acao = "<input type='hidden' name='acao' value='altera'>";
-                        $queryalterar = "SELECT fl.id, func.nome, cargo.funcao_upa, fl.adc_not, fl.ext_6, fl.ext_12, fl.ext_24, fl.acionamento, fl.transferencia, fl.fixos, fl.obs, cargo.valor_plantao, cargo.valor_acionamento FROM u940659928_siupa.tb_folha AS fl INNER JOIN u940659928_siupa.tb_funcionario AS func ON (fl.fk_funcionario = func.id) INNER JOIN u940659928_siupa.tb_cargo AS cargo ON (func.fk_cargo = cargo.id) WHERE fl.fk_folhas = '$idfolha' AND fl.fk_funcionario = $idselecionado";
+                        $id_linha = $_GET['id_linha'];
+                        $queryalterar = "SELECT fl.id, func.nome, cargo.funcao_upa, fl.adc_not, fl.ext_6, fl.ext_12, fl.ext_24, fl.acionamento, fl.transferencia, fl.fixos, fl.obs, cargo.valor_plantao, cargo.valor_acionamento FROM u940659928_siupa.tb_folha AS fl INNER JOIN u940659928_siupa.tb_funcionario AS func ON (fl.fk_funcionario = func.id) INNER JOIN u940659928_siupa.tb_cargo AS cargo ON (func.fk_cargo = cargo.id) WHERE fl.fk_folha = '$id_linha'";
                         if ($stmtalterar = $conn->prepare($queryalterar)) {
                             $stmtalterar->execute();
                             $stmtalterar->bind_result($fl_id, $nome, $funcao_upa, $adc_not, $ext_6, $ext_12, $ext_24, $acionamento, $transferencia, $fixos, $obs, $valor_plantao, $valor_acionamento);
