@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Copiar Dados em JSON</title>
+
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fafafa;
+      margin: 0;
+      padding: 0;
+    }
+
+    #busca {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    input[type="text"] {
+      padding: 5px;
+      width: 100%;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      margin-bottom: 10px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    li {
+      padding: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    li:hover {
+      background-color: #f9f9f9;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #3897f0;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #1877f2;
+    }
+
+    button.clicado {
+      background-color: #262626;
+    }
+
+    pre {
+      background-color: #f5f5f5;
+      padding: 10px;
+      border-radius: 5px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .piscar-verde {
+      animation: piscar 0.5s;
+    }
+
+    @keyframes piscar {
+
+      0%,
+      100% {
+        background-color: white;
+      }
+
+      50% {
+        background-color: #4caf50;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <div id="busca" draggable="true">
+    <label for="searchInput">ID da Escala:</label>
+    <input type="text" id="idEscala">
+    <br>
+    <label for="searchInput">Mes:</label>
+    <input type="text" id="mesEscala">
+    <label for="searchInput">anoEscala</label>
+    <input type="text" id="anoEscala">
+    <label for="searchInput">Buscar Funcionario:</label>
+    <input type="text" id="searchInput" oninput="buscarUsuarios(this.value)">
+    <br>
+    <label for="searchInput">Funcionario Selecionado:</label>
+    <input type="text" id="funcSelecionado" data-idFuncionario="">
+    <ul id="resultadoBusca"></ul>
+  </div>
+
+  <script>
+    function buscarUsuarios(termo) {
+      // Substitua a URL da API pelo endpoint desejado
+      const apiUrl = `https://www.siupa.com.br/siiupa/api/rh/api.php/records/tb_funcionario?filter=status,eq,ATIVO&filter=nome,cs,${termo}`;
+
+
+      // Limpar resultados anteriores
+      document.getElementById('resultadoBusca').innerHTML = '';
+
+      // Fazer a solicitação à API
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+          // Exibir resultados na lista
+
+          const resultadoLista = document.getElementById('resultadoBusca');
+          data.records.forEach(usuario => {
+            const listItem = document.createElement('li');
+            listItem.textContent = usuario.nome;
+            listItem.addEventListener('click', () => selecionarUsuario(usuario));
+            resultadoLista.appendChild(listItem);
+          });
+        })
+        .catch(error => console.error('Erro ao buscar usuários:', error));
+    }
+
+    function selecionarUsuario(usuario) {
+      document.getElementById("funcSelecionado").value = usuario.nome;
+      document.getElementById("funcSelecionado").setAttribute("data-idFuncionario", usuario.id);
+      //  alert(`Usuário selecionado: ${usuario.nome}`);
+      // Você pode realizar ações adicionais com o usuário selecionado aqui
+    }
+  </script>
+  <h1>Copiar Dados em JSON</h1>
+  <label for="json">Digite os Dados em JSON:</label>
+  <textarea id="json" rows="10"></textarea>
+  <button id="copiar-tudo">Copiar Todos os Dados</button>
+
+  <div id="dados"></div>
+  <script>
+    const jsonInput = document.getElementById('json');
+    const dadosDiv = document.getElementById('dados');
+    const copiarTudoButton = document.getElementById('copiar-tudo');
+
+    copiarTudoButton.addEventListener('click', function () {
+      jsonInput.select();
+      document.execCommand('copy');
+    });
+
+    function renderizarDados(dados) {
+      let html = '';
+      let i = 0;
+      dados.forEach(function (d) {
+        idItem = `item${i}`;
+        html += '<h2 id="item' + i + '" class="nomeFuncionarios">' + d.nome + '</h2>';
+        i++;
+        html += '<pre>{<br>';
+        Object.keys(d).forEach(function (k) {
+          if (k !== 'nome') {
+            html += '  "' + k + '": "' + d[k] + '",<br>';
+          }
+        });
+        html += '}</pre>';
+
+
+        html += "<button class='copiar-item' data-dados='" + JSON.stringify(d) + "''>Copiar Estes Dados</button>";
+
+      });
+
+      dadosDiv.innerHTML = html;
+      const copiarItemButtons = document.getElementsByClassName('copiar-item');
+
+      for (let i = 0; i < copiarItemButtons.length; i++) {
+        copiarItemButtons[i].addEventListener('click', function () {
+
+          let dados = JSON.parse(this.getAttribute('data-dados'));
+          let json = JSON.stringify(dados, null, 2);
+          let idEscala = document.getElementById("idEscala").value;
+          let mesEscala = document.getElementById("mesEscala").value;
+          let anoEscala = document.getElementById("anoEscala").value;
+
+          dados.fk_funcionario = parseInt(document.getElementById("funcSelecionado").getAttribute("data-idFuncionario"));
+          dados.fk_escala = parseInt(idEscala);
+          dados.mes = parseInt(mesEscala);
+          dados.ano = parseInt(anoEscala);
+          dados.posicao = 100;
+
+          // Importar a biblioteca Axios
+          // const axios = require('axios');
+
+          // Definir a URL da API
+          const apiUrlPost = 'https://www.siupa.com.br/siiupa/api/rh/api.php/records/tb_escala_funcionario';
+
+          // Enviar a requisição POST usando Axios`
+          let funcSelecionado = document.getElementById("funcSelecionado").value;
+          if (funcSelecionado == "") {
+            alert("Selecione o servidor antes");
+            return;
+          }
+          axios.post(apiUrlPost, dados)
+            .then(resposta => {
+              // Manipular a resposta da API, se necessário
+              console.log('Resposta da API:', resposta.data);
+            })
+            .catch(erro => {
+              // Lidar com erros da requisição
+              console.error('Erro na requisição:', erro.message);
+            });
+
+          document.getElementById("searchInput").focus();
+          navigator.clipboard.writeText(json.replace(/({|})/g, ''));
+          // console.log(this);
+          this.classList.add('clicado');
+          this.textContent = "Copiado!";
+          usuarioNull = {
+            nome: "",
+            id: ""
+          }
+          selecionarUsuario(usuarioNull);
+
+          ii = i + 1;
+          document.querySelector('#item' + ii).scrollIntoView({ behavior: "smooth" });
+
+        });
+
+        let item = document.getElementById(`item${i}`);
+
+        // Adiciona um evento de clique ao elemento
+        item.addEventListener('click', function () {
+          preencheSearch(this.innerText);
+          let input = document.getElementById('searchInput');
+
+          // Adiciona a classe para piscar em verde
+          input.classList.add('piscar-verde');
+
+          // Remove a classe após 500ms para piscar apenas uma vez
+          setTimeout(() => {
+            input.classList.remove('piscar-verde');
+          }, 500);
+        });
+      }
+    }
+
+    jsonInput.addEventListener('input', function () {
+      try {
+        const dados = JSON.parse(jsonInput.value);
+        renderizarDados(dados);
+      } catch (e) {
+        dadosDiv.innerHTML = '<p style="color: red;">Erro ao analisar os dados em JSON!</p>';
+      }
+    });
+
+    function preencheSearch(nome) {
+      let texto = nome;
+
+      // Dividir a string em palavras
+      let palavras = texto.split(" ");
+
+      // Pegar a primeira palavra
+      let primeiraPalavra = palavras[0];
+
+      // Pegar a segunda palavra
+      let segundaPalavra = palavras[1];
+
+      // Pegar a primeira letra da segunda palavra
+      let primeiraLetraSegundaPalavra = segundaPalavra.charAt(0);
+
+      // console.log("Primeira palavra: " + primeiraPalavra);
+
+      // console.log("Primeira letra da segunda palavra: " + primeiraLetraSegundaPalavra);
+
+      let nomeParaBuscar = document.getElementById("searchInput").value = primeiraPalavra + " " + primeiraLetraSegundaPalavra;
+      buscarUsuarios(nomeParaBuscar);
+      usuarioNull = {
+        nome: "",
+        id: ""
+      }
+      selecionarUsuario(usuarioNull);
+    }
+
+  </script>
+</body>
+
+</html>

@@ -51,12 +51,14 @@ include_once('../bd/nivel.php');
         }
 
 
-        $afastamentoUtf8 = utf8_encode($resultado_atestado->afastamento);
+        $afastamentoUtf8 = $resultado_atestado->afastamento;
 
-        echo "<div class='box_atestados table-hover ' style='width:auto;' name='$resultado_atestado->nome'><span class='$classe_css' > $texto_etiqueta</span> <span class='tipo_afastamento'>  $afastamentoUtf8 </span><span class='nome_funcionario'>";
-        echo "<a href='?setor=adm&sub=rh&subsub=atestado_exibe&idafastamento=$resultado_atestado->idAfastamento'> ";
+       
+        
+        echo "<div class='box_atestados table-hover ' style='width:auto;' name='$resultado_atestado->nome'><span class='$classe_css' > $texto_etiqueta</span> <span class='tipo_afastamento'>  $afastamentoUtf8 </span><br>";
+        echo "<span class='nome_funcionario'><a href='?setor=adm&sub=rh&subsub=atestado_exibe&idafastamento=$resultado_atestado->idAfastamento'> ";
 
-        echo $resultado_atestado->nome . "</a></span> - <span class='nome_cargo'>" . utf8_encode($resultado_atestado->titulo) . "</span> - ";
+        echo $resultado_atestado->nome . "</a></span> - <span class='nome_cargo'>" . utf8_encode($resultado_atestado->titulo) . "</span><br>";
         echo "De: <input class='data' type='date' value='" . $resultado_atestado->data_inicio . "' readonly> Até: <input class='data'  type='date' value='" . $resultado_atestado->data_fim . "' readonly><br>";
 
         echo "(" . $totalDias . " dias) | " . $intvl->y . " ano(s), " . $intvl->m . " mes(es) e " . $dias . " dia(s)";
@@ -67,7 +69,7 @@ include_once('../bd/nivel.php');
 
 
         echo "<button class='bt_editaAtestado form-control' style='width:100px;float:left;margin-right:5px;' data-idatestado='$resultado_atestado->id' data-idfuncionario='$resultado_atestado->fk_funcionario' data-data_inicio='$resultado_atestado->data_inicio' data-data_fim='$resultado_atestado->data_fim' data-afastamento='$resultado_atestado->afastamento' data-afastamentoid='$resultado_atestado->afastamento_id' data-nome='$resultado_atestado->nome' data-cargo='$resultado_atestado->titulo' data-afastamento_obs='$resultado_atestado->afastamento_obs'>Editar</button>";
-        echo "<button class='bt_anexaDocumentos form-control' style='width:200px;float:left;' data-idatestado='$resultado_atestado->id' data-idfuncionario='$resultado_atestado->fk_funcionario' data-data_inicio='$resultado_atestado->data_inicio' data-data_fim='$resultado_atestado->data_fim' data-afastamento='$resultado_atestado->afastamento' data-afastamentoid='$resultado_atestado->afastamento_id' data-nome='$resultado_atestado->nome' data-cargo='$resultado_atestado->titulo'>Anexar documento</button>";
+        
 
 
 

@@ -136,6 +136,23 @@
         });
 
 
+        $("#dialogAcionamentos").confirm({
+            autoOpen: true,
+            title: 'Encountered an error!',
+            content: 'Something went downhill, this may be serious',
+            type: 'red',
+            typeAnimated: true,
+            buttons: {
+                tryAgain: {
+                    text: 'Try again',
+                    btnClass: 'btn-red',
+                    action: function() {}
+                },
+                close: function() {}
+            }
+        });
+
+
         //função para capturar o valor e campo para atualizar
         //tipo para diferenciar se precisa tratar a data ou não
         function editafunc(celula, idfunc, campo, valorinput, tipo) {
@@ -582,17 +599,17 @@ class Grade
     echo "</td>
     
             </tr>";
-            
+
 
     echo "
             
             </tbody< /table>";
-            
+
     $grade->fimcoluna();
 
 
     $grade->fimlinha();
-    echo "</table>";    
+    echo "</table>";
     echo "<div class='copiar btn btn-sm btn-grey' data-text='C:\wamp64\www\siiupa\administracao\\rh\\$perfil->id\'>Pasta Windows</div>";
 
     ?>
@@ -827,14 +844,16 @@ class Grade
         $data_acionamento = new DateTime($resultado_acionamento->data_acionamento);
 
         $dataAcionamento = $data_acionamento->format('d/m/Y');
-        
+
         if ($resultado_acionamento->turno == "diurno") {
             $turnoAcionamento = "D";
         } elseif ($resultado_acionamento->turno == "noturno") {
             $turnoAcionamento = "N";
         } elseif ($resultado_acionamento->turno == "plantao_24h") {
             $turnoAcionamento = "P";
-        } else {$turnoAcionamento = "D";}
+        } else {
+            $turnoAcionamento = "D";
+        }
         echo "<td>$resultado_acionamento->nome</td><td>$dataAcionamento</td><td class='colunaHorasAcionamento'>$resultado_acionamento->qtd_horas $turnoAcionamento</td><td class='coluna_valor'>R$ $resultado_acionamento->valor,00</td><td>" . utf8_encode($resultado_acionamento->acionamento) . "</td>";
         echo "<td>";
         if ($resultado_acionamento->fk_afastamento != 0) {
@@ -1134,6 +1153,22 @@ class Grade
     </div>
     <div id="arquivostemporarios"></div>
     <div id='testando'></div>
+    <!-- Inclua o Axios no seu HTML -->
+
+    <div id="dialogAcionamentos">Teste acionamentos</div>
+    <script>
+       
+    </script>
+    <script>
+        // Fazendo uma requisição GET
+        axios.get('https://siupa.com.br/siiupa/api/rh/api.php/records/tb_acionamento?join=tb_acionamentos&page=3,4')
+            .then(response => {
+                console.log('Dados da resposta:', response.data);
+            })
+            .catch(error => {
+                console.error('Erro na requisição:', error);
+            });
+    </script>
 
     <?php
     //$path = "../rh/" . $perfil->id . "/";
@@ -1207,6 +1242,8 @@ class Grade
             </div>
 
             <div id="dialogPerfil"></div>
+            
+
     <?php
         }
     } else {

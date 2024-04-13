@@ -57,6 +57,54 @@ class Tabela
 } ?>
 
 <script type="text/javascript" src="/siiupa/js/script.js"></script>
+<script>
+    function consultarMatricula(cpf) {
+        const url = `https://siupa.com.br/siiupa/administracao/api/consulta_matricula.php?cpf=${cpf}`;
+
+        return fetch(url)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Erro na requisição: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                return data.ultimaMatricula;
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                throw error; // opcional: lançar novamente o erro para tratamento posterior
+            });
+    }
+
+    function atualizarDadosFuncionario(id, dadosAtualizados, metodo = 'PUT') {
+        const url = `https://siupa.com.br/siiupa/api/rh/api.php/records/tb_funcionario/${id}`;
+
+        const opcoes = {
+            method: metodo,
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(dadosAtualizados),
+        };
+
+        return fetch(url, opcoes)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Erro na requisição: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Dados Atualizados:', data);
+                return data; // opcional: retornar os dados atualizados
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                throw error; // opcional: lançar novamente o erro para tratamento posterior
+            });
+    }
+</script>
 
 
 <style type="text/css">
@@ -345,6 +393,7 @@ $tab->tfechalinha();
 $tab->fechaTabela();
 
 $query = "SELECT fl.id as id_linha, func.id, func.matricula, func.cpf, func.vinculo, func.nome, cargo.funcao_upa, cargo.titulo, fl.adc_not, fl.ext_6, fl.ext_12, fl.ext_24, fl.acionamento, fl.transferencia, fl.fixos, fl.obs, cargo.valor_plantao, cargo.valor_acionamento, cargo.valor_transferencia FROM u940659928_siupa.tb_folha AS fl INNER JOIN u940659928_siupa.tb_funcionario AS func ON (fl.fk_funcionario = func.id) INNER JOIN u940659928_siupa.tb_cargo AS cargo ON (func.fk_cargo = cargo.id) WHERE fl.fk_folhas = '$idfolha' $vinculo_separa $setor_separa ORDER BY func.nome ASC";
+//ECHO $query;
 
 if ($stmt = $conn->prepare($query)) {
     $stmt->execute();
@@ -410,55 +459,71 @@ if ($stmt = $conn->prepare($query)) {
 
         if ($status_folha == "aberta") {
             // $link_para_alterar = "?setor=adm&sub=rh&subsub=rhfolhaadicionaservidor&acao=seleciona&idservidor=$func_id&idfolha=$idfolha&subacao=alterar";
-            $link_para_alterar = "/siiupa/administracao/pagina_rh_folha_adicionaservidor.php?setor=adm&sub=rh&subsub=rhfolhaadicionaservidor&acao=seleciona&idservidor=$func_id&idfolha=$idfolha&subacao=alterar";
+            $link_para_alterar = "/siiupa/administracao/pagina_rh_folha_adicionaservidor.php?setor=adm&sub=rh&subsub=rhfolhaadicionaservidor&acao=seleciona&idservidor=$func_id&idfolha=$idfolha&id_linha=$id_linha&subacao=alterar";
         } else {
             $link_para_alterar = 'javascript:alert("Folha fechada. Alteração não permitida.");';
         }
-        
-$fcpfn = preg_replace("/[^0-9]/", "", $fcpf);
-$fcpfpontos = substr($fcpfn, 0, 3) . '.' . substr($fcpfn, 3, 3) . '.' . substr($fcpfn, 6, 3) . '-' . substr($fcpfn, 9, 2);
+
+        //$fcpfn = preg_replace("/[^0-9]/", "", $fcpf);
+        $fcpfn = "";
+        $fcpfn = strval(preg_replace("/[^0-9]/", "", $fcpf));
+
+        $fcpfpontos = substr($fcpfn, 0, 3) . '.' . substr($fcpfn, 3, 3) . '.' . substr($fcpfn, 6, 3) . '-' . substr($fcpfn, 9, 2);
 
 ?>
-<script>
+        <script>
+            // CONSULTAR E ATUALIZAR MATRICULAS
 
-const apiURL<?php echo $fcpfn;?> = `https://apionline.layoutsistemas.com.br/api/matriculas/?cpf=<?php echo $fcpfn;?>`;
-const authorizationHeader<?php echo $fcpfn;?> = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzAyMzk2NjQ3LCJqdGkiOiJkN2ZkNWRkNmI2ZTU0NzFkOTY1YzEwNGFjMDljMGEyNCIsInVzZXJfaWQiOjE5MDY3M30.Oq-TiHmXDSnEuNvy4YggnbfVhBuToq_lmoWs9KNw8xM";
+            // consultarMatricula('<?= $fcpfpontos ?>')
+            //     .then(matricula => {
+            //         console.log(<?= $fcpfn ?>);
+            //         console.log('Matrícula: ', matricula);
+            //         document.getElementById('<?php echo $fcpfn; ?>').textContent = matricula + " - " + "<?= $func_id ?>";
+            //         const idFuncionario<?= $fcpfn ?> = <?= $func_id ?>;
+            //         const dadosFuncionario<?= $fcpfn ?> = {
+            //             matricula: matricula
+            //         };
 
-// Fazer uma solicitação GET usando a função fetch
-fetch(apiURL<?php echo $fcpfn;?>, {
-  method: "GET",
-  headers: {
-    "Authorization": authorizationHeader<?php echo $fcpfn;?>
-  }
-})
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(`Erro na solicitação: ${response.status}`);
-    }
-    return response.json();
-  })
-  .then(data => {
-    // Verificar se a resposta foi bem-sucedida e obter o CPF
-    console.log("<?php echo $nome;?>");
-    if (data.results && data.results.length > 0) {
-      const matricula = data.results[0].matricula;
-      console.log("CPF:", matricula);
-      document.getElementById('<?php echo $fcpfn;?>').textContent = matricula;
-    } else {
-      console.log("CPF não encontrado na resposta da API.");
-    }
-  })
-  .catch(error => {
-    console.error("Erro na solicitação:", error);
-  });
-</script>
+            //         const url<?=$fcpfn?> = 'https://siupa.com.br/siiupa/api/rh/api.php/records/tb_funcionario/<?=$func_id?>';
+
+            //         const dadosAtualizados<?=$fcpfn?> = {
+            //             matricula: matricula
+            //         };
+
+            //         const opcoes<?=$fcpfn?> = {
+            //             method: 'PUT', // Método HTTP PATCH para atualização parcial
+            //             headers: {
+            //                 'Content-Type': 'application/json',
+            //             },
+            //             body: JSON.stringify(dadosAtualizados<?=$fcpfn?>),
+            //         };
+
+            //         fetch(url<?=$fcpfn?>, opcoes<?=$fcpfn?>)
+            //             .then(response => {
+            //                 if (!response.ok) {
+            //                     throw new Error(`Erro na requisição: ${response.status}`);
+            //                 }
+            //                 return response.json();
+            //             })
+            //             .then(data => {
+            //                 console.log('Dados Atualizados:', data);
+            //             })
+            //             .catch(error => {
+            //                 console.error('Erro:', error);
+            //             });
+
+            //     })
+            //     .catch(error => {
+            //         console.log('erro');
+            //     });
+        </script>
 <?php
 
         printf("
         
         <tr class='align-middle box_nomes' name='%s'>
         <td>%s</td>
-        <td class='fmatricula' id='%s'></td>
+        <td class='fmatricula' id='%s'>%s</td>
         <td class='fcpf' >%s</td>       
         <td class='fvinculo'>%s</td>
         <td id='%s'><a href='%s#offcanvasExample'class='btEditaServidor text-dark text-decoration-none' data-bs-toggle='offcanvas' role='button' aria-controls='offcanvasExample'>%s</a></td>
@@ -474,7 +539,7 @@ fetch(apiURL<?php echo $fcpfn;?>, {
         <td>%s</td>
         
 
-      </tr>", $nome, $i, $fcpfn,  $fcpfpontos, $fvinculo, $id_linha, $link_para_alterar, $nome, $cargoTitulo, $adc_not, $ext_6, $ext_12, $ext_24, $acionamento, $transferencia, number_format($fixos, 2, ',', '.'), number_format($valor_total, 2, ',', '.'), $obs);
+      </tr>", $nome, $i, $fcpfn,  $fmatricula, $fcpfpontos, $fvinculo, $id_linha, $link_para_alterar, $nome, $cargoTitulo, $adc_not, $ext_6, $ext_12, $ext_24, $acionamento, $transferencia, number_format($fixos, 2, ',', '.'), number_format($valor_total, 2, ',', '.'), $obs);
         $valor_geral = $valor_geral + $valor_total;
     }
     $stmt->close();
@@ -504,7 +569,7 @@ echo "</div>"; ///                   FECHA AREA DE IMPRESSAO
     </div>
     <div class="offcanvas-body">
         <div id="offCanvas">
-           
+
 
 
         </div>

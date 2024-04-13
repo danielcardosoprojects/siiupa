@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Copiar Dados em JSON</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fafafa;
+      margin: 0;
+      padding: 0;
+    }
+    #busca {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: #333;
+    }
+    input[type="text"] {
+      padding: 5px;
+      width: 100%;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      margin-bottom: 10px;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    li {
+      padding: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    li:hover {
+      background-color: #f9f9f9;
+    }
+    h1 {
+      color: #333;
+    }
+    textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background-color: #3897f0;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #1877f2;
+    }
+    button.clicado {
+      background-color: #262626;
+    }
+    pre {
+      background-color: #f5f5f5;
+      padding: 10px;
+      border-radius: 5px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    .piscar-verde {
+      animation: piscar 0.5s;
+    }
+    @keyframes piscar {
+      0%, 100% {
+        background-color: white;
+      }
+      50% {
+        background-color: #4caf50;
+      }
+    }
+  </style>
+</head>
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <div id="busca" draggable="true">
+    <label for="searchInput">ID da Escala:</label>
+    <input type="text" id="idEscala">
+    <br>
+    <label for="searchInput">Mes:</label>
+    <input type="text" id="mesEscala">
+    <label for="searchInput">Ano:</label>
+    <input type="text" id="anoEscala">
+    <label for="searchInput">Buscar Funcionário:</label>
+    <input type="text" id="searchInput" oninput="buscarUsuarios(this.value)">
+    <br>
+    <label for="searchInput">Funcionário Selecionado:</label>
+    <input type="text" id="funcSelecionado" data-idFuncionario="">
+    <ul id="resultadoBusca"></ul>
+  </div>
+  <h1>Copiar Dados em JSON</h1>
+  <label for="json">Digite os Dados em JSON:</label>
+  <textarea id="json" rows="10"></textarea>
+  <button id="copiar-tudo">Copiar Todos os Dados</button>
+  <div id="dados"></div>
+  <script>
+    const jsonInput = document.getElementById('json');
+    const dadosDiv = document.getElementById('dados');
+    const copiarTudoButton = document.getElementById('copiar-tudo');
+
+    copiarTudoButton.addEventListener('click', () => {
+      jsonInput.select();
+      document.execCommand('copy');
+    });
+
+    jsonInput.addEventListener('input', () => {
+      try {
+        const dados = JSON.parse(jsonInput.value);
+        renderizarDados(dados);
+      } catch (error) {
+        dadosDiv.innerHTML = '<p style="color: red;">Erro ao analisar os dados em JSON!</p>';
+      }
+    });
+
+    function buscarUsuarios(termo) {
+      const apiUrl = `https://www.siupa.com.br/siiupa/api/rh/api.php/records/tb_funcionario?filter=status,eq,ATIVO&filter=nome,cs,${termo}`;
+      document.getElementById('resultadoBusca').innerHTML = '';
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+          const resultadoLista = document.getElementById('resultadoBusca');
+          data.records.forEach(usuario => {
+            const listItem = document.createElement('li');
+            listItem.textContent = usuario.nome;
+            listItem.addEventListener('click', () => selecionarUsuario(usuario));
+            resultadoLista.appendChild(listItem);
+          });
+        })
+        .catch(error => console.error('Erro ao buscar usuários:', error));
+    }
+
+    function selecionarUsuario(usuario) {
+      document.getElementById("funcSelecionado").value = usuario.nome;
+      document.getElementById("funcSelecionado").setAttribute("data-idFuncionario", usuario.id);
+    }
+
+    function renderizarDados(dados) {
+      let html = '';
+      dados.forEach((d, i) => {
+        html += `<h2 id="item${i}" class="nomeFuncionarios">${d.nome}</h2>`;
+        html += '<pre>{<br>';
+        Object.keys(d).forEach(k => {
+          if (k !== 'nome') {
+            html += `  "${k}": "${d[k]}",<br>`;
+          }
+        });
+        html += '}</pre>';
+        html += `<button class='copiar-item' data-dados='${JSON.stringify(d)}'>Copiar Estes Dados</button>`;
+      });
+      dadosDiv.innerHTML = html;
+      const copiarItemButtons = document.getElementsByClassName('copiar-item');
+      Array.from(copiarItemButtons).forEach((button, i) => {
+        button.addEventListener('click', () => {
+          const dados = JSON.parse(button.getAttribute('data-dados'));
+          const json = JSON.stringify(dados, null, 2);
+          dados.fk_funcionario = parseInt(document.getElementById("funcSelecionado").getAttribute("data-idFuncionario"));
+          dados.fk_escala = parseInt(document.getElementById("idEscala").value);
+          dados.mes = parseInt(document.getElementById("mesEscala").value);
+          dados.ano = parseInt(document.getElementById("anoEscala").value);
+          dados.posicao = 100;
+          const apiUrlPost = 'https://www.siupa.com.br/siiupa/api/rh/api.php/records/tb_escala_funcionario';
+          axios.post(apiUrlPost, dados)
+            .then(resposta => {
+              console.log('Resposta da API:', resposta.data);
+            })
+            .catch(erro => {
+              console.error('Erro na requisição:', erro.message);
+            });
+          document.getElementById("searchInput").focus();
+          navigator.clipboard.writeText(json.replace(/({|})/g, ''));
+          button.classList.add('clicado');
+          button.textContent = "Copiado!";
+          document.querySelector(`#item${i + 1}`).scrollIntoView({ behavior: "smooth" });
+        });
+      });
+    }
+
+    document.addEventListener('click', (event) => {
+      if (event.target.classList.contains('nomeFuncionarios')) {
+        preencheSearch(event.target.innerText);
+        const input = document.getElementById('searchInput');
+        input.classList.add('piscar-verde');
+        setTimeout(() => {
+          input.classList.remove('piscar-verde');
+        }, 500);
+      }
+    });
+  </script>
+</body>
+</html>

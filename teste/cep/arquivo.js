@@ -139,6 +139,7 @@ document.addEventListener('keydown', event => {
     if (event.key === 'Enter') {
         event.preventDefault();
 
+
         console.log(campoAtual + 1, totalCampos);
         if (campoAtual + 1 > totalCampos) {
             console.log('maior');
@@ -146,11 +147,34 @@ document.addEventListener('keydown', event => {
         }
 
         proximoCampo();
-        campoPosicao.value = parseFloat(campoPosicao.value) - 24;
+        campoPosicao.value = parseFloat(campoPosicao.value) - 23.6;
         atualizarPosicao();
 
 
     }
+    if (event.key === 'b') {
+        event.preventDefault();
+        if (confirm('Cadastrar??')) {
+            criarJSON();
+        }
+    }
+
+
+    if (event.key === 'ArrowUp' || event.key ==='w') {
+        event.preventDefault();
+        campoPosicao.blur(); // desfoca o campo para que a atualização da posição funcione
+        campoPosicao.value = parseFloat(campoPosicao.value) - 1;
+        atualizarPosicao();
+    }
+
+    if (event.key === 'ArrowDown' || event.key ==='s') {
+        event.preventDefault();
+        campoPosicao.blur(); // desfoca o campo para que a atualização da posição funcione
+        campoPosicao.value = parseFloat(campoPosicao.value) + 1;
+        atualizarPosicao();
+    }
+
+
 });
 
 document.addEventListener('keydown', function (event) {
@@ -173,7 +197,7 @@ function atualizarPosicao() {
     var novaPosicaoY = (campoPosicao.value - 24);
     if (novaPosicaoY !== posicaoY) {
         posicaoY = novaPosicaoY;
-        container.style.backgroundPosition = "-500px " + posicaoY + "px";
+        container.style.backgroundPosition = "-600px " + posicaoY + "px";
     }
 }
 
@@ -194,6 +218,8 @@ campoPosicao.addEventListener('input', function () {
 
 document.addEventListener('keypress', function (event) {
 
+
+
     if (event.keyCode == 13) {
         console.log('oi');
 
@@ -202,20 +228,22 @@ document.addEventListener('keypress', function (event) {
         campoPosicao.value = parseFloat(campoPosicao.value) - 24;
         atualizarPosicao();
     }
-    if (event.keyCode == 119) {
-
+    if (event.key == 119) {
+        console.log('119');
         campoPosicao.blur(); // desfoca o campo para que a atualização da posição funcione
         campoPosicao.value = parseFloat(campoPosicao.value) + 1;
         atualizarPosicao();
     }
-    if (event.keyCode == 115) {
+    console.log(event);
+    if (event.key == 115) {
 
         campoPosicao.blur(); // desfoca o campo para que a atualização da posição funcione
         campoPosicao.value = parseFloat(campoPosicao.value) - 1;
         atualizarPosicao();
     }
-    if (event.keyCode == 97) {
+    if (event.keyCode == 97 || event.key === 'a' || event.key === '-') {
         //A
+        event.preventDefault();
         if (campoAtual == 0) {
             console.log('menor');
             return;
@@ -246,6 +274,9 @@ document.addEventListener('keypress', function (event) {
         });
         alert("copiado");
     }
+
+    //APERTAR LETRA S PARA SALVAR
+
 
 });
 const inputsC = document.querySelectorAll('input');
@@ -312,6 +343,7 @@ function criarJSON() {
         .then(response => response.json())
         .then(data => {
             console.log('Dados inseridos com sucesso:', data);
+            location.reload();
         })
         .catch(error => {
             console.error('Erro ao inserir dados:', error);
@@ -321,3 +353,59 @@ function criarJSON() {
     // Retorne o JSON (opcional, dependendo do seu caso de uso)
     return jsonString;
 }
+
+function carregaHistorico() {
+    // Obtém todas as células com a classe 'tdLimpa'
+    const historico = document.getElementById("historico");
+
+
+    const url = 'https://siupa.com.br/siiupa/api/api.php/records/tb_cep/?order=id,desc';
+
+
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        //body: JSON.stringify(dadosParaInserir),
+    })
+        .then(response => response.json())
+        .then(data => {
+            var currentDate = new Date(data.records[0].data);
+
+            // Adicionar um dia
+            currentDate.setDate(currentDate.getDate() + 1);
+
+            // Formatar a nova data (YYYY-MM-DD)
+            var nextDate = currentDate.toISOString().split('T')[0];
+            document.getElementById("dateInput").value = nextDate;
+
+
+            var parts = nextDate.split("-");
+
+            // Criar o novo formato
+            var newFormat = parts[0] + parts[1] + '/' + parts[0] + parts[1] + parts[2] + '.png';
+
+            console.log(newFormat);
+            const minhaDiv2 = document.getElementById("container");
+            const dataAtual2 = document.getElementById("dataAtual");
+            minhaDiv2.style.backgroundImage = `url('${newFormat}')`;
+            dataAtual2.style.backgroundImage = `url('${newFormat}')`;
+
+            data.records.forEach((dado) => {
+
+                historico.innerHTML = historico.innerHTML + dado.data + "<br>";
+
+
+            });
+        })
+        .catch(error => {
+            console.error('Erro ao inserir dados:', error);
+        });
+
+
+    // Retorne o JSON (opcional, dependendo do seu caso de uso)
+    // return jsonString;
+}
+
+carregaHistorico();
