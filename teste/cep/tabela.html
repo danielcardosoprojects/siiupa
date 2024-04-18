@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organização de Dados em Tabela</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+<script>
+    // Função para obter os dados da API
+    async function fetchData(url) {
+        const response = await fetch(url);
+        const data = await response.json();
+        return data.records;
+    }
+
+    // Função para organizar os dados em uma tabela
+    async function renderTable() {
+        const bairrosData = await fetchData('https://siupa.com.br/siiupa/api/api.php/records/tb_bairros');
+        const cepData = await fetchData('https://siupa.com.br/siiupa/api/api.php/records/tb_cep');
+
+        // Mapear os IDs dos bairros para seus nomes
+        const bairrosMap = new Map(bairrosData.map(bairro => [bairro.id, bairro.bairro]));
+
+        // Criar a tabela
+        const table = document.createElement('table');
+
+        // Cabeçalho da tabela
+        const thead = document.createElement('thead');
+        const headerRow = document.createElement('tr');
+        const headers = ['Data', 'Bairros'];
+        headers.forEach(headerText => {
+            const th = document.createElement('th');
+            th.appendChild(document.createTextNode(headerText));
+            headerRow.appendChild(th);
+        });
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
+
+        // Corpo da tabela
+        const tbody = document.createElement('tbody');
+        cepData.forEach(cep => {
+            const row = document.createElement('tr');
+
+            // Adicionar data
+            const dateCell = document.createElement('td');
+            dateCell.appendChild(document.createTextNode(cep.data));
+            row.appendChild(dateCell);
+
+            // Adicionar bairros
+            const bairrosCell = document.createElement('td');
+            const bairrosObj = JSON.parse(cep.bairros);
+            const bairrosArray = Object.keys(bairrosObj).map(id => `<td>${bairrosMap.get(parseInt(id))}</td><td>${bairrosObj[id]}</td>`);
+            bairrosCell.appendChild(document.createTextNode(bairrosArray.join(', ')));
+            row.appendChild(bairrosCell);
+
+            tbody.appendChild(row);
+        });
+        table.appendChild(tbody);
+
+        // Adicionar a tabela ao corpo do documento
+        document.body.appendChild(table);
+    }
+
+    // Chamar a função para renderizar a tabela
+    renderTable();
+</script>
+
+</body>
+</html>
