@@ -22,6 +22,7 @@ if (!isset($_SESSION['nivel'])) {
 
 
 	});
+	
 </script>
 <div id="topo" class="notprint">
 	<div id="notification-icon"><img src="/siiupa/imagens/icones/bell.svg" width="24px;">
@@ -48,6 +49,7 @@ if (!isset($_SESSION['nivel'])) {
 		$sub = $_GET['sub'];
 		if ($sub == "rh") {
 			include("paginarh.php");
+			
 		} elseif ($sub == "rhperfil") {
 			include("paginarh_perfil.php");
 		} elseif ($sub == "rh_perfil") {
@@ -70,9 +72,10 @@ if (!isset($_SESSION['nivel'])) {
 			include("pagina_escala_exibe.php");
 		} elseif ($sub == "rhalimentacao") {
 			include("pagina_rh_alimentacao.php");
+		
+		} elseif ($sub == "impressos") {
+			include("../impressos/index.php");
 		}
-	} elseif ($sub == "impressos") {
-		include("/siiupa/impressos/index.php");
 	} else {
 	?>
 		<div class="row">
@@ -187,16 +190,16 @@ if (!isset($_SESSION['nivel'])) {
 
 		// Converter o retorno para JSON
 		const data = await response.json();
-
-
+		
+		
 		// Mapear o retorno
 		data.map(item => {
-
-			addNotification(`Aniversário: ${item.nome} - ${item.data_nasc}`);
-
+			
+				addNotification(`Aniversário: ${item.nome} - ${item.data_nasc}`);
+		
 		});
 
-
+		
 	}
 	consultBirth();
 
