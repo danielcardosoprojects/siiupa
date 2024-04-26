@@ -15,6 +15,12 @@
         h1 {
             color: #5a5a5a;
         }
+        input[type="text"] {
+            padding: 10px;
+            margin-bottom: 20px;
+            width: 300px;
+            border: 1px solid #ddd;
+        }
         ul {
             list-style-type: none;
             padding: 0;
@@ -25,6 +31,7 @@
             padding: 10px;
             margin-bottom: 5px;
             border-radius: 5px;
+            display: none; /* Start with no files displayed */
         }
         li a {
             text-decoration: none;
@@ -33,65 +40,97 @@
         li a:hover {
             text-decoration: underline;
         }
-        /* Estilos para o modal */
         .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1; /* Sit on top */
+            display: none;
+            position: fixed;
+            z-index: 1;
             left: 0;
             top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
         }
         .modal-content {
             background-color: #fefefe;
-            margin: 10% auto; /* 15% from the top and centered */
+            margin: 15% auto;
             padding: 20px;
             border: 1px solid #888;
-            width: 80%; /* Could be more or less, depending on screen size */
+            width: 80%;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
     <h1>Arquivos PDF no diretório</h1>
-    <ul>
+    <input type="text" id="searchBox" onkeyup="searchPDFs()" placeholder="Buscar arquivo...">
+    <ul id="pdfList">
     <?php
     $diretorio = './'; // Substitua pelo caminho do diretório que contém os PDFs
     $arquivos = scandir($diretorio);
 
     foreach ($arquivos as $arquivo) {
         if (pathinfo($arquivo, PATHINFO_EXTENSION) === 'pdf') {
-            echo "<li><a href='#' onclick='openModal(\"$diretorio/$arquivo\")'>$arquivo</a></li>";
+            echo "<li style='display: block;'><a href='#' onclick='openModal(\"$diretorio/$arquivo\")'>$arquivo</a></li>";
         }
     }
     ?>
     </ul>
 
-    <!-- O Modal -->
+    <!-- The Modal -->
     <div id="pdfModal" class="modal">
         <div class="modal-content">
-            <span onclick="closeModal()" style="cursor:pointer;float:right;">&times;</span>
+            <span class="close" onclick="closeModal()">&times;</span>
             <iframe id="pdfFrame" style="width:100%; height:500px;" frameborder="0"></iframe>
         </div>
     </div>
 
     <script>
+        function searchPDFs() {
+            var input = document.getElementById('searchBox');
+            var filter = input.value.toUpperCase();
+            var ul = document.getElementById('pdfList');
+            var li = ul.getElementsByTagName('li');
+
+            for (var i = 0; i < li.length; i++) {
+                var a = li[i].getElementsByTagName("a")[0];
+                var txtValue = a.textContent || a.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    li[i].style.display = "block";
+                } else {
+                    li[i].style.display = "none";
+                }
+            }
+        }
+
         function openModal(pdfUrl) {
-            document.getElementById('pdfFrame').src = pdfUrl;
-            document.getElementById('pdfModal').style.display = "block";
+            var modal = document.getElementById('pdfModal');
+            var iframe = document.getElementById('pdfFrame');
+            iframe.src = pdfUrl;
+            modal.style.display = "block";
         }
 
         function closeModal() {
-            document.getElementById('pdfModal').style.display = "none";
+            var modal = document.getElementById('pdfModal');
+            modal.style.display = "none";
             document.getElementById('pdfFrame').src = '';
         }
 
-        // Close the modal if the user clicks anywhere outside of the modal
+        // Close the modal if the user clicks outside of it
         window.onclick = function(event) {
             var modal = document.getElementById('pdfModal');
-            if (event.target === modal) {
+            if (event.target == modal) {
                 closeModal();
             }
         }
