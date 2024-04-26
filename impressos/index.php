@@ -70,6 +70,19 @@
             text-decoration: none;
             cursor: pointer;
         }
+        .open-pdf {
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .open-pdf:hover {
+            background-color: #45a049;
+        }
     </style>
 </head>
 <body>
@@ -93,10 +106,13 @@
         <div class="modal-content">
             <span class="close" onclick="closeModal()">&times;</span>
             <iframe id="pdfFrame" style="width:100%; height:500px;" frameborder="0"></iframe>
+            <button class="open-pdf" onclick="openPDFInNewTab()">Abrir em Nova Aba</button>
         </div>
     </div>
 
     <script>
+        var currentPDFUrl = '';
+
         function searchPDFs() {
             var input = document.getElementById('searchBox');
             var filter = input.value.toUpperCase();
@@ -115,6 +131,7 @@
         }
 
         function openModal(pdfUrl) {
+            currentPDFUrl = pdfUrl;  // Store current PDF URL to use for opening in a new tab
             var modal = document.getElementById('pdfModal');
             var iframe = document.getElementById('pdfFrame');
             iframe.src = pdfUrl;
@@ -125,6 +142,10 @@
             var modal = document.getElementById('pdfModal');
             modal.style.display = "none";
             document.getElementById('pdfFrame').src = '';
+        }
+
+        function openPDFInNewTab() {
+            window.open(currentPDFUrl, '_blank');
         }
 
         // Close the modal if the user clicks outside of it
