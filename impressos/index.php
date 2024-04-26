@@ -104,9 +104,10 @@
     <!-- The Modal -->
     <div id="pdfModal" class="modal">
         <div class="modal-content">
+        <button class="open-pdf" onclick="openPDFInNewTab()">Abrir em Nova Aba</button>
             <span class="close" onclick="closeModal()">&times;</span>
             <iframe id="pdfFrame" style="width:100%; height:500px;" frameborder="0"></iframe>
-            <button class="open-pdf" onclick="openPDFInNewTab()">Abrir em Nova Aba</button>
+            
         </div>
     </div>
 
