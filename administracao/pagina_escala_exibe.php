@@ -217,7 +217,7 @@ STATUS:
 </p>
 
 
-<div id="carregaesqueleto">
+<div id="carregaesqueleto" style="overflow-x: auto;">
 
     <?php
     include("pagina_escala_esqueleto.php");
