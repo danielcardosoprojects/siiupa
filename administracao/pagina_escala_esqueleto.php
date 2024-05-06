@@ -145,7 +145,7 @@
         }
 
         #contentescala {
-            overflow: hidden;
+            overflow: auto;
             font-family: calibri;
 
         }
