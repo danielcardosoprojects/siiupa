@@ -1,7 +1,7 @@
 <style>
     #carregaesqueleto {
         overflow:visible;
-        background-color: #0056b3;
+        background-color: #FFF;
     }
     #addservidor {
         display: inline-block;
