@@ -72,6 +72,7 @@
         #assinatura {
             text-align: center;
             width: 100%;
+            height
         }
         .assinaturas {
             display:flex;
@@ -133,7 +134,7 @@
         }
 
         #assinatura div {
-            height: 50px;
+            height: 80px;
             width: 100%;
         }
 
