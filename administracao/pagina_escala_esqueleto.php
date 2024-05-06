@@ -929,7 +929,7 @@
             <!-- <div class='atualizado'>Atualizado em: <?php echo $atualizado; ?></div> -->
             <div class='assinaturas'>
             <!-- <div>_____________________________<br>Assinatura Responsável</div> -->
-            <div><br/>_____________________________<br>Assinatura Responsável</div>
+            <div><br><br><br>_____________________________<br>Assinatura Responsável</div>
             </div>
         </div>
 
