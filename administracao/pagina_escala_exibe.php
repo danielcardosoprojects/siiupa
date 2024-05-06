@@ -216,8 +216,20 @@ STATUS:
     <span id="excluir_varios">Excluir vários</span><span id="confirmar_exclusao" title="Confirmar exclusão" style='display:none'>✅</span><span id="cancelar_exclusao" style='display:none' title="Cancelar exclusão">❌</span>
 </p>
 
+<style>
+    /* Estilo para a div que contém o conteúdo carregado pelo include */
+    #carregaesqueleto {
+        overflow-x: auto;
+        white-space: nowrap; /* Evita que o conteúdo quebre em várias linhas */
+    }
 
-<div id="carregaesqueleto" style="overflow-x: auto;">
+    /* Estilo para o conteúdo dentro da div */
+    #carregaesqueleto > * {
+        display: inline-block; /* Garante que o conteúdo não quebre em várias linhas */
+        white-space: normal; /* Restaura o comportamento padrão de quebra de linha */
+    }
+</style>
+<div id="carregaesqueleto">
 
     <?php
     include("pagina_escala_esqueleto.php");
