@@ -13,11 +13,11 @@
 
 
     <style>
-        /* @media print {
+        @media print {
             @page {
                 size: landscape
             }
-        } */
+        }
 
         .table,
         .table th,
