@@ -131,17 +131,6 @@
     }
 
 
-    /* Estilo para a div que contém o conteúdo carregado pelo include */
-    #carregaesqueleto {
-        overflow-x: auto;
-        white-space: nowrap; /* Evita que o conteúdo quebre em várias linhas */
-    }
-
-    /* Estilo para o conteúdo dentro da div */
-    #carregaesqueleto > * {
-        display: inline-block; /* Garante que o conteúdo não quebre em várias linhas */
-        white-space: normal; /* Restaura o comportamento padrão de quebra de linha */
-    }
 
 </style>
 <?php
