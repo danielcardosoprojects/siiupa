@@ -10,6 +10,11 @@
 	<meta charset="UTF-8">
 	<title>CEP</title>
 	<style>
+		body {
+    background-color: #121212;
+    color: #e0e0e0;
+    font-family: Arial, sans-serif;
+}
 		#main {
 			display: flex;
 			flex-direction: row;
@@ -65,8 +70,25 @@
 		}
 
 		table {
-			border: 1px solid #000;
-		}
+    width: 100%;
+    border-collapse: collapse; /* Remove o espaço entre as bordas das células */
+    margin: 20px 0;
+    background-color: #282828;
+    color: #e0e0e0;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #444; /* Define a cor da borda */
+}
+
+th {
+    background-color: #1e1e1e; /* Cor de fundo para cabeçalhos da tabela */
+}
+
+tbody tr:hover {
+    background-color: #333; /* Efeito hover para linhas da tabela */
+}
 		#logo{
 			position: absolute;
 			width: 180px;
