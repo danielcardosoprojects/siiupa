@@ -4,10 +4,10 @@ var botaoBaixo = document.getElementById('botao-baixo');
 var campoPosicao = document.getElementById('campo-posicao');
 var container = document.getElementById('container');
 let anguloAtual = 0;
-var posicaoY = -68;
+var posicaoY = -38;
 let texto = "";
 let contaLinhas = 1;
-campoPosicao.value = -24;
+campoPosicao.value = -6;
 
 const form = document.querySelector('form');
 const NUMERO_DE_INPUTS = 62;
@@ -197,7 +197,7 @@ function atualizarPosicao() {
     var novaPosicaoY = (campoPosicao.value - 24);
     if (novaPosicaoY !== posicaoY) {
         posicaoY = novaPosicaoY;
-        container.style.backgroundPosition = "-600px " + posicaoY + "px";
+        container.style.backgroundPosition = "-500px " + posicaoY + "px";
     }
 }
 

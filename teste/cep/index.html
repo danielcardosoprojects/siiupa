@@ -10,6 +10,11 @@
 	<meta charset="UTF-8">
 	<title>CEP</title>
 	<style>
+		body {
+    background-color: #121212;
+    color: #e0e0e0;
+    font-family: Arial, sans-serif;
+}
 		#main {
 			display: flex;
 			flex-direction: row;
@@ -34,8 +39,11 @@
 			overflow: hidden;
 			background-image: url(202303/20230302.png);
 			background-repeat: no-repeat;
-			background-position: -597px -68px;
+			background-position: -500px -28px;
 			background-size: 1131px 1600px;
+			
+            filter: invert(100%); /* inverte as cores da imagem*/
+        
 		}
 
 		#dataAtual {
@@ -46,8 +54,9 @@
 			overflow: hidden;
 			background-image: url(202303/20230302.png);
 			background-repeat: no-repeat;
-			background-position: -500px -15px;
+			background-position: -460px -12px;
 			background-size: 1131px 1600px;
+			filter: invert(100%); /* inverte as cores da imagem */
 		}
 
 		#formulario label {
@@ -65,8 +74,27 @@
 		}
 
 		table {
-			border: 1px solid #000;
-		}
+    width: 100%;
+    border-collapse: collapse; /* Remove o espaço entre as bordas das células */
+    margin: 20px 0;
+    background-color: #282828;
+    color: #e0e0e0;
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #444; /* Define a cor da borda */
+	color: #e0e0e0;
+}
+
+th {
+    background-color: #1e1e1e; /* Cor de fundo para cabeçalhos da tabela */
+	color: #e0e0e0;
+}
+
+tbody tr:hover {
+    background-color: #333;  /* Efeito hover para linhas da tabela */
+}
 		#logo{
 			position: absolute;
 			width: 180px;
@@ -101,6 +129,47 @@ transform : translateY(-0px);
 background: linear-gradient(90deg, #0066CC 0%, #00cc2c 100%);
 color: #0066cc;
 border: solid 2px #0066cc;
+}
+form {
+    max-width: 400px;
+    margin: 20px;
+    padding: 20px;
+    background-color: #282828;
+    border-radius: 8px;
+}
+
+label {
+    margin-top: 10px;
+}
+
+input[type="date"],input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="submit"] {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 1px solid #444;
+    background-color: #333;
+    color: #ddd;
+}
+
+input[type="submit"] {
+    background-color: #1e1e1e;
+    color: white;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #0a58ca;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus {
+    border-color: #0a58ca;
+    outline: none;
 }
 	</style>
 </head>
@@ -141,7 +210,7 @@ border: solid 2px #0066cc;
 		</div>
 		<div id="direito">
 			<button onclick="criarJSON()">Gerar JSON</button>
-			<table class="table table-bordered">
+			<table>
 				<thead>
 					<th>Cidade</th>
 					<th>QTD</th>

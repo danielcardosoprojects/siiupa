@@ -72,6 +72,7 @@
         #assinatura {
             text-align: center;
             width: 100%;
+            height
         }
         .assinaturas {
             display:flex;
@@ -133,7 +134,7 @@
         }
 
         #assinatura div {
-            height: 50px;
+            height: 100%;
             width: 100%;
         }
 
@@ -144,7 +145,7 @@
         }
 
         #contentescala {
-            overflow: hidden;
+            overflow: auto;
             font-family: calibri;
 
         }
@@ -929,7 +930,7 @@
             <!-- <div class='atualizado'>Atualizado em: <?php echo $atualizado; ?></div> -->
             <div class='assinaturas'>
             <!-- <div>_____________________________<br>Assinatura Responsável</div> -->
-            <div><br/>_____________________________<br>Assinatura Responsável</div>
+            <div><br><br><br>_____________________________<br>Assinatura Responsável</div>
             </div>
         </div>
 

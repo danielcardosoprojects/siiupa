@@ -1,4 +1,8 @@
 <style>
+    #carregaesqueleto {
+        overflow:visible;
+        background-color: #FFF;
+    }
     #addservidor {
         display: inline-block;
         padding: 5px 20px;
@@ -129,6 +133,9 @@
         width: 100%;
         height: 100%;
     }
+
+
+
 </style>
 <?php
 
@@ -218,6 +225,7 @@ STATUS:
 
 
 <div id="carregaesqueleto">
+
 
     <?php
     include("pagina_escala_esqueleto.php");

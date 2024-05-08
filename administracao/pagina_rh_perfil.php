@@ -522,7 +522,7 @@ class Grade
     </a>
 
 
-    <a class='btn btn-outline-secondary' target="_blank" href="/siiupa/ADMINISTRACAO/apicnes.php?id=<?php echo $perfil->id; ?>">
+    <a class='btn btn-outline-secondary' target="_blank" href="/siiupa/administracao/apicnes.php?id=<?php echo $perfil->id; ?>">
         <img src="/siiupa/imagens/icones/inventory.svg">
         Solicitação CNES
     </a>

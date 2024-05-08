@@ -39,6 +39,7 @@ if (!isset($_SESSION['nivel'])) {
 		<a id="abrerh" href="?setor=adm&sub=rh" class="btn btn-light abrerh">Recursos Humanos</a>
 		<a id="abrerh" href="?setor=adm&sub=producao" class="btn btn-light">Produção e Estatística</a>
 		<a id="abreadministracao" href="administracao/paginaadministracao.php" class="btn btn-light">Administração</a>
+		<a id="abreimpressos" href="/siiupa/impressos/index.php" target='_blank' class="btn btn-light impressos">Impressos</a>
 		<a href="/siiupa/enviararquivo.php" class="btn btn-light">Arquivos</a>
 	</div>
 </div>
@@ -72,7 +73,8 @@ if (!isset($_SESSION['nivel'])) {
 			include("pagina_escala_exibe.php");
 		} elseif ($sub == "rhalimentacao") {
 			include("pagina_rh_alimentacao.php");
-		}
+		
+		} 
 	} else {
 	?>
 		<div class="row">
