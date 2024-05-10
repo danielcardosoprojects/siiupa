@@ -246,10 +246,10 @@
         var valorM = getQueryStringValue('m'); // Captura o valor do parâmetro 'm'
         if (valorM === null) {
             console.log('Parâmetro \'m\' não está presente na URL.');
-            document.getElementById('matriculaInput').textContent = '';
+            document.getElementById('matriculaInput').value = '';
         } else {
             console.log('Valor de m:', valorM); // Exibe no console do navegador
-            document.getElementById('matriculaInput').textContent = valorM; // Exibe na página
+            document.getElementById('matriculaInput').value = valorM; // Exibe na página
         }
     }
 
