@@ -415,7 +415,7 @@ function carregaHistorico() {
     const historico = document.getElementById("historico");
 
 
-    const url = 'https://siupa.com.br/siiupa/api/api.php/records/tb_cep/?order=id,desc';
+    const url = 'https://siupa.com.br/siiupa/api/api.php/records/tb_cep/?filter=cidades,is,NULL';
 
 
     fetch(url, {
