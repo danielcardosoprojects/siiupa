@@ -430,7 +430,7 @@ function carregaHistorico() {
             var currentDate = new Date(data.records[0].data);
 
             // Adicionar um dia
-            currentDate.setDate(currentDate.getDate() + 1);
+            currentDate.setDate(currentDate.getDate());
 
             // Formatar a nova data (YYYY-MM-DD)
             var nextDate = currentDate.toISOString().split('T')[0];
