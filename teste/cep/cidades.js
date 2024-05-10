@@ -377,7 +377,7 @@ function criarJSON() {
         jsonValores[idNumero] = texto;
     });
 
-    jsonResult['bairros'] = JSON.stringify(jsonValores, null, 2);
+    jsonResult['cidades'] = JSON.stringify(jsonValores, null, 2);
 
     // Converte o objeto JSON para uma string JSON
     const jsonString = JSON.stringify(jsonResult, null, 2);
