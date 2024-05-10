@@ -107,6 +107,7 @@ dateInput.addEventListener("change", function () {
 
 function criarInput() {
     const nome = NOMES_DE_BAIRROS[currentInputIndex];
+    
 
     const input = document.createElement('input');
     input.type = 'number';
@@ -116,7 +117,7 @@ function criarInput() {
 
     const label = document.createElement('label');
     label.for = nome;
-    label.innerHTML = "<h1>" + nome + "<h1>";
+    label.innerHTML = "<h1>" + input.id + " - " + nome + "<h1>";
 
     const div = document.getElementById('formulario');
     const tabela = document.getElementById('tbody');
@@ -415,7 +416,7 @@ function carregaHistorico() {
     const historico = document.getElementById("historico");
 
 
-    const url = 'https://siupa.com.br/siiupa/api/api.php/records/tb_cep/?filter=cidades,is,NULL';
+    const url = 'https://siupa.com.br/siiupa/api/api.php/records/tb_cep/?filter=cidades,is,NULL&order=id,desc';
 
 
     fetch(url, {
