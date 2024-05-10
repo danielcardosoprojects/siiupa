@@ -11,10 +11,11 @@
 	<title>CEP</title>
 	<style>
 		body {
-    background-color: #121212;
-    color: #e0e0e0;
-    font-family: Arial, sans-serif;
-}
+			background-color: #121212;
+			color: #e0e0e0;
+			font-family: Arial, sans-serif;
+		}
+
 		#main {
 			display: flex;
 			flex-direction: row;
@@ -23,7 +24,7 @@
 
 		#container1 {
 			width: 489px;
-			height: 26px;
+			height: 500px;
 			position: relative;
 			overflow: hidden;
 
@@ -31,7 +32,7 @@
 
 		#container {
 			width: 489px;
-			height: 48px;
+			height: 500px;
 			border: 1px solid black;
 			position: absolute;
 			top: 0;
@@ -39,11 +40,12 @@
 			overflow: hidden;
 			background-image: url(202303/20230302.png);
 			background-repeat: no-repeat;
-			background-position: -500px -28px;
+			background-position: -50px -28px;
 			background-size: 1131px 1600px;
-			
-            filter: invert(100%); /* inverte as cores da imagem*/
-        
+
+			filter: invert(100%);
+			/* inverte as cores da imagem*/
+
 		}
 
 		#dataAtual {
@@ -56,7 +58,8 @@
 			background-repeat: no-repeat;
 			background-position: -460px -12px;
 			background-size: 1131px 1600px;
-			filter: invert(100%); /* inverte as cores da imagem */
+			filter: invert(100%);
+			/* inverte as cores da imagem */
 		}
 
 		#formulario label {
@@ -74,109 +77,118 @@
 		}
 
 		table {
-    width: 100%;
-    border-collapse: collapse; /* Remove o espaço entre as bordas das células */
-    margin: 20px 0;
-    background-color: #282828;
-    color: #e0e0e0;
-}
+			width: 100%;
+			border-collapse: collapse;
+			/* Remove o espaço entre as bordas das células */
+			margin: 20px 0;
+			background-color: #282828;
+			color: #e0e0e0;
+		}
 
-th, td {
-    padding: 10px;
-    border: 1px solid #444; /* Define a cor da borda */
-	color: #e0e0e0;
-}
+		th,
+		td {
+			padding: 10px;
+			border: 1px solid #444;
+			/* Define a cor da borda */
+			color: #e0e0e0;
+		}
 
-th {
-    background-color: #1e1e1e; /* Cor de fundo para cabeçalhos da tabela */
-	color: #e0e0e0;
-}
+		th {
+			background-color: #1e1e1e;
+			/* Cor de fundo para cabeçalhos da tabela */
+			color: #e0e0e0;
+		}
 
-tbody tr:hover {
-    background-color: #333;  /* Efeito hover para linhas da tabela */
-}
-		#logo{
+		tbody tr:hover {
+			background-color: #333;
+			/* Efeito hover para linhas da tabela */
+		}
+
+		#logo {
 			position: absolute;
 			width: 180px;
 			left: 250px;
 		}
+
 		@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Koulen&family=Lato&family=Nunito&family=Playfair+Display:ital@1&family=Prata&family=Raleway:ital,wght@1,100&family=Roboto&family=Roboto+Condensed&family=Teko&display=swap');
 
-button{
+		button {
 
-font-family: Roboto, sans-serif;
-font-weight: 0;
-font-size: 14px;
-color: #fff;
-background: linear-gradient(90deg, #0066CC 0%, #00cc2c 100%);
-padding: 5px 5px;
-border: 2px solid #0066cc;
-box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
+			font-family: Roboto, sans-serif;
+			font-weight: 0;
+			font-size: 14px;
+			color: #fff;
+			background: linear-gradient(90deg, #0066CC 0%, #00cc2c 100%);
+			padding: 5px 5px;
+			border: 2px solid #0066cc;
+			box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
 
-transition : 1000ms;
-transform: translateY(0);
-display: flex;
-flex-direction: row;
-align-items: center;
-cursor: pointer;
-}
+			transition: 1000ms;
+			transform: translateY(0);
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			cursor: pointer;
+		}
 
-button:hover{
+		button:hover {
 
-transition : 1000ms;
-padding: 10px 50px;
-transform : translateY(-0px);
-background: linear-gradient(90deg, #0066CC 0%, #00cc2c 100%);
-color: #0066cc;
-border: solid 2px #0066cc;
-}
-form {
-    max-width: 400px;
-    margin: 20px;
-    padding: 20px;
-    background-color: #282828;
-    border-radius: 8px;
-}
+			transition: 1000ms;
+			padding: 10px 50px;
+			transform: translateY(-0px);
+			background: linear-gradient(90deg, #0066CC 0%, #00cc2c 100%);
+			color: #0066cc;
+			border: solid 2px #0066cc;
+		}
 
-label {
-    margin-top: 10px;
-}
+		form {
+			max-width: 400px;
+			margin: 20px;
+			padding: 20px;
+			background-color: #282828;
+			border-radius: 8px;
+		}
 
-input[type="date"],input[type="text"],
-input[type="number"],
-input[type="email"],
-input[type="submit"] {
-    display: block;
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    border: 1px solid #444;
-    background-color: #333;
-    color: #ddd;
-}
+		label {
+			margin-top: 10px;
+		}
 
-input[type="submit"] {
-    background-color: #1e1e1e;
-    color: white;
-    cursor: pointer;
-}
+		input[type="date"],
+		input[type="text"],
+		input[type="number"],
+		input[type="email"],
+		input[type="submit"] {
+			display: block;
+			width: 100%;
+			padding: 8px;
+			margin-top: 5px;
+			border: 1px solid #444;
+			background-color: #333;
+			color: #ddd;
+		}
 
-input[type="submit"]:hover {
-    background-color: #0a58ca;
-}
+		input[type="submit"] {
+			background-color: #1e1e1e;
+			color: white;
+			cursor: pointer;
+		}
 
-input[type="text"]:focus,
-input[type="number"]:focus,
-input[type="email"]:focus {
-    border-color: #0a58ca;
-    outline: none;
-}
+		input[type="submit"]:hover {
+			background-color: #0a58ca;
+		}
+
+		input[type="text"]:focus,
+		input[type="number"]:focus,
+		input[type="email"]:focus {
+			border-color: #0a58ca;
+			outline: none;
+		}
 	</style>
 </head>
 
 <body>
 	<div id="main">
-		<img id="logo" src="logo.png"/>
+		<img id="logo" src="logo.png" />
 		<div id="esquerdo">
 			<input type="date" id="dateInput" placeholder="Selecione uma data">1
 
@@ -190,6 +202,8 @@ input[type="email"]:focus {
 			<button id="botao-baixo">Mover para cima</button>
 			<input id="campo-posicao" type="number" value="68">
 
+			</div>
+			<div id="direito">
 
 			<form id="formulario">
 				<label>aperte enter para iniciar</label>
