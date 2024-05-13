@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Feed de Mídia</title>
+    <title>Feed de Mídia com Download</title>
     <style>
         body {
             display: flex;
@@ -18,10 +18,22 @@
             box-shadow: 0 0 5px 0 rgba(0,0,0,0.1);
             width: 290px;
             overflow: hidden;
+            position: relative;
         }
         img, video {
             width: 100%;
             height: auto;
+        }
+        .download-btn {
+            display: block;
+            text-align: center;
+            background: #0095f6;
+            color: white;
+            text-decoration: none;
+            padding: 8px;
+            border: none;
+            cursor: pointer;
+            width: 100%;
         }
     </style>
 </head>
@@ -41,6 +53,7 @@
                     } elseif ($file_parts['extension'] == 'mp4') {
                         echo "<video controls><source src='$dir$file' type='video/mp4'>Seu navegador não suporta vídeo HTML5.</video>";
                     }
+                    echo "<a href='$dir$file' download class='download-btn'>Download</a>";
                     echo '</div>';
                 }
             }
