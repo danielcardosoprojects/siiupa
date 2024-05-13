@@ -2,23 +2,25 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Feed de Mídia com Download</title>
+    <title>Feed de Mídia Estilo Instagram</title>
     <style>
         body {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
             background: #fafafa;
             margin: 0;
+            padding-top: 20px;
             font-family: Arial, sans-serif;
         }
         .media {
-            margin: 8px;
+            margin: 20px 0;
             border: 1px solid #ddd;
             box-shadow: 0 0 5px 0 rgba(0,0,0,0.1);
-            width: 290px;
+            width: 90%;
+            max-width: 600px; /* Similar à largura máxima das postagens no Instagram */
             overflow: hidden;
-            position: relative;
+            background: white;
         }
         img, video {
             width: 100%;
@@ -30,10 +32,11 @@
             background: #0095f6;
             color: white;
             text-decoration: none;
-            padding: 8px;
+            padding: 10px;
             border: none;
             cursor: pointer;
             width: 100%;
+            font-size: 16px;
         }
     </style>
 </head>
