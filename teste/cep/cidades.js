@@ -365,7 +365,7 @@ function criarJSON() {
 
     // Itera sobre cada célula
 
-    jsonResult['data'] = document.getElementById("dateInput").value;
+    //jsonResult['data'] = document.getElementById("dateInput").value;
 
     celulas.forEach((celula) => {
         // Obtém o ID da célula e extrai apenas o número
