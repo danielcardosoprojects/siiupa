@@ -77,7 +77,7 @@ let currentInputIndex = 0;
 
 const dateInput = document.getElementById("dateInput");
 
-dateInput.addEventListener("change", function () {
+dateInput.addEventListener("change",  async function() {
     const selectedDate = new Date(this.value);
     selectedDate.setUTCHours(12);
     const year = selectedDate.getFullYear().toString();
@@ -100,6 +100,32 @@ dateInput.addEventListener("change", function () {
         // Fazer algo com cada elemento selecionado
         elemento.innerText = "";
     });
+     // Captura a data do input e formata para 'YYYY-MM-DD'
+     const selectedDate2 = new Date(this.value).toISOString().split('T')[0];
+
+     // Formata a URL com o filtro da data selecionada
+     const url = `https://siupa.com.br/siiupa/api/api.php/records/tb_cep/?filter=data,eq,${selectedDate2}&include=id`;
+ 
+     try {
+         // Realiza a consulta à API
+         const response = await fetch(url);
+         if (!response.ok) {
+             throw new Error('Erro na API: ' + response.statusText);
+         }
+         const data = await response.json();
+ 
+         // Verifica se registros foram retornados e extrai o ID
+         if (data.records && data.records.length > 0) {
+             const id = data.records[0].id; // Pega o ID do primeiro registro
+             console.log('ID obtido:', id); // Exibe o ID no console
+ 
+             // Você pode usar a variável 'id' conforme necessário aqui
+         } else {
+             console.log('Nenhum registro encontrado para a data:', selectedDate2);
+         }
+     } catch (error) {
+         console.error('Erro ao acessar a API:', error);
+     }
 
 });
 
