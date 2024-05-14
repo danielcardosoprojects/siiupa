@@ -118,7 +118,7 @@ dateInput.addEventListener("change",  async function() {
          if (data.records && data.records.length > 0) {
              const id = data.records[0].id; // Pega o ID do primeiro registro
              console.log('ID obtido:', id); // Exibe o ID no console
- 
+             document.getElementById("id_cep").value = id;
              // Você pode usar a variável 'id' conforme necessário aqui
          } else {
              console.log('Nenhum registro encontrado para a data:', selectedDate2);
