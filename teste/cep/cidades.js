@@ -386,26 +386,29 @@ function criarJSON() {
     // Exibe o JSON no console (opcional)
     console.log(jsonString);
 
-    const url = 'https://siupa.com.br/siiupa/api/api.php/records/tb_cep';
+    const urlBase = 'https://siupa.com.br/siiupa/api/api.php/records/tb_cep';
 
-    const dadosParaInserir = jsonResult;
-
+    // Obter o ID do registro a partir de um input HTML.
+    const cepId = document.getElementById('id_cep').value;
+    const url = `${urlBase}/${cepId}`; // Adiciona o ID do CEP à URL para a atualização.
+    
+    const dadosParaAtualizar = jsonResult;
+    
     fetch(url, {
-        method: 'POST',
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify(dadosParaInserir),
+        body: JSON.stringify(dadosParaAtualizar),
     })
         .then(response => response.json())
         .then(data => {
-            console.log('Dados inseridos com sucesso:', data);
-            location.reload();
+            console.log('Dados atualizados com sucesso:', data);
+            //location.reload();
         })
         .catch(error => {
-            console.error('Erro ao inserir dados:', error);
+            console.error('Erro ao atualizar dados:', error);
         });
-
 
     // Retorne o JSON (opcional, dependendo do seu caso de uso)
     return jsonString;
