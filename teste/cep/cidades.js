@@ -479,6 +479,7 @@ function carregaHistorico() {
             dataAtual2.style.backgroundImage = `url('${newFormat}')`;
 
             data.records.forEach((dado) => {
+                console.log(dado.data, dado.cidades);
 
                 historico.innerHTML = historico.innerHTML + dado.data + "<br>";
 
