@@ -480,7 +480,9 @@ function carregaHistorico() {
 
             data.records.forEach((dado) => {
                 if (dado.cidades != 'null') {
-                    console.log(dado);
+                    console.log(dado.cidades);
+
+
                 }
 
                 historico.innerHTML = historico.innerHTML + dado.data + "<br>";
