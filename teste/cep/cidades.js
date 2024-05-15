@@ -480,6 +480,8 @@ function carregaHistorico() {
 
             data.records.forEach((dado) => {
                 if (dado.cidades === null) {
+                    
+                } else {
                     console.log(dado.cidades);
                 }
 
