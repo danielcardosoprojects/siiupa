@@ -491,7 +491,7 @@ function carregaHistorico() {
                     ultima_data++;
                     
                 } else {
-                    dado.ok = "";
+                    dado.ok = "🔴";
                 }
                 historico.innerHTML = historico.innerHTML + `<a href="#" class="sem_cidade" data-date="${dado.data}" onclick="preencherInput(this)">` + dado.data + "</a>" + dado.ok + "<br>";
 
