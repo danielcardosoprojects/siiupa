@@ -236,71 +236,21 @@
         const loading = document.querySelector('.loading');
         loading.style.display = 'none';
     }
-    const servidoresContainer = document.getElementById("servidoresContainer");
+    // Função para pegar o valor de um parâmetro específico da URL
+    function getQueryStringValue(key) {
+        return new URLSearchParams(window.location.search).get(key);
+    }
 
-    async function carregarServidores(linkApi) {
-        try {
-            const loading = document.querySelector('.loading');
-            showLoading();
-            const response = await axios.get(linkApi);
-
-
-            const servidores = response.data.results;
-            stopLoading();
-            servidores.forEach(servidor => {
-                const servidorElement = document.createElement("tr");
-                servidorElement.innerHTML = `
-                      
-                            <td>${servidor.nome}</td>
-                            <td>${servidor.matricula}</td>
-                            <td>${servidor.cargo_display}</td>
-                            <td><button onclick="selecionarServidor('${servidor.matricula}')">Selecionar</button></td>
-                    
-              
-                    `;
-                // <button onclick="selecionarServidor('${servidor.matricula}')">Selecionar</button>
-                servidoresContainer.appendChild(servidorElement);
-            });
-            
-        } catch (error) {
-            console.error("Erro ao carregar servidores:", error);
+    // Chamada da função e exibição do resultado
+    window.onload = function () {
+        var valorM = getQueryStringValue('m'); // Captura o valor do parâmetro 'm'
+        if (valorM === null) {
+            console.log('Parâmetro \'m\' não está presente na URL.');
+            document.getElementById('matriculaInput').value = '';
+        } else {
+            console.log('Valor de m:', valorM); // Exibe no console do navegador
+            document.getElementById('matriculaInput').value = valorM; // Exibe na página
         }
-    }
-    async function carregarServidores2(linkApi) {
-        try {
-            const response = await axios.get(linkApi);
-
-            const servidores = response.data.results;
-            console.log(servidores);
-
-            servidores.forEach(servidor => {
-                const servidorElement = document.createElement("tr");
-                servidorElement.innerHTML = `
-               
-                            <td>${servidor.nome}</td>
-                            <td>${servidor.matricula}</td>
-                            <td>${servidor.cargo_display}</td>
-                            <td><button id="selecionar" onclick="selecionarServidor('${servidor.matricula}');marcaButton(this)">Selecionar</button></td>
-                
-                    `;
-                servidoresContainer.appendChild(servidorElement);
-            });
-
-           
-        } catch (error) {
-            console.error("Erro ao carregar servidores:", error);
-        }
-    }
-    
-
-    function selecionarServidor(matricula, nomeServ) {
-        document.getElementById("matriculaInput").value = matricula;
-        document.getElementById("nomeServ").textContent = nomeServ;
-        document.getElementById("cardsContainer").innerHTML = '';
-        window.close();
-    }
-    function marcaButton(a){
-        a.style.backgroundColor = "green";
     }
 
         // Chamada para carregar os servidores temporários
