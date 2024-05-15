@@ -430,8 +430,8 @@ function criarJSON() {
         .then(response => response.json())
         .then(data => {
             console.log('Dados atualizados com sucesso:', data);
-            //location.reload();
-            avancarData();
+            location.reload();
+            
         })
         .catch(error => {
             console.error('Erro ao atualizar dados:', error);
@@ -483,6 +483,9 @@ function carregaHistorico() {
             
                 if(dado.cidades != null) {
                     dado.ok = "•";
+                    const input = document.getElementById('dateInput');
+                    input.value = dado.data;
+                    avancarData();
                 } else {
                     dado.ok = "";
                 }
@@ -501,6 +504,7 @@ function carregaHistorico() {
 }
 
 carregaHistorico();
+
 function avancarData() {
     // Encontra o elemento input pelo seu ID
     const input = document.getElementById('dateInput');
