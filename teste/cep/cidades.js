@@ -478,14 +478,18 @@ function carregaHistorico() {
             const dataAtual2 = document.getElementById("dataAtual");
             minhaDiv2.style.backgroundImage = `url('${newFormat}')`;
             dataAtual2.style.backgroundImage = `url('${newFormat}')`;
-            
+            let ultima_data = 0;
             data.records.forEach((dado) => {
             
                 if(dado.cidades != null) {
                     dado.ok = "•";
                     const input = document.getElementById('dateInput');
-                    input.value = dado.data;
+                    if(ultima_data == 0){
+                        input.value = dado.data;
                     avancarData();
+                    }
+                    ultima_data++;
+                    
                 } else {
                     dado.ok = "";
                 }
