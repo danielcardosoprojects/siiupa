@@ -445,7 +445,7 @@ function carregaHistorico() {
     const historico = document.getElementById("historico");
 
 
-    const url = 'https://siupa.com.br/siiupa/api/api.php/records/tb_cep/?filter=cidades,is,NULL&order=id,desc';
+    const url = 'https://siupa.com.br/siiupa/api/api.php/records/tb_cep/?order=id,desc';
 
 
     fetch(url, {
@@ -477,11 +477,15 @@ function carregaHistorico() {
             const dataAtual2 = document.getElementById("dataAtual");
             minhaDiv2.style.backgroundImage = `url('${newFormat}')`;
             dataAtual2.style.backgroundImage = `url('${newFormat}')`;
-            console.log(data.records);
+            
             data.records.forEach((dado) => {
-                
-
-                historico.innerHTML = historico.innerHTML + dado.data + "<br>";
+            
+                if(dado.cidades != null) {
+                    dado.ok = "•";
+                } else {
+                    dado.ok = "";
+                }
+                historico.innerHTML = historico.innerHTML + `<a href="#" class="sem_cidade" data-date="${dado.data}" onclick="preencherInput(this)">` + dado.data + "</a>" + dado.ok + "<br>";
 
 
             });
@@ -496,3 +500,24 @@ function carregaHistorico() {
 }
 
 carregaHistorico();
+
+// Função que é chamada ao clicar no link
+function preencherInput(elemento) {
+    // Pega o valor do atributo 'data-date' do link clicado
+    const dataValue = elemento.getAttribute('data-date');
+
+    // Encontra o elemento input pelo seu ID
+    const input = document.getElementById('dateInput');
+
+    // Altera o seu valor para o 'data-date' do link clicado
+    input.value = dataValue;
+
+    // Cria um novo evento 'change'
+    const event = new Event('change');
+
+    // Dispara o evento 'change' no input
+    input.dispatchEvent(event);
+
+    // Evitar o comportamento padrão do link
+    return false;
+}
