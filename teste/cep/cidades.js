@@ -431,6 +431,7 @@ function criarJSON() {
         .then(data => {
             console.log('Dados atualizados com sucesso:', data);
             //location.reload();
+            avancarData();
         })
         .catch(error => {
             console.error('Erro ao atualizar dados:', error);
@@ -500,6 +501,29 @@ function carregaHistorico() {
 }
 
 carregaHistorico();
+function avancarData() {
+    // Encontra o elemento input pelo seu ID
+    const input = document.getElementById('dateInput');
+
+    // Tenta converter o valor atual do input em uma data
+    const currentDate = new Date(input.value);
+
+    // Checa se a data é válida
+    if (!isNaN(currentDate.getTime())) {
+        // Adiciona um dia à data (1 dia = 24 * 60 * 60 * 1000 milissegundos)
+        currentDate.setDate(currentDate.getDate() + 1);
+
+        // Atualiza o valor do input para o novo valor da data
+        // O método toISOString() retorna uma string no formato ISO, mas vamos cortar o horário e timezone
+        input.value = currentDate.toISOString().split('T')[0];
+
+        // Dispara o evento 'change' para o input
+        const event = new Event('change');
+        input.dispatchEvent(event);
+    } else {
+        console.error('Data inválida');
+    }
+}
 
 // Função que é chamada ao clicar no link
 function preencherInput(elemento) {
