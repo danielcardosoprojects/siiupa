@@ -106,7 +106,7 @@ echo "<h2 class='tituloTiposAcionamentos'>$tituloTipoAcionamento</h2>";
                     $dataFim = $dataFim->format('d/m/Y');
                     echo "🏃<span class='tipo_afastamento'>".utf8_encode($resultadoAfastamento->afastamento)."</span>";
                     echo "<br>";
-                    echo "<span><a href='#'>$resultadoAfastamento->nomeAfastado - " . utf8_encode($resultadoAfastamento->tituloCargo) . " - $dataInicio a $dataFim</a></span>";
+                    echo "<span><a href='/siiupa/?setor=adm&sub=rh&subsub=atestado_exibe&idafastamento=$resultadoAfastamento->idAfastado'>$resultadoAfastamento->nomeAfastado - " . utf8_encode($resultadoAfastamento->tituloCargo) . " - $dataInicio a $dataFim</a></span>";
                 } ?>
 
 
