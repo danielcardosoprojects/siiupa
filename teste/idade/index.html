@@ -3,18 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Idades</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Jogo de Idades</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            padding-left:20px
+            border-radius: 10px;
+            text-align: center;
+            width: 300px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        input {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            margin-bottom: 10px;
+            width: 100%;
+            margin-right:20px;
+        }
+
+        button {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background: #feb47b;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #ff7e5f;
+        }
+
+        #confetti-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>Idades</h1>
+        <h1>Jogo de Idades</h1>
         <p id="question">Qual a idade de uma pessoa nascida em <span id="birth-date"></span>?</p>
         <input type="number" id="age-input" placeholder="Digite a idade" onkeypress="handleKeyPress(event)">
         <button onclick="checkAnswer()">Enviar</button>
         <p id="feedback"></p>
+        <p>Acertos Seguidos: <span id="streak-count">0</span></p>
+        <p>Maior Pontuação: <span id="high-score">0</span></p>
+        <p>Tempo Médio: <span id="average-time">0</span> segundos</p>
     </div>
-    <div id="confetti-container"></div>
-    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+    <script>
+        const usedDates = new Set();
+        let currentBirthDate;
+        let streakCount = 0;
+        let highScore = 0;
+        let totalTime = 0;
+        let attempts = 0;
+        let startTime;
+        const feedbackElement = document.getElementById("feedback");
+        const birthDateElement = document.getElementById("birth-date");
+        const streakCountElement = document.getElementById("streak-count");
+        const highScoreElement = document.getElementById("high-score");
+        const averageTimeElement = document.getElementById("average-time");
+
+        function getRandomBirthDate() {
+            let randomDate;
+            do {
+                const start = new Date(1904, 0, 1);
+                const end = new Date();
+                const randomTimestamp = start.getTime() + Math.random() * (end.getTime() - start.getTime());
+                randomDate = new Date(randomTimestamp);
+            } while (usedDates.has(randomDate.toDateString()));
+            usedDates.add(randomDate.toDateString());
+            return randomDate;
+        }
+
+        function calculateAge(birthDate, currentDate) {
+            let age = currentDate.getFullYear() - birthDate.getFullYear();
+            const m = currentDate.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && currentDate.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            return age;
+        }
+
+        function displayQuestion() {
+            currentBirthDate = getRandomBirthDate();
+            birthDateElement.textContent = currentBirthDate.toLocaleDateString('pt-BR');
+            feedbackElement.textContent = "";
+            document.getElementById("age-input").focus();
+            startTime = new Date();
+        }
+
+        function checkAnswer() {
+            const userAnswer = parseInt(document.getElementById("age-input").value);
+            const correctAnswer = calculateAge(currentBirthDate, new Date(2024, 5, 9));
+            const endTime = new Date();
+            const responseTime = (endTime - startTime) / 1000;
+            totalTime += responseTime;
+            attempts++;
+
+            if (userAnswer === correctAnswer) {
+                feedbackElement.textContent = "Correto!";
+                feedbackElement.style.color = "lime";
+                feedbackElement.classList.add('animate__animated', 'animate__bounce');
+                streakCount++;
+                if (streakCount > highScore) {
+                    highScore = streakCount;
+                    highScoreElement.textContent = highScore;
+                }
+                streakCountElement.textContent = streakCount;
+                averageTimeElement.textContent = (totalTime / attempts).toFixed(2);
+                triggerConfetti();
+                setTimeout(nextQuestion, 2000);
+            } else {
+                feedbackElement.textContent = `Na verdade, a pessoa teria ${correctAnswer} anos em 09/06/2024.`;
+                feedbackElement.style.color = "red";
+                streakCount = 0;
+                streakCountElement.textContent = streakCount;
+                totalTime = 0;
+                attempts = 0;
+            }
+            document.getElementById("age-input").value = "";
+        }
+
+        function nextQuestion() {
+            displayQuestion();
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === "Enter") {
+                checkAnswer();
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", displayQuestion);
+
+        function triggerConfetti() {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }
+    </script>
 </body>
 </html>
