@@ -80,7 +80,7 @@
             <option value="2021">2021</option>
         </select>
         <input type="text" id="matriculaInput" placeholder="Matrícula">
-        <button id="openServidoresPage">Selecionar Servidor</button>
+       
         <button id="searchButton">Buscar</button>
         <div class="loading">
             <img src="loading.gif" alt="Carregando...">
@@ -113,9 +113,7 @@
             }
         });
 
-        document.getElementById("openServidoresPage").addEventListener("click", () => {
-            window.open("lista_servidores2.html", "_blank", "width=600,height=400");
-        });
+
 
         document.getElementById("searchButton").addEventListener("click", async () => {
             document.getElementById("cardsContainer").innerHTML = "";
