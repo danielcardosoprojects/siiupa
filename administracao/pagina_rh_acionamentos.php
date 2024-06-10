@@ -19,7 +19,7 @@ $rTAcions = $tiposAcionamentos->consulta($sqlTiposAcionamentos);
 echo "<div class='tiposAcionamentos'>";
 echo "<a href='/siiupa/?setor=adm&sub=rh&subsub=acionamentos' class='btn btn-outline-dark'>Tudo</a>";
 foreach($rTAcions as $rTAcion){
-    $acionamento = utf8_encode($rTAcion->acionamento);
+    $acionamento = $rTAcion->acionamento;
     echo "<a href='/siiupa/?setor=adm&sub=rh&subsub=acionamentos&tipoAcionamento=$rTAcion->id' class='btn btn-outline-dark'>$acionamento</a>";
     $titulosAcionamentos[$rTAcion->id] = $acionamento;
 
@@ -65,7 +65,7 @@ echo "<h2 class='tituloTiposAcionamentos'>$tituloTipoAcionamento</h2>";
         <div class="box_acionamentos" id="box_<?php echo $resultado_acionamento->id; ?>" data-id="<?php echo $resultado_acionamento->id; ?>" name='<?php echo $resultado_acionamento->nome ?>'>
             <span class="acionamentoEtiqueta">📣 Acionamento:</span>
             <div class="nome">
-                <h5>👤 <a href="/siiupa/?setor=adm&sub=rh&subsub=acionamento_exibe&id=<?=$resultado_acionamento->id;?>"><?php echo utf8_encode($resultado_acionamento->nome); ?></a><span class="ui-icon ui-icon-copy copiarAcionamento" data-id="<?php echo $resultado_acionamento->id; ?>" data-text=""></span></h5>
+                <h5>👤 <a href="/siiupa/?setor=adm&sub=rh&subsub=acionamento_exibe&id=<?=$resultado_acionamento->id;?>"><?php echo $resultado_acionamento->nome; ?></a><span class="ui-icon ui-icon-copy copiarAcionamento" data-id="<?php echo $resultado_acionamento->id; ?>" data-text=""></span></h5>
             </div>
             <div class="linha_dados">
                 <span class="data">📅 <?php echo $data_acionamento->format('d/m/Y'); ?></span>
@@ -91,7 +91,7 @@ echo "<h2 class='tituloTiposAcionamentos'>$tituloTipoAcionamento</h2>";
                 <span class="valor">💰 <?php echo $resultado_acionamento->valor; ?>,00</span>
             </div>
             <div class="motivo">
-                ➡️ Motivo:<span class="tipo_afastamento"><?php echo utf8_encode($resultado_acionamento->acionamento); ?></span>
+                ➡️ Motivo:<span class="tipo_afastamento"><?php echo $resultado_acionamento->acionamento; ?></span>
                 <?php
                 if ($resultado_acionamento->fk_afastamento != 0) {
                     $consulta_afastamento = new BD;
@@ -104,15 +104,15 @@ echo "<h2 class='tituloTiposAcionamentos'>$tituloTipoAcionamento</h2>";
                     $dataFim = new DateTime($resultadoAfastamento->data_fim);
                     $dataInicio = $dataInicio->format('d/m/Y');
                     $dataFim = $dataFim->format('d/m/Y');
-                    echo "🏃<span class='tipo_afastamento'>".utf8_encode($resultadoAfastamento->afastamento)."</span>";
+                    echo "🏃<span class='tipo_afastamento'>".$resultadoAfastamento->afastamento."</span>";
                     echo "<br>";
-                    echo "<span><a href='#'>$resultadoAfastamento->nomeAfastado - " . utf8_encode($resultadoAfastamento->tituloCargo) . " - $dataInicio a $dataFim</a></span>";
+                    echo "<span><a href='/siiupa/?setor=adm&sub=rh&subsub=atestado_exibe&idafastamento=$resultadoAfastamento->idAfastado'>$resultadoAfastamento->nomeAfastado - " . $resultadoAfastamento->tituloCargo . " - $dataInicio a $dataFim</a></span>";
                 } ?>
 
 
             </div>
-            <div class="obs_acionamento">📝 <?php echo utf8_encode($resultado_acionamento->acionamento_obs); ?></div>
-            <button class="editaAcionamento ui-button ui-widget ui-corner-all" data-idescolhido="<?php echo $resultado_acionamento->id; ?>" data-idfuncionario="<?php echo $resultado_acionamento->fk_funcionario; ?>" data-nome="<?php echo $resultado_acionamento->nome; ?>" data-cargoescolhidoId="<?php echo $resultado_acionamento->cargoId; ?>" data-cargoescolhido="<?php echo $resultado_acionamento->funcao_upa; ?>" data-acionamentosId="<?php echo $resultado_acionamento->acionamentosId; ?>" data-acionamentosTxt="<?php echo utf8_encode($resultado_acionamento->acionamento); ?>" data-afastamentoId="<?php echo $resultado_acionamento->fk_afastamento; ?>" data-dataAcionamento="<?php echo $data_acionamento->format('Y-m-d'); ?>" data-ch="<?php echo $resultado_acionamento->qtd_horas; ?>" data-turno="<?php echo $resultado_acionamento->turno; ?>" data-acionamentoobs="<?php echo utf8_encode($resultado_acionamento->acionamento_obs); ?>">Editar</button>
+            <div class="obs_acionamento">📝 <?php echo $resultado_acionamento->acionamento_obs; ?></div>
+            <button class="editaAcionamento ui-button ui-widget ui-corner-all" data-idescolhido="<?php echo $resultado_acionamento->id; ?>" data-idfuncionario="<?php echo $resultado_acionamento->fk_funcionario; ?>" data-nome="<?php echo $resultado_acionamento->nome; ?>" data-cargoescolhidoId="<?php echo $resultado_acionamento->cargoId; ?>" data-cargoescolhido="<?php echo $resultado_acionamento->funcao_upa; ?>" data-acionamentosId="<?php echo $resultado_acionamento->acionamentosId; ?>" data-acionamentosTxt="<?php echo $resultado_acionamento->acionamento; ?>" data-afastamentoId="<?php echo $resultado_acionamento->fk_afastamento; ?>" data-dataAcionamento="<?php echo $data_acionamento->format('Y-m-d'); ?>" data-ch="<?php echo $resultado_acionamento->qtd_horas; ?>" data-turno="<?php echo $resultado_acionamento->turno; ?>" data-acionamentoobs="<?php echo $resultado_acionamento->acionamento_obs; ?>">Editar</button>
         </div>
 
 <?php } ?>

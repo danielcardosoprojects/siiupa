@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Idades</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Idades</h1>
+        <p id="question">Qual a idade de uma pessoa nascida em <span id="birth-date"></span>?</p>
+        <input type="number" id="age-input" placeholder="Digite a idade" onkeypress="handleKeyPress(event)">
+        <button onclick="checkAnswer()">Enviar</button>
+        <p id="feedback"></p>
+    </div>
+    <div id="confetti-container"></div>
+    <script src="script.js"></script>
+</body>
+</html>

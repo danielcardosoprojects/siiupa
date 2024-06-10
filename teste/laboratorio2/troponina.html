@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exames de Laboratório</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        textarea {
+            width: 100%;
+            height: 200px;
+            margin-bottom: 20px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Exames de Laboratório</h1>
+    <textarea id="inputData" placeholder="Copie e cole os dados do PDF aqui..."></textarea>
+    <button onclick="processData()">Processar Dados</button>
+    <table id="resultsTable">
+        <thead>
+            <tr>
+                <th>Procedência</th>
+                <th>Cliente</th>
+                <th>Atendimento</th>
+                <th>Exames</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        function processData() {
+            const inputData = document.getElementById('inputData').value;
+            const tableBody = document.querySelector('#resultsTable tbody');
+            tableBody.innerHTML = '';
+
+            const lines = inputData.split('\n');
+            lines.forEach(line => {
+                const columns = line.split(/\s{2,}/);
+                if (columns.length === 4) {
+                    const row = document.createElement('tr');
+                    columns.forEach(column => {
+                        const cell = document.createElement('td');
+                        cell.textContent = column.trim();
+                        row.appendChild(cell);
+                    });
+                    tableBody.appendChild(row);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
