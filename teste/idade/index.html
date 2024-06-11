@@ -33,16 +33,11 @@
         }
 
         input {
-            padding: 10px;
-            border-radius: 5px;
-            border: none;
-            margin-bottom: 10px;
-            width: 100%;
             display: none;
         }
 
         .custom-keyboard {
-            display: none;
+            display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
             margin-top: 10px;
@@ -223,19 +218,10 @@
             ageInputElement.value = "";
         }
 
-        function detectMobile() {
-            return /Mobi|Android/i.test(navigator.userAgent);
-        }
-
         document.addEventListener("DOMContentLoaded", () => {
             displayQuestion();
-            if (detectMobile()) {
-                ageInputElement.style.display = "none";
-                customKeyboard.style.display = "grid";
-            } else {
-                ageInputElement.style.display = "block";
-                customKeyboard.style.display = "none";
-            }
+            ageInputElement.style.display = "block";
+            customKeyboard.style.display = "grid";
         });
 
         function triggerConfetti() {
