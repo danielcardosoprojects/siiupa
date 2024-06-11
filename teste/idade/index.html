@@ -20,7 +20,6 @@
         .container {
             background: rgba(0, 0, 0, 0.7);
             padding: 20px;
-            padding-left:20px
             border-radius: 10px;
             text-align: center;
             width: 300px;
@@ -38,7 +37,6 @@
             border: none;
             margin-bottom: 10px;
             width: 100%;
-            margin-right:20px;
         }
 
         button {
@@ -83,12 +81,12 @@
     <div class="container">
         <h1>Jogo de Idades</h1>
         <p id="question">Qual a idade de uma pessoa nascida em <span id="birth-date"></span>?</p>
-        <input type="number" id="age-input" placeholder="Digite a idade" onkeypress="handleKeyPress(event)">
+        <input type="tel" inputmode="numeric" id="age-input" placeholder="Digite a idade" onkeypress="handleKeyPress(event)">
         <button onclick="checkAnswer()">Enviar</button>
         <p id="feedback"></p>
         <p>Acertos Seguidos: <span id="streak-count">0</span></p>
-        <p>Maior Pontuação: <span id="high-score">0</span></p>
-        <p>Tempo Médio: <span id="average-time">0</span> segundos</p>
+        <p>Maior Pontuação: <span id="high-score">0</span> | Tempo Médio: <span id="high-score-time">0</span>s</p>
+        <p>Tempo Médio de Resposta: <span id="average-time">0</span>s</p>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
     <script>
@@ -96,19 +94,20 @@
         let currentBirthDate;
         let streakCount = 0;
         let highScore = 0;
+        let highScoreTime = 0;
         let totalTime = 0;
-        let attempts = 0;
         let startTime;
         const feedbackElement = document.getElementById("feedback");
         const birthDateElement = document.getElementById("birth-date");
         const streakCountElement = document.getElementById("streak-count");
         const highScoreElement = document.getElementById("high-score");
+        const highScoreTimeElement = document.getElementById("high-score-time");
         const averageTimeElement = document.getElementById("average-time");
 
         function getRandomBirthDate() {
             let randomDate;
             do {
-                const start = new Date(1904, 0, 1);
+                const start = new Date(1900, 0, 1);
                 const end = new Date();
                 const randomTimestamp = start.getTime() + Math.random() * (end.getTime() - start.getTime());
                 randomDate = new Date(randomTimestamp);
@@ -137,31 +136,31 @@
         function checkAnswer() {
             const userAnswer = parseInt(document.getElementById("age-input").value);
             const correctAnswer = calculateAge(currentBirthDate, new Date(2024, 5, 9));
-            const endTime = new Date();
-            const responseTime = (endTime - startTime) / 1000;
+            const responseTime = (new Date() - startTime) / 1000; // in seconds
             totalTime += responseTime;
-            attempts++;
 
             if (userAnswer === correctAnswer) {
                 feedbackElement.textContent = "Correto!";
                 feedbackElement.style.color = "lime";
                 feedbackElement.classList.add('animate__animated', 'animate__bounce');
                 streakCount++;
+                const averageTime = (totalTime / streakCount).toFixed(2);
+                averageTimeElement.textContent = averageTime;
                 if (streakCount > highScore) {
                     highScore = streakCount;
+                    highScoreTime = averageTime;
                     highScoreElement.textContent = highScore;
+                    highScoreTimeElement.textContent = highScoreTime;
                 }
                 streakCountElement.textContent = streakCount;
-                averageTimeElement.textContent = (totalTime / attempts).toFixed(2);
                 triggerConfetti();
                 setTimeout(nextQuestion, 2000);
             } else {
                 feedbackElement.textContent = `Na verdade, a pessoa teria ${correctAnswer} anos em 09/06/2024.`;
                 feedbackElement.style.color = "red";
                 streakCount = 0;
-                streakCountElement.textContent = streakCount;
                 totalTime = 0;
-                attempts = 0;
+                streakCountElement.textContent = streakCount;
             }
             document.getElementById("age-input").value = "";
         }
