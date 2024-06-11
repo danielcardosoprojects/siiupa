@@ -15,6 +15,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            overflow: hidden;
         }
 
         .container {
@@ -37,6 +38,29 @@
             border: none;
             margin-bottom: 10px;
             width: 100%;
+            display: none;
+        }
+
+        .custom-keyboard {
+            display: none;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .custom-keyboard button {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background: #feb47b;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-size: 1.5em;
+        }
+
+        .custom-keyboard button:hover {
+            background: #ff7e5f;
         }
 
         button {
@@ -82,6 +106,20 @@
         <h1>Jogo de Idades</h1>
         <p id="question">Qual a idade de uma pessoa nascida em <span id="birth-date"></span>?</p>
         <input type="tel" inputmode="numeric" id="age-input" placeholder="Digite a idade" onkeypress="handleKeyPress(event)">
+        <div class="custom-keyboard" id="custom-keyboard">
+            <button onclick="appendNumber(1)">1</button>
+            <button onclick="appendNumber(2)">2</button>
+            <button onclick="appendNumber(3)">3</button>
+            <button onclick="appendNumber(4)">4</button>
+            <button onclick="appendNumber(5)">5</button>
+            <button onclick="appendNumber(6)">6</button>
+            <button onclick="appendNumber(7)">7</button>
+            <button onclick="appendNumber(8)">8</button>
+            <button onclick="appendNumber(9)">9</button>
+            <button onclick="clearInput()">C</button>
+            <button onclick="appendNumber(0)">0</button>
+            <button onclick="checkAnswer()">OK</button>
+        </div>
         <button onclick="checkAnswer()">Enviar</button>
         <p id="feedback"></p>
         <p>Acertos Seguidos: <span id="streak-count">0</span></p>
@@ -103,11 +141,13 @@
         const highScoreElement = document.getElementById("high-score");
         const highScoreTimeElement = document.getElementById("high-score-time");
         const averageTimeElement = document.getElementById("average-time");
+        const ageInputElement = document.getElementById("age-input");
+        const customKeyboard = document.getElementById("custom-keyboard");
 
         function getRandomBirthDate() {
             let randomDate;
             do {
-                const start = new Date(1900, 0, 1);
+                const start = new Date(1904, 0, 1);
                 const end = new Date();
                 const randomTimestamp = start.getTime() + Math.random() * (end.getTime() - start.getTime());
                 randomDate = new Date(randomTimestamp);
@@ -129,12 +169,12 @@
             currentBirthDate = getRandomBirthDate();
             birthDateElement.textContent = currentBirthDate.toLocaleDateString('pt-BR');
             feedbackElement.textContent = "";
-            document.getElementById("age-input").focus();
+            ageInputElement.focus();
             startTime = new Date();
         }
 
         function checkAnswer() {
-            const userAnswer = parseInt(document.getElementById("age-input").value);
+            const userAnswer = parseInt(ageInputElement.value);
             const correctAnswer = calculateAge(currentBirthDate, new Date(2024, 5, 9));
             const responseTime = (new Date() - startTime) / 1000; // in seconds
             totalTime += responseTime;
@@ -162,7 +202,7 @@
                 totalTime = 0;
                 streakCountElement.textContent = streakCount;
             }
-            document.getElementById("age-input").value = "";
+            ageInputElement.value = "";
         }
 
         function nextQuestion() {
@@ -175,7 +215,28 @@
             }
         }
 
-        document.addEventListener("DOMContentLoaded", displayQuestion);
+        function appendNumber(num) {
+            ageInputElement.value += num;
+        }
+
+        function clearInput() {
+            ageInputElement.value = "";
+        }
+
+        function detectMobile() {
+            return /Mobi|Android/i.test(navigator.userAgent);
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            displayQuestion();
+            if (detectMobile()) {
+                ageInputElement.style.display = "none";
+                customKeyboard.style.display = "grid";
+            } else {
+                ageInputElement.style.display = "block";
+                customKeyboard.style.display = "none";
+            }
+        });
 
         function triggerConfetti() {
             confetti({
