@@ -223,6 +223,15 @@
             ageInputElement.style.display = "block";
             customKeyboard.style.display = "grid";
         });
+        document.getElementById("age-input").addEventListener("input", function() {
+    const userAnswer = parseInt(this.value);
+    const correctAnswer = calculateAge(currentBirthDate, new Date(2024, 5, 9));
+
+    if (userAnswer === correctAnswer) {
+        checkAnswer();
+    }
+});
+
 
         function triggerConfetti() {
             confetti({
