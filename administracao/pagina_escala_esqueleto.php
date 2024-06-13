@@ -528,6 +528,27 @@
 
         });
     </script>
+     <script>
+        $(document).ready(function() {
+            // Initialize jqte
+            $('.jqte-test').jqte();
+
+            // Add custom button
+            var button = $('<div>', {
+                class: 'jqte_tool jqte_tool_update',
+                title: 'Inserir Data e Hora Atual',
+                click: function() {
+                    var editor = $(this).closest('.jqte').find('.jqte_editor');
+                    var currentDateTime = new Date().toLocaleString();
+                    var textToInsert = 'Atualizado em: ' + currentDateTime;
+                    document.execCommand('insertText', false, textToInsert);
+                }
+            });
+
+            // Append the custom button to the toolbar
+            $('.jqte .jqte_toolbar').append(button);
+        });
+    </script>
 
 </head>
 

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabela de Turnos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+
+<h2>Tabela de Turnos</h2>
+<textarea id="inputData" rows="10" cols="50"></textarea>
+<button onclick="generateTable()">Gerar Tabela</button>
+<button onclick="exportTableToExcel()">Exportar para Excel</button>
+
+<table id="shiftTable">
+    <thead>
+        <tr>
+            <th>Nomes</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<script>
+function generateTable() {
+    const inputData = document.getElementById('inputData').value.trim().split('\n');
+    const days = [];
+    const employees = {};
+
+    let currentDay = '';
+
+    inputData.forEach(line => {
+        if (line.match(/^\d+$/)) {
+            currentDay = line;
+            if (!days.includes(currentDay)) {
+                days.push(currentDay);
+            }
+        } else {
+            const match = line.match(/(.+?) \((.+?)\)/);
+            if (match) {
+                const name = match[1].trim();
+                const shift = match[2].replace(/[0-9]/g, '').trim();
+
+                if (!employees[name]) {
+                    employees[name] = {};
+                }
+                employees[name][currentDay] = shift;
+            }
+        }
+    });
+
+    const table = document.getElementById('shiftTable');
+    const thead = table.querySelector('thead tr');
+    thead.innerHTML = '<th>Nomes</th>';
+
+    days.forEach(day => {
+        const th = document.createElement('th');
+        th.textContent = day;
+        thead.appendChild(th);
+    });
+
+    const tbody = table.querySelector('tbody');
+    tbody.innerHTML = '';
+
+    for (const [name, shifts] of Object.entries(employees)) {
+        const tr = document.createElement('tr');
+        const tdName = document.createElement('td');
+        tdName.textContent = name;
+        tr.appendChild(tdName);
+
+        days.forEach(day => {
+            const td = document.createElement('td');
+            td.textContent = shifts[day] || '';
+            tr.appendChild(td);
+        });
+
+        tbody.appendChild(tr);
+    }
+}
+
+function exportTableToExcel() {
+    const table = document.getElementById('shiftTable');
+    const wb = XLSX.utils.table_to_book(table, { sheet: "Sheet1" });
+    XLSX.writeFile(wb, 'Tabela_de_Turnos.xlsx');
+}
+</script>
+
+</body>
+</html>
