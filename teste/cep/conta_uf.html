@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabela de UFs do Brasil</title>
+    <style>
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Sigla</th>
+                <th>Sigla</th>
+                <th>Sigla</th>
+                <th>Sigla</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><button onclick="increment(this)">AC</button></td>
+                <td><button onclick="increment(this)">AL</button></td>
+                <td><button onclick="increment(this)">AM</button></td>
+                <td><button onclick="increment(this)">AP</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="increment(this)">BA</button></td>
+                <td><button onclick="increment(this)">CE</button></td>
+                <td><button onclick="increment(this)">DF</button></td>
+                <td><button onclick="increment(this)">ES</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="increment(this)">GO</button></td>
+                <td><button onclick="increment(this)">MA</button></td>
+                <td><button onclick="increment(this)">MG</button></td>
+                <td><button onclick="increment(this)">MS</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="increment(this)">MT</button></td>
+                <td><button onclick="increment(this)">PA</button></td>
+                <td><button onclick="increment(this)">PB</button></td>
+                <td><button onclick="increment(this)">PE</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="increment(this)">PI</button></td>
+                <td><button onclick="increment(this)">PR</button></td>
+                <td><button onclick="increment(this)">RJ</button></td>
+                <td><button onclick="increment(this)">RN</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="increment(this)">RO</button></td>
+                <td><button onclick="increment(this)">RR</button></td>
+                <td><button onclick="increment(this)">RS</button></td>
+                <td><button onclick="increment(this)">SC</button></td>
+            </tr>
+            <tr>
+                <td><button onclick="increment(this)">SE</button></td>
+                <td><button onclick="increment(this)">SP</button></td>
+                <td><button onclick="increment(this)">TO</button></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        function increment(button) {
+            let count = parseInt(button.innerText.match(/\d+/)) || 0;
+            count++;
+            button.innerText = button.innerText.replace(/\d*/, count);
+        }
+    </script>
+</body>
+</html>

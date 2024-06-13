@@ -1,20 +1,258 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Idades</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Jogo de Idades</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 300px;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        input {
+            display: none;
+        }
+
+        .custom-keyboard {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .custom-keyboard button {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background: #feb47b;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-size: 1.5em;
+        }
+
+        .custom-keyboard button:hover {
+            background: #ff7e5f;
+        }
+
+        button {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background: #feb47b;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #ff7e5f;
+        }
+
+        #confetti-container {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
 </head>
+
 <body>
     <div class="container">
-        <h1>Idades</h1>
+        <h1>Jogo de Idades</h1>
         <p id="question">Qual a idade de uma pessoa nascida em <span id="birth-date"></span>?</p>
-        <input type="number" id="age-input" placeholder="Digite a idade" onkeypress="handleKeyPress(event)">
-        <button onclick="checkAnswer()">Enviar</button>
+        <input type="tel" inputmode="numeric" id="age-input" placeholder="Digite a idade"
+            onkeypress="handleKeyPress(event)">
+        <div class="custom-keyboard" id="custom-keyboard">
+            <button onclick="appendNumber(1)">1</button>
+            <button onclick="appendNumber(2)">2</button>
+            <button onclick="appendNumber(3)">3</button>
+            <button onclick="appendNumber(4)">4</button>
+            <button onclick="appendNumber(5)">5</button>
+            <button onclick="appendNumber(6)">6</button>
+            <button onclick="appendNumber(7)">7</button>
+            <button onclick="appendNumber(8)">8</button>
+            <button onclick="appendNumber(9)">9</button>
+            <button onclick="clearInput()">C</button>
+            <button onclick="appendNumber(0)">0</button>
+            <button onclick="checkAnswer()">OK</button>
+        </div>
+        <!-- <button onclick="checkAnswer()">Enviar</button> -->
         <p id="feedback"></p>
+        <p>Acertos Seguidos: <span id="streak-count">0</span></p>
+        <p>Maior Pontuação: <span id="high-score">0</span> | Tempo Médio: <span id="high-score-time">0</span>s</p>
+        <p>Tempo Médio de Resposta: <span id="average-time">0</span>s</p>
     </div>
-    <div id="confetti-container"></div>
-    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+    <script>
+        const usedDates = new Set();
+        let currentBirthDate;
+        let streakCount = 0;
+        let highScore = 0;
+        let highScoreTime = 0;
+        let totalTime = 0;
+        let startTime;
+        const feedbackElement = document.getElementById("feedback");
+        const birthDateElement = document.getElementById("birth-date");
+        const streakCountElement = document.getElementById("streak-count");
+        const highScoreElement = document.getElementById("high-score");
+        const highScoreTimeElement = document.getElementById("high-score-time");
+        const averageTimeElement = document.getElementById("average-time");
+        const ageInputElement = document.getElementById("age-input");
+        const customKeyboard = document.getElementById("custom-keyboard");
+
+        function getRandomBirthDate() {
+            let randomDate;
+            do {
+                const start = new Date(1904, 0, 1);
+                const end = new Date();
+                const randomTimestamp = start.getTime() + Math.random() * (end.getTime() - start.getTime());
+                randomDate = new Date(randomTimestamp);
+            } while (usedDates.has(randomDate.toDateString()));
+            usedDates.add(randomDate.toDateString());
+            return randomDate;
+        }
+
+        function calculateAge(birthDate, currentDate) {
+            let age = currentDate.getFullYear() - birthDate.getFullYear();
+            const m = currentDate.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && currentDate.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            return age;
+        }
+
+        function displayQuestion() {
+            currentBirthDate = getRandomBirthDate();
+            birthDateElement.textContent = currentBirthDate.toLocaleDateString('pt-BR');
+            feedbackElement.textContent = "";
+            ageInputElement.focus();
+            startTime = new Date();
+        }
+
+        function checkAnswer() {
+            const userAnswer = parseInt(ageInputElement.value);
+            const correctAnswer = calculateAge(currentBirthDate, new Date(2024, 5, 9));
+            const responseTime = (new Date() - startTime) / 1000; // in seconds
+            totalTime += responseTime;
+
+            if (userAnswer === correctAnswer) {
+                feedbackElement.textContent = "Correto!";
+                feedbackElement.style.color = "lime";
+                feedbackElement.classList.add('animate__animated', 'animate__bounce');
+                streakCount++;
+                const averageTime = (totalTime / streakCount).toFixed(2);
+                averageTimeElement.textContent = averageTime;
+                if (streakCount > highScore) {
+                    highScore = streakCount;
+                    highScoreTime = averageTime;
+                    highScoreElement.textContent = highScore;
+                    highScoreTimeElement.textContent = highScoreTime;
+                }
+                streakCountElement.textContent = streakCount;
+                triggerConfetti();
+                setTimeout(nextQuestion, 2000);
+            } else {
+                feedbackElement.textContent = `Na verdade, a pessoa teria ${correctAnswer} anos em 09/06/2024.`;
+                feedbackElement.style.color = "red";
+                streakCount = 0;
+                totalTime = 0;
+                streakCountElement.textContent = streakCount;
+            }
+            ageInputElement.value = "";
+        }
+
+        function nextQuestion() {
+            displayQuestion();
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === "Enter") {
+                checkAnswer();
+            }
+        }
+
+        function appendNumber(num) {
+            ageInputElement.value += num;
+            const userAnswer = parseInt(ageInputElement.value);
+            const correctAnswer = calculateAge(currentBirthDate, new Date(2024, 5, 9));
+
+            if (userAnswer === correctAnswer) {
+                checkAnswer();
+            }
+
+
+        }
+
+        function clearInput() {
+            ageInputElement.value = "";
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            displayQuestion();
+            ageInputElement.style.display = "block";
+            customKeyboard.style.display = "grid";
+        });
+        document.getElementById("age-input").addEventListener("input", function () {
+            const userAnswer = parseInt(this.value);
+            const correctAnswer = calculateAge(currentBirthDate, new Date(2024, 5, 9));
+
+            if (userAnswer === correctAnswer) {
+                checkAnswer();
+            }
+        });
+
+
+        function triggerConfetti() {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+        }
+    </script>
 </body>
+
 </html>
