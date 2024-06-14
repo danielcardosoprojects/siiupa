@@ -2,10 +2,11 @@
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_FILES['file']) && $_FILES['file']['error'] == UPLOAD_ERR_OK) {
         $uploadDir = 'exames/';
-        $uploadFile = $uploadDir . basename($_FILES['file']['name']);
+        $photoName = basename($_POST['name']);
+        $fileType = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
+        $uploadFile = $uploadDir . $photoName . '.' . $fileType;
 
         // Verifica se o arquivo é uma imagem
-        $fileType = pathinfo($uploadFile, PATHINFO_EXTENSION);
         $allowedTypes = array('jpg', 'jpeg', 'png', 'gif');
 
         if (!in_array(strtolower($fileType), $allowedTypes)) {
