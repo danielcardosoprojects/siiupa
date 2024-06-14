@@ -22,10 +22,6 @@
                         <div class="form-group">
                             <input type="text" class="form-control" id="photoName" placeholder="Nome da Foto" required>
                         </div>
-                        <div class="form-group form-check">
-                            <input type="checkbox" class="form-check-input" id="consentCheck" required>
-                            <label class="form-check-label" for="consentCheck">Eu tenho permissão para enviar esta foto</label>
-                        </div>
                         <button type="submit" class="btn btn-success btn-block">Upload</button>
                     </form>
                     <p id="statusMessage" class="mt-3 text-center"></p>
@@ -48,7 +44,6 @@
         event.preventDefault();
         const fileInput = document.getElementById('fileInput');
         const photoName = document.getElementById('photoName').value;
-        const consentCheck = document.getElementById('consentCheck').checked;
 
         if (!fileInput.files.length) {
             document.getElementById('statusMessage').textContent = 'Por favor, selecione uma foto.';
@@ -69,17 +64,14 @@
             return;
         }
 
-        if (!consentCheck) {
-            document.getElementById('statusMessage').textContent = 'Você deve confirmar que tem permissão para enviar esta foto.';
-            return;
-        }
-
         const formData = new FormData();
         formData.append('file', file);
         formData.append('name', photoName);
 
-        // Simular requisição à API
-       
+        // Simular upload (apenas mostra a mensagem de sucesso sem realmente enviar)
+        document.getElementById('statusMessage').textContent = 'Upload realizado com sucesso!';
+        document.getElementById('statusMessage').classList.remove('text-danger');
+        document.getElementById('statusMessage').classList.add('text-success');
     });
 </script>
 
