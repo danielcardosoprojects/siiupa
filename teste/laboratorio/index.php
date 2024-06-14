@@ -71,6 +71,10 @@ $recentImages = listRecentImages('exames/');
                     </form>
                     <p id="statusMessage" class="mt-3 text-center"></p>
 
+                    <div class="progress mt-3" style="height: 25px;">
+                        <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+
                     <h3 class="mt-5">Imagens Recentes</h3>
                     <ul class="list-group">
                         <?php foreach ($recentImages as $image): ?>
@@ -122,7 +126,16 @@ $recentImages = listRecentImages('exames/');
         formData.append('file', file);
         formData.append('name', photoName);
 
-        axios.post('index.php', formData)
+        const config = {
+            onUploadProgress: function(progressEvent) {
+                const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+                const progressBar = document.getElementById('progressBar');
+                progressBar.style.width = percentCompleted + '%';
+                progressBar.setAttribute('aria-valuenow', percentCompleted);
+            }
+        };
+
+        axios.post('index.php', formData, config)
             .then(response => {
                 document.getElementById('statusMessage').textContent = response.data;
                 if (response.data.includes('sucesso')) {
