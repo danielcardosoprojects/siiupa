@@ -79,18 +79,7 @@
         formData.append('name', photoName);
 
         // Simular requisição à API
-        axios.post('https://api.exemplo.com/upload', formData)
-            .then(response => {
-                document.getElementById('statusMessage').textContent = 'Upload realizado com sucesso!';
-                document.getElementById('statusMessage').classList.remove('text-danger');
-                document.getElementById('statusMessage').classList.add('text-success');
-            })
-            .catch(error => {
-                console.error('Erro ao realizar upload:', error);
-                document.getElementById('statusMessage').textContent = `Erro ao realizar upload: ${error.message}`;
-                document.getElementById('statusMessage').classList.remove('text-success');
-                document.getElementById('statusMessage').classList.add('text-danger');
-            });
+       
     });
 </script>
 
