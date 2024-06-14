@@ -14,13 +14,13 @@
             <div class="card">
                 <div class="card-body">
                     <h2 class="card-title text-center">Upload de Foto</h2>
-                    <form id="uploadForm">
+                    <form id="uploadForm" action="upload.php" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="fileInput" class="btn btn-primary btn-block">Escolher Foto</label>
-                            <input type="file" class="form-control-file" id="fileInput" accept="image/*" capture="environment" required hidden>
+                            <input type="file" class="form-control-file" id="fileInput" name="file" accept="image/*" capture="environment" required hidden>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control" id="photoName" placeholder="Nome da Foto" required>
+                            <input type="text" class="form-control" id="photoName" placeholder="Nome da Foto" name="name" required>
                         </div>
                         <button type="submit" class="btn btn-success btn-block">Upload</button>
                     </form>
@@ -68,10 +68,23 @@
         formData.append('file', file);
         formData.append('name', photoName);
 
-        // Simular upload (apenas mostra a mensagem de sucesso sem realmente enviar)
-        document.getElementById('statusMessage').textContent = 'Upload realizado com sucesso!';
-        document.getElementById('statusMessage').classList.remove('text-danger');
-        document.getElementById('statusMessage').classList.add('text-success');
+        axios.post('upload.php', formData)
+            .then(response => {
+                document.getElementById('statusMessage').textContent = response.data;
+                if (response.data.includes('sucesso')) {
+                    document.getElementById('statusMessage').classList.remove('text-danger');
+                    document.getElementById('statusMessage').classList.add('text-success');
+                } else {
+                    document.getElementById('statusMessage').classList.remove('text-success');
+                    document.getElementById('statusMessage').classList.add('text-danger');
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao realizar upload:', error);
+                document.getElementById('statusMessage').textContent = 'Erro ao realizar upload.';
+                document.getElementById('statusMessage').classList.remove('text-success');
+                document.getElementById('statusMessage').classList.add('text-danger');
+            });
     });
 </script>
 
