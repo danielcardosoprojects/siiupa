@@ -513,7 +513,7 @@
             });
 
             // Append the custom button to the toolbar
-            $('#txtlegenda .jqte_toolbar').append(button);
+            $('.jqte_toolbar').append(button);
 
 
                 $('#attlegenda').click(function() {
