@@ -22,6 +22,10 @@
                         <div class="form-group">
                             <input type="text" class="form-control" id="photoName" placeholder="Nome da Foto" required>
                         </div>
+                        <div class="form-group form-check">
+                            <input type="checkbox" class="form-check-input" id="consentCheck" required>
+                            <label class="form-check-label" for="consentCheck">Eu tenho permissão para enviar esta foto</label>
+                        </div>
                         <button type="submit" class="btn btn-success btn-block">Upload</button>
                     </form>
                     <p id="statusMessage" class="mt-3 text-center"></p>
@@ -44,6 +48,7 @@
         event.preventDefault();
         const fileInput = document.getElementById('fileInput');
         const photoName = document.getElementById('photoName').value;
+        const consentCheck = document.getElementById('consentCheck').checked;
 
         if (!fileInput.files.length) {
             document.getElementById('statusMessage').textContent = 'Por favor, selecione uma foto.';
@@ -51,6 +56,24 @@
         }
 
         const file = fileInput.files[0];
+        const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        const maxSize = 2 * 1024 * 1024; // 2MB
+
+        if (!allowedTypes.includes(file.type)) {
+            document.getElementById('statusMessage').textContent = 'Por favor, selecione um arquivo de imagem válido (JPEG, PNG, GIF).';
+            return;
+        }
+
+        if (file.size > maxSize) {
+            document.getElementById('statusMessage').textContent = 'O tamanho do arquivo não deve exceder 2MB.';
+            return;
+        }
+
+        if (!consentCheck) {
+            document.getElementById('statusMessage').textContent = 'Você deve confirmar que tem permissão para enviar esta foto.';
+            return;
+        }
+
         const formData = new FormData();
         formData.append('file', file);
         formData.append('name', photoName);
@@ -64,7 +87,7 @@
             })
             .catch(error => {
                 console.error('Erro ao realizar upload:', error);
-                document.getElementById('statusMessage').textContent = 'Erro ao realizar upload.';
+                document.getElementById('statusMessage').textContent = `Erro ao realizar upload: ${error.message}`;
                 document.getElementById('statusMessage').classList.remove('text-success');
                 document.getElementById('statusMessage').classList.add('text-danger');
             });
