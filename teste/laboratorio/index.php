@@ -58,7 +58,7 @@ $recentImages = listRecentImages('exames/');
             <div class="card">
                 <div class="card-body">
                     <h2 class="card-title text-center">Upload de Foto</h2>
-                    <form id="uploadForm" action="upload.php" method="POST" enctype="multipart/form-data">
+                    <form id="uploadForm" action="index.php" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
                             <label for="fileInput" class="btn btn-primary btn-block">Escolher Foto</label>
                             <input type="file" class="form-control-file" id="fileInput" name="file" accept="image/*" capture="environment" required hidden>
@@ -121,7 +121,7 @@ $recentImages = listRecentImages('exames/');
         formData.append('file', file);
         formData.append('name', photoName);
 
-        axios.post('upload.php', formData)
+        axios.post('index.php', formData)
             .then(response => {
                 document.getElementById('statusMessage').textContent = response.data;
                 if (response.data.includes('sucesso')) {
