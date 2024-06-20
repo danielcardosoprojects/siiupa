@@ -1,3 +1,8 @@
+function showTab(tabId) {
+    const tabs = document.querySelectorAll('.tab-content');
+    tabs.forEach(tab => tab.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+}
 document.addEventListener('DOMContentLoaded', function() {
     const cadastroForm = document.getElementById('cadastroEquipamento');
     const envioForm = document.getElementById('envioManutencao');
@@ -8,11 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const envioSelect = document.getElementById('envio');
     const enviosTableBody = document.getElementById('enviosTable').querySelector('tbody');
 
-    function showTab(tabId) {
-        const tabs = document.querySelectorAll('.tab-content');
-        tabs.forEach(tab => tab.classList.remove('active'));
-        document.getElementById(tabId).classList.add('active');
-    }
+
 
     // Função para carregar setores e equipamentos via API
     function loadSelectData() {
