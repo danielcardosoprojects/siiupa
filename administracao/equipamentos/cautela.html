@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elaboração de Cautela</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Elaboração de Cautela</h1>
+        <form id="elaboracaoCautela">
+            <label for="data">Data:</label>
+            <input type="date" id="data" name="data" required>
+            
+            <label for="descricao_problema">Descrição do Problema:</label>
+            <textarea id="descricao_problema" name="descricao_problema" required></textarea>
+            
+            <div class="signature-area">
+                <label for="assinatura">Assinatura:</label>
+                <div class="signature-line"></div>
+            </div>
+            
+            <button type="submit">Gerar Cautela</button>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
