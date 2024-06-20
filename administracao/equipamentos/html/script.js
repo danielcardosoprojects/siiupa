@@ -8,27 +8,31 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Função para carregar setores e equipamentos via API
     function loadSelectData() {
-        fetch('https://siupa.com.br/siiupa/api/rh/api.php/records/tb_setor')
-            .then(response => response.json())
-            .then(data => {
-                data.records.forEach(setor => {
-                    let option = document.createElement('option');
-                    option.value = setor.id;
-                    option.text = setor.setor;
-                    setorSelect.appendChild(option);
+        if (setorSelect) {
+            fetch('https://siupa.com.br/siiupa/api/rh/api.php/records/tb_setor')
+                .then(response => response.json())
+                .then(data => {
+                    data.records.forEach(setor => {
+                        let option = document.createElement('option');
+                        option.value = setor.id;
+                        option.text = setor.setor;
+                        setorSelect.appendChild(option);
+                    });
                 });
-            });
+        }
 
-        fetch('https://siupa.com.br/siiupa/api/rh/api.php/records/tb_equipamentos_equipamentos')
-            .then(response => response.json())
-            .then(data => {
-                data.records.forEach(equipamento => {
-                    let option = document.createElement('option');
-                    option.value = equipamento.id;
-                    option.text = `${equipamento.nome} (${equipamento.numero_serie})`;
-                    equipamentoSelect.appendChild(option);
+        if (equipamentoSelect) {
+            fetch('https://siupa.com.br/siiupa/api/rh/api.php/records/tb_equipamentos_equipamentos')
+                .then(response => response.json())
+                .then(data => {
+                    data.records.forEach(equipamento => {
+                        let option = document.createElement('option');
+                        option.value = equipamento.id;
+                        option.text = `${equipamento.nome} (${equipamento.numero_serie})`;
+                        equipamentoSelect.appendChild(option);
+                    });
                 });
-            });
+        }
     }
 
     loadSelectData();
@@ -44,12 +48,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 'Content-Type': 'application/json'
             }
         })
-        .then(response => response.json())
+        .then(response => {
+            if (response.status === 409) {
+                throw new Error('Conflito: O equipamento já existe.');
+            }
+            return response.json();
+        })
         .then(data => {
             alert('Equipamento cadastrado com sucesso!');
             cadastroForm.reset();
         })
-        .catch(error => console.error('Erro:', error));
+        .catch(error => {
+            console.error('Erro:', error);
+            if (error.message.includes('Conflito')) {
+                alert('Erro: O número de série do equipamento já está cadastrado.');
+            } else {
+                alert('Erro ao cadastrar o equipamento. Por favor, tente novamente.');
+            }
+        });
     });
 
     envioForm?.addEventListener('submit', function(e) {
