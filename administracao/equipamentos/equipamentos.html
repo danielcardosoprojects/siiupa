@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Envio de Equipamento</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Envio de Equipamento para Manutenção</h1>
+        <form id="envioManutencao">
+            <label for="equipamento">Equipamento:</label>
+            <select id="equipamento" name="equipamento">
+                <!-- Options will be populated dynamically -->
+            </select>
+            
+            <label for="data_envio">Data de Envio:</label>
+            <input type="date" id="data_envio" name="data_envio" required>
+            
+            <label for="defeito">Defeito:</label>
+            <input type="text" id="defeito" name="defeito" required>
+            
+            <label for="responsavel_envio">Responsável pelo Envio:</label>
+            <input type="text" id="responsavel_envio" name="responsavel_envio" required>
+            
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
