@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de Gerenciamento</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Painel de Gerenciamento</h1>
+        <div class="tabs">
+            <button class="tab-button" onclick="showTab('equipamentos')">Equipamentos</button>
+            <button class="tab-button" onclick="showTab('envios')">Envios</button>
+            <button class="tab-button" onclick="showTab('cautelas')">Elaborar Cautela</button>
+        </div>
+
+        <div id="equipamentos" class="tab-content">
+            <h2>Cadastro de Equipamento</h2>
+            <form id="cadastroEquipamento">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required>
+                
+                <label for="tipo">Tipo:</label>
+                <input type="text" id="tipo" name="tipo" required>
+                
+                <label for="modelo">Modelo:</label>
+                <input type="text" id="modelo" name="modelo" required>
+                
+                <label for="numero_serie">Número de Série:</label>
+                <input type="text" id="numero_serie" name="numero_serie" required>
+                
+                <label for="setor">Setor:</label>
+                <select id="setor" name="setor">
+                    <!-- Options will be populated dynamically -->
+                </select>
+                
+                <button type="submit">Cadastrar</button>
+            </form>
+        </div>
+
+        <div id="envios" class="tab-content">
+            <h2>Envio de Equipamento para Manutenção</h2>
+            <form id="envioManutencao">
+                <label for="equipamento">Equipamento:</label>
+                <select id="equipamento" name="equipamento">
+                    <!-- Options will be populated dynamically -->
+                </select>
+                
+                <label for="data_envio">Data de Envio:</label>
+                <input type="date" id="data_envio" name="data_envio" required>
+                
+                <label for="defeito">Defeito:</label>
+                <input type="text" id="defeito" name="defeito" required>
+                
+                <label for="responsavel_envio">Responsável pelo Envio:</label>
+                <input type="text" id="responsavel_envio" name="responsavel_envio" required>
+                
+                <button type="submit">Enviar</button>
+            </form>
+
+            <h2>Lista de Envios</h2>
+            <table id="enviosTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Equipamento</th>
+                        <th>Data de Envio</th>
+                        <th>Defeito</th>
+                        <th>Responsável</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Rows will be populated dynamically -->
+                </tbody>
+            </table>
+        </div>
+
+        <div id="cautelas" class="tab-content">
+            <h2>Elaboração de Cautela</h2>
+            <form id="elaboracaoCautela">
+                <label for="envio">Selecionar Envio:</label>
+                <select id="envio" name="envio">
+                    <!-- Options will be populated dynamically -->
+                </select>
+
+                <label for="data">Data:</label>
+                <input type="date" id="data" name="data" required readonly>
+                
+                <label for="descricao_problema">Descrição do Problema:</label>
+                <textarea id="descricao_problema" name="descricao_problema" required readonly></textarea>
+                
+                <div class="signature-area">
+                    <label for="assinatura">Assinatura:</label>
+                    <div class="signature-line"></div>
+                </div>
+                
+                <button type="submit">Gerar Cautela</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="../js/script.js" defer></script>
+</body>
+</html>

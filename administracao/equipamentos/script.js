@@ -6,6 +6,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const setorSelect = document.getElementById('setor');
     const equipamentoSelect = document.getElementById('equipamento');
     const envioSelect = document.getElementById('envio');
+    const enviosTableBody = document.getElementById('enviosTable').querySelector('tbody');
+
+    function showTab(tabId) {
+        const tabs = document.querySelectorAll('.tab-content');
+        tabs.forEach(tab => tab.classList.remove('active'));
+        document.getElementById(tabId).classList.add('active');
+    }
 
     // Função para carregar setores e equipamentos via API
     function loadSelectData() {
@@ -47,6 +54,32 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
                 });
         }
+
+        if (enviosTableBody) {
+            fetch('https://siupa.com.br/siiupa/api/rh/api.php/records/tb_equipamentos_envios')
+                .then(response => response.json())
+                .then(data => {
+                    data.records.forEach(envio => {
+                        let row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${envio.id}</td>
+                            <td>${envio.equipamento_id}</td>
+                            <td>${envio.data_envio}</td>
+                            <td>${envio.defeito}</td>
+                            <td>${envio.responsavel_envio}</td>
+                            <td><button onclick="generateCautela(${envio.id})">Gerar Cautela</button></td>
+                        `;
+                        enviosTableBody.appendChild(row);
+                    });
+                });
+        }
+    }
+
+    window.generateCautela = function(envioId) {
+        showTab('cautelas');
+        envioSelect.value = envioId;
+        const event = new Event('change');
+        envioSelect.dispatchEvent(event);
     }
 
     loadSelectData();
@@ -90,6 +123,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             alert('Equipamento cadastrado com sucesso!');
             cadastroForm.reset();
+            loadSelectData();
         })
         .catch(error => {
             console.error('Erro:', error);
@@ -119,6 +153,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             alert('Equipamento enviado para manutenção com sucesso!');
             envioForm.reset();
+            loadSelectData();
         })
         .catch(error => console.error('Erro:', error));
     });
