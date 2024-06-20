@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const setorSelect = document.getElementById('setor');
     const equipamentoSelect = document.getElementById('equipamento');
+    const envioSelect = document.getElementById('envio');
 
     // Função para carregar setores e equipamentos via API
     function loadSelectData() {
@@ -33,9 +34,35 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
                 });
         }
+
+        if (envioSelect) {
+            fetch('https://siupa.com.br/siiupa/api/rh/api.php/records/tb_equipamentos_envios')
+                .then(response => response.json())
+                .then(data => {
+                    data.records.forEach(envio => {
+                        let option = document.createElement('option');
+                        option.value = envio.id;
+                        option.text = `${envio.equipamento_id} - ${envio.data_envio}`;
+                        envioSelect.appendChild(option);
+                    });
+                });
+        }
     }
 
     loadSelectData();
+
+    envioSelect?.addEventListener('change', function() {
+        const selectedEnvioId = envioSelect.value;
+        if (selectedEnvioId) {
+            fetch(`https://siupa.com.br/siiupa/api/rh/api.php/records/tb_equipamentos_envios/${selectedEnvioId}`)
+                .then(response => response.json())
+                .then(data => {
+                    const envio = data;
+                    document.getElementById('data').value = envio.data_envio;
+                    document.getElementById('descricao_problema').value = envio.defeito;
+                });
+        }
+    });
 
     cadastroForm?.addEventListener('submit', function(e) {
         e.preventDefault();
