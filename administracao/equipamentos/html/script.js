@@ -40,6 +40,9 @@ document.addEventListener('DOMContentLoaded', function() {
     cadastroForm?.addEventListener('submit', function(e) {
         e.preventDefault();
         const formData = new FormData(cadastroForm);
+        const dataAtual = new Date().toISOString().split('T')[0];
+        formData.append('data_cadastro', dataAtual);
+
         const jsonData = JSON.stringify(Object.fromEntries(formData));
 
         console.log('Enviando JSON para a API:', jsonData);
