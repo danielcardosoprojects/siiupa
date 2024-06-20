@@ -40,10 +40,13 @@ document.addEventListener('DOMContentLoaded', function() {
     cadastroForm?.addEventListener('submit', function(e) {
         e.preventDefault();
         const formData = new FormData(cadastroForm);
+        const jsonData = JSON.stringify(Object.fromEntries(formData));
+
+        console.log('Enviando JSON para a API:', jsonData);
 
         fetch('https://siupa.com.br/siiupa/api/rh/api.php/records/tb_equipamentos_equipamentos', {
             method: 'POST',
-            body: JSON.stringify(Object.fromEntries(formData)),
+            body: jsonData,
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -71,10 +74,13 @@ document.addEventListener('DOMContentLoaded', function() {
     envioForm?.addEventListener('submit', function(e) {
         e.preventDefault();
         const formData = new FormData(envioForm);
+        const jsonData = JSON.stringify(Object.fromEntries(formData));
+
+        console.log('Enviando JSON para a API:', jsonData);
 
         fetch('https://siupa.com.br/siiupa/api/rh/api.php/records/tb_equipamentos_envios', {
             method: 'POST',
-            body: JSON.stringify(Object.fromEntries(formData)),
+            body: jsonData,
             headers: {
                 'Content-Type': 'application/json'
             }
