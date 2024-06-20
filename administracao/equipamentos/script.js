@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     loadSelectData();
 
-    cadastroForm.addEventListener('submit', function(e) {
+    cadastroForm?.addEventListener('submit', function(e) {
         e.preventDefault();
         const formData = new FormData(cadastroForm);
 
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => console.error('Erro:', error));
     });
 
-    envioForm.addEventListener('submit', function(e) {
+    envioForm?.addEventListener('submit', function(e) {
         e.preventDefault();
         const formData = new FormData(envioForm);
 
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => console.error('Erro:', error));
     });
 
-    cautelaForm.addEventListener('submit', function(e) {
+    cautelaForm?.addEventListener('submit', function(e) {
         e.preventDefault();
         const formData = new FormData(cautelaForm);
 
