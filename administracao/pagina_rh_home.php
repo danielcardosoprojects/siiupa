@@ -10,6 +10,16 @@ include_once('../bd/nivel.php');
         flex-direction: row;
         flex-wrap: wrap;
     }
+    .jconfirm-content {
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            padding: 0;
+        }
+        .jconfirm-box {
+            width: 80% !important;
+            max-width: 800px !important;
+        }
 </style>
 <div id="busca_impressao">
     <div>
@@ -48,8 +58,33 @@ include_once('../bd/nivel.php');
             <a href="#" id="gerarFrequencias" class="btn btn-outline-success">
                 <img src="/siiupa/imagens/icones/frequencia.svg" width="20px">
                 Gerar Frequencias</a>
+                <button class="btn btn-primary" onclick="openModal()">Abrir Modal</button>
 
         </div>
+        <script>
+        function openModal() {
+            $.confirm({
+                title: 'Servidores Inativos',
+                content: 'url:URL_DA_PAGINA_QUE_CRIAMOS.html',
+                type: 'blue',
+                boxWidth: '80%',
+                useBootstrap: false,
+                buttons: {
+                    fechar: function () {
+                        // Fecha o modal
+                    }
+                },
+                onContentReady: function () {
+                    // Adiciona estilo ao iframe
+                    this.$content.find('iframe').css({
+                        width: '100%',
+                        height: '100%',
+                        border: 'none'
+                    });
+                }
+            });
+        }
+    </script>
         <br>
         <form class="row g-3 form-inline" style="display:none">
 
