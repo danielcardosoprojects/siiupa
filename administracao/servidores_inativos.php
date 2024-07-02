@@ -54,7 +54,7 @@
     </div>
 
     <script>
-        const apiURL = 'https://siupa.com.br/siiupa/api/rh/api.php/records/tb_funcionario/?filter=status,eq,INATIVO';
+        const apiURL = 'https://siupa.com.br/siiupa/api/rh/api.php/records/tb_funcionario/?filter=status,eq,INATIVO&join=tb_cargo';
 
         document.addEventListener('DOMContentLoaded', () => {
             fetchRecords();
@@ -78,7 +78,7 @@
                 row.innerHTML = `
                     <td>${record.id}</td>
                     <td>${record.nome}</td>
-                    <td>${record.funcao_upa}</td>
+                    <td>${record.fk_cargo.funcao_upa}</td>
                     <td>${record.cpf || ''}</td>
                     <td>${record.admissao}</td>
                     <td>${record.desligamento || ''}</td>
