@@ -10,16 +10,24 @@ include_once('../bd/nivel.php');
         flex-direction: row;
         flex-wrap: wrap;
     }
+
     .jconfirm-content {
-            width: 100%;
-            height: 500px;
-            overflow: hidden;
-            padding: 0;
-        }
-        .jconfirm-box {
-            width: 80% !important;
-            max-width: 800px !important;
-        }
+        width: 100%;
+        height: 500px;
+        overflow: hidden;
+        padding: 0;
+    }
+
+    .jconfirm-box {
+        width: 80% !important;
+        max-width: 800px !important;
+    }
+
+    iframe {
+        width: 100%;
+        height: 500px;
+        border: none;
+    }
 </style>
 <div id="busca_impressao">
     <div>
@@ -58,7 +66,7 @@ include_once('../bd/nivel.php');
             <a href="#" id="gerarFrequencias" class="btn btn-outline-success">
                 <img src="/siiupa/imagens/icones/frequencia.svg" width="20px">
                 Gerar Frequencias</a>
-                <button class="btn btn-primary" onclick="openModal()">Abrir Modal</button>
+            <button class="btn btn-primary" onclick="openModal()">Abrir Modal</button>
 
         </div>
         <script>
@@ -75,12 +83,22 @@ include_once('../bd/nivel.php');
                     }
                 },
                 onContentReady: function () {
-                    // Adiciona estilo ao iframe
-                    this.$content.find('iframe').css({
-                        width: '100%',
-                        height: '100%',
-                        border: 'none'
-                    });
+                    // Garantir que a DataTables é inicializada no iframe
+                    const iframe = this.$content.find('iframe')[0];
+                    iframe.onload = function() {
+                        const iframeContent = iframe.contentDocument || iframe.contentWindow.document;
+                        $(iframeContent).ready(function() {
+                            $(iframeContent).find('#servidores-table').DataTable({
+                                language: {
+                                    url: "//cdn.datatables.net/plug-ins/1.11.5/i18n/Portuguese-Brasil.json"
+                                },
+                                pageLength: 10,
+                                lengthChange: false,
+                                searching: true,
+                                ordering: true
+                            });
+                        });
+                    };
                 }
             });
         }
@@ -225,7 +243,7 @@ include_once('../bd/nivel.php');
 
     //busca u940659928_siupa.tb_funcionario
     $sqlbusca = "SELECT  DATE_FORMAT(f.data_nasc,'%d\/%m\/%Y') as data_nascbr, f.*, DATE_FORMAT(f.admissao,'%d\/%m\/%Y') as admissaoBR, f.id AS idfuncionario, c.descricao AS cargo, c.id, s.setor FROM u940659928_siupa.tb_funcionario AS f INNER JOIN u940659928_siupa.tb_cargo AS c ON f.fk_cargo = c.id INNER JOIN u940659928_siupa.tb_setor AS s ON f.fk_setor = s.id $where $fcsql $bsetorsql $orderby";
-        // echo $sqlbusca;
+    // echo $sqlbusca;
 
     // verifica o número total de registros
     $todosResultadosBusca = mysqli_query($conn, $sqlbusca);
@@ -312,7 +330,7 @@ include_once('../bd/nivel.php');
 
 
             $contalinha = ($pc - 1) * 10 + 1;
-            
+
             if (mysqli_num_rows($resultbusca) > 0) {
                 while ($rownomes = mysqli_fetch_assoc($resultbusca)) {
                     $dados = (object) $rownomes;
@@ -409,7 +427,7 @@ include_once('../bd/nivel.php');
                     // echo "<td class='edita' data-idfunc='$dados->idfuncionario' data-campo='CNES' data-valor='$dados->CNES'>$dados->CNES</td>";
 
                     echo "<td>$dados->CNES</td>";
-                    
+
 
                     echo "</tr>";
                     $contalinha++;
