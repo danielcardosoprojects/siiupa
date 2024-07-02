@@ -89,7 +89,7 @@
 
             $('#servidores-table').DataTable({
                 language: {
-                    url: "//cdn.datatables.net/plug-ins/1.11.5/i18n/Portuguese-Brasil.json"
+                    url: "//cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json"
                 },
                 pageLength: 10,
                 lengthChange: false,
