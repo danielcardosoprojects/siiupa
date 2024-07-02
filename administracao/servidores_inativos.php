@@ -68,7 +68,7 @@ include_once('../bd/nivel.php');
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script>
-        const apiURL = 'https://siupa.com.br/siiupa/api/rh/api.php/records/tb_funcionario/?filter=status,eq,INATIVO';
+        const apiURL = 'https://siupa.com.br/siiupa/api/rh/api.php/records/tb_funcionario/?filter=status,eq,INATIVO&join=tb_cargo';
 
         document.addEventListener('DOMContentLoaded', () => {
             fetchRecords();
