@@ -1,7 +1,7 @@
 <?php
-include_once('../bd/conectabd.php');
+include_once('bd/conectabd.php');
 session_start();
-include_once('../bd/nivel.php');
+include_once('bd/nivel.php');
 ?>
    <style>
         body {
