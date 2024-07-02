@@ -330,6 +330,9 @@
             case 'perfil':
                 include_once('pagina_rh_perfil.php');
                 break;
+                case 'servidores_inativos':
+                    include_once('servidores_inativos.php');
+                    break;
             case 'ferias':
                 include_once('pagina_rh_ferias.php');
                 break;
