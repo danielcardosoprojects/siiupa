@@ -1,10 +1,6 @@
 <?php
-
 include_once($_SERVER['DOCUMENT_ROOT'].'/siiupa/bd/conectabd.php');
 include_once($_SERVER['DOCUMENT_ROOT'].'/siiupa/bd/nivel.php');
-
-
-
 ?>
    <style>
         body {
