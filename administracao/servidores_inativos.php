@@ -68,48 +68,39 @@ include_once('../bd/nivel.php');
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script>
-        const apiURL = 'https://siupa.com.br/siiupa/api/rh/api.php/records/tb_funcionario/?filter=status,eq,INATIVO&join=tb_cargo';
-
-        document.addEventListener('DOMContentLoaded', () => {
-            fetchRecords();
-        });
-
-        function fetchRecords() {
-            fetch(apiURL)
-                .then(response => response.json())
-                .then(data => {
-                    displayRecords(data.records);
-                })
-                .catch(error => console.error('Erro ao buscar registros:', error));
-        }
-
-        function displayRecords(records) {
-            const tableBody = document.querySelector('#servidores-table tbody');
-            tableBody.innerHTML = '';
-
-            records.forEach(record => {
-                console.log(record);
-                const row = document.createElement('tr');
-                row.innerHTML = `
-                    <td>${record.id}</td>
-                    <td>${record.nome}</td>
-                    <td>${record.fk_cargo.funcao_upa}</td>
-                    <td>${record.cpf || ''}</td>
-                    <td>${record.admissao}</td>
-                    <td>${record.desligamento || ''}</td>
-                    <td><a href="https://siupa.com.br/siiupa/?setor=adm&sub=rh&subsub=perfil&id=${record.id}" target="_blank">Abrir Perfil</a></td>
-                `;
-                tableBody.appendChild(row);
-            });
-
-            $('#servidores-table').DataTable({
-                language: {
-                    url: "//cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json"
+        function openModal() {
+            $.confirm({
+                title: 'Servidores Inativos',
+                content: 'url:https://siupa.com.br/siiupa/administracao/servidores_inativos.php',
+                type: 'blue',
+                boxWidth: '80%',
+                useBootstrap: false,
+                buttons: {
+                    fechar: function () {
+                        // Fecha o modal
+                    }
                 },
-                pageLength: 10,
-                lengthChange: false,
-                searching: true,
-                ordering: true
+                onContentReady: function () {
+                    const iframe = this.$content.find('iframe')[0];
+                    iframe.onload = function() {
+                        try {
+                            const iframeContent = iframe.contentDocument || iframe.contentWindow.document;
+                            $(iframeContent).ready(function() {
+                                $(iframeContent).find('#servidores-table').DataTable({
+                                    language: {
+                                        url: "//cdn.datatables.net/plug-ins/1.11.5/i18n/Portuguese-Brasil.json"
+                                    },
+                                    pageLength: 10,
+                                    lengthChange: false,
+                                    searching: true,
+                                    ordering: true
+                                });
+                            });
+                        } catch (error) {
+                            console.error('Erro ao acessar o conteúdo do iframe:', error);
+                        }
+                    };
+                }
             });
         }
     </script>
