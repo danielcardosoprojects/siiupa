@@ -1,67 +1,4 @@
-<script>
-    // scripts.js
-$(function() {
-    $('.dropdown-toggle').dropdown();
-    $('#buscanome').focus();
 
-    $('.noticias_linha').hide();
-
-    $('.copiarTexto').click(function(e) {
-        e.preventDefault();
-        const copyText = $(this).attr('data-text');
-        copyToClipboard(copyText);
-    });
-
-    $('#bcadastrarFUNCIONARIO, .abreperfil').click(function(e) {
-        e.preventDefault();
-        const href = $(this).attr('href');
-        sessionStorage.setItem('linkanterior', href);
-        $('#subconteudo').load(href);
-    });
-
-    $('#busca').click(function() {
-        const buscanome = encodeURIComponent($('#buscanome').val());
-        const buscafunc = $('#buscafunc').val();
-        const buscasetor = encodeURIComponent($('#setorbusca').val());
-        const link = `administracao/paginarh.php?busca=1&nome=${buscanome}&func=${buscafunc}&buscasetor=${buscasetor}`;
-        
-        $('body').load(link, function() {
-            window.history.pushState('page2', 'Title', link);
-            sessionStorage.setItem('linkanterior', link);
-        });
-    });
-});
-
-async function copyToClipboard(textToCopy) {
-    if (navigator.clipboard && window.isSecureContext) {
-        try {
-            await navigator.clipboard.writeText(textToCopy);
-        } catch (err) {
-            console.error('Failed to copy: ', err);
-        }
-    } else {
-        const textArea = document.createElement('textarea');
-        textArea.value = textToCopy;
-        textArea.style.position = 'fixed';
-        textArea.style.left = '-999999px';
-        textArea.style.top = '-999999px';
-        document.body.appendChild(textArea);
-        textArea.focus();
-        textArea.select();
-        try {
-            document.execCommand('copy');
-        } catch (err) {
-            console.error('Failed to copy: ', err);
-        }
-        textArea.remove();
-    }
-}
-
-async function loadPage(page) {
-    $('#subsubconteudo').load(`/siiupa/administracao/${page}.php`);
-}
-
-</script>
 <style>
     /* styles.css */
 @import url('/siiupa/css/font_MontSerrat.css');
@@ -234,3 +171,67 @@ switch ($subsub) {
         break;
 }
 ?>
+<script>
+    // scripts.js
+$(function() {
+    $('.dropdown-toggle').dropdown();
+    $('#buscanome').focus();
+
+    $('.noticias_linha').hide();
+
+    $('.copiarTexto').click(function(e) {
+        e.preventDefault();
+        const copyText = $(this).attr('data-text');
+        copyToClipboard(copyText);
+    });
+
+    $('#bcadastrarFUNCIONARIO, .abreperfil').click(function(e) {
+        e.preventDefault();
+        const href = $(this).attr('href');
+        sessionStorage.setItem('linkanterior', href);
+        $('#subconteudo').load(href);
+    });
+
+    $('#busca').click(function() {
+        const buscanome = encodeURIComponent($('#buscanome').val());
+        const buscafunc = $('#buscafunc').val();
+        const buscasetor = encodeURIComponent($('#setorbusca').val());
+        const link = `administracao/paginarh.php?busca=1&nome=${buscanome}&func=${buscafunc}&buscasetor=${buscasetor}`;
+        
+        $('body').load(link, function() {
+            window.history.pushState('page2', 'Title', link);
+            sessionStorage.setItem('linkanterior', link);
+        });
+    });
+});
+
+async function copyToClipboard(textToCopy) {
+    if (navigator.clipboard && window.isSecureContext) {
+        try {
+            await navigator.clipboard.writeText(textToCopy);
+        } catch (err) {
+            console.error('Failed to copy: ', err);
+        }
+    } else {
+        const textArea = document.createElement('textarea');
+        textArea.value = textToCopy;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-999999px';
+        textArea.style.top = '-999999px';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+            document.execCommand('copy');
+        } catch (err) {
+            console.error('Failed to copy: ', err);
+        }
+        textArea.remove();
+    }
+}
+
+async function loadPage(page) {
+    $('#subsubconteudo').load(`/siiupa/administracao/${page}.php`);
+}
+
+</script>
