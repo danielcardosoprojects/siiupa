@@ -69,40 +69,7 @@ include_once('../bd/nivel.php');
             <button class="btn btn-primary" onclick="openModal()">Abrir Modal</button>
 
         </div>
-        <script>
-        function openModal() {
-            $.confirm({
-                title: 'Servidores Inativos',
-                content: 'url:https://siupa.com.br/siiupa/administracao/servidores_inativos.php',
-                type: 'blue',
-                boxWidth: '80%',
-                useBootstrap: false,
-                buttons: {
-                    fechar: function () {
-                        // Fecha o modal
-                    }
-                },
-                onContentReady: function () {
-                    // Adiciona um atraso para garantir que o iframe esteja totalmente carregado
-                    setTimeout(() => {
-                        const iframe = this.$content.find('iframe')[0];
-                        const iframeContent = iframe.contentDocument || iframe.contentWindow.document;
-                        $(iframeContent).ready(function() {
-                            $(iframeContent).find('#servidores-table').DataTable({
-                                language: {
-                                    url: "//cdn.datatables.net/plug-ins/1.11.5/i18n/Portuguese-Brasil.json"
-                                },
-                                pageLength: 10,
-                                lengthChange: false,
-                                searching: true,
-                                ordering: true
-                            });
-                        });
-                    }, 1000); // 1 segundo de atraso para garantir que o iframe esteja carregado
-                }
-            });
-        }
-    </script>
+        
         <br>
         <form class="row g-3 form-inline" style="display:none">
 
@@ -584,3 +551,33 @@ function mes($entrada)
 }
 
 ?>
+<script>
+        function openModal() {
+            $.confirm({
+                title: 'Servidores Inativos',
+                content: 'url:https://siupa.com.br/siiupa/administracao/servidores_inativos.php',
+                type: 'blue',
+                boxWidth: '80%',
+                useBootstrap: false,
+                buttons: {
+                    fechar: function () {
+                        // Fecha o modal
+                    }
+                },
+                onContentReady: function () {
+                    // Adiciona um atraso para garantir que o iframe esteja totalmente carregado
+                    const iframe = this.$content.find('iframe')[0];
+                    if (iframe) {
+                        iframe.onload = function() {
+                            const iframeContent = iframe.contentDocument || iframe.contentWindow.document;
+                            if (iframeContent) {
+                                $(iframeContent).ready(function() {
+                                    // Adicione aqui qualquer funcionalidade adicional necessária após o carregamento
+                                });
+                            }
+                        };
+                    }
+                }
+            });
+        }
+    </script>
