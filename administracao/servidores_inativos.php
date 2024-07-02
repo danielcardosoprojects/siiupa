@@ -93,7 +93,7 @@ include_once('../bd/nivel.php');
                 row.innerHTML = `
                     <td>${record.id}</td>
                     <td>${record.nome}</td>
-                    <td>${record.funcao_upa}</td>
+                    <td>${record.fk_cargo.funcao_upa}</td>
                     <td>${record.cpf || ''}</td>
                     <td>${record.admissao}</td>
                     <td>${record.desligamento || ''}</td>
