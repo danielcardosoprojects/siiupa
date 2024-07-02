@@ -1,4 +1,9 @@
-    <style>
+<?php
+include_once('../bd/conectabd.php');
+session_start();
+include_once('../bd/nivel.php');
+?>
+   <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f9;
