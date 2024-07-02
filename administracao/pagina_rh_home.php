@@ -31,7 +31,7 @@ include_once('../bd/nivel.php');
 </style>
 <div id="busca_impressao">
     <div>
-        
+
         <div class="">
             <a href="?setor=adm&sub=rh&subsub=perfil_criar" id="bcadastrarFUNCIONARIO" class="btn btn-outline-success">
                 <img src="/siiupa/imagens/icones/person_add.svg">
@@ -55,10 +55,10 @@ include_once('../bd/nivel.php');
             <a href="/siiupa/?setor=adm&sub=rh&subsub=servidores_inativos" id="servidoresInativos" class="btn btn-outline-success">
                 Servidores Inativos
             </a>
-            
+
 
         </div>
-        
+
         <br>
         <form class="row g-3 form-inline" style="display:none">
 
@@ -458,27 +458,28 @@ include_once('../bd/nivel.php');
 
         </tbody>
     </table>
-    <div class="contagem_cargos">
-            <?php
-            $bdContagemCargos = new BD;
-            $sqlCG = "SELECT c.titulo, count(c.titulo) as total, c.id FROM u940659928_siupa.tb_funcionario as f inner join u940659928_siupa.tb_cargo AS c on (f.fk_cargo = c.id) where status='ATIVO' group by c.titulo";
-            $rConsultaCargos = $bdContagemCargos->consulta($sqlCG);
-            foreach ($rConsultaCargos as $rCG) {
-                $tituloCG = $rCG->titulo;
-                echo "<a class='contagem_cargo btn btn-sm btn-light' href='/siiupa/?setor=adm&sub=rh&busca=1&nome=&func=$rCG->id&buscasetor=undefined'>$tituloCG: $rCG->total</a>";
-            }
-
-            $bdContagemSetores = new BD;
-            $sqlCS = "SELECT s.id, s.setor, count(s.setor) as totalS FROM u940659928_siupa.tb_funcionario as f inner join u940659928_siupa.tb_setor as s on(f.fk_setor = s.id) where status='ATIVO' group by s.setor;";
-            $rConsultaSetores = $bdContagemSetores->consulta($sqlCS);
-            foreach ($rConsultaSetores as $rCS) {
-                $tituloCS = $rCS->setor;
-                echo "<a class='contagem_cargo btn btn-sm btn-light' href='/siiupa/?setor=adm&sub=rh&busca=1&nome=&func=undefined&buscasetor=$tituloCS'>$tituloCS: $rCS->totalS</a>";
-            }
-
-            ?>
-        </div>
+    
 </div><!-- FIM DA AREA DE IMPRESSAO -->
+<div class="contagem_cargos">
+        <?php
+        $bdContagemCargos = new BD;
+        $sqlCG = "SELECT c.titulo, count(c.titulo) as total, c.id FROM u940659928_siupa.tb_funcionario as f inner join u940659928_siupa.tb_cargo AS c on (f.fk_cargo = c.id) where status='ATIVO' group by c.titulo";
+        $rConsultaCargos = $bdContagemCargos->consulta($sqlCG);
+        foreach ($rConsultaCargos as $rCG) {
+            $tituloCG = $rCG->titulo;
+            echo "<a class='contagem_cargo btn btn-sm btn-light' href='/siiupa/?setor=adm&sub=rh&busca=1&nome=&func=$rCG->id&buscasetor=undefined'>$tituloCG: $rCG->total</a>";
+        }
+
+        $bdContagemSetores = new BD;
+        $sqlCS = "SELECT s.id, s.setor, count(s.setor) as totalS FROM u940659928_siupa.tb_funcionario as f inner join u940659928_siupa.tb_setor as s on(f.fk_setor = s.id) where status='ATIVO' group by s.setor;";
+        $rConsultaSetores = $bdContagemSetores->consulta($sqlCS);
+        foreach ($rConsultaSetores as $rCS) {
+            $tituloCS = $rCS->setor;
+            echo "<a class='contagem_cargo btn btn-sm btn-light' href='/siiupa/?setor=adm&sub=rh&busca=1&nome=&func=undefined&buscasetor=$tituloCS'>$tituloCS: $rCS->totalS</a>";
+        }
+
+        ?>
+    </div>
 </div>
 </div>
 
