@@ -1,10 +1,3 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Servidores Inativos</title>
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -38,8 +31,8 @@
             color: #fff;
         }
     </style>
-</head>
-<body>
+
+
     <div class="container">
         <h1>Servidores Inativos</h1>
         <table id="servidores-table" class="display">
@@ -60,8 +53,6 @@
         </table>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <script>
         const apiURL = 'https://siupa.com.br/siiupa/api/rh/api.php/records/tb_funcionario/?filter=status,eq,INATIVO';
 
@@ -107,5 +98,3 @@
             });
         }
     </script>
-</body>
-</html>
