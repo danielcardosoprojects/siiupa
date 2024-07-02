@@ -1,6 +1,7 @@
 <?php
 include_once('/siiupa/bd/conectabd.php');
 include_once('/siiupa/bd/nivel.php');
+var_dump(__DIR__);
 
 ?>
    <style>
