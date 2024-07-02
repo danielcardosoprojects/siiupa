@@ -172,35 +172,37 @@ switch ($subsub) {
 }
 ?>
 <script>
-    // scripts.js
-$(function() {
-    $('.dropdown-toggle').dropdown();
-    $('#buscanome').focus();
+document.addEventListener('DOMContentLoaded', function() {
+    // Seu código aqui
+    $(function() {
+        $('.dropdown-toggle').dropdown();
+        $('#buscanome').focus();
 
-    $('.noticias_linha').hide();
+        $('.noticias_linha').hide();
 
-    $('.copiarTexto').click(function(e) {
-        e.preventDefault();
-        const copyText = $(this).attr('data-text');
-        copyToClipboard(copyText);
-    });
+        $('.copiarTexto').click(function(e) {
+            e.preventDefault();
+            const copyText = $(this).attr('data-text');
+            copyToClipboard(copyText);
+        });
 
-    $('#bcadastrarFUNCIONARIO, .abreperfil').click(function(e) {
-        e.preventDefault();
-        const href = $(this).attr('href');
-        sessionStorage.setItem('linkanterior', href);
-        $('#subconteudo').load(href);
-    });
+        $('#bcadastrarFUNCIONARIO, .abreperfil').click(function(e) {
+            e.preventDefault();
+            const href = $(this).attr('href');
+            sessionStorage.setItem('linkanterior', href);
+            $('#subconteudo').load(href);
+        });
 
-    $('#busca').click(function() {
-        const buscanome = encodeURIComponent($('#buscanome').val());
-        const buscafunc = $('#buscafunc').val();
-        const buscasetor = encodeURIComponent($('#setorbusca').val());
-        const link = `administracao/paginarh.php?busca=1&nome=${buscanome}&func=${buscafunc}&buscasetor=${buscasetor}`;
-        
-        $('body').load(link, function() {
-            window.history.pushState('page2', 'Title', link);
-            sessionStorage.setItem('linkanterior', link);
+        $('#busca').click(function() {
+            const buscanome = encodeURIComponent($('#buscanome').val());
+            const buscafunc = $('#buscafunc').val();
+            const buscasetor = encodeURIComponent($('#setorbusca').val());
+            const link = `administracao/paginarh.php?busca=1&nome=${buscanome}&func=${buscafunc}&buscasetor=${buscasetor}`;
+            
+            $('body').load(link, function() {
+                window.history.pushState('page2', 'Title', link);
+                sessionStorage.setItem('linkanterior', link);
+            });
         });
     });
 });
@@ -233,5 +235,4 @@ async function copyToClipboard(textToCopy) {
 async function loadPage(page) {
     $('#subsubconteudo').load(`/siiupa/administracao/${page}.php`);
 }
-
 </script>
