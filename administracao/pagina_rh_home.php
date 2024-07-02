@@ -65,7 +65,7 @@ include_once('../bd/nivel.php');
         function openModal() {
             $.confirm({
                 title: 'Servidores Inativos',
-                content: 'url:URL_DA_PAGINA_QUE_CRIAMOS.html',
+                content: 'url:https://siupa.com.br/siiupa/administracao/servidores_inativos.php',
                 type: 'blue',
                 boxWidth: '80%',
                 useBootstrap: false,
