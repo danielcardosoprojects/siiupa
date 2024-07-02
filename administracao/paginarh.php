@@ -321,55 +321,65 @@
 
 
         $subsub = pega('subsub');
-        //console_log($subsub); // [1,2,3]favicon
-
-
-        if ($subsub == null) {
-
-            // include_once('pagina_rh_home.php');
-            echo "<script>$(document).ready(function() {loadPage('pagina_rh_home');});</script>";
-        } elseif ($subsub == 'perfil') {
-
-            include_once('pagina_rh_perfil.php');
-        } elseif ($subsub == 'ferias') {
-
-            include_once('pagina_rh_ferias.php');
-        } elseif ($subsub == 'folhas') {
-
-            include_once('pagina_rh_folhas.php');
-        } elseif ($subsub == 'escalas') {
-
-            include_once('pagina_rh_escalas.php');
-        } elseif ($subsub == 'listaepi') {
-
-            include_once('pagina_rh_farmacia_epi.php');
-        } elseif ($subsub == 'alimentacao') {
-            include_once('pagina_rh_alimentacao.php');
-        } elseif ($subsub == 'atestados') {
-            // include_once('pagina_rh_atestados.php');
-            echo "<script>$(document).ready(function() {loadPage('pagina_rh_atestados');});</script>";
-        } elseif ($subsub == 'acionamentos') {
-            // include_once('pagina_rh_acionamentos.php');
-            echo "<script>$(document).ready(function() {loadPage('pagina_rh_acionamentos');});</script>";
-
-        } elseif ($subsub == 'acionamento_exibe') {
-            include_once('pagina_rh_acionamento_exibe.php');
-        }elseif ($subsub == 'atestado_exibe') {
-            include_once('pagina_rh_atestados_exibe.php');
-        } elseif ($subsub == 'perfil_criar') {
-            include_once('pagina_rh_perfil_criar.php');
-        } elseif ($subsub == "rhfolhas") {
-            include("paginarh_folhas.php");
-        } elseif ($subsub == "rhfolhasmodifica") {
-            include("paginarh_folhas_criareditar.php");
-        } elseif ($subsub == "rhfolhaexibe") {
-            include("pagina_rh_folha.php");
-        } elseif ($subsub == "rhfolhaadicionaservidor") {
-            include("pagina_rh_folha_adicionaservidor.php");
-        } elseif ($subsub == "rhcadastraferias") {
-            include("paginarh_cadastraferias.php");
+        // console_log($subsub); // [1,2,3]favicon
+        
+        switch ($subsub) {
+            case null:
+                echo "<script>$(document).ready(function() {loadPage('pagina_rh_home');});</script>";
+                break;
+            case 'perfil':
+                include_once('pagina_rh_perfil.php');
+                break;
+            case 'ferias':
+                include_once('pagina_rh_ferias.php');
+                break;
+            case 'folhas':
+                include_once('pagina_rh_folhas.php');
+                break;
+            case 'escalas':
+                include_once('pagina_rh_escalas.php');
+                break;
+            case 'listaepi':
+                include_once('pagina_rh_farmacia_epi.php');
+                break;
+            case 'alimentacao':
+                include_once('pagina_rh_alimentacao.php');
+                break;
+            case 'atestados':
+                echo "<script>$(document).ready(function() {loadPage('pagina_rh_atestados');});</script>";
+                break;
+            case 'acionamentos':
+                echo "<script>$(document).ready(function() {loadPage('pagina_rh_acionamentos');});</script>";
+                break;
+            case 'acionamento_exibe':
+                include_once('pagina_rh_acionamento_exibe.php');
+                break;
+            case 'atestado_exibe':
+                include_once('pagina_rh_atestados_exibe.php');
+                break;
+            case 'perfil_criar':
+                include_once('pagina_rh_perfil_criar.php');
+                break;
+            case 'rhfolhas':
+                include_once('pagina_rh_folhas.php');
+                break;
+            case 'rhfolhasmodifica':
+                include_once('pagina_rh_folhas_criareditar.php');
+                break;
+            case 'rhfolhaexibe':
+                include_once('pagina_rh_folha.php');
+                break;
+            case 'rhfolhaadicionaservidor':
+                include_once('pagina_rh_folha_adicionaservidor.php');
+                break;
+            case 'rhcadastraferias':
+                include_once('pagina_rh_cadastraferias.php');
+                break;
+            default:
+                echo "<script>$(document).ready(function() {loadPage('pagina_rh_home');});</script>";
+                break;
         }
-
+        
         ?>
     </div>
 
