@@ -88,6 +88,7 @@ include_once('../bd/nivel.php');
             tableBody.innerHTML = '';
 
             records.forEach(record => {
+                console.log(record);
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${record.id}</td>
