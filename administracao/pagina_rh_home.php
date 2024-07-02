@@ -83,9 +83,9 @@ include_once('../bd/nivel.php');
                     }
                 },
                 onContentReady: function () {
-                    // Garantir que a DataTables é inicializada no iframe
-                    const iframe = this.$content.find('iframe')[0];
-                    iframe.onload = function() {
+                    // Adiciona um atraso para garantir que o iframe esteja totalmente carregado
+                    setTimeout(() => {
+                        const iframe = this.$content.find('iframe')[0];
                         const iframeContent = iframe.contentDocument || iframe.contentWindow.document;
                         $(iframeContent).ready(function() {
                             $(iframeContent).find('#servidores-table').DataTable({
@@ -98,7 +98,7 @@ include_once('../bd/nivel.php');
                                 ordering: true
                             });
                         });
-                    };
+                    }, 1000); // 1 segundo de atraso para garantir que o iframe esteja carregado
                 }
             });
         }
