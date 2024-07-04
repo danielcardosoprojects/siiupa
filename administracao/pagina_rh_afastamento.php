@@ -13,7 +13,7 @@
         }
     </style>
 
-    <div id="loader">
+    <div id="loaders">
         <img src="https://i.gifer.com/ZZ5H.gif" alt="Carregando..." />
     </div>
     <table id="servidores-table" class="display" style="width:100%">
@@ -48,11 +48,11 @@
             });
 
             const showLoader = () => {
-                document.getElementById('loader').style.display = 'block';
+                document.getElementById('loaders').style.display = 'block';
             };
 
             const hideLoader = () => {
-                document.getElementById('loader').style.display = 'none';
+                document.getElementById('loaders').style.display = 'none';
             };
 
             showLoader();
