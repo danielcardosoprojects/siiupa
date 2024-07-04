@@ -76,10 +76,15 @@
 
         axios.get('administracao/apiafastamentos.php')
             .then(response => {
-                const { afastamentos, cargos, tiposAfastamentos } = response.data;
+                const { afastamentos, cargos, setores, tiposAfastamentos } = response.data;
 
                 const cargosMap = cargos.records.reduce((map, cargo) => {
                     map[cargo.id] = cargo.titulo;
+                    return map;
+                }, {});
+
+                const setoresMap = setores.records.reduce((map, setor) => {
+                    map[setores.id] = setores.setor;
                     return map;
                 }, {});
 
@@ -90,6 +95,7 @@
 
                 afastamentos.records.forEach(record => {
                     const cargo = cargosMap[record.fk_funcionario.fk_cargo] || 'N/A';
+                    const setor = setoresMap[record.fk_funcionario.fk_setor] || 'N/A';
                     const afastamento = tiposAfastamentosMap[record.fk_afastamentos] || 'N/A';
                     const dataInicio = formatDateBR(record.data_inicio);
                     const dataFim = formatDateBR(record.data_fim);
@@ -99,7 +105,7 @@
                     table.row.add([
                         record.id,
                         record.fk_funcionario.nome,
-                        record.fk_funcionario.funcao_upa,
+                        setor,
                         record.fk_funcionario.cpf,
                         cargo,
                         dataInicio,
