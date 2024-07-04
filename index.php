@@ -47,6 +47,7 @@ include('../conexao/verifica_login.php');
 
 	<!-- AXIOS -->
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+	
 	<!-- jquery confim -->
 	<!-- <link rel="stylesheet" href="/siiupa/js/jquery-confirm.min.css">
 	<script src="/siiupa/js/jquery-confirm.min.js"></script> -->

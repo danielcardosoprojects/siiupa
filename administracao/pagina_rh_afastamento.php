@@ -34,7 +34,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/siiupa/bd/conectabd.php');
     </table>
 
      <!-- Axios JS -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const table = $('#example').DataTable({
