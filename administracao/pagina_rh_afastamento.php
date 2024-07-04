@@ -46,7 +46,7 @@
 
             showLoader();
 
-            axios.get('apiafastamentos.php')
+            axios.get('administracao/apiafastamentos.php')
                 .then(response => {
                     const { afastamentos, cargos, tiposAfastamentos } = response.data;
 
