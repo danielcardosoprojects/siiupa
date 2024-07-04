@@ -37,7 +37,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/siiupa/bd/conectabd.php');
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const table = $('#example').DataTable({
+            const table = $('#servidores-table').DataTable({
                 "pageLength": 15,
                 "order": [[0, "desc"]]
             });
