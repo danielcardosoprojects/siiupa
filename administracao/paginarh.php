@@ -351,6 +351,9 @@
             case 'atestados':
                 echo "<script>$(document).ready(function() {loadPage('pagina_rh_atestados');});</script>";
                 break;
+                case 'afastamentos':
+                    echo "<script>$(document).ready(function() {loadPage('pagina_rh_afastamento');});</script>";
+                    break;
             case 'acionamentos':
                 echo "<script>$(document).ready(function() {loadPage('pagina_rh_acionamentos');});</script>";
                 break;
