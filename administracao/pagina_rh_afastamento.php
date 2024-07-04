@@ -32,9 +32,14 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/siiupa/bd/conectabd.php');
             </tr>
         </thead>
     </table>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
      <!-- Axios JS -->
-    
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <!-- Axios JS -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const table = $('#servidores-table').DataTable({
@@ -101,3 +106,5 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/siiupa/bd/conectabd.php');
             });
         });
     </script>
+
+
