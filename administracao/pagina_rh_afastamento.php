@@ -8,8 +8,7 @@
             z-index: 1000;
         }
     </style>
-</head>
-<body>
+
     <div id="loader">
         <img src="https://i.gifer.com/ZZ5H.gif" alt="Carregando..." />
     </div>
@@ -87,5 +86,3 @@
                 });
         });
     </script>
-</body>
-</html>
