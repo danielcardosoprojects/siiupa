@@ -16,7 +16,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/siiupa/bd/conectabd.php');
     <div id="loader">
         <img src="https://i.gifer.com/ZZ5H.gif" alt="Carregando..." />
     </div>
-    <table id="example" class="display" style="width:100%">
+    <table id="servidores-table" class="display" style="width:100%">
         <thead>
             <tr>
                 <th>ID</th>
@@ -88,6 +88,16 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/siiupa/bd/conectabd.php');
             })).catch(error => {
                 console.error('Erro ao buscar dados:', error);
                 hideLoader();
+            });
+
+            $('#servidores-table').DataTable({
+                language: {
+                    url: "//cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json"
+                },
+                pageLength: 10,
+                lengthChange: false,
+                searching: true,
+                ordering: true
             });
         });
     </script>
