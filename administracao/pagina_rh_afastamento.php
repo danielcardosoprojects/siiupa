@@ -53,7 +53,7 @@
                 document.getElementById('loader').style.display = 'none';
             };
 
-            showLoader();
+           // showLoader();
 
             axios.all([
                 axios.get('https://siupa.com.br/siiupa/api/rh/api.php/records/tb_afastamento?order=id,desc&join=tb_funcionario'),
