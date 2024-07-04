@@ -63,7 +63,7 @@
             const diff = new Date(endDate - startDate);
             const years = diff.getUTCFullYear() - 1970;
             const months = diff.getUTCMonth();
-            const days = diff.getUTCDate() - 1;
+            const days = diff.getUTCDate();
             return `${years} anos, ${months} meses, ${days} dias`;
         };
 
