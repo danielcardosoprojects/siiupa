@@ -22,6 +22,8 @@
     <thead>
         <tr>
             <th>ID</th>
+            <th>Em Vigor</th>
+            <th>Afastamento</th>
             <th>Funcionário</th>
             <th>Setor</th>
             <th>CPF</th>
@@ -29,8 +31,8 @@
             <th>Data Início</th>
             <th>Data Fim</th>
             <th>Duração</th>
-            <th>Em Vigor</th>
-            <th>Afastamento</th>
+            
+            
             <th>Observações</th>
             <th>Criado em</th>
         </tr>
@@ -105,6 +107,8 @@
 
                     table.row.add([
                         record.id,
+                        emVigor,
+                        afastamento,
                         record.fk_funcionario.nome,
                         setor,
                         record.fk_funcionario.cpf,
@@ -112,8 +116,8 @@
                         dataInicio,
                         dataFim,
                         duracao,
-                        emVigor,
-                        afastamento,
+                        
+                        
                         record.afastamento_obs,
                         formatDateBR(record.created_at)
                     ]).draw();
