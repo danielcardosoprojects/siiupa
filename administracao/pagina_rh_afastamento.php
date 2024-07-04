@@ -84,7 +84,8 @@
                 }, {});
 
                 const setoresMap = setores.records.reduce((map, setor) => {
-                    map[setores.id] = setores.setor;
+                    
+                    map[setor.id] = setor.setor;
                     return map;
                 }, {});
 
