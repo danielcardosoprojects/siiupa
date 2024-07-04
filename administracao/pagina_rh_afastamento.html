@@ -42,30 +42,28 @@
                 .then(response => {
                     const records = response.data.records;
                     records.forEach(record => {
-                        axios.get(`https://siupa.com.br/siiupa/api/rh/api.php/records/tb_cargo/${record.fk_funcionario.fk_cargo}`)
-                            .then(cargoResponse => {
-                                const cargo = cargoResponse.data.records[0].nome;
+                        const cargoUrl = `https://siupa.com.br/siiupa/api/rh/api.php/records/tb_cargo/${record.fk_funcionario.fk_cargo}`;
+                        const afastamentoUrl = `https://siupa.com.br/siiupa/api/rh/api.php/records/tb_afastamentos/${record.fk_afastamentos}`;
 
-                                axios.get(`https://siupa.com.br/siiupa/api/rh/api.php/records/tb_afastamentos/${record.fk_afastamentos}`)
-                                    .then(afastamentoResponse => {
-                                        const afastamento = afastamentoResponse.data.records[0].afastamento;
+                        axios.all([axios.get(cargoUrl), axios.get(afastamentoUrl)])
+                            .then(axios.spread((cargoResponse, afastamentoResponse) => {
+                                const cargo = cargoResponse.data.records[0] ? cargoResponse.data.records[0].nome : 'N/A';
+                                const afastamento = afastamentoResponse.data.records[0] ? afastamentoResponse.data.records[0].afastamento : 'N/A';
 
-                                        table.row.add([
-                                            record.id,
-                                            record.fk_funcionario.nome,
-                                            record.fk_funcionario.funcao_upa,
-                                            record.fk_funcionario.cpf,
-                                            cargo,
-                                            record.data_inicio,
-                                            record.data_fim,
-                                            afastamento,
-                                            record.afastamento_obs,
-                                            record.created_at
-                                        ]).draw();
-                                    })
-                                    .catch(error => console.error('Erro ao buscar afastamento:', error));
-                            })
-                            .catch(error => console.error('Erro ao buscar cargo:', error));
+                                table.row.add([
+                                    record.id,
+                                    record.fk_funcionario.nome,
+                                    record.fk_funcionario.funcao_upa,
+                                    record.fk_funcionario.cpf,
+                                    cargo,
+                                    record.data_inicio,
+                                    record.data_fim,
+                                    afastamento,
+                                    record.afastamento_obs,
+                                    record.created_at
+                                ]).draw();
+                            }))
+                            .catch(error => console.error('Erro ao buscar dados relacionados:', error));
                     });
                 })
                 .catch(error => console.error('Erro ao buscar dados:', error));
