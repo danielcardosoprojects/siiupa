@@ -48,11 +48,11 @@
             });
 
             const showLoader = () => {
-                document.getElementById('loaders').style.display = 'block';
+                document.getElementById('loader').style.display = 'block';
             };
 
             const hideLoader = () => {
-                document.getElementById('loaders').style.display = 'none';
+                document.getElementById('loader').style.display = 'none';
             };
 
             showLoader();
