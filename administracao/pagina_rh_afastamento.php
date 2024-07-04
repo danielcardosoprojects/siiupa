@@ -23,7 +23,7 @@
         <tr>
             <th>ID</th>
             <th>Funcionário</th>
-            <th>Função</th>
+            <th>Setor</th>
             <th>CPF</th>
             <th>Cargo</th>
             <th>Data Início</th>
