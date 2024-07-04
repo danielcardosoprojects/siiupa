@@ -10,7 +10,7 @@
     </style>
 
     <div id="loader">
-        <img src="https://i.gifer.com/ZZ5H.gif" alt="Carregando..." />
+        <img src="https://www.blogson.com.br/wp-content/uploads/2017/10/loading-gif-transparent-10.gif" alt="Carregando..." />
     </div>
     <table id="example" class="display" style="width:100%">
         <thead>
