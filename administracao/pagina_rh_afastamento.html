@@ -38,35 +38,40 @@
                 "order": [[0, "desc"]]
             });
 
-            axios.get('https://siupa.com.br/siiupa/api/rh/api.php/records/tb_afastamento?order=id,desc&join=tb_funcionario')
-                .then(response => {
-                    const records = response.data.records;
-                    records.forEach(record => {
-                        const cargoUrl = `https://siupa.com.br/siiupa/api/rh/api.php/records/tb_cargo/${record.fk_funcionario.fk_cargo}`;
-                        const afastamentoUrl = `https://siupa.com.br/siiupa/api/rh/api.php/records/tb_afastamentos/${record.fk_afastamentos}`;
+            axios.all([
+                axios.get('https://siupa.com.br/siiupa/api/rh/api.php/records/tb_afastamento?order=id,desc&join=tb_funcionario'),
+                axios.get('https://siupa.com.br/siiupa/api/rh/api.php/records/tb_cargo'),
+                axios.get('https://siupa.com.br/siiupa/api/rh/api.php/records/tb_afastamentos')
+            ]).then(axios.spread((afastamentosResponse, cargosResponse, tiposAfastamentosResponse) => {
+                const afastamentos = afastamentosResponse.data.records;
+                const cargos = cargosResponse.data.records.reduce((map, cargo) => {
+                    map[cargo.id] = cargo.nome;
+                    return map;
+                }, {});
+                const tiposAfastamentos = tiposAfastamentosResponse.data.records.reduce((map, tipo) => {
+                    map[tipo.id] = tipo.afastamento;
+                    return map;
+                }, {});
 
-                        axios.all([axios.get(cargoUrl), axios.get(afastamentoUrl)])
-                            .then(axios.spread((cargoResponse, afastamentoResponse) => {
-                                const cargo = cargoResponse.data.records[0] ? cargoResponse.data.records[0].nome : 'N/A';
-                                const afastamento = afastamentoResponse.data.records[0] ? afastamentoResponse.data.records[0].afastamento : 'N/A';
+                afastamentos.forEach(record => {
+                    console.log(cargos[record.fk_funcionario.fk_cargo]);
+                    const cargo = cargos[record.fk_funcionario.fk_cargo] || 'N/A';
+                    const afastamento = tiposAfastamentos[record.fk_afastamentos] || 'N/A';
 
-                                table.row.add([
-                                    record.id,
-                                    record.fk_funcionario.nome,
-                                    record.fk_funcionario.funcao_upa,
-                                    record.fk_funcionario.cpf,
-                                    cargo,
-                                    record.data_inicio,
-                                    record.data_fim,
-                                    afastamento,
-                                    record.afastamento_obs,
-                                    record.created_at
-                                ]).draw();
-                            }))
-                            .catch(error => console.error('Erro ao buscar dados relacionados:', error));
-                    });
-                })
-                .catch(error => console.error('Erro ao buscar dados:', error));
+                    table.row.add([
+                        record.id,
+                        record.fk_funcionario.nome,
+                        record.fk_funcionario.funcao_upa,
+                        record.fk_funcionario.cpf,
+                        cargo,
+                        record.data_inicio,
+                        record.data_fim,
+                        afastamento,
+                        record.afastamento_obs,
+                        record.created_at
+                    ]).draw();
+                });
+            })).catch(error => console.error('Erro ao buscar dados:', error));
         });
     </script>
 </body>
