@@ -1,5 +1,5 @@
 <?php
-include_once($_SERVER['DOCUMENT_ROOT'].'/siiupa/bd/conectabd.php');
+//include_once($_SERVER['DOCUMENT_ROOT'].'/siiupa/bd/conectabd.php');
 //include_once($_SERVER['DOCUMENT_ROOT'].'/siiupa/bd/nivel.php');
 ?>
  <style>
@@ -95,15 +95,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/siiupa/bd/conectabd.php');
                 hideLoader();
             });
 
-            $('#servidores-table').DataTable({
-                language: {
-                    url: "//cdn.datatables.net/plug-ins/1.10.24/i18n/Portuguese-Brasil.json"
-                },
-                pageLength: 10,
-                lengthChange: false,
-                searching: true,
-                ordering: true
-            });
+        
         });
     </script>
 
