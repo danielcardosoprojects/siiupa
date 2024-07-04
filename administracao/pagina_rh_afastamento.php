@@ -13,9 +13,7 @@
         }
     </style>
 
-    <div id="loaders">
-        <img src="https://i.gifer.com/ZZ5H.gif" alt="Carregando..." />
-    </div>
+
     <table id="servidores-table" class="display" style="width:100%">
         <thead>
             <tr>
