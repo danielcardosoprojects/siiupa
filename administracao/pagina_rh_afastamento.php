@@ -26,14 +26,14 @@
             <th>Afastamento</th>
             <th>Funcionário</th>
             <th>Setor</th>
-            <th>CPF</th>
+
             <th>Cargo</th>
             <th>Data Início</th>
             <th>Data Fim</th>
             <th>Duração</th>
             
             
-            <th>Observações</th>
+      
             <th>Criado em</th>
         </tr>
     </thead>
@@ -111,14 +111,14 @@
                         afastamento,
                         record.fk_funcionario.nome,
                         setor,
-                        record.fk_funcionario.cpf,
+                    
                         cargo,
                         dataInicio,
                         dataFim,
                         duracao,
                         
                         
-                        record.afastamento_obs,
+           
                         formatDateBR(record.created_at)
                     ]).draw();
                 });
