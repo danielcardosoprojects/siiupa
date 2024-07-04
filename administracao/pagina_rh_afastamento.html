@@ -25,58 +25,48 @@
         </thead>
     </table>
 
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <!-- Axios JS -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#example').DataTable({
-                "ajax": {
-                    "url": "https://siupa.com.br/siiupa/api/rh/api.php/records/tb_afastamento?order=id,desc&join=tb_funcionario",
-                    "dataSrc": "records"
-                },
-                "columns": [
-                    { "data": "id" },
-                    { "data": "fk_funcionario.nome" },
-                    { "data": "fk_funcionario.funcao_upa" },
-                    { "data": "fk_funcionario.cpf" },
-                    {
-                        "data": "fk_funcionario.fk_cargo",
-                        "render": function(data, type, row) {
-                            var cargo = '';
-                            $.ajax({
-                                url: `https://siupa.com.br/siiupa/api/rh/api.php/records/tb_cargo/${data}`,
-                                async: false,
-                                success: function(result) {
-                                    cargo = result.records[0].nome;
-                                }
-                            });
-                            return cargo;
-                        }
-                    },
-                    { "data": "data_inicio" },
-                    { "data": "data_fim" },
-                    {
-                        "data": "fk_afastamentos",
-                        "render": function(data, type, row) {
-                            var afastamento = '';
-                            $.ajax({
-                                url: `https://siupa.com.br/siiupa/api/rh/api.php/records/tb_afastamentos/${data}`,
-                                async: false,
-                                success: function(result) {
-                                    afastamento = result.records[0].afastamento;
-                                }
-                            });
-                            return afastamento;
-                        }
-                    },
-                    { "data": "afastamento_obs" },
-                    { "data": "created_at" }
-                ],
+        document.addEventListener('DOMContentLoaded', function() {
+            const table = $('#example').DataTable({
                 "pageLength": 15,
                 "order": [[0, "desc"]]
             });
+
+            axios.get('https://siupa.com.br/siiupa/api/rh/api.php/records/tb_afastamento?order=id,desc&join=tb_funcionario')
+                .then(response => {
+                    const records = response.data.records;
+                    records.forEach(record => {
+                        axios.get(`https://siupa.com.br/siiupa/api/rh/api.php/records/tb_cargo/${record.fk_funcionario.fk_cargo}`)
+                            .then(cargoResponse => {
+                                const cargo = cargoResponse.data.records[0].nome;
+
+                                axios.get(`https://siupa.com.br/siiupa/api/rh/api.php/records/tb_afastamentos/${record.fk_afastamentos}`)
+                                    .then(afastamentoResponse => {
+                                        const afastamento = afastamentoResponse.data.records[0].afastamento;
+
+                                        table.row.add([
+                                            record.id,
+                                            record.fk_funcionario.nome,
+                                            record.fk_funcionario.funcao_upa,
+                                            record.fk_funcionario.cpf,
+                                            cargo,
+                                            record.data_inicio,
+                                            record.data_fim,
+                                            afastamento,
+                                            record.afastamento_obs,
+                                            record.created_at
+                                        ]).draw();
+                                    })
+                                    .catch(error => console.error('Erro ao buscar afastamento:', error));
+                            })
+                            .catch(error => console.error('Erro ao buscar cargo:', error));
+                    });
+                })
+                .catch(error => console.error('Erro ao buscar dados:', error));
         });
     </script>
 </body>
