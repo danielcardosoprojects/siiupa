@@ -30,7 +30,7 @@
     </table>
 
  <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        
             const table = $('#example').DataTable({
                 "pageLength": 15,
                 "order": [[0, "desc"]]
@@ -84,5 +84,5 @@
                     console.error('Erro ao buscar dados:', error);
                     hideLoader();
                 });
-        });
+        
     </script>
