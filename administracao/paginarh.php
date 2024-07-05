@@ -380,6 +380,8 @@
                 break;
             case 'rhcadastraferias':
                 //include_once('pagina_rh_cadastraferias.php');
+                include_once($_SERVER['DOCUMENT_ROOT'].'/siiupa/administracao/pagina_rh_cadastraferias.php');
+
                 echo "<script>$(document).ready(function() {loadPage('pagina_rh_cadastraferias');});</script>";
                 break;
             default:
