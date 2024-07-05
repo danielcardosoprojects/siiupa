@@ -380,7 +380,7 @@
                 break;
             case 'rhcadastraferias':
                 include_once('paginarh_cadastraferias.php');
-
+                echo "<script>$(document).ready(function() {loadPage('paginarh_cadastraferias');});</script>";
                 break;
             default:
                 echo "<script>$(document).ready(function() {loadPage('pagina_rh_home');});</script>";
