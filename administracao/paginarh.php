@@ -183,9 +183,9 @@
         <small><a href="http://cnes2.datasus.gov.br/Exibe_Ficha_Estabelecimento.asp?VCo_Unidade=1502407474423&VListar=1&VEstado=15&VMun=150240" target="_blank" class="lei">Site do CNES<img width="20px" src="/siiupa/imagens/icones/diario.jpg"></a></small>
     </h1>
     <script>
-    var dataToken = sessionStorage.getItem("token");
-    //$("#tituloRH").text(dataToken);
-</script>
+        var dataToken = sessionStorage.getItem("token");
+        //$("#tituloRH").text(dataToken);
+    </script>
     <div class="noticias_linha">
         <?php
         $dtz = new DateTimeZone("America/Belem");
@@ -322,7 +322,7 @@
 
         $subsub = pega('subsub');
         // console_log($subsub); // [1,2,3]favicon
-        
+
         switch ($subsub) {
             case null:
                 echo "<script>$(document).ready(function() {loadPage('pagina_rh_home');});</script>";
@@ -330,9 +330,9 @@
             case 'perfil':
                 include_once('pagina_rh_perfil.php');
                 break;
-                case 'servidores_inativos':
-                    include_once('servidores_inativos.php');
-                    break;
+            case 'servidores_inativos':
+                include_once('servidores_inativos.php');
+                break;
             case 'ferias':
                 include_once('pagina_rh_ferias.php');
                 break;
@@ -351,9 +351,9 @@
             case 'atestados':
                 echo "<script>$(document).ready(function() {loadPage('pagina_rh_atestados');});</script>";
                 break;
-                case 'afastamentos':
-                    echo "<script>$(document).ready(function() {loadPage('pagina_rh_afastamento');});</script>";
-                    break;
+            case 'afastamentos':
+                echo "<script>$(document).ready(function() {loadPage('pagina_rh_afastamento');});</script>";
+                break;
             case 'acionamentos':
                 echo "<script>$(document).ready(function() {loadPage('pagina_rh_acionamentos');});</script>";
                 break;
@@ -378,14 +378,14 @@
             case 'rhfolhaadicionaservidor':
                 include_once('pagina_rh_folha_adicionaservidor.php');
                 break;
-            case 'rhcadastraferias':
-                include_once('administracao/pagina_rh_cadastraferias.php');
-                break;
+                case 'rhcadastraferias':
+                    include_once('pagina_rh_cadastraferias.php');
+                    break;
             default:
                 echo "<script>$(document).ready(function() {loadPage('pagina_rh_home');});</script>";
                 break;
         }
-        
+
         ?>
     </div>
 
