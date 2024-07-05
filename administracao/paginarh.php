@@ -379,7 +379,6 @@
                 include_once('pagina_rh_folha_adicionaservidor.php');
                 break;
             case 'rhcadastraferias':
-                //echo "<script>$(document).ready(function() {loadPage('paginarh_cadastraferias');});</script>";
                 include('paginarh_cadastraferias.php');
                 break;
             default:
