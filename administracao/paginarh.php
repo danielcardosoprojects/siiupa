@@ -379,10 +379,8 @@
                 include_once('pagina_rh_folha_adicionaservidor.php');
                 break;
             case 'rhcadastraferias':
-                //include_once('pagina_rh_cadastraferias.php');
-                include_once($_SERVER['DOCUMENT_ROOT'].'/siiupa/administracao/pagina_rh_cadastraferias.php');
+                include_once('paginarh_cadastraferias.php');
 
-                echo "<script>$(document).ready(function() {loadPage('pagina_rh_cadastraferias');});</script>";
                 break;
             default:
                 echo "<script>$(document).ready(function() {loadPage('pagina_rh_home');});</script>";
