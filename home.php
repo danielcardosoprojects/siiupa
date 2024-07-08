@@ -49,9 +49,9 @@
                  <div class="card-body">
                      <a href="/siiupa/farmacia/" class="btn btn-primary">Farmácia</a>
                      <br>
-                   
-                         <a href="/siiupa/farmacia/estoque/" class="btn btn-sm btn-light">Estoque</a>
-                         <?php
+
+                     <a href="/siiupa/farmacia/estoque/" class="btn btn-sm btn-light">Estoque</a>
+                     <?php
                         if ($_SESSION['nivel'] == 2 || $_SESSION['nivel'] == 1) {
                         ?>
                          <a href="/siiupa/farmacia/movimento/entrada" class="btn btn-sm btn-light">Entrada de Item</a>
@@ -70,11 +70,14 @@
              </div>
          </div>
          <div class="col-sm">
+             <div class="card" style="width: 18rem;text-align:center">
+             <br>
+                 <img src="imagens/icones/postoenfermagem.png" class="card-img-top" alt="..." height="150px">
+                 <div class="card-body">
+                     <a href="#" class="btn btn-primary">Posto de Enfermagem</a>
 
-
-
-
-
+                 </div>
+             </div>
          </div>
      </div>
  </div>
