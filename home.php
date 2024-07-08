@@ -74,6 +74,7 @@
              <br>
                  <img src="imagens/icones/postoenfermagem.svg" class="card-img-top" alt="..." >
                  <div class="card-body">
+                    <br>
                      <a href="#" class="btn btn-primary">Posto de Enfermagem</a>
                      <a href="#" class="btn btn-sm btn-light">Censo</a>
                      <a href="#" class="btn btn-sm btn-light">Dieta</a>
