@@ -72,7 +72,7 @@
          <div class="col-sm">
              <div class="card" style="width: 18rem;text-align:center">
              <br>
-                 <img src="imagens/icones/postoenfermagem.svg" class="card-img-top" alt="..." >
+                 <img src="imagens/icones/postoenfermagem.svg" class="card-img-top" alt="..." height="150px">
                  <div class="card-body">
                     <br>
                      <a href="#" class="btn btn-primary">Posto de Enfermagem</a>
