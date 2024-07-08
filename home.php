@@ -75,7 +75,11 @@
                  <img src="imagens/icones/postoenfermagem.png" class="card-img-top" alt="..." >
                  <div class="card-body">
                      <a href="#" class="btn btn-primary">Posto de Enfermagem</a>
-
+                     <a href="#" class="btn btn-sm btn-light">Censo</a>
+                     <a href="#" class="btn btn-sm btn-light">Dieta</a>
+                     <a href="#" class="btn btn-sm btn-light">Prescrição de Enfermagem</a>
+                     <a href="#" class="btn btn-sm btn-light">Evolução</a>
+                     <a href="#" class="btn btn-sm btn-light">Pacientes</a>
                  </div>
              </div>
          </div>
