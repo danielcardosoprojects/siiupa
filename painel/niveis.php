@@ -187,4 +187,29 @@ $usuarios = $result['response']['records'] ?? [];
                 <td><?php echo $row['nome']; ?></td>
                 <td><?php echo $row['nivel']; ?></td>
                 <td>
-                    <button class="
+                    <button class="btn btn-warning btn-sm" onclick="editUsuario('<?php echo $row['id']; ?>', '<?php echo $row['nome']; ?>', '<?php echo $row['nivel']; ?>')">Editar</button>
+                    <a href="?setor=adm&sub=niveis&delete_usuario=<?php echo $row['id']; ?>" class="btn btn-danger btn-sm">Excluir</a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        </tbody>
+    </table>
+</div>
+
+<script>
+function submitForm(formId) {
+    document.getElementById(formId).submit();
+}
+
+function editNivel(id, nivel, descricao) {
+    document.getElementById('id').value = id;
+    document.getElementById('nivel').value = nivel;
+    document.getElementById('descricao').value = descricao;
+}
+
+function editUsuario(id, nome, nivel) {
+    document.getElementById('id_usuario').value = id;
+    document.getElementById('nome').value = nome;
+    document.getElementById('nivel_usuario').value = nivel;
+}
+</script>
