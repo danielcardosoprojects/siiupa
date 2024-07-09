@@ -74,7 +74,7 @@ if (!isset($_SESSION['nivel'])) {
 		} elseif ($sub == "rhalimentacao") {
 			include("pagina_rh_alimentacao.php");		
 		} elseif ($sub == "niveis") {
-			include("../painel/niveis.php");		
+			include("painel/niveis.php");		
 		} 
 	} else {
 	?>
