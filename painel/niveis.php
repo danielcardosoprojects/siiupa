@@ -2,6 +2,7 @@
 include_once('../bd/conectabd.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    var_dump($_POST);
     $nivel = $_POST['nivel'];
     $descricao = $_POST['descricao'];
 
