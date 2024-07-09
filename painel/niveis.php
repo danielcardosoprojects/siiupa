@@ -89,7 +89,7 @@ $records = $result['response']['records'] ?? [];
                 <td><?php echo $row['descricao']; ?></td>
                 <td>
                     <button class="btn btn-warning btn-sm" onclick="editNivel('<?php echo $row['id']; ?>', '<?php echo $row['nivel']; ?>', '<?php echo $row['descricao']; ?>')">Editar</button>
-                    <a href="?delete=<?php echo $row['id']; ?>" class="btn btn-danger btn-sm">Excluir</a>
+                    <a href="?setor=adm&sub=niveis&delete=<?php echo $row['id']; ?>" class="btn btn-danger btn-sm">Excluir</a>
                 </td>
             </tr>
         <?php endforeach; ?>
