@@ -14,8 +14,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         // Inserir
         $stmt = new BD;
-        var_dump($stmt);
+        
         $stmt = $conn->prepare("INSERT INTO u940659928_siupa.tb_niveis_acesso (nivel, descricao) VALUES (?, ?)");
+        var_dump($stmt);
         $stmt->bind_param("is", $nivel, $descricao);
     }
     $stmt->execute();
