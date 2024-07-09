@@ -1,39 +1,63 @@
 <?php
-require('../bd/conectabsd.php');
+$api_url = 'https://www.siupa.com.br/siiupa/api/rh/api.php/records/tb_niveis_acesso';
+
+function make_api_request($url, $method, $data = null) {
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
+    if ($data) {
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+    }
+    $response = curl_exec($ch);
+    curl_close($ch);
+    return json_decode($response, true);
+}
+
+$message = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    var_dump($_POST);
     $nivel = $_POST['nivel'];
     $descricao = $_POST['descricao'];
 
-    if (isset($_POST['id'])) {
+    $data = ['nivel' => $nivel, 'descricao' => $descricao];
+
+    if (isset($_POST['id']) && !empty($_POST['id'])) {
         // Atualizar
         $id = $_POST['id'];
-        $stmt = $conn->prepare("UPDATE u940659928_siupa.tb_niveis_acesso SET nivel = ?, descricao = ? WHERE id = ?");
-        $stmt->bind_param("isi", $nivel, $descricao, $id);
+        $url = $api_url . '/' . $id;
+        $response = make_api_request($url, 'PUT', $data);
+        if (isset($response['code']) && $response['code'] == 200) {
+            $message = "Nível de acesso atualizado com sucesso.";
+        } else {
+            $message = "Erro ao atualizar nível de acesso.";
+        }
     } else {
         // Inserir
-        $stmt = new BD;
-        
-        $stmt = $conn->prepare("INSERT INTO u940659928_siupa.tb_niveis_acesso (nivel, descricao) VALUES (?, ?)");
-        echo($stmt);
-        $stmt->bind_param("is", $nivel, $descricao);
+        $response = make_api_request($api_url, 'POST', $data);
+        if (isset($response['code']) && $response['code'] == 200) {
+            $message = "Nível de acesso criado com sucesso.";
+        } else {
+            $message = "Erro ao criar nível de acesso.";
+        }
     }
-    $stmt->execute();
-    $stmt->close();
 }
 
 // Excluir
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
-    $stmt = $conn->prepare("DELETE FROM u940659928_siupa.tb_niveis_acesso WHERE id = ?");
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
-    $stmt->close();
+    $url = $api_url . '/' . $id;
+    $response = make_api_request($url, 'DELETE');
+    if (isset($response['code']) && $response['code'] == 200) {
+        $message = "Nível de acesso excluído com sucesso.";
+    } else {
+        $message = "Erro ao excluir nível de acesso.";
+    }
 }
 
 // Selecionar todos os níveis de acesso
-$result = $conn->query("SELECT * FROM u940659928_siupa.tb_niveis_acesso");
+$response = make_api_request($api_url, 'GET');
+$records = $response['records'] ?? [];
 ?>
 
 <!DOCTYPE html>
@@ -45,6 +69,12 @@ $result = $conn->query("SELECT * FROM u940659928_siupa.tb_niveis_acesso");
 <body>
 <div class="container">
     <h2 class="my-4">Gerenciamento de Níveis de Acesso</h2>
+
+    <?php if ($message): ?>
+        <div class="alert alert-info">
+            <?php echo $message; ?>
+        </div>
+    <?php endif; ?>
 
     <form method="post" action="">
         <div class="form-group">
@@ -72,7 +102,7 @@ $result = $conn->query("SELECT * FROM u940659928_siupa.tb_niveis_acesso");
         </tr>
         </thead>
         <tbody>
-        <?php while ($row = $result->fetch_assoc()): ?>
+        <?php foreach ($records as $row): ?>
             <tr>
                 <td><?php echo $row['id']; ?></td>
                 <td><?php echo $row['nivel']; ?></td>
@@ -82,7 +112,7 @@ $result = $conn->query("SELECT * FROM u940659928_siupa.tb_niveis_acesso");
                     <a href="?delete=<?php echo $row['id']; ?>" class="btn btn-danger btn-sm">Excluir</a>
                 </td>
             </tr>
-        <?php endwhile; ?>
+        <?php endforeach; ?>
         </tbody>
     </table>
 </div>
