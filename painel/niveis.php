@@ -60,13 +60,6 @@ $response = make_api_request($api_url, 'GET');
 $records = $response['records'] ?? [];
 ?>
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title>CRUD de Níveis de Acesso</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
 <div class="container">
     <h2 class="my-4">Gerenciamento de Níveis de Acesso</h2>
 
@@ -76,7 +69,7 @@ $records = $response['records'] ?? [];
         </div>
     <?php endif; ?>
 
-    <form method="post" action="">
+    <form method="post" action="" id="niveis">
         <div class="form-group">
             <label for="nivel">Nível</label>
             <input type="number" class="form-control" id="nivel" name="nivel" required>
@@ -124,5 +117,3 @@ function editNivel(id, nivel, descricao) {
     document.getElementById('descricao').value = descricao;
 }
 </script>
-</body>
-</html>
