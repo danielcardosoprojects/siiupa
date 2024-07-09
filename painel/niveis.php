@@ -1,18 +1,5 @@
 <?php
-$api_url = 'https://www.siupa.com.br/siiupa/api/rh/api.php/records/tb_niveis_acesso';
-
-function make_api_request($url, $method, $data = null) {
-    $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, $method);
-    if ($data) {
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-    }
-    $response = curl_exec($ch);
-    curl_close($ch);
-    return json_decode($response, true);
-}
+require 'api_niveis.php';
 
 $message = '';
 
@@ -26,16 +13,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Atualizar
         $id = $_POST['id'];
         $url = $api_url . '/' . $id;
-        $response = make_api_request($url, 'PUT', $data);
-        if (isset($response['code']) && $response['code'] == 200) {
+        $result = make_api_request($url, 'PUT', $data);
+        if ($result['http_code'] >= 200 && $result['http_code'] < 300) {
             $message = "Nível de acesso atualizado com sucesso.";
         } else {
             $message = "Erro ao atualizar nível de acesso.";
         }
     } else {
         // Inserir
-        $response = make_api_request($api_url, 'POST', $data);
-        if (isset($response['code']) && $response['code'] == 200) {
+        $result = make_api_request($api_url, 'POST', $data);
+        if ($result['http_code'] >= 200 && $result['http_code'] < 300) {
             $message = "Nível de acesso criado com sucesso.";
         } else {
             $message = "Erro ao criar nível de acesso.";
@@ -47,8 +34,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
     $url = $api_url . '/' . $id;
-    $response = make_api_request($url, 'DELETE');
-    if (isset($response['code']) && $response['code'] == 200) {
+    $result = make_api_request($url, 'DELETE');
+    if ($result['http_code'] >= 200 && $result['http_code'] < 300) {
         $message = "Nível de acesso excluído com sucesso.";
     } else {
         $message = "Erro ao excluir nível de acesso.";
@@ -56,8 +43,8 @@ if (isset($_GET['delete'])) {
 }
 
 // Selecionar todos os níveis de acesso
-$response = make_api_request($api_url, 'GET');
-$records = $response['records'] ?? [];
+$result = make_api_request($api_url, 'GET');
+$records = $result['response']['records'] ?? [];
 ?>
 
 <div class="container">
@@ -69,7 +56,7 @@ $records = $response['records'] ?? [];
         </div>
     <?php endif; ?>
 
-    <form method="post" action="" id="niveis">
+    <form method="post" action="">
         <div class="form-group">
             <label for="nivel">Nível</label>
             <input type="number" class="form-control" id="nivel" name="nivel" required>
