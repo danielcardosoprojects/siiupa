@@ -76,6 +76,7 @@
                  <div class="card-body">
                     <br>
                      <a href="#" class="btn btn-primary">Posto de Enfermagem</a>
+                     <br>
                      <a href="#" class="btn btn-sm btn-light">Censo</a>
                      <a href="#" class="btn btn-sm btn-light">Dieta</a>
                      <a href="#" class="btn btn-sm btn-light">Prescrição de Enfermagem</a>
