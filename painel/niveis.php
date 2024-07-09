@@ -1,5 +1,5 @@
 <?php
-include_once('../bd/conectabd.php');
+require('../bd/conectabd.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     var_dump($_POST);
@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt = new BD;
         
         $stmt = $conn->prepare("INSERT INTO u940659928_siupa.tb_niveis_acesso (nivel, descricao) VALUES (?, ?)");
-        var_dump($stmt);
+        echo($stmt);
         $stmt->bind_param("is", $nivel, $descricao);
     }
     $stmt->execute();
