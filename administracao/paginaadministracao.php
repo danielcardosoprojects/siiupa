@@ -72,8 +72,9 @@ if (!isset($_SESSION['nivel'])) {
 		} elseif ($sub == "rhescala_exibe") {
 			include("pagina_escala_exibe.php");
 		} elseif ($sub == "rhalimentacao") {
-			include("pagina_rh_alimentacao.php");
-		
+			include("pagina_rh_alimentacao.php");		
+		} elseif ($sub == "niveis") {
+			include("../painel/niveis.php");		
 		} 
 	} else {
 	?>
