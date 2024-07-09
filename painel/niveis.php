@@ -59,8 +59,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['nome'])) {
     if (isset($_POST['id_usuario']) && !empty($_POST['id_usuario'])) {
         // Atualizar
         $id = $_POST['id_usuario'];
-        $url = $api_url . '/' . $id;
-        $result = make_api_request($url, 'PUT', $data);
+        $url = $api_url_usuarios . '/' . $id;
+        $result = make_api_request_usuarios($url, 'PUT', $data);
         if ($result['http_code'] >= 200 && $result['http_code'] < 300) {
             $message_usuarios = "Usuário atualizado com sucesso.";
         } else {
@@ -68,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['nome'])) {
         }
     } else {
         // Inserir
-        $result = make_api_request($api_url, 'POST', $data);
+        $result = make_api_request_usuarios($api_url_usuarios, 'POST', $data);
         if ($result['http_code'] >= 200 && $result['http_code'] < 300) {
             $message_usuarios = "Usuário criado com sucesso.";
         } else {
@@ -80,8 +80,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['nome'])) {
 // Excluir Usuários
 if (isset($_GET['delete_usuario'])) {
     $id = $_GET['delete_usuario'];
-    $url = $api_url . '/' . $id;
-    $result = make_api_request($url, 'DELETE');
+    $url = $api_url_usuarios . '/' . $id;
+    $result = make_api_request_usuarios($url, 'DELETE');
     if ($result['http_code'] >= 200 && $result['http_code'] < 300) {
         $message_usuarios = "Usuário excluído com sucesso.";
     } else {
@@ -90,8 +90,7 @@ if (isset($_GET['delete_usuario'])) {
 }
 
 // Selecionar todos os usuários
-$result = make_api_request($api_url, 'GET');
-var_dump($result);
+$result = make_api_request_usuarios($api_url_usuarios, 'GET');
 $usuarios = $result['response']['records'] ?? [];
 ?>
 
@@ -188,29 +187,4 @@ $usuarios = $result['response']['records'] ?? [];
                 <td><?php echo $row['nome']; ?></td>
                 <td><?php echo $row['nivel']; ?></td>
                 <td>
-                    <button class="btn btn-warning btn-sm" onclick="editUsuario('<?php echo $row['id']; ?>', '<?php echo $row['nome']; ?>', '<?php echo $row['nivel']; ?>')">Editar</button>
-                    <a href="?setor=adm&sub=niveis&delete_usuario=<?php echo $row['id']; ?>" class="btn btn-danger btn-sm">Excluir</a>
-                </td>
-            </tr>
-        <?php endforeach; ?>
-        </tbody>
-    </table>
-</div>
-
-<script>
-function submitForm(formId) {
-    document.getElementById(formId).submit();
-}
-
-function editNivel(id, nivel, descricao) {
-    document.getElementById('id').value = id;
-    document.getElementById('nivel').value = nivel;
-    document.getElementById('descricao').value = descricao;
-}
-
-function editUsuario(id, nome, nivel) {
-    document.getElementById('id_usuario').value = id;
-    document.getElementById('nome').value = nome;
-    document.getElementById('nivel_usuario').value = nivel;
-}
-</script>
+                    <button class="
