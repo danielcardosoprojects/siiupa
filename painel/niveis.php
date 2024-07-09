@@ -56,7 +56,7 @@ $records = $result['response']['records'] ?? [];
         </div>
     <?php endif; ?>
 
-    <form method="post" action="">
+    <form method="post" action="https://siupa.com.br/siiupa/?setor=adm&sub=niveis">
         <div class="form-group">
             <label for="nivel">Nível</label>
             <input type="number" class="form-control" id="nivel" name="nivel" required>
