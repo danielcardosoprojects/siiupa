@@ -91,6 +91,7 @@ if (isset($_GET['delete_usuario'])) {
 
 // Selecionar todos os usuários
 $result = make_api_request($api_url, 'GET');
+var_dump($result);
 $usuarios = $result['response']['records'] ?? [];
 ?>
 
