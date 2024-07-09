@@ -1,4 +1,3 @@
-<!-- CRUD de Níveis de Acesso (crud_niveis_acesso.php) -->
 <?php
 require 'api_niveis.php';
 
@@ -57,7 +56,7 @@ $records = $result['response']['records'] ?? [];
         </div>
     <?php endif; ?>
 
-    <form method="post" action="https://siupa.com.br/siiupa/?setor=adm&sub=niveis">
+    <form id="niveis" method="post" action="?setor=adm&sub=niveis">
         <div class="form-group">
             <label for="nivel">Nível</label>
             <input type="number" class="form-control" id="nivel" name="nivel" required>
@@ -67,7 +66,7 @@ $records = $result['response']['records'] ?? [];
             <textarea class="form-control" id="descricao" name="descricao"></textarea>
         </div>
         <input type="hidden" name="id" id="id">
-        <button type="submit" class="btn btn-primary">Salvar</button>
+        <button type="button" class="btn btn-primary" onclick="submitForm()">Salvar</button>
     </form>
 
     <hr>
@@ -90,7 +89,7 @@ $records = $result['response']['records'] ?? [];
                 <td><?php echo $row['descricao']; ?></td>
                 <td>
                     <button class="btn btn-warning btn-sm" onclick="editNivel('<?php echo $row['id']; ?>', '<?php echo $row['nivel']; ?>', '<?php echo $row['descricao']; ?>')">Editar</button>
-                    <a href="?delete=<?php echo $row['id']; ?>" class="btn btn-danger btn-sm">Excluir</a>
+                    <a href="?setor=adm&sub=niveis&delete=<?php echo $row['id']; ?>" class="btn btn-danger btn-sm">Excluir</a>
                 </td>
             </tr>
         <?php endforeach; ?>
@@ -99,6 +98,10 @@ $records = $result['response']['records'] ?? [];
 </div>
 
 <script>
+function submitForm() {
+    document.getElementById('niveis').submit();
+}
+
 function editNivel(id, nivel, descricao) {
     document.getElementById('id').value = id;
     document.getElementById('nivel').value = nivel;
