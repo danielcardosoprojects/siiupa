@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bind_param("isi", $nivel, $descricao, $id);
     } else {
         // Inserir
+        $stmt = new BD;
         $stmt = $conn->prepare("INSERT INTO u940659928_siupa.tb_niveis_acesso (nivel, descricao) VALUES (?, ?)");
         $stmt->bind_param("is", $nivel, $descricao);
     }
