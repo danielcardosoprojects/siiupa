@@ -8,11 +8,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['id'])) {
         // Atualizar
         $id = $_POST['id'];
-        $stmt = $conn->prepare("UPDATE tb_niveis_acesso SET nivel = ?, descricao = ? WHERE id = ?");
+        $stmt = $conn->prepare("UPDATE u940659928_siupa.tb_niveis_acesso SET nivel = ?, descricao = ? WHERE id = ?");
         $stmt->bind_param("isi", $nivel, $descricao, $id);
     } else {
         // Inserir
-        $stmt = $conn->prepare("INSERT INTO tb_niveis_acesso (nivel, descricao) VALUES (?, ?)");
+        $stmt = $conn->prepare("INSERT INTO u940659928_siupa.tb_niveis_acesso (nivel, descricao) VALUES (?, ?)");
         $stmt->bind_param("is", $nivel, $descricao);
     }
     $stmt->execute();
@@ -22,14 +22,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 // Excluir
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
-    $stmt = $conn->prepare("DELETE FROM tb_niveis_acesso WHERE id = ?");
+    $stmt = $conn->prepare("DELETE FROM u940659928_siupa.tb_niveis_acesso WHERE id = ?");
     $stmt->bind_param("i", $id);
     $stmt->execute();
     $stmt->close();
 }
 
 // Selecionar todos os níveis de acesso
-$result = $conn->query("SELECT * FROM tb_niveis_acesso");
+$result = $conn->query("SELECT * FROM u940659928_siupa.tb_niveis_acesso");
 ?>
 
 <!DOCTYPE html>
