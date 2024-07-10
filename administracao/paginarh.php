@@ -370,7 +370,7 @@
                 include_once('pagina_rh_folhas.php');
                 break;
             case 'rhfolhasmodifica':
-                include_once('pagina_rh_folhas_criareditar.php');
+                include_once('paginarh_folhas_criareditar.php');
                 break;
             case 'rhfolhaexibe':
                 include_once('pagina_rh_folha.php');
