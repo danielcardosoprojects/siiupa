@@ -410,7 +410,7 @@ include_once('../bd/nivel.php');
                 document.execCommand('copy');
                 tempInput.remove();
 
-                $.notify("Texto copiado: " + textToCopy, "success");
+                $(this).notify("Texto copiado: " + textToCopy, "success");
             });
         });
     </script>
