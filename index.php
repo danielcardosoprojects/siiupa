@@ -98,7 +98,7 @@ include('../conexao/verifica_login.php');
 
 
 
-			background-color: #33A7FF;
+			background-color: transparent;
 
 			text-align: center;
 			padding: 0px;
