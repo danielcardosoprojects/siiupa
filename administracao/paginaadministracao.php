@@ -152,7 +152,7 @@ if (!isset($_SESSION['nivel'])) {
 	#topo {
 		display: flex;
 		gap: 10px;
-		background-color: rgba(255, 255, 255, 0.8);
+		background-color: rgba(85, 85, 85, 0.8);
 		color: #000;
 		
 	}
