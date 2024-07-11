@@ -25,7 +25,7 @@ include('../conexao/verifica_login.php');
 	<link rel="apple-touch-icon" sizes="152x152" href="/siiupa/iconified/apple-touch-icon-152x152.png" />
 	<link rel="apple-touch-icon" sizes="180x180" href="/siiupa/iconified/apple-touch-icon-180x180.png" />
 
-
+	<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 
 
