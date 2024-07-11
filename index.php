@@ -90,7 +90,7 @@ include('../conexao/verifica_login.php');
 			margin: 0;
 			padding: 2px;
 			height: 100%;
-			background-color: grey;
+			background-color: #2c2c2c;
 
 		}
 
