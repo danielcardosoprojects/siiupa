@@ -26,7 +26,7 @@ if (!isset($_SESSION['nivel'])) {
 <div id="topo" class="notprint">
 	
 	<div class="second-navbar">
-		<a class="navbar-brand" href="#">Administrativo</a>
+		<a class="navbar-brand" href="#">Setor Administrativo</a>
 		<a id="abrerh" href="?setor=adm&sub=rh" class="nav-link">Recursos Humanos</a>
 		<a id="abrerh" href="?setor=adm&sub=producao" class="nav-link">Produção e Estatística</a>
 		<a id="abreadministracao" href="administracao/paginaadministracao.php" class="nav-link">Administração</a>
