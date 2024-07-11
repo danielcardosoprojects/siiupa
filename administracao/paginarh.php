@@ -176,7 +176,7 @@
 
 <div style="text-align:left;">
 
-    <h1 text-color="#fff" style="float:left" id="tituloRH">Recursos Humanos
+    <h1 text-color="#fff" style="float:left; font-family: 'Oswald', sans-serif;" id="tituloRH">Recursos Humanos
         <small><a href="administracao/leimunicipal003991999.pdf" target="_blank" class="lei">LEI MUNICIPAL Nº 003/99 <img width="20px" src="/siiupa/imagens/icones/pdf.svg"></a></small>
         <small><a href="https://transparencia.layoutsistemas.com.br/servidores/resumo?codigo_entidade=441402" target="_blank" class="lei">Transparência Saúde <img width="20px" src="/siiupa/imagens/icones/layoutonline.png"></a></small>
         <small><a href="https://sites.google.com/castanhal.pa.gov.br/diariooficialdecastanhal/inicio" target="_blank" class="lei">Diário Oficial <img width="20px" src="/siiupa/imagens/icones/diario.jpg"></a></small>
