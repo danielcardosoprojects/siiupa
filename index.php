@@ -321,7 +321,7 @@ include('../conexao/verifica_login.php');
 						<a id="abreRecepcao" href="#" class="nav-link">Recepção</a>
 					</li>
 				</ul>
-				<div class="d-flex align-items-center">
+				<div class="d-flex align-items-center" style="color:#b0b0b0">
 					<img src="/siiupa/administracao/rh/<?php echo $_SESSION['idServidorUsuario']; ?>/foto_perfil" height="32" class="rounded-circle" alt="Perfil">
 					<span class="ms-2 me-3">
 						<?php echo $_SESSION['nomeusuario']; ?>
