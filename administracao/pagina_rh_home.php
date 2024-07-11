@@ -356,7 +356,7 @@ include_once('../bd/nivel.php');
 
                     //CONTA LINHA
                     echo "<td>$contalinha</td>";
-                    echo "<td id='matriculaFunc_$dados->idfuncionario'><span class='matriculaFunc' data-id='$dados->idfuncionario'>$dados->matricula</span></td>";
+                    echo "<td id='matriculaFunc_$dados->idfuncionario'><span class='matriculaFunc' data-id='$dados->idfuncionario'>$dados->matricula</span><i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->matricula'></span></i></td>";
 
                     //NOME
                     echo "<td><a target='_blank' class='abreperfil'  rel='noreferrer noopener' href='?setor=adm&sub=rh&subsub=perfil&id=$dados->idfuncionario'>$dados->nome</a><i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->nome'></span></i></td>";
@@ -369,7 +369,7 @@ include_once('../bd/nivel.php');
                     } else {
                         $dataAdmissao = "";
                     }
-                    echo "<td>$dados->vinculo <!-- $dataAdmissao --></td>";
+                    echo "<td>$dados->vinculo <i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->vinculo'></span></i> <!-- $dataAdmissao --></td>";
                     // echo "<td>$ref_mes</td>";
                     echo "<td>";
                     $ferias23 = new BD;
