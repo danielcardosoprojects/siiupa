@@ -1,4 +1,4 @@
-﻿<?php 
+﻿<?php
 header('Content-Type: text/html; charset=utf-8');
 include("bd/conectabd.php");
 include('../conexao/verifica_login.php');
@@ -30,7 +30,7 @@ include('../conexao/verifica_login.php');
 
 
 
-	
+
 
 
 	<script src="/siiupa/js/jquery-3.6.0.js"></script>
@@ -41,17 +41,17 @@ include('../conexao/verifica_login.php');
 	<script src="/siiupa/js/jquerymask/src/jquery.mask.js"></script>
 	<script src="/siiupa/js/jquery-ui-1.12.1/jquery-ui.js"></script>
 	<script src="/siiupa/js/jquery.table2excel.js"></script>
-	
+
 	<link rel="stylesheet" href="/siiupa/bootstrap-5.0.0-beta3-dist/css/bootstrap.min.css">
 	<script src="/siiupa/bootstrap-5.0.0-beta3-dist/js/bootstrap.min.js"></script>
 
 	<!-- AXIOS -->
 	<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-	
+
 	<!-- jquery confim -->
 	<!-- <link rel="stylesheet" href="/siiupa/js/jquery-confirm.min.css">
 	<script src="/siiupa/js/jquery-confirm.min.js"></script> -->
-	
+
 	<link rel="stylesheet" href="/siiupa/widgets/jqueryconfirm/jquery-confirm.min.css">
 	<script src="/siiupa/widgets/jqueryconfirm/jquery-confirm.min.js"></script>
 
@@ -80,10 +80,10 @@ include('../conexao/verifica_login.php');
 	<!-- DATA TABLES -->
 	<script type="text/javascript" src="/siiupa/js/dataTables/datatables.min.js"></script>
 
-<link href="/siiupa/js/dataTables/datatables.min.css" rel="stylesheet">
+	<link href="/siiupa/js/dataTables/datatables.min.css" rel="stylesheet">
 
-<!-- Notificações  -->
-<script src="/siiupa/js/notify/notify.min.js"></script>
+	<!-- Notificações  -->
+	<script src="/siiupa/js/notify/notify.min.js"></script>
 
 	<style>
 		body {
@@ -170,41 +170,54 @@ include('../conexao/verifica_login.php');
 		}
 
 		.navbar {
-        background-color: #f8f9fa; /* Subtle background color */
-    }
-    .navbar-brand img {
-        height: 32px; /* Consistent logo size */
-    }
-    .nav-link {
-        color: #333; /* Neutral text color */
-        padding: 8px 12px; /* Consistent padding */
-    }
-    .nav-link:hover {
-        color: #007bff; /* Hover effect */
-    }
-    .btn-outline-info,
-    .btn-outline-danger {
-        border-width: 1px; /* Thinner border */
-        padding: 4px 8px; /* Smaller buttons */
-    }
-    .btn-outline-info {
-        color: #007bff;
-        border-color: #007bff;
-    }
-    .btn-outline-info:hover {
-        background-color: #007bff;
-        color: #fff;
-    }
-    .btn-outline-danger {
-        color: #dc3545;
-        border-color: #dc3545;
-    }
-    .btn-outline-danger:hover {
-        background-color: #dc3545;
-        color: #fff;
-    }
+			background-color: #f8f9fa;
+			/* Subtle background color */
+		}
 
-		 
+		.navbar-brand img {
+			height: 32px;
+			/* Consistent logo size */
+		}
+
+		.nav-link {
+			color: #333;
+			/* Neutral text color */
+			padding: 8px 12px;
+			/* Consistent padding */
+		}
+
+		.nav-link:hover {
+			color: #007bff;
+			/* Hover effect */
+		}
+
+		.btn-outline-info,
+		.btn-outline-danger {
+			border-width: 1px;
+			/* Thinner border */
+			padding: 4px 8px;
+			/* Smaller buttons */
+		}
+
+		.btn-outline-info {
+			color: #007bff;
+			border-color: #007bff;
+		}
+
+		.btn-outline-info:hover {
+			background-color: #007bff;
+			color: #fff;
+		}
+
+		.btn-outline-danger {
+			color: #dc3545;
+			border-color: #dc3545;
+		}
+
+		.btn-outline-danger:hover {
+			background-color: #dc3545;
+			color: #fff;
+		}
 	</style>
 	<script>
 		$(document).on({
@@ -286,41 +299,41 @@ include('../conexao/verifica_login.php');
 
 	</nav> -->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-        <a class="navbar-brand" href="/siiupa/">
-            <img src="/siiupa/imagens/siiupa.png" height="32" alt="Logo">
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a href="/siiupa/?setor=adm" class="nav-link">Administração</a>
-                </li>
-                <li class="nav-item">
-                    <a href="/siiupa/servidor/dist" class="nav-link">Servidor</a>
-                </li>
-                <li class="nav-item">
-                    <a id="btnFarmacia" href="/siiupa/farmacia/" class="nav-link">Farmácia</a>
-                </li>
-                <li class="nav-item">
-                    <a id="abreRecepcao" href="#" class="nav-link">Recepção</a>
-                </li>
-            </ul>
-            <div class="d-flex align-items-center">
-                <img src="/siiupa/administracao/rh/<?php echo $_SESSION['idServidorUsuario']; ?>/foto_perfil" height="32" class="rounded-circle" alt="Perfil">
-                <span class="ms-2 me-3">
-                    <?php echo $_SESSION['nomeusuario']; ?>
-                    <img src="/siiupa/imagens/icones/nivel.svg" width="16" alt="Nível">
-                    <?php echo $_SESSION['nivel']; ?>
-                </span>
-                <a class="btn btn-outline-info btn-sm me-2" href='/conexao/redefinirsenha.php'>Troca senha</a>
-                <a class="btn btn-outline-danger btn-sm" href="/conexao/logout.php" id="sair">Sair</a>
-            </div>
-        </div>
-    </div>
-</nav>
+		<div class="container">
+			<a class="navbar-brand" href="/siiupa/">
+				<img src="/siiupa/imagens/siiupa.png" height="32" alt="Logo">
+			</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a href="/siiupa/?setor=adm" class="nav-link">Administração</a>
+					</li>
+					<li class="nav-item">
+						<a href="/siiupa/servidor/dist" class="nav-link">Servidor</a>
+					</li>
+					<li class="nav-item">
+						<a id="btnFarmacia" href="/siiupa/farmacia/" class="nav-link">Farmácia</a>
+					</li>
+					<li class="nav-item">
+						<a id="abreRecepcao" href="#" class="nav-link">Recepção</a>
+					</li>
+				</ul>
+				<div class="d-flex align-items-center">
+					<img src="/siiupa/administracao/rh/<?php echo $_SESSION['idServidorUsuario']; ?>/foto_perfil" height="32" class="rounded-circle" alt="Perfil">
+					<span class="ms-2 me-3">
+						<?php echo $_SESSION['nomeusuario']; ?>
+						<img src="/siiupa/imagens/icones/nivel.svg" width="16" alt="Nível">
+						<?php echo $_SESSION['nivel']; ?>
+					</span>
+					<a class="btn btn-outline-info btn-sm me-2" href='/conexao/redefinirsenha.php'>Troca senha</a>
+					<a class="btn btn-outline-danger btn-sm" href="/conexao/logout.php" id="sair">Sair</a>
+				</div>
+			</div>
+		</div>
+	</nav>
 	<?php
 
 	?>

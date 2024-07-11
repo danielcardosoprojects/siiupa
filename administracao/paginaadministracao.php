@@ -158,6 +158,7 @@ if (!isset($_SESSION['nivel'])) {
 		cursor: pointer;
 		float: left;
 		margin-right: 30px;
+		margin-top: 5px;
 
 
 	}
