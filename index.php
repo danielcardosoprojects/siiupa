@@ -180,7 +180,7 @@ include('../conexao/verifica_login.php');
 		}
 
 		.nav-link {
-			color: #333;
+			color: #b0b0b0;
 			/* Neutral text color */
 			padding: 8px 12px;
 			/* Consistent padding */
