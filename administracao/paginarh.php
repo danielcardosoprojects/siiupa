@@ -325,7 +325,7 @@
 
         switch ($subsub) {
             case null:
-                echo "<script>alert('null');$(document).ready(function() {loadPage('pagina_rh_home');});</script>";
+                echo "<script>$(document).ready(function() {loadPage('pagina_rh_home');});</script>";
                 break;
             case 'perfil':
                 include_once('pagina_rh_perfil.php');
