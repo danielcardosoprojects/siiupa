@@ -63,7 +63,7 @@ if (!isset($_SESSION['nivel'])) {
 			/* Remove underline from links */
 			font-weight: 500;
 			/* Slightly bold text */
-			padding: 5px 10px;
+			padding: 5px 5px;
 			/* Consistent padding */
 			border-radius: 4px;
 			/* Slightly rounded corners */
