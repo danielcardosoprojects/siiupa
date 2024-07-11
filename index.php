@@ -214,7 +214,7 @@ include('../conexao/verifica_login.php');
 	<!-- COLOQUE A DIV "loading" ACIMA DE TODO O CONTEUDO DO SITE (ABAIXO DA <body>) -->
 
 
-	<nav class="navbar navbar-expand-lg navbar-light" style="background-color:whitesmoke;">
+	<!-- <nav class="navbar navbar-expand-lg navbar-light" style="background-color:whitesmoke;">
 		<div class="container">
 			<a class="navbar-brand" href="/siiupa/"><img src="/siiupa/imagens/siiupa.png" height="32px" style="float:left" /></a>
 			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -249,7 +249,43 @@ include('../conexao/verifica_login.php');
 			</div>
 		</div>
 
-	</nav>
+	</nav> -->
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="/siiupa/">
+            <img src="/siiupa/imagens/siiupa.png" height="32" alt="Logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a href="/siiupa/?setor=adm" class="nav-link">Administração</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/siiupa/servidor/dist" class="nav-link">Servidor</a>
+                </li>
+                <li class="nav-item">
+                    <a id="btnFarmacia" href="/siiupa/farmacia/" class="nav-link">Farmácia</a>
+                </li>
+                <li class="nav-item">
+                    <a id="abreRecepcao" href="#" class="nav-link">Recepção</a>
+                </li>
+            </ul>
+            <div class="d-flex align-items-center">
+                <img src="/siiupa/administracao/rh/<?php echo $_SESSION['idServidorUsuario']; ?>/foto_perfil" height="32" class="rounded-circle" alt="Perfil">
+                <span class="ms-2 me-3">
+                    Usuário: <?php echo utf8_encode($_SESSION['nomeusuario']); ?>
+                    <img src="/siiupa/imagens/icones/nivel.svg" width="16" alt="Nível">
+                    <?php echo $_SESSION['nivel']; ?>
+                </span>
+                <a class="btn btn-outline-info btn-sm me-2" href='/conexao/redefinirsenha.php'>Troca senha</a>
+                <a class="btn btn-outline-danger btn-sm" href="/conexao/logout.php" id="sair">Sair</a>
+            </div>
+        </div>
+    </div>
+</nav>
 	<?php
 
 	?>
