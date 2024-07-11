@@ -22,7 +22,6 @@ if (!isset($_SESSION['nivel'])) {
 
 
 	});
-	
 </script>
 <div id="topo" class="notprint">
 	<div id="notification-icon"><img src="/siiupa/imagens/icones/bell.svg" width="24px;">
@@ -35,13 +34,53 @@ if (!isset($_SESSION['nivel'])) {
 
 
 	<div class="second-navbar">
-    <a class="navbar-brand btn" href="#">Administrativo</a>
-    <a id="abrerh" href="?setor=adm&sub=rh" class="btn">Recursos Humanos</a>
-    <a id="abrerh" href="?setor=adm&sub=producao" class="btn">Produção e Estatística</a>
-    <a id="abreadministracao" href="administracao/paginaadministracao.php" class="btn">Administração</a>
-    <a id="abreimpressos" href="/siiupa/impressos/index.php" target='_blank' class="btn">Impressos</a>
-    <a href="/siiupa/enviararquivo.php" class="btn">Arquivos</a>
-</div>
+		<a class="navbar-brand" href="#">Administrativo</a>
+		<a id="abrerh" href="?setor=adm&sub=rh" class="nav-link">Recursos Humanos</a>
+		<a id="abrerh" href="?setor=adm&sub=producao" class="nav-link">Produção e Estatística</a>
+		<a id="abreadministracao" href="administracao/paginaadministracao.php" class="nav-link">Administração</a>
+		<a id="abreimpressos" href="/siiupa/impressos/index.php" target='_blank' class="nav-link">Impressos</a>
+		<a href="/siiupa/enviararquivo.php" class="nav-link">Arquivos</a>
+	</div>
+
+	<style>
+		.second-navbar {
+			display: flex;
+			align-items: center;
+			background-color: #f8f9fa;
+			/* Light background */
+			padding: 10px 0;
+			border-top: 1px solid #e2e6ea;
+			/* Subtle top border for separation */
+		}
+
+		.second-navbar .navbar-brand,
+		.second-navbar .nav-link {
+			color: #007bff;
+			/* Primary color for text */
+			margin-right: 15px;
+			/* Space between links */
+			text-decoration: none;
+			/* Remove underline from links */
+			font-weight: 500;
+			/* Slightly bold text */
+			padding: 5px 10px;
+			/* Consistent padding */
+			border-radius: 4px;
+			/* Slightly rounded corners */
+		}
+
+		.second-navbar .nav-link:hover {
+			background-color: #e2e6ea;
+			/* Light grey background on hover */
+			color: #0056b3;
+			/* Darker text on hover */
+		}
+
+		.second-navbar .navbar-brand {
+			font-size: 18px;
+			/* Slightly larger font for brand */
+		}
+	</style>
 
 </div>
 <div id="subconteudo">
@@ -51,7 +90,6 @@ if (!isset($_SESSION['nivel'])) {
 		$sub = $_GET['sub'];
 		if ($sub == "rh") {
 			include("paginarh.php");
-			
 		} elseif ($sub == "rhperfil") {
 			include("paginarh_perfil.php");
 		} elseif ($sub == "rh_perfil") {
@@ -73,10 +111,10 @@ if (!isset($_SESSION['nivel'])) {
 		} elseif ($sub == "rhescala_exibe") {
 			include("pagina_escala_exibe.php");
 		} elseif ($sub == "rhalimentacao") {
-			include("pagina_rh_alimentacao.php");		
+			include("pagina_rh_alimentacao.php");
 		} elseif ($sub == "niveis") {
-			include("painel/niveis.php");		
-		} 
+			include("painel/niveis.php");
+		}
 	} else {
 	?>
 		<div class="row">
@@ -158,33 +196,6 @@ if (!isset($_SESSION['nivel'])) {
 		margin: 0;
 		padding: 0;
 	}
-	.second-navbar {
-        display: flex;
-        align-items: center;
-        background-color: #343a40; /* Dark background */
-        padding: 10px 0;
-    }
-    .second-navbar .navbar-brand,
-    .second-navbar .btn {
-        color: #ffffff; /* White text */
-        background-color: #007bff; /* Primary button color */
-        border: none; /* Remove borders */
-        margin-right: 10px; /* Space between buttons */
-        padding: 8px 12px; /* Consistent padding */
-        text-decoration: none; /* Remove underline from links */
-        border-radius: 4px; /* Slightly rounded corners */
-    }
-    .second-navbar .btn:hover {
-        background-color: #0056b3; /* Darker blue on hover */
-    }
-    .second-navbar .btn-light {
-        color: #007bff; /* Primary color for text */
-        background-color: #ffffff; /* Light background */
-    }
-    .second-navbar .btn-light:hover {
-        color: #0056b3; /* Darker text on hover */
-        background-color: #e2e6ea; /* Light grey background on hover */
-    }
 </style>
 <script>
 	var notificationCount = 0;
@@ -218,16 +229,16 @@ if (!isset($_SESSION['nivel'])) {
 
 		// Converter o retorno para JSON
 		const data = await response.json();
-		
-		
+
+
 		// Mapear o retorno
 		data.map(item => {
-			
-				addNotification(`Aniversário: ${item.nome} - ${item.data_nasc}`);
-		
+
+			addNotification(`Aniversário: ${item.nome} - ${item.data_nasc}`);
+
 		});
 
-		
+
 	}
 	consultBirth();
 
