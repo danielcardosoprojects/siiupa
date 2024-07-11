@@ -311,7 +311,7 @@ include('../conexao/verifica_login.php');
             <div class="d-flex align-items-center">
                 <img src="/siiupa/administracao/rh/<?php echo $_SESSION['idServidorUsuario']; ?>/foto_perfil" height="32" class="rounded-circle" alt="Perfil">
                 <span class="ms-2 me-3">
-                    Usuário: <?php echo utf8_encode($_SESSION['nomeusuario']); ?>
+                    <?php echo $_SESSION['nomeusuario']; ?>
                     <img src="/siiupa/imagens/icones/nivel.svg" width="16" alt="Nível">
                     <?php echo $_SESSION['nivel']; ?>
                 </span>
@@ -412,7 +412,7 @@ include('../conexao/verifica_login.php');
 
 		<!-- Copyright -->
 		<div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-			<div style="text-align:center;">Copyright - 2021/2022 - Daniel Cardoso de Oliveira</div>
+			<div style="text-align:center;">Copyright - 2021/2024 - Daniel Cardoso de Oliveira</div>
 		</div>
 		<!-- Copyright -->
 	</footer>
