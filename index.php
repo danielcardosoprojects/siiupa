@@ -170,7 +170,7 @@ include('../conexao/verifica_login.php');
 		}
 
 		.navbar {
-			background-color: #f8f9fa;
+			background-color: #444;
 			/* Subtle background color */
 		}
 
