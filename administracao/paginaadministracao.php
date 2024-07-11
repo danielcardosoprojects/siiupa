@@ -24,15 +24,7 @@ if (!isset($_SESSION['nivel'])) {
 	});
 </script>
 <div id="topo" class="notprint">
-	<div id="notification-icon"><img src="/siiupa/imagens/icones/bell.svg" width="24px;">
-		<span id="notification-count"></span>
-		<i class="fa fa-bell"></i>
-		<div id="notification-popup">
-			<ul id="notification-list"></ul>
-		</div>
-	</div>
-
-
+	
 	<div class="second-navbar">
 		<a class="navbar-brand" href="#">Administrativo</a>
 		<a id="abrerh" href="?setor=adm&sub=rh" class="nav-link">Recursos Humanos</a>
@@ -40,6 +32,13 @@ if (!isset($_SESSION['nivel'])) {
 		<a id="abreadministracao" href="administracao/paginaadministracao.php" class="nav-link">Administração</a>
 		<a id="abreimpressos" href="/siiupa/impressos/index.php" target='_blank' class="nav-link">Impressos</a>
 		<a href="/siiupa/enviararquivo.php" class="nav-link">Arquivos</a>
+	</div>
+	<div id="notification-icon"><img src="/siiupa/imagens/icones/bell.svg" width="24px;">
+		<span id="notification-count"></span>
+		<i class="fa fa-bell"></i>
+		<div id="notification-popup">
+			<ul id="notification-list"></ul>
+		</div>
 	</div>
 
 	<style>
