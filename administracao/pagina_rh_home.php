@@ -398,26 +398,33 @@ include_once('../bd/nivel.php');
         </tbody>
     </table>
     <script>
-        $('.copiarTexto').click(function() {
-            const textToCopy = $(this).attr('data-text');
-            const tempInput = $('<input>');
-            $('body').append(tempInput);
-            tempInput.val(textToCopy).select();
-            document.execCommand('copy');
-            tempInput.remove();
+       $(document).ready(function() {
+            $('.copiarTexto').click(function() {
+                const textToCopy = $(this).attr('data-text');
+                const tempInput = $('<input>');
+                $('body').append(tempInput);
+                tempInput.val(textToCopy).select();
+                document.execCommand('copy');
+                tempInput.remove();
 
-            $.confirm({
-                title: 'Texto Copiado!',
-                content: 'Texto copiado: ' + textToCopy,
-                type: 'green',
-                typeAnimated: true,
-                buttons: {
-                    ok: {
-                        text: 'OK',
-                        btnClass: 'btn-green',
-                        action: function() {}
+                $.confirm({
+                    title: 'Texto Copiado!',
+                    content: 'Texto copiado: ' + textToCopy,
+                    type: 'green',
+                    typeAnimated: true,
+                    boxWidth: '30%',
+                    useBootstrap: false,
+                    buttons: {
+                        ok: {
+                            text: 'OK',
+                            btnClass: 'btn-green',
+                            action: function() {}
+                        }
+                    },
+                    onContentReady: function () {
+                        this.$content.css('max-height', 'none');
                     }
-                }
+                });
             });
         });
     </script>
