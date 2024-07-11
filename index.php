@@ -101,7 +101,7 @@ include('../conexao/verifica_login.php');
 			background-color: #33A7FF;
 
 			text-align: center;
-			padding: 10px;
+			padding: 0px;
 		}
 
 		#conteudo {
