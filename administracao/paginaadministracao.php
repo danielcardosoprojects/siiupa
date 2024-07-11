@@ -45,7 +45,8 @@ if (!isset($_SESSION['nivel'])) {
 		.second-navbar {
 			display: flex;
 			align-items: center;
-			background-color: transparent;
+			background-color: #888;
+			opacity: 70%;
 			/* Light background */
 			padding: 0;
 			border-top: 1px solid #e2e6ea;
