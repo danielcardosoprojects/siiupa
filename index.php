@@ -298,7 +298,7 @@ include('../conexao/verifica_login.php');
 		</div>
 
 	</nav> -->
-	<nav class="navbar navbar-expand-lg navbar-light">
+	<nav class="navbar navbar-expand-lg">
 		<div class="container">
 			<a class="navbar-brand" href="/siiupa/">
 				<img src="/siiupa/imagens/siiupa.png" height="32" alt="Logo">
