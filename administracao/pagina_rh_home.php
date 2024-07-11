@@ -407,24 +407,7 @@ include_once('../bd/nivel.php');
                 document.execCommand('copy');
                 tempInput.remove();
 
-                $.confirm({
-                    title: 'Texto Copiado!',
-                    content: 'Texto copiado: ' + textToCopy,
-                    type: 'green',
-                    typeAnimated: true,
-                    boxWidth: '30%',
-                    useBootstrap: false,
-                    buttons: {
-                        ok: {
-                            text: 'OK',
-                            btnClass: 'btn-green',
-                            action: function() {}
-                        }
-                    },
-                    onContentReady: function () {
-                        this.$content.css('max-height', 'none');
-                    }
-                });
+                $.notify("Texto copiado: " + textToCopy, "success");
             });
         });
     </script>
