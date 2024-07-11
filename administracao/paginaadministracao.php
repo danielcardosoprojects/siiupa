@@ -152,8 +152,8 @@ if (!isset($_SESSION['nivel'])) {
 	#topo {
 		display: flex;
 		gap: 10px;
-		background-color: #fff;
-		opacity: 70%;
+		background-color: rgba(255, 255, 255, 0.8);
+		
 	}
 
 	#notification-icon {
