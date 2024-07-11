@@ -50,6 +50,7 @@ if (!isset($_SESSION['nivel'])) {
 			/* Light background */
 			padding: 0;
 			border-top: 1px solid #e2e6ea;
+			width: 80%;
 			/* Subtle top border for separation */
 		}
 
