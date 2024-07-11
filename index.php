@@ -180,7 +180,7 @@ include('../conexao/verifica_login.php');
 		}
 
 		.nav-link {
-			color: #fff;
+			color: #b0b0b0;
 			/* Neutral text color */
 			padding: 8px 12px;
 			/* Consistent padding */
@@ -298,7 +298,7 @@ include('../conexao/verifica_login.php');
 		</div>
 
 	</nav> -->
-	<nav class="navbar navbar-expand-lg">
+	<nav class="navbar navbar-expand-lg navbar-dark">
 		<div class="container">
 			<a class="navbar-brand" href="/siiupa/">
 				<img src="/siiupa/imagens/siiupa.png" height="32" alt="Logo">
