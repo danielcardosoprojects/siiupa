@@ -169,6 +169,41 @@ include('../conexao/verifica_login.php');
 			}
 		}
 
+		.navbar {
+        background-color: #f8f9fa; /* Subtle background color */
+    }
+    .navbar-brand img {
+        height: 32px; /* Consistent logo size */
+    }
+    .nav-link {
+        color: #333; /* Neutral text color */
+        padding: 8px 12px; /* Consistent padding */
+    }
+    .nav-link:hover {
+        color: #007bff; /* Hover effect */
+    }
+    .btn-outline-info,
+    .btn-outline-danger {
+        border-width: 1px; /* Thinner border */
+        padding: 4px 8px; /* Smaller buttons */
+    }
+    .btn-outline-info {
+        color: #007bff;
+        border-color: #007bff;
+    }
+    .btn-outline-info:hover {
+        background-color: #007bff;
+        color: #fff;
+    }
+    .btn-outline-danger {
+        color: #dc3545;
+        border-color: #dc3545;
+    }
+    .btn-outline-danger:hover {
+        background-color: #dc3545;
+        color: #fff;
+    }
+
 		 
 	</style>
 	<script>
