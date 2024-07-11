@@ -398,20 +398,28 @@ include_once('../bd/nivel.php');
         </tbody>
     </table>
     <script>
-        const copyButtons = document.querySelectorAll('.copiarTexto');
+        $('.copiarTexto').click(function() {
+            const textToCopy = $(this).attr('data-text');
+            const tempInput = $('<input>');
+            $('body').append(tempInput);
+            tempInput.val(textToCopy).select();
+            document.execCommand('copy');
+            tempInput.remove();
 
-copyButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const textToCopy = button.getAttribute('data-text');
-        const tempInput = document.createElement('input');
-        tempInput.value = textToCopy;
-        document.body.appendChild(tempInput);
-        tempInput.select();
-        document.execCommand('copy');
-        document.body.removeChild(tempInput);
-        alert('Texto copiado: ' + textToCopy);
-    });
-});
+            $.confirm({
+                title: 'Texto Copiado!',
+                content: 'Texto copiado: ' + textToCopy,
+                type: 'green',
+                typeAnimated: true,
+                buttons: {
+                    ok: {
+                        text: 'OK',
+                        btnClass: 'btn-green',
+                        action: function() {}
+                    }
+                }
+            });
+        });
     </script>
     <?php
     $queryString = filter_input(INPUT_SERVER, 'QUERY_STRING');
@@ -504,7 +512,7 @@ copyButtons.forEach(button => {
 $idunico = uniqid();
 ?>
 
-<script type="text/javascript" src="/siiupa/js/tablesorter/jquery.tablesorter.js"></>
+<script type="text/javascript" src="/siiupa/js/tablesorter/jquery.tablesorter.js"></script>
 <script type="text/javascript" src="/siiupa/administracao/pagina_rh_home.js"></script>
 <script>
     $(".matriculaFunc").dblclick(function(e) {
