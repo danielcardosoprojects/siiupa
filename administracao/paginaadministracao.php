@@ -45,7 +45,7 @@ if (!isset($_SESSION['nivel'])) {
 		.second-navbar {
 			display: flex;
 			align-items: center;
-			background-color: #888;
+			
 			
 			/* Light background */
 			padding: 0;
@@ -152,6 +152,8 @@ if (!isset($_SESSION['nivel'])) {
 	#topo {
 		display: flex;
 		gap: 10px;
+		background-color: #fff;
+		opacity: 70%;
 	}
 
 	#notification-icon {
