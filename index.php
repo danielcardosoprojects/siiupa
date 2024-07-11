@@ -106,7 +106,7 @@ include('../conexao/verifica_login.php');
 
 		#conteudo {
 			padding: 0px;
-			background-color: #3366cc;
+			background-color: #555;
 			background-image: url('/siiupa/imagens/bg-home.jpg');
 			background-size: cover;
 
