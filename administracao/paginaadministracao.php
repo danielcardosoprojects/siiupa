@@ -48,14 +48,14 @@ if (!isset($_SESSION['nivel'])) {
 			align-items: center;
 			background-color: transparent;
 			/* Light background */
-			padding: 10px 0;
+			padding: 0;
 			border-top: 1px solid #e2e6ea;
 			/* Subtle top border for separation */
 		}
 
 		.second-navbar .navbar-brand,
 		.second-navbar .nav-link {
-			color: #007bff;
+			color: #fff;
 			/* Primary color for text */
 			margin-right: 15px;
 			/* Space between links */
