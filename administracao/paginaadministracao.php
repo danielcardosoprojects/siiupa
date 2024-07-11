@@ -56,7 +56,7 @@ if (!isset($_SESSION['nivel'])) {
 
 		.second-navbar .navbar-brand,
 		.second-navbar .nav-link {
-			color: #fff;
+			color: #000;
 			/* Primary color for text */
 			margin-right: 15px;
 			/* Space between links */
