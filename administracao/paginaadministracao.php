@@ -34,14 +34,15 @@ if (!isset($_SESSION['nivel'])) {
 	</div>
 
 
-	<div>
-		<a class="navbar-brand btn btn-info" href="#">Administrativo</a>
-		<a id="abrerh" href="?setor=adm&sub=rh" class="btn btn-light abrerh">Recursos Humanos</a>
-		<a id="abrerh" href="?setor=adm&sub=producao" class="btn btn-light">Produção e Estatística</a>
-		<a id="abreadministracao" href="administracao/paginaadministracao.php" class="btn btn-light">Administração</a>
-		<a id="abreimpressos" href="/siiupa/impressos/index.php" target='_blank' class="btn btn-light impressos">Impressos</a>
-		<a href="/siiupa/enviararquivo.php" class="btn btn-light">Arquivos</a>
-	</div>
+	<div class="second-navbar">
+    <a class="navbar-brand btn" href="#">Administrativo</a>
+    <a id="abrerh" href="?setor=adm&sub=rh" class="btn">Recursos Humanos</a>
+    <a id="abrerh" href="?setor=adm&sub=producao" class="btn">Produção e Estatística</a>
+    <a id="abreadministracao" href="administracao/paginaadministracao.php" class="btn">Administração</a>
+    <a id="abreimpressos" href="/siiupa/impressos/index.php" target='_blank' class="btn">Impressos</a>
+    <a href="/siiupa/enviararquivo.php" class="btn">Arquivos</a>
+</div>
+
 </div>
 <div id="subconteudo">
 
@@ -157,6 +158,33 @@ if (!isset($_SESSION['nivel'])) {
 		margin: 0;
 		padding: 0;
 	}
+	.second-navbar {
+        display: flex;
+        align-items: center;
+        background-color: #343a40; /* Dark background */
+        padding: 10px 0;
+    }
+    .second-navbar .navbar-brand,
+    .second-navbar .btn {
+        color: #ffffff; /* White text */
+        background-color: #007bff; /* Primary button color */
+        border: none; /* Remove borders */
+        margin-right: 10px; /* Space between buttons */
+        padding: 8px 12px; /* Consistent padding */
+        text-decoration: none; /* Remove underline from links */
+        border-radius: 4px; /* Slightly rounded corners */
+    }
+    .second-navbar .btn:hover {
+        background-color: #0056b3; /* Darker blue on hover */
+    }
+    .second-navbar .btn-light {
+        color: #007bff; /* Primary color for text */
+        background-color: #ffffff; /* Light background */
+    }
+    .second-navbar .btn-light:hover {
+        color: #0056b3; /* Darker text on hover */
+        background-color: #e2e6ea; /* Light grey background on hover */
+    }
 </style>
 <script>
 	var notificationCount = 0;
