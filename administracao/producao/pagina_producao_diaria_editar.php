@@ -263,27 +263,27 @@ include("../../bd/conectabd.php");
                 <th colspan="6" class="text-center">Total de Atendimentos: </th>
             </tr>
             <tr>
-                <td class="box " data-campo="idade.0_13">Crise Hipertensiva<br>
+                <td class="box " data-campo="idade.0_13">PA<br>
                     <h3>
                         <p>0</p>
                     </h3>
                 </td>
-                <td class="box" data-campo="idade.14_21">PA<br>
+                <td class="box" data-campo="idade.14_21">Glicemia<br>
                     <h3>
                         <p>0</p>
                     </h3>
                 </td>
-                <td class="box " data-campo="idade.22_59">PULSO/FC<br>
+                <td class="box " data-campo="idade.22_59">FR<br>
                     <h3>
                         <p>0</p>
                     </h3>
                 </td>
-                <td class="box r" data-campo="idade.60_idoso">FR<br>
+                <td class="box r" data-campo="idade.60_idoso">FC<br>
                     <h3>
                         <p>0</p>
                     </h3>
                 </td>
-                <td class="box" data-campo="sexo.feminino">GLICEMIA<br>
+                <td class="box" data-campo="sexo.feminino">Saturação<br>
                     <h3>
                         <p>0</p>
                     </h3>
