@@ -288,7 +288,7 @@ include("../../bd/conectabd.php");
                         <p>0</p>
                     </h3>
                 </td>
-                <td class="box" data-campo="sexo.masculino">INALAÇÃO<br>
+                <td class="box" data-campo="sexo.masculino">CRISE HIPERTENSIVA<br>
                     <h3>
                         <p>0</p>
                     </h3>
