@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contabilização de Prontuários</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .hidden {
+            display: none;
+        }
+        .container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Contabilização de Prontuários</h2>
+        <button class="btn btn-primary" id="newRecordBtn">Cadastrar Novo Prontuário</button>
+
+        <div id="personalInfo" class="hidden">
+            <h4>Dados Pessoais</h4>
+            <div class="form-group">
+                <label for="registrationNumber">Número de Registro</label>
+                <input type="text" id="registrationNumber" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="city">Cidade/Bairro</label>
+                <input type="text" id="city" class="form-control">
+            </div>
+            <button class="btn btn-secondary nextBtn">Próximo</button>
+        </div>
+
+        <div id="ageGroup" class="hidden">
+            <h4>Faixa Etária</h4>
+            <div class="form-check">
+                <input type="radio" id="age0-13" name="ageGroup" value="0-13" class="form-check-input">
+                <label for="age0-13" class="form-check-label">0-13</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" id="age14-21" name="ageGroup" value="14-21" class="form-check-input">
+                <label for="age14-21" class="form-check-label">14-21</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" id="age22-59" name="ageGroup" value="22-59" class="form-check-input">
+                <label for="age22-59" class="form-check-label">22-59</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" id="age60+" name="ageGroup" value="60+" class="form-check-input">
+                <label for="age60+" class="form-check-label">60+</label>
+            </div>
+            <button class="btn btn-secondary nextBtn">Próximo</button>
+        </div>
+
+        <div id="gender" class="hidden">
+            <h4>Sexo</h4>
+            <div class="form-check">
+                <input type="radio" id="female" name="gender" value="Feminino" class="form-check-input">
+                <label for="female" class="form-check-label">Feminino</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" id="male" name="gender" value="Masculino" class="form-check-input">
+                <label for="male" class="form-check-label">Masculino</label>
+            </div>
+            <button class="btn btn-secondary nextBtn">Próximo</button>
+        </div>
+
+        <div id="susCard" class="hidden">
+            <h4>Cartão SUS</h4>
+            <div class="form-check">
+                <input type="radio" id="withCard" name="susCard" value="Com Cartão" class="form-check-input">
+                <label for="withCard" class="form-check-label">Com Cartão</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" id="withoutCard" name="susCard" value="Sem Cartão" class="form-check-input">
+                <label for="withoutCard" class="form-check-label">Sem Cartão</label>
+            </div>
+            <button class="btn btn-secondary nextBtn">Próximo</button>
+        </div>
+
+        <div id="riskClassification" class="hidden">
+            <h4>Classificação de Risco</h4>
+            <div class="form-check">
+                <input type="radio" id="classified" name="riskClassification" value="Classificado" class="form-check-input">
+                <label for="classified" class="form-check-label">Classificado</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" id="notClassified" name="riskClassification" value="Não Classificado" class="form-check-input">
+                <label for="notClassified" class="form-check-label">Não Classificado</label>
+            </div>
+            <button class="btn btn-secondary nextBtn">Próximo</button>
+        </div>
+
+        <div id="anamnesis" class="hidden">
+            <h4>Anamnese</h4>
+            <div class="form-check">
+                <input type="checkbox" id="pa" name="anamnesis" value="PA" class="form-check-input">
+                <label for="pa" class="form-check-label">PA</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" id="pulse" name="anamnesis" value="Pulso/FC" class="form-check-input">
+                <label for="pulse" class="form-check-label">Pulso/FC</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" id="fr" name="anamnesis" value="FR" class="form-check-input">
+                <label for="fr" class="form-check-label">FR</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" id="saturation" name="anamnesis" value="Saturação" class="form-check-input">
+                <label for="saturation" class="form-check-label">Saturação</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" id="temperature" name="anamnesis" value="Temperatura" class="form-check-input">
+                <label for="temperature" class="form-check-label">Temperatura</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" id="weight" name="anamnesis" value="Peso" class="form-check-input">
+                <label for="weight" class="form-check-label">Peso</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" id="glycemia" name="anamnesis" value="Glicemia" class="form-check-input">
+                <label for="glycemia" class="form-check-label">Glicemia</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" id="inhalation" name="anamnesis" value="Inalação" class="form-check-input">
+                <label for="inhalation" class="form-check-label">Inalação</label>
+            </div>
+            <button class="btn btn-secondary nextBtn">Próximo</button>
+        </div>
+
+        <div id="consultations" class="hidden">
+            <h4>Consultas</h4>
+            <div class="form-check">
+                <input type="checkbox" id="doctor" name="consultations" value="Médico" class="form-check-input">
+                <label for="doctor" class="form-check-label">Médico</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" id="nurse" name="consultations" value="Enfermeiro" class="form-check-input">
+                <label for="nurse" class="form-check-label">Enfermeiro</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" id="socialAssistant" name="consultations" value="Assistente Social" class="form-check-input">
+                <label for="socialAssistant" class="form-check-label">Assistente Social</label>
+            </div>
+            <button class="btn btn-secondary nextBtn">Próximo</button>
+        </div>
+
+        <div id="trafficAccidents" class="hidden">
+            <h4>Acidentes de Trânsito</h4>
+            <div class="form-check">
+                <input type="checkbox" id="motoCar" name="trafficAccidents" value="MOTO X CARRO" class="form-check-input">
+                <label for="motoCar" class="form-check-label">MOTO X CARRO</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" id="motoMoto" name="trafficAccidents" value="MOTO X MOTO" class="form-check-input">
+                <label for="motoMoto" class="form-check-label">MOTO X MOTO</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" id="motoLargeVehicle" name="trafficAccidents" value="MOTO X VEÍCULO GRANDE" class="form-check-input">
+                <label for="motoLargeVehicle" class="form-check-label">MOTO X VEÍCULO GRANDE</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" id="motoFall" name="trafficAccidents" value="MOTO – QUEDA" class="form-check-input">
+                <label for="motoFall" class="form-check-label">MOTO – QUEDA</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" id="motoOther" name="trafficAccidents" value="MOTO - OUTROS" class="form-check-input">
+                <label for="motoOther" class="form-check-label">MOTO - OUTROS</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" id="largeVehicle" name="trafficAccidents" value="VEÍCULO GRANDE" class="form-check-input">
+                <label for="largeVehicle" class="form-check-label">VEÍCULO GRANDE</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" id="carRollover" name="trafficAccidents" value="CARRO – CAPOTAMENTO" class="form-check-input">
+                <label for="carRollover" class="form-check-label">CARRO – CAPOTAMENTO</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" id="carCar" name="trafficAccidents" value="CARRO X CARRO" class="form-check-input">
+                <label for="carCar" class="form-check-label">CARRO X CARRO</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" id="carLargeVehicle" name="trafficAccidents" value="CARRO X VEÍCULO GRANDE" class="form-check-input">
+                <label for="carLargeVehicle" class="form-check-label">CARRO X VEÍCULO GRANDE</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" id="carOther" name="trafficAccidents" value="CARRO – OUTROS" class="form-check-input">
+                <label for="carOther" class="form-check-label">CARRO – OUTROS</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" id="hit" name="trafficAccidents" value="ATROPELAMENTO" class="form-check-input">
+                <label for="hit" class="form-check-label">ATROPELAMENTO</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" id="bicycle" name="trafficAccidents" value="BICICLETA" class="form-check-input">
+                <label for="bicycle" class="form-check-label">BICICLETA</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" id="fab" name="trafficAccidents" value="FAB" class="form-check-input">
+                <label for="fab" class="form-check-label">FAB</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" id="faf" name="trafficAccidents" value="FAF" class="form-check-input">
+                <label for="faf" class="form-check-label">FAF</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" id="workAccident" name="trafficAccidents" value="ACIDENTE DE TRABALHO" class="form-check-input">
+                <label for="workAccident" class="form-check-label">ACIDENTE DE TRABALHO</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" id="pregnant" name="trafficAccidents" value="GESTANTE" class="form-check-input">
+                <label for="pregnant" class="form-check-label">GESTANTE</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" id="physicalAssault" name="trafficAccidents" value="AGRESSÃO FÍSICA" class="form-check-input">
+                <label for="physicalAssault" class="form-check-label">AGRESSÃO FÍSICA</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" id="trauma" name="trafficAccidents" value="TRAUMA" class="form-check-input">
+                <label for="trauma" class="form-check-label">TRAUMA</label>
+            </div>
+            <button class="btn btn-secondary nextBtn">Próximo</button>
+        </div>
+
+        <div id="falls" class="hidden">
+            <h4>Quedas</h4>
+            <div class="form-check">
+                <input type="checkbox" id="ownHeight" name="falls" value="PRÓPRIA ALTURA" class="form-check-input">
+                <label for="ownHeight" class="form-check-label">PRÓPRIA ALTURA</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" id="more1m" name="falls" value="+1m" class="form-check-input">
+                <label for="more1m" class="form-check-label">+1m</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" id="bed" name="falls" value="CAMA" class="form-check-input">
+                <label for="bed" class="form-check-label">CAMA</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" id="stairs" name="falls" value="ESCADA" class="form-check-input">
+                <label for="stairs" class="form-check-label">ESCADA</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" id="horse" name="falls" value="CAVALO" class="form-check-input">
+                <label for="horse" class="form-check-label">CAVALO</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" id="tree" name="falls" value="QUEDA DE ÁRVORE" class="form-check-input">
+                <label for="tree" class="form-check-label">QUEDA DE ÁRVORE</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" id="hammock" name="falls" value="REDE" class="form-check-input">
+                <label for="hammock" class="form-check-label">REDE</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" id="roof" name="falls" value="TELHADO" class="form-check-input">
+                <label for="roof" class="form-check-label">TELHADO</label>
+            </div>
+            <div class="form-check">
+                <input type="checkbox" id="otherFalls" name="falls" value="OUTROS" class="form-check-input">
+                <label for="otherFalls" class="form-check-label">OUTROS</label>
+            </div>
+            <button class="btn btn-secondary nextBtn">Próximo</button>
+        </div>
+
+        <div id="suicideAttempt" class="hidden">
+            <h4>Tentativa de Suicídio</h4>
+            <div class="form-check">
+                <input type="checkbox" id="suicideAttemptCheck" name="suicideAttempt" value="TENTATIVA DE SUICIDIO" class="form-check-input">
+                <label for="suicideAttemptCheck" class="form-check-label">TENTATIVA DE SUICIDIO</label>
+            </div>
+            <button class="btn btn-secondary nextBtn">Finalizar</button>
+        </div>
+
+        <button class="btn btn-success hidden" id="generateJsonBtn">Gerar JSON</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            let sections = [
+                '#personalInfo', '#ageGroup', '#gender', '#susCard', '#riskClassification',
+                '#anamnesis', '#consultations', '#trafficAccidents', '#falls', '#suicideAttempt'
+            ];
+            let currentSectionIndex = 0;
+
+            $('#newRecordBtn').click(function() {
+                $(this).hide();
+                $(sections[currentSectionIndex]).removeClass('hidden');
+            });
+
+            $('.nextBtn').click(function() {
+                $(sections[currentSectionIndex]).addClass('hidden');
+                currentSectionIndex++;
+                if (currentSectionIndex < sections.length) {
+                    $(sections[currentSectionIndex]).removeClass('hidden');
+                } else {
+                    $('#generateJsonBtn').removeClass('hidden');
+                }
+            });
+
+            $('#generateJsonBtn').click(function() {
+                let record = {
+                    registrationNumber: $('#registrationNumber').val(),
+                    city: $('#city').val(),
+                    ageGroup: $('input[name="ageGroup"]:checked').val(),
+                    gender: $('input[name="gender"]:checked').val(),
+                    susCard: $('input[name="susCard"]:checked').val(),
+                    riskClassification: $('input[name="riskClassification"]:checked').val(),
+                    anamnesis: $('input[name="anamnesis"]:checked').map(function() { return this.value; }).get(),
+                    consultations: $('input[name="consultations"]:checked').map(function() { return this.value; }).get(),
+                    trafficAccidents: $('input[name="trafficAccidents"]:checked').map(function() { return this.value; }).get(),
+                    falls: $('input[name="falls"]:checked').map(function() { return this.value; }).get(),
+                    suicideAttempt: $('input[name="suicideAttempt"]:checked').map(function() { return this.value; }).get()
+                };
+                console.log(JSON.stringify(record));
+                alert(JSON.stringify(record));
+            });
+        });
+    </script>
+</body>
+</html>

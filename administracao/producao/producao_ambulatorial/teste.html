@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Owl Carousel Controlado</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.theme.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .item {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .square {
+            width: 20%;
+            height: 100px;
+            border: 1px solid #424242;
+            background-color: #1e1e1e;
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border-radius: 8px;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .square:hover {
+            transform: scale(1.05);
+            background-color: #2c2c2c;
+        }
+
+        .title {
+            position: absolute;
+            top: 5px;
+            font-size: 0.8rem;
+            color: #9e9e9e;
+        }
+
+        .count {
+            font-size: 1.5rem;
+            margin-top: 10px;
+            color: #e0e0e0;
+        }
+
+        .key {
+            font-size: 1rem;
+            margin-top: 5px;
+            color: #bdbdbd;
+        }
+
+        .tituloCategoria {
+            width: 100%;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="owl-carousel" class="owl-carousel owl-theme">
+        <div id="um" class="item"></div>
+        <div id="dois" class="item">Div 2</div>
+        <div id="tres" class="item">Div 3</div>
+        <div id="quatro" class="item">Div 4</div>
+        <div id="cinco" class="item">Div 5</div>
+        <div id="seis" class="item">Div 6</div>
+        <div id="sete" class="item">Div 7</div>
+        <div id="oito" class="item">Div 8</div>
+        <div id="nove" class="item">Div 9</div>
+        <div id="dez" class="item">Div 10</div>
+
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js"></script>
+    <script>
+        const letras = {
+            1: "A",
+            2: "S",
+            3: "D",
+            4: "F",
+            5: "G",
+            6: "H",
+            7: "J",
+            8: "K",
+            9: "L",
+            10: "Ç"
+        };
+        const dados = {
+            "Dados Pessoais": {
+                "NumeroRegistro": "",
+                "CidadeBairro": ""
+            },
+            "FaixaEtaria": {
+                "0a13": 0,
+                "14a21": 0,
+                "22a59": 0,
+                "60ouMais": 0
+            },
+            "Sexo": {
+                "Feminino": 0,
+                "Masculino": 0
+            },
+            "CartaoSUS": {
+                "ComCartao": 0,
+                "SemCartao": 0
+            },
+            "ClassificacaoRisco": {
+                "Classificado": 0,
+                "NaoClassificado": 0
+            },
+            "Anamnese": {
+                "PA": 0,
+                "PulsoFC": 0,
+                "FR": 0,
+                "Saturacao": 0,
+                "Temperatura": 0,
+                "Peso": 0,
+                "Glicemia": 0,
+                "Inalacao": 0
+            },
+            "Consultas": {
+                "Medico": 0,
+                "Enfermeiro": 0,
+                "AssistenteSocial": 0
+            },
+            "AcidentesTransito": {
+                "MOTO_X_CARRO": 0,
+                "MOTO_X_MOTO": 0,
+                "MOTO_X_VEICULO_GRANDE": 0,
+                "MOTO_QUEDA": 0,
+                "MOTO_OUTROS": 0,
+                "VEICULO_GRANDE": 0,
+                "CARRO_CAPOTAMENTO": 0,
+                "CARRO_X_CARRO": 0,
+                "CARRO_X_VEICULO_GRANDE": 0,
+                "CARRO_OUTROS": 0,
+                "ATROPELAMENTO": 0,
+                "BICICLETA": 0
+            },
+            "CausasAcidente": {
+                "FAB": 0,
+                "FAF": 0,
+                "ACIDENTE_TRABALHO": 0,
+                "GESTANTE": 0,
+                "AGRESSAO_FISICA": 0,
+                "TRAUMA": 3
+            },
+            "Quedas": {
+                "PROP_ALTURA": 0,
+                "+1m": 0,
+                "CAMA": 0,
+                "ESCADA": 0,
+                "CAVALO": 0,
+                "QUEDA_ARVORE": 0,
+                "REDE": 0,
+                "TELHADO": 0,
+                "OUTROS": 0,
+                "TENTATIVA_SUICIDIO": 0
+            }
+        };
+        $(document).ready(function () {
+
+
+            // Função para percorrer e exibir dados de cada categoria
+            function exibirDados(categoria, titulo) {
+                //console.log(`\n**${titulo}**`);
+                for (const chave in categoria) {
+                    //console.log(`${chave}: ${categoria[chave]}`);
+                }
+            }
+
+            function populaDados(div, categoria, multi) {
+                //se multi = 1 o trigger nao passa automaticamente, se for 0 passa automaticamente
+                const elem = document.getElementById(div);
+                elem.innerHTML = "<h2 class='tituloCategoria'>" + categoria + "</h2>";
+                categoria = dados[categoria];
+                const fragment = document.createDocumentFragment();
+                let i = 1;
+                for (const chave in categoria) {
+                    const square = document.createElement('div');
+                    square.classList.add('square');
+
+                    const title = document.createElement('div');
+                    title.classList.add('title');
+                    title.textContent = chave;
+
+                    const count = document.createElement('div');
+                    count.classList.add('count');
+                    count.dataset.key = letras[i]; // Set data-key to the actual key
+                    count.dataset.multi = multi;
+                    count.textContent = categoria[chave]; // Update count based on categoria data
+
+                    const key = document.createElement('div');
+                    key.classList.add('key');
+                    key.textContent = letras[i];
+
+                    square.appendChild(title);
+                    square.appendChild(count);
+                    square.appendChild(key);
+
+                    fragment.appendChild(square);
+                    i++;
+                } //fim loop
+
+                elem.appendChild(fragment);
+            }
+
+
+            populaDados("um", "Dados Pessoais", "n");
+            populaDados("dois", "FaixaEtaria", "n");
+            populaDados("tres", "Sexo", "n");
+            populaDados("quatro", "CartaoSUS", "n");
+            populaDados("cinco", "ClassificacaoRisco", "n");
+            populaDados("seis", "Anamnese", "s");
+            populaDados("sete", "Consultas", "s");
+            populaDados("oito", "AcidentesTransito", "n");
+            populaDados("nove", "CausasAcidente", "n");
+            populaDados("dez", "Quedas", "n");
+
+
+            // Exibir dados de cada categoria
+            exibirDados(dados["Dados Pessoais"], "Dados Pessoais");
+            exibirDados(dados["FaixaEtaria"], "Faixa Etária");
+            exibirDados(dados["Sexo"], "Sexo");
+            // ... (adicione outras categorias aqui)
+
+
+
+            // Exemplo de como acessar um valor específico
+            const numeroAcidentesMotoQueda = dados["AcidentesTransito"]["MOTO_QUEDA"];
+            console.log(`Número de acidentes de moto com queda: ${numeroAcidentesMotoQueda}`);
+            var owl = $("#owl-carousel").owlCarousel({
+                items: 1,
+                loop: true,
+                nav: false,
+                dots: false,
+                autoPlay: false
+            });
+
+            function updateActiveClass() {
+                $('.owl-item').removeClass('active');
+                var currentIndex = owl.data('owlCarousel').currentItem;
+                $('.owl-item').eq(currentIndex).addClass('active');
+            }
+            function proximo() {
+                owl.trigger('owl.next');
+                updateActiveClass();
+            }
+
+            owl.on('changed.owl.carousel', updateActiveClass);
+            updateActiveClass(); // Initial call
+
+            $(document).keydown(function (event) {
+                var key = event.key.toUpperCase();
+                var activeItem = $(".owl-item.active .item");
+
+                if (key === 'ENTER') {
+                    proximo();
+                } else if (event.key === 'ArrowLeft') {
+                    owl.trigger('owl.prev');
+                    updateActiveClass();
+                } else {
+                    activeItem.find('.count').each(function () {
+                        if ($(this).data('key') === key) {
+                            var count = parseInt($(this).text());
+                            if (event.shiftKey) {
+                                count = count > 0 ? count - 1 : 0;
+                            } else {
+                                count++;
+                            }
+                            $(this).text(count);
+                            if ($(this).data('multi') == "n") {
+
+                                proximo();
+                            }
+                        }
+
+                    });
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>
