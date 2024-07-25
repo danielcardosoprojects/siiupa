@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contabilização por Localidade</title>
+    <style>
+        .container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .section {
+            width: 30%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        .search-box {
+            margin-bottom: 10px;
+            width: 100%;
+            padding: 8px;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="text" class="search-box" placeholder="Buscar Cidade, Bairro ou Estado...">
+    <div class="container">
+        <div class="section" id="cities">
+            <h2>Cidades</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Quantidade</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="section" id="neighborhoods">
+            <h2>Bairros</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Quantidade</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+        <div class="section" id="states">
+            <h2>Estados</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Quantidade</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        const data = {
+    cities: [
+        'Abaetetuba', 'Abel Figueiredo', 'Acara', 'Afua', 'Agua Azul do Norte', 'Alenquer', 'Almeirim', 'Altamira', 
+        'Anajas', 'Ananindeua', 'Anapu', 'Augusto Correa', 'Aurora do Para', 'Aveiro', 'Bagre', 'Baiao', 'Bannach', 
+        'Barcarena', 'Belem', 'Belterra', 'Benevides', 'Bom Jesus do Tocantins', 'Bonito', 'Braganca', 'Brasil Novo', 
+        'Brejo Grande do Araguaia', 'Breu Branco', 'Breves', 'Bujaru', 'Cachoeira do Arari', 'Cachoeira do Piria', 
+        'Cameta', 'Canaa dos Carajas', 'Capanema', 'Capitao Poco', 'Castanhal', 'Chaves', 'Colares', 'Conceicao do Araguaia', 
+        'Concordia do Para', 'Cumaru do Norte', 'Curionopolis', 'Curralinho', 'Curua', 'Curuca', 'Dom Eliseu', 'Eldorado do Carajas', 
+        'Faro', 'Floresta do Araguaia', 'Garrafao do Norte', 'Goianesia do Para', 'Gurupa', 'Igarape-Acu', 'Igarape-Miri', 
+        'Inhangapi', 'Ipixuna do Para', 'Irituia', 'Itaituba', 'Itupiranga', 'Jacareacanga', 'Jacunda', 'Juruti', 'Limoeiro do Ajuru', 
+        'Mae do Rio', 'Magalhaes Barata', 'Maraba', 'Maracana', 'Marapanim', 'Marituba', 'Medicilandia', 'Melgaco', 'Mocajuba', 'Moju', 
+        'Monte Alegre', 'Muana', 'Nova Esperanca do Piria', 'Nova Ipixuna', 'Nova Timboteua', 'Novo Progresso', 'Novo Repartimento', 
+        'Obidos', 'Oeiras do Para', 'Oriximina', 'Ourem', 'Ourilandia do Norte', 'Pacaja', 'Palestina do Para', 'Paragominas', 
+        'Parauapebas', 'Pau Darco', 'Peixe-Boi', 'Picarra', 'Placas', 'Ponta de Pedras', 'Portel', 'Porto de Moz', 'Prainha', 
+        'Primavera', 'Quatipuru', 'Redencao', 'Rio Maria', 'Rondon do Para', 'Ruropolis', 'Salinopolis', 'Salvaterra', 
+        'Santa Barbara do Para', 'Santa Cruz do Arari', 'Santa Isabel do Para', 'Santa Luzia do Para', 'Santa Maria das Barreiras', 
+        'Santa Maria do Para', 'Santarem', 'Santarem Novo', 'Santo Antonio do Taua', 'Sao Caetano de Odivelas', 'Sao Domingos do Araguaia', 
+        'Sao Domingos do Capim', 'Sao Felix do Xingu', 'Sao Francisco do Para', 'Sao Geraldo do Araguaia', 'Sao Joao da Ponta', 
+        'Sao Joao de Pirabas', 'Sao Joao do Araguaia', 'Sao Miguel do Guama', 'Sao Sebastiao da Boa Vista', 'Sapucaia', 'Senador Jose Porfirio', 
+        'Soure', 'Tailândia', 'Terra Alta', 'Terra Santa', 'Tome-Acu', 'Tracuateua', 'Trairao', 'Tucuma', 'Tucurui', 'Ulianopolis', 
+        'Urucara', 'Vigia', 'Viseu', 'Vitoria do Xingu', 'Xinguara'
+    ],
+    neighborhoods: [
+        'Agrovila Calucia', 'Agrovila 3 de outubro', 'Agrovila Bacabal', 'Agrovila Bacuri', 'Agrovila Boa Vista', 
+        'Agrovila C. Branco', 'Agrovila Cupiuba', 'Agrovila Iracema', 'Agrovila Itaqui', 'Agrovila João Batista', 
+        'Agrovila Macapazinho', 'Agrovila Nazare', 'Agrovila Pacuquara', 'Agrovila S. Terezinha', 'Agrovila S. Raimundo', 
+        'Ana Júlia', 'Bairro Novo', 'Betânia', 'Bom Jesus', 'Caiçara', 'Camp. Elisios', 'Camp. Lindos', 'Cariri', 
+        'Centro', 'Conj. Tangaras', 'Conj. Ypês', 'Cristo', 'Estrela', 'Florestal', 'Fonte Boa', 'Heliolandia', 'Ianetama', 
+        'Imperador', 'Imperial', 'Jaderlândia', 'Jardim Acacias', 'Jardim Castanhal', 'Jardim Modelo', 'Jardim Tropical', 
+        'Milagre/Sta. Lidia', 'Nova Olinda', 'Novo Caiçara', 'Novo Estrela', 'Novo Horizonte', 'Pantanal', 'Prq. Castanhais', 
+        'Prq. dos Buritis', 'Pirapora', 'Propira', 'Rouxinol', 'Salgadinho', 'Sta Catarina', 'Santa Helena', 'Sta Terezinha', 
+        'São José', 'Saudade', 'Saudade II', 'Titanlândia', 'Tókio', 'Vila do Apeú', 'Zona Rural', 'Não Identif.'
+    ],
+    states: [
+        'Acre', 'Alagoas', 'Amapá', 'Amazonas', 'Bahia', 'Ceará', 'Distrito Federal', 'Espírito Santo', 'Goiás', 'Maranhão', 
+        'Mato Grosso', 'Mato Grosso do Sul', 'Minas Gerais', 'Pará', 'Paraíba', 'Paraná', 'Pernambuco', 'Piauí', 
+        'Rio de Janeiro', 'Rio Grande do Norte', 'Rio Grande do Sul', 'Rondônia', 'Roraima', 'Santa Catarina', 'São Paulo', 
+        'Sergipe', 'Tocantins'
+    ]
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    const searchBox = document.querySelector('.search-box');
+
+    searchBox.addEventListener('input', function() {
+        updateSuggestions(this);
+    });
+
+    searchBox.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            incrementCount(this.value);
+            this.value = '';
+            clearSuggestions();
+        }
+    });
+});
+
+function normalizeText(text) {
+    return text.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+}
+
+function updateSuggestions(input) {
+    const allData = [
+        ...data.cities.map(city => ({ name: city, category: 'Cidade' })),
+        ...data.neighborhoods.map(neighborhood => ({ name: neighborhood, category: 'Bairro' })),
+        ...data.states.map(state => ({ name: state, category: 'Estado' }))
+    ];
+    const searchText = normalizeText(input.value);
+    const suggestions = allData.filter(item => normalizeText(item.name).includes(searchText));
+    const datalist = document.createElement('datalist');
+    datalist.id = `datalist-suggestions`;
+    clearSuggestions();
+    suggestions.forEach(item => {
+        const option = document.createElement('option');
+        option.value = `${item.name} (${item.category})`;
+        datalist.appendChild(option);
+    });
+    document.body.appendChild(datalist);
+    input.setAttribute('list', datalist.id);
+}
+
+function clearSuggestions() {
+    document.querySelectorAll('datalist').forEach(datalist => datalist.remove());
+}
+
+function incrementCount(selectedText) {
+    const name = selectedText.replace(/\s+\(.*?\)$/, ''); // Remove the category from the selected text
+    let category;
+    if (data.cities.includes(name)) {
+        category = 'cities';
+    } else if (data.neighborhoods.includes(name)) {
+        category = 'neighborhoods';
+    } else if (data.states.includes(name)) {
+        category = 'states';
+    }
+
+    if (category) {
+        const tableBody = document.querySelector(`#${category} tbody`);
+        let row = [...tableBody.rows].find(row => row.cells[0].textContent === name);
+
+        if (row) {
+            row.cells[1].textContent = parseInt(row.cells[1].textContent) + 1;
+        } else {
+            row = tableBody.insertRow();
+            const cellName = row.insertCell(0);
+            const cellCount = row.insertCell(1);
+            cellName.textContent = name;
+            cellCount.textContent = 1;
+        }
+
+        sortTable(tableBody);
+    }
+}
+
+function sortTable(tableBody) {
+    const rows = Array.from(tableBody.rows);
+    rows.sort((a, b) => a.cells[0].textContent.localeCompare(b.cells[0].textContent));
+
+    rows.forEach(row => tableBody.appendChild(row));
+}
+
+
+    </script>
+</body>
+
+</html>

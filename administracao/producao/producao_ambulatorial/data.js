@@ -1,0 +1,50 @@
+const data = {
+    "dadosPessoais": { "NumeroRegistro": "", "CidadeBairro": "" },
+    "faixaEtaria": { "0a13": 0, "14a21": 0, "22a59": 0, "60ouMais": 0 },
+    "sexo": { "Feminino": 0, "Masculino": 0 },
+    "cartaoSUS": { "ComCartao": 0, "SemCartao": 0 },
+    "classificacaoRisco": { "Classificado": 0, "NaoClassificado": 0 },
+    "anamnese": { "PA": 0, "PulsoFC": 0, "FR": 0, "Saturacao": 0, "Temperatura": 0, "Peso": 0, "Glicemia": 0, "Inalacao": 0 },
+    "consultas": { "Medico": 0, "Enfermeiro": 0, "AssistenteSocial": 0 },
+    "acidentesTransito": { "MOTO_X_CARRO": 0, "MOTO_X_MOTO": 0, "MOTO_X_VEICULO_GRANDE": 0, "MOTO_QUEDA": 0, "MOTO_OUTROS": 0, "VEICULO_GRANDE": 0, "CARRO_CAPOTAMENTO": 0, "CARRO_X_CARRO": 0, "CARRO_X_VEICULO_GRANDE": 0, "CARRO_OUTROS": 0, "ATROPELAMENTO": 0, "BICICLETA": 0 },
+    "causasAcidente": { "FAB": 0, "FAF": 0, "ACIDENTE_TRABALHO": 0, "GESTANTE": 0, "AGRESSAO_FISICA": 0, "TRAUMA": 3 },
+    "quedas": { "PROP_ALTURA": 0, "+1m": 0, "CAMA": 0, "ESCADA": 0, "CAVALO": 0, "QUEDA_ARVORE": 0, "REDE": 0, "TELHADO": 0, "OUTROS": 0, "TENTATIVA_SUICIDIO": 0 },
+    "cities": [
+        'Abaetetuba', 'Abel Figueiredo', 'Acara', 'Afua', 'Agua Azul do Norte', 'Alenquer', 'Almeirim', 'Altamira',
+        'Anajas', 'Ananindeua', 'Anapu', 'Augusto Correa', 'Aurora do Para', 'Aveiro', 'Bagre', 'Baiao', 'Bannach',
+        'Barcarena', 'Belem', 'Belterra', 'Benevides', 'Bom Jesus do Tocantins', 'Bonito', 'Braganca', 'Brasil Novo',
+        'Brejo Grande do Araguaia', 'Breu Branco', 'Breves', 'Bujaru', 'Cachoeira do Arari', 'Cachoeira do Piria',
+        'Cameta', 'Canaa dos Carajas', 'Capanema', 'Capitao Poco', 'Castanhal', 'Chaves', 'Colares', 'Conceicao do Araguaia',
+        'Concordia do Para', 'Cumaru do Norte', 'Curionopolis', 'Curralinho', 'Curua', 'Curuca', 'Dom Eliseu', 'Eldorado do Carajas',
+        'Faro', 'Floresta do Araguaia', 'Garrafao do Norte', 'Goianesia do Para', 'Gurupa', 'Igarape-Acu', 'Igarape-Miri',
+        'Inhangapi', 'Ipixuna do Para', 'Irituia', 'Itaituba', 'Itupiranga', 'Jacareacanga', 'Jacunda', 'Juruti', 'Limoeiro do Ajuru',
+        'Mae do Rio', 'Magalhaes Barata', 'Maraba', 'Maracana', 'Marapanim', 'Marituba', 'Medicilandia', 'Melgaco', 'Mocajuba', 'Moju',
+        'Monte Alegre', 'Muana', 'Nova Esperanca do Piria', 'Nova Ipixuna', 'Nova Timboteua', 'Novo Progresso', 'Novo Repartimento',
+        'Obidos', 'Oeiras do Para', 'Oriximina', 'Ourem', 'Ourilandia do Norte', 'Pacaja', 'Palestina do Para', 'Paragominas',
+        'Parauapebas', 'Pau Darco', 'Peixe-Boi', 'Picarra', 'Placas', 'Ponta de Pedras', 'Portel', 'Porto de Moz', 'Prainha',
+        'Primavera', 'Quatipuru', 'Redencao', 'Rio Maria', 'Rondon do Para', 'Ruropolis', 'Salinopolis', 'Salvaterra',
+        'Santa Barbara do Para', 'Santa Cruz do Arari', 'Santa Isabel do Para', 'Santa Luzia do Para', 'Santa Maria das Barreiras',
+        'Santa Maria do Para', 'Santarem', 'Santarem Novo', 'Santo Antonio do Taua', 'Sao Caetano de Odivelas', 'Sao Domingos do Araguaia',
+        'Sao Domingos do Capim', 'Sao Felix do Xingu', 'Sao Francisco do Para', 'Sao Geraldo do Araguaia', 'Sao Joao da Ponta',
+        'Sao Joao de Pirabas', 'Sao Joao do Araguaia', 'Sao Miguel do Guama', 'Sao Sebastiao da Boa Vista', 'Sapucaia', 'Senador Jose Porfirio',
+        'Soure', 'Tailândia', 'Terra Alta', 'Terra Santa', 'Tome-Acu', 'Tracuateua', 'Trairao', 'Tucuma', 'Tucurui', 'Ulianopolis',
+        'Urucara', 'Vigia', 'Viseu', 'Vitoria do Xingu', 'Xinguara'
+    ],
+    "neighborhoods": [
+        'Agrovila Calucia', 'Agrovila 3 de outubro', 'Agrovila Bacabal', 'Agrovila Bacuri', 'Agrovila Boa Vista',
+        'Agrovila C. Branco', 'Agrovila Cupiuba', 'Agrovila Iracema', 'Agrovila Itaqui', 'Agrovila João Batista',
+        'Agrovila Macapazinho', 'Agrovila Nazare', 'Agrovila Pacuquara', 'Agrovila S. Terezinha', 'Agrovila S. Raimundo',
+        'Ana Júlia', 'Bairro Novo', 'Betânia', 'Bom Jesus', 'Caiçara', 'Camp. Elisios', 'Camp. Lindos', 'Cariri',
+        'Centro', 'Conj. Tangaras', 'Conj. Ypês', 'Cristo', 'Estrela', 'Florestal', 'Fonte Boa', 'Heliolandia', 'Ianetama',
+        'Imperador', 'Imperial', 'Jaderlândia', 'Jardim Acacias', 'Jardim Castanhal', 'Jardim Modelo', 'Jardim Tropical',
+        'Milagre/Sta. Lidia', 'Nova Olinda', 'Novo Caiçara', 'Novo Estrela', 'Novo Horizonte', 'Pantanal', 'Prq. Castanhais',
+        'Prq. dos Buritis', 'Pirapora', 'Propira', 'Rouxinol', 'Salgadinho', 'Sta Catarina', 'Santa Helena', 'Sta Terezinha',
+        'São José', 'Saudade', 'Saudade II', 'Titanlândia', 'Tókio', 'Vila do Apeú', 'Zona Rural', 'Não Identif.'
+    ],
+    "states": [
+        'Acre', 'Alagoas', 'Amapá', 'Amazonas', 'Bahia', 'Ceará', 'Distrito Federal', 'Espírito Santo', 'Goiás', 'Maranhão',
+        'Mato Grosso', 'Mato Grosso do Sul', 'Minas Gerais', 'Pará', 'Paraíba', 'Paraná', 'Pernambuco', 'Piauí',
+        'Rio de Janeiro', 'Rio Grande do Norte', 'Rio Grande do Sul', 'Rondônia', 'Roraima', 'Santa Catarina', 'São Paulo',
+        'Sergipe', 'Tocantins'
+    ]
+};
