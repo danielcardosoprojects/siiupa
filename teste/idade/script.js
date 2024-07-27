@@ -42,7 +42,7 @@ function displayQuestion() {
 
 function checkAnswer() {
     const userAnswer = parseInt(document.getElementById("age-input").value);
-    const correctAnswer = calculateAge(currentBirthDate, new Date(2024, 5, 9));
+    const correctAnswer = calculateAge(currentBirthDate, new Date());
     if (userAnswer === correctAnswer) {
         feedbackElement.textContent = "Correto!";
         feedbackElement.style.color = "lime";
