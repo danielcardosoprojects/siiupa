@@ -174,7 +174,7 @@
 
         function checkAnswer() {
             const userAnswer = parseInt(ageInputElement.value);
-            const correctAnswer = calculateAge(currentBirthDate, new Date());
+            const correctAnswer = calculateAge(currentBirthDate, new Date(2024, 7, 27));
             const responseTime = (new Date() - startTime) / 1000; // in seconds
             totalTime += responseTime;
 
