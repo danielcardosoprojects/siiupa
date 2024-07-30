@@ -1,10 +1,10 @@
-const data = {
+let data = {
     "dadosPessoais": { "NumeroRegistro": "", "CidadeBairro": "" },
     "faixaEtaria": { "0a13": 0, "14a21": 0, "22a59": 0, "60ouMais": 0 },
     "sexo": { "Feminino": 0, "Masculino": 0 },
     "cartaoSUS": { "ComCartao": 0, "SemCartao": 0 },
     "classificacaoRisco": { "Classificado": 0, "NaoClassificado": 0 },
-    "anamnese": { "PA": 0, "PulsoFC": 0, "FR": 0, "Saturacao": 0, "Temperatura": 0, "Peso": 0, "Glicemia": 0, "Inalacao": 0 },
+    "anamnese": { "PA": 0, "PulsoFC": 0, "FR": 0, "Saturacao": 0, "Temperatura": 0, "Peso": 0, "Glicemia": 0, "Inalacao": 0, "Crise Hipertensiva": 0 },
     "consultas": { "Medico": 0, "Enfermeiro": 0, "AssistenteSocial": 0 },
     "acidentesTransito": { "MOTO_X_CARRO": 0, "MOTO_X_MOTO": 0, "MOTO_X_VEICULO_GRANDE": 0, "MOTO_QUEDA": 0, "MOTO_OUTROS": 0, "VEICULO_GRANDE": 0, "CARRO_CAPOTAMENTO": 0, "CARRO_X_CARRO": 0, "CARRO_X_VEICULO_GRANDE": 0, "CARRO_OUTROS": 0, "ATROPELAMENTO": 0, "BICICLETA": 0 },
     "causasAcidente": { "FAB": 0, "FAF": 0, "ACIDENTE_TRABALHO": 0, "GESTANTE": 0, "AGRESSAO_FISICA": 0, "TRAUMA": 3 },
@@ -117,6 +117,7 @@ function sortTable(tableBody) {
 }
 
 function populaDados(div, categoria, multi) {
+    
     const elem = document.getElementById(div);
     elem.innerHTML = "<h2 class='tituloCategoria'>" + capitalize(categoria) + "</h2>";
     const categoriaDados = data[categoria];
@@ -129,12 +130,18 @@ function populaDados(div, categoria, multi) {
         const title = document.createElement('div');
         title.classList.add('title');
         title.textContent = chave;
+        
 
         const count = document.createElement('div');
         count.classList.add('count');
         count.dataset.key = letras[i];
         count.dataset.multi = multi;
         count.textContent = categoriaDados[chave];
+        count.dataset.categoria = `${categoria}`;
+        count.dataset.chave = `${chave}`;
+        
+        
+        // console.log(`data['${categoria}']['${chave}']`);
 
         const key = document.createElement('div');
         key.classList.add('key');
@@ -237,10 +244,18 @@ $(document).ready(function () {
                     var count = parseInt($(this).text());
                     if (event.shiftKey) {
                         count = count > 0 ? count - 1 : 0;
+                        categoria = $(this).data('categoria');
+                    chave = $(this).data('chave');
+                    data[`${categoria}`][`${chave}`]--;
                     } else {
                         count++;
+                        $(this).text(count);
+                    categoria = $(this).data('categoria');
+                    chave = $(this).data('chave');
+                    data[`${categoria}`][`${chave}`]++;
                     }
-                    $(this).text(count);
+                    
+                    
                     if ($(this).data('multi') == "n") {
                         proximo();
                     }
