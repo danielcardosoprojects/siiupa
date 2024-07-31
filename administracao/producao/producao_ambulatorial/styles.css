@@ -74,18 +74,21 @@ body {
     box-sizing: border-box;
     margin-bottom: 20px;
 }
+
 #busca {
     width: 100%;
     display: flex;
     justify-content: center;
 }
+
 .container {
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
     overflow-y: auto;
     position: relative;
-    max-height: calc(100vh - 150px); /* Ajuste a altura máxima conforme necessário */
+    max-height: calc(100vh - 150px);
+    /* Ajuste a altura máxima conforme necessário */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -101,7 +104,8 @@ table {
     border-collapse: collapse;
 }
 
-th, td {
+th,
+td {
     border: 1px solid #424242;
     padding: 8px;
     text-align: left;
@@ -134,4 +138,33 @@ th {
 
 .owl-controls .owl-buttons div:hover {
     background: #2c2c2c;
+}
+
+.float-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    width: 140px;
+    height: 50px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+    z-index: 1000;
+}
+
+.float-button:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.float-button:active {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
