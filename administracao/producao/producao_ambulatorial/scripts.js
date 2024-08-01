@@ -54,6 +54,25 @@ const letras = {
     1: "A", 2: "S", 3: "D", 4: "F", 5: "G", 6: "H", 7: "J", 8: "K", 9: "L", 10: "c", 11: "Z", 12: "X", 13: "C", 14: "V", 15: "B"
 };
 
+// Cria um evento de teclado para a tecla especificada
+function simulateKeyPress(key) {
+    // Cria um novo evento de teclado
+    const event = new KeyboardEvent('keydown', {
+        key: key,
+        keyCode: key.charCodeAt(0),
+        code: 'Key' + key.toUpperCase(),
+        bubbles: true,
+        cancelable: true
+    });
+
+    // Dispara o evento no elemento desejado, por exemplo, no document
+    document.dispatchEvent(event);
+}
+
+// Simula a pressão da tecla 'A'
+//simulateKeyPress('a');
+
+
 let separaProntuario;
 
 function separarProntuario(val) {
@@ -212,6 +231,9 @@ function populaDados(div, categoria, multi) {
         count.textContent = categoriaDados[chave];
         count.dataset.categoria = `${categoria}`;
         count.dataset.chave = `${chave}`;
+        count.onclick = function() {
+            simulateKeyPress(`${letras[i]}`); // Simula a pressão da tecla 'a'
+        };
 
         const key = document.createElement('div');
         key.classList.add('key');
