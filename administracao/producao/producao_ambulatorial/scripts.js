@@ -219,11 +219,16 @@ function populaDados(div, categoria, multi) {
     for (const chave in categoriaDados) {
         const square = document.createElement('div');
         square.classList.add('square');
+        square.id = chave;
+        square.addEventListener('click', function() {
+
+            simulateKeyPress(`${letras[i]}`); // Simula a pressão da tecla 'a'
+        });
 
         const title = document.createElement('div');
         title.classList.add('title');
         title.textContent = chave;
-
+        
         const count = document.createElement('div');
         count.classList.add('count');
         count.dataset.key = letras[i];
@@ -231,9 +236,12 @@ function populaDados(div, categoria, multi) {
         count.textContent = categoriaDados[chave];
         count.dataset.categoria = `${categoria}`;
         count.dataset.chave = `${chave}`;
-        count.onclick = function () {
-            simulateKeyPress(`${letras[i]}`); // Simula a pressão da tecla 'a'
-        };
+
+ 
+        // count.onclick = function () {
+        //     simulateKeyPress(`${letras[i]}`); // Simula a pressão da tecla 'a'
+        // };
+        
 
         const key = document.createElement('div');
         key.classList.add('key');
@@ -245,6 +253,7 @@ function populaDados(div, categoria, multi) {
 
         fragment.appendChild(square);
         i++;
+        
     }
 
     elem.appendChild(fragment);
