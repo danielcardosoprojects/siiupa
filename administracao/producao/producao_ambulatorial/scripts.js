@@ -7,7 +7,8 @@ let data = {
     "anamnese": { "PA": 0, "PulsoFC": 0, "FR": 0, "Saturacao": 0, "Temperatura": 0, "Peso": 0, "Glicemia": 0, "Inalacao": 0, "Crise Hipertensiva": 0 },
     "consultas": { "Medico": 0, "Enfermeiro": 0, "AssistenteSocial": 0 },
     "acidentesTransito": { "MOTO_X_CARRO": 0, "MOTO_X_MOTO": 0, "MOTO_X_VEICULO_GRANDE": 0, "MOTO_QUEDA": 0, "MOTO_OUTROS": 0, "VEICULO_GRANDE": 0, "CARRO_CAPOTAMENTO": 0, "CARRO_X_CARRO": 0, "CARRO_X_VEICULO_GRANDE": 0, "CARRO_OUTROS": 0, "ATROPELAMENTO": 0, "BICICLETA": 0 },
-    "causasAcidente": { "FAB": 0, "FAF": 0, "ACIDENTE_TRABALHO": 0, "GESTANTE": 0, "AGRESSAO_FISICA": 0, "TRAUMA": 3 },
+    "causasAcidente": { "FAB": 0, "FAF": 0, "ACIDENTE_TRABALHO": 0, "GESTANTE": 0, "AGRESSAO_FISICA": 0, "TRAUMA": 0 },
+    "traumas": {"TRAUMA": 0},
     "quedas": { "PROP_ALTURA": 0, "+1m": 0, "CAMA": 0, "ESCADA": 0, "CAVALO": 0, "QUEDA_ARVORE": 0, "REDE": 0, "TELHADO": 0, "OUTROS": 0, "TENTATIVA_SUICIDIO": 0 },
     "cities": {
         'Abaetetuba': 0, 'Abel Figueiredo': 0, 'Acara': 0, 'Afua': 0, 'Agua Azul do Norte': 0, 'Alenquer': 0, 'Almeirim': 0, 'Altamira': 0,
@@ -264,6 +265,7 @@ $(document).ready(function () {
     populaDados("seis", "acidentesTransito", "n");
     populaDados("sete", "causasAcidente", "n");
     populaDados("oito", "quedas", "n");
+    populaDados("oito2", "traumas", "n");
     populaDados("nove", "anamnese", "s");
     populaDados("dez", "consultas", "s");
 
@@ -288,7 +290,8 @@ $(document).ready(function () {
     function proximo() {
         owl.trigger('owl.next');
         updateActiveClass();
-        if (owl.data('owlCarousel').currentItem === 10) {
+        if (owl.data('owlCarousel').currentItem === 11) {
+            console.log(owl.data('owlCarousel'));
 
             setTimeout(() => {
                 searchBox.focus();
@@ -374,7 +377,7 @@ $(document).ready(function () {
             if (this.value.endsWith("(Cidade)")) {
                 setTimeout(() => {
 
-                    alertify.alert('Este prontuário deverá ser separado.');
+                    alertify.alert('Este prontuário deverá ser separado em Cidades.');
 
                 }, 500);
             }
