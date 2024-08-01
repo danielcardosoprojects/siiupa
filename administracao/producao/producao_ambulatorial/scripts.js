@@ -289,7 +289,7 @@ $(document).ready(function () {
         owl.trigger('owl.next');
         updateActiveClass();
         if (owl.data('owlCarousel').currentItem === 10) {
-            
+
             setTimeout(() => {
                 searchBox.focus();
             }, 500);
@@ -297,14 +297,14 @@ $(document).ready(function () {
         totalItems = owl.data('owlCarousel').itemsAmount - 1;
         currentItem = owl.data('owlCarousel').currentItem;
         if (currentItem == 0) {
-            
-        
+
+
             consultaSeparacao();
         }
     }
 
     function anterior() {
-        
+
 
         if (owl.data('owlCarousel').currentItem === 0) {
             totalItems = owl.data('owlCarousel').itemsAmount - 1;
@@ -371,11 +371,14 @@ $(document).ready(function () {
         if (e.key === 'Enter') {
             incrementCount(this.value);
             //verifica se é cidade e da alerta
-            if(this.value.endsWith("(Cidade)")){
-                alertify.alert('Este prontuário deverá ser separado.');
+            if (this.value.endsWith("(Cidade)")) {
+                setTimeout(() => {
+
+                    alertify.alert('Este prontuário deverá ser separado.');
+
+                }, 500);
             }
 
-            
             this.value = '';
             clearSuggestions();
             this.blur();
