@@ -53,6 +53,26 @@ const letras = {
     1: "A", 2: "S", 3: "D", 4: "F", 5: "G", 6: "H", 7: "J", 8: "K", 9: "L", 10: "c", 11: "Z", 12: "X", 13: "C", 14: "V", 15: "B"
 };
 
+let separaProntuario;
+
+function separarProntuario(val) {
+    if (val === 1) {
+        separaProntuario = 1; //registra para separação
+        alertify.success('Este prontuário deverá ser separado.');
+
+    } else {
+        separaProntuario = 0; //limpa separação
+    }
+
+}
+
+function consultaSeparacao() {
+    if (separaProntuario) {
+        alertify.alert('Este prontuário deverá ser separado nos acidentes de trânsito.');
+        separarProntuario(0);
+    }
+}
+
 // Carrega dados do localStorage, se existirem
 function loadData() {
     const savedData = localStorage.getItem('data');
@@ -106,7 +126,7 @@ function clearSuggestions() {
 function addDecrementButton(category, name) {
     const button = document.createElement('button');
     button.textContent = '-';
-    button.addEventListener('click', function() {
+    button.addEventListener('click', function () {
         if (data[category][name] > 0) {
             data[category][name]--;
             updateTableRow(category, name);
@@ -130,11 +150,16 @@ function incrementCount(selectedText) {
     let category;
     if (data.cities.hasOwnProperty(name)) {
         category = 'cities';
+
     } else if (data.neighborhoods.hasOwnProperty(name)) {
         category = 'neighborhoods';
     } else if (data.states.hasOwnProperty(name)) {
         category = 'states';
     }
+
+
+
+
 
     if (category) {
         data[category][name]++;
@@ -224,6 +249,10 @@ function capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
+
+
+
+
 $(document).ready(function () {
     loadData(); // Carrega os dados do localStorage ao carregar a página
 
@@ -258,11 +287,9 @@ $(document).ready(function () {
 
     function proximo() {
         owl.trigger('owl.next');
-        console.log(owl.data('owlCarousel').currentItem);
         updateActiveClass();
         if (owl.data('owlCarousel').currentItem === 10) {
-            console.log('esta aqui');
-            console.log(searchBox);
+            
             setTimeout(() => {
                 searchBox.focus();
             }, 500);
@@ -270,12 +297,14 @@ $(document).ready(function () {
         totalItems = owl.data('owlCarousel').itemsAmount - 1;
         currentItem = owl.data('owlCarousel').currentItem;
         if (currentItem == 0) {
-            console.log(data);
+            
+        
+            consultaSeparacao();
         }
     }
 
     function anterior() {
-        console.log(owl.data('owlCarousel'));
+        
 
         if (owl.data('owlCarousel').currentItem === 0) {
             totalItems = owl.data('owlCarousel').itemsAmount - 1;
@@ -306,6 +335,14 @@ $(document).ready(function () {
                     var count = parseInt($(this).text());
                     const categoria = $(this).data('categoria');
                     const chave = $(this).data('chave');
+
+                    //elabora o alerta para separação de prontuario
+                    if (categoria == "acidentesTransito") {
+                        separarProntuario(1);
+
+                    };
+
+
                     if (event.shiftKey) {
                         count = count > 0 ? count - 1 : 0;
                         data[`${categoria}`][`${chave}`]--;
@@ -333,13 +370,19 @@ $(document).ready(function () {
     searchBox.addEventListener('keydown', function (e) {
         if (e.key === 'Enter') {
             incrementCount(this.value);
+            //verifica se é cidade e da alerta
+            if(this.value.endsWith("(Cidade)")){
+                alertify.alert('Este prontuário deverá ser separado.');
+            }
+
+            
             this.value = '';
             clearSuggestions();
             this.blur();
         }
     });
 
-    searchBox.addEventListener('blur', function() {
+    searchBox.addEventListener('blur', function () {
         // this.disabled = true; // Desativar input ao perder foco
     });
 
