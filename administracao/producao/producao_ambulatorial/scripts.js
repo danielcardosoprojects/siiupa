@@ -8,7 +8,7 @@ let data = {
     "consultas": { "Medico": 0, "Enfermeiro": 0, "AssistenteSocial": 0 },
     "acidentesTransito": { "MOTO_X_CARRO": 0, "MOTO_X_MOTO": 0, "MOTO_X_VEICULO_GRANDE": 0, "MOTO_QUEDA": 0, "MOTO_OUTROS": 0, "VEICULO_GRANDE": 0, "CARRO_CAPOTAMENTO": 0, "CARRO_X_CARRO": 0, "CARRO_X_VEICULO_GRANDE": 0, "CARRO_OUTROS": 0, "ATROPELAMENTO": 0, "BICICLETA": 0 },
     "causasAcidente": { "FAB": 0, "FAF": 0, "ACIDENTE_TRABALHO": 0, "GESTANTE": 0, "AGRESSAO_FISICA": 0 },
-    "traumas": {"TRAUMA": 0},
+    "traumas": { "TRAUMA": 0 },
     "quedas": { "PROP_ALTURA": 0, "+1m": 0, "CAMA": 0, "ESCADA": 0, "CAVALO": 0, "QUEDA_ARVORE": 0, "REDE": 0, "TELHADO": 0, "OUTROS": 0, "TENTATIVA_SUICIDIO": 0 },
     "cities": {
         'Abaetetuba': 0, 'Abel Figueiredo': 0, 'Acara': 0, 'Afua': 0, 'Agua Azul do Norte': 0, 'Alenquer': 0, 'Almeirim': 0, 'Altamira': 0,
@@ -231,7 +231,7 @@ function populaDados(div, categoria, multi) {
         count.textContent = categoriaDados[chave];
         count.dataset.categoria = `${categoria}`;
         count.dataset.chave = `${chave}`;
-        count.onclick = function() {
+        count.onclick = function () {
             simulateKeyPress(`${letras[i]}`); // Simula a pressão da tecla 'a'
         };
 
@@ -300,7 +300,9 @@ $(document).ready(function () {
         loop: false,
         nav: true,  // Adicionado para mostrar navegacao
         dots: false,
-        autoPlay: false
+        autoPlay: false,
+        touchDrag  : true,
+        mouseDrag  : false
     });
 
     function updateActiveClass() {
