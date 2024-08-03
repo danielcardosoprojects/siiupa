@@ -317,17 +317,21 @@ $(document).ready(function () {
         autoPlay: false,
         touchDrag: true,
         mouseDrag: true,
-        onDragged: function (event) {
-            alert('teste');
-        }
-    });
+        
 
+    });
+    $('#owl-carousel').owlCarousel({
+        onDragged: callback
+    });
+    function callback(event) {
+        alert('a');
+    }
     function updateActiveClass() {
         $('.owl-item').removeClass('active');
         var currentIndex = owl.data('owlCarousel').currentItem;
         $('.owl-item').eq(currentIndex).addClass('active');
     }
-   
+
 
     function proximo() {
         owl.trigger('owl.next');
