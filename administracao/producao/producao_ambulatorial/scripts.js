@@ -209,13 +209,9 @@ function sortTable(tableBody) {
     rows.sort((a, b) => a.cells[0].textContent.localeCompare(b.cells[0].textContent));
     rows.forEach(row => tableBody.appendChild(row));
 }
-function simulaTecla(ter){
-    categoria = document.getElementById(ter);
-    // console.log($(ter).data('key'));
-    ter.addEventListener('click', function() {
-
+function simulaTecla(categoria) {
+    ter.addEventListener('click', function () {
         simulateKeyPress($(ter).data('key'));
-        console.log('chegou e a tecla é ' + $(ter).data('key'));
     });
 }
 function populaDados(div, categoria, multi) {
@@ -229,9 +225,9 @@ function populaDados(div, categoria, multi) {
         square.classList.add('square');
         square.id = chave;
         square.dataset.key = letras[i];
-        
-        
-        
+
+
+
 
         const title = document.createElement('div');
         title.classList.add('title');
