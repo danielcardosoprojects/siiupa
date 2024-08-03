@@ -210,8 +210,8 @@ function sortTable(tableBody) {
     rows.forEach(row => tableBody.appendChild(row));
 }
 function simulaTecla(categoria) {
-    ter.addEventListener('click', function () {
-        simulateKeyPress($(ter).data('key'));
+    categoria.addEventListener('click', function () {
+        simulateKeyPress($(categoria).data('key'));
     });
 }
 function populaDados(div, categoria, multi) {
@@ -316,7 +316,10 @@ $(document).ready(function () {
         dots: false,
         autoPlay: false,
         touchDrag: true,
-        mouseDrag: false
+        mouseDrag: true,
+        onDragged: function (event) {
+            alert('teste');
+        }
     });
 
     function updateActiveClass() {
@@ -324,6 +327,7 @@ $(document).ready(function () {
         var currentIndex = owl.data('owlCarousel').currentItem;
         $('.owl-item').eq(currentIndex).addClass('active');
     }
+   
 
     function proximo() {
         owl.trigger('owl.next');
