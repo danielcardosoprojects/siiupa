@@ -209,7 +209,15 @@ function sortTable(tableBody) {
     rows.sort((a, b) => a.cells[0].textContent.localeCompare(b.cells[0].textContent));
     rows.forEach(row => tableBody.appendChild(row));
 }
+function simulaTecla(ter){
+    categoria = document.getElementById(ter);
+    // console.log($(ter).data('key'));
+    ter.addEventListener('click', function() {
 
+        simulateKeyPress($(ter).data('key'));
+        console.log('chegou e a tecla é ' + $(ter).data('key'));
+    });
+}
 function populaDados(div, categoria, multi) {
     const elem = document.getElementById(div);
     elem.innerHTML = "<h2 class='tituloCategoria'>" + capitalize(categoria) + "</h2>";
@@ -220,15 +228,15 @@ function populaDados(div, categoria, multi) {
         const square = document.createElement('div');
         square.classList.add('square');
         square.id = chave;
-        square.addEventListener('click', function() {
-
-            simulateKeyPress(`${letras[i]}`); // Simula a pressão da tecla 'a'
-        });
+        square.dataset.key = letras[i];
+        
+        
+        
 
         const title = document.createElement('div');
         title.classList.add('title');
         title.textContent = chave;
-        
+
         const count = document.createElement('div');
         count.classList.add('count');
         count.dataset.key = letras[i];
@@ -237,11 +245,11 @@ function populaDados(div, categoria, multi) {
         count.dataset.categoria = `${categoria}`;
         count.dataset.chave = `${chave}`;
 
- 
+
         // count.onclick = function () {
         //     simulateKeyPress(`${letras[i]}`); // Simula a pressão da tecla 'a'
         // };
-        
+
 
         const key = document.createElement('div');
         key.classList.add('key');
@@ -252,8 +260,9 @@ function populaDados(div, categoria, multi) {
         square.appendChild(key);
 
         fragment.appendChild(square);
+        simulaTecla(square);
         i++;
-        
+
     }
 
     elem.appendChild(fragment);
@@ -310,8 +319,8 @@ $(document).ready(function () {
         nav: true,  // Adicionado para mostrar navegacao
         dots: false,
         autoPlay: false,
-        touchDrag  : true,
-        mouseDrag  : false
+        touchDrag: true,
+        mouseDrag: false
     });
 
     function updateActiveClass() {
