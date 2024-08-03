@@ -1,3 +1,5 @@
+
+
 let data = {
     "dadosPessoais": { "NumeroRegistro": "", "CidadeBairro": "" },
     "faixaEtaria": { "0a13": 0, "14a21": 0, "22a59": 0, "60ouMais": 0 },
@@ -313,24 +315,26 @@ $(document).ready(function () {
         items: 1,
         loop: false,
         nav: true,  // Adicionado para mostrar navegacao
-        dots: false,
+        dots: true,
         autoPlay: false,
         touchDrag: true,
         mouseDrag: true,
-        
+        startDragging: function (e) {
+            proximo();
+
+        },
+
+
 
     });
-    $('#owl-carousel').owlCarousel({
-        onDragged: callback
-    });
-    function callback(event) {
-        alert('a');
-    }
+
     function updateActiveClass() {
         $('.owl-item').removeClass('active');
         var currentIndex = owl.data('owlCarousel').currentItem;
         $('.owl-item').eq(currentIndex).addClass('active');
     }
+
+
 
 
     function proximo() {
