@@ -318,130 +318,147 @@ $(document).ready(function () {
         dots: true,
         autoPlay: false,
         touchDrag: true,
-        mouseDrag: true,
-        startDragging: function (e) {
-            proximo();
+        mouseDrag: true
+    });
+    const owlCarousel = document.getElementById('owl-carousel');
+    const hammer = new Hammer(owlCarousel);
 
-        },
+    let startX;
 
-
-
+    hammer.on('panstart', function(event) {
+        startX = event.center.x;
+        
     });
 
-    function updateActiveClass() {
-        $('.owl-item').removeClass('active');
-        var currentIndex = owl.data('owlCarousel').currentItem;
-        $('.owl-item').eq(currentIndex).addClass('active');
+    hammer.on('panend', function(event) {
+        const endX = event.center.x;
+        const direction = endX > startX ? 'direita' : 'esquerda';
+        console.log(`Arrastou para a ${direction}`);
+        if (direction === 'esquerda') {
+            proximo();
+        } else {
+            anterior();
+        }
+    });
+
+function updateActiveClass() {
+    $('.owl-item').removeClass('active');
+    var currentIndex = owl.data('owlCarousel').currentItem;
+    $('.owl-item').eq(currentIndex).addClass('active');
+}
+
+function teste() {
+    return owl.data('owlCarousel').currentItem;
+
+}
+
+
+
+function proximo() {
+    owl.trigger('owl.next');
+    updateActiveClass();
+    if (owl.data('owlCarousel').currentItem === 11) {
+        console.log(owl.data('owlCarousel'));
+
+        setTimeout(() => {
+            searchBox.focus();
+        }, 500);
     }
+    totalItems = owl.data('owlCarousel').itemsAmount - 1;
+    currentItem = owl.data('owlCarousel').currentItem;
+    if (currentItem == 0) {
 
 
+        consultaSeparacao();
+    }
+}
+
+function anterior() {
 
 
-    function proximo() {
-        owl.trigger('owl.next');
+    if (owl.data('owlCarousel').currentItem === 0) {
+        totalItems = owl.data('owlCarousel').itemsAmount - 1;
+        for (let i = 0; i < totalItems; i++) {
+            proximo();
+        }
+    } else {
+        owl.trigger('owl.prev');
         updateActiveClass();
-        if (owl.data('owlCarousel').currentItem === 11) {
-            console.log(owl.data('owlCarousel'));
+    }
+}
 
+owl.on('changed.owl.carousel', updateActiveClass);
+updateActiveClass();
+
+$(document, ".iframe").keydown(function (event) {
+    var key = String(event.key).toUpperCase();
+    console.log(key);
+    var activeItem = $(".owl-item.active .item");
+
+    if (key === 'ENTER') {
+        proximo();
+    } else if (event.key === 'ArrowLeft') {
+        anterior();
+    } else {
+        activeItem.find('.count').each(function () {
+            if ($(this).data('key') === key) {
+                var count = parseInt($(this).text());
+                const categoria = $(this).data('categoria');
+                const chave = $(this).data('chave');
+
+                //elabora o alerta para separação de prontuario
+                if (categoria == "acidentesTransito") {
+                    separarProntuario(1);
+
+                };
+
+
+                if (event.shiftKey) {
+                    count = count > 0 ? count - 1 : 0;
+                    data[`${categoria}`][`${chave}`]--;
+                } else {
+                    count++;
+                    data[`${categoria}`][`${chave}`]++;
+                }
+
+                $(this).text(count);
+                saveData(); // Salva os dados sempre que houver uma alteração
+
+                if ($(this).data('multi') == "n") {
+                    proximo();
+                }
+            }
+        });
+    }
+});
+
+const searchBox = document.querySelector('.search-box');
+searchBox.addEventListener('input', function () {
+    updateSuggestions(this);
+});
+
+searchBox.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') {
+        incrementCount(this.value);
+        //verifica se é cidade e da alerta
+        if (this.value.endsWith("(Cidade)")) {
             setTimeout(() => {
-                searchBox.focus();
+
+                alertify.alert('Este prontuário deverá ser separado em Cidades.');
+
             }, 500);
         }
-        totalItems = owl.data('owlCarousel').itemsAmount - 1;
-        currentItem = owl.data('owlCarousel').currentItem;
-        if (currentItem == 0) {
 
-
-            consultaSeparacao();
-        }
+        this.value = '';
+        clearSuggestions();
+        this.blur();
     }
+});
 
-    function anterior() {
+searchBox.addEventListener('blur', function () {
+    // this.disabled = true; // Desativar input ao perder foco
+});
 
-
-        if (owl.data('owlCarousel').currentItem === 0) {
-            totalItems = owl.data('owlCarousel').itemsAmount - 1;
-            for (let i = 0; i < totalItems; i++) {
-                proximo();
-            }
-        } else {
-            owl.trigger('owl.prev');
-            updateActiveClass();
-        }
-    }
-
-    owl.on('changed.owl.carousel', updateActiveClass);
-    updateActiveClass();
-
-    $(document, ".iframe").keydown(function (event) {
-        var key = String(event.key).toUpperCase();
-        console.log(key);
-        var activeItem = $(".owl-item.active .item");
-
-        if (key === 'ENTER') {
-            proximo();
-        } else if (event.key === 'ArrowLeft') {
-            anterior();
-        } else {
-            activeItem.find('.count').each(function () {
-                if ($(this).data('key') === key) {
-                    var count = parseInt($(this).text());
-                    const categoria = $(this).data('categoria');
-                    const chave = $(this).data('chave');
-
-                    //elabora o alerta para separação de prontuario
-                    if (categoria == "acidentesTransito") {
-                        separarProntuario(1);
-
-                    };
-
-
-                    if (event.shiftKey) {
-                        count = count > 0 ? count - 1 : 0;
-                        data[`${categoria}`][`${chave}`]--;
-                    } else {
-                        count++;
-                        data[`${categoria}`][`${chave}`]++;
-                    }
-
-                    $(this).text(count);
-                    saveData(); // Salva os dados sempre que houver uma alteração
-
-                    if ($(this).data('multi') == "n") {
-                        proximo();
-                    }
-                }
-            });
-        }
-    });
-
-    const searchBox = document.querySelector('.search-box');
-    searchBox.addEventListener('input', function () {
-        updateSuggestions(this);
-    });
-
-    searchBox.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter') {
-            incrementCount(this.value);
-            //verifica se é cidade e da alerta
-            if (this.value.endsWith("(Cidade)")) {
-                setTimeout(() => {
-
-                    alertify.alert('Este prontuário deverá ser separado em Cidades.');
-
-                }, 500);
-            }
-
-            this.value = '';
-            clearSuggestions();
-            this.blur();
-        }
-    });
-
-    searchBox.addEventListener('blur', function () {
-        // this.disabled = true; // Desativar input ao perder foco
-    });
-
-    // Evento de clique para o botão de limpar dados
-    document.getElementById('clearDataButton').addEventListener('click', clearData);
+// Evento de clique para o botão de limpar dados
+document.getElementById('clearDataButton').addEventListener('click', clearData);
 });
