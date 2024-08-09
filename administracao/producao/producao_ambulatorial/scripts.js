@@ -405,7 +405,7 @@ $(document, ".iframe").keydown(function (event) {
                 var count = parseInt($(this).text());
                 const categoria = $(this).data('categoria');
                 const chave = $(this).data('chave');
-
+                piscarDiv(chave);
                 //elabora o alerta para separação de prontuario
                 if (categoria == "acidentesTransito") {
                     separarProntuario(1);
@@ -462,3 +462,25 @@ searchBox.addEventListener('blur', function () {
 // Evento de clique para o botão de limpar dados
 document.getElementById('clearDataButton').addEventListener('click', clearData);
 });
+
+function piscarDiv(id) {
+    // Seleciona a div
+    var div = document.getElementById(id);
+
+    // Define as cores para o highlight
+    var highlightColor = 'limegreen';  // Cor de destaque
+    var originalColor = div.style.backgroundColor || '';  // Cor original
+
+    // Define a função de piscar
+    function toggleHighlight() {
+        div.style.backgroundColor = highlightColor;
+
+        setTimeout(function() {
+            div.style.backgroundColor = originalColor;
+        }, 100);  // Duração do highlight (500ms)
+    }
+
+    // Chama a função para piscar uma vez
+    toggleHighlight();
+}
+
