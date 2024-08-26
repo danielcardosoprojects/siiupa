@@ -197,6 +197,8 @@
 </head>
 
 <body>
+	<div id="animated-object" style="position: absolute; width: 150px; height: 150px;"><div id="gif-container" style="position: absolute; width: 100px; height: 100px;"></div>
+</div>
 	<div id="main">
 		<img id="logo" src="logo.png" />
 		<div id="esquerdo"> 
@@ -251,6 +253,86 @@
 
 	</div>
 	<script src="cidades.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.7.6/lottie.min.js"></script>
+
+<script>
+	
+	var animation = lottie.loadAnimation({
+    container: document.getElementById('animated-object'), // O elemento para renderizar a animação
+    renderer: 'svg',
+    loop: true,
+    autoplay: true,
+    path: 'path-to-your-animation.json' // Substitua com o caminho da sua animação
+  });
+
+  // Função para mover a animação pela tela
+  function moveAnimation() {
+    let xPos = 0;
+    let yPos = 0;
+    let xDirection = 1;
+    let yDirection = 1;
+
+    function animate() {
+      xPos += xDirection * 2; // Velocidade horizontal
+      yPos += yDirection * 2; // Velocidade vertical
+
+      // Detecção de bordas
+      if (xPos + 150 > window.innerWidth || xPos < 0) {
+        xDirection *= -1;
+      }
+      if (yPos + 150 > window.innerHeight || yPos < 0) {
+        yDirection *= -1;
+      }
+
+      document.getElementById('animated-object').style.transform = `translate(${xPos}px, ${yPos}px)`;
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  }
+
+  moveAnimation();
+const apiKey = '4aqW68FVa2F0tSe8AB4402daivX8wvkk'; // Substitua com a sua chave de API da Giphy
+
+  function fetchRandomGif() {
+    fetch(`https://api.giphy.com/v1/gifs/random?api_key=${apiKey}&tag=funny`)
+      .then(response => response.json())
+      .then(data => {
+        const gifUrl = data.data.images.original.url;
+        const gifContainer = document.getElementById('gif-container');
+        gifContainer.innerHTML = `<img src="${gifUrl}" alt="Funny GIF" style="width: 100%; height: 100%;">`;
+      })
+      .catch(error => console.error('Error fetching GIF:', error));
+  }
+
+  // Função para mover o GIF pela tela
+  function moveGif() {
+    let xPos = 0;
+    let yPos = 0;
+    let xDirection = 1;
+    let yDirection = 1;
+
+    function animate() {
+      xPos += xDirection * 2;
+      yPos += yDirection * 2;
+
+      if (xPos + 300 > window.innerWidth || xPos < 0) {
+        xDirection *= -1;
+      }
+      if (yPos + 300 > window.innerHeight || yPos < 0) {
+        yDirection *= -1;
+      }
+
+      document.getElementById('gif-container').style.transform = `translate(${xPos}px, ${yPos}px)`;
+      requestAnimationFrame(animate);
+    }
+
+    animate();
+  }
+
+  fetchRandomGif(); // Carrega um GIF aleatório
+  moveGif(); // Começa a mover o GIF
+</script>
 </body>
 
 
