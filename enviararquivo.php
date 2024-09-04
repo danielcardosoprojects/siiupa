@@ -4,6 +4,7 @@ require __DIR__ . '/vendor/autoload.php';
 <link rel="stylesheet" href="/siiupa/vendor/coffeecode/uploader/style.css">
 
 <div class="form">
+
     <form name="env" method="post" enctype="multipart/form-data">
         <?php
         require __DIR__ . "/vendor/coffeecode/uploader/src/Uploader.php";
@@ -26,9 +27,9 @@ require __DIR__ . '/vendor/autoload.php';
         <input type="file" name="file" required/>
         <button>Enviar arquivo</button>
     </form>
-</div>
-
+    <div style="position:fixed;margin-left:0px;">
 <?php
+
 $diretorio = 'arquivos'; // Substitua pelo caminho da sua pasta
 $arquivos = scandir($diretorio);
 
@@ -36,7 +37,11 @@ foreach ($arquivos as $arquivo) {
     // Ignora os diretórios especiais "." e ".."
     if ($arquivo !== "." && $arquivo !== "..") {
         // Gera um link para o arquivo
-        echo '<a href="' . $diretorio . '/' . $arquivo . '">' . $arquivo . '</a><br>';
+        echo '<span><li><a href="' . $diretorio . '/' . $arquivo . '">' . $arquivo . '</a></li></span><span></span>';
     }
 }
 ?>
+</div>
+</div>
+
+
