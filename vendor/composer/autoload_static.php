@@ -74,6 +74,10 @@ class ComposerStaticInit90d09208118e7ccaaf593f5c9a7d0490
             'Dotenv\\' => 7,
             'DeepCopy\\' => 9,
         ),
+        'C' => 
+        array (
+            'CoffeeCode\\Uploader\\' => 20,
+        ),
         'A' => 
         array (
             'Atlas\\Query\\' => 12,
@@ -188,6 +192,10 @@ class ComposerStaticInit90d09208118e7ccaaf593f5c9a7d0490
         'DeepCopy\\' => 
         array (
             0 => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy',
+        ),
+        'CoffeeCode\\Uploader\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/coffeecode/uploader/src',
         ),
         'Atlas\\Query\\' => 
         array (

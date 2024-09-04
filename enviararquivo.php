@@ -1,36 +1,42 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Upload your files</title>
-</head>
-<body>
-  <form enctype="multipart/form-data" action="enviararquivo.php" method="POST">
-    <p>Upload your file</p>
-    <input type="file" name="uploaded_file"></input><br />
-    <input type="submit" value="Upload"></input>
-  </form>
-</body>
-</html>
-<?PHP
-  if(!empty($_FILES['uploaded_file']))
-  {
-    $path = "../arquivos\/";
-    $path = $path . basename( $_FILES['uploaded_file']['name']);
+<?php
+require __DIR__ . '/vendor/autoload.php';
+?>
+<link rel="stylesheet" href="/siiupa/vendor/coffeecode/uploader/style.css">
 
-    if(move_uploaded_file($_FILES['uploaded_file']['tmp_name'], $path)) {
-      echo "The file ".  basename( $_FILES['uploaded_file']['name']). 
-      " has been uploaded";
-    } else{
-        echo "There was an error uploading the file, please try again!";
+<div class="form">
+    <form name="env" method="post" enctype="multipart/form-data">
+        <?php
+        require __DIR__ . "/vendor/coffeecode/uploader/src/Uploader.php";
+        require __DIR__ . "/vendor/coffeecode/uploader/src/File.php";
+
+        $file = new CoffeeCode\Uploader\File("arquivos", "", false); //SEM PASTAS DE ANO E MÊS
+        // $file = new CoffeeCode\Uploader\File("uploads", "files");
+
+
+        if ($_FILES) {
+            try {
+                $upload = $file->upload($_FILES['file'], $_POST['name']);
+                echo "<p><a href='{$upload}' target='_blank'>$upload</a></p>";
+            } catch (Exception $e) {
+                echo "<p>(!) {$e->getMessage()}</p>";
+            }
+        }
+        ?>
+        <input type="text" name="name" placeholder="Nome do arquivo" required/>
+        <input type="file" name="file" required/>
+        <button>Enviar arquivo</button>
+    </form>
+</div>
+
+<?php
+$diretorio = 'arquivos'; // Substitua pelo caminho da sua pasta
+$arquivos = scandir($diretorio);
+
+foreach ($arquivos as $arquivo) {
+    // Ignora os diretórios especiais "." e ".."
+    if ($arquivo !== "." && $arquivo !== "..") {
+        // Gera um link para o arquivo
+        echo '<a href="' . $diretorio . '/' . $arquivo . '">' . $arquivo . '</a><br>';
     }
-  }
-
-  $path = "../arquivos/";
-$diretorio = dir($path);
-
-echo "Lista de Arquivos do diretório '<strong>".$path."</strong>':<br />";
-while($arquivo = $diretorio -> read()){
-echo "<a href='".$path.$arquivo."'>".$arquivo."</a><br />";
 }
-$diretorio -> close();
 ?>
