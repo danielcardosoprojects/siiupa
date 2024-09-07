@@ -16,7 +16,8 @@ const birthDates = [
     new Date(1988, 3, 15),
     new Date(1953, 10, 19)
 ];
-let currentBirthDate;
+let currentBirthDate = new Date();
+let currentDate = new Date();
 const feedbackElement = document.getElementById("feedback");
 const birthDateElement = document.getElementById("birth-date");
 
@@ -30,6 +31,7 @@ function calculateAge(birthDate, currentDate) {
     if (m < 0 || (m === 0 && currentDate.getDate() < birthDate.getDate())) {
         age--;
     }
+    alert(age);
     return age;
 }
 
@@ -43,6 +45,7 @@ function displayQuestion() {
 function checkAnswer() {
     const userAnswer = parseInt(document.getElementById("age-input").value);
     const correctAnswer = calculateAge(currentBirthDate, new Date());
+    console.log(correctAnswer);
     if (userAnswer === correctAnswer) {
         feedbackElement.textContent = "Correto!";
         feedbackElement.style.color = "lime";

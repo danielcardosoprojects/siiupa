@@ -161,6 +161,7 @@
             if (m < 0 || (m === 0 && currentDate.getDate() < birthDate.getDate())) {
                 age--;
             }
+            console.log(currentDate);
             return age;
         }
 
@@ -174,7 +175,7 @@
 
         function checkAnswer() {
             const userAnswer = parseInt(ageInputElement.value);
-            const correctAnswer = calculateAge(currentBirthDate, new Date(2024, 7, 27));
+            const correctAnswer = calculateAge(currentBirthDate, new Date());
             const responseTime = (new Date() - startTime) / 1000; // in seconds
             totalTime += responseTime;
 
@@ -195,13 +196,21 @@
                 triggerConfetti();
                 setTimeout(nextQuestion, 2000);
             } else {
-                feedbackElement.textContent = `Na verdade, a pessoa teria ${correctAnswer} anos em 09/06/2024.`;
+                feedbackElement.textContent = `Na verdade, a pessoa teria ${correctAnswer} anos em ${formatDate(Date())}.`;
                 feedbackElement.style.color = "red";
                 streakCount = 0;
                 totalTime = 0;
                 streakCountElement.textContent = streakCount;
             }
             ageInputElement.value = "";
+        }
+        function formatDate() {
+            date = new Date();
+            let day = String(date.getDate()).padStart(2, '0'); // Obter o dia e adicionar zero à esquerda se necessário
+            let month = String(date.getMonth() + 1).padStart(2, '0'); // Obter o mês (lembre-se de que os meses começam em 0, então somamos 1)
+            let year = date.getFullYear(); // Obter o ano
+
+            return `${day}/${month}/${year}`; // Formatar como dd/mm/AAAA
         }
 
         function nextQuestion() {
@@ -217,7 +226,7 @@
         function appendNumber(num) {
             ageInputElement.value += num;
             const userAnswer = parseInt(ageInputElement.value);
-            const correctAnswer = calculateAge(currentBirthDate, new Date(2024, 5, 9));
+            const correctAnswer = calculateAge(currentBirthDate, new Date());
 
             if (userAnswer === correctAnswer) {
                 checkAnswer();
@@ -237,7 +246,7 @@
         });
         document.getElementById("age-input").addEventListener("input", function () {
             const userAnswer = parseInt(this.value);
-            const correctAnswer = calculateAge(currentBirthDate, new Date(2024, 5, 9));
+            const correctAnswer = calculateAge(currentBirthDate, new Date());
 
             if (userAnswer === correctAnswer) {
                 checkAnswer();
