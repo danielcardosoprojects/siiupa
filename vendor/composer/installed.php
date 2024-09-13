@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'd2515583f4d2f34bb6b72d85c75add48e0e20ee5',
+        'reference' => '31119d1516f0d2b9c6d592ad1624fad74d39e8d0',
         'name' => '__root__',
         'dev' => true,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'd2515583f4d2f34bb6b72d85c75add48e0e20ee5',
+            'reference' => '31119d1516f0d2b9c6d592ad1624fad74d39e8d0',
             'dev_requirement' => false,
         ),
         'atlas/pdo' => array(
@@ -290,6 +290,15 @@
             'install_path' => __DIR__ . '/../simple-crud/simple-crud',
             'aliases' => array(),
             'reference' => '9a6ec77b37fe15b1d7fdbece4259345bda5a19c5',
+            'dev_requirement' => false,
+        ),
+        'smalot/pdfparser' => array(
+            'pretty_version' => 'v2.11.0',
+            'version' => '2.11.0.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../smalot/pdfparser',
+            'aliases' => array(),
+            'reference' => 'ac8e6678b0940e4b2ccd5caadd3fb18e68093be6',
             'dev_requirement' => false,
         ),
         'symfony/polyfill-ctype' => array(
