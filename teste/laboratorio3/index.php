@@ -1,5 +1,5 @@
 <?php
-require 'vendor/autoload.php'; // Carregar a biblioteca PDFParser
+require '../vendor/autoload.php'; // Carregar a biblioteca PDFParser
 
 use Smalot\PdfParser\Parser;
 
