@@ -8,9 +8,6 @@ function extract_patient_data($pdf_path) {
     $pdf = $parser->parseFile($pdf_path);
     $text = $pdf->getText();
 
-    // Converter o texto para UTF-8 para evitar problemas com caracteres especiais
-    $text = mb_convert_encoding($text, 'UTF-8', 'auto');
-
     // Extração dos dados (ajuste a lógica de acordo com o formato do PDF)
     $nome = find_between($text, 'Paciente:', 'Nasc.');
     $nascimento = find_between($text, 'Nasc.:', 'Origem');
@@ -68,3 +65,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo 'Dados extraídos e salvos em ' . $csv_file;
 }
 ?>
+
+<!-- HTML para upload de múltiplos PDFs -->
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload de PDFs</title>
+</head>
+<body>
+    <h1>Upload de PDFs</h1>
+    <form action="" method="POST" enctype="multipart/form-data">
+        <input type="file" name="pdf_files[]" multiple>
+        <button type="submit">Enviar</button>
+    </form>
+</body>
+</html>
