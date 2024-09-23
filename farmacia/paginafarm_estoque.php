@@ -50,7 +50,7 @@
     echo "<a href='/siiupa/farmacia/estoque/filtra/genero-1' class='btn btn-sm btn-warning'>Medicações</a>  ";
     foreach ($classesFiltra as $cFiltra) {
 
-      $categoria = utf8_encode($cFiltra->categoria);
+      $categoria = $cFiltra->categoria;
       $arrayCategorias[$cFiltra->id] = $categoria;
 
       echo "<a href='/siiupa/farmacia/estoque/filtra/classe-$cFiltra->id#imprimir' class='btn btn-sm btn-info classesTerapeuticas'>$categoria ($cFiltra->cat_qtd)</a> ";
