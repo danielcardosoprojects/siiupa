@@ -1,0 +1,322 @@
+<html><head><base href="https://upa24h.gov.br/internacao/">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UPA 24h - Gerenciamento de Pacientes Internados</title>
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.9.359/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+  }
+  .container {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  }
+  h1, h2 {
+    color: #007bff;
+  }
+  .form-group {
+    margin-bottom: 15px;
+  }
+  .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+  .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
+</style>
+</head>
+<body>
+<div id="app" class="container">
+  <h1 class="text-center mb-4">UPA 24h - Gerenciamento de Pacientes Internados</h1>
+  
+  <div class="row">
+    <div class="col-md-6">
+      <h2>Cadastro de Paciente</h2>
+      <form @submit.prevent="cadastrarPaciente">
+        <div class="form-group">
+          <label for="nome">Nome:</label>
+          <input type="text" id="nome" v-model="novoPaciente.nome" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="dataNascimento">Data de Nascimento:</label>
+          <input type="date" id="dataNascimento" v-model="novoPaciente.dataNascimento" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="cpf">CPF:</label>
+          <input type="text" id="cpf" v-model="novoPaciente.cpf" class="form-control" pattern="\d{3}\.\d{3}\.\d{3}-\d{2}" placeholder="000.000.000-00" required>
+        </div>
+        <div class="form-group">
+          <label for="cns">CNS:</label>
+          <input type="text" id="cns" v-model="novoPaciente.cns" class="form-control" pattern="\d{15}" placeholder="000000000000000" required>
+        </div>
+        <div class="form-group">
+          <label for="nomeMae">Nome da Mãe:</label>
+          <input type="text" id="nomeMae" v-model="novoPaciente.nomeMae" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="sexo">Sexo:</label>
+          <select id="sexo" v-model="novoPaciente.sexo" class="form-control" required>
+            <option value="M">Masculino</option>
+            <option value="F">Feminino</option>
+            <option value="O">Outro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="endereco">Endereço:</label>
+          <input type="text" id="endereco" v-model="novoPaciente.endereco" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label>Telefones:</label>
+          <div v-for="(telefone, index) in novoPaciente.telefones" :key="index" class="input-group mb-2">
+            <input type="tel" v-model="novoPaciente.telefones[index]" class="form-control" placeholder="(00) 00000-0000">
+            <button type="button" @click="removerTelefone(index)" class="btn btn-danger">Remover</button>
+          </div>
+          <button type="button" @click="adicionarTelefone" class="btn btn-secondary" :disabled="novoPaciente.telefones.length >= 5">Adicionar Telefone</button>
+        </div>
+        <div class="form-group">
+          <label for="hipoteseDiagnostica">Hipótese Diagnóstica:</label>
+          <div class="input-group">
+            <input type="text" id="hipoteseDiagnostica" v-model="novoPaciente.hipoteseDiagnostica" class="form-control" required>
+            <button type="button" @click="buscarCID" class="btn btn-info">Buscar CID-10</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="doencasPreExistentes">Doenças Pré-existentes:</label>
+          <textarea id="doencasPreExistentes" v-model="novoPaciente.doencasPreExistentes" class="form-control" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="observacoes">Observações:</label>
+          <textarea id="observacoes" v-model="novoPaciente.observacoes" class="form-control" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="dataEntrada">Data de Entrada:</label>
+          <input type="datetime-local" id="dataEntrada" v-model="novoPaciente.dataEntrada" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Cadastrar Paciente</button>
+      </form>
+    </div>
+    
+    <div class="col-md-6">
+      <h2>Lista de Pacientes Internados</h2>
+      <ul class="list-group">
+        <li v-for="paciente in pacientes" :key="paciente.id" class="list-group-item">
+          {{ paciente.nome }} - {{ paciente.dataEntrada }}
+          <button @click="registrarSaida(paciente)" class="btn btn-warning btn-sm float-end">Registrar Saída</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <div class="row mt-4">
+    <div class="col-12">
+      <h2>Gerar Lista de Dietas</h2>
+      <form @submit.prevent="gerarListaDietas">
+        <div class="form-group">
+          <label for="dataDieta">Data:</label>
+          <input type="date" id="dataDieta" v-model="dataDieta" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-success">Gerar Lista de Dietas</button>
+      </form>
+    </div>
+  </div>
+  
+  <!-- Modal para registro de saída -->
+  <div class="modal fade" id="modalSaida" tabindex="-1" aria-labelledby="modalSaidaLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalSaidaLabel">Registrar Saída</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form @submit.prevent="confirmarSaida">
+            <div class="form-group">
+              <label for="tipoSaida">Tipo de Saída:</label>
+              <select id="tipoSaida" v-model="saidaPaciente.tipo" class="form-control" required>
+                <option value="alta">Alta Médica</option>
+                <option value="transferencia">Transferência</option>
+                <option value="obito">Óbito</option>
+              </select>
+            </div>
+            <div class="form-group" v-if="saidaPaciente.tipo === 'alta'">
+              <label for="medicoResponsavel">Médico Responsável:</label>
+              <input type="text" id="medicoResponsavel" v-model="saidaPaciente.medicoResponsavel" class="form-control" required>
+            </div>
+            <div class="form-group" v-if="saidaPaciente.tipo === 'transferencia'">
+              <label for="hospitalDestino">Hospital de Destino:</label>
+              <input type="text" id="hospitalDestino" v-model="saidaPaciente.hospitalDestino" class="form-control" required>
+            </div>
+            <div v-if="saidaPaciente.tipo === 'obito'">
+              <div class="form-group">
+                <label for="dataObito">Data do Óbito:</label>
+                <input type="date" id="dataObito" v-model="saidaPaciente.dataObito" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="horaObito">Hora do Óbito:</label>
+                <input type="time" id="horaObito" v-model="saidaPaciente.horaObito" class="form-control" required>
+              </div>
+              <div class="form-group">
+                <label for="declaracaoObito">Número da Declaração de Óbito:</label>
+                <input type="text" id="declaracaoObito" v-model="saidaPaciente.declaracaoObito" class="form-control" required>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="dataSaida">Data de Saída:</label>
+              <input type="datetime-local" id="dataSaida" v-model="saidaPaciente.dataSaida" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Confirmar Saída</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const { createApp } = Vue;
+
+createApp({
+  data() {
+    return {
+      novoPaciente: {
+        nome: '',
+        dataNascimento: '',
+        cpf: '',
+        cns: '',
+        nomeMae: '',
+        sexo: '',
+        endereco: '',
+        telefones: [''],
+        hipoteseDiagnostica: '',
+        doencasPreExistentes: '',
+        observacoes: '',
+        dataEntrada: ''
+      },
+      pacientes: [],
+      saidaPaciente: {
+        tipo: 'alta',
+        medicoResponsavel: '',
+        hospitalDestino: '',
+        dataObito: '',
+        horaObito: '',
+        declaracaoObito: '',
+        dataSaida: ''
+      },
+      dataDieta: '',
+      pacienteSelecionado: null
+    }
+  },
+  methods: {
+    cadastrarPaciente() {
+      // Lógica para cadastrar o paciente
+      this.pacientes.push({...this.novoPaciente, id: Date.now()});
+      this.novoPaciente = {
+        nome: '',
+        dataNascimento: '',
+        cpf: '',
+        cns: '',
+        nomeMae: '',
+        sexo: '',
+        endereco: '',
+        telefones: [''],
+        hipoteseDiagnostica: '',
+        doencasPreExistentes: '',
+        observacoes: '',
+        dataEntrada: ''
+      };
+    },
+    adicionarTelefone() {
+      if (this.novoPaciente.telefones.length < 5) {
+        this.novoPaciente.telefones.push('');
+      }
+    },
+    removerTelefone(index) {
+      this.novoPaciente.telefones.splice(index, 1);
+    },
+    buscarCID() {
+      // Implementar lógica para buscar CID-10
+      alert('Funcionalidade de busca CID-10 será implementada aqui.');
+    },
+    registrarSaida(paciente) {
+      this.pacienteSelecionado = paciente;
+      this.saidaPaciente = {
+        tipo: 'alta',
+        medicoResponsavel: '',
+        hospitalDestino: '',
+        dataObito: '',
+        horaObito: '',
+        declaracaoObito: '',
+        dataSaida: new Date().toISOString().slice(0, 16)
+      };
+      // Abrir modal
+      const modal = new bootstrap.Modal(document.getElementById('modalSaida'));
+      modal.show();
+    },
+    confirmarSaida() {
+      // Lógica para confirmar a saída do paciente
+      const index = this.pacientes.findIndex(p => p.id === this.pacienteSelecionado.id);
+      if (index !== -1) {
+        this.pacientes.splice(index, 1);
+      }
+      // Fechar modal
+      const modal = bootstrap.Modal.getInstance(document.getElementById('modalSaida'));
+      modal.hide();
+    },
+    gerarListaDietas() {
+      // Lógica para gerar a lista de dietas
+      const listaDietas = this.pacientes.map(paciente => {
+        return {
+          nome: paciente.nome,
+          cafe: 'Café com leite, pão integral com queijo',
+          lancheManha: 'Maçã',
+          almoco: 'Arroz, feijão, frango grelhado, salada',
+          lancheTarde: 'Iogurte com granola',
+          janta: 'Sopa de legumes, torradas'
+        };
+      });
+      
+      // Gerar PDF
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      
+      doc.setFontSize(18);
+      doc.text(`Lista de Dietas - ${this.dataDieta}`, 14, 22);
+      
+      doc.setFontSize(12);
+      let yPos = 40;
+      listaDietas.forEach((dieta, index) => {
+        doc.text(`Paciente: ${dieta.nome}`, 14, yPos);
+        yPos += 10;
+        doc.text(`Café: ${dieta.cafe}`, 14, yPos);
+        yPos += 10;
+        doc.text(`Lanche da Manhã: ${dieta.lancheManha}`, 14, yPos);
+        yPos += 10;
+        doc.text(`Almoço: ${dieta.almoco}`, 14, yPos);
+        yPos += 10;
+        doc.text(`Lanche da Tarde: ${dieta.lancheTarde}`, 14, yPos);
+        yPos += 10;
+        doc.text(`Janta: ${dieta.janta}`, 14, yPos);
+        yPos += 20;
+        
+        if (yPos > 280) {
+          doc.addPage();
+          yPos = 20;
+        }
+      });
+      
+      doc.save(`lista_dietas_${this.dataDieta}.pdf`);
+    }
+  }
+}).mount('#app');
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body></html>
