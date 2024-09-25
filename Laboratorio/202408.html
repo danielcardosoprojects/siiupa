@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabela de Exames - JULHO 2024</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .copiado {
+            visibility: hidden;
+            color: green;
+            margin-left: 10px;
+        }
+
+        .show {
+            visibility: visible;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-4">
+        <h2 class="mb-4">Lista de Exames JULHO 2024</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Cliente</th>
+                    <th>Exame</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody id="tabelaExames">
+                <!-- Linhas de exame serão inseridas aqui -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const exames = [
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ADILSON DO NASCIMENTO LIMA",
+  "exame": "82800-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ADILSON DO NASCIMENTO LIMA",
+  "exame": "82805-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "GERCILENE MARIA PINHEIRO MACEDO",
+  "exame": "82827-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ANTONIO EDIELSO DE OLIVEIRA FERNANDES",
+  "exame": "82831-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "FRANCISCA PATRICIA DA SILVA",
+  "exame": "82838-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARCELO JOSE SOARES",
+  "exame": "82849-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "HELIO SANTOS MOTA",
+  "exame": "82894-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "HELIO SANTOS MOTA",
+  "exame": "82911-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ROBERTO CARLOS SILVA",
+  "exame": "82921-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "JOAO PEREIRA DA COSTA",
+  "exame": "82938-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "AGOSTINHO NEPOMOCENO FERREIRA",
+  "exame": "82964-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARIA DO PERPETUO SOCORRO DE MORAIS MATOS",
+  "exame": "82980-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "BENEDITO CUNHA",
+  "exame": "83017-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARIA DAS DORES CHAVES DE LIMA",
+  "exame": "83027-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARIO SILVA DE ALFAIA",
+  "exame": "83037-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "DIJALMA FERREIRA DA SILVA",
+  "exame": "83045-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "DIJALMA FERREIRA DA SILVA",
+  "exame": "83054-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "BENEDITO FERREIRA DE LIMA",
+  "exame": "83060-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "FRANCISCA TELES TEIXEIRA",
+  "exame": "83065-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "EDIVALDO VIEIRA DA SILVA",
+  "exame": "83086-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "RAIMUNDA LOPES SILVA",
+  "exame": "83111-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "CONSTANCIO FRANCISCO COSTA",
+  "exame": "83125-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "RAIMUNDA LOPES SILVA",
+  "exame": "83126-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "BENEDITA LUCIA DE SOUSA E SOUSA",
+  "exame": "83130-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ANTONIO ROSIVALDO SANTIAGO DA SILVA",
+  "exame": "83131-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "DARIO DA SILVA PANTOJA",
+  "exame": "83134-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "JOSE RIBAMAR COSTA",
+  "exame": "83137-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "RAQUEL CARNEIRO SAMPAIO",
+  "exame": "83139-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ESTER QUEIROZ DE OLIVEIRA",
+  "exame": "83152-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ANA LUCIA DOS SANTOS SILVA",
+  "exame": "83155-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "DARIO DA SILVA PANTOJA",
+  "exame": "83160-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MANOEL TEIXEIRA DAMASCENO",
+  "exame": "83161-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "DORALICE NASCIMENTO DE SENA PINHEIRO",
+  "exame": "83191-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "EDIANA GOMES DO NASCIMENTO",
+  "exame": "83208-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "NOEMIA CUNHA DA TRINDADE",
+  "exame": "83222-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "DOLORES CARNEIRO VILACA",
+  "exame": "83226-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "EDILSON ALVES PINTO",
+  "exame": "83238-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "FLORINDA DE MORAES MATOS",
+  "exame": "83249-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "EDILSON ALVES PINTO",
+  "exame": "83254-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ITAMIRA PEREIRA DA SILVA",
+  "exame": "83257-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ADRIANA PAIXAO DOS SANTOS",
+  "exame": "83259-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ANA CAROLINA GOMES PINTO DO NASCIMENTO",
+  "exame": "83265-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARIA DE NAZARE RAMOS DE OLIVEIRA",
+  "exame": "83274-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ITAMIRA PEREIRA DA SILVA",
+  "exame": "83275-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ANA PAULA GONZAGA DOS SANTOS",
+  "exame": "83276-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "SEVERINA ARANHA DE MOURA",
+  "exame": "83278-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARIA DE NAZARE RAMOS DE OLIVEIRA",
+  "exame": "83307-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "HELIO INACIO DA CUNHA",
+  "exame": "83310-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "RONALDO CABRAL DE LIMA",
+  "exame": "83315-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "PAULO EDUARDO BARBOSA NOGUEIRA",
+  "exame": "83324-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "RIVALDO DE SOUZA CONSTANTINO",
+  "exame": "83327-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL INTERNADOS",
+  "cliente": "MARIA DE NAZARE FERREIRA FARIAS",
+  "exame": "83357-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL INTERNADOS",
+  "cliente": "BENEDITA LUCIA DE SOUSA E SOUSA",
+  "exame": "83358-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARIA LUZIA DA SILVA",
+  "exame": "83371-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL INTERNADOS",
+  "cliente": "BENEDITA LUCIA DE SOUSA E SOUSA",
+  "exame": "83382-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARIA ALICE SEABRA",
+  "exame": "83392-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "RAMIELLY CAROLINE BOTELHO SANTOS",
+  "exame": "83393-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL INTERNADOS",
+  "cliente": "LUZIA PEREIRA DE SOUZA",
+  "exame": "83403-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "WELLINGTON ANDRADE PALHETA",
+  "exame": "83407-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARIA DO SOCORRO SARAIVA LIMA",
+  "exame": "83413-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "GENOVEVA PORTO DA SILVA SOUZA",
+  "exame": "83431-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "HENRIQUE DO NASCIMENTO RODRIGUES",
+  "exame": "83443-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "GENOVEVA PORTO DA SILVA SOUZA",
+  "exame": "83444-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "HENRIQUE DO NASCIMENTO RODRIGUES",
+  "exame": "83449-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "JOSE RIBAMAR FRANCO SOUZA JUNIOR",
+  "exame": "83479-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "REGINALDO DE ARAUJO SOUZA",
+  "exame": "83480-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARIA DE LOURDES NEVES DE OLIVEIRA",
+  "exame": "83481-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "KAZUKO YAMO",
+  "exame": "83490-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARIA DE LOURDES NEVES DE OLIVEIRA",
+  "exame": "83492-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "HENRIQUE DO NASCIMENTO RODRIGUES",
+  "exame": "83495-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARILENE ASSUNÇÃO DA SILVA",
+  "exame": "83497-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARILENE ASSUNÇÃO DA SILVA",
+  "exame": "83508-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARIA DE LOURDES NEVES DE OLIVEIRA",
+  "exame": "83510-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "RAMIRES DE SOUZA MARTINS",
+  "exame": "83513-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "HIDEO YANO",
+  "exame": "83519-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ITAMIRA PEREIRA DA SILVA",
+  "exame": "83531-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ELI REGINA CORDEIRO DOS SANTOS",
+  "exame": "83535-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "CRISTIANE DE FATIMA DOS REIS FERNANDES",
+  "exame": "83548-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "JOSÉ REGINALDO BRITO DE ASSIS",
+  "exame": "83558-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "JOSÉ REGINALDO BRITO DE ASSIS",
+  "exame": "83583-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MESSIAS DOS SANTOS COSTA",
+  "exame": "83620-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "FRANCISCO GELZILON CAMPOS SOUZA",
+  "exame": "83642-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "FRANCISCO GELZILON CAMPOS SOUZA",
+  "exame": "83643-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "FRANCISCO LUIZ LOPES PEREIRA",
+  "exame": "83661-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ANTONIA VALDIRENE MONTEIRO MORAES",
+  "exame": "83664-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "TEREZINHA DE JESUS SENA DOS SANTOS",
+  "exame": "83676-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ANTONIA VALDIRENE MONTEIRO MORAES",
+  "exame": "83679-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MANOEL PEREIRA GOMES",
+  "exame": "83680-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "CLAUDEMIR PINTO PEREIRA",
+  "exame": "83687-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "JUDITH DOS SANTOS",
+  "exame": "83691-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARIA DE NAZARE LEITE DA SILVA",
+  "exame": "83695-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "LUCIRENE ALVES DOS SANTOS",
+  "exame": "83696-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL INTERNADOS",
+  "cliente": "DOLORES CARNEIRO VILACA",
+  "exame": "83711-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARGARIDA MARIA DA CONCEICAO LIMA",
+  "exame": "83727-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARGARIDA DA CONCEICAO LIMA",
+  "exame": "83728-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARIA DE NAZARE RAMOS DE OLIVEIRA",
+  "exame": "83732-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "JOSE TAVARES DE OLIVEIRA",
+  "exame": "83736-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "JOSE DE RIBAMAR ALVES CABRAL",
+  "exame": "83738-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARIA RAIMUNDA SILVA DOS SANTOS",
+  "exame": "83747-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "JOSE TAVARES DE OLIVEIRA",
+  "exame": "83750-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "OTAVIANO DOS REIS LIMA",
+  "exame": "83761-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "IVANETE AGUIAR DA CRUZ",
+  "exame": "83762-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "JHONHY WILLYAM MONTEIRO GALENO",
+  "exame": "83764-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ARNANDE VICENTE DE LUCENA",
+  "exame": "83769-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "SEBASTIANA NEVES DO REGO",
+  "exame": "83770-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "GUSTAVO JORDÃO NARDI",
+  "exame": "83776-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "CAIO GUILHERME CHAVES LIMA",
+  "exame": "83813-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "FRANCISCA TELES TEIXEIRA",
+  "exame": "83815-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "RAIMUNDO FIRMINO DE SOUSA",
+  "exame": "83827-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "DEIVID NAZARE DE OLIVEIRA",
+  "exame": "83832-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "RAFAEL FERREIRA PINTO",
+  "exame": "83836-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "FERNANDO JORGE SOARES LOBO",
+  "exame": "83839-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "LUIZ ANAZIO DA SILVA ARAUJO",
+  "exame": "83850-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "LEANDRO WAGNER TEIXEIRA HENRIQUE",
+  "exame": "83851-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "UMBELINA DOS SANTOS CEREJA",
+  "exame": "83852-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "JOAO FELIX DIAS",
+  "exame": "83874-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "RODRIGO PORPINO ROCHA",
+  "exame": "83879-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "JOAO CLODOALDO DE OLIVEIRA ALMEIDA",
+  "exame": "83886-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARCOS LUIZ LIMA BARBOSA",
+  "exame": "83890-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "REGINALDO DE ARAUJO SOUZA",
+  "exame": "83891-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "GABRIEL FELIX PEREIRA",
+  "exame": "83894-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "JOSE MARIA MARTINS DE SOUSA",
+  "exame": "83895-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "JOSE WANDERLEY ALMEIDA DE SOUZA",
+  "exame": "83918-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "PAULO SERGIO MOTA E SILVA",
+  "exame": "83920-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "JOSE MARIA MARTINS DE SOUSA",
+  "exame": "83921-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "WILSON ALVES MACHADO",
+  "exame": "83922-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "PAULO SERGIO MOTA E SILVA",
+  "exame": "83923-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "JOSE MARIA MARTINS DE SOUSA",
+  "exame": "83924-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "PAULO SERGIO MOTA E SILVA",
+  "exame": "83933-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "FRANCISCO SANTIAGO DA SILVA",
+  "exame": "83939-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "EZEMIAS DAS NEVES GONZAGA",
+  "exame": "83955-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "RAIMUNDA NONATO MIRANDA MENINEA",
+  "exame": "83971-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "EZEMIAS DAS NEVES GONZAGA",
+  "exame": "83972-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ESMERALDA MUNIZ LOPES",
+  "exame": "83988-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARIA MONTEIRO MIRANDA",
+  "exame": "84031-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL INTERNADOS",
+  "cliente": "MARIA MONTEIRO MIRANDA",
+  "exame": "84039-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "JOÃO JACO BENFICA VENEROSO",
+  "exame": "84046-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "JADENILSON GAIA LAMEIRA",
+  "exame": "84050-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARIA GEOVANA SOUZA CARVALHO",
+  "exame": "84055-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL INTERNADOS",
+  "cliente": "MARIA MONTEIRO MIRANDA",
+  "exame": "84056-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARIA DELAIDE MEIRELES DA SILVA",
+  "exame": "84057-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "VALDETE SOUSA ARAUJO",
+  "exame": "84086-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "SEBASTIANA BORGES DE ALMEIDA",
+  "exame": "84114-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "SEBASTIANA BORGES DE ALMEIDA",
+  "exame": "84119-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "JOÃO BATISTA FERNANDES TEIXEIRA",
+  "exame": "84153-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARCIANO XAVIER MOARES",
+  "exame": "84166-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "CLEVERSON ANTONIO BRITO SIQUEIRA",
+  "exame": "84188-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "IZA DOS SANTOS PINTO",
+  "exame": "84190-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "RADIELZA DO SOCORRO DA CUNHA",
+  "exame": "84199-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "EMERSON OLIVEIRA BARROSO",
+  "exame": "84202-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "THIAGO SATURNINO DA SILVA",
+  "exame": "84203-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARIO DA SILVA BEZERRA",
+  "exame": "84226-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "CICERA SILVA DO NASCIMENTO",
+  "exame": "84312-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ROBERTA PIRES DA SILVA",
+  "exame": "84340-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "FRANCISCO CAETANO COSTA",
+  "exame": "84354-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "SOFIA PAIVA DA COSTA",
+  "exame": "84389-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "RAIMUNDO DELMIRO MEDEIROS DE OLIVEIRA",
+  "exame": "84401-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "SOFIA PAIVA DA COSTA",
+  "exame": "84402-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ADENILSON DE NAZARE ARAUJO SILVA",
+  "exame": "84404-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARIA DO SOCORRO FERREIRA DA SILVA",
+  "exame": "84443-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "CREUZA DA COSTA FERREIRA",
+  "exame": "84448-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "IRAPUAM PEREIRA DOS SANTOS",
+  "exame": "84470-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "SEVERINO DAMASCENO DA SILVA",
+  "exame": "84471-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "JOSE CANDIDO DA SILVA",
+  "exame": "84500-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "REGINA NAZARE DE CASTRO",
+  "exame": "84566-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ANTONIO IGOR NOGUEIRA REIS",
+  "exame": "84576-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "SILVIA CLEIDE DA SILVA",
+  "exame": "84578-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL INTERNADOS",
+  "cliente": "GENEZIO MIRANDA DA SILVA",
+  "exame": "84612-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "GUSTAVO ESPINDOLA DE CARVALHO",
+  "exame": "84623-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ARNANDE VICENTE DE LUCENA",
+  "exame": "84631-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "EIJI NOHARA",
+  "exame": "84632-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "JOSÉ JOAO DE OLIVEIRA",
+  "exame": "84633-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ARNANDE VICENTE DE LUCENA",
+  "exame": "84635-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "EIJI NOHARA",
+  "exame": "84639-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ALBERT IORRAM NASCIMENTO ARAUJO",
+  "exame": "84648-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "FRANCISCA SILVA FERREIRA",
+  "exame": "84656-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "HAROLDO MORAIS LIMA",
+  "exame": "84658-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARIA ROSIMAR DA SILVA BARROSO",
+  "exame": "84683-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "PEDRO PAIVA DE ALMEIDA",
+  "exame": "84688-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "JOSE ADERSON FERREIRA ROCHA",
+  "exame": "84691-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "FRANCISCO BARRETO DE BRITO",
+  "exame": "84705-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL INTERNADOS",
+  "cliente": "FRANCISCO BARRETO DE BRITO",
+  "exame": "84733-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "LORRANA GALVÃO DOS SANTOS",
+  "exame": "84734-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "HERICLES LEONARDO CUNHA TERRA",
+  "exame": "84737-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "FRANCISCO BARRETO DE BRITO",
+  "exame": "84749-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "JOSÉ CARLOS DE OLIVEIRA",
+  "exame": "84772-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "FRANCISCO BARRETO DE BRITO",
+  "exame": "84798-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "FRANCINALDO LOPES DE QUEIROZ",
+  "exame": "84799-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "WIRLENBERG SILVA DA SILVA",
+  "exame": "84810-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARIA ALDENOURA BARBOSA DA SILVA",
+  "exame": "84811-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "EIJI NOHARA",
+  "exame": "84826-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "JOSE MARIA MARTINS DE SOUSA",
+  "exame": "84841-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "LUANA DA SILVA FALCAO",
+  "exame": "84852-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL INTERNADOS",
+  "cliente": "FRANCISCO BARRETO DE BRITO",
+  "exame": "84893-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "LUCIA GOMES DE PONTES",
+  "exame": "84897-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "JOSE DE ARIMATEIA MORAES DE OLIVEIRA",
+  "exame": "84909-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "RAIMUNDO DA CONCEIÇAO AZEVEDO",
+  "exame": "84934-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL INTERNADOS",
+  "cliente": "FRANCISCO BARRETO DE BRITO",
+  "exame": "84936-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL INTERNADOS",
+  "cliente": "FRANCISCO BARRETO DE BRITO",
+  "exame": "84983-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARIA MEIRE SANTANA",
+  "exame": "84997-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARILDA SILVA SOUSA",
+  "exame": "85001-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARIA MEIRE ALVES SANTANA",
+  "exame": "85015-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "FRANCISCO SALES DA COSTA 287972",
+  "exame": "85025-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARILDA SILVA SOUSA",
+  "exame": "85027-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "FRANCISCO SALES DA COSTA 287972",
+  "exame": "85035-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "JOANA SILVA DOS PASSOS",
+  "exame": "85039-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MAELHY BORGES SANTANA",
+  "exame": "85044-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARILDA SILVA SOUSA",
+  "exame": "85047-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "OSMAR ARAUJO DE SOUSA",
+  "exame": "85054-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "RODRIGO FREIRE MODESTO",
+  "exame": "85055-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ADELCINA JOANA DA SILVA",
+  "exame": "85063-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL INTERNADOS",
+  "cliente": "FRANCISCO BARRETO DE BRITO",
+  "exame": "85085-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "PEDRO PAIVA DE ALMEIDA",
+  "exame": "85098-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "FRANCISCO JOSE GARCIA DIAS",
+  "exame": "85102-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "PEDRO PAIVA DE ALMEIDA",
+  "exame": "85105-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "PEDRO PAIVA DE ALMEIDA",
+  "exame": "85133-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "JOICE TATIANE SANTOS DA COSTA",
+  "exame": "85154-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "CLAUDIA LUCIA BEZERRA SANTOS",
+  "exame": "85178-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ZILDA MARIA CAETANO",
+  "exame": "85194-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ROBERTO JOSE SOUZA DA SILVA",
+  "exame": "85202-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL INTERNADOS",
+  "cliente": "ROBERTO JOSE SOUZA DA SILVA",
+  "exame": "85226-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL INTERNADOS",
+  "cliente": "JOÃO PANTOJA DE OLIVEIRA",
+  "exame": "85229-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL INTERNADOS",
+  "cliente": "MARIA DE LOURDES DO CARMO CARVALHO",
+  "exame": "85231-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "CREUZA DA COSTA FERREIRA",
+  "exame": "85234-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "BENEDITA OLIVEIRA DE GUSMAO",
+  "exame": "85242-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARIA DE NAZARE PEREIRA LISBOA",
+  "exame": "85254-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ORMENDINA DA COSTA NEVES FAVACHO",
+  "exame": "85255-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ROBERTO CARLOS PEREIRA DA SILVA",
+  "exame": "85260-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL INTERNADOS",
+  "cliente": "FRANCISCO BARRETO DE BRITO",
+  "exame": "85261-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "SEVERINO RAMOS DE LIMA FERREIRA",
+  "exame": "85265-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "SEBASTIAO BALSINO DE BRITO",
+  "exame": "85268-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "JAIR COSTA DA SILVA",
+  "exame": "85271-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "LEIDE LAURA FARIAS GUEDES MORAES",
+  "exame": "85274-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ANA BEATRIZ ALVES BARBOSA",
+  "exame": "85291-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "CLEICE GABRIELA BATALHA ALMEIDA",
+  "exame": "85309-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL INTERNADOS",
+  "cliente": "FRANCISCO BARRETO DE BRITO",
+  "exame": "85326-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARILDA DOS SANTOS ASSUNÇÃO",
+  "exame": "85335-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARILDA DOS SANTOS ASSUNÇÃO",
+  "exame": "85342-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "LIMA MARCELA SILVA CASTANEDA",
+  "exame": "85350-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ADRIANO COSTA SALES",
+  "exame": "85354-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "FRACISCO BARRETO DE BRITO",
+  "exame": "85360-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARILDA DOS SANTOS ASSUNÇÃO",
+  "exame": "85361-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ODOVALDO ROCHA DAS NEVES",
+  "exame": "85378-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ANTONIO OLIVEIRA MOTA",
+  "exame": "85384-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ANTONIO MARIA CARDOSO MONTEIRO",
+  "exame": "85406-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "CARLOS DE JESUS CARDOSO",
+  "exame": "85447-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "EDNA DO SOCORRO PANTOJA CARDOSO",
+  "exame": "85448-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "WASHINGTON LUIZ ARAUJO MORAES",
+  "exame": "85460-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL INTERNADOS",
+  "cliente": "FRANCISCO BARRETO DE BRITO",
+  "exame": "85494-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "RITA DE CACIA SILVA SA",
+  "exame": "85497-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ANTONIA PAULA LIMA DE SOUZA",
+  "exame": "85504-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ANTONIO FERNANDES DA SILVEIRA",
+  "exame": "85505-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ANA CARLA FARIAS TEIXEIRA",
+  "exame": "85511-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ANA CARLA DE SOUZA ALVES",
+  "exame": "85517-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ANA CARLA DE SOUZA ALVES",
+  "exame": "85529-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ROBERTO DA SILVA FEREIRA",
+  "exame": "85535-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "EDILAMARA ABREU DE SOUZA",
+  "exame": "85537-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "PAULO HENRIQUE MARTINS",
+  "exame": "85538-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "EDILAMARA ABREU DE SOUZA",
+  "exame": "85544-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "PAULO HENRIQUE MARTINS",
+  "exame": "85571-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "REGINALDO PALHETA DA SILVA",
+  "exame": "85588-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ANTONIO MARIA COSMO LEAL",
+  "exame": "85589-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "REGINALDO PALHETA DA SILVA",
+  "exame": "85597-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARCIENE DA SILVA PINHEIRO",
+  "exame": "85610-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "JOSE SANTANA DE OLIVEIRA",
+  "exame": "85616-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "WILSON RODRIGUES PORTO JUNIOR",
+  "exame": "85620-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "JOSE SANTANA DE OLIVEIRA",
+  "exame": "85629-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "IZAEL BEZERRA DA SILVA",
+  "exame": "85638-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARIA DOS SANTOS NASCIMENTO",
+  "exame": "85642-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "ANTONIA PAULA LIMA DE SOUZA",
+  "exame": "85682-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "EZEMIAS DAS NEVES GONZAGA",
+  "exame": "85692-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "EZENIAS DAS NEVES GONZAGA",
+  "exame": "85709-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "JHON PETERSON FREITAS ABREU",
+  "exame": "85718-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "JULYA RIBEIRO PINHAR",
+  "exame": "85732-20"
+ },
+ {
+  "PROCEDENCIA": "CASTANHAL AMBULATÓRIO",
+  "cliente": "MARCELINO CHAVES CORDEIRO",
+  "exame": "85740-20"
+ }
+];
+
+        const tabelaExames = document.getElementById("tabelaExames");
+
+        // Função para carregar o estado dos exames copiados do localStorage
+        function carregarExamesCopiados() {
+            return JSON.parse(localStorage.getItem('examesCopiados')) || [];
+        }
+
+        // Função para salvar o estado dos exames copiados no localStorage
+        function salvarExameCopiado(exame) {
+            let examesCopiados = carregarExamesCopiados();
+            if (!examesCopiados.includes(exame)) {
+                examesCopiados.push(exame);
+                localStorage.setItem('examesCopiados', JSON.stringify(examesCopiados));
+            }
+        }
+
+        // Função para verificar se um exame já foi copiado
+        function exameJaCopiado(exame) {
+            const examesCopiados = carregarExamesCopiados();
+            return examesCopiados.includes(exame);
+        }
+
+        // Adicionar os exames à tabela
+        exames.forEach((exame) => {
+            const tr = document.createElement("tr");
+
+            const clienteTd = document.createElement("td");
+            clienteTd.textContent = exame.cliente;
+            tr.appendChild(clienteTd);
+
+            const exameTd = document.createElement("td");
+            exameTd.textContent = exame.exame;
+            tr.appendChild(exameTd);
+
+            const acaoTd = document.createElement("td");
+            const botaoCopiar = document.createElement("button");
+            botaoCopiar.textContent = "Copiar";
+            botaoCopiar.className = "btn btn-primary btn-sm";
+            botaoCopiar.setAttribute("data-exame", exame.exame);
+
+            const mensagemCopiado = document.createElement("span");
+            mensagemCopiado.className = "copiado";
+            mensagemCopiado.textContent = "Copiado";
+
+            // Verificar se o exame já foi copiado e mostrar a mensagem
+            if (exameJaCopiado(exame.exame)) {
+                mensagemCopiado.classList.add("show");
+            }
+
+            botaoCopiar.addEventListener("click", () => {
+                navigator.clipboard.writeText(exame.exame).then(() => {
+                    mensagemCopiado.classList.add("show");
+                    salvarExameCopiado(exame.exame);  // Salvar o exame como copiado no localStorage
+                });
+            });
+
+            acaoTd.appendChild(botaoCopiar);
+            acaoTd.appendChild(mensagemCopiado);
+            tr.appendChild(acaoTd);
+
+            tabelaExames.appendChild(tr);
+        });
+    </script>
+</body>
+</html>
