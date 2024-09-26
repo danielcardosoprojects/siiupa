@@ -47,6 +47,7 @@ function process_pdfs($pdf_files) {
 }
 
 function save_to_csv($data, $csv_file) {
+    var_dump($data);
     $file = fopen($csv_file, 'w');
     fputcsv($file, array_keys($data[0]));
 
