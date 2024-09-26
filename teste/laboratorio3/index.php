@@ -16,7 +16,7 @@ function extract_patient_data($pdf_path) {
     $data_atendimento = find_between($text, 'Data Atend.:', 'Pág');
     $numero_pedido = find_between($text, 'Pedido:', 'Sexo');
     $solicitante = find_between($text, 'Solicitante:', 'Data Atend.');
-    var_dump($cpf);
+    
     return [
         'Nome' => trim($nome),
         'Data de Nascimento' => trim($nascimento),
@@ -47,7 +47,7 @@ function process_pdfs($pdf_files) {
 }
 
 function save_to_csv($data, $csv_file) {
-    var_dump($data);
+    
     $file = fopen($csv_file, 'w');
     fputcsv($file, array_keys($data[0]));
 
