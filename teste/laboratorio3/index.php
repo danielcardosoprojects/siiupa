@@ -11,6 +11,7 @@ function extract_patient_data($pdf_path) {
     // Extração dos dados (ajuste a lógica de acordo com o formato do PDF)
     $nome = find_between($text, 'Paciente:', 'Nasc.');
     $nascimento = find_between($text, 'Nasc.:', 'Origem');
+    $cpf = find_between($text, 'CPF:','Idade');
     $sexo = find_between($text, 'Sexo:', 'Solicitante');
     $data_atendimento = find_between($text, 'Data Atend.:', 'Pág');
     $numero_pedido = find_between($text, 'Pedido:', 'Sexo');
@@ -19,6 +20,7 @@ function extract_patient_data($pdf_path) {
     return [
         'Nome' => trim($nome),
         'Data de Nascimento' => trim($nascimento),
+        'CPF' => trim($cpf),
         'Sexo' => trim($sexo),
         'Data de Atendimento' => trim($data_atendimento),
         'Número do Pedido' => trim($numero_pedido),
