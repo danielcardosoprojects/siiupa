@@ -16,7 +16,7 @@ function extract_patient_data($pdf_path) {
     $data_atendimento = find_between($text, 'Data Atend.:', 'Pág');
     $numero_pedido = find_between($text, 'Pedido:', 'Sexo');
     $solicitante = find_between($text, 'Solicitante:', 'Data Atend.');
-
+    var_dump($cpf);
     return [
         'Nome' => trim($nome),
         'Data de Nascimento' => trim($nascimento),
