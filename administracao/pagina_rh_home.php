@@ -13,6 +13,7 @@ include_once('../bd/nivel.php');
         /* Remove o sublinhado padrão do link */
         font-weight: bold;
         /* Texto em negrito para chamar atenção */
+        background-color: #0056b3;
     }
 
     .eleicaobtn-link:hover {
