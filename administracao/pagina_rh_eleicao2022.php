@@ -9,10 +9,10 @@
 <br>
 <br>
 
-<p style="text-indent: 10em;text-align:justify;font-size:20px; margin:0 50px;">Declaro, respeitosamente, à essa seção eleitoral que o(a) servidor(a) <strong><?php echo $_GET['nome'].", ".$_GET['cargo']; ?></strong>,  encontra-se em plantão de 12 Horas diurno nesta Unidade de Pronto Atendimento, necessitando de atendimento agilizado para retornar ao seu posto de trabalho, nesta data de 30 de outubro de 2022.</p>
+<p style="text-indent: 10em;text-align:justify;font-size:20px; margin:0 50px;">Declaro, respeitosamente, à essa seção eleitoral que o(a) servidor(a) <strong><?php echo $_GET['nome'].", ".$_GET['cargo']; ?></strong>,  encontra-se em plantão de 12 Horas diurno nesta Unidade de Pronto Atendimento, necessitando de atendimento agilizado para retornar ao seu posto de trabalho, nesta data de 06 de outubro de 2024.</p>
 <br>
 <br>
-<p style="text-align:right; font-size:20px; margin-right:50px;">Castanhal(PA), 30 de outubro de 2022.</p>
+<p style="text-align:right; font-size:20px; margin-right:50px;">Castanhal(PA), 06 de outubro de 2024.</p>
 
 
 
