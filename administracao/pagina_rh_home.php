@@ -5,15 +5,15 @@ include_once('../bd/nivel.php');
 ?>
 <style>
     .eleicaobtn-link {
-        font-size: 12px;
-        /* Tamanho pequeno */
-        color: #007bff;
-        /* Cor azul típica de links */
-        text-decoration: none;
-        /* Remove o sublinhado padrão do link */
-        font-weight: bold;
-        /* Texto em negrito para chamar atenção */
-        background-color: #0056b3;
+        font-size: 8px;           /* Tamanho pequeno */
+    color: white;              /* Texto branco para contraste com o fundo */
+    background-color: #007bff; /* Fundo azul */
+    text-decoration: none;     /* Remove o sublinhado padrão do link */
+    font-weight: bold;         /* Texto em negrito */
+    padding: 5px 10px;         /* Espaçamento interno */
+    border: 1px solid #007bff; /* Borda da mesma cor do fundo */
+    border-radius: 15px;       /* Borda arredondada */
+    display: inline-block;     /* Garante que o padding e a borda apareçam corretamente */
     }
 
     .eleicaobtn-link:hover {
