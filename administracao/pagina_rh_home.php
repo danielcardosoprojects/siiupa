@@ -7,7 +7,7 @@ include_once('../bd/nivel.php');
     .eleicaobtn-link {
         font-size: 8px;           /* Tamanho pequeno */
     color: white;              /* Texto branco para contraste com o fundo */
-    background-color: #007bff; /* Fundo azul */
+    background-color: #007bff; /* Fundo azul */ 
     text-decoration: none;     /* Remove o sublinhado padrão do link */
     font-weight: bold;         /* Texto em negrito */
     padding: 5px 10px;         /* Espaçamento interno */
@@ -384,7 +384,7 @@ include_once('../bd/nivel.php');
                     echo "<td id='matriculaFunc_$dados->idfuncionario'><span class='matriculaFunc' data-id='$dados->idfuncionario'>$dados->matricula</span><i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->matricula'></span></i></td>";
 
                     //NOME
-                    echo "<td><a class='eleicaobtn-link' target='_blank' href='https://siupa.com.br/siiupa/administracao/pagina_rh_eleicao2022.php?nome=$dados->nome&cargo=$dados->cargo&cpf=$dados->cpf'>Eleição</a> | <a target='_blank' class='abreperfil'  rel='noreferrer noopener' href='?setor=adm&sub=rh&subsub=perfil&id=$dados->idfuncionario'>$dados->nome</a><i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->nome'></span></i></td>";
+                    echo "<td><a class='eleicaobtn-link' target='_blank' href='https://siupa.com.br/siiupa/administracao/pagina_rh_eleicao2022.php?nome=$dados->nome&cargo=$dados->cargo&cpf=$dados->cpf'>Eleição</a> <a target='_blank' class='abreperfil'  rel='noreferrer noopener' href='?setor=adm&sub=rh&subsub=perfil&id=$dados->idfuncionario'>$dados->nome</a><i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->nome'></span></i></td>";
                     //                    echo "<td>$dados->data_nascbr</td>";
                     echo "<td><!-- $dados->fk_cargo -->$dados->cargo <i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->cargo'></span></i></td>";
 

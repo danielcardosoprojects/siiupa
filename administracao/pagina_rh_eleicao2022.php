@@ -1,3 +1,9 @@
+<?php
+include_once('../bd/conectabd.php');
+session_start();
+include_once('../bd/nivel.php');
+?>
+
 <div style="text-align:center;width:100%">
 <img src="../imagens/documentos/cabeçalho_2022.fw.png">
 <br>
