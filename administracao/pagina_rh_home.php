@@ -4,6 +4,29 @@ session_start();
 include_once('../bd/nivel.php');
 ?>
 <style>
+    .eleicaobtn-link {
+        font-size: 12px;
+        /* Tamanho pequeno */
+        color: #007bff;
+        /* Cor azul típica de links */
+        text-decoration: none;
+        /* Remove o sublinhado padrão do link */
+        font-weight: bold;
+        /* Texto em negrito para chamar atenção */
+    }
+
+    .eleicaobtn-link:hover {
+        text-decoration: underline;
+        /* Adiciona sublinhado ao passar o mouse */
+        color: #0056b3;
+        /* Escurece a cor ao passar o mouse */
+    }
+
+    .eleicaobtn-link:active {
+        color: #003865;
+        /* Cor ainda mais escura ao clicar no link */
+    }
+
     .contagem_cargos {
         display: flex;
         gap: 2px;
@@ -28,6 +51,7 @@ include_once('../bd/nivel.php');
         height: 500px;
         border: none;
     }
+
     .copiarTexto {
         cursor: pointer;
     }
@@ -401,7 +425,7 @@ include_once('../bd/nivel.php');
         </tbody>
     </table>
     <script>
-       $(document).ready(function() {
+        $(document).ready(function() {
             $('.copiarTexto').click(function() {
                 const textToCopy = $(this).attr('data-text');
                 const tempInput = $('<input>');
