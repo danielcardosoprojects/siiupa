@@ -676,24 +676,27 @@ STATUS:
 
             // Confirmar ação do usuário
             if (confirm('Tem certeza que deseja limpar a escala?')) {
-                // Configurar a requisição DELETE
-                fetch(url, {
-                    method: 'DELETE'
-                })
+                // Configurar a requisição DELETE com axios
+                axios.delete(url)
                 .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Erro ao limpar a escala');
-                    }
-                    return response.json(); // Caso a resposta contenha um JSON
-                })
-                .then(data => {
-                    console.log('Resposta da API:', data);
+                    console.log('Resposta da API:', response.data);
                     alert('Escala limpa com sucesso!');
                     location.reload(); // Recarrega a página
                 })
                 .catch(error => {
-                    console.error('Erro:', error);
-                    alert('Ocorreu um erro ao limpar a escala.');
+                    if (error.response) {
+                        // O servidor respondeu com um status diferente de 2xx
+                        console.error('Erro na resposta da API:', error.response.data);
+                        alert(`Erro ao limpar a escala: ${error.response.status} - ${error.response.data}`);
+                    } else if (error.request) {
+                        // A requisição foi feita, mas nenhuma resposta foi recebida
+                        console.error('Nenhuma resposta recebida:', error.request);
+                        alert('Nenhuma resposta da API.');
+                    } else {
+                        // Erro ao configurar a requisição
+                        console.error('Erro ao configurar a requisição:', error.message);
+                        alert(`Erro ao limpar a escala: ${error.message}`);
+                    }
                 });
             }
         }
