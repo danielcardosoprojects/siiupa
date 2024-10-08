@@ -672,7 +672,7 @@ STATUS:
     window.addEventListener('load', carregarConteudoBloco);
     function limparEscala(idEscala) {
             // URL da API
-            const url = `https://www.siupa.com.br/siiupa/api/api.php/records/tb_escala_funcionario/?filter=fk_escala,eq,${idEscala}`;
+            const url = `api/api.php/records/tb_escala_funcionario/?filter=fk_escala,eq,${idEscala}`;
 
             // Confirmar ação do usuário
             if (confirm('Tem certeza que deseja limpar a escala?')) {
