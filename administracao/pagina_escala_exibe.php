@@ -221,6 +221,7 @@ STATUS:
     <span type="button" class="btn btn btn-outline-dark" id="addservidor">
         ➕ Adicionar Servidor</span>
     <span id="excluir_varios">Excluir vários</span><span id="confirmar_exclusao" title="Confirmar exclusão" style='display:none'>✅</span><span id="cancelar_exclusao" style='display:none' title="Cancelar exclusão">❌</span>
+    <button onclick="limparEscala()">Limpar Escala</button>
 </p>
 
 
@@ -669,6 +670,33 @@ STATUS:
 
     // Chamar a função para carregar o conteúdo do bloco de notas ao carregar a página
     window.addEventListener('load', carregarConteudoBloco);
+    function limparEscala() {
+            // URL da API
+            const url = 'https://www.siupa.com.br/siiupa/api/api.php/records/tb_escala_funcionario/?filter=fk_escala,eq,639';
+
+            // Confirmar ação do usuário
+            if (confirm('Tem certeza que deseja limpar a escala?')) {
+                // Configurar a requisição DELETE
+                fetch(url, {
+                    method: 'DELETE'
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro ao limpar a escala');
+                    }
+                    return response.json(); // Caso a resposta contenha um JSON
+                })
+                .then(data => {
+                    console.log('Resposta da API:', data);
+                    alert('Escala limpa com sucesso!');
+                    location.reload(); // Recarrega a página
+                })
+                .catch(error => {
+                    console.error('Erro:', error);
+                    alert('Ocorreu um erro ao limpar a escala.');
+                });
+            }
+        }
 </script>
 <script src="/siiupa/js/jquery.session.js" defer></script>
 <script src="/siiupa/administracao/pagina_escala_exibe.js?v=1"></script>
