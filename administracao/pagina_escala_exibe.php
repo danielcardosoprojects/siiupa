@@ -252,7 +252,7 @@ STATUS:
 <p>Ferramentas:
     <span type="button" class="btn btn btn-outline-dark" id="addservidor">
         ➕ Adicionar Servidor</span>
-    <span id="excluir_varios">Excluir vários</span><span id="confirmar_exclusao" title="Confirmar exclusão" style='display:none'>✅</span><span id="cancelar_exclusao" style='display:none' title="Cancelar exclusão">❌</span> <span id="seleciona_todos" style="display:none; cursor:pointer;">Seleciona todos<span>
+    <span id="excluir_varios">Excluir vários</span><span id="confirmar_exclusao" title="Confirmar exclusão" style='display:none'>✅</span><span id="cancelar_exclusao" style='display:none' title="Cancelar exclusão">❌</span> <span id="seleciona_todos" style="display:none; cursor:pointer;">Selecionar todos<span>
     
 </p>
 
