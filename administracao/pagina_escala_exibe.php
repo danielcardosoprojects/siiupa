@@ -1,8 +1,9 @@
 <style>
     #carregaesqueleto {
-        overflow:visible;
+        overflow: visible;
         background-color: #FFF;
     }
+
     #addservidor {
         display: inline-block;
         padding: 5px 20px;
@@ -133,9 +134,6 @@
         width: 100%;
         height: 100%;
     }
-
-
-
 </style>
 <?php
 
@@ -221,7 +219,7 @@ STATUS:
     <span type="button" class="btn btn btn-outline-dark" id="addservidor">
         ➕ Adicionar Servidor</span>
     <span id="excluir_varios">Excluir vários</span><span id="confirmar_exclusao" title="Confirmar exclusão" style='display:none'>✅</span><span id="cancelar_exclusao" style='display:none' title="Cancelar exclusão">❌</span>
-    <button onclick="limparEscala(<?=$idescala;?>)">Limpar Escala</button>
+    <button onclick="limparEscala(<?= $idescala; ?>)">Limpar Escala</button>
 </p>
 
 
@@ -269,93 +267,93 @@ STATUS:
             </h2>
             <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
                 <div class="accordion-body">
-                <ul>
-        <li>
-            <strong>15 de agosto de 2023</strong>
-            <ul>
-                <li>Terça</li>
-                <li>Adesão do Pará à Independência - LEI N° 5.999, DE 10/09/1996 Feriado Estadual</li>
-            </ul>
-        </li>
-        <li>
-            <strong>7 de setembro de 2023</strong>
-            <ul>
-                <li>Quinta</li>
-                <li>Independência do Brasil - leis 662, 06/04/1949, e 10.607, 19/12/2002 Feriado Nacional</li>
-            </ul>
-        </li>
-        <li>
-            <strong>12 de outubro de 2023</strong>
-            <ul>
-                <li>Quinta</li>
-                <li>N S Aparecida – Padroeira do Brasil - Lei no 6.802, de 30/06/1980 Feriado Nacional</li>
-            </ul>
-        </li>
-        <li>
-            <strong>15 de outubro de 2023</strong>
-            <ul>
-                <li>Domingo</li>
-                <li>Dia do Professor – Dec. Fed. 52.682, de 14/10/1963. Feriado Escolar</li>
-                <li>Romaria XXXXXXXXXX</li>
-            </ul>
-        </li>
-        <li>
-            <strong>16 de outubro de 2023</strong>
-            <ul>
-                <li>Segunda</li>
-                <li>Pós Romaria de N S de Nazaré Ponto Facultativo</li>
-            </ul>
-        </li>
-        <li>
-            <strong>28 de outubro de 2023</strong>
-            <ul>
-                <li>Sábado</li>
-                <li>Dia do Servidor Público – Lei Mun. 003/99, Art. 218 Ponto Facultativo</li>
-            </ul>
-        </li>
-        <li>
-            <strong>2 de novembro de 2023</strong>
-            <ul>
-                <li>Quinta</li>
-                <li>Dia de Finados - Lei no 10.607, de 19 de dezembro de 2002 Feriado Nacional</li>
-            </ul>
-        </li>
-        <li>
-            <strong>15 de novembro de 2023</strong>
-            <ul>
-                <li>Quarta</li>
-                <li>Proclamação da República - Lei no 10.607, de 19 de dezembro de 2002 Feriado Nacional</li>
-            </ul>
-        </li>
-        <li>
-            <strong>8 de dezembro de 2023</strong>
-            <ul>
-                <li>Sexta</li>
-                <li>Imaculada Conceição - Lei 026/83, 27/12/83 Feriado Municipal</li>
-            </ul>
-        </li>
-        <li>
-            <strong>24 de dezembro de 2023</strong>
-            <ul>
-                <li>Domingo</li>
-                <li>Véspera de Natal Ponto Facultativo</li>
-            </ul>
-        </li>
-        <li>
-            <strong>25 de dezembro de 2023</strong>
-            <ul>
-                <li>Segunda</li>
-                <li>Natal Lei n°10.607, de 19 de dezembro de 2022 Feriado Nacional</li>
-            </ul>
-        </li>
-        <li>
-            <strong>31 de dezembro de 2023</strong>
-            <ul>
-                <li>Domingo</li>
-                <li>Véspera de Ano Novo Ponto Facultativo</li>
-            </ul>
-        </li>
-    </ul>
+                    <ul>
+                        <li>
+                            <strong>15 de agosto de 2023</strong>
+                            <ul>
+                                <li>Terça</li>
+                                <li>Adesão do Pará à Independência - LEI N° 5.999, DE 10/09/1996 Feriado Estadual</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>7 de setembro de 2023</strong>
+                            <ul>
+                                <li>Quinta</li>
+                                <li>Independência do Brasil - leis 662, 06/04/1949, e 10.607, 19/12/2002 Feriado Nacional</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>12 de outubro de 2023</strong>
+                            <ul>
+                                <li>Quinta</li>
+                                <li>N S Aparecida – Padroeira do Brasil - Lei no 6.802, de 30/06/1980 Feriado Nacional</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>15 de outubro de 2023</strong>
+                            <ul>
+                                <li>Domingo</li>
+                                <li>Dia do Professor – Dec. Fed. 52.682, de 14/10/1963. Feriado Escolar</li>
+                                <li>Romaria XXXXXXXXXX</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>16 de outubro de 2023</strong>
+                            <ul>
+                                <li>Segunda</li>
+                                <li>Pós Romaria de N S de Nazaré Ponto Facultativo</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>28 de outubro de 2023</strong>
+                            <ul>
+                                <li>Sábado</li>
+                                <li>Dia do Servidor Público – Lei Mun. 003/99, Art. 218 Ponto Facultativo</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>2 de novembro de 2023</strong>
+                            <ul>
+                                <li>Quinta</li>
+                                <li>Dia de Finados - Lei no 10.607, de 19 de dezembro de 2002 Feriado Nacional</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>15 de novembro de 2023</strong>
+                            <ul>
+                                <li>Quarta</li>
+                                <li>Proclamação da República - Lei no 10.607, de 19 de dezembro de 2002 Feriado Nacional</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>8 de dezembro de 2023</strong>
+                            <ul>
+                                <li>Sexta</li>
+                                <li>Imaculada Conceição - Lei 026/83, 27/12/83 Feriado Municipal</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>24 de dezembro de 2023</strong>
+                            <ul>
+                                <li>Domingo</li>
+                                <li>Véspera de Natal Ponto Facultativo</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>25 de dezembro de 2023</strong>
+                            <ul>
+                                <li>Segunda</li>
+                                <li>Natal Lei n°10.607, de 19 de dezembro de 2022 Feriado Nacional</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <strong>31 de dezembro de 2023</strong>
+                            <ul>
+                                <li>Domingo</li>
+                                <li>Véspera de Ano Novo Ponto Facultativo</li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
@@ -670,36 +668,21 @@ STATUS:
 
     // Chamar a função para carregar o conteúdo do bloco de notas ao carregar a página
     window.addEventListener('load', carregarConteudoBloco);
-    function limparEscala(idEscala) {
-            // URL da API
-            const url = `api/rh/api.php/records/tb_escala_funcionario?filter=fk_escala,eq,${idEscala}`;
+    // Função para marcar todos os checkboxes
+    function marcarTodosCheckboxes(checkboxClass) {
+        const checkboxes = document.querySelectorAll(`.${checkboxClass}`);
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = true; // Marca todos os checkboxes
+        });
+    }
 
-            // Confirmar ação do usuário
-            if (confirm('Tem certeza que deseja limpar a escala?')) {
-                // Configurar a requisição DELETE com axios
-                axios.delete(url)
-                .then(response => {
-                    console.log('Resposta da API:', response.data);
-                    alert('Escala limpa com sucesso!');
-                    location.reload(); // Recarrega a página
-                })
-                .catch(error => {
-                    if (error.response) {
-                        // O servidor respondeu com um status diferente de 2xx
-                        console.error('Erro na resposta da API:', error.response.data);
-                        alert(`Erro ao limpar a escala: ${error.response.status} - ${error.response.data}`);
-                    } else if (error.request) {
-                        // A requisição foi feita, mas nenhuma resposta foi recebida
-                        console.error('Nenhuma resposta recebida:', error.request);
-                        alert('Nenhuma resposta da API.');
-                    } else {
-                        // Erro ao configurar a requisição
-                        console.error('Erro ao configurar a requisição:', error.message);
-                        alert(`Erro ao limpar a escala: ${error.message}`);
-                    }
-                });
-            }
-        }
+    // Função para desmarcar todos os checkboxes
+    function desmarcarTodosCheckboxes(checkboxClass) {
+        const checkboxes = document.querySelectorAll(`.${checkboxClass}`);
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = false; // Desmarca todos os checkboxes
+        });
+    }
 </script>
 <script src="/siiupa/js/jquery.session.js" defer></script>
 <script src="/siiupa/administracao/pagina_escala_exibe.js?v=1"></script>
