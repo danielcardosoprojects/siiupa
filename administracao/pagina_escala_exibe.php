@@ -218,8 +218,8 @@ STATUS:
 <p>Ferramentas:
     <span type="button" class="btn btn btn-outline-dark" id="addservidor">
         ➕ Adicionar Servidor</span>
-    <span id="excluir_varios">Excluir vários</span><span id="confirmar_exclusao" title="Confirmar exclusão" style='display:none'>✅</span><span id="cancelar_exclusao" style='display:none' title="Cancelar exclusão">❌</span>
-    <button onclick="limparEscala(<?= $idescala; ?>)">Limpar Escala</button>
+    <span id="excluir_varios">Excluir vários</span><span id="confirmar_exclusao" title="Confirmar exclusão" style='display:none'>✅</span><span id="cancelar_exclusao" style='display:none' title="Cancelar exclusão">❌</span> <span id="seleciona_todos">Seleciona todos<span>
+    
 </p>
 
 
@@ -456,6 +456,10 @@ STATUS:
         $(".seleciona_exclusao").show();
         $("#confirmar_exclusao").show();
         $("#cancelar_exclusao").show();
+        $("#seleciona_todos").show();
+        document.getElementById('seleciona_todos').addEventListener('click', function() {
+            marcarTodosCheckboxes('seleciona_exclusao');
+        });
     });
 
     $("#cancelar_exclusao").click(() => {
@@ -464,6 +468,7 @@ STATUS:
         $(".seleciona_exclusao").hide();
         $("#confirmar_exclusao").hide();
         $("#cancelar_exclusao").hide();
+        $("#seleciona_todos").hide();
         $.notify(
             "Nada excluído", {
                 position: 'left',
@@ -515,6 +520,7 @@ STATUS:
         $(".seleciona_exclusao").hide();
         $("#confirmar_exclusao").hide();
         $("#cancelar_exclusao").hide();
+        $("#seleciona_todos").hide();
     });
 
 
@@ -668,6 +674,7 @@ STATUS:
 
     // Chamar a função para carregar o conteúdo do bloco de notas ao carregar a página
     window.addEventListener('load', carregarConteudoBloco);
+
     // Função para marcar todos os checkboxes
     function marcarTodosCheckboxes(checkboxClass) {
         const checkboxes = document.querySelectorAll(`.${checkboxClass}`);
