@@ -67,7 +67,18 @@ document.getElementById('itemForm').addEventListener('submit', function (e) {
             // Atualize a tabela com a nova entrada
             //$('#equipamentosTable').DataTable().ajax.reload();
             //$('#itemModal').modal('hide');
-            window.location.href = `/siiupa/administracao/patrimonio/${response.data}`;
+            Swal.fire({
+                icon: "success",
+                title: "Cadastrado",
+                showConfirmButton: false,
+                timer: 1500
+            });
+            setTimeout(function () {
+                window.location.href = `/siiupa/administracao/patrimonio/${response.data}`;
+            }, 1600); // 3000 milissegundos = 3 segundos
+
+
+
 
         })
         .catch(error => {
@@ -77,7 +88,7 @@ document.getElementById('itemForm').addEventListener('submit', function (e) {
 
 document.getElementById('addItemBtn').addEventListener('click', function () {
     // Exibe o modal
-    
+
 
 
     let itemModal = new bootstrap.Modal(document.getElementById('itemModal'));
@@ -98,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 option.textContent = setor.setor + " - " + setor.categoria;
                 setorSelect.appendChild(option);
             });
-           
+
         })
         .catch(function (error) {
             console.error("Erro ao carregar os setores:", error);
