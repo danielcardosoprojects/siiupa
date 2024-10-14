@@ -26,6 +26,7 @@
                     <th>ID</th>
                     <th>Nome</th>
                     <th>Tipo</th>
+                    <th>Marca</th>
                     <th>Modelo</th>
                     <th>Número de Série</th>
                     <th>Data de Cadastro</th>
@@ -56,26 +57,33 @@
                         </div>
 
                         <div class="mb-3">
-                            <label for="nome" class="form-label">Nome</label>
-                            <input type="text" class="form-control" id="nome" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="tipo" class="form-label">Tipo</label>
-                            <select class="form-select" id="tipo" required>
-                                <option value="Equipamento">Equipamento</option>
-                                <option value="Móvel">Móvel</option>
-                                <option value="Material">Material</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="modelo" class="form-label">Modelo</label>
-                            <input type="text" class="form-control" id="modelo" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="numeroSerie" class="form-label">Número de Série</label>
-                            <input type="text" class="form-control" id="numeroSerie" required>
-                        </div>
-                  
+                        <label for="nome" class="form-label">Nome</label>
+                        <input type="text" class="form-control" id="nome" required list="suggestionsNome">
+                        <datalist id="suggestionsNome"></datalist>
+                    </div>
+                    <div class="mb-3">
+                        <label for="tipo" class="form-label">Tipo</label>
+                        <select class="form-select" id="tipo" required>
+                            <option value="Equipamento">Equipamento</option>
+                            <option value="Móvel">Móvel</option>
+                            <option value="Material">Material</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                    <label for="marca" class="form-label">Marca</label>
+                        <input type="text" class="form-control" id="marca" required list="suggestionsMarca">
+                        <datalist id="suggestionsMarca"></datalist>
+                    </div>
+                    <div class="mb-3">
+                        <label for="modelo" class="form-label">Modelo</label>
+                        <input type="text" class="form-control" id="modelo" required list="suggestionsModelo">
+                        <datalist id="suggestionsModelo"></datalist>
+                    </div>
+                    <div class="mb-3">
+                        <label for="numeroSerie" class="form-label">Número de Série</label>
+                        <input type="text" class="form-control" id="numeroSerie" required list="suggestionsNumeroSerie">
+                        <datalist id="suggestionsNumeroSerie"></datalist>
+                    </div>
                         <input type="hidden" id="itemId">
                         <button type="submit" class="btn btn-primary">Salvar</button>
                     </form>
