@@ -8,13 +8,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Controle de Patrimônio</title>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Axios JS -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.3/dist/sweetalert2.all.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.3/dist/sweetalert2.min.css">
+    <script>
+     
+    </script>
 </head>
+<style>
+    .select2-dropdown {
+        z-index: 9999;
+    }
+</style>
 
 <body>
+
+
     <div class="container my-5">
         <h1 class="text-center mb-4">Controle de Patrimônio da Unidade</h1>
         <div class="text-end mb-3">
@@ -57,33 +77,36 @@
                         </div>
 
                         <div class="mb-3">
-                        <label for="nome" class="form-label">Nome</label>
-                        <input type="text" class="form-control" id="nome" required list="suggestionsNome">
-                        <datalist id="suggestionsNome"></datalist>
-                    </div>
-                    <div class="mb-3">
-                        <label for="tipo" class="form-label">Tipo</label>
-                        <select class="form-select" id="tipo" required>
-                            <option value="Equipamento">Equipamento</option>
-                            <option value="Móvel">Móvel</option>
-                            <option value="Material">Material</option>
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                    <label for="marca" class="form-label">Marca</label>
-                        <input type="text" class="form-control" id="marca" required list="suggestionsMarca">
-                        <datalist id="suggestionsMarca"></datalist>
-                    </div>
-                    <div class="mb-3">
-                        <label for="modelo" class="form-label">Modelo</label>
-                        <input type="text" class="form-control" id="modelo" required list="suggestionsModelo">
-                        <datalist id="suggestionsModelo"></datalist>
-                    </div>
-                    <div class="mb-3">
-                        <label for="numeroSerie" class="form-label">Número de Série</label>
-                        <input type="text" class="form-control" id="numeroSerie" required list="suggestionsNumeroSerie">
-                        <datalist id="suggestionsNumeroSerie"></datalist>
-                    </div>
+                            <label for="nome" class="form-label">Nome</label>
+                            <input type="text" class="form-control" id="nome" required list="suggestionsNome">
+                            <datalist id="suggestionsNome"></datalist>
+                        </div>
+                        <div class="mb-3">
+                            <label for="tipo" class="form-label">Tipo</label>
+                            <select class="form-select" id="tipo" required>
+                                <option value="Equipamento">Equipamento</option>
+                                <option value="Móvel">Móvel</option>
+                                <option value="Material">Material</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="marca" class="form-label">Marca</label>
+                            <input type="text" class="form-control" id="marca" required list="suggestionsMarca">
+                            <datalist id="suggestionsMarca"></datalist>
+                        </div>
+                        <div class="mb-3">
+                            <label for="modelo" class="form-label">Modelo</label>
+                            <input type="text" class="form-control" id="modelo" required list="suggestionsModelo">
+                            <datalist id="suggestionsModelo"></datalist>
+                        </div>
+                        <div class="mb-3">
+                            <label for="numeroSerie" class="form-label">Número de Série</label>
+                            <input type="text" class="form-control" id="numeroSerie" required list="suggestionsNumeroSerie">
+                            <datalist id="suggestionsNumeroSerie"></datalist>
+                        </div>
+                        
+
+
                         <input type="hidden" id="itemId">
                         <button type="submit" class="btn btn-primary">Salvar</button>
                     </form>
@@ -92,14 +115,12 @@
         </div>
     </div>
 
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Axios JS -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- DataTables JS -->
-    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+
+
+
+
+
+
     <script src="script.js?<?php echo time(); ?>"></script>
 </body>
 

@@ -1,4 +1,8 @@
+
 $(document).ready(function () {
+
+    // Supondo que você tenha uma função para obter dados da tabela
+
     $('#equipamentosTable').DataTable({
         "ajax": {
             "url": "https://www.siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos?join=setor_id,tb_setor&order=id,desc",
@@ -19,61 +23,16 @@ $(document).ready(function () {
             }
         ]
     });
-    
-// Função para buscar sugestões de acordo com o input e preencher a lista
-function fetchSuggestions(input, listId, key) {
-    const query = $(input).val().toLowerCase();
-    const suggestionsList = $(listId);
-    suggestionsList.empty();
+    let allData = $('#equipamentosTable').DataTable().rows().data().toArray();
+    console.log(allData);
+    // Crie uma lista de sugestões de todos os campos necessários
+    const nomes = allData.map(item => item.nome);
+    const tipos = allData.map(item => item.tipo);
+    const marcas = allData.map(item => item.marca);
+    const modelos = allData.map(item => item.modelo);
+    const numerosSerie = allData.map(item => item.numero_serie);
+    console.log(marcas);
 
-    if (query.length > 0) {
-        const allData = table.rows().data(); // Obtemos todos os dados da tabela
-        allData.each(function (item) {
-            if (item[key].toLowerCase().includes(query)) {
-                // Cria um item de lista para cada sugestão correspondente
-                suggestionsList.append(`<li class="list-group-item suggestion-item" data-value="${item[key]}">${item[key]}</li>`);
-            }
-        });
-    }
-}
-
-// Eventos de input para sugestões
-$('#nome').on('input', function () {
-    fetchSuggestions(this, '#suggestionsListNome', 'nome');
-});
-
-$('#tipo').on('input', function () {
-    fetchSuggestions(this, '#suggestionsListTipo', 'tipo');
-});
-
-$('#marca').on('input', function () {
-    fetchSuggestions(this, '#suggestionsListMarca', 'marca');
-});
-
-$('#modelo').on('input', function () {
-    fetchSuggestions(this, '#suggestionsListModelo', 'modelo');
-});
-
-$('#numeroSerie').on('input', function () {
-    fetchSuggestions(this, '#suggestionsListNumeroSerie', 'numero_serie');
-});
-
-// Ao clicar na sugestão, preenche o campo correspondente
-$(document).on('click', '.suggestion-item', function () {
-    const value = $(this).data('value');
-    const targetInputId = $(this).closest('.mb-3').find('input').attr('id');
-    $(`#${targetInputId}`).val(value);
-    $(this).closest('.mb-3').find('ul').empty(); // Limpa a lista de sugestões após a seleção
-});
-
-
-// Ao clicar na sugestão, preenche o campo correspondente
-$(document).on('click', '.suggestion-item', function () {
-    const value = $(this).data('value');
-    const targetInputId = $(this).closest('.mb-3').find('input').attr('id');
-    $(`#${targetInputId}`).val(value);
-    $(this).closest('.mb-3').find('ul').empty(); // Limpa a lista de sugestões após a seleção
-});
 
 });
 
@@ -100,21 +59,27 @@ document.getElementById('itemForm').addEventListener('submit', function (e) {
         numeroSerie: document.getElementById('numeroSerie').value,
         dataCadastro: formatarData(),
         itemId: document.getElementById('itemId').value,
-        user_id: "<?='2';?>"
+        user_id: 1
     };
 
     axios.post('https://www.siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos?join=setor_id,tb_setor', data)
         .then(response => {
             // Atualize a tabela com a nova entrada
-            $('#equipamentosTable').DataTable().ajax.reload();
-            $('#itemModal').modal('hide');
+            //$('#equipamentosTable').DataTable().ajax.reload();
+            //$('#itemModal').modal('hide');
+            window.location.href = `/siiupa/administracao/patrimonio/${response.data}`;
+
         })
         .catch(error => {
             console.error("Erro ao adicionar o item:", error);
         });
 });
+
 document.getElementById('addItemBtn').addEventListener('click', function () {
     // Exibe o modal
+    
+
+
     let itemModal = new bootstrap.Modal(document.getElementById('itemModal'));
     itemModal.show();
 });
@@ -133,6 +98,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 option.textContent = setor.setor + " - " + setor.categoria;
                 setorSelect.appendChild(option);
             });
+           
         })
         .catch(function (error) {
             console.error("Erro ao carregar os setores:", error);
