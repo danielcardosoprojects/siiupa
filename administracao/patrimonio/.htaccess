@@ -1,0 +1,7 @@
+RewriteEngine On
+
+# Redireciona para a página inicial de patrimônio
+RewriteRule ^$ patrimonio_home.php [L]
+
+# Redireciona para a página de detalhe de um item de patrimônio
+RewriteRule ^([0-9]+)$ patrimonio_item.php?id=$1 [L]

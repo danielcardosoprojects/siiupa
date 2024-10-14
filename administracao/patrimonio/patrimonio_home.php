@@ -1,8 +1,9 @@
 <?php
-echo "<h1>Hellow World</h1>";
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@ echo "<h1>Hellow World</h1>";
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css">
 </head>
+
 <body>
     <div class="container my-5">
         <h1 class="text-center mb-4">Controle de Patrimônio da Unidade</h1>
@@ -46,6 +48,14 @@ echo "<h1>Hellow World</h1>";
                 <div class="modal-body">
                     <form id="itemForm">
                         <div class="mb-3">
+                            <label for="setor" class="form-label">Setor</label>
+                            <select class="form-select" id="setor" required>
+                                <option value="">Selecione um setor</option>
+                                <!-- As opções serão adicionadas dinamicamente pelo JavaScript -->
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
                             <label for="nome" class="form-label">Nome</label>
                             <input type="text" class="form-control" id="nome" required>
                         </div>
@@ -65,10 +75,7 @@ echo "<h1>Hellow World</h1>";
                             <label for="numeroSerie" class="form-label">Número de Série</label>
                             <input type="text" class="form-control" id="numeroSerie" required>
                         </div>
-                        <div class="mb-3">
-                            <label for="dataCadastro" class="form-label">Data de Cadastro</label>
-                            <input type="date" class="form-control" id="dataCadastro" required>
-                        </div>
+                  
                         <input type="hidden" id="itemId">
                         <button type="submit" class="btn btn-primary">Salvar</button>
                     </form>
@@ -85,6 +92,7 @@ echo "<h1>Hellow World</h1>";
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
-    <script src="script.js"></script>
+    <script src="script.js?<?php echo time(); ?>"></script>
 </body>
+
 </html>
