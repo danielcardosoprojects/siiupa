@@ -1,11 +1,13 @@
 
 $(document).ready(function () {
 
+    //verifica se na url tem o setor
+    setorUrl = cachedSetor != 'todos' ? `filter=setor_id,eq,${cachedSetor}&` : '';
+    console.log(setorUrl);
     // Supondo que você tenha uma função para obter dados da tabela
-
     $('#equipamentosTable').DataTable({
         "ajax": {
-            "url": "https://www.siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos?join=setor_id,tb_setor&order=id,desc",
+            "url": `https://www.siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos?${setorUrl}join=setor_id,tb_setor&order=id,desc`,
             "dataSrc": "records"
         },
         "columns": [
@@ -56,7 +58,7 @@ document.getElementById('itemForm').addEventListener('submit', function (e) {
         tipo: document.getElementById('tipo').value,
         marca: document.getElementById('marca').value,
         modelo: document.getElementById('modelo').value,
-        numeroSerie: document.getElementById('numeroSerie').value,
+        numero_serie: document.getElementById('numeroSerie').value,
         dataCadastro: formatarData(),
         itemId: document.getElementById('itemId').value,
         user_id: 1

@@ -23,7 +23,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.3/dist/sweetalert2.all.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.3/dist/sweetalert2.min.css">
     <script>
-     
+
     </script>
 </head>
 <style>
@@ -33,10 +33,31 @@
 </style>
 
 <body>
+<button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#botao_setores_offcanvas" aria-controls="botao_setores_offcanvas">
+        Abrir Menu de Setores
+    </button>
 
+    <!-- Menu lateral Offcanvas -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="botao_setores_offcanvas" aria-labelledby="botao_setores_offcanvas_label">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="botao_setores_offcanvas_label">Setores</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <!-- Container dos botões -->
+            <div id="botao_setores_container">
+                <!-- Os botões serão inseridos aqui -->
+            </div>
+        </div>
+    </div>
 
     <div class="container my-5">
         <h1 class="text-center mb-4">Controle de Patrimônio da Unidade</h1>
+        <h2 id="titulo_setor"></h2>
+        <div id="botao_setores_container">
+            <!-- Os botões serão inseridos aqui -->
+        </div>
+
         <div class="text-end mb-3">
             <button class="btn btn-success" id="addItemBtn">Adicionar Item</button>
         </div>
@@ -104,7 +125,7 @@
                             <input type="text" class="form-control" id="numeroSerie" required list="suggestionsNumeroSerie">
                             <datalist id="suggestionsNumeroSerie"></datalist>
                         </div>
-                        
+
 
 
                         <input type="hidden" id="itemId">
@@ -121,6 +142,7 @@
 
 
 
+    <script src="localstorage.js?<?php echo time(); ?>"></script>
     <script src="script.js?<?php echo time(); ?>"></script>
 </body>
 
