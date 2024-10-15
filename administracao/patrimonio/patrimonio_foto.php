@@ -41,7 +41,7 @@ function listRecentImages($dir, $limit = 100) {
     return array_slice($images, 0, $limit);
 }
 
-$recentImages = listRecentImages('exames/');
+$recentImages = listRecentImages('fotos/');
 ?>
 <!DOCTYPE html>
 <html lang="en">
