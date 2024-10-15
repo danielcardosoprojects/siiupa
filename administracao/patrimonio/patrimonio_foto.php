@@ -1,7 +1,7 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_FILES['file']) && $_FILES['file']['error'] == UPLOAD_ERR_OK) {
-        $uploadDir = 'fotos/';
+        $uploadDir = 'uploads/';
         $photoName = basename($_POST['name']);
         $fileType = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
         $uploadFile = $uploadDir . $photoName . '.' . $fileType;
@@ -41,7 +41,7 @@ function listRecentImages($dir, $limit = 100) {
     return array_slice($images, 0, $limit);
 }
 
-$recentImages = listRecentImages('fotos/');
+$recentImages = listRecentImages('uploads/');
 ?>
 <!DOCTYPE html>
 <html lang="en">

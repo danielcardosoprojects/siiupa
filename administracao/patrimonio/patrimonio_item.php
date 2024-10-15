@@ -43,7 +43,7 @@ $equipamento = getData($apiUrl);
         <div class="col-md-4">
             <h4>Foto Principal:</h4>
             <?php if ($equipamento['foto_frente']): ?>
-                <img src="<?= htmlspecialchars($equipamento['foto_frente']) ?>" alt="Foto Frente" style="max-width: 300px; max-height: 300px;">
+                <img src="uploads/<?= htmlspecialchars($equipamento['foto_frente']) ?>" alt="Foto Frente" style="max-width: 300px; max-height: 300px;">
             <?php else: ?>
                 <p>Nenhuma foto cadastrada.</p>
             <?php endif; ?>
@@ -52,7 +52,7 @@ $equipamento = getData($apiUrl);
         <div class="col-md-4">
             <h4>Foto da Etiqueta:</h4>
             <?php if ($equipamento['foto_etiqueta']): ?>
-                <img src="<?= htmlspecialchars($equipamento['foto_etiqueta']) ?>" alt="Foto Etiqueta" style="max-width: 150px; max-height: 150px;">
+                <img src="uploads/<?= htmlspecialchars($equipamento['foto_etiqueta']) ?>" alt="Foto Etiqueta" style="max-width: 150px; max-height: 150px;">
             <?php else: ?>
                 <p>Nenhuma foto cadastrada.</p>
             <?php endif; ?>
