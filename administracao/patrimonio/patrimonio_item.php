@@ -6,6 +6,7 @@ if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
 
 $id = intval($_GET['id']); // Converte o ID para um inteiro
 
+
 // URL da API com o ID
 $apiUrl = "https://www.siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos/" . $id;
 
@@ -47,6 +48,9 @@ $equipamento = getData($apiUrl);
             <?php else: ?>
                 <p>Nenhuma foto cadastrada.</p>
             <?php endif; ?>
+
+            <a href="/siiupa/administracao/patrimonio/<?=$id?>/foto/principal" type="button" class="btn btn-link">Editar Foto</a>
+
         </div>
 
         <div class="col-md-4">
@@ -56,12 +60,15 @@ $equipamento = getData($apiUrl);
             <?php else: ?>
                 <p>Nenhuma foto cadastrada.</p>
             <?php endif; ?>
+            <div></div>
+            <a href="/siiupa/administracao/patrimonio/<?=$id?>/foto/etiqueta" type="button" class="btn btn-link">Editar Foto</a>
         </div>
     </div>
 
     <!-- Botão para Editar -->
     <div class="mt-4">
         <a href="editar_equipamento.php?id=<?= $id ?>" class="btn btn-primary">Editar</a>
+        <a href="./" class="btn btn-primary">Concluído</a>
     </div>
 </div>
 

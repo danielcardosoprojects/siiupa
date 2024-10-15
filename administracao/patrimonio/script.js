@@ -2,7 +2,7 @@
 $(document).ready(function () {
 
     //verifica se na url tem o setor
-    setorUrl = cachedSetor != 'todos' ? `filter=setor_id,eq,${cachedSetor}&` : '';
+    setorUrl = cachedSetor != '0' ? `filter=setor_id,eq,${cachedSetor}&` : '';
     console.log(setorUrl);
     // Supondo que você tenha uma função para obter dados da tabela
     $('#equipamentosTable').DataTable({
@@ -21,9 +21,13 @@ $(document).ready(function () {
             { "data": "setor_id.setor" }, // Pega o setor do campo de associação
             {
                 "data": null,
-                "defaultContent": "<button class='btn btn-sm btn-primary'>Editar</button> <button class='btn btn-sm btn-danger'>Excluir</button>"
+                "render": function (data, type, row) {
+                    var link = "/siiupa/administracao/patrimonio/" + row.id;
+                    return "<a href='" + link + "' class='btn btn-sm btn-primary'>Vizualizar</a>";
+                }
             }
-        ]
+        ],
+        "order": [[0, "desc"]]
     });
     let allData = $('#equipamentosTable').DataTable().rows().data().toArray();
     console.log(allData);
@@ -90,6 +94,9 @@ document.getElementById('itemForm').addEventListener('submit', function (e) {
 
 document.getElementById('addItemBtn').addEventListener('click', function () {
     // Exibe o modal
+    let selectSetor = document.getElementById('setor');
+    selectSetor.value = cachedSetor;
+    
 
 
 

@@ -21,13 +21,8 @@ const setor = getSetorFromQueryString();
 
 if (setor) {
     saveSetorToLocalStorage(setor);
-    
 }
-if (setor == null) {
-    console.log('entrou');
-    
-    saveSetorToLocalStorage('todos');
-} 
+
 // Exemplo: Usar o valor salvo
 const cachedSetor = loadSetorFromLocalStorage();
 if (cachedSetor) {
@@ -44,10 +39,13 @@ function botao_setores_criarBotoes(setores) {
 
     // Percorrer a lista de setores e criar os botões
     setores.forEach(setor => {
-        if(cachedSetor == setor.id) {
+        if (cachedSetor == setor.id) {
+
+            $('#titulo_setor').text(setor.setor);
             
-            $('#titulo_setor').text(setor.setor)
-        } else if(cachedSetor == 'todos'){
+       
+
+        } else if (cachedSetor == 'todos') {
             $('#titulo_setor').text('Todos')
         }
         // Criar um botão
@@ -56,7 +54,7 @@ function botao_setores_criarBotoes(setores) {
         botao_setores_botao.className = "btn btn-light";
 
         // Adicionar evento de clique que redireciona para a URL com o ID do setor
-        botao_setores_botao.onclick = function() {
+        botao_setores_botao.onclick = function () {
             window.location.href = `/siiupa/administracao/patrimonio/?setor=${setor.id}`;
         };
 
