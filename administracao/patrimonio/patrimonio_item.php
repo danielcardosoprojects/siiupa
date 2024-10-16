@@ -36,7 +36,7 @@ $equipamento = getData($apiUrl);
 <body>
 <div class="container mt-5">
 <div class="mt-4">
-        <a href="editar_equipamento.php?id=<?= $id ?>" class="btn btn-primary">Editar</a>
+        <a href="<?= $id ?>/editar" class="btn btn-primary">Editar</a>
         <a href="./" class="btn btn-primary">Concluído</a>
     </div>
     <h2>Nome: <?= htmlspecialchars($equipamento['nome']) ?></h2>
