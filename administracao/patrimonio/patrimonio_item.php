@@ -8,10 +8,11 @@ $id = intval($_GET['id']); // Converte o ID para um inteiro
 
 
 // URL da API com o ID
-$apiUrl = "https://www.siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos/" . $id."?join=setor_id,tb_setor";
+$apiUrl = "https://www.siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos/" . $id . "?join=setor_id,tb_setor";
 
 // Função para fazer a requisição à API
-function getData($url) {
+function getData($url)
+{
     $response = file_get_contents($url);
     return json_decode($response, true);
 }
@@ -22,97 +23,79 @@ $equipamento = getData($apiUrl);
 
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
-    
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="style.css" rel="stylesheet">
     <style>
         div {
             border: solid 1px #ccc;
         }
-        </style>
+    </style>
 </head>
+
 <body>
-<nav class="navbar navbar-light bg-light">
-  <a class="navbar-brand" href="/siiupa/?setor=adm">
-  <img src="/siiupa/imagens/siiupa.png" class="d-inline-block align-top" alt="" width="200px">
-    Administração - Controle de Patrimônio
-  </a>
-</nav>
-<div class="container mt-5">
-<div class="mt-4">
-        <a href="<?= $id ?>/editar" class="btn btn-primary">Editar</a>
-        <a href="./" class="btn btn-primary">Concluído</a>
-    </div>
-    <h2>Nome: <?= htmlspecialchars($equipamento['nome']) ?></h2>
-    <div class="row">
-        <div class="col-md-4">
-            
-            <p><strong>Tipo:</strong> <?= htmlspecialchars($equipamento['tipo']) ?></p>
-            <p><strong>Marca:</strong> <?= htmlspecialchars($equipamento['marca']) ?></p>
-            <p><strong>Modelo:</strong> <?= htmlspecialchars($equipamento['modelo']) ?></p>
-            <p><strong>Número de Série:</strong> <?= htmlspecialchars($equipamento['numero_serie']) ?></p>
-            <p><strong>Setor ID:</strong> <?= htmlspecialchars($equipamento['setor_id']['setor']) ?></p>
-            <p><strong>Data de Cadastro:</strong> <?= htmlspecialchars($equipamento['data_cadastro']) ?></p>
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="/siiupa/?setor=adm">
+            <img src="/siiupa/imagens/siiupa.png" class="d-inline-block align-top" alt="" width="200px">
+            Administração - Controle de Patrimônio
+        </a>
+    </nav>
+    <div class="container mt-5">
+        <div class="mt-4">
+            <a href="<?= $id ?>/editar" class="btn btn-primary">Editar</a>
+            <a href="./" class="btn btn-primary">Concluído</a>
+        </div>
+        <h2>Nome: <?= htmlspecialchars($equipamento['nome']) ?></h2>
+        <div class="row">
+            <div class="col-md-4">
+
+                <p><strong>Tipo:</strong> <?= htmlspecialchars($equipamento['tipo']) ?></p>
+                <p><strong>Marca:</strong> <?= htmlspecialchars($equipamento['marca']) ?></p>
+                <p><strong>Modelo:</strong> <?= htmlspecialchars($equipamento['modelo']) ?></p>
+                <p><strong>Número de Série:</strong> <?= htmlspecialchars($equipamento['numero_serie']) ?></p>
+                <p><strong>Setor ID:</strong> <?= htmlspecialchars($equipamento['setor_id']['setor']) ?></p>
+                <p><strong>Data de Cadastro:</strong> <?= htmlspecialchars($equipamento['data_cadastro']) ?></p>
+            </div>
+
+
+            <div class="col-md-4">
+
+                <?php if ($equipamento['foto_frente']): ?>
+                    <a href="uploads/<?= htmlspecialchars($equipamento['foto_frente']) ?>" data-fancybox data-caption="Single image">
+                    <img src="uploads/<?= htmlspecialchars($equipamento['foto_frente']) ?>" alt="Foto Frente" style="max-width: 300px; max-height: 300px;">
+                </a>
+                <?php else: ?>
+                    <p>Nenhuma foto cadastrada.</p>
+                <?php endif; ?>
+
+                <a href="/siiupa/administracao/patrimonio/<?= $id ?>/foto/principal" type="button" class="btn btn-link">Editar Foto</a>
+
+            </div>
+
+            <div class="col-md-4">
+                <h4>Foto da Etiqueta:</h4>
+                <?php if ($equipamento['foto_etiqueta']): ?>
+                    <img src="uploads/<?= htmlspecialchars($equipamento['foto_etiqueta']) ?>" alt="Foto Etiqueta" style="max-width: 150px; max-height: 150px;">
+                <?php else: ?>
+                    <p>Nenhuma foto cadastrada.</p>
+                <?php endif; ?>
+                <div></div>
+                <a href="/siiupa/administracao/patrimonio/<?= $id ?>/foto/etiqueta" type="button" class="btn btn-link">Editar Foto</a>
+            </div>
         </div>
 
+        <!-- Botão para Editar -->
 
-        <div class="col-md-4">
-          
-            <?php if ($equipamento['foto_frente']): ?>
-                <img src="uploads/<?= htmlspecialchars($equipamento['foto_frente']) ?>" alt="Foto Frente" style="max-width: 300px; max-height: 300px;">
-            <?php else: ?>
-                <p>Nenhuma foto cadastrada.</p>
-            <?php endif; ?>
-
-            <a href="/siiupa/administracao/patrimonio/<?=$id?>/foto/principal" type="button" class="btn btn-link">Editar Foto</a>
-
-        </div>
-
-        <div class="col-md-4">
-            <h4>Foto da Etiqueta:</h4>
-            <?php if ($equipamento['foto_etiqueta']): ?>
-                <img src="uploads/<?= htmlspecialchars($equipamento['foto_etiqueta']) ?>" alt="Foto Etiqueta" style="max-width: 150px; max-height: 150px;">
-            <?php else: ?>
-                <p>Nenhuma foto cadastrada.</p>
-            <?php endif; ?>
-            <div></div>
-            <a href="/siiupa/administracao/patrimonio/<?=$id?>/foto/etiqueta" type="button" class="btn btn-link">Editar Foto</a>
-        </div>
     </div>
-
-    <!-- Botão para Editar -->
-   
-</div>
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#fotoPrincipal">
-  Principal
-</button>
-
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#fotoEtiqueta">
-  Principal
-</button>
-
-<div class="modal fade" id="fotoPrincipal" tabindex="-1"   
- aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      
-      <img src="uploads/<?= htmlspecialchars($equipamento['foto_frente']) ?>" class="img-fluid" alt="Imagem no modal">
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="fotoEtiqueta" tabindex="-1"   
- aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      
-      <img src="uploads/<?= htmlspecialchars($equipamento['foto_etiqueta']) ?>" class="img-fluid" alt="Imagem no modal">
-    </div>
-  </div>
-</div>
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
 </body>
+
 </html>
