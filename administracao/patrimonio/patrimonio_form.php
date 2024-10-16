@@ -15,7 +15,7 @@
         <h1>Cadastro de Patrimônio</h1>
         <button type="button" class="btn btn-primary" id="repetirUltimo">Carregar último</button>
         <form id="itemForm">
-            <input type="hidden" value="<?=$_GET['acao'];?>">
+            <input type="hidden" value="<?=$_GET['acao'];?>" id="acao">
             <!-- Campo Setor -->
             <div class="mb-3">
                 <label for="setor" class="form-label">Setor</label>
@@ -151,6 +151,8 @@
         // Submissão do formulário
         document.getElementById('itemForm').addEventListener('submit', function(e) {
             e.preventDefault();
+            const acao = document.getElementById('acao').value;
+            
             function cadastra(){
             const nome = document.getElementById('nome').value;
             const marca = document.getElementById('marca').value;
@@ -201,6 +203,12 @@
 
             function edita(){
                 console.log('edita');
+            }
+
+            if(acao == "cadastrar") {
+                cadastra();
+            } else {
+                edita();
             }
         });
 
