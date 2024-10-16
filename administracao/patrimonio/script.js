@@ -139,6 +139,17 @@ axios.get(ultimoUrl)
     const equipamentos = data.records;
     equipamentos.forEach(equipamento => {
       console.log(equipamento);
+      setor = document.getElementById('setor');
+      nome = document.getElementById('nome');
+      tipo = document.getElementById('tipo');
+      marca = document.getElementById('marca');
+      modelo = document.getElementById('modelo');
+
+      setor.value = equipamento.setor_id;
+      nome.value = equipamento.nome;
+      tipo.value = equipamento.tipo;
+      marca.value = equipamento.marca;
+      modelo.value = equipamento.value;
     });
   })
   .catch(error => {
