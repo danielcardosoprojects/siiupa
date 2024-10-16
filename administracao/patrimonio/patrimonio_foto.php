@@ -24,7 +24,7 @@
             </div>
             <button type="submit" class="btn btn-primary">Enviar</button>
         </form>
-        <img src="../../loading.gif" />
+        <img src="../../loading.gif" id="loading"/>
         <div v-if="uploadStatus" class="mt-3" :class="{'text-success': uploadStatus.success, 'text-danger': !uploadStatus.success}">
             {{ uploadStatus.message }}
         </div>
