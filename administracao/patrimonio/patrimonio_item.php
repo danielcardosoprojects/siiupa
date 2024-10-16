@@ -85,7 +85,33 @@ $equipamento = getData($apiUrl);
     <!-- Botão para Editar -->
    
 </div>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#fotoPrincipal">
+  Principal
+</button>
 
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#fotoEtiqueta">
+  Principal
+</button>
+
+<div class="modal fade" id="fotoPrincipal" tabindex="-1"   
+ aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      
+      <img src="uploads/<?= htmlspecialchars($equipamento['foto_frente']) ?>" class="img-fluid" alt="Imagem no modal">
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="fotoEtiqueta" tabindex="-1"   
+ aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      
+      <img src="uploads/<?= htmlspecialchars($equipamento['foto_etiqueta']) ?>" class="img-fluid" alt="Imagem no modal">
+    </div>
+  </div>
+</div>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
