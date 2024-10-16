@@ -33,7 +33,7 @@ $equipamento = getData($apiUrl);
     <h2>Perfil do Equipamento</h2>
     <div class="row">
         <div class="col-md-4">
-            <h4>Nome: <?= htmlspecialchars($equipamento['nome']) ?></h4>
+            <h2>Nome: <?= htmlspecialchars($equipamento['nome']) ?></h2>
             <p><strong>Tipo:</strong> <?= htmlspecialchars($equipamento['tipo']) ?></p>
             <p><strong>Marca:</strong> <?= htmlspecialchars($equipamento['marca']) ?></p>
             <p><strong>Modelo:</strong> <?= htmlspecialchars($equipamento['modelo']) ?></p>
