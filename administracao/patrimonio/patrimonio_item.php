@@ -64,7 +64,8 @@ $equipamento = getData($apiUrl);
 
 
             <div class="col-md-4">
-                
+            <h4>Foto Principal:</h4><br>
+
                 <?php if ($equipamento['foto_frente']): ?>
                     <a href="uploads/<?= htmlspecialchars($equipamento['foto_frente']) ?>" data-fancybox data-caption="Single image">
                         <img src="uploads/<?= htmlspecialchars($equipamento['foto_frente']) ?>" alt="Foto Frente" style="max-width: 300px; max-height: 300px;">
@@ -78,7 +79,7 @@ $equipamento = getData($apiUrl);
             </div>
 
             <div class="col-md-4">
-                <h4>Foto da Etiqueta:</h4>
+                <h4>Foto da Etiqueta:</h4><br>
                 <?php if ($equipamento['foto_etiqueta']): ?>
                     <a href="uploads/<?= htmlspecialchars($equipamento['foto_etiqueta']) ?>" data-fancybox data-caption="Single image">
                     <img src="uploads/<?= htmlspecialchars($equipamento['foto_etiqueta']) ?>" alt="Foto Etiqueta" style="max-width: 150px; max-height: 150px;">
