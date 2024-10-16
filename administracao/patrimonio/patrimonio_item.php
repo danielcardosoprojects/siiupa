@@ -27,6 +27,11 @@ $equipamento = getData($apiUrl);
     
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="style.css" rel="stylesheet">
+    <style>
+        div {
+            border: solid 1px #ccc;t
+        }
+        </style>
 </head>
 <body>
 <div class="container mt-5">
