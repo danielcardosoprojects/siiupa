@@ -206,7 +206,7 @@
                     
                     setTimeout(function() {
                         
-                        window.location.href = `/siiupa/administracao/patrimonio/${idUrl}`;
+                        console.log(`/siiupa/administracao/patrimonio/${idUrl}`);
                     }, 1600); // 3000 milissegundos = 3 segundos
                 })
                 .catch(function(error) {
