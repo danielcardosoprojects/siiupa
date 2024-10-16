@@ -31,6 +31,9 @@
     </div>
 
     <script>
+        const loadingImage = document.getElementById('loading');
+        loadingImage.style.display = 'none';
+
         new Vue({
             el: '#app',
             data: {
@@ -54,6 +57,8 @@
                     formData.append('foto', this.selectedFile);
 
                     try {
+                        const loadingImage = document.getElementById('loading');
+loadingImage.style.display = 'block';
                         const response = await fetch('/siiupa/administracao/patrimonio/upload.php', {
                             method: 'POST',
                             body: formData
