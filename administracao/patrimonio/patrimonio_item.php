@@ -62,7 +62,9 @@ $equipamento = getData($apiUrl);
 
 
             <div class="col-md-4">
-
+            <a href="image-b.jpeg" data-fancybox="gallery" data-caption="Caption #2">
+  <img src="thumbnail-b.jpeg" />
+</a>
                 <?php if ($equipamento['foto_frente']): ?>
                     <a href="uploads/<?= htmlspecialchars($equipamento['foto_frente']) ?>" data-fancybox data-caption="Single image">
                     <img src="uploads/<?= htmlspecialchars($equipamento['foto_frente']) ?>" alt="Foto Frente" style="max-width: 300px; max-height: 300px;">
