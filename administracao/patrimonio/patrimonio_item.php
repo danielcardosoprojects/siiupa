@@ -29,7 +29,7 @@ $equipamento = getData($apiUrl);
     <link href="style.css" rel="stylesheet">
     <style>
         div {
-            border: solid 1px #ccc;t
+            border: solid 1px #ccc;
         }
         </style>
 </head>

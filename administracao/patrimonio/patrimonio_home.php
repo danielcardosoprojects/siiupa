@@ -47,6 +47,8 @@
         <div class="offcanvas-body">
             <!-- Container dos botões -->
             <div id="botao_setores_container">
+                <a href="?setor=0" class="btn btn-success">Todos</a>
+                
                 <!-- Os botões serão inseridos aqui -->
             </div>
         </div>
