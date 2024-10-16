@@ -9,26 +9,31 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
     <link href="/siiupa/administracao/patrimonio/style.css" rel="stylesheet">
-
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+   
 </head>
+<style>
+
+</style>
 
 <body>
-<nav class="navbar navbar-light bg-light">
-  <a class="navbar-brand" href="/siiupa/?setor=adm">
-  <img src="/siiupa/imagens/siiupa.png" class="d-inline-block align-top" alt="" width="200px">
-    Administração - Controle de Patrimônio
-  </a>
-</nav>
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="/siiupa/?setor=adm">
+            <img src="/siiupa/imagens/siiupa.png" class="d-inline-block align-top" alt="" width="200px">
+            Administração - Controle de Patrimônio
+        </a>
+    </nav>
     <div class="container mt-4">
-        
+
         <button type="button" class="btn btn-primary" id="repetirUltimo">Carregar último</button>
         <br><br>
         <form id="itemForm">
             <input type="hidden" value="<?= $_GET['acao']; ?>" id="acao">
             <!-- Campo Setor -->
             <div class="mb-3">
-                <label for="setor" class="form-label">Setor</label>
-                <select class="form-select" id="setor" required>
+                <label for="setor" class="form-label setorSetor">Setor</label>
+                <select class="form-select js-example-responsive" style="width: 50%" id="setor" required >
                     <option value="">Selecione um setor</option>
                 </select>
             </div>
@@ -83,7 +88,12 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.3/dist/sweetalert2.all.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.14.3/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
+        $(document).ready(function() {
+            const selectSetor = document.getElementById('setor');
+            $('#setor').select2();
+        });
         // Função para carregar os setores da API
         function carregarSetores() {
             axios.get('https://www.siupa.com.br/siiupa/api/api.php/records/tb_setor?order=setor,asc')
@@ -96,6 +106,7 @@
                         option.text = setor.setor;
                         selectSetor.appendChild(option);
                     });
+
                     // Verifica se a chave "setor" existe no localStorage
                     const setorLocalStorage = localStorage.getItem('setor');
 
@@ -127,6 +138,8 @@
                         option.value = item[campo];
                         datalist.appendChild(option);
                     });
+
+
                 })
                 .catch(function(error) {
                     console.log(`Erro ao carregar sugestões para ${campo}:`, error);
