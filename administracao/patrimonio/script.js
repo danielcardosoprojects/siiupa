@@ -27,7 +27,13 @@ $(document).ready(function () {
                 }
             }
         ],
-        "order": [[0, "desc"]]
+        "order": [[0, "desc"]],
+        "rowCallback": function(row, data, index) {
+            $(row).addClass('clickable').click(function() {
+                var link = "/siiupa/administracao/patrimonio/" + data.id;
+                window.location.href = link; // Redireciona para a página de detalhes
+            });
+        }
     });
     let allData = $('#equipamentosTable').DataTable().rows().data().toArray();
     console.log(allData);

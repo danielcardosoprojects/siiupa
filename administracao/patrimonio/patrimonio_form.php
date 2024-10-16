@@ -11,10 +11,16 @@
     <link href="/siiupa/administracao/patrimonio/style.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-   
+
 </head>
 <style>
+    .clickable {
+        cursor: pointer;
+    }
 
+    .clickable:hover {
+        background-color: #f0f0f0;
+    }
 </style>
 
 <body>
@@ -33,7 +39,7 @@
             <!-- Campo Setor -->
             <div class="mb-3">
                 <label for="setor" class="form-label setorSetor">Setor</label>
-                <select class="form-select js-example-responsive" style="width: 50%" id="setor" required >
+                <select class="form-select js-example-responsive" style="width: 50%" id="setor" required>
                     <option value="">Selecione um setor</option>
                 </select>
             </div>
