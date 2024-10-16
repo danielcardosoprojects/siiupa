@@ -126,11 +126,10 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
-import axios from 'axios';
 
-const apiUrl = 'https://siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos?order=id,desc&page=1,1';
+const ultimoUrl = 'https://siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos?order=id,desc&page=1,1';
 
-axios.get(apiUrl)
+axios.get(ultimoUrl)
   .then(response => {
     // La richiesta è andata a buon fine
     const data = response.data;
