@@ -253,13 +253,6 @@
 
         if(acao == "editar"){
             carregarItem(itemId);
-        } else {
-            function loadSetorFromLocalStorage() {
-             return localStorage.getItem('setor');
-            }
-            const cachedSetor = loadSetorFromLocalStorage();
-            let selectSetor = document.getElementById('setor');
-            selectSetor.value = cachedSetor;
         }
 
 //////////////// CARREFGAR ULTIMO NO FOMRULARIO
