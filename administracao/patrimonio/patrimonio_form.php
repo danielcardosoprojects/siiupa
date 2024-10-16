@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
     <link href="/siiupa/administracao/patrimonio/style.css" rel="stylesheet">
-    
+
 </head>
 
 <body>
@@ -18,7 +18,7 @@
         <button type="button" class="btn btn-primary" id="repetirUltimo">Carregar último</button>
         <br><br>
         <form id="itemForm">
-            <input type="hidden" value="<?=$_GET['acao'];?>" id="acao">
+            <input type="hidden" value="<?= $_GET['acao']; ?>" id="acao">
             <!-- Campo Setor -->
             <div class="mb-3">
                 <label for="setor" class="form-label">Setor</label>
@@ -65,7 +65,7 @@
                 <datalist id="suggestionsNumeroSerie"></datalist>
             </div>
 
-            <input type="hidden" id="itemId" value="<?=$_GET['id'];?>">
+            <input type="hidden" id="itemId" value="<?= $_GET['id']; ?>">
             <button type="submit" class="btn btn-primary">Salvar</button>
         </form>
     </div>
@@ -90,20 +90,20 @@
                         option.text = setor.setor;
                         selectSetor.appendChild(option);
                     });
-                     // Verifica se a chave "setor" existe no localStorage
-            const setorLocalStorage = localStorage.getItem('setor');
+                    // Verifica se a chave "setor" existe no localStorage
+                    const setorLocalStorage = localStorage.getItem('setor');
 
-// Se a chave existir, encontra o elemento com o id "setor" e atribui o valor
-if (setorLocalStorage) {
-const elementoSetor = document.getElementById('setor');
-if (elementoSetor) {
-    elementoSetor.value = setorLocalStorage;
-} else {
-    console.error('Elemento com id "setor" não encontrado.');
-}
-} else {
-console.log('Chave "setor" não encontrada no localStorage.');
-}
+                    // Se a chave existir, encontra o elemento com o id "setor" e atribui o valor
+                    if (setorLocalStorage) {
+                        const elementoSetor = document.getElementById('setor');
+                        if (elementoSetor) {
+                            elementoSetor.value = setorLocalStorage;
+                        } else {
+                            console.error('Elemento com id "setor" não encontrado.');
+                        }
+                    } else {
+                        console.log('Chave "setor" não encontrada no localStorage.');
+                    }
                 })
                 .catch(function(error) {
                     console.log('Erro ao carregar setores:', error);
@@ -129,28 +129,28 @@ console.log('Chave "setor" não encontrada no localStorage.');
 
         // Função para carregar dados do item ao editar
         function carregarItem(itemId) {
-    axios.get(`https://www.siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos/${itemId}?join=setor_id,tb_setor`)
-    .then(function (response) {
-        const item = response.data;
-        
-        
-        document.getElementById('nome').value = item.nome;
-        document.getElementById('marca').value = item.marca;
-        document.getElementById('modelo').value = item.modelo;
-        document.getElementById('numeroSerie').value = item.numero_serie;
-        document.getElementById('tipo').value = item.tipo;
-        document.getElementById('setor').value = item.setor_id.id;
-        document.getElementById('itemId').value = itemId; // Armazena o ID do item para atualizações
-    })
-    .catch(function (error) {
-        console.log('Erro ao carregar item:', error);
-    });
-}
+            axios.get(`https://www.siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos/${itemId}?join=setor_id,tb_setor`)
+                .then(function(response) {
+                    const item = response.data;
+
+
+                    document.getElementById('nome').value = item.nome;
+                    document.getElementById('marca').value = item.marca;
+                    document.getElementById('modelo').value = item.modelo;
+                    document.getElementById('numeroSerie').value = item.numero_serie;
+                    document.getElementById('tipo').value = item.tipo;
+                    document.getElementById('setor').value = item.setor_id.id;
+                    document.getElementById('itemId').value = itemId; // Armazena o ID do item para atualizações
+                })
+                .catch(function(error) {
+                    console.log('Erro ao carregar item:', error);
+                });
+        }
 
 
         document.addEventListener('DOMContentLoaded', function() {
             carregarSetores();
-           
+
             // Obter o ID do item da URL
             const urlParams = new URLSearchParams(window.location.search);
             const itemId = urlParams.get('id');
@@ -170,151 +170,151 @@ console.log('Chave "setor" não encontrada no localStorage.');
         document.getElementById('itemForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const acao = document.getElementById('acao').value;
-            
-            function cadastra(){
-            const nome = document.getElementById('nome').value;
-            const marca = document.getElementById('marca').value;
-            const modelo = document.getElementById('modelo').value;
-            const numero_serie = document.getElementById('numeroSerie').value;
-            const tipo = document.getElementById('tipo').value;
-            const setor = document.getElementById('setor').value;
-            const itemId = document.getElementById('itemId').value;
 
-            if (!nome || !marca || !modelo || !numero_serie || !tipo || !setor) {
-                alert('Preencha todos os campos.');
-                return;
-            }
+            function cadastra() {
+                const nome = document.getElementById('nome').value;
+                const marca = document.getElementById('marca').value;
+                const modelo = document.getElementById('modelo').value;
+                const numero_serie = document.getElementById('numeroSerie').value;
+                const tipo = document.getElementById('tipo').value;
+                const setor = document.getElementById('setor').value;
+                const itemId = document.getElementById('itemId').value;
 
-            // Atualização ou adição de novo item
-            const url = itemId != 0 ?
-                `https://www.siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos/${itemId}` :
-                'https://www.siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos';
-            const metodo = itemId != 0 ? 'put' : 'post';
+                if (!nome || !marca || !modelo || !numero_serie || !tipo || !setor) {
+                    alert('Preencha todos os campos.');
+                    return;
+                }
 
-            axios({
-                    method: metodo,
-                    url: url,
-                    data: {
-                        nome: nome,
-                        marca: marca,
-                        modelo: modelo,
-                        numero_serie: numero_serie,
-                        tipo: tipo,
-                        setor_id: setor
-                    }
-                })
-                .then(function(response) {
-                    let idUrl;
-                    let mensagem;
-                    if(metodo == "post") {
-                        idUrl = response.data;
-                        mensagem = "Cadastrado com sucesso!";
-                    } else {
-                        idUrl = itemId;
-                        mensagem = "Editado com sucesso!";
-                    }
-                    Swal.fire({
-                        icon: "success",
-                        title: mensagem,
-                        showConfirmButton: false,
-                        timer: 1500
+                // Atualização ou adição de novo item
+                const url = itemId != 0 ?
+                    `https://www.siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos/${itemId}` :
+                    'https://www.siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos';
+                const metodo = itemId != 0 ? 'put' : 'post';
+
+                axios({
+                        method: metodo,
+                        url: url,
+                        data: {
+                            nome: nome,
+                            marca: marca,
+                            modelo: modelo,
+                            numero_serie: numero_serie,
+                            tipo: tipo,
+                            setor_id: setor
+                        }
+                    })
+                    .then(function(response) {
+                        let idUrl;
+                        let mensagem;
+                        if (metodo == "post") {
+                            idUrl = response.data;
+                            mensagem = "Cadastrado com sucesso!";
+                        } else {
+                            idUrl = itemId;
+                            mensagem = "Editado com sucesso!";
+                        }
+                        Swal.fire({
+                            icon: "success",
+                            title: mensagem,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+
+
+                        setTimeout(function() {
+
+                            window.location.href = `/siiupa/administracao/patrimonio/${idUrl}`;
+                        }, 1600); // 3000 milissegundos = 3 segundos
+                    })
+                    .catch(function(error) {
+                        console.log('Erro ao salvar:', error);
                     });
-   
-                    
-                    setTimeout(function() {
-                        
-                        window.location.href = `/siiupa/administracao/patrimonio/${idUrl}`;
-                    }, 1600); // 3000 milissegundos = 3 segundos
-                })
-                .catch(function(error) {
-                    console.log('Erro ao salvar:', error);
-                });
             }
 
-            function edita(){
+            function edita() {
                 console.log('edita');
             }
 
-            if(acao == "cadastrar") {
+            if (acao == "cadastrar") {
                 cadastra();
             } else {
                 cadastra();
             }
         });
 
-        document.addEventListener('DOMContentLoaded', function () {
-    // Chama a API para obter os setores
-    axios.get('https://www.siupa.com.br/siiupa/api/api.php/records/tb_setor')
-        .then(function (response) {
-            const setores = response.data.records;
-            const setorSelect = document.getElementById('setor');
+        document.addEventListener('DOMContentLoaded', function() {
+            // Chama a API para obter os setores
+            axios.get('https://www.siupa.com.br/siiupa/api/api.php/records/tb_setor')
+                .then(function(response) {
+                    const setores = response.data.records;
+                    const setorSelect = document.getElementById('setor');
 
-            // Popula o select de setor com os dados da API
-            setores.forEach(function (setor) {
-                const option = document.createElement('option');
-                option.value = setor.id;
-                option.textContent = setor.setor + " - " + setor.categoria;
-                setorSelect.appendChild(option);
+                    // Popula o select de setor com os dados da API
+                    setores.forEach(function(setor) {
+                        const option = document.createElement('option');
+                        option.value = setor.id;
+                        option.textContent = setor.setor + " - " + setor.categoria;
+                        setorSelect.appendChild(option);
+                    });
+
+                })
+                .catch(function(error) {
+                    console.error("Erro ao carregar os setores:", error);
+                });
+
+            ////////// se for edição vai carregar os dados 
+
+            const acao = document.getElementById('acao').value;
+            const itemId = document.getElementById('itemId').value;
+
+            if (acao == "editar") {
+                carregarItem(itemId);
+            }
+
+            //////////////// CARREFGAR ULTIMO NO FOMRULARIO
+
+
+
+            function carregaUltimo() {
+                const ultimoUrl = 'https://siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos?order=id,desc&page=1,1';
+                axios.get(ultimoUrl)
+                    .then(response => {
+                        // La richiesta è andata a buon fine
+                        const data = response.data;
+                        console.log(data); // Stampa la risposta completa al console
+
+                        // Estrai i dati specifici che ti interessano
+                        const equipamentos = data.records;
+                        equipamentos.forEach(equipamento => {
+                            console.log(equipamento);
+                            let setor = document.getElementById('setor');
+                            let nome = document.getElementById('nome');
+                            let tipo = document.getElementById('tipo');
+                            let marca = document.getElementById('marca');
+                            let modelo = document.getElementById('modelo');
+
+                            setor.value = equipamento.setor_id;
+                            nome.value = equipamento.nome;
+                            tipo.value = equipamento.tipo;
+                            marca.value = equipamento.marca;
+                            modelo.value = equipamento.modelo;
+                        });
+                    })
+                    .catch(error => {
+                        // Si è verificato un errore
+                        console.error('Errore durante la richiesta:', error);
+                    });
+            }
+            // Seleciona o elemento com o ID "repetirUltimo"
+            const botaoRepetir = document.getElementById('repetirUltimo');
+
+            // Adiciona um event listener para o evento de clique
+            botaoRepetir.addEventListener('click', function() {
+                // Código a ser executado quando o botão for clicado
+
+                carregaUltimo();
             });
-
-        })
-        .catch(function (error) {
-            console.error("Erro ao carregar os setores:", error);
         });
-
-        ////////// se for edição vai carregar os dados 
-        
-        const acao = document.getElementById('acao').value;
-        const itemId = document.getElementById('itemId').value;
-
-        if(acao == "editar"){
-            carregarItem(itemId);
-        }
-
-//////////////// CARREFGAR ULTIMO NO FOMRULARIO
-
-
-
-function carregaUltimo() {
-    const ultimoUrl = 'https://siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos?order=id,desc&page=1,1';
-    axios.get(ultimoUrl)
-        .then(response => {
-            // La richiesta è andata a buon fine
-            const data = response.data;
-            console.log(data); // Stampa la risposta completa al console
-
-            // Estrai i dati specifici che ti interessano
-            const equipamentos = data.records;
-            equipamentos.forEach(equipamento => {
-                console.log(equipamento);
-                let setor = document.getElementById('setor');
-                let nome = document.getElementById('nome');
-                let tipo = document.getElementById('tipo');
-                let marca = document.getElementById('marca');
-                let modelo = document.getElementById('modelo');
-
-                setor.value = equipamento.setor_id;
-                nome.value = equipamento.nome;
-                tipo.value = equipamento.tipo;
-                marca.value = equipamento.marca;
-                modelo.value = equipamento.modelo;
-            });
-        })
-        .catch(error => {
-            // Si è verificato un errore
-            console.error('Errore durante la richiesta:', error);
-        });
-}
-// Seleciona o elemento com o ID "repetirUltimo"
-const botaoRepetir = document.getElementById('repetirUltimo');
-
-// Adiciona um event listener para o evento de clique
-botaoRepetir.addEventListener('click', function() {
-  // Código a ser executado quando o botão for clicado
-  
-  carregaUltimo();
-});
-});
     </script>
 </body>
 
