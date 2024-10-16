@@ -90,6 +90,20 @@
                         option.text = setor.setor;
                         selectSetor.appendChild(option);
                     });
+                     // Verifica se a chave "setor" existe no localStorage
+            const setorLocalStorage = localStorage.getItem('setor');
+
+// Se a chave existir, encontra o elemento com o id "setor" e atribui o valor
+if (setorLocalStorage) {
+const elementoSetor = document.getElementById('setor');
+if (elementoSetor) {
+    elementoSetor.value = setorLocalStorage;
+} else {
+    console.error('Elemento com id "setor" não encontrado.');
+}
+} else {
+console.log('Chave "setor" não encontrada no localStorage.');
+}
                 })
                 .catch(function(error) {
                     console.log('Erro ao carregar setores:', error);
@@ -136,20 +150,7 @@
 
         document.addEventListener('DOMContentLoaded', function() {
             carregarSetores();
-            // Verifica se a chave "setor" existe no localStorage
-            const setorLocalStorage = localStorage.getItem('setor');
-
-            // Se a chave existir, encontra o elemento com o id "setor" e atribui o valor
-            if (setorLocalStorage) {
-            const elementoSetor = document.getElementById('setor');
-            if (elementoSetor) {
-                elementoSetor.value = setorLocalStorage;
-            } else {
-                console.error('Elemento com id "setor" não encontrado.');
-            }
-            } else {
-            console.log('Chave "setor" não encontrada no localStorage.');
-            }
+           
             // Obter o ID do item da URL
             const urlParams = new URLSearchParams(window.location.search);
             const itemId = urlParams.get('id');
