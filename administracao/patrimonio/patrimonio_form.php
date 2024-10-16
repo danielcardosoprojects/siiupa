@@ -199,7 +199,7 @@
                     
                     setTimeout(function() {
                         
-                        console.log(response.data,itemId,`/siiupa/administracao/patrimonio/${idUrl}`);
+                        console.log(response.data,itemId,`/siiupa/administracao/patrimonio/${response.data}`);
                     }, 1600); // 3000 milissegundos = 3 segundos
                 })
                 .catch(function(error) {
