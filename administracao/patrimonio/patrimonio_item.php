@@ -8,7 +8,7 @@ $id = intval($_GET['id']); // Converte o ID para um inteiro
 
 
 // URL da API com o ID
-$apiUrl = "https://www.siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos/" . $id;
+$apiUrl = "https://www.siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos/" . $id."?join=setor_id,tb_setor";
 
 // Função para fazer a requisição à API
 function getData($url) {
