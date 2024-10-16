@@ -168,7 +168,7 @@
 
 
         document.addEventListener('DOMContentLoaded', function() {
-            carregarSetores();
+            //carregarSetores();
 
             // Obter o ID do item da URL
             const urlParams = new URLSearchParams(window.location.search);
@@ -272,7 +272,7 @@
                     setores.forEach(function(setor) {
                         const option = document.createElement('option');
                         option.value = setor.id;
-                        option.textContent = setor.setor + " - " + setor.categoria;
+                        option.textContent = setor.setor;
                         setorSelect.appendChild(option);
                     });
 
