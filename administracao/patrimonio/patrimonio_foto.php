@@ -16,7 +16,7 @@
 <body>
 <nav class="navbar navbar-light bg-light">
   <a class="navbar-brand" href="/siiupa/?setor=adm">
-    <img src="/siiupa/imagens/siiupa.png" class="d-inline-block align-top" alt="">
+  <img src="/siiupa/imagens/siiupa.png" class="d-inline-block align-top" alt="" width="200px">
     Administração - Controle de Patrimônio
   </a>
 </nav>
