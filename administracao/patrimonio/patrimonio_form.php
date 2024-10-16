@@ -16,7 +16,7 @@
     <div class="container mt-4">
         <h1>Cadastro de Patrimônio</h1>
         <button type="button" class="btn btn-primary" id="repetirUltimo">Carregar último</button>
-        <br>
+        <br><br>
         <form id="itemForm">
             <input type="hidden" value="<?=$_GET['acao'];?>" id="acao">
             <!-- Campo Setor -->
@@ -136,7 +136,20 @@
 
         document.addEventListener('DOMContentLoaded', function() {
             carregarSetores();
+            // Verifica se a chave "setor" existe no localStorage
+            const setorLocalStorage = localStorage.getItem('setor');
 
+            // Se a chave existir, encontra o elemento com o id "setor" e atribui o valor
+            if (setorLocalStorage) {
+            const elementoSetor = document.getElementById('setor');
+            if (elementoSetor) {
+                elementoSetor.value = setorLocalStorage;
+            } else {
+                console.error('Elemento com id "setor" não encontrado.');
+            }
+            } else {
+            console.log('Chave "setor" não encontrada no localStorage.');
+            }
             // Obter o ID do item da URL
             const urlParams = new URLSearchParams(window.location.search);
             const itemId = urlParams.get('id');
