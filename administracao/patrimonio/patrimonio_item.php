@@ -24,7 +24,7 @@ $equipamento = getData($apiUrl);
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Perfil do Equipamento</title>
+    
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="style.css" rel="stylesheet">
 </head>
