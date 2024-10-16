@@ -193,7 +193,7 @@
                         idUrl = response.data;
                         mensagem = "Cadastrado com sucesso!";
                     } else {
-                        idUrl = response.data;
+                        idUrl = itemId;
                         mensagem = "Editado com sucesso!";
                     }
                     Swal.fire({
