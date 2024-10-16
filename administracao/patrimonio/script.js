@@ -127,9 +127,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 //////////////// CARREFGAR ULTIMO NO FOMRULARIO
 
-const ultimoUrl = 'https://siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos?order=id,desc&page=1,1';
+
 
 function carregaUltimo() {
+    const ultimoUrl = 'https://siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos?order=id,desc&page=1,1';
     axios.get(ultimoUrl)
         .then(response => {
             // La richiesta è andata a buon fine
