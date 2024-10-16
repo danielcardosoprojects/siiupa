@@ -126,3 +126,25 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+import axios from 'axios';
+
+const apiUrl = 'https://siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos?order=id,desc&page=1,1';
+
+axios.get(apiUrl)
+  .then(response => {
+    // La richiesta è andata a buon fine
+    const data = response.data;
+    console.log(data); // Stampa la risposta completa al console
+
+    // Estrai i dati specifici che ti interessano
+    const equipamentos = data.records;
+    equipamentos.forEach(equipamento => {
+      console.log(`Nome: ${equipamento.nome}, Modello: ${equipamento.modelo}`);
+    });
+  })
+  .catch(error => {
+    // Si è verificato un errore
+    console.error('Errore durante la richiesta:', error);
+  });
+
+
