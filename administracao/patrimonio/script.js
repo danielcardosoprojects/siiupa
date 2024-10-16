@@ -138,7 +138,7 @@ axios.get(ultimoUrl)
     // Estrai i dati specifici che ti interessano
     const equipamentos = data.records;
     equipamentos.forEach(equipamento => {
-      console.log(`Nome: ${equipamento.nome}, Modello: ${equipamento.modelo}`);
+      console.log(equipamento);
     });
   })
   .catch(error => {
