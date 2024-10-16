@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
     <link href="style.css" rel="stylesheet">
-    <script src="localstorage.js?<?php echo time(); ?>"></script>
+    
 </head>
 
 <body>
@@ -136,11 +136,8 @@
 
         document.addEventListener('DOMContentLoaded', function() {
             carregarSetores();
-            let selectSetor = document.getElementById('setor');
-            selectSetor.value = cachedSetor;
-            // Obter o ID do item da URL
-            const urlParams = new URLSearchParams(window.location.search);
-            const itemId = urlParams.get('id');
+
+
 
             if (itemId) {
                 carregarItem(itemId); // Carregar dados do item se o ID estiver presente
@@ -256,6 +253,13 @@
 
         if(acao == "editar"){
             carregarItem(itemId);
+        } else {
+            function loadSetorFromLocalStorage() {
+             return localStorage.getItem('setor');
+            }
+            const cachedSetor = loadSetorFromLocalStorage();
+            let selectSetor = document.getElementById('setor');
+            selectSetor.value = cachedSetor;
         }
 
 //////////////// CARREFGAR ULTIMO NO FOMRULARIO
