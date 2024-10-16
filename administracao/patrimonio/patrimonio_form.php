@@ -62,7 +62,7 @@
                 <datalist id="suggestionsNumeroSerie"></datalist>
             </div>
 
-            <input type="hidden" id="<?=$_GET['id'];?>">
+            <input type="hidden" id="itemId" value="<?=$_GET['id'];?>">
             <button type="submit" class="btn btn-primary">Salvar</button>
         </form>
     </div>
@@ -115,14 +115,14 @@
     axios.get(`https://www.siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos/${itemId}?join=setor_id,tb_setor`)
     .then(function (response) {
         const item = response.data;
-        console.log(item.setor_id);
+        
         
         document.getElementById('nome').value = item.nome;
         document.getElementById('marca').value = item.marca;
         document.getElementById('modelo').value = item.modelo;
         document.getElementById('numeroSerie').value = item.numero_serie;
         document.getElementById('tipo').value = item.tipo;
-        document.getElementById('setor').value = item.setor_id;
+        document.getElementById('setor').value = item.setor_id.id;
         document.getElementById('itemId').value = itemId; // Armazena o ID do item para atualizações
     })
     .catch(function (error) {
@@ -233,6 +233,14 @@
             console.error("Erro ao carregar os setores:", error);
         });
 
+        ////////// se for edição vai carregar os dados 
+        
+        const acao = document.getElementById('acao').value;
+        const itemId = document.getElementById('itemId').value;
+
+        if(acao == "editar"){
+            carregarItem(itemId);
+        }
 
 //////////////// CARREFGAR ULTIMO NO FOMRULARIO
 
