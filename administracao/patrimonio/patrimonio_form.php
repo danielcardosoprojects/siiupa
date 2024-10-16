@@ -8,12 +8,15 @@
     <!-- Incluindo CSS do Bootstrap e jQuery UI para autocomplete -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <link href="style.css" rel="stylesheet">
+    <script src="localstorage.js?<?php echo time(); ?>"></script>
 </head>
 
 <body>
     <div class="container mt-4">
         <h1>Cadastro de Patrimônio</h1>
         <button type="button" class="btn btn-primary" id="repetirUltimo">Carregar último</button>
+        <br>
         <form id="itemForm">
             <input type="hidden" value="<?=$_GET['acao'];?>" id="acao">
             <!-- Campo Setor -->
@@ -133,7 +136,8 @@
 
         document.addEventListener('DOMContentLoaded', function() {
             carregarSetores();
-
+            let selectSetor = document.getElementById('setor');
+            selectSetor.value = cachedSetor;
             // Obter o ID do item da URL
             const urlParams = new URLSearchParams(window.location.search);
             const itemId = urlParams.get('id');
