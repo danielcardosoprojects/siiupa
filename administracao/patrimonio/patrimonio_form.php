@@ -188,12 +188,12 @@
                 })
                 .then(function(response) {
                     if(metodo == "post"){
-                        let idUrl = response.data;
-                        let mensagem = "Cadastrado!";
+                        idUrl = response.data;
+                        mensagem = "Cadastrado!";
                     }
                     else {
-                        let idUrl = itemId;
-                        let mensagem = "Atualizado!";
+                        idUrl = itemId;
+                        mensagem = "Atualizado!";
                     }
                     Swal.fire({
                         icon: "success",
