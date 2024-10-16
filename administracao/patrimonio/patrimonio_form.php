@@ -187,14 +187,23 @@
                     }
                 })
                 .then(function(response) {
+                    if(metodo == "post"){
+                        let idUrl = response.data;
+                        let mensagem = "Cadastrado!";
+                    }
+                    else {
+                        let idUrl = itemId;
+                        let mensagem = "Atualizado!";
+                    }
                     Swal.fire({
                         icon: "success",
-                        title: "Cadastrado",
+                        title: mensagem,
                         showConfirmButton: false,
                         timer: 1500
                     });
                     setTimeout(function() {
-                        window.location.href = `/siiupa/administracao/patrimonio/${response.data}`;
+                        
+                        window.location.href = `/siiupa/administracao/patrimonio/${idUrl}`;
                     }, 1600); // 3000 milissegundos = 3 segundos
                 })
                 .catch(function(error) {
