@@ -41,7 +41,8 @@ $equipamento = getData($apiUrl);
             <p><strong>Setor ID:</strong> <?= htmlspecialchars($equipamento['setor_id']['setor']) ?></p>
             <p><strong>Data de Cadastro:</strong> <?= htmlspecialchars($equipamento['data_cadastro']) ?></p>
         </div>
-
+</div>
+<div class="container mt-5">
         <div class="col-md-4">
             <h4>Foto Principal:</h4>
             <?php if ($equipamento['foto_frente']): ?>
