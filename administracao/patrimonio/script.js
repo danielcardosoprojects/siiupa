@@ -139,11 +139,11 @@ axios.get(ultimoUrl)
     const equipamentos = data.records;
     equipamentos.forEach(equipamento => {
       console.log(equipamento);
-      setor = document.getElementById('setor');
-      nome = document.getElementById('nome');
-      tipo = document.getElementById('tipo');
-      marca = document.getElementById('marca');
-      modelo = document.getElementById('modelo');
+      let setor = document.getElementById('setor');
+      let nome = document.getElementById('nome');
+      let tipo = document.getElementById('tipo');
+      let marca = document.getElementById('marca');
+      let modelo = document.getElementById('modelo');
 
       setor.value = equipamento.setor_id;
       nome.value = equipamento.nome;
