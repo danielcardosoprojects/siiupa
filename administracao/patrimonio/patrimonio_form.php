@@ -169,10 +169,10 @@
             }
 
             // Atualização ou adição de novo item
-            const url = itemId ?
+            const url = itemId != 0 ?
                 `https://www.siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos/${itemId}` :
                 'https://www.siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos';
-            const metodo = itemId ? 'put' : 'post';
+            const metodo = itemId != 0 ? 'put' : 'post';
 
             axios({
                     method: metodo,
