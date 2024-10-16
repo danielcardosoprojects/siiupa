@@ -28,6 +28,7 @@ if (!isset($_SESSION['nivel'])) {
 	<div class="second-navbar">
 		<h2 style="  font-family: 'Oswald', sans-serif; color:#fff;">SETOR ADMINISTRATIVO</h2>
 		<a id="abrerh" href="?setor=adm&sub=rh" class="nav-link">Recursos Humanos</a>
+		<a id="abrerh" href="/siiupa/administracao/patrimonio" class="nav-link">Patrimônio</a>
 		<a id="abrerh" href="?setor=adm&sub=producao" class="nav-link">Produção e Estatística</a>
 		<a id="abreadministracao" href="administracao/paginaadministracao.php" class="nav-link">Administração</a>
 		<a id="abreimpressos" href="/siiupa/impressos/index.php" target='_blank' class="nav-link">Impressos</a>
