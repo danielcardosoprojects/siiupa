@@ -94,14 +94,15 @@ document.getElementById('itemForm').addEventListener('submit', function (e) {
 
 document.getElementById('addItemBtn').addEventListener('click', function () {
     // Exibe o modal
-    let selectSetor = document.getElementById('setor');
-    selectSetor.value = cachedSetor;
+    // let selectSetor = document.getElementById('setor');
+    // selectSetor.value = cachedSetor;
 
 
 
 
-    let itemModal = new bootstrap.Modal(document.getElementById('itemModal'));
-    itemModal.show();
+    // let itemModal = new bootstrap.Modal(document.getElementById('itemModal'));
+    // itemModal.show();
+    window.location.href = "cadastrar";
 });
 
 document.addEventListener('DOMContentLoaded', function () {
