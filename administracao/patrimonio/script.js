@@ -96,7 +96,7 @@ document.getElementById('addItemBtn').addEventListener('click', function () {
     // Exibe o modal
     let selectSetor = document.getElementById('setor');
     selectSetor.value = cachedSetor;
-    
+
 
 
 
@@ -128,33 +128,34 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 const ultimoUrl = 'https://siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos?order=id,desc&page=1,1';
+function carregaUltimo() {
+    axios.get(ultimoUrl)
+        .then(response => {
+            // La richiesta è andata a buon fine
+            const data = response.data;
+            console.log(data); // Stampa la risposta completa al console
 
-axios.get(ultimoUrl)
-  .then(response => {
-    // La richiesta è andata a buon fine
-    const data = response.data;
-    console.log(data); // Stampa la risposta completa al console
+            // Estrai i dati specifici che ti interessano
+            const equipamentos = data.records;
+            equipamentos.forEach(equipamento => {
+                console.log(equipamento);
+                let setor = document.getElementById('setor');
+                let nome = document.getElementById('nome');
+                let tipo = document.getElementById('tipo');
+                let marca = document.getElementById('marca');
+                let modelo = document.getElementById('modelo');
 
-    // Estrai i dati specifici che ti interessano
-    const equipamentos = data.records;
-    equipamentos.forEach(equipamento => {
-      console.log(equipamento);
-      let setor = document.getElementById('setor');
-      let nome = document.getElementById('nome');
-      let tipo = document.getElementById('tipo');
-      let marca = document.getElementById('marca');
-      let modelo = document.getElementById('modelo');
-
-      setor.value = equipamento.setor_id;
-      nome.value = equipamento.nome;
-      tipo.value = equipamento.tipo;
-      marca.value = equipamento.marca;
-      modelo.value = equipamento.value;
-    });
-  })
-  .catch(error => {
-    // Si è verificato un errore
-    console.error('Errore durante la richiesta:', error);
-  });
+                setor.value = equipamento.setor_id;
+                nome.value = equipamento.nome;
+                tipo.value = equipamento.tipo;
+                marca.value = equipamento.marca;
+                modelo.value = equipamento.value;
+            });
+        })
+        .catch(error => {
+            // Si è verificato un errore
+            console.error('Errore durante la richiesta:', error);
+        });
 
 
+}
