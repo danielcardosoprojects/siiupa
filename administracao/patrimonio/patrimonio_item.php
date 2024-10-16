@@ -30,8 +30,11 @@ $equipamento = getData($apiUrl);
 </head>
 <body>
 <div class="container mt-5">
-<h2>Perfil do Equipamento</h2>
-<h2>Nome: <?= htmlspecialchars($equipamento['nome']) ?></h2>
+<div class="mt-4">
+        <a href="editar_equipamento.php?id=<?= $id ?>" class="btn btn-primary">Editar</a>
+        <a href="./" class="btn btn-primary">Concluído</a>
+    </div>
+    <h2>Nome: <?= htmlspecialchars($equipamento['nome']) ?></h2>
     <div class="row">
         <div class="col-md-4">
             
@@ -44,8 +47,9 @@ $equipamento = getData($apiUrl);
         </div>
 </div>
 <div class="container mt-5">
+
         <div class="col-md-4">
-            <h4>Foto Principal:</h4>
+          
             <?php if ($equipamento['foto_frente']): ?>
                 <img src="uploads/<?= htmlspecialchars($equipamento['foto_frente']) ?>" alt="Foto Frente" style="max-width: 300px; max-height: 300px;">
             <?php else: ?>
