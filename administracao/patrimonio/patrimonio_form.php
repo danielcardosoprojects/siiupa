@@ -13,8 +13,14 @@
 </head>
 
 <body>
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand" href="/siiupa/?setor=adm">
+    <img src="/siiupa/imagens/siiupa.png" class="d-inline-block align-top" alt="">
+    Administração - Controle de Patrimônio
+  </a>
+</nav>
     <div class="container mt-4">
-        <h1>Cadastro de Patrimônio</h1>
+        
         <button type="button" class="btn btn-primary" id="repetirUltimo">Carregar último</button>
         <br><br>
         <form id="itemForm">

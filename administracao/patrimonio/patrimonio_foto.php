@@ -14,7 +14,12 @@
 </head>
 
 <body>
-
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand" href="/siiupa/?setor=adm">
+    <img src="/siiupa/imagens/siiupa.png" class="d-inline-block align-top" alt="">
+    Administração - Controle de Patrimônio
+  </a>
+</nav>
     <div id="app" class="container mt-5">
         <h2>Upload de Foto <?= $_GET['foto']; ?></h2>
         <form @submit.prevent="uploadPhoto">

@@ -34,6 +34,12 @@ $equipamento = getData($apiUrl);
         </style>
 </head>
 <body>
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand" href="/siiupa/?setor=adm">
+    <img src="/siiupa/imagens/siiupa.png" class="d-inline-block align-top" alt="">
+    Administração - Controle de Patrimônio
+  </a>
+</nav>
 <div class="container mt-5">
 <div class="mt-4">
         <a href="<?= $id ?>/editar" class="btn btn-primary">Editar</a>
