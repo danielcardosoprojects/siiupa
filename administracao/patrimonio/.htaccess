@@ -5,6 +5,6 @@ RewriteRule ^$ patrimonio_home.php [L]
 
 # Redireciona para a página de detalhe de um item de patrimônio
 RewriteRule ^([0-9]+)$ patrimonio_item.php?id=$1 [L]
-RewriteRule ^([0-9]+)/editar$ patrimonio_form.php?id=$1 [L]
+RewriteRule ^([0-9]+)/editar$ patrimonio_form.php?id=$1&acao=editar [L]
 
 RewriteRule ^([^/]+)/foto/([^/]+)$ patrimonio_foto.php?id=$1&foto=$2 [L]
