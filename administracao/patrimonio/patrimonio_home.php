@@ -90,6 +90,7 @@
                 </div>
                 <div class="modal-body">
                     <form id="itemForm">
+                        <button type="button" class="btn btn-primary" id="repetirUltimo">Carregar último</button>
                         <div class="mb-3">
                             <label for="setor" class="form-label">Setor</label>
                             <select class="form-select" id="setor" required>

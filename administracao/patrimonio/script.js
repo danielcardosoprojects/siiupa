@@ -123,11 +123,12 @@ document.addEventListener('DOMContentLoaded', function () {
         .catch(function (error) {
             console.error("Erro ao carregar os setores:", error);
         });
-});
 
 
+//////////////// CARREFGAR ULTIMO NO FOMRULARIO
 
 const ultimoUrl = 'https://siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos?order=id,desc&page=1,1';
+
 function carregaUltimo() {
     axios.get(ultimoUrl)
         .then(response => {
@@ -156,6 +157,17 @@ function carregaUltimo() {
             // Si è verificato un errore
             console.error('Errore durante la richiesta:', error);
         });
-
-
 }
+// Seleciona o elemento com o ID "repetirUltimo"
+const botaoRepetir = document.getElementById('repetirUltimo');
+
+// Adiciona um event listener para o evento de clique
+botaoRepetir.addEventListener('click', function() {
+  // Código a ser executado quando o botão for clicado
+  console.log('Botão "repetirUltimo" clicado!');
+
+  // Aqui você pode adicionar a lógica para repetir a última ação
+  // Por exemplo, se a última ação foi uma busca:
+  realizarUltimaBusca();
+});
+});
