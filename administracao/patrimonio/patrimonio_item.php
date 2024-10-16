@@ -30,10 +30,11 @@ $equipamento = getData($apiUrl);
 </head>
 <body>
 <div class="container mt-5">
-    <h2>Perfil do Equipamento</h2>
+<h2>Perfil do Equipamento</h2>
+<h2>Nome: <?= htmlspecialchars($equipamento['nome']) ?></h2>
     <div class="row">
         <div class="col-md-4">
-            <h2>Nome: <?= htmlspecialchars($equipamento['nome']) ?></h2>
+            
             <p><strong>Tipo:</strong> <?= htmlspecialchars($equipamento['tipo']) ?></p>
             <p><strong>Marca:</strong> <?= htmlspecialchars($equipamento['marca']) ?></p>
             <p><strong>Modelo:</strong> <?= htmlspecialchars($equipamento['modelo']) ?></p>
@@ -68,10 +69,7 @@ $equipamento = getData($apiUrl);
     </div>
 
     <!-- Botão para Editar -->
-    <div class="mt-4">
-        <a href="editar_equipamento.php?id=<?= $id ?>" class="btn btn-primary">Editar</a>
-        <a href="./" class="btn btn-primary">Concluído</a>
-    </div>
+   
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
