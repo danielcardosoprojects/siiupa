@@ -34,15 +34,12 @@
 </style>
 
 <body>
-<div class="second-navbar">
-		<h2 style="  font-family: 'Oswald', sans-serif; color:#fff;">SETOR ADMINISTRATIVO</h2>
-		<a id="abrerh" href="?setor=adm&sub=rh" class="nav-link">Recursos Humanos</a>
-		<a id="abrerh" href="/siiupa/administracao/patrimonio" class="nav-link">Patrimônio</a>
-		<a id="abrerh" href="?setor=adm&sub=producao" class="nav-link">Produção e Estatística</a>
-		<a id="abreadministracao" href="administracao/paginaadministracao.php" class="nav-link">Administração</a>
-		<a id="abreimpressos" href="/siiupa/impressos/index.php" target='_blank' class="nav-link">Impressos</a>
-		<a href="/siiupa/enviararquivo.php" class="nav-link">Arquivos</a>
-	</div>
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand" href="/siiupa/?setor=adm">
+    <img src="/siiupa/imagens/siiupa.png" width="30" height="30" class="d-inline-block align-top" alt="">
+    Administração
+  </a>
+</nav>
 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#botao_setores_offcanvas" aria-controls="botao_setores_offcanvas">
         Abrir Menu de Setores
     </button>
