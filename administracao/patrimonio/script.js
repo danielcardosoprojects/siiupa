@@ -150,7 +150,7 @@ function carregaUltimo() {
                 nome.value = equipamento.nome;
                 tipo.value = equipamento.tipo;
                 marca.value = equipamento.marca;
-                modelo.value = equipamento.value;
+                modelo.value = equipamento.modelo;
             });
         })
         .catch(error => {
