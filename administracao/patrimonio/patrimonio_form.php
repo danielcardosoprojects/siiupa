@@ -62,7 +62,7 @@
                 <datalist id="suggestionsNumeroSerie"></datalist>
             </div>
 
-            <input type="hidden" id="itemId">
+            <input type="hidden" id="<?=$_GET['id'];?>">
             <button type="submit" class="btn btn-primary">Salvar</button>
         </form>
     </div>
@@ -115,6 +115,7 @@
     axios.get(`https://www.siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos/${itemId}?join=setor_id,tb_setor`)
     .then(function (response) {
         const item = response.data;
+        console.log(item.setor_id);
         
         document.getElementById('nome').value = item.nome;
         document.getElementById('marca').value = item.marca;
