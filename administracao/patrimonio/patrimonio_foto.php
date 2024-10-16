@@ -24,7 +24,7 @@
             </div>
             <button type="submit" class="btn btn-primary">Enviar</button>
         </form>
-        <img src="../../loading.gif" style="display: hidden"/>
+        <img src="../../loading.gif" />
         <div v-if="uploadStatus" class="mt-3" :class="{'text-success': uploadStatus.success, 'text-danger': !uploadStatus.success}">
             {{ uploadStatus.message }}
         </div>
@@ -58,7 +58,7 @@
 
                     try {
                         const loadingImage = document.getElementById('loading');
-loadingImage.style.display = 'block';
+                        loadingImage.style.display = 'block';
                         const response = await fetch('/siiupa/administracao/patrimonio/upload.php', {
                             method: 'POST',
                             body: formData
@@ -91,7 +91,7 @@ loadingImage.style.display = 'block';
                                     timer: 1500
                                 });
                                 setTimeout(function() {
-                                    window.location.href = `/siiupa/administracao/patrimonio/<?=$_GET['id'];?>`;
+                                    window.location.href = `/siiupa/administracao/patrimonio/<?= $_GET['id']; ?>`;
                                 }, 1600); // 3000 milissegundos = 3 segundos
 
                             })
