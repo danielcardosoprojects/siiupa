@@ -206,7 +206,7 @@
                     
                     setTimeout(function() {
                         
-                        console.log(idUrl,mensagem,`/siiupa/administracao/patrimonio/${idUrl}`);
+                        window.location.href = `/siiupa/administracao/patrimonio/${idUrl}`;
                     }, 1600); // 3000 milissegundos = 3 segundos
                 })
                 .catch(function(error) {
@@ -221,7 +221,7 @@
             if(acao == "cadastrar") {
                 cadastra();
             } else {
-                edita();
+                cadastra();
             }
         });
 
