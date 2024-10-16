@@ -164,10 +164,7 @@ const botaoRepetir = document.getElementById('repetirUltimo');
 // Adiciona um event listener para o evento de clique
 botaoRepetir.addEventListener('click', function() {
   // Código a ser executado quando o botão for clicado
-  console.log('Botão "repetirUltimo" clicado!');
-
-  // Aqui você pode adicionar a lógica para repetir a última ação
-  // Por exemplo, se a última ação foi uma busca:
-  realizarUltimaBusca();
+  
+  carregaUltimo();
 });
 });
