@@ -36,8 +36,8 @@
 <body>
 <nav class="navbar navbar-light bg-light">
   <a class="navbar-brand" href="/siiupa/?setor=adm">
-    <img src="/siiupa/imagens/siiupa.png" width="30" height="30" class="d-inline-block align-top" alt="">
-    Administração
+    <img src="/siiupa/imagens/siiupa.png" class="d-inline-block align-top" alt="">
+    Administração - Controle de Patrimônio
   </a>
 </nav>
 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#botao_setores_offcanvas" aria-controls="botao_setores_offcanvas">
@@ -61,7 +61,7 @@
     </div>
 
     <div class="container my-5">
-        <h1 class="text-center mb-4">Controle de Patrimônio da Unidade</h1>
+        
         <h2 id="titulo_setor"></h2>
         <div id="botao_setores_container">
             <!-- Os botões serão inseridos aqui -->
