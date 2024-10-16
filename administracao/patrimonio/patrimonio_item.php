@@ -37,7 +37,7 @@ $equipamento = getData($apiUrl);
             <p><strong>Marca:</strong> <?= htmlspecialchars($equipamento['marca']) ?></p>
             <p><strong>Modelo:</strong> <?= htmlspecialchars($equipamento['modelo']) ?></p>
             <p><strong>Número de Série:</strong> <?= htmlspecialchars($equipamento['numero_serie']) ?></p>
-            <p><strong>Setor ID:</strong> <?= htmlspecialchars($equipamento['setor_id']) ?></p>
+            <p><strong>Setor ID:</strong> <?= htmlspecialchars($equipamento['setor_id']['setor']) ?></p>
             <p><strong>Data de Cadastro:</strong> <?= htmlspecialchars($equipamento['data_cadastro']) ?></p>
         </div>
 
