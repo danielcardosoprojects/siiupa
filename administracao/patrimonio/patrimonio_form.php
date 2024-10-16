@@ -86,7 +86,7 @@
     <script>
         // Função para carregar os setores da API
         function carregarSetores() {
-            axios.get('https://www.siupa.com.br/siiupa/api/api.php/records/tb_setor')
+            axios.get('https://www.siupa.com.br/siiupa/api/api.php/records/tb_setor?order=setor,asc')
                 .then(function(response) {
                     const setores = response.data.records;
                     const selectSetor = document.getElementById('setor');
@@ -250,7 +250,7 @@
 
         document.addEventListener('DOMContentLoaded', function() {
             // Chama a API para obter os setores
-            axios.get('https://www.siupa.com.br/siiupa/api/api.php/records/tb_setor')
+            axios.get('https://www.siupa.com.br/siiupa/api/api.php/records/tb_setor?order=setor,asc')
                 .then(function(response) {
                     const setores = response.data.records;
                     const setorSelect = document.getElementById('setor');
