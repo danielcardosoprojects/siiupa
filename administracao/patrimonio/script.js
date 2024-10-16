@@ -2,7 +2,8 @@
 $(document).ready(function () {
 
     //verifica se na url tem o setor
-    setorUrl = cachedSetor != '0' && null ? `filter=setor_id,eq,${cachedSetor}&` : '';
+    const setorCacheado = loadSetorFromLocalStorage();
+    setorUrl = parseInt(setorCacheado) != '0' || null ? `filter=setor_id,eq,${cachedSetor}&` : '';
     console.log(setorUrl);
     // Supondo que você tenha uma função para obter dados da tabela
     $('#equipamentosTable').DataTable({
