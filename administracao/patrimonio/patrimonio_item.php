@@ -26,7 +26,9 @@ $equipamento = getData($apiUrl);
 
 <head>
     <meta charset="UTF-8">
-
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="style.css" rel="stylesheet">
     <style>
@@ -62,13 +64,13 @@ $equipamento = getData($apiUrl);
 
 
             <div class="col-md-4">
-            <a href="image-b.jpeg" data-fancybox="gallery" data-caption="Caption #2">
-  <img src="thumbnail-b.jpeg" />
-</a>
+                <a href="image-b.jpeg" data-fancybox="gallery" data-caption="Caption #2">
+                    <img src="thumbnail-b.jpeg" />
+                </a>
                 <?php if ($equipamento['foto_frente']): ?>
                     <a href="uploads/<?= htmlspecialchars($equipamento['foto_frente']) ?>" data-fancybox data-caption="Single image">
-                    <img src="uploads/<?= htmlspecialchars($equipamento['foto_frente']) ?>" alt="Foto Frente" style="max-width: 300px; max-height: 300px;">
-                </a>
+                        <img src="uploads/<?= htmlspecialchars($equipamento['foto_frente']) ?>" alt="Foto Frente" style="max-width: 300px; max-height: 300px;">
+                    </a>
                 <?php else: ?>
                     <p>Nenhuma foto cadastrada.</p>
                 <?php endif; ?>
@@ -94,10 +96,13 @@ $equipamento = getData($apiUrl);
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
+    <script>
+        Fancybox.bind('[data-fancybox]', {
+            // Your custom options
+        });
+    </script>
 </body>
 
 </html>
