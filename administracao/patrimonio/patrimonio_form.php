@@ -195,14 +195,7 @@
                         showConfirmButton: false,
                         timer: 1500
                     });
-                    if(metodo == "post"){
-                        idUrl = response.data;
-                        mensagem = "Cadastrado!";
-                    }
-                    else {
-                        idUrl = itemId;
-                        mensagem = "Atualizado!";
-                    }
+   
                     
                     setTimeout(function() {
                         
