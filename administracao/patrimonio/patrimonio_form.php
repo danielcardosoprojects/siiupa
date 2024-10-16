@@ -187,6 +187,14 @@
                     }
                 })
                 .then(function(response) {
+                    let idUrl;
+                    let mensagem;
+                    Swal.fire({
+                        icon: "success",
+                        title: "Sucesso!",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
                     if(metodo == "post"){
                         idUrl = response.data;
                         mensagem = "Cadastrado!";
@@ -195,12 +203,7 @@
                         idUrl = itemId;
                         mensagem = "Atualizado!";
                     }
-                    Swal.fire({
-                        icon: "success",
-                        title: "Sucesso!",
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
+                    
                     setTimeout(function() {
                         
                         window.location.href = `/siiupa/administracao/patrimonio/${idUrl}`;
