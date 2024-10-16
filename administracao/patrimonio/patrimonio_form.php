@@ -8,7 +8,7 @@
     <!-- Incluindo CSS do Bootstrap e jQuery UI para autocomplete -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
-    <link href="style.css" rel="stylesheet">
+    <link href="/siiupa/administracao/patrimonio/style.css" rel="stylesheet">
     
 </head>
 
