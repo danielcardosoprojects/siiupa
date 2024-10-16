@@ -189,9 +189,16 @@
                 .then(function(response) {
                     let idUrl;
                     let mensagem;
+                    if(metodo == "post") {
+                        idUrl = response.data;
+                        mensagem = "Cadastrado com sucesso!";
+                    } else {
+                        idUrl = response.data;
+                        mensagem = "Editado com sucesso!";
+                    }
                     Swal.fire({
                         icon: "success",
-                        title: "Sucesso!",
+                        title: mensagem,
                         showConfirmButton: false,
                         timer: 1500
                     });
@@ -199,7 +206,7 @@
                     
                     setTimeout(function() {
                         
-                        console.log(metodo,itemId,`/siiupa/administracao/patrimonio/${response.data}`);
+                        console.log(idUrl,mensagem,`/siiupa/administracao/patrimonio/${idUrl}`);
                     }, 1600); // 3000 milissegundos = 3 segundos
                 })
                 .catch(function(error) {
