@@ -32,7 +32,7 @@ $equipamento = getData($apiUrl);
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="style.css" rel="stylesheet">
     <style>
-        div {
+        .row {
             border: solid 1px #ccc;
         }
     </style>
@@ -64,9 +64,7 @@ $equipamento = getData($apiUrl);
 
 
             <div class="col-md-4">
-                <a href="image-b.jpeg" data-fancybox="gallery" data-caption="Caption #2">
-                    <img src="thumbnail-b.jpeg" />
-                </a>
+                
                 <?php if ($equipamento['foto_frente']): ?>
                     <a href="uploads/<?= htmlspecialchars($equipamento['foto_frente']) ?>" data-fancybox data-caption="Single image">
                         <img src="uploads/<?= htmlspecialchars($equipamento['foto_frente']) ?>" alt="Foto Frente" style="max-width: 300px; max-height: 300px;">
@@ -82,7 +80,9 @@ $equipamento = getData($apiUrl);
             <div class="col-md-4">
                 <h4>Foto da Etiqueta:</h4>
                 <?php if ($equipamento['foto_etiqueta']): ?>
+                    <a href="uploads/<?= htmlspecialchars($equipamento['foto_etiqueta']) ?>" data-fancybox data-caption="Single image">
                     <img src="uploads/<?= htmlspecialchars($equipamento['foto_etiqueta']) ?>" alt="Foto Etiqueta" style="max-width: 150px; max-height: 150px;">
+                </a>
                 <?php else: ?>
                     <p>Nenhuma foto cadastrada.</p>
                 <?php endif; ?>
