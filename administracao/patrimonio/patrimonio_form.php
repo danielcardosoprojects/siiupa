@@ -137,7 +137,9 @@
         document.addEventListener('DOMContentLoaded', function() {
             carregarSetores();
 
-
+            // Obter o ID do item da URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const itemId = urlParams.get('id');
 
             if (itemId) {
                 carregarItem(itemId); // Carregar dados do item se o ID estiver presente
