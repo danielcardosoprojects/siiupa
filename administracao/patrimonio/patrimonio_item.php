@@ -39,6 +39,7 @@ $equipamento = getData($apiUrl);
             border: solid 1px #ccc;
         }
     </style>
+    <title>Patrimônio</title>
 </head>
 
 <body>
