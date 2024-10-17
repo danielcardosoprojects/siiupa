@@ -19,6 +19,7 @@ if (isset($_GET['ano_ferias'])) {
   <h1><a class="btn btn-lg btn-outline-success" href="/siiupa/?setor=adm&sub=rh&subsub=ferias&ano_ferias=2022">2022</a></h1>
   <h1><a class="btn btn-lg btn-outline-success" href="/siiupa/?setor=adm&sub=rh&subsub=ferias&ano_ferias=2023">2023</a></h1>
   <h1><a class="btn btn-lg btn-outline-success" href="/siiupa/?setor=adm&sub=rh&subsub=ferias&ano_ferias=2024">2024</a></h1>
+  <h1><a class="btn btn-lg btn-outline-success" href="/siiupa/?setor=adm&sub=rh&subsub=ferias&ano_ferias=2025">2025</a></h1>
 </div>
 <?php
 
