@@ -57,6 +57,11 @@ class ComposerStaticInit90d09208118e7ccaaf593f5c9a7d0490
             'Mpdf\\PsrHttpMessageShim\\' => 24,
             'Mpdf\\' => 5,
         ),
+        'I' => 
+        array (
+            'Intervention\\Image\\' => 19,
+            'Intervention\\Gif\\' => 17,
+        ),
         'H' => 
         array (
             'Http\\Message\\' => 13,
@@ -172,6 +177,14 @@ class ComposerStaticInit90d09208118e7ccaaf593f5c9a7d0490
         'Mpdf\\' => 
         array (
             0 => __DIR__ . '/..' . '/mpdf/mpdf/src',
+        ),
+        'Intervention\\Image\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/intervention/image/src',
+        ),
+        'Intervention\\Gif\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/intervention/gif/src',
         ),
         'Http\\Message\\' => 
         array (
