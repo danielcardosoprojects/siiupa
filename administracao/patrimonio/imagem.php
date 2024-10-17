@@ -26,8 +26,17 @@ try {
         }
     }
 
-    // Redimensionar a imagem
-    $image->resize(new Box(200, 200))
+    // Obter a largura e altura originais
+    $originalSize = $image->getSize();
+    $originalWidth = $originalSize->getWidth();
+    $originalHeight = $originalSize->getHeight();
+
+    // Definir a nova largura (200px) e calcular a altura proporcional
+    $newWidth = 200;
+    $newHeight = intval(($newWidth / $originalWidth) * $originalHeight);
+
+    // Redimensionar a imagem mantendo a proporção
+    $image->resize(new Box($newWidth, $newHeight))
           ->save('uploads/resized_' . $_GET['imagem']);
 
     // Definir cabeçalho e exibir a imagem
@@ -36,6 +45,5 @@ try {
 } catch (Exception $e) {
     echo 'Erro ao processar a imagem: ' . $e->getMessage();
 }
-
 
 ?>
