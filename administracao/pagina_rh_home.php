@@ -296,11 +296,12 @@ include_once('../bd/nivel.php');
                 <th scope="col">VINCULO<img src="/siiupa/imagens/tablesorter.svg"></th>
                 <!-- <th scope="col">Férias 2022<img src="/siiupa/imagens/tablesorter.svg"></th> -->
                 <th scope="col">Férias 2024</th>
+                <th scope="col">Férias 2025</th>
 
                 <!-- <th scope="col">Data Inicio</th> -->
                 <!-- <th scope="col">Data Fim</th> -->
 
-                <th scope="col">CNES<img src="/siiupa/imagens/tablesorter.svg"></th>
+                <!-- <th scope="col">CNES<img src="/siiupa/imagens/tablesorter.svg"></th> -->
 
             </tr>
         </thead>
