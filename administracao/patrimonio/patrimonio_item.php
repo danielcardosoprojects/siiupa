@@ -71,7 +71,7 @@ $equipamento = getData($apiUrl);
 
                 <?php if ($equipamento['foto_frente']): ?>
                     <a href="uploads/<?= htmlspecialchars($equipamento['foto_frente']) ?>" data-fancybox data-caption="Single image">
-                        <img src="uploads/<?= htmlspecialchars($equipamento['foto_frente']) ?>" alt="Foto Frente" style="max-width: 300px; max-height: 300px;">
+                        <img src="imagem.php?imagem<?= htmlspecialchars($equipamento['foto_frente']) ?>" alt="Foto Frente" style="max-width: 300px; max-height: 300px;">
                     </a>
                 <?php else: ?>
                     <p>Nenhuma foto cadastrada.</p>
