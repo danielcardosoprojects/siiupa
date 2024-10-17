@@ -88,7 +88,7 @@ try {
     }
 
     // Caminho absoluto para salvar a imagem
-    $savePath = 'uploads' . time() . '.' . $extension;
+    $savePath = 'uploads/' . time() . '.' . $extension;
 
     $img = Image::make('uploads/' . htmlspecialchars($equipamento['foto_frente']));
     $img->resize(null, 200); // Redimensiona mantendo a proporção
