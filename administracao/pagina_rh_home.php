@@ -292,7 +292,7 @@ include_once('../bd/nivel.php');
 
                 <th scope="col">CARGO<img src="/siiupa/imagens/tablesorter.svg"></th>
 
-                <!-- <th scope="col">SETOR<img src="imagens/tablesorter.svg"></th>-->
+                <th scope="col">SETOR<img src="imagens/tablesorter.svg"></th>
                 <th scope="col">VINCULO<img src="/siiupa/imagens/tablesorter.svg"></th>
                 <!-- <th scope="col">Férias 2022<img src="/siiupa/imagens/tablesorter.svg"></th> -->
                 <th scope="col">Férias 2024</th>
@@ -389,7 +389,7 @@ include_once('../bd/nivel.php');
                     //                    echo "<td>$dados->data_nascbr</td>";
                     echo "<td><!-- $dados->fk_cargo -->$dados->cargo <i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->cargo'></span></i></td>";
 
-                    //echo "<td>$dados->setor</td>";
+                    echo "<td>$dados->setor</td>";
                     if ($dados->vinculo == "EFETIVO") {
                         $dataAdmissao = "<span class='dataAdmissao'>$dados->admissaoBR</span>";
                     } else {
