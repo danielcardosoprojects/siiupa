@@ -21,6 +21,18 @@ $(document).ready(function () {
             { "data": "data_cadastro" },
             { "data": "setor_id.setor" }, // Pega o setor do campo de associação
             {
+                "data": "foto_frente", // Campo da imagem "foto_frente"
+                "render": function(data, type, row) {
+                    if (data) {
+                        // Caminho da imagem com a URL base
+                        var imageUrl = "/siiupa/administracao/patrimonio/uploads/" + data;
+                        return "<img src='" + imageUrl + "' alt='Foto Frente' height='50' />";
+                    } else {
+                        return "Sem imagem";
+                    }
+                }
+            },
+            {
                 "data": null,
                 "render": function (data, type, row) {
                     var link = "/siiupa/administracao/patrimonio/" + row.id;
@@ -36,6 +48,7 @@ $(document).ready(function () {
             });
         }
     });
+    
     let allData = $('#equipamentosTable').DataTable().rows().data().toArray();
     console.log(allData);
     // Crie uma lista de sugestões de todos os campos necessários
