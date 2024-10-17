@@ -1,5 +1,9 @@
 <?php
 require '../../vendor/autoload.php';
+use Intervention\Image\Facades\Image;
+
+// Carrega a imagem
+
 // Verifica se o ID foi passado via query string
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     die("ID inválido.");
@@ -74,7 +78,9 @@ $equipamento = getData($apiUrl);
                 <?php else: ?>
                     <p>Nenhuma foto cadastrada.</p>
                 <?php endif; ?>
+<?php 
 
+?>
                 <a href="/siiupa/administracao/patrimonio/<?= $id ?>/foto/principal" type="button" class="btn btn-link">Editar Foto</a>
 
             </div>
