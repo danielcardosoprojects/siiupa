@@ -20,7 +20,13 @@ $(document).ready(function () {
             { "data": "numero_serie", "defaultContent": "" }, // Número de série pode ser null
             { "data": "data_cadastro" },
             { "data": "setor_id.setor" }, // Pega o setor do campo de associação
-            
+            {
+                "data": null,
+                "render": function (data, type, row) {
+                    var link = "/siiupa/administracao/patrimonio/" + row.id;
+                    return "<a href='" + link + "' class='btn btn-sm btn-primary'>Vizualizar</a>";
+                }
+            }
         ],
         "order": [[0, "desc"]],
         "rowCallback": function(row, data, index) {
