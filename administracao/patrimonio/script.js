@@ -33,12 +33,17 @@ $(document).ready(function () {
                 }
             },
             {
-                "data": null,
-                "render": function (data, type, row) {
-                    var link = "/siiupa/administracao/patrimonio/" + row.id;
-                    return "<a href='" + link + "' class='btn btn-sm btn-primary'>Vizualizar</a>";
+                "data": "foto_frente",
+                "render": function(data, type, row) {
+                    if (data) {
+                        var imageUrl = "/siiupa/administracao/patrimonio/uploads/" + data;
+                        return "<img src='" + imageUrl + "' alt='Foto Frente' height='50' />";
+                    } else {
+                        return "Sem imagem";
+                    }
                 }
             }
+            
         ],
         "order": [[0, "desc"]],
         "rowCallback": function(row, data, index) {
