@@ -77,7 +77,7 @@ $equipamento = getData($apiUrl);
                     <p>Nenhuma foto cadastrada.</p>
                 <?php endif; ?>
 
-                <a href="imagem.php?imagem=<?= $id ?>/foto/principal" type="button" class="btn btn-link">Editar Foto</a>
+                <a href="/siiupa/administracao/patrimonio/<?= $id ?>/foto/principal" type="button" class="btn btn-link">Editar Foto</a>
 
             </div>
 
@@ -85,7 +85,7 @@ $equipamento = getData($apiUrl);
                 <h4>Foto da Etiqueta:</h4><br>
                 <?php if ($equipamento['foto_etiqueta']): ?>
                     <a href="uploads/<?= htmlspecialchars($equipamento['foto_etiqueta']) ?>" data-fancybox data-caption="Single image">
-                    <img src="uploads/<?= htmlspecialchars($equipamento['foto_etiqueta']) ?>" alt="Foto Etiqueta" style="max-width: 150px; max-height: 150px;">
+                    <img src="imagem.php?imagem=<?= htmlspecialchars($equipamento['foto_etiqueta']) ?>" alt="Foto Etiqueta" style="max-width: 150px; max-height: 150px;">
                 </a>
                 <?php else: ?>
                     <p>Nenhuma foto cadastrada.</p>
