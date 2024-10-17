@@ -79,7 +79,18 @@ $equipamento = getData($apiUrl);
                     <p>Nenhuma foto cadastrada.</p>
                 <?php endif; ?>
 <?php 
+$img = Image::make('uploads/'.htmlspecialchars($equipamento['foto_frente']));
 
+// Redimensiona para 200px de altura, mantendo a proporção
+$img->resize(null, 200, function ($constraint) {
+    $constraint->aspectRatio();
+});
+
+// Salva a imagem redimensionada
+$img->save('resized.jpg');
+
+// Exibe a imagem em HTML
+echo '<img src="resized.jpg" alt="Imagem redimensionada">';
 ?>
                 <a href="/siiupa/administracao/patrimonio/<?= $id ?>/foto/principal" type="button" class="btn btn-link">Editar Foto</a>
 
