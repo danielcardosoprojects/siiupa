@@ -98,7 +98,7 @@ try {
 } catch (Exception $e) {
     echo 'Erro ao processar a imagem: ' . $e->getMessage();
 }
-echo 'aaa<img src="resized.jpg" alt="Imagem redimensionada">';
+
 ?>
                 <a href="/siiupa/administracao/patrimonio/<?= $id ?>/foto/principal" type="button" class="btn btn-link">Editar Foto</a>
 
