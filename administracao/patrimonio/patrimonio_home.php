@@ -76,6 +76,7 @@
             <thead>
                 <tr>
                     <th>ID</th>
+                    <th>Foto</th>
                     <th>Nome</th>
                     <th>Tipo</th>
                     <th>Marca</th>
@@ -84,7 +85,7 @@
                     <th>Data de Cadastro</th>
                     <th>Setor</th>
                     <th>Ações</th>
-                    <th>Foto</th>
+                    
                 </tr>
             </thead>
             <tbody></tbody>

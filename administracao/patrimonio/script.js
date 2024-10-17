@@ -13,13 +13,6 @@ $(document).ready(function () {
         },
         "columns": [
             { "data": "id" },
-            { "data": "nome" },
-            { "data": "tipo" },
-            { "data": "marca" },
-            { "data": "modelo" },
-            { "data": "numero_serie", "defaultContent": "" }, // Número de série pode ser null
-            { "data": "data_cadastro" },
-            { "data": "setor_id.setor" }, // Pega o setor do campo de associação
             {
                 "data": "foto_frente", // Campo da imagem "foto_frente"
                 "render": function(data, type, row) {
@@ -32,6 +25,14 @@ $(document).ready(function () {
                     }
                 }
             },
+            { "data": "nome" },
+            { "data": "tipo" },
+            { "data": "marca" },
+            { "data": "modelo" },
+            { "data": "numero_serie", "defaultContent": "" }, // Número de série pode ser null
+            { "data": "data_cadastro" },
+            { "data": "setor_id.setor" }, // Pega o setor do campo de associação
+            
             {
                 "data": null,
                 "render": function (data, type, row) {
