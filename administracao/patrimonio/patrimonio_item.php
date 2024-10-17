@@ -72,7 +72,7 @@ $equipamento = getData($apiUrl);
 
                 <?php if ($equipamento['foto_frente']): ?>
                     <a href="uploads/<?= htmlspecialchars($equipamento['foto_frente']) ?>" data-fancybox data-caption="Principal">
-                        <img src="imagem.php?imagem=<?= htmlspecialchars($equipamento['foto_frente']) ?>" alt="Foto Frente" style="max-width: 300px; max-height: 300px;">
+                        <img src="imagem.php?largura=200&imagem=<?= htmlspecialchars($equipamento['foto_frente']) ?>" alt="Foto Frente" style="max-width: 300px; max-height: 300px;">
                     </a>
                 <?php else: ?>
                     <p>Nenhuma foto cadastrada.</p>
@@ -86,7 +86,7 @@ $equipamento = getData($apiUrl);
                 <h4>Foto da Etiqueta:</h4><br>
                 <?php if ($equipamento['foto_etiqueta']): ?>
                     <a href="uploads/<?= htmlspecialchars($equipamento['foto_etiqueta']) ?>" data-fancybox data-caption="Etiqueta">
-                    <img src="imagem.php?imagem=<?= htmlspecialchars($equipamento['foto_etiqueta']) ?>" alt="Foto Etiqueta" style="max-width: 150px; max-height: 150px;">
+                    <img src="imagem.php?largura=200&imagem=<?= htmlspecialchars($equipamento['foto_etiqueta']) ?>" alt="Foto Etiqueta" style="max-width: 150px; max-height: 150px;">
                 </a>
                 <?php else: ?>
                     <p>Nenhuma foto cadastrada.</p>
