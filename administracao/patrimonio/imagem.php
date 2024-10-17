@@ -22,3 +22,4 @@ try {
     // Tratar erros (imagem não encontrada, formato inválido, etc.)
     echo 'Erro ao processar a imagem: ' . $e->getMessage();
 }
+?>
