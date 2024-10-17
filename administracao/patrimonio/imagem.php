@@ -1,26 +1,23 @@
 <?php
 require '../../vendor/autoload.php';
-use Intervention\Image\ImageManagerStatic as Image;
 
-// Obter o nome da imagem do parâmetro GET
-$imagem = $_GET['imagem'];
 
-// Construir o caminho completo para a imagem
-$caminho = 'uploads/' . htmlspecialchars($imagem);
+use Imagine\Image\Box;
+use Imagine\Gd\Imagine; // Para GD; para Imagick, use Imagine\Imagick\Imagine
 
 try {
-    // Carregar a imagem
-    $img = Image::make($caminho);
+    $imagine = new Imagine();
+    $image = $imagine->open('uploads/' . htmlspecialchars($_GET['imagem']));
 
-    // Redimensionar a imagem
-    $img->resize(null, 200, function ($constraint) {
-        $constraint->aspectRatio();
-    });
+    // Redimensionar imagem
+    $image->resize(new Box(200, 200))
+          ->save('uploads/resized_' . $_GET['imagem']);
 
-    // Definir o tipo de conteúdo e enviar a imagem
+    // Definir cabeçalho e exibir a imagem
     header('Content-Type: image/jpeg');
-    echo $img->encode('jpeg');
+    echo $image->show('jpeg');
 } catch (Exception $e) {
-    // Tratar erros (imagem não encontrada, formato inválido, etc.)
     echo 'Erro ao processar a imagem: ' . $e->getMessage();
 }
+
+?>

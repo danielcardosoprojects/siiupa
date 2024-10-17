@@ -61,6 +61,7 @@ class ComposerStaticInit90d09208118e7ccaaf593f5c9a7d0490
         array (
             'Intervention\\Image\\' => 19,
             'Intervention\\Gif\\' => 17,
+            'Imagine\\' => 8,
         ),
         'H' => 
         array (
@@ -185,6 +186,10 @@ class ComposerStaticInit90d09208118e7ccaaf593f5c9a7d0490
         'Intervention\\Gif\\' => 
         array (
             0 => __DIR__ . '/..' . '/intervention/gif/src',
+        ),
+        'Imagine\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/imagine/imagine/src',
         ),
         'Http\\Message\\' => 
         array (
