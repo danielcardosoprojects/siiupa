@@ -26,8 +26,10 @@ $(document).ready(function () {
                     var link = "/siiupa/administracao/patrimonio/" + row.id;
                     return "<a href='" + link + "' class='btn btn-sm btn-primary'>Vizualizar</a>";
                 }
-            }
+            },
+            { "data": "foto_frente"},
         ],
+
         "order": [[0, "desc"]],
         "rowCallback": function(row, data, index) {
             $(row).addClass('clickable').click(function() {
