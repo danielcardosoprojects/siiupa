@@ -32,7 +32,7 @@ try {
     $originalHeight = $originalSize->getHeight();
 
     // Definir a nova largura (200px) e calcular a altura proporcional
-    $newWidth = 200;
+    $newWidth = $_GET['largura'];
     $newHeight = intval(($newWidth / $originalWidth) * $originalHeight);
 
     // Redimensionar a imagem mantendo a proporção
