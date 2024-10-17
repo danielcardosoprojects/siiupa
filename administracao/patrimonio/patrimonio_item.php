@@ -90,7 +90,7 @@ $img->resize(null, 200, function ($constraint) {
 $img->save('resized.jpg');
 
 // Exibe a imagem em HTML
-echo '<img src="resized.jpg" alt="Imagem redimensionada">';
+echo 'aaa<img src="resized.jpg" alt="Imagem redimensionada">';
 ?>
                 <a href="/siiupa/administracao/patrimonio/<?= $id ?>/foto/principal" type="button" class="btn btn-link">Editar Foto</a>
 
