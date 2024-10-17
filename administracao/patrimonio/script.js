@@ -18,7 +18,7 @@ $(document).ready(function () {
                 "render": function(data, type, row) {
                     if (data) {
                         // Caminho da imagem com a URL base
-                        var imageUrl = "/siiupa/administracao/patrimonio/uploads/" + data;
+                        var imageUrl = "imagem.php?largura=50&imagem=" + data;
                         return "<img src='" + imageUrl + "' alt='Foto Frente' height='50' />";
                     } else {
                         return "Sem imagem";
