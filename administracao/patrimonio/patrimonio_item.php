@@ -77,7 +77,7 @@ $equipamento = getData($apiUrl);
                     <p>Nenhuma foto cadastrada.</p>
                 <?php endif; ?>
 
-                <a href="/siiupa/administracao/patrimonio/<?= $id ?>/foto/principal" type="button" class="btn btn-link">Editar Foto</a>
+                <a href="imagem.php?imagem=<?= $id ?>/foto/principal" type="button" class="btn btn-link">Editar Foto</a>
 
             </div>
 
