@@ -412,7 +412,8 @@ include_once('../bd/nivel.php');
 
                     // echo "<td class='edita' data-idfunc='$dados->idfuncionario' data-campo='CNES' data-valor='$dados->CNES'>$dados->CNES</td>";
 
-                    echo "<td>$dados->CNES</td>";
+                    echo "<td></td>";
+                    // echo "<td>$dados->CNES</td>";
 
 
                     echo "</tr>";
