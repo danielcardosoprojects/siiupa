@@ -79,17 +79,25 @@ $equipamento = getData($apiUrl);
                     <p>Nenhuma foto cadastrada.</p>
                 <?php endif; ?>
 <?php 
-$img = Image::make('uploads/'.htmlspecialchars($equipamento['foto_frente']));
+try {
+    // Validação do nome do arquivo (exemplo básico)
+    $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+    $extension = pathinfo($equipamento['foto_frente'], PATHINFO_EXTENSION);
+    if (!in_array($extension, $allowedExtensions)) {
+        throw new Exception('Tipo de arquivo inválido.');
+    }
 
-// Redimensiona para 200px de altura, mantendo a proporção
-$img->resize(null, 200, function ($constraint) {
-    $constraint->aspectRatio();
-});
+    // Caminho absoluto para salvar a imagem
+    $savePath = 'uploads' . time() . '.' . $extension;
 
-// Salva a imagem redimensionada
-$img->save('resized.jpg');
+    $img = Image::make('uploads/' . htmlspecialchars($equipamento['foto_frente']));
+    $img->resize(null, 200); // Redimensiona mantendo a proporção
+    $img->save($savePath);
 
-// Exibe a imagem em HTML
+    echo 'aaa<img src="' . $savePath . '" alt="Imagem redimensionada">';
+} catch (Exception $e) {
+    echo 'Erro ao processar a imagem: ' . $e->getMessage();
+}
 echo 'aaa<img src="resized.jpg" alt="Imagem redimensionada">';
 ?>
                 <a href="/siiupa/administracao/patrimonio/<?= $id ?>/foto/principal" type="button" class="btn btn-link">Editar Foto</a>
