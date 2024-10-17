@@ -1,5 +1,5 @@
 <?php
-require '../../vendor/autoload.php';
+
 // Verifica se o ID foi passado via query string
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     die("ID inválido.");
