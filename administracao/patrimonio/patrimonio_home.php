@@ -84,6 +84,7 @@
                     <th>Data de Cadastro</th>
                     <th>Setor</th>
                     <th>Ações</th>
+                    <th>Foto</th>
                 </tr>
             </thead>
             <tbody></tbody>
