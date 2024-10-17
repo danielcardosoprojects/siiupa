@@ -1,6 +1,4 @@
 <?php
-require '../../vendor/autoload.php';
-use Intervention\Image\Facades\Image;
 
 // Carrega a imagem
 
@@ -78,28 +76,7 @@ $equipamento = getData($apiUrl);
                 <?php else: ?>
                     <p>Nenhuma foto cadastrada.</p>
                 <?php endif; ?>
-<?php 
-try {
-    // Validação do nome do arquivo (exemplo básico)
-    $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
-    $extension = pathinfo($equipamento['foto_frente'], PATHINFO_EXTENSION);
-    if (!in_array($extension, $allowedExtensions)) {
-        throw new Exception('Tipo de arquivo inválido.');
-    }
 
-    // Caminho absoluto para salvar a imagem
-    $savePath = 'uploads/' . time() . '.' . $extension;
-
-    $img = Image::make('uploads/' . htmlspecialchars($equipamento['foto_frente']));
-    $img->resize(null, 200); // Redimensiona mantendo a proporção
-    $img->save($savePath);
-
-    echo 'aaa<img src="' . $savePath . '" alt="Imagem redimensionada">';
-} catch (Exception $e) {
-    echo 'Erro ao processar a imagem: ' . $e->getMessage();
-}
-
-?>
                 <a href="/siiupa/administracao/patrimonio/<?= $id ?>/foto/principal" type="button" class="btn btn-link">Editar Foto</a>
 
             </div>
