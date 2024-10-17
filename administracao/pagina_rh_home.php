@@ -286,7 +286,7 @@ include_once('../bd/nivel.php');
                 <!-- <th scope="col">=)</th> -->
                 <!--  <th scope="col">ID</th>-->
                 <th scope="col">#</th>
-                <th scope="col">MATRICULA</th>
+                <!-- <th scope="col">MATRICULA</th> -->
 
                 <th scope="col">NOME<img src="/siiupa/imagens/tablesorter.svg"></th>
 
@@ -381,7 +381,7 @@ include_once('../bd/nivel.php');
 
                     //CONTA LINHA
                     echo "<td>$contalinha</td>";
-                    echo "<td id='matriculaFunc_$dados->idfuncionario'><span class='matriculaFunc' data-id='$dados->idfuncionario'>$dados->matricula</span><i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->matricula'></span></i></td>";
+                    // echo "<td id='matriculaFunc_$dados->idfuncionario'><span class='matriculaFunc' data-id='$dados->idfuncionario'>$dados->matricula</span><i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->matricula'></span></i></td>";
 
                     //NOME
                     echo "<td><a target='_blank' class='abreperfil'  rel='noreferrer noopener' href='?setor=adm&sub=rh&subsub=perfil&id=$dados->idfuncionario'>$dados->nome</a><i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->nome'></span></i></td>";
