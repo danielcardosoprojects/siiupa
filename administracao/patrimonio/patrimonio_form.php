@@ -2,9 +2,9 @@
 session_start();
 include('../../../conexao/verifica_login.php');
 // Verifica se a variável 'minhaChave' está definida na sessão
-if (isset($_SESSION['idUsuario'])) {
+if (isset($_SESSION['token'])) {
     // Pega o valor armazenado na sessão
-    $valor = $_SESSION['idUsuario'];
+    $valor = $_SESSION['token'];
     echo "Valor armazenado: " . $valor;
 } else {
     echo "Nenhum valor encontrado na sessão.";
