@@ -302,7 +302,7 @@ if (isset($_SESSION['token'])) {
                     setores.forEach(function(setor) {
                         const option = document.createElement('option');
                         option.value = setor.id;
-                        $('#setor').val(setor.id).trigger('change'); 
+                         
                         option.textContent = setor.setor;
                         setorSelect.appendChild(option);
                     });
