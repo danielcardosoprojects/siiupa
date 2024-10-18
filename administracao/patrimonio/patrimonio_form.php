@@ -196,7 +196,7 @@ if (isset($_SESSION['token'])) {
 
 
         document.addEventListener('DOMContentLoaded', function() {
-            //carregarSetores();
+            carregarSetores();
 
             // Obter o ID do item da URL
             const urlParams = new URLSearchParams(window.location.search);
