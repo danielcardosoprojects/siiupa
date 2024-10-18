@@ -134,6 +134,8 @@ if (isset($_SESSION['token'])) {
                         const elementoSetor = document.getElementById('setor');
                         if (elementoSetor) {
                             elementoSetor.value = setorLocalStorage;
+                            $('#setor').val(setorLocalStorage).trigger('change'); 
+
                         } else {
                             console.error('Elemento com id "setor" não encontrado.');
                         }
