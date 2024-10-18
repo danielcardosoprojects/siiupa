@@ -99,6 +99,16 @@
         $(document).ready(function() {
             const selectSetor = document.getElementById('setor');
             $('#setor').select2();
+            // Pega o valor armazenado no sessionStorage com a chave 'minhaChave'
+            let valor = sessionStorage.getItem('minhaChave');
+
+            // Verifica se existe algum valor armazenado
+            if (valor !== null) {
+                console.log('Valor armazenado:', valor);
+            } else {
+                console.log('Nenhum valor encontrado.');
+            }
+
         });
         // Função para carregar os setores da API
         function carregarSetores() {
