@@ -187,6 +187,7 @@ if (isset($_SESSION['token'])) {
                     document.getElementById('numeroSerie').value = item.numero_serie;
                     document.getElementById('tipo').value = item.tipo;
                     document.getElementById('setor').value = item.setor_id.id;
+                    console.log(item.setor_id.id);
                     document.getElementById('itemId').value = itemId; // Armazena o ID do item para atualizações
                 })
                 .catch(function(error) {
