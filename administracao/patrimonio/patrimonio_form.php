@@ -188,7 +188,7 @@ if (isset($_SESSION['token'])) {
                     document.getElementById('tipo').value = item.tipo;
                     document.getElementById('setor').value = item.setor_id.id;
                     $('#setor').val(item.setor_id.id).trigger('change'); 
-                    console.log(item.setor_id.id);
+                    
                     document.getElementById('itemId').value = itemId; // Armazena o ID do item para atualizações
                 })
                 .catch(function(error) {
@@ -302,6 +302,7 @@ if (isset($_SESSION['token'])) {
                     setores.forEach(function(setor) {
                         const option = document.createElement('option');
                         option.value = setor.id;
+                        $('#setor').val(setor.id).trigger('change'); 
                         option.textContent = setor.setor;
                         setorSelect.appendChild(option);
                     });
