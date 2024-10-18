@@ -1,3 +1,14 @@
+<?php
+session_start();
+// Verifica se a variável 'minhaChave' está definida na sessão
+if (isset($_SESSION['idServidor'])) {
+    // Pega o valor armazenado na sessão
+    $valor = $_SESSION['idServidor'];
+    echo "Valor armazenado: " . $valor;
+} else {
+    echo "Nenhum valor encontrado na sessão.";
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 
