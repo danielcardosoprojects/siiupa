@@ -329,7 +329,7 @@ if (isset($_SESSION['token'])) {
                         const equipamentos = data.records;
                         equipamentos.forEach(equipamento => {
                             console.log(equipamento);
-                            console.log('oioioi');
+                            
                             let setor = document.getElementById('setor');
                             let nome = document.getElementById('nome');
                             let tipo = document.getElementById('tipo');
@@ -337,8 +337,7 @@ if (isset($_SESSION['token'])) {
                             let modelo = document.getElementById('modelo');
 
                             setor.value = equipamento.setor_id;
-                                              
-                            console.log(equipamento.setor_id);
+                            $("#setor").val(equipamento.setor_id).trigger('change');
                             nome.value = equipamento.nome;
                             tipo.value = equipamento.tipo;
                             marca.value = equipamento.marca;
