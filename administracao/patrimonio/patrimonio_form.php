@@ -187,7 +187,11 @@ if (isset($_SESSION['token'])) {
                     document.getElementById('numeroSerie').value = item.numero_serie;
                     document.getElementById('tipo').value = item.tipo;
                     document.getElementById('setor').value = item.setor_id.id;
-                    $('#setor').val(item.setor_id.id).trigger('change');
+                    setTimeout(function() {
+                        $('#setor').val(item.setor_id.id).trigger('change');
+                    }, 3000); // 3000 milissegundos = 3 segundos
+
+
                     document.getElementById('itemId').value = itemId; // Armazena o ID do item para atualizações
                     document.getElementById('obs').value = item.obs; // Armazena a observação do item para atualizações
                 })
