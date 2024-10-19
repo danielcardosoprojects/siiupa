@@ -171,6 +171,7 @@ function carregaUltimo() {
 
                 setor.value = equipamento.setor_id;
                 $("#setor").val(equipamento.setor_id).trigger('change');
+                console.log('oioioi');
                 nome.value = equipamento.nome;
                 tipo.value = equipamento.tipo;
                 marca.value = equipamento.marca;
