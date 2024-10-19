@@ -330,6 +330,7 @@ if (isset($_SESSION['token'])) {
                         const equipamentos = data.records;
                         equipamentos.forEach(equipamento => {
                             console.log(equipamento);
+                            console.log('oioioi');
                             let setor = document.getElementById('setor');
                             let nome = document.getElementById('nome');
                             let tipo = document.getElementById('tipo');
