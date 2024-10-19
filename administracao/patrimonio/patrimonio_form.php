@@ -189,7 +189,7 @@ if (isset($_SESSION['token'])) {
                     document.getElementById('setor').value = item.setor_id.id;
                     setTimeout(function() {
                         $('#setor').val(item.setor_id.id).trigger('change');
-                    }, 3000); // 3000 milissegundos = 3 segundos
+                    }, 1500); // 3000 milissegundos = 3 segundos
 
 
                     document.getElementById('itemId').value = itemId; // Armazena o ID do item para atualizações
