@@ -151,38 +151,38 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-function carregaUltimo() {
-    const ultimoUrl = 'https://siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos?order=id,desc&page=1,1';
-    axios.get(ultimoUrl)
-        .then(response => {
-            // La richiesta è andata a buon fine
-            const data = response.data;
-            console.log(data); // Stampa la risposta completa al console
+// function carregaUltimo() {
+//     const ultimoUrl = 'https://siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos?order=id,desc&page=1,1';
+//     axios.get(ultimoUrl)
+//         .then(response => {
+//             // La richiesta è andata a buon fine
+//             const data = response.data;
+//             console.log(data); // Stampa la risposta completa al console
 
-            // Estrai i dati specifici che ti interessano
-            const equipamentos = data.records;
-            equipamentos.forEach(equipamento => {
-                console.log(equipamento);
-                let setor = document.getElementById('setor');
-                let nome = document.getElementById('nome');
-                let tipo = document.getElementById('tipo');
-                let marca = document.getElementById('marca');
-                let modelo = document.getElementById('modelo');
+//             // Estrai i dati specifici che ti interessano
+//             const equipamentos = data.records;
+//             equipamentos.forEach(equipamento => {
+//                 console.log(equipamento);
+//                 let setor = document.getElementById('setor');
+//                 let nome = document.getElementById('nome');
+//                 let tipo = document.getElementById('tipo');
+//                 let marca = document.getElementById('marca');
+//                 let modelo = document.getElementById('modelo');
 
-                setor.value = equipamento.setor_id;
-                $("#setor").val(equipamento.setor_id).trigger('change');
-                console.log('oioioi');
-                nome.value = equipamento.nome;
-                tipo.value = equipamento.tipo;
-                marca.value = equipamento.marca;
-                modelo.value = equipamento.modelo;
-            });
-        })
-        .catch(error => {
-            // Si è verificato un errore
-            console.error('Errore durante la richiesta:', error);
-        });
-}
+//                 setor.value = equipamento.setor_id;
+//                 $("#setor").val(equipamento.setor_id).trigger('change');
+//                 console.log('oioioi');
+//                 nome.value = equipamento.nome;
+//                 tipo.value = equipamento.tipo;
+//                 marca.value = equipamento.marca;
+//                 modelo.value = equipamento.modelo;
+//             });
+//         })
+//         .catch(error => {
+//             // Si è verificato un errore
+//             console.error('Errore durante la richiesta:', error);
+//         });
+// }
 // Seleciona o elemento com o ID "repetirUltimo"
 const botaoRepetir = document.getElementById('repetirUltimo');
 
