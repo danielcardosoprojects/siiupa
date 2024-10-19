@@ -336,7 +336,8 @@ if (isset($_SESSION['token'])) {
                             let marca = document.getElementById('marca');
                             let modelo = document.getElementById('modelo');
 
-                            setor.value = equipamento.setor_id;                  
+                            setor.value = equipamento.setor_id;
+                                              
                             console.log(equipamento.setor_id);
                             nome.value = equipamento.nome;
                             tipo.value = equipamento.tipo;
