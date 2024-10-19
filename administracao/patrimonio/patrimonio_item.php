@@ -65,6 +65,7 @@ $equipamento = getData($apiUrl);
                 <p><strong>Setor ID:</strong> <?= htmlspecialchars($equipamento['setor_id']['setor']) ?></p>
                 <p><strong>Data de Cadastro:</strong> <?= htmlspecialchars($equipamento['data_cadastro']) ?></p>
                 <p><strong>Última atualização:</strong> <?= htmlspecialchars($equipamento['data_update']) ?></p>
+                <p><strong>Observação:</strong> <?= htmlspecialchars($equipamento['obs'])?></p>
             </div>
 
 
