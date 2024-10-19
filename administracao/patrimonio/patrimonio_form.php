@@ -324,8 +324,8 @@ if (isset($_SESSION['token'])) {
                     .then(response => {
                         // La richiesta è andata a buon fine
                         const data = response.data;
-                        console.log(data); // Stampa la risposta completa al console
-
+                        console.log(data.records[0].setor_id); // Stampa la risposta completa al console
+                        $('#setor').val(data.records[0].setor_id).trigger('change'); 
                         // Estrai i dati specifici che ti interessano
                         const equipamentos = data.records;
                         equipamentos.forEach(equipamento => {
@@ -337,7 +337,7 @@ if (isset($_SESSION['token'])) {
                             let modelo = document.getElementById('modelo');
 
                             setor.value = equipamento.setor_id;
-                            $('#setor').val(5).trigger('change'); 
+                  
                             console.log(equipamento.setor_id);
                             nome.value = equipamento.nome;
                             tipo.value = equipamento.tipo;
