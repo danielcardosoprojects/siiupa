@@ -44,7 +44,7 @@ $equipamento = getData($apiUrl);
 
 <body>
     <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand" href="/siiupa/?setor=adm">
+        <a class="navbar-brand" href="/siiupa/administracao/patrimonio">
             <img src="/siiupa/imagens/siiupa.png" class="d-inline-block align-top" alt="" width="200px">
             Administração - Controle de Patrimônio
         </a>
