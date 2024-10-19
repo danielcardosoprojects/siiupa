@@ -338,6 +338,7 @@ if (isset($_SESSION['token'])) {
 
                             setor.value = equipamento.setor_id;
                             $('#setor').val(5).trigger('change'); 
+                            console.log(equipamento.setor_id);
                             nome.value = equipamento.nome;
                             tipo.value = equipamento.tipo;
                             marca.value = equipamento.marca;
