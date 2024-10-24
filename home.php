@@ -12,7 +12,7 @@
     .card-body {
         display:flex;
         flex-direction: column;
-        text-align: left;
+        text-align: left !important;
     }
     .bi {
     /* font-size: 2rem; /* Ajusta o tamanho */ 
