@@ -31,7 +31,7 @@ if (cachedSetor) {
 }
 //////////////// carrega botoes dos setores ///////////////////////
 // URL da API
-const botao_setores_apiURL = "https://www.siupa.com.br/siiupa/api/api.php/records/tb_setor";
+const botao_setores_apiURL = "https://www.siupa.com.br/siiupa/api/api.php/records/tb_setor?order=setor,asc";
 
 // Função para criar os botões dinamicamente
 function botao_setores_criarBotoes(setores) {
