@@ -28,13 +28,13 @@
 
                          <a href="?setor=adm" class="btn btn-primary">Administração</a>
                          <br>
-                         <a href="/siiupa/?setor=adm&sub=rh" class="btn btn-sm btn-light">Servidores</a>
-                         <a href="/siiupa/?setor=adm&sub=rh&subsub=escalas" class="btn btn-sm btn-light">Escalas</a>
-                         <a href="/siiupa/?setor=adm&sub=rh&subsub=folhas" class="btn btn-sm btn-light">Folhas</a>
-                         <a href="/siiupa/?setor=adm&sub=rh&subsub=atestados" class="btn btn-sm btn-light">Afastamentos</a>
-                         <a href="/siiupa/?setor=adm&sub=rh&subsub=acionamentos" class="btn btn-sm btn-light">Acionamentos</a>
-                         <a href="/siiupa/?setor=adm&sub=rh&subsub=ferias" class="btn btn-sm btn-light">Férias</a>
-                         <a href="/siiupa/administracao/patrimonio" class="btn btn-sm btn-light">Patrimônio <i class="bi bi-building-check"></i></a>
+                         <a href="/siiupa/?setor=adm&sub=rh" class="btn btn-sm btn-light"><i class="bi bi-person-circle"></i> Servidores</a>
+                         <a href="/siiupa/?setor=adm&sub=rh&subsub=escalas" class="btn btn-sm btn-light"><i class="bi bi-calendar2-check"></i> Escalas</a>
+                         <a href="/siiupa/?setor=adm&sub=rh&subsub=folhas" class="btn btn-sm btn-light"><i class="bi bi-coin"></i> Folhas</a>
+                         <a href="/siiupa/?setor=adm&sub=rh&subsub=atestados" class="btn btn-sm btn-light"><i class="bi bi-person-x"></i> Afastamentos</a>
+                         <a href="/siiupa/?setor=adm&sub=rh&subsub=acionamentos" class="btn btn-sm btn-light"><i class="bi bi-person-check"></i> Acionamentos</a>
+                         <a href="/siiupa/?setor=adm&sub=rh&subsub=ferias" class="btn btn-sm btn-light"><i class="bi bi-airplane"></i> Férias</a>
+                         <a href="/siiupa/administracao/patrimonio" class="btn btn-sm btn-light"><i class="bi bi-building-check"></i> Patrimônio</a>
 
 
                      </div>
