@@ -10,6 +10,7 @@
 
 <style>
     .card-body {
+        display:flex;
         flex-direction: column;
     }
     </style>
