@@ -278,7 +278,9 @@ if (isset($_SESSION['token'])) {
             }
 
             if (acao == "cadastrar") {
+                
                 cadastra();
+
             } else {
                 cadastra();
             }
