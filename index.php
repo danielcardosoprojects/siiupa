@@ -85,6 +85,8 @@ include('../conexao/verifica_login.php');
 	<!-- Notificações  -->
 	<script src="/siiupa/js/notify/notify.min.js"></script>
 
+	<!-- Icones BOotstrap -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 	<style>
 		body {
 			margin: 0;
