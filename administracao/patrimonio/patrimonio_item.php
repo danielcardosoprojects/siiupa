@@ -80,7 +80,7 @@ $equipamento = getData($apiUrl);
                     <p>Nenhuma foto cadastrada.</p>
                 <?php endif; ?>
 
-                <a href="/siiupa/administracao/patrimonio/<?= $id ?>/foto/principal" type="button" class="btn btn-link">Editar Foto</a>
+                <a href="/siiupa/administracao/patrimonio/<?= $id ?>/foto/principal" type="button" class="btn btn-light">Editar Foto</a>
 
             </div>
 
@@ -94,7 +94,7 @@ $equipamento = getData($apiUrl);
                     <p>Nenhuma foto cadastrada.</p>
                 <?php endif; ?>
                 <div></div>
-                <a href="/siiupa/administracao/patrimonio/<?= $id ?>/foto/etiqueta" type="button" class="btn btn-link">Editar Foto</a>
+                <a href="/siiupa/administracao/patrimonio/<?= $id ?>/foto/etiqueta" type="button" class="btn btn-light">Editar Foto</a>
             </div>
         </div>
 
