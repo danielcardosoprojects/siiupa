@@ -5,7 +5,7 @@ include('../../../conexao/verifica_login.php');
 if (isset($_SESSION['token'])) {
     // Pega o valor armazenado na sessão
     $valor = $_SESSION['token'];
-    echo "Valor armazenado: " . $valor;
+    // echo "Valor armazenado: " . $valor;
 } else {
     echo "Nenhum valor encontrado na sessão.";
 }
@@ -37,7 +37,7 @@ if (isset($_SESSION['token'])) {
 
 <body>
     <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand" href="/siiupa/?setor=adm">
+        <a class="navbar-brand" href="/siiupa/administracao/patrimonio">
             <img src="/siiupa/imagens/siiupa.png" class="d-inline-block align-top" alt="" width="200px">
             Administração - Controle de Patrimônio
         </a>
@@ -93,6 +93,13 @@ if (isset($_SESSION['token'])) {
                 <input type="text" class="form-control" id="numeroSerie" required list="suggestionsNumeroSerie">
                 <datalist id="suggestionsNumeroSerie"></datalist>
             </div>
+            <!-- Campo Observação -->
+
+            <div class="mb-3">
+                <label for="obs" class="form-label">Observação</label>
+                <textarea class="form-control" id="obs" rows="3"></textarea>
+            </div>
+
 
             <input type="hidden" id="itemId" value="<?= $_GET['id']; ?>">
             <button type="submit" class="btn btn-primary">Salvar</button>
@@ -134,7 +141,7 @@ if (isset($_SESSION['token'])) {
                         const elementoSetor = document.getElementById('setor');
                         if (elementoSetor) {
                             elementoSetor.value = setorLocalStorage;
-                            $('#setor').val(setorLocalStorage).trigger('change'); 
+                            $('#setor').val(setorLocalStorage).trigger('change');
 
                         } else {
                             console.error('Elemento com id "setor" não encontrado.');
@@ -180,9 +187,13 @@ if (isset($_SESSION['token'])) {
                     document.getElementById('numeroSerie').value = item.numero_serie;
                     document.getElementById('tipo').value = item.tipo;
                     document.getElementById('setor').value = item.setor_id.id;
-                    $('#setor').val(item.setor_id.id).trigger('change'); 
-                    
+                    setTimeout(function() {
+                        $('#setor').val(item.setor_id.id).trigger('change');
+                    }, 1500); // 3000 milissegundos = 3 segundos
+
+
                     document.getElementById('itemId').value = itemId; // Armazena o ID do item para atualizações
+                    document.getElementById('obs').value = item.obs; // Armazena a observação do item para atualizações
                 })
                 .catch(function(error) {
                     console.log('Erro ao carregar item:', error);
@@ -191,7 +202,7 @@ if (isset($_SESSION['token'])) {
 
 
         document.addEventListener('DOMContentLoaded', function() {
-           // carregarSetores();
+            // carregarSetores();
 
             // Obter o ID do item da URL
             const urlParams = new URLSearchParams(window.location.search);
@@ -221,6 +232,7 @@ if (isset($_SESSION['token'])) {
                 const tipo = document.getElementById('tipo').value;
                 const setor = document.getElementById('setor').value;
                 const itemId = document.getElementById('itemId').value;
+                const obs = document.getElementById('obs').value;
 
                 if (!nome || !marca || !modelo || !numero_serie || !tipo || !setor) {
                     alert('Preencha todos os campos.');
@@ -242,7 +254,8 @@ if (isset($_SESSION['token'])) {
                             modelo: modelo,
                             numero_serie: numero_serie,
                             tipo: tipo,
-                            setor_id: setor
+                            setor_id: setor,
+                            obs: obs
                         }
                     })
                     .then(function(response) {
@@ -297,7 +310,7 @@ if (isset($_SESSION['token'])) {
                     setores.forEach(function(setor) {
                         const option = document.createElement('option');
                         option.value = setor.id;
-                         
+
                         option.textContent = setor.setor;
                         setorSelect.appendChild(option);
                     });
@@ -326,23 +339,26 @@ if (isset($_SESSION['token'])) {
                     .then(response => {
                         // La richiesta è andata a buon fine
                         const data = response.data;
-                        console.log(data); // Stampa la risposta completa al console
 
                         // Estrai i dati specifici che ti interessano
                         const equipamentos = data.records;
                         equipamentos.forEach(equipamento => {
                             console.log(equipamento);
+
                             let setor = document.getElementById('setor');
                             let nome = document.getElementById('nome');
                             let tipo = document.getElementById('tipo');
                             let marca = document.getElementById('marca');
                             let modelo = document.getElementById('modelo');
+                            let obs = document.getElementById('obs');
 
                             setor.value = equipamento.setor_id;
+                            $("#setor").val(equipamento.setor_id).trigger('change');
                             nome.value = equipamento.nome;
                             tipo.value = equipamento.tipo;
                             marca.value = equipamento.marca;
                             modelo.value = equipamento.modelo;
+                            obs.value = equipamento.obs;
                         });
                     })
                     .catch(error => {

@@ -44,7 +44,7 @@ $equipamento = getData($apiUrl);
 
 <body>
     <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand" href="/siiupa/?setor=adm">
+        <a class="navbar-brand" href="/siiupa/administracao/patrimonio">
             <img src="/siiupa/imagens/siiupa.png" class="d-inline-block align-top" alt="" width="200px">
             Administração - Controle de Patrimônio
         </a>
@@ -65,6 +65,7 @@ $equipamento = getData($apiUrl);
                 <p><strong>Setor ID:</strong> <?= htmlspecialchars($equipamento['setor_id']['setor']) ?></p>
                 <p><strong>Data de Cadastro:</strong> <?= htmlspecialchars($equipamento['data_cadastro']) ?></p>
                 <p><strong>Última atualização:</strong> <?= htmlspecialchars($equipamento['data_update']) ?></p>
+                <p><strong>Observação:</strong> <?= htmlspecialchars($equipamento['obs'])?></p>
             </div>
 
 
