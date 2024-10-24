@@ -8,7 +8,11 @@
 
 
 
-
+<style>
+    .card-body {
+        flex-direction: column;
+    }
+    </style>
  <div class="container">
      <div class="row">
          <?php
