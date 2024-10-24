@@ -8,15 +8,15 @@
 /* Corpo da página */
 body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    background-color: #fafafa;
-    color: #262626;
+    background-color: #1e1e1e; /* Fundo escuro */
+    color: #d4d4d4; /* Texto claro */
     line-height: 1.6;
 }
 
 /* Cabeçalho */
 header {
-    background-color: #fff;
-    border-bottom: 1px solid #dbdbdb;
+    background-color: #252526; /* Fundo do cabeçalho escuro */
+    border-bottom: 1px solid #3c3c3c; /* Borda mais clara */
     padding: 10px 20px;
     display: flex;
     justify-content: space-between;
@@ -27,13 +27,13 @@ header {
 .logo {
     font-size: 24px;
     font-weight: bold;
-    color: #262626;
+    color: #d4d4d4; /* Texto claro */
     text-decoration: none;
 }
 
 /* Navegação */
 nav a {
-    color: #262626;
+    color: #d4d4d4; /* Texto claro */
     text-decoration: none;
     margin-left: 20px;
     font-size: 14px;
@@ -50,8 +50,8 @@ nav a {
 /* Barra lateral */
 .sidebar {
     width: 250px;
-    background-color: #fff;
-    border: 1px solid #dbdbdb;
+    background-color: #252526; /* Fundo escuro */
+    border: 1px solid #3c3c3c;
     padding: 20px;
 }
 
@@ -63,25 +63,25 @@ nav a {
 
 /* Postagem */
 .post {
-    background-color: #fff;
-    border: 1px solid #dbdbdb;
+    background-color: #252526; /* Fundo escuro */
+    border: 1px solid #3c3c3c;
     margin-bottom: 20px;
     padding: 15px;
 }
 
 /* Rodapé */
 footer {
-    background-color: #fafafa;
+    background-color: #1e1e1e;
     text-align: center;
     padding: 20px;
-    border-top: 1px solid #dbdbdb;
+    border-top: 1px solid #3c3c3c;
     font-size: 12px;
-    color: #999;
+    color: #6a6a6a; /* Texto mais apagado */
 }
 
 /* Botões */
 button {
-    background-color: #0095f6;
+    background-color: #007acc; /* Azul VS Code */
     color: #fff;
     border: none;
     padding: 8px 16px;
@@ -91,7 +91,7 @@ button {
 }
 
 button:hover {
-    background-color: #007bb5;
+    background-color: #005a9e; /* Azul escuro no hover */
 }
 
 /* Inputs */
@@ -100,17 +100,20 @@ input[type="password"] {
     width: 100%;
     padding: 10px;
     margin: 8px 0;
-    border: 1px solid #dbdbdb;
+    border: 1px solid #3c3c3c;
     border-radius: 4px;
-    background-color: #fafafa;
+    background-color: #1e1e1e;
+    color: #d4d4d4; /* Texto claro */
     font-size: 14px;
 }
 
 input[type="text"]:focus,
 input[type="password"]:focus {
-    border-color: #a8a8a8;
+    border-color: #6a6a6a; /* Borda mais clara ao focar */
     outline: none;
 }
+
+/* Contêiner dos botões de setores */
 #botao_setores_container {
     display: flex;
     flex-direction: column;
