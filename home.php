@@ -29,7 +29,7 @@
                          <a href="/siiupa/?setor=adm&sub=rh&subsub=atestados" class="btn btn-sm btn-light">Afastamentos</a>
                          <a href="/siiupa/?setor=adm&sub=rh&subsub=acionamentos" class="btn btn-sm btn-light">Acionamentos</a>
                          <a href="/siiupa/?setor=adm&sub=rh&subsub=ferias" class="btn btn-sm btn-light">Férias</a>
-                         <a href="/siiupa/administracao/patrimonio" class="btn btn-sm btn-light">Patrimônio</a>
+                         <a href="/siiupa/administracao/patrimonio" class="btn btn-sm btn-light">Patrimônio <span class="badge text-bg-secondary">NOVO</span></a>
 
 
                      </div>
