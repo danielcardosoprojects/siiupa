@@ -15,7 +15,7 @@
         text-align: left !important;
     }
     .bi {
-    /* font-size: 2rem; /* Ajusta o tamanho */ 
+    font-size: 1rem; /* Ajusta o tamanho */ 
     color: #007bff;  /* Cor azul */
   }
     </style>
