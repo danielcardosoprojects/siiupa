@@ -29,9 +29,7 @@ $equipamento = getData($apiUrl);
 
 <head>
     <meta charset="UTF-8">
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link href="style.css" rel="stylesheet">
     <style>
@@ -53,7 +51,11 @@ $equipamento = getData($apiUrl);
         <div class="mt-4">
             <a href="<?= $id ?>/editar" class="btn btn-primary">Editar</a>
             <a href="./" class="btn btn-primary">Concluído</a>
-            <a href="./<?= $_GET['id'] ?>" class="btn btn-primary">Próximo</a>
+
+            <?php
+            $proximo = isset($_GET['id']) ? floatval($_GET['id']) + 1 : 1;
+            ?>
+            <a href="./<?= $proximo ?>" class="btn btn-primary">Próximo</a>
         </div>
         <h2>Nome: <?= htmlspecialchars($equipamento['nome']) ?></h2>
         <div class="row">
@@ -66,18 +68,18 @@ $equipamento = getData($apiUrl);
                 <p><strong>Setor ID:</strong> <?= htmlspecialchars($equipamento['setor_id']['setor']) ?></p>
                 <p><strong>Data de Cadastro:</strong> <?= htmlspecialchars($equipamento['data_cadastro']) ?></p>
                 <p><strong>Última atualização:</strong> <?= htmlspecialchars($equipamento['data_update']) ?></p>
-                <p><strong>Observação:</strong> <?= htmlspecialchars($equipamento['obs'])?></p>
+                <p><strong>Observação:</strong> <?= htmlspecialchars($equipamento['obs']) ?></p>
             </div>
 
 
             <div class="col-md-4">
-            <h4>Foto Principal:</h4><br>
+                <h4>Foto Principal:</h4><br>
 
-                <?php if ($equipamento['foto_frente']): ?>
+                <?php if ($equipamento['foto_frente']) : ?>
                     <a href="uploads/<?= htmlspecialchars($equipamento['foto_frente']) ?>" data-fancybox data-caption="Principal">
                         <img src="imagem.php?largura=200&imagem=<?= htmlspecialchars($equipamento['foto_frente']) ?>" alt="Foto Frente" style="max-width: 300px; max-height: 300px;">
                     </a>
-                <?php else: ?>
+                <?php else : ?>
                     <p>Nenhuma foto cadastrada.</p>
                 <?php endif; ?>
 
@@ -87,11 +89,11 @@ $equipamento = getData($apiUrl);
 
             <div class="col-md-4">
                 <h4>Foto da Etiqueta:</h4><br>
-                <?php if ($equipamento['foto_etiqueta']): ?>
+                <?php if ($equipamento['foto_etiqueta']) : ?>
                     <a href="uploads/<?= htmlspecialchars($equipamento['foto_etiqueta']) ?>" data-fancybox data-caption="Etiqueta">
-                    <img src="imagem.php?largura=200&imagem=<?= htmlspecialchars($equipamento['foto_etiqueta']) ?>" alt="Foto Etiqueta" style="max-width: 150px; max-height: 150px;">
-                </a>
-                <?php else: ?>
+                        <img src="imagem.php?largura=200&imagem=<?= htmlspecialchars($equipamento['foto_etiqueta']) ?>" alt="Foto Etiqueta" style="max-width: 150px; max-height: 150px;">
+                    </a>
+                <?php else : ?>
                     <p>Nenhuma foto cadastrada.</p>
                 <?php endif; ?>
                 <div></div>
