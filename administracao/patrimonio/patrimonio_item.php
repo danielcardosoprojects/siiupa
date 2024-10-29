@@ -58,7 +58,7 @@ $equipamento = getData($apiUrl);
             ?>
             <a href="./<?= $proximo ?>" class="btn btn-primary">Próximo</a>
         </div>
-        <h2><?= htmlspecialchars($equipamento['id']) ?> Nome: <?= htmlspecialchars($equipamento['nome']) ?></h2>
+        <h2><?= htmlspecialchars($equipamento['id']) ?>: <?= htmlspecialchars($equipamento['nome']) ?></h2>
         <div class="row">
             <div class="col-md-4">
 
