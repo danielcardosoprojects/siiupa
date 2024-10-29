@@ -58,11 +58,11 @@ $equipamento = getData($apiUrl);
             ?>
             <a href="./<?= $proximo ?>" class="btn btn-primary">Próximo</a>
         </div>
-        <h2>Nome: <?= htmlspecialchars($equipamento['nome']) ?></h2>
+        <h2><?= htmlspecialchars($equipamento['id']) ?> Nome: <?= htmlspecialchars($equipamento['nome']) ?></h2>
         <div class="row">
             <div class="col-md-4">
 
-                <p><strong>Tipo:</strong> <?= htmlspecialchars($equipamento['tipo']) ?> - <?= htmlspecialchars($equipamento['id']) ?></p>
+                <p><strong>Tipo:</strong> <?= htmlspecialchars($equipamento['tipo']) ?></p>
                 <p><strong>Marca:</strong> <?= htmlspecialchars($equipamento['marca']) ?></p>
                 <p><strong>Modelo:</strong> <?= htmlspecialchars($equipamento['modelo']) ?></p>
                 <p><strong>Número de Série:</strong> <?= htmlspecialchars($equipamento['numero_serie']) ?></p>
