@@ -49,6 +49,7 @@ $equipamento = getData($apiUrl);
     </nav>
     <div class="container mt-5">
         <div class="mt-4">
+        <a href="./cadastrar" class="btn btn-success">Cadastrar</a>
             <a href="<?= $id ?>/editar" class="btn btn-primary">Editar</a>
             <a href="./" class="btn btn-primary">Concluído</a>
 
