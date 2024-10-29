@@ -21,7 +21,7 @@
   </a>
 </nav>
     <div id="app" class="container mt-5">
-        <h2>Upload de Foto <?= $_GET['foto']; ?></h2>
+        <h2><?= $_GET['id'] ?>: Upload de Foto <?= $_GET['foto']; ?></h2>
         <form @submit.prevent="uploadPhoto">
             <div class="form-group">
                 <label for="fileInput">Escolha uma foto:</label>
