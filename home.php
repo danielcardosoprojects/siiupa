@@ -54,7 +54,7 @@
          <?php } ?>
          <div class="col-sm">
              <!-- farmacia -->
-             <div class="card" style="width: 18rem;text-align:center">
+             <div class="card" style="width: 18rem;text-align:left">
                  <br>
                  <img src="imagens/icones/farmacia.svg" class="card-img-top" alt="..." height="150px">
                  <div class="card-body">
