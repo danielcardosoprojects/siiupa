@@ -6,60 +6,88 @@
     <title>Consulta de Contracheques</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f2f5;
-            color: #1c1e21;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            max-width: 500px;
-            width: 100%;
-            text-align: center;
-        }
-        h1 {
-            margin-bottom: 20px;
-        }
-        input, select, button {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #dddfe2;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        button {
-            background-color: #1877f2;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #165bca;
-        }
-        .card {
-            border: 1px solid #ccc;
-            padding: 10px;
-            margin: 10px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-        .loading {
-            display: none;
-        }
-        .loading img {
-            width: 50px;
-        }
+        /* Ajuste para evitar problemas de overflow */
+html, body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #1c1e21;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* Configuração para o contêiner principal */
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 1000px;
+    width: 100%;
+    margin-top: 20px; /* Espaço para evitar conteúdo escondido */
+}
+
+/* Título */
+h1 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Estilos para inputs, selects e botão */
+input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #dddfe2;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Botão com efeito de hover */
+button {
+    background-color: #1877f2;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #165bca;
+}
+
+/* Cards em estilo flexível */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    flex: 1 1 45%; /* Ajuste para cards lado a lado */
+    max-width: 45%;
+}
+
+.loading {
+    display: none;
+    text-align: center;
+}
+
+.loading img {
+    width: 50px;
+}
+
+/* Layout
+
     </style>
 </head>
 <body>
