@@ -61,15 +61,15 @@
                      <a href="/siiupa/farmacia/" class="btn btn-primary">Farmácia</a>
                      <br>
 
-                     <a href="/siiupa/farmacia/estoque/" class="btn btn-sm btn-light">Estoque</a>
+                     <a href="/siiupa/farmacia/estoque/" class="btn btn-sm btn-light"><i class="bi bi-capsule"></i> Estoque</a>
                      <?php
                         if ($_SESSION['nivel'] == 2 || $_SESSION['nivel'] == 1) {
                         ?>
-                         <a href="/siiupa/farmacia/movimento/entrada" class="btn btn-sm btn-light">Entrada de Item</a>
-                         <a href="/siiupa/farmacia/movimento/saida" class="btn btn-sm btn-light">Saída de Item</a>
-                         <a href="/siiupa/farmacia/movimentos/" class="btn btn-sm btn-light">Filtrar movimentos</a>
-                         <a href="/siiupa/farmacia/ranking/" class="btn btn-sm btn-light">Ranking</a>
-                         <a href="/siiupa/farmacia/validade/" class="btn btn-sm btn-light">Validade</a>
+                         <a href="/siiupa/farmacia/movimento/entrada" class="btn btn-sm btn-light"><i class="bi bi-bookmark-plus"></i> Entrada de Item</a>
+                         <a href="/siiupa/farmacia/movimento/saida" class="btn btn-sm btn-light"><i class="bi bi-box-arrow-down-right"></i> Saída de Item</a>
+                         <a href="/siiupa/farmacia/movimentos/" class="btn btn-sm btn-light"><i class="bi bi-funnel"></i> Filtrar movimentos</a>
+                         <a href="/siiupa/farmacia/ranking/" class="btn btn-sm btn-light"><i class="bi bi-bar-chart"></i> Ranking</a>
+                         <a href="/siiupa/farmacia/validade/" class="btn btn-sm btn-light"><i class="bi bi-calendar-x"></i> Validade</a>
                      <?php } ?>
                  </div>
 
