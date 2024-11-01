@@ -28,7 +28,7 @@ if ($acao == 'busca') {
     }
     echo "</tbody></table>";
 
-    echo `<script></script>`;
+
 }
 if ($acao == 'insere') {
     $id = $_GET['id'];
@@ -47,7 +47,7 @@ if ($acao == 'insere') {
     $id = $_GET['id'];
     $mes = $_GET['mes'];
     $ano = $_GET['ano'];
-    $todos = utf8_encode($_POST['todos']);
+    $todos = $_POST['todos'];
     $chave = $_POST['chave'];
     $todos = json_decode($todos, true);
 
