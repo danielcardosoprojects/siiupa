@@ -87,7 +87,7 @@ $(function() {
         var buscar = encodeURI($('#buscar').val());
         var busca_servidor_setor = $('#busca_servidor_setor').val();
         var acao = "buscar";
-        var urlbusca = "administracao/escalas/buscarservidor.php?acao=busca&nome=" + buscar + "&setor=" + busca_servidor_setor;
+        var urlbusca = "https://siupa.com.br/siiupa/administracao/escalas/buscarservidor.php?acao=busca&nome=" + buscar + "&setor=" + busca_servidor_setor;
         console.log(urlbusca);
         
         $('#dialogaddresultadobusca').load(urlbusca,
