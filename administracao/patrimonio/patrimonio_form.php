@@ -74,6 +74,14 @@ if (isset($_SESSION['token'])) {
                 <a id="completaVazio" href="#salvar">Vazio</a>
             </div>
 
+            <!--- Campo quantidade -->
+            
+            <div class="mb-3">
+                <label for="quantidade" class="form-label">quantidade</label>
+                <input type="number" class="form-control" id="quantidade" required list="suggestionsMarca">
+                
+            </div>
+
             <!-- Campo Marca -->
             <div class="mb-3">
                 <label for="marca" class="form-label">Marca</label>
