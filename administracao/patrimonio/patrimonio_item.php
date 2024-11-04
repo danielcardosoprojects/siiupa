@@ -45,6 +45,8 @@ $equipamento = getData($apiUrl);
             display: inline-block;
             padding: 4px 8px;
             font-size: 1em;
+            width:15px;
+            height: 15px;
             font-weight: bold;
             color: #333;
             background-color: #e0e0e0;
