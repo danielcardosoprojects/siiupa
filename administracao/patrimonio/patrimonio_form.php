@@ -71,6 +71,7 @@ if (isset($_SESSION['token'])) {
                     <option value="Móvel">Móvel</option>
                     <option value="Material">Material</option>
                 </select>
+                <a id="completaVazio" href="#salvar">Vazio</a>
             </div>
 
             <!-- Campo Marca -->
@@ -102,7 +103,7 @@ if (isset($_SESSION['token'])) {
 
 
             <input type="hidden" id="itemId" value="<?= $_GET['id']; ?>">
-            <button type="submit" class="btn btn-primary">Salvar</button>
+            <button type="submit" class="btn btn-primary" id="salvar">Salvar</button>
         </form>
     </div>
 
