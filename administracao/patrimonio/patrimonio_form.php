@@ -374,7 +374,7 @@ if (isset($_SESSION['token'])) {
                             nome.value = equipamento.nome;
                             tipo.value = equipamento.tipo;
                             quantidade = equipamento.quantidade;
-                            console.log(equipamento.quantidade);
+                            console.log(quantidade);
                             marca.value = equipamento.marca;
                             modelo.value = equipamento.modelo;
                             obs.value = equipamento.obs;
