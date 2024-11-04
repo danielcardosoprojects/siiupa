@@ -78,7 +78,7 @@ if (isset($_SESSION['token'])) {
             
             <div class="mb-3">
                 <label for="quantidade" class="form-label">quantidade</label>
-                <input type="number" class="form-control" id="quantidade" required list="suggestionsMarca">
+                <input type="number" class="form-control" id="quantidade" required>
                 
             </div>
 
@@ -199,6 +199,7 @@ if (isset($_SESSION['token'])) {
                     document.getElementById('modelo').value = item.modelo;
                     document.getElementById('numeroSerie').value = item.numero_serie;
                     document.getElementById('tipo').value = item.tipo;
+                    document.getElementById('quantidade').value = item.quantidade;
                     document.getElementById('setor').value = item.setor_id.id;
                     setTimeout(function() {
                         $('#setor').val(item.setor_id.id).trigger('change');
