@@ -36,6 +36,11 @@ $equipamento = getData($apiUrl);
         .row {
             border: solid 1px #ccc;
         }
+        .legend {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #555;
+        }
     </style>
     <title>Patrimônio</title>
 </head>
@@ -47,6 +52,7 @@ $equipamento = getData($apiUrl);
             Administração - Controle de Patrimônio
         </a>
     </nav>
+    <p class="legend">Pressione a tecla <strong>F</strong> para acessar enviar uma foto.</p
     <div class="container mt-5">
         <div class="mt-4">
         <a href="./cadastrar" class="btn btn-success">Cadastrar</a>
@@ -113,6 +119,12 @@ $equipamento = getData($apiUrl);
     <script>
         Fancybox.bind('[data-fancybox]', {
             // Your custom options
+        });
+        document.addEventListener("keydown", function(event) {
+            // Verifica se a tecla pressionada foi "f" ou "F"
+            if (event.key === "f" || event.key === "F") {
+                window.location.href = "/siiupa/administracao/patrimonio/<?= $id ?>/foto/principal"; // Redireciona para o link desejado
+            }
         });
     </script>
 </body>
