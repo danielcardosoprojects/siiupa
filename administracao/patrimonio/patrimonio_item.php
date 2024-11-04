@@ -41,6 +41,18 @@ $equipamento = getData($apiUrl);
             font-size: 1.2em;
             color: #555;
         }
+        .key {
+            display: inline-block;
+            padding: 4px 8px;
+            font-size: 1em;
+            font-weight: bold;
+            color: #333;
+            background-color: #e0e0e0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            font-family: 'Courier New', Courier, monospace;
+        }
     </style>
     <title>Patrimônio</title>
 </head>
@@ -52,7 +64,7 @@ $equipamento = getData($apiUrl);
             Administração - Controle de Patrimônio
         </a>
     </nav>
-    <p class="legend">Pressione a tecla <strong>F</strong> para acessar enviar uma foto.</p>
+    <p class="legend">Pressione a tecla <strong class="key">F</strong> para acessar enviar uma foto.</p>
     <div class="container mt-5">
         <div class="mt-4">
         <a href="./cadastrar" class="btn btn-success">Cadastrar</a>
