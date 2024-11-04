@@ -27,7 +27,7 @@ $(document).ready(function () {
             },
             { "data": "nome" },
             { "data": "tipo" },
-            { "data": "quantidade", "defaultContent": "0" },
+            
             { "data": "marca" },
             { "data": "modelo" },
             { "data": "numero_serie", "defaultContent": "" }, // Número de série pode ser null
