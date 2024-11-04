@@ -120,6 +120,10 @@ if (isset($_SESSION['token'])) {
             const selectSetor = document.getElementById('setor');
             $('#setor').select2();
 
+            $('#completaVazio').click((e)=>{
+                document.getElementById('numeroSerie').value = 'sn';
+            })
+
         });
         // Função para carregar os setores da API
         function carregarSetores() {
