@@ -37,7 +37,7 @@ $equipamento = getData($apiUrl);
             border: solid 1px #ccc;
         }
         .legend {
-            margin-top: 20px;
+          
             font-size: 1.2em;
             color: #555;
         }
@@ -52,7 +52,7 @@ $equipamento = getData($apiUrl);
             Administração - Controle de Patrimônio
         </a>
     </nav>
-    <p class="legend">Pressione a tecla <strong>F</strong> para acessar enviar uma foto.</p
+    <p class="legend">Pressione a tecla <strong>F</strong> para acessar enviar uma foto.</p>
     <div class="container mt-5">
         <div class="mt-4">
         <a href="./cadastrar" class="btn btn-success">Cadastrar</a>
