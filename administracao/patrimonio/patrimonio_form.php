@@ -364,7 +364,7 @@ if (isset($_SESSION['token'])) {
                             let setor = document.getElementById('setor');
                             let nome = document.getElementById('nome');
                             let tipo = document.getElementById('tipo');
-                            let quantidade = document.getElementById('quantidade');
+                            let quantidade = document.getElementById("quantidade");
                             let marca = document.getElementById('marca');
                             let modelo = document.getElementById('modelo');
                             let obs = document.getElementById('obs');
@@ -373,8 +373,7 @@ if (isset($_SESSION['token'])) {
                             $("#setor").val(equipamento.setor_id).trigger('change');
                             nome.value = equipamento.nome;
                             tipo.value = equipamento.tipo;
-                            quantidade = equipamento.quantidade;
-                            console.log(quantidade);
+                            quantidade.value = equipamento.quantidade;
                             marca.value = equipamento.marca;
                             modelo.value = equipamento.modelo;
                             obs.value = equipamento.obs;
