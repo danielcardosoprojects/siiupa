@@ -77,8 +77,8 @@ if (isset($_SESSION['token'])) {
             <!--- Campo quantidade -->
             
             <div class="mb-3">
-                <label for="quantidade" class="form-label">quantidade</label>
-                <input type="number" class="form-control" id="quantidade" required>
+                <label for="quantidade" class="form-label">Quantidade</label>
+                <input type="number" class="form-control" id="quantidade" required="" min="1">
                 
             </div>
 
@@ -374,6 +374,7 @@ if (isset($_SESSION['token'])) {
                             nome.value = equipamento.nome;
                             tipo.value = equipamento.tipo;
                             quantidade = equipamento.quantidade;
+                            console.log(equipamento.quantidade);
                             marca.value = equipamento.marca;
                             modelo.value = equipamento.modelo;
                             obs.value = equipamento.obs;
