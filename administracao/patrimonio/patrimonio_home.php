@@ -79,6 +79,7 @@
                     <th>Foto</th>
                     <th>Nome</th>
                     <th>Tipo</th>
+                    <th>Qtd</th>
                     <th>Marca</th>
                     <th>Modelo</th>
                     <th>Número de Série</th>
