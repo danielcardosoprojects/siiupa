@@ -243,11 +243,12 @@ if (isset($_SESSION['token'])) {
                 const modelo = document.getElementById('modelo').value;
                 const numero_serie = document.getElementById('numeroSerie').value;
                 const tipo = document.getElementById('tipo').value;
+                const quantidade = document.getElementById('quantidade').value;
                 const setor = document.getElementById('setor').value;
                 const itemId = document.getElementById('itemId').value;
                 const obs = document.getElementById('obs').value;
 
-                if (!nome || !marca || !modelo || !numero_serie || !tipo || !setor) {
+                if (!nome || !marca || !modelo || !numero_serie || !tipo || !quantidade || !setor) {
                     alert('Preencha todos os campos.');
                     return;
                 }
@@ -267,6 +268,7 @@ if (isset($_SESSION['token'])) {
                             modelo: modelo,
                             numero_serie: numero_serie,
                             tipo: tipo,
+                            quantidade: quantidade,
                             setor_id: setor,
                             obs: obs
                         }
@@ -361,6 +363,7 @@ if (isset($_SESSION['token'])) {
                             let setor = document.getElementById('setor');
                             let nome = document.getElementById('nome');
                             let tipo = document.getElementById('tipo');
+                            let quantidade = document.getElementById('quantidade');
                             let marca = document.getElementById('marca');
                             let modelo = document.getElementById('modelo');
                             let obs = document.getElementById('obs');
@@ -369,6 +372,7 @@ if (isset($_SESSION['token'])) {
                             $("#setor").val(equipamento.setor_id).trigger('change');
                             nome.value = equipamento.nome;
                             tipo.value = equipamento.tipo;
+                            quantidade = equipamento.quantidade;
                             marca.value = equipamento.marca;
                             modelo.value = equipamento.modelo;
                             obs.value = equipamento.obs;
