@@ -78,7 +78,7 @@ if (isset($_SESSION['token'])) {
             
             <div class="mb-3">
                 <label for="quantidade" class="form-label">Quantidade</label>
-                <input type="number" class="form-control" id="quantidade" required="" min="1">
+                <input type="number" class="form-control" id="quantidade" required="" min="0">
                 
             </div>
 
