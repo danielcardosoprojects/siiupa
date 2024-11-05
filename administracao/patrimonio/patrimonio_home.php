@@ -41,6 +41,7 @@
     <img src="/siiupa/imagens/siiupa.png" class="d-inline-block align-top" alt="" width="200px">
     Administração - Controle de Patrimônio
   </a>
+  <a href="lista_patrimonio" class="btn btn-primary">Lista Patrimônio</a>
 </nav>
 <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#botao_setores_offcanvas" aria-controls="botao_setores_offcanvas">
         Abrir Menu de Setores
