@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipamentos por Setor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+    <style>
+        /* Quebra de página após a capa ao imprimir */
+        @media print {
+
+            /* Padding para a imagem da assinatura */
+            .assinatura {
+                padding-top: 450px;
+                /* Padding superior de 300px */
+            }
+
+            .page-break {
+                page-break-after: always;
+            }
+            @media print and (orientation: landscape) {
+                .assinatura {
+                    padding-top: 100px; /* Valor específico para paisagem */
+                }
+            }
+
+            /* Estilo do rodapé somente na primeira página (capa) */
+            .footer {
+                display: block;
+                /* Exibe o rodapé apenas na impressão */
+            }
+
+            .no-footer {
+                display: none;
+                /* Oculta o rodapé nas outras páginas */
+            }
+        }
+
+        /* Estilização do sumário em duas colunas e fonte reduzida */
+        .sumario {
+            columns: 2;
+            /* Duas colunas */
+            column-gap: 20px;
+            /* Espaço entre colunas */
+            font-size: 0.8rem;
+            /* Tamanho da fonte reduzido */
+            margin-bottom: 20px;
+            /* Espaço inferior */
+        }
+
+        /* Padding para o título */
+        h1 {
+            padding-top: 200px;
+            /* Padding superior de 200px */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app" class="container my-4">
+
+        <!-- Cabeçalho com imagem, título e descrição -->
+        <div class="text-center mb-4">
+            <img src="cabecalho_2024.jpg" alt="Cabeçalho" class="img-fluid">
+            <h1 class="mt-4">Patrimônio UPA Castanhal - Outubro/2024</h1>
+            <p>Lista de equipamentos, móveis e materiais da UPA Castanhal. Alguns itens não contêm foto devido a estarem
+                em uso por pacientes ou estarem fora da Unidade em manutenção/reparos.</p>
+
+            <!-- Imagem da assinatura abaixo do texto -->
+            <img src="assinatura_governo_2024.fw.png" alt="Assinatura Governo" class="img-fluid assinatura">
+        </div>
+
+        <!-- Quebra de página após a capa -->
+        <div class="page-break"></div>
+
+        <!-- Sumário com links para cada setor que tem itens cadastrados -->
+        <div class="my-4">
+            <h2>Sumário</h2>
+            <div class="sumario">
+                <ul>
+                    <li v-for="(equipamentos, setor) in setoresComItens" :key="setor">
+                        <a :href="'#' + setor">{{ setor }}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Quebra de página após o sumário -->
+        <div class="page-break"></div>
+
+        <!-- Tabelas de Equipamentos por Setor -->
+        <div v-for="(equipamentos, setor) in setoresComItens" :key="setor" class="my-4">
+            <!-- Tabela com o título do setor integrado na primeira linha -->
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <!-- Linha de título do setor -->
+                        <th :colspan="7" :id="setor" class="text-center h4 bg-light">{{ setor }}</th>
+                    </tr>
+                    <tr>
+                        <th>Foto</th>
+                        <th>Nome</th>
+                        <th>Tipo</th>
+                        <th>Marca</th>
+                        <th>Obs</th>
+                        <th>N. Série</th>
+                        <th>QTD</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="equipamento in equipamentos" :key="equipamento.id">
+                        <td>
+                            <img :src="equipamento.foto_frente ? `https://siupa.com.br/siiupa/administracao/patrimonio/imagem.php?largura=50&imagem=${equipamento.foto_frente}` : 'https://siupa.com.br/siiupa/administracao/patrimonio/imagem.php?largura=50&imagem=sem_foto.jpg'"
+                                alt="Foto do equipamento">
+                        </td>
+                        <td>{{ equipamento.nome }}</td>
+                        <td>{{ equipamento.tipo }}</td>
+                        <td>{{ equipamento.marca }}</td>
+                        <td>{{ equipamento.obs ? equipamento.obs : 'Bom estado.' }}</td>
+                        <td>{{ equipamento.numero_serie }}</td>
+                        <td>{{ equipamento.quantidade }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <!-- Inclusão do Vue.js -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <!-- Inclusão do Axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                equipamentosPorSetor: {},
+            },
+            computed: {
+                setoresComItens() {
+                    return Object.fromEntries(
+                        Object.entries(this.equipamentosPorSetor).filter(
+                            ([, equipamentos]) => equipamentos.length > 0
+                        )
+                    );
+                }
+            },
+            mounted() {
+                this.carregarDados();
+            },
+            methods: {
+                async carregarDados() {
+                    try {
+                        const respostaSetores = await axios.get('https://www.siupa.com.br/siiupa/api/api.php/records/tb_setor?order=setor,asc');
+                        const respostaEquipamentos = await axios.get('https://www.siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos?join=setor_id,tb_setor');
+
+                        const setores = respostaSetores.data.records.reduce((acc, setor) => {
+                            acc[setor.setor] = [];
+                            return acc;
+                        }, {});
+
+                        respostaEquipamentos.data.records.forEach(equipamento => {
+                            const setorNome = equipamento.setor_id.setor;
+                            if (setores[setorNome]) {
+                                setores[setorNome].push(equipamento);
+                            }
+                        });
+
+                        this.equipamentosPorSetor = setores;
+
+                    } catch (error) {
+                        console.error('Erro ao carregar dados:', error);
+                    }
+                }
+            }
+        });
+    </script>
+
+</body>
+
+</html>
