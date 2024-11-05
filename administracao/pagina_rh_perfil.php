@@ -526,7 +526,7 @@ class Grade
             // Verifica se a tecla pressionada foi "f" ou "F"
             if (event.key === "f" || event.key === "F") {
                 let linkFerias = "?setor=adm&sub=rh&subsub=rhcadastraferias&acao=cadastrar&id=<?php echo $perfil->id; ?>&nome=<?php echo urlencode($perfil->nome); ?>&cargo=<?php echo urlencode($perfil->cargo_desc); ?>&vinculo=<?= $perfil->vinculo; ?>";
-                window.location.href = "/siiupa/administracao/patrimonio/<?= $id ?>/foto/principal"; // Redireciona para o link desejado
+                window.location.href = linkFerias; // Redireciona para o link desejado
             }
         });
         </script>
