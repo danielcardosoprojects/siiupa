@@ -521,7 +521,7 @@ class Grade
         <img src="/siiupa/imagens/icones/houseboat.svg">
         Cadastrar Férias
     </a>
-    <script>
+    <!-- <script>
         document.addEventListener("keydown", function(event) {
             // Verifica se a tecla pressionada foi "f" ou "F"
             if (event.key === "f" || event.key === "F") {
@@ -529,7 +529,7 @@ class Grade
                 window.location.href = linkFerias; // Redireciona para o link desejado
             }
         });
-        </script>
+        </script> -->
 
 
     <a class='btn btn-outline-secondary' target="_blank" href="/siiupa/administracao/apicnes.php?id=<?php echo $perfil->id; ?>">
