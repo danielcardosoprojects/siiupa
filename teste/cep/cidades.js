@@ -482,7 +482,7 @@ function carregaHistorico() {
             data.records.forEach((dado) => {
             
                 if(dado.cidades != null) {
-                    dado.ok = "🟢";
+                    dado.ok = "✅";
                     const input = document.getElementById('dateInput');
                     if(ultima_data == 0){
                         input.value = dado.data;
