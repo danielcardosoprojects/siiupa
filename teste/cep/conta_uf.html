@@ -3,90 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tabela de UFs do Brasil</title>
+    <title>Contador de Estados</title>
     <style>
-        table {
-            width: 80%;
-            margin: 20px auto;
-            border-collapse: collapse;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
         }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
+        .state-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 0;
+            width: 100%;
+            height: 100%;
+            max-width: 100%;
+            max-height: 100%;
+            margin: 0;
         }
-        th {
-            background-color: #f2f2f2;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
+        .state-button {
+            border: 1px solid black;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0;
+            margin: 0;
             cursor: pointer;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+        }
+        .state-button button {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: transparent;
+            font-size: inherit;
+            font-weight: inherit;
+            cursor: pointer;
+        }
+        .state-button button:hover {
+            background-color: #ddd;
+        }
+        .count-display {
+            margin-left: 10px;
+            font-weight: normal;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
-    <table>
-        <thead>
-            <tr>
-                <th>Sigla</th>
-                <th>Sigla</th>
-                <th>Sigla</th>
-                <th>Sigla</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><button onclick="increment(this)">AC</button></td>
-                <td><button onclick="increment(this)">AL</button></td>
-                <td><button onclick="increment(this)">AM</button></td>
-                <td><button onclick="increment(this)">AP</button></td>
-            </tr>
-            <tr>
-                <td><button onclick="increment(this)">BA</button></td>
-                <td><button onclick="increment(this)">CE</button></td>
-                <td><button onclick="increment(this)">DF</button></td>
-                <td><button onclick="increment(this)">ES</button></td>
-            </tr>
-            <tr>
-                <td><button onclick="increment(this)">GO</button></td>
-                <td><button onclick="increment(this)">MA</button></td>
-                <td><button onclick="increment(this)">MG</button></td>
-                <td><button onclick="increment(this)">MS</button></td>
-            </tr>
-            <tr>
-                <td><button onclick="increment(this)">MT</button></td>
-                <td><button onclick="increment(this)">PA</button></td>
-                <td><button onclick="increment(this)">PB</button></td>
-                <td><button onclick="increment(this)">PE</button></td>
-            </tr>
-            <tr>
-                <td><button onclick="increment(this)">PI</button></td>
-                <td><button onclick="increment(this)">PR</button></td>
-                <td><button onclick="increment(this)">RJ</button></td>
-                <td><button onclick="increment(this)">RN</button></td>
-            </tr>
-            <tr>
-                <td><button onclick="increment(this)">RO</button></td>
-                <td><button onclick="increment(this)">RR</button></td>
-                <td><button onclick="increment(this)">RS</button></td>
-                <td><button onclick="increment(this)">SC</button></td>
-            </tr>
-            <tr>
-                <td><button onclick="increment(this)">SE</button></td>
-                <td><button onclick="increment(this)">SP</button></td>
-                <td><button onclick="increment(this)">TO</button></td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
+
+    <div class="state-container" id="stateContainer">
+        <!-- Botões dos estados serão inseridos aqui pelo JavaScript -->
+    </div>
 
     <script>
-        function increment(button) {
-            let count = parseInt(button.innerText.match(/\d+/)) || 0;
-            count++;
-            button.innerText = button.innerText.replace(/\d*/, count);
+        const estados = [
+            { uf: "AC", atalho: "a" }, { uf: "AL", atalho: "b" },
+            { uf: "AP", atalho: "c" }, { uf: "AM", atalho: "d" },
+            { uf: "BA", atalho: "e" }, { uf: "CE", atalho: "f" },
+            { uf: "DF", atalho: "g" }, { uf: "ES", atalho: "h" },
+            { uf: "GO", atalho: "i" }, { uf: "MA", atalho: "j" },
+            { uf: "MT", atalho: "k" }, { uf: "MS", atalho: "l" },
+            { uf: "MG", atalho: "m" }, { uf: "PA", atalho: "n" },
+            { uf: "PB", atalho: "o" }, { uf: "PR", atalho: "p" },
+            { uf: "PE", atalho: "q" }, { uf: "PI", atalho: "r" },
+            { uf: "RJ", atalho: "s" }, { uf: "RN", atalho: "t" },
+            { uf: "RS", atalho: "u" }, { uf: "RO", atalho: "v" },
+            { uf: "RR", atalho: "w" }, { uf: "SC", atalho: "x" },
+            { uf: "SP", atalho: "y" }, { uf: "SE", atalho: "z" },
+            { uf: "TO", atalho: "ç" }
+        ];
+
+        const stateContainer = document.getElementById('stateContainer');
+        const counts = {};
+
+        // Paleta de cores em tons pastéis para os botões
+        const coresPastel = [
+            '#FFB3BA', '#FFDFBA', '#FFFFBA', '#BAFFC9', '#BAE1FF', '#FFB3E6',
+            '#C2F0C2', '#F5B7B1', '#D0B4F1', '#FFB7C5', '#D2F7D1', '#D0E9FF',
+            '#F4E1D2', '#A8D8B9', '#F9E79F', '#F7C4B6', '#B5EAD7', '#F6A6A1',
+            '#F1E3B3', '#C9B6E4', '#F9D5D3', '#C8D8E4', '#FFFCBB', '#F3E4E8',
+            '#FFDCF2', '#D1F4F2'
+        ];
+
+        // Função para criar os botões de estados
+        estados.forEach((estado, index) => {
+            counts[estado.uf] = 0;
+
+            const buttonContainer = document.createElement('div');
+            buttonContainer.classList.add('state-button');
+            buttonContainer.style.backgroundColor = coresPastel[index % coresPastel.length];  // Atribui cor ao botão
+
+            const incrementButton = document.createElement('button');
+            incrementButton.innerText = `${estado.uf}`;
+            incrementButton.onclick = () => updateCount(estado.uf, 1);
+
+            const countDisplay = document.createElement('span');
+            countDisplay.id = `count-${estado.uf}`;
+            countDisplay.classList.add('count-display');
+            countDisplay.innerText = counts[estado.uf];
+
+            buttonContainer.appendChild(incrementButton);
+            buttonContainer.appendChild(countDisplay);
+            stateContainer.appendChild(buttonContainer);
+        });
+
+        // Função para atualizar a contagem
+        function updateCount(uf, increment) {
+            counts[uf] += increment;
+            if (counts[uf] < 0) counts[uf] = 0;
+            document.getElementById(`count-${uf}`).innerText = counts[uf];
         }
+
+        // Atalhos de teclado para incrementar contagens
+        document.addEventListener('keydown', (event) => {
+            const pressedKey = event.key.toLowerCase();
+            const state = estados.find(e => e.atalho === pressedKey);
+            if (state) {
+                updateCount(state.uf, 1);  // Apenas a letra adiciona
+            }
+        });
     </script>
+
 </body>
 </html>

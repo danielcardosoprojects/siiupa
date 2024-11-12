@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulação de Tabela com Painel Congelado</title>
+    <style>
+        /* Estilos para o layout */
+        .container {
+            display: flex;
+            overflow: hidden;
+            width: 100%;
+            max-width: 100vw;
+            height: 50vw; /* Ajuste a altura conforme necessário */
+            border: 1px solid #ccc;
+            position: relative;
+        }
+        
+        /* Coluna fixa à esquerda */
+        .fixed-column {
+            width: 200px; /* Ajuste o valor conforme necessário */
+            flex-shrink: 0;
+            overflow: hidden;
+            position: relative;
+            z-index: 2; /* Coloca a coluna fixa acima da área rolável */
+        }
+
+        /* A imagem da coluna fixa é um recorte da imagem total */
+        .fixed-column img {
+            position: absolute;
+            left: 0;
+            top: 0;
+            clip: rect(auto, 400px, auto, auto); /* Exibe apenas a coluna fixa */
+        }
+        
+        /* Seção rolável à direita */
+        .scrollable-area {
+            overflow: hidden; /* Remove as barras de rolagem */
+            position: relative;
+            flex-grow: 1;
+        }
+
+        /* Imagem dentro da área rolável */
+        .scrollable-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Coluna fixa à esquerda -->
+        <div class="fixed-column">
+            <img src="01.jpg" alt="Primeira Coluna da Tabela" >
+        </div>
+
+        <!-- Área rolável à direita -->
+        <div class="scrollable-area" id="scrollable-area">
+            <div class="scrollable-image" id="scrollable-image">
+                <img src="01.jpg" alt="Tabela Completa">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Variáveis para manipular a posição da imagem
+        const scrollableImage = document.getElementById("scrollable-image");
+        let posX = 0;
+        let posY = 0;
+        const step = 10; // Ajuste a distância movida a cada tecla pressionada
+
+        // Função para atualizar a posição da imagem
+        function updateImagePosition() {
+            scrollableImage.style.left = `${posX}px`;
+            scrollableImage.style.top = `${posY}px`;
+        }
+
+        // Evento de teclado para controlar a imagem com WASD
+        document.addEventListener("keydown", (e) => {
+            switch (e.key.toLowerCase()) {
+                case 'w': // Move para cima
+                    posY -= step;
+                    break;
+                case 'a': // Move para a esquerda
+                    posX -= step;
+                    break;
+                case 's': // Move para baixo
+                    posY += step;
+                    break;
+                case 'd': // Move para a direita
+                    posX += step;
+                    break;
+                default:
+                    return; // Ignora outras teclas
+            }
+            updateImagePosition(); // Atualiza a posição da imagem
+        });
+    </script>
+</body>
+</html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,85 +12,116 @@
             margin-top: 20px;
         }
 
-        table, th, td {
+        table,
+        th,
+        td {
             border: 1px solid #ddd;
         }
 
-        th, td {
+        th,
+        td {
             padding: 10px;
             text-align: left;
         }
     </style>
 </head>
+
 <body>
 
-<script>
-    // Função para obter os dados da API
-    async function fetchData(url) {
-        const response = await fetch(url);
-        const data = await response.json();
-        return data.records;
-    }
+    <script>
+        // Função para obter os dados da API
+        async function fetchData(url) {
+            const response = await fetch(url);
+            const data = await response.json();
+            return data.records;
+        }
 
-    // Função para organizar os dados em uma tabela
-    async function renderTable() {
-        const cidadesData = await fetchData('https://siupa.com.br/siiupa/api/api.php/records/tb_cidades');
-        const cepData = await fetchData('https://siupa.com.br/siiupa/api/api.php/records/tb_cep?filter=cidades,nis,null');
+        // Função para organizar os dados em uma tabela
+        async function renderTable() {
+            const cidadesData = await fetchData('https://siupa.com.br/siiupa/api/api.php/records/tb_cidades');
+            const cepData = await fetchData('https://siupa.com.br/siiupa/api/api.php/records/tb_cep?filter=cidades,nis,null');
 
-        // Mapear os IDs dos cidades para seus nomes
-        const cidadesMap = new Map(cidadesData.map(cidade => [cidade.id, cidade.cidade]));
+            // Mapear os IDs dos cidades para seus nomes
+            const cidadesMap = new Map(cidadesData.map(cidade => [cidade.id, cidade.cidade]));
 
-        // Criar a tabela
-        const table = document.createElement('table');
+            // Criar a tabela
+            const table = document.createElement('table');
 
-        // Cabeçalho da tabela
-        const thead = document.createElement('thead');
-        const headerRow = document.createElement('tr');
-        const headers = ['Data', 'cidade', 'QTD do cidade'];
-        headers.forEach(headerText => {
-            const th = document.createElement('th');
-            th.appendChild(document.createTextNode(headerText));
-            headerRow.appendChild(th);
-        });
-        thead.appendChild(headerRow);
-        table.appendChild(thead);
-
-        // Corpo da tabela
-        const tbody = document.createElement('tbody');
-        cepData.forEach(cep => {
-            const cidades = JSON.parse(cep.cidades);
-
-            Object.keys(cidades).forEach(cidadeId => {
-                const row = document.createElement('tr');
-
-                // Adicionar data
-                const dateCell = document.createElement('td');
-                dateCell.appendChild(document.createTextNode(cep.data));
-                row.appendChild(dateCell);
-
-                // Adicionar nome do cidade
-                const cidadeNomeCell = document.createElement('td');
-                const cidadeNome = cidadesMap.get(parseInt(cidadeId));
-                cidadeNomeCell.appendChild(document.createTextNode(cidadeNome));
-                row.appendChild(cidadeNomeCell);
-
-                // Adicionar ID do cidade
-                const cidadeIdCell = document.createElement('td');
-                cidadeIdCell.appendChild(document.createTextNode(cidades[cidadeId]));
-                row.appendChild(cidadeIdCell);
-
-                tbody.appendChild(row);
+            // Cabeçalho da tabela
+            const thead = document.createElement('thead');
+            const headerRow = document.createElement('tr');
+            const headers = ['Data', 'ANO', 'MES', 'quadrimestre', ' cidade', 'QTD do cidade'];
+            headers.forEach(headerText => {
+                const th = document.createElement('th');
+                th.appendChild(document.createTextNode(headerText));
+                headerRow.appendChild(th);
             });
-        });
-        table.appendChild(tbody);
+            thead.appendChild(headerRow);
+            table.appendChild(thead);
 
-        // Adicionar a tabela ao corpo do documento
-        document.body.appendChild(table);
-    }
+            // Corpo da tabela
+            const tbody = document.createElement('tbody');
+            cepData.forEach(cep => {
+                const cidades = JSON.parse(cep.cidades);
 
-    // Chamar a função para renderizar a tabela
-    renderTable();
-</script>
+                Object.keys(cidades).forEach(cidadeId => {
+                    const row = document.createElement('tr');
+
+                    // Adicionar data
+                    const dateCell = document.createElement('td');
+                    dateCell.appendChild(document.createTextNode(cep.data));
+                    row.appendChild(dateCell);
+                    let dataDados = new Date(cep.data);
+                    
+                    
+                    dataCelula = cep.data.split('-',3);
+                    console.log(dataCelula);
+
+                    const anoCell = document.createElement('td');
+                    anoCell.appendChild(document.createTextNode(dataCelula[0]));
+                    row.appendChild(anoCell);
+
+                    const mesCell = document.createElement('td');
+
+                    let meses = [
+                        "jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"
+                    ];
+                    let mesNum = parseFloat(dataCelula[1]-1);
+                    let mesAbrev = meses[mesNum];
+                    mesCell.appendChild(document.createTextNode(mesAbrev));
+                    row.appendChild(mesCell);
+
+                    const quadrimestreCell = document.createElement('td');
+
+                    let quadrimestre = (mesNum < 4) ? 1 : ((mesNum < 8)? 2 : 3);
+                    quadrimestreCell.appendChild(document.createTextNode(quadrimestre));
+                    row.appendChild(quadrimestreCell);
+
+
+                    // Adicionar nome do cidade
+                    const cidadeNomeCell = document.createElement('td');
+                    const cidadeNome = cidadesMap.get(parseInt(cidadeId));
+                    cidadeNomeCell.appendChild(document.createTextNode(cidadeNome));
+                    row.appendChild(cidadeNomeCell);
+
+                    // Adicionar ID do cidade
+                    const cidadeIdCell = document.createElement('td');
+                    cidadeIdCell.appendChild(document.createTextNode(cidades[cidadeId]));
+                    row.appendChild(cidadeIdCell);
+
+                    tbody.appendChild(row);
+                });
+            });
+            table.appendChild(tbody);
+
+            // Adicionar a tabela ao corpo do documento
+            document.body.appendChild(table);
+        }
+
+        // Chamar a função para renderizar a tabela
+        renderTable();
+    </script>
 
 </body>
+
 </html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página Dividida com Iframe</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            margin: 0;
+            padding: 0;
+            height: 100vh; /* Faz a altura ocupar toda a tela */
+        }
+        #buttons {
+           position: fixed;
+           background-color: antiquewhite;
+        }
+        .container {
+            display: flex;
+            width: 100%;
+        }
+
+        .left {
+            flex: 1;
+            padding: 20px;
+            border-right: 2px solid #ccc;
+            overflow-y: auto; /* Para permitir rolagem se necessário */
+            max-width: 50%; /* Limita o tamanho da área à esquerda */
+        }
+
+        .right {
+            flex: 1;
+            padding: 20px;
+            overflow: hidden; /* Impede rolagem dentro do iframe */
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none; /* Remove a borda padrão do iframe */
+        }
+
+        img {
+            width: 150%; /* Ajusta a imagem para a largura do contêiner */
+            max-width: 800px; /* Define um tamanho máximo para a imagem */
+            height: auto;
+            object-fit: cover;
+            display: block;
+            margin-top: 5px; /* Para garantir o espaçamento após os botões */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Lado esquerdo (conteúdo principal) -->
+        <div class="left">
+            
+            <!-- Coloque o conteúdo da sua página principal aqui -->
+            <div id="buttons">
+                <button id="previousButton" onclick="navigateImage(-1)">Anterior</button>
+                <button id="nextButton" onclick="navigateImage(1)">Próximo</button>
+                <div id="dateDisplay" class="date-display">Dia: 01/09/2024</div>
+            </div>
+           
+            <img id="imageDisplay" src="" alt="Imagem escaneada">
+            
+        </div>
+
+        <!-- Lado direito (iframe) -->
+        <div class="right">
+            <iframe src="conta_uf.html" title="Conta UF"></iframe>
+        </div>
+    </div>
+
+    <script>
+        let currentImageIndex = 1;
+        const totalImages = 61; // Total de imagens (20240901 a 20241031)
+        const imageBaseUrl = "202410/"; // Substitua pelo caminho correto
+
+        function updateImage() {
+            const imageUrl = `${imageBaseUrl}${getImageName(currentImageIndex)}`;
+            const imgElement = document.getElementById('imageDisplay');
+            imgElement.src = imageUrl;
+            updateDateDisplay();
+            cropImage();
+        }
+
+        function getImageName(index) {
+            const datePrefix = "2024";
+            const month = 10;
+            const day = String(index).padStart(2, '0');
+            return `${datePrefix}${month}${day}.png`;
+        }
+
+        function updateDateDisplay() {
+            const date = getDateFromIndex(currentImageIndex);
+            const dateDisplay = document.getElementById('dateDisplay');
+            dateDisplay.textContent = `Dia: ${date}`;
+        }
+
+        function getDateFromIndex(index) {
+            const datePrefix = "2024";
+            const month = 10;
+            const day = String(index).padStart(2, '0');
+            return `${day}/${month}/${datePrefix}`;
+        }
+
+        function cropImage() {
+            const img = document.getElementById('imageDisplay');
+            img.onload = function() {
+                const imageHeight = img.height;
+                const imageWidth = img.width;
+                const cropHeight = 0; // Pegando a metade inferior da imagem
+                const cropWidth = imageWidth / 2; // Pegando a metade esquerda da imagem
+
+                img.style.objectPosition = `-${cropWidth}px -${cropHeight}px`; // Move a imagem para exibir o terceiro quadrante
+            };
+        }
+
+        function navigateImage(direction) {
+            currentImageIndex += direction;
+
+            // Limita a navegação para o intervalo de imagens
+            if (currentImageIndex < 1) currentImageIndex = 1;
+            if (currentImageIndex > totalImages) currentImageIndex = totalImages;
+
+            updateImage();
+        }
+
+        // Função para detectar os atalhos de teclado
+        document.addEventListener('keydown', function(event) {
+            // Ignora o evento se o foco estiver dentro do iframe
+            const iframe = document.querySelector('iframe');
+            if (iframe === document.activeElement || iframe.contentWindow === document.activeElement) {
+                return; // Não faz nada se o foco estiver no iframe
+            }
+
+            if (event.key === 'a' || event.key === 'A') {
+                navigateImage(-1); // Atalho para "Anterior"
+            } else if (event.key === 'd' || event.key === 'D') {
+                navigateImage(1); // Atalho para "Próximo"
+            }
+        });
+
+        // Inicializa a primeira imagem
+        updateImage();
+    </script>
+</body>
+</html>
