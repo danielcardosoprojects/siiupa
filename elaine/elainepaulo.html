@@ -74,8 +74,10 @@
         .pix-key {
             font-size: 1.3em;
             font-weight: bold;
-            color: #c68623; /* Cor dourada inspirada no centro do girassol */
+            color: #000; /* Cor dourada inspirada no centro do girassol */
             margin-top: 15px;
+            background-color: #fff;
+            cursor: pointer;
         }
         
         /* Estilo da imagem Pix */
@@ -130,6 +132,7 @@
         <p class="texto">
             Estamos muito felizes em compartilhar esse dia especial com vocês! A celebração do nosso amor é o nosso maior presente, mas se desejarem contribuir, aceitamos com carinho um presente via Pix.
         </p>
+        <p class="pix-key" onclick="copyPix()">admelainecabral@gmail.com</p>
         <img src="pixelaine.jpg" alt="Chave Pix" class="pix">
         
         <!-- Botão de copiar o código Pix -->
@@ -141,7 +144,7 @@
     <script>
         function copyPix() {
             // Código Pix
-            const pixCode = "00020126630014br.gov.bcb.pix0125admelainecabral@gmail.com0212Elaine&Paulo5204000053039865802BR5922Elaine Cabral da Silva6008Brasilia620905056qe796304B89F";
+            const pixCode = "admelainecabral@gmail.com";
             
             // Cria um campo de texto temporário para copiar o código Pix
             const tempInput = document.createElement("input");
@@ -160,6 +163,8 @@
                 alert.style.display = "none";
             }, 3000);
         }
+
+      
     </script>
 </body>
 </html>
