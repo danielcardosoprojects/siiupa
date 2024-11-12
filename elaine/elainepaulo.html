@@ -1,1 +1,82 @@
-teste
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosso Casamento</title>
+    <style>
+        /* Definições de estilo para o fundo e a imagem do casal */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: url('https://example.com/fundo-girassois.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        /* Container da mensagem */
+        .content {
+            text-align: center;
+            color: #fff;
+            background: rgba(0, 0, 0, 0.6); /* Fundo levemente transparente */
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 90%;
+            width: 500px;
+        }
+
+        /* Imagem do casal */
+        .couple-image {
+            width: 80%;
+            max-width: 300px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Estilo do título */
+        h1 {
+            font-size: 2em;
+            margin: 0;
+            padding-bottom: 10px;
+        }
+
+        /* Estilo da mensagem */
+        p {
+            font-size: 1.1em;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Chave Pix */
+        .pix-key {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #ffd700; /* Cor dourada */
+            margin-top: 10px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5em;
+            }
+            p {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <img src="https://example.com/imagem-casal.png" alt="Imagem do Casal" class="couple-image">
+        <h1>Bem-vindos ao Nosso Casamento</h1>
+        <p>
+            Estamos muito felizes em compartilhar esse dia especial com vocês! A celebração do nosso amor é o nosso maior presente, mas se desejarem contribuir, aceitamos com carinho um presente via Pix.
+        </p>
+        <p class="pix-key">Chave Pix: 123.456.789-00</p>
+    </div>
+</body>
+</html>
