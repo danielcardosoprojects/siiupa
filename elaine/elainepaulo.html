@@ -20,14 +20,14 @@
             background: url('girassol.jpg') no-repeat center center fixed;
             background-size: cover;
             position: relative;
-            overflow: hidden; /* Impede rolagem enquanto as animações acontecem */
+            overflow-y: auto; /* Permite rolagem na página */
         }
 
         /* Estilo do container central */
         .content {
             text-align: center;
             color: #4a381f; /* Cor inspirada no centro do girassol */
-            background: rgba(255, 239, 191, 0.9); /* Fundo amarelo suave inspirado nas pétalas de girassol */
+            background: rgba(255, 239, 191, 0.5); /* Fundo amarelo suave inspirado nas pétalas de girassol */
             padding: 20px 30px;
             border-radius: 15px;
             box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
@@ -35,6 +35,14 @@
             width: 500px;
             position: relative;
             z-index: 2;
+        }
+
+        .texto {
+            text-align: center;
+            color: #4a381f; /* Cor inspirada no centro do girassol */
+            background: rgba(255, 239, 191, 0.8); /* Fundo amarelo suave inspirado nas pétalas de girassol */
+            padding: 20px 30px;
+            border-radius: 15px;
         }
 
         /* Imagem do casal */
@@ -79,7 +87,7 @@
 
         /* Botão de copiar */
         .copy-btn {
-            display: inline-block;
+            display: block; /* Garante que o botão fique abaixo da imagem */
             margin-top: 15px;
             padding: 10px 15px;
             background-color: #c68623;
@@ -89,6 +97,7 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
+            width: 100%;
         }
 
         .copy-btn:hover {
@@ -101,28 +110,6 @@
             font-size: 1em;
             color: green;
             display: none; /* Oculto inicialmente */
-        }
-
-        /* Animação de corações caindo */
-        .heart {
-            position: absolute;
-            font-size: 30px;
-            color: #f9d71c; /* Cor amarela */
-            animation: fall 3s infinite ease-in;
-        }
-
-        /* Animação de queda dos corações */
-        @keyframes fall {
-            0% {
-                top: -10%;
-                opacity: 1;
-                transform: rotate(0deg);
-            }
-            100% {
-                top: 100%;
-                opacity: 0;
-                transform: rotate(360deg);
-            }
         }
 
         /* Responsividade */
@@ -140,7 +127,7 @@
     <div class="content">
         <img src="casal.png" alt="Imagem do Casal" class="couple-image">
         <h1>Bem-vindos ao Nosso Casamento</h1>
-        <p>
+        <p class="texto">
             Estamos muito felizes em compartilhar esse dia especial com vocês! A celebração do nosso amor é o nosso maior presente, mas se desejarem contribuir, aceitamos com carinho um presente via Pix.
         </p>
         <img src="pixelaine.jpg" alt="Chave Pix" class="pix">
@@ -173,29 +160,6 @@
                 alert.style.display = "none";
             }, 3000);
         }
-
-        // Função para criar corações caindo aleatoriamente
-        function createHearts() {
-            const numberOfHearts = 20; // Número de corações
-            for (let i = 0; i < numberOfHearts; i++) {
-                const heart = document.createElement("div");
-                heart.classList.add("heart");
-                heart.innerHTML = "❤️"; // Coração em HTML
-
-                // Posição aleatória para o coração
-                heart.style.left = `${Math.random() * 100}vw`;
-                heart.style.animationDuration = `${Math.random() * 2 + 3}s`; // Durabilidade aleatória da animação
-                document.body.appendChild(heart);
-
-                // Remove o coração após a animação
-                setTimeout(() => {
-                    heart.remove();
-                }, 3000);
-            }
-        }
-
-        // Cria corações caindo a cada 0.5s
-        setInterval(createHearts, 500);
     </script>
 </body>
 </html>
