@@ -1564,7 +1564,7 @@ let incrementValue = 100 / totalCalls; // Valor para aumentar a cada chamada
 
 // Função para carregar o progresso salvo do Local Storage
 function loadProgress() {
-    const savedProgress = localStorage.getItem('progress');
+    const savedProgress = localStorage.getItem('progressSet24');
     if (savedProgress) {
         currentProgress = parseFloat(savedProgress);
         updateProgressBar();
@@ -1584,7 +1584,7 @@ function updateProgress() {
         if (currentProgress > 100) currentProgress = 100; // Limita a 100%
 
         // Salva o progresso no Local Storage
-        localStorage.setItem('progress', currentProgress);
+        localStorage.setItem('progressSet24', currentProgress);
 
         // Atualiza a barra de progresso
         updateProgressBar();
