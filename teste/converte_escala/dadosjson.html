@@ -205,7 +205,11 @@
 
       for (let i = 0; i < copiarItemButtons.length; i++) {
         copiarItemButtons[i].addEventListener('click', function () {
-
+          
+          
+          let proximo = JSON.parse(copiarItemButtons[i+1].getAttribute('data-dados'));
+          console.log(proximo.nome);
+          preencheSearch(proximo.nome)
           let dados = JSON.parse(this.getAttribute('data-dados'));
           let json = JSON.stringify(dados, null, 2);
           let idEscala = document.getElementById("idEscala").value;
@@ -234,6 +238,7 @@
             .then(resposta => {
               // Manipular a resposta da API, se necessário
               console.log('Resposta da API:', resposta.data);
+              preencheSearch(proximo.nome)
             })
             .catch(erro => {
               // Lidar com erros da requisição
