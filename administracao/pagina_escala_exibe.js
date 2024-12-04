@@ -123,7 +123,7 @@ $(function () {
                     let anoEscala = $(".bt_oficial").data("ano");
                     let mesEscala = $(".bt_oficial").data("mes");
                     let todosJson = [];
-                    let teste = 2;
+                    
                     $(buscaTodos).each(function () {
                         nomeBT = $(this).data('nome');
                         idEscolhidoBT = $(this).data('idescolhido');
@@ -139,8 +139,8 @@ $(function () {
                     let url = "https://www.siupa.com.br/siiupa/api/api.php/records/tb_escala_funcionario";
 
                     // Enviar o JSON via POST
-                    alert(teste);
-                    teste++;
+                    
+                  
 
                     $.ajax({
                         url: url,
@@ -148,7 +148,10 @@ $(function () {
                         contentType: "application/json",
                         data: JSON.stringify(todosJson),
                         success: function (response) {
-                           window.location.reload();
+                            var urlescala = (location.search);
+                            var recarregaescala = 'administracao/pagina_escala_exibe.php' + urlescala;
+    
+                            $('#subconteudo').load(recarregaescala);
                         },
                         error: function (xhr, status, error) {
                             console.error("Erro:", error);
