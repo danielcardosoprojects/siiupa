@@ -114,16 +114,16 @@ $(function () {
                 $('#btAddTodos2').click(function (e) {
                     e.preventDefault();
 
-                    var urlescala = (location.search);
+                   
                     buscaTodos = $(".escolhido");
-                    let chave = $("#chaveAddServ").val();
+                   
 
-                    todosArray = JSON.stringify(buscaTodos.toArray());
+                 
                     let idEscala = $(".bt_oficial").data("idescala");
                     let anoEscala = $(".bt_oficial").data("ano");
                     let mesEscala = $(".bt_oficial").data("mes");
                     let todosJson = [];
-
+                    let teste = 1;
                     $(buscaTodos).each(function () {
                         nomeBT = $(this).data('nome');
                         idEscolhidoBT = $(this).data('idescolhido');
@@ -134,14 +134,14 @@ $(function () {
                     });
 
 
-                    var urlescala = (location.search);
-                    var inserirlink = "/siiupa/administracao/escalas/buscarservidor.php" + urlescala + "&acao=inseretodos";
-                    console.log(inserirlink);
+                  
                     // URL da API
                     let url = "https://www.siupa.com.br/siiupa/api/api.php/records/tb_escala_funcionario";
 
                     // Enviar o JSON via POST
-                    alert('click');
+                    alert(teste);
+                    teste++;
+
                     $.ajax({
                         url: url,
                         type: "POST",
@@ -155,16 +155,6 @@ $(function () {
                         }
                     });
 
-                    // $.post(inserirlink, {
-                    //     todos: todosJson,
-                    //     chave: chave
-                    // }).done(function (data) {
-                    //     $("#dialogaddresultadobusca").html(data);
-                    //     var urlescala = (location.search);
-                    //     var recarregaescala = 'administracao/pagina_escala_exibe.php' + urlescala;
-
-                    //     $('#subconteudo').load(recarregaescala);
-                    // });
 
                 });
 
