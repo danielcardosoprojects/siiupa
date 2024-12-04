@@ -112,6 +112,7 @@ $(function () {
                 });
 
                 $('#btAddTodos2').click(function (e) {
+                    e.preventDefault();
 
                     var urlescala = (location.search);
                     buscaTodos = $(".escolhido");
