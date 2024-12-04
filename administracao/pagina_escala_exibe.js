@@ -146,7 +146,7 @@ $(function () {
                         contentType: "application/json",
                         data: JSON.stringify(todosJson),
                         success: function (response) {
-                            $("#dialogaddresultadobusca").html(data);
+                            $("#dialogaddresultadobusca").html(response);
                             var urlescala = (location.search);
                             var recarregaescala = 'administracao/pagina_escala_exibe.php' + urlescala;
                             console.log(recarregaescala);
