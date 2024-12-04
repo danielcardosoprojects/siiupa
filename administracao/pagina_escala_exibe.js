@@ -1,8 +1,8 @@
-$(function() {
+$(function () {
 
     //exibe os checkbox de exclusao
-    
-    
+
+
     $("#blocodenotas").click((e) => {
         e.preventDefault();
         // $("#dialogAnota").dialog();
@@ -19,7 +19,7 @@ $(function() {
     });
 
 
-    $(".bt_oficial").click(function(e) {
+    $(".bt_oficial").click(function (e) {
         e.preventDefault();
         valor = $(this).data('oficial');
         idescala = $(this).data('idescala');
@@ -53,7 +53,7 @@ $(function() {
         }
         var escala_oficial = 'administracao/escalas/atualiza_oficial.php?idescala=' + idescala + '&valor=' + valor;
         $("#load_status_escala").removeClass("d-none");
-        $.get(escala_oficial, function(data) {
+        $.get(escala_oficial, function (data) {
 
             window.history.pushState(null, 'hi', linknovo);
             window.location.reload();
@@ -68,38 +68,38 @@ $(function() {
         height: 500,
         width: 600
     });
-    $('#addservidor').click(function() {
+    $('#addservidor').click(function () {
         $("#dialogadd").dialog("open");
 
     });
 
-    $("#btaddservidor").click(function(e){
+    $("#btaddservidor").click(function (e) {
         e.preventDefault();
         $('#form-busca-servidores').submit();
         $("#btAddTodos2").removeClass("d-none");
     });
 
-    $('#form-busca-servidores').submit(function( event ) {
-        
+    $('#form-busca-servidores').submit(function (event) {
+
 
         event.preventDefault();
-        
+
         var buscar = encodeURI($('#buscar').val());
         var busca_servidor_setor = $('#busca_servidor_setor').val();
         var acao = "buscar";
         var urlbusca = "https://siupa.com.br/siiupa/administracao/escalas/buscarservidor.php?acao=busca&nome=" + buscar + "&setor=" + busca_servidor_setor;
         console.log(urlbusca);
-        
+
         $('#dialogaddresultadobusca').load(urlbusca,
-            function() {
-                $(".escolhido").click(function(e) {
+            function () {
+                $(".escolhido").click(function (e) {
                     e.preventDefault();
                     var urlescala = (location.search);
 
 
                     var inserirlink = "administracao/escalas/buscarservidor.php" + urlescala + "&acao=insere&idservidor=" + $(this).data('idescolhido');
 
-                    $('#dialogaddresultadobusca').load(inserirlink, function() {
+                    $('#dialogaddresultadobusca').load(inserirlink, function () {
                         var urlescala = (location.search);
                         var recarregaescala = 'administracao/pagina_escala_exibe.php' + urlescala;
 
@@ -111,23 +111,27 @@ $(function() {
 
                 });
 
-                $('#btAddTodos2').click(function(e) {
+                $('#btAddTodos2').click(function (e) {
 
                     var urlescala = (location.search);
                     buscaTodos = $(".escolhido");
                     let chave = $("#chaveAddServ").val();
 
                     todosArray = JSON.stringify(buscaTodos.toArray());
+                    let idEscala = $(".bt_oficial").data("idescala");
+                    let anoEscala = $(".bt_oficial").data("ano");
+                    let mesEscala = $(".bt_oficial").data("mes");
+                    let todosJson = [];
 
-                    var todosJson = '{';
-                    virgula = '';
-                    $(buscaTodos).each(function() {
-                        todosJson = todosJson + virgula;
-                        todosJson = todosJson + '"' + ($(this).data('nome')) + '":' + ($(this).data('idescolhido'));
-                        virgula = ',';
+                    $(buscaTodos).each(function () {
+                        nomeBT = $(this).data('nome');
+                        idEscolhidoBT = $(this).data('idescolhido');
+
+                        todosJson.push({ fk_escala: idEscala, fk_funcionario: idEscolhidoBT, mes: mesEscala, ano: anoEscala });
+
 
                     });
-                    todosJson = todosJson + '}';
+
 
                     var urlescala = (location.search);
                     var inserirlink = "/siiupa/administracao/escalas/buscarservidor.php" + urlescala + "&acao=inseretodos";
@@ -136,7 +140,7 @@ $(function() {
                     $.post(inserirlink, {
                         todos: todosJson,
                         chave: chave
-                    }).done(function(data) {
+                    }).done(function (data) {
                         $("#dialogaddresultadobusca").html(data);
                         var urlescala = (location.search);
                         var recarregaescala = 'administracao/pagina_escala_exibe.php' + urlescala;
@@ -157,27 +161,27 @@ $(function() {
         width: 500
     });
 
-    $('.link-oculto').click(function(e) {
+    $('.link-oculto').click(function (e) {
         e.preventDefault();
 
     });
-    $('.editafuncionario').dblclick(function() {
+    $('.editafuncionario').dblclick(function () {
         var edita = $(this);
 
         function centralizaDialog(idDialog) {
             appendTo: "body",
-            $(idDialog).dialog({
-                position: {
-                    my: "center",
-                    at: "center",
-                    of: window
-                }
-            });
+                $(idDialog).dialog({
+                    position: {
+                        my: "center",
+                        at: "center",
+                        of: window
+                    }
+                });
         }
 
         dialogConfig = $("#dialogconfig");
         var linkedita = 'administracao/escalas/editaservidor.php?idef=' + edita.data('idef') + '&idf=' + edita.data('idf') + '&nomeservidor=' + encodeURI(edita.data('nomeservidor')) + '&posicao=' + edita.data('posicao');
-        $.get(linkedita, function(data) {
+        $.get(linkedita, function (data) {
             dialogConfig.html(data), centralizaDialog("#dialogconfig");
         }).done(centralizaDialog("#dialogconfig"));
         //$("#dialogcfgresult").load(linkedita);
