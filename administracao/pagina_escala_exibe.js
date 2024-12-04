@@ -136,17 +136,33 @@ $(function () {
                     var urlescala = (location.search);
                     var inserirlink = "/siiupa/administracao/escalas/buscarservidor.php" + urlescala + "&acao=inseretodos";
                     console.log(inserirlink);
+// URL da API
+let url = "https://www.siupa.com.br/siiupa/api/api.php/records/tb_escala_funcionario";
 
-                    $.post(inserirlink, {
-                        todos: todosJson,
-                        chave: chave
-                    }).done(function (data) {
-                        $("#dialogaddresultadobusca").html(data);
-                        var urlescala = (location.search);
-                        var recarregaescala = 'administracao/pagina_escala_exibe.php' + urlescala;
+// Enviar o JSON via POST
+$.ajax({
+    url: url,
+    type: "POST",
+    contentType: "application/json",
+    data: JSON.stringify(todosJson),
+    success: function (response) {
+        console.log("Sucesso:", response);
+    },
+    error: function (xhr, status, error) {
+        console.error("Erro:", error);
+    }
+});
 
-                        $('#subconteudo').load(recarregaescala);
-                    });
+                    // $.post(inserirlink, {
+                    //     todos: todosJson,
+                    //     chave: chave
+                    // }).done(function (data) {
+                    //     $("#dialogaddresultadobusca").html(data);
+                    //     var urlescala = (location.search);
+                    //     var recarregaescala = 'administracao/pagina_escala_exibe.php' + urlescala;
+
+                    //     $('#subconteudo').load(recarregaescala);
+                    // });
 
                 });
 
