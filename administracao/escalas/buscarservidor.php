@@ -49,39 +49,6 @@ if ($acao == 'insere') {
     $chave = $_POST['chave'];
     $todos = json_decode($todos, true);
     var_dump($todos);
-
-    //CONSULTA Chave PARA EVITAR DUPLICACAO
-    $buscaChave = new BD;
-    $sqlBChave = "SELECT chave FROM u940659928_siupa.tb_escalas where chave='$chave'";
-
-    $buscaChave = $buscaChave->conecta();
-    $consultaChave = $buscaChave->prepare($sqlBChave);
-    $consultaChave->execute();
-
-    if ($consultaChave->rowCount() == 0) {
-        $virgula = "";
-        $values = "";
-        foreach ($todos as $idservidor) {
-            $values .= $virgula;
-
-            $values .= "('$id','$idservidor','$mes','$ano')";
-            $virgula = ",";
-        }
-        var_dump($values);
-        $busca = new BD;
-        $sql = "INSERT IGNORE INTO u940659928_siupa.tb_escala_funcionario (fk_escala, fk_funcionario, mes, ano) VALUES $values";
-
-        $rBusca = $busca->consulta($sql);
-
-        $attChave = new BD;
-        $sqlAttChave = "UPDATE u940659928_siupa.tb_escalas where id=$id SET chave=$chave";
-        $rAttChave = $attChave->consulta($sqlAttChave);
-
-        echo "Adicionados todos com sucesso!";
-        echo "<script>window.location.reload();</script>";
-    } else {
-        echo "Atualize a página.";
-    }
-
-    //var_dump($todosArray);
+} else {
+    echo "Atualize a página!";
 }
