@@ -46,7 +46,7 @@ if (isset($_GET['acao'])) {
         $busca = $att->conecta();
         $insere = $busca->prepare($sql);
         $insere->execute();
-        echo $sql;
+        echo "Sucesso!";
     }
 }
 
