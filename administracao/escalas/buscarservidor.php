@@ -48,7 +48,7 @@ if ($acao == 'insere') {
     $todos = $_POST['todos'];
     $chave = $_POST['chave'];
     
-    $todos = json_encode($todos, true);
+    $todosJson = json_encode($todos, true);
     // Configurar o endpoint da API
 $url = "https://www.siupa.com.br/siiupa/api/api.php/records/tb_escala_funcionario";
 
