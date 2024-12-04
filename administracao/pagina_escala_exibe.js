@@ -123,7 +123,7 @@ $(function () {
                     let anoEscala = $(".bt_oficial").data("ano");
                     let mesEscala = $(".bt_oficial").data("mes");
                     let todosJson = [];
-                    let teste = 1;
+                    let teste = 2;
                     $(buscaTodos).each(function () {
                         nomeBT = $(this).data('nome');
                         idEscolhidoBT = $(this).data('idescolhido');
