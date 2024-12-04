@@ -57,7 +57,7 @@ include_once('tabelas.php');
                             var criaescala = 'administracao/escalas/listasetor.php?acao=cria' + '&setor=' + setor + '&mes=' + mes + '&ano=' + ano;
                             $.get(criaescala, function(data) {
                                 alert(data);
-                                //location.reload();
+                                location.reload();
                             });
 
                         }
