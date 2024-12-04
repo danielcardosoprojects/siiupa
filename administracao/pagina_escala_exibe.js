@@ -149,6 +149,7 @@ $(function () {
                             $("#dialogaddresultadobusca").html(data);
                             var urlescala = (location.search);
                             var recarregaescala = 'administracao/pagina_escala_exibe.php' + urlescala;
+                            console.log(recarregaescala);
 
                             $('#subconteudo').load(recarregaescala);
                         },
