@@ -27,8 +27,6 @@ if ($acao == 'busca') {
         echo "</tr>";
     }
     echo "</tbody></table>";
-
-
 }
 if ($acao == 'insere') {
     $id = $_GET['id'];
@@ -60,28 +58,28 @@ if ($acao == 'insere') {
     $consultaChave->execute();
 
     if ($consultaChave->rowCount() == 0) {
-    $virgula = "";
-    $values = "";
-    foreach ($todos as $idservidor) {
-        $values .= $virgula;
+        $virgula = "";
+        $values = "";
+        foreach ($todos as $idservidor) {
+            $values .= $virgula;
 
-        $values .= "('$id','$idservidor','$mes','$ano')";
-        $virgula = ",";
+            $values .= "('$id','$idservidor','$mes','$ano')";
+            $virgula = ",";
+        }
+        $busca = new BD;
+        $sql = "INSERT IGNORE INTO u940659928_siupa.tb_escala_funcionario (fk_escala, fk_funcionario, mes, ano) VALUES $values";
+
+        $rBusca = $busca->consulta($sql);
+
+        $attChave = new BD;
+        $sqlAttChave = "UPDATE u940659928_siupa.tb_escalas where id=$id SET chave=$chave";
+        $rAttChave = $attChave->consulta($sqlAttChave);
+
+        echo "Adicionados todos com sucesso!";
+        echo "<script>window.location.reload();</script>";
+    } else {
+        echo "Atualize a página.";
     }
-    $busca = new BD;
-    $sql = "INSERT INTO u940659928_siupa.tb_escala_funcionario (fk_escala, fk_funcionario, mes, ano) VALUES $values";
-    $rBusca = $busca->consulta($sql);
-
-    $attChave = new BD;
-    $sqlAttChave = "UPDATE u940659928_siupa.tb_escalas where id=$id SET chave=$chave";
-    $rAttChave = $attChave->consulta($sqlAttChave);
-
-    echo "Adicionados todos com sucesso!";
-    echo "<script>window.location.reload();</script>";
-
-} else {
-    echo "Atualize a página.";
-}
 
     //var_dump($todosArray);
 }
