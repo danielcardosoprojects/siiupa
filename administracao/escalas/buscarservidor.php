@@ -48,7 +48,7 @@ if ($acao == 'insere') {
     $todos = $_POST['todos'];
     $chave = $_POST['chave'];
     
-    $todos = json_decode($todos, true);
+    $todos = json_encode($todos, true);
     var_dump($todos);
 } else {
     echo "Atualize a página!";
