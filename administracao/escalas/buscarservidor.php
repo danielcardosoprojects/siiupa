@@ -49,7 +49,36 @@ if ($acao == 'insere') {
     $chave = $_POST['chave'];
     
     $todos = json_encode($todos, true);
-    var_dump($todos);
+    // Configurar o endpoint da API
+$url = "https://www.siupa.com.br/siiupa/api/api.php/records/tb_escala_funcionario";
+
+// Inicializar o cURL
+$ch = curl_init($url);
+
+// Configurar opções do cURL
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Retornar resposta como string
+curl_setopt($ch, CURLOPT_POST, true);          // Usar método POST
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    "Content-Type: application/json",          // Definir cabeçalho Content-Type
+    "Accept: application/json"                 // Indicar que queremos uma resposta em JSON
+]);
+curl_setopt($ch, CURLOPT_POSTFIELDS, $todosJson); // Enviar o JSON no corpo da requisição
+
+// Executar a requisição e obter a resposta
+$response = curl_exec($ch);
+
+// Verificar se ocorreu algum erro
+if (curl_errno($ch)) {
+    echo "Erro na requisição: " . curl_error($ch);
+} else {
+    // Exibir a resposta da API
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    echo "Código HTTP: $httpCode\n";
+    echo "Resposta: $response";
+}
+
+// Fechar o cURL
+curl_close($ch);
 } else {
     echo "Atualize a página!";
 }
