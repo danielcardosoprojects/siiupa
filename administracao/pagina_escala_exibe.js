@@ -111,7 +111,7 @@ $(function () {
 
                 });
 
-                $('#btAddTodos2').click(function (e) {
+                $('#btAddTodos2').off('click').click(function (e) {
                     e.preventDefault();
 
                    
