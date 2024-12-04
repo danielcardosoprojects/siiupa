@@ -26,7 +26,7 @@ if (isset($_GET['acao'])) {
             <option value="11">Novembro</option>
             <option value="12">Dezembro</option>
         </select>
-        <input class="ano form-control" value="2024">
+        <input class="ano form-control" value="2025">
 <?php
     } elseif ($acao == 'cria') {
         $idsetor = $_GET['setor'];
