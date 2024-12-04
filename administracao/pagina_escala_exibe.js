@@ -152,6 +152,7 @@ $(function () {
                             var recarregaescala = 'administracao/pagina_escala_exibe.php' + urlescala;
     
                             $('#subconteudo').load(recarregaescala);
+                            $("#dialogaddresultadobusca").html('Adicionado todos!');
                         },
                         error: function (xhr, status, error) {
                             console.error("Erro:", error);
