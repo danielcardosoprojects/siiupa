@@ -141,6 +141,7 @@ $(function () {
                     let url = "https://www.siupa.com.br/siiupa/api/api.php/records/tb_escala_funcionario";
 
                     // Enviar o JSON via POST
+                    alert('click');
                     $.ajax({
                         url: url,
                         type: "POST",
