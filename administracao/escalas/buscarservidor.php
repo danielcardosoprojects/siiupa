@@ -67,6 +67,7 @@ if ($acao == 'insere') {
             $values .= "('$id','$idservidor','$mes','$ano')";
             $virgula = ",";
         }
+        var_dump($values);
         $busca = new BD;
         $sql = "INSERT IGNORE INTO u940659928_siupa.tb_escala_funcionario (fk_escala, fk_funcionario, mes, ano) VALUES $values";
 
