@@ -726,5 +726,5 @@ STATUS:
     }
 </script>
 <script src="/siiupa/js/jquery.session.js" defer></script>
-<script src="/siiupa/administracao/pagina_escala_exibe.js?v=1"></script>
+<script src="/siiupa/administracao/pagina_escala_exibe.js?v=2"></script>
 <script src="/siiupa/js/axios/axios.min.js" defer></script>
