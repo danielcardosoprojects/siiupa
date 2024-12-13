@@ -7,7 +7,7 @@ let anguloAtual = 0;
 var posicaoY = -38;
 let texto = "";
 let contaLinhas = 1;
-campoPosicao.value = -6;
+campoPosicao.value = -46;
 
 const form = document.querySelector('form');
 const NUMERO_DE_INPUTS = 62;
@@ -230,7 +230,7 @@ document.addEventListener('keydown', event => {
         }
 
         proximoCampo();
-        campoPosicao.value = parseFloat(campoPosicao.value) - 23.6;
+        campoPosicao.value = parseFloat(campoPosicao.value) - 22.9;
         atualizarPosicao();
 
 
