@@ -7,7 +7,7 @@ let anguloAtual = 0;
 var posicaoY = -38;
 let texto = "";
 let contaLinhas = 1;
-campoPosicao.value = -6;
+campoPosicao.value = -44,6;
 
 const form = document.querySelector('form');
 const NUMERO_DE_INPUTS = 62;

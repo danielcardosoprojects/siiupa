@@ -23,7 +23,7 @@
 
 		#container1 {
 			width: 489px;
-			height: 26px;
+			height: 200px;
 			position: relative;
 			overflow: hidden;
 
@@ -31,7 +31,7 @@
 
 		#container {
 			width: 489px;
-			height: 48px;
+			height: 200px;
 			border: 1px solid black;
 			position: absolute;
 			top: 0;
@@ -44,6 +44,11 @@
 			
             filter: invert(100%); /* inverte as cores da imagem*/
         
+		}
+		#delimitador {
+			border: 4px solid red;
+			width: 100%;
+			height: 28px;
 		}
 
 		#dataAtual {
@@ -183,7 +188,9 @@ input[type="email"]:focus {
 
 			<div id="dataAtual"></div>
 			<div id="container1">
-				<div id="container"></div>
+				<div id="container">
+					<div id="delimitador"></div>
+				</div>
 			</div>
 
 			<button id="botao-cima">Mover para baixo</button>
