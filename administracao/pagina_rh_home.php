@@ -289,7 +289,8 @@ include_once('../bd/nivel.php');
                 <!-- <th scope="col">MATRICULA</th> -->
 
                 <th scope="col">NOME<img src="/siiupa/imagens/tablesorter.svg"></th>
-
+                <th scope="col">CPF</th>
+                <th scope="col">COREN</th>
                 <th scope="col">CARGO<img src="/siiupa/imagens/tablesorter.svg"></th>
 
                 <th scope="col">SETOR<img src="imagens/tablesorter.svg"></th>
@@ -391,6 +392,7 @@ include_once('../bd/nivel.php');
                     //                    echo "<td>$dados->data_nascbr</td>";
                     echo "<td>$dados->cpf</td>";
                     echo "<td><!-- $dados->fk_cargo -->$dados->cargo <i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->cargo'></span></i></td>";
+                    echo "<td>$dados->conselho_n</td>";
 
                     echo "<td>$dados->setor</td>";
                     if ($dados->vinculo == "EFETIVO") {
