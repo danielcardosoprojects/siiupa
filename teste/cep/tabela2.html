@@ -45,7 +45,7 @@
         // Cabeçalho da tabela
         const thead = document.createElement('thead');
         const headerRow = document.createElement('tr');
-        const headers = ['Data', 'Bairro', 'ID do Bairro'];
+        const headers = ['Data', , 'ANO', 'MES', 'quadrimestre', 'Bairro', 'ID do Bairro'];
         headers.forEach(headerText => {
             const th = document.createElement('th');
             th.appendChild(document.createTextNode(headerText));
@@ -66,6 +66,32 @@
                 const dateCell = document.createElement('td');
                 dateCell.appendChild(document.createTextNode(cep.data));
                 row.appendChild(dateCell);
+
+                let dataDados = new Date(cep.data);
+                    
+                    
+                    dataCelula = cep.data.split('-',3);
+                    console.log(dataCelula);
+
+                    const anoCell = document.createElement('td');
+                    anoCell.appendChild(document.createTextNode(dataCelula[0]));
+                    row.appendChild(anoCell);
+
+                    const mesCell = document.createElement('td');
+
+                    let meses = [
+                        "jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"
+                    ];
+                    let mesNum = parseFloat(dataCelula[1]-1);
+                    let mesAbrev = meses[mesNum];
+                    mesCell.appendChild(document.createTextNode(mesAbrev));
+                    row.appendChild(mesCell);
+
+                    const quadrimestreCell = document.createElement('td');
+
+                    let quadrimestre = (mesNum < 4) ? 1 : ((mesNum < 8)? 2 : 3);
+                    quadrimestreCell.appendChild(document.createTextNode(quadrimestre));
+                    row.appendChild(quadrimestreCell);
 
                 // Adicionar nome do bairro
                 const bairroNomeCell = document.createElement('td');
