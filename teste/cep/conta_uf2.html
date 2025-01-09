@@ -76,7 +76,7 @@
     <script>
         let currentImageIndex = 1;
         const totalImages = 61; // Total de imagens (20240901 a 20241031)
-        const imageBaseUrl = "202411/"; // Substitua pelo caminho correto
+        const imageBaseUrl = "202412/"; // Substitua pelo caminho correto
 
         function updateImage() {
             const imageUrl = `${imageBaseUrl}${getImageName(currentImageIndex)}`;
@@ -88,7 +88,7 @@
 
         function getImageName(index) {
             const datePrefix = "2024";
-            const month = 11;
+            const month = 12;
             const day = String(index).padStart(2, '0');
             return `${datePrefix}${month}${day}.png`;
         }
@@ -101,7 +101,7 @@
 
         function getDateFromIndex(index) {
             const datePrefix = "2024";
-            const month = 11;
+            const month = 12;
             const day = String(index).padStart(2, '0');
             return `${day}/${month}/${datePrefix}`;
         }
