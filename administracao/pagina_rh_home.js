@@ -52,6 +52,7 @@ $(function () {
         data_freq = {
             dado:servidoresJson
         }
+        console.log(data_freq);
         $.post("gerapdf_varias.php", data_freq);
         // data?json=${encodeURI(servidoresJson)}`).then(function(){alert("Sucesso!")});
     });
