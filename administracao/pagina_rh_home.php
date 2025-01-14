@@ -5,15 +5,24 @@ include_once('../bd/nivel.php');
 ?>
 <style>
     .eleicaobtn-link {
-        font-size: 8px;           /* Tamanho pequeno */
-    color: white;              /* Texto branco para contraste com o fundo */
-    background-color: #007bff; /* Fundo azul */ 
-    text-decoration: none;     /* Remove o sublinhado padrão do link */
-    font-weight: bold;         /* Texto em negrito */
-    padding: 5px 10px;         /* Espaçamento interno */
-    border: 1px solid #007bff; /* Borda da mesma cor do fundo */
-    border-radius: 15px;       /* Borda arredondada */
-    display: inline-block;     /* Garante que o padding e a borda apareçam corretamente */
+        font-size: 8px;
+        /* Tamanho pequeno */
+        color: white;
+        /* Texto branco para contraste com o fundo */
+        background-color: #007bff;
+        /* Fundo azul */
+        text-decoration: none;
+        /* Remove o sublinhado padrão do link */
+        font-weight: bold;
+        /* Texto em negrito */
+        padding: 5px 10px;
+        /* Espaçamento interno */
+        border: 1px solid #007bff;
+        /* Borda da mesma cor do fundo */
+        border-radius: 15px;
+        /* Borda arredondada */
+        display: inline-block;
+        /* Garante que o padding e a borda apareçam corretamente */
     }
 
     .eleicaobtn-link:hover {
@@ -387,13 +396,13 @@ include_once('../bd/nivel.php');
 
                     //NOME
                     echo "<td><a target='_blank' class='abreperfil'  rel='noreferrer noopener' href='?setor=adm&sub=rh&subsub=perfil&id=$dados->idfuncionario'>$dados->nome</a><i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->nome'></span></i></td>";
-                    
+
                     //<a class='eleicaobtn-link' target='_blank' href='https://siupa.com.br/siiupa/administracao/pagina_rh_eleicao2022.php?nome=$dados->nome&cargo=$dados->cargo&cpf=$dados->cpf'>Eleição</a> 
                     //                    echo "<td>$dados->data_nascbr</td>";
                     echo "<td>$dados->cpf</td>";
                     echo "<td>$dados->conselho_n</td>";
                     echo "<td><!-- $dados->fk_cargo -->$dados->cargo <i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->cargo'></span></i></td>";
-                    
+
 
                     echo "<td>$dados->setor</td>";
                     if ($dados->vinculo == "EFETIVO") {
@@ -530,6 +539,82 @@ include_once('../bd/nivel.php');
 
     ?>
 </div>
+<select id="setor-select">
+  <option value="">Selecione um setor</option>
+  <option value="Enfermagem - Enfermeiros(as)">Enfermagem - Enfermeiros(as)</option>
+  <option value="Enfermagem - Tec. de Enfermagem">Enfermagem - Tec. de Enfermagem</option>
+  <!-- Adicione outros setores aqui -->
+</select>
+<button id="gerar-frequencias">Gerar Frequências</button>
+
+<div id="frequencias-container"></div>
+<script>
+
+
+// Função para gerar frequências por setor
+function gerarFrequenciasPorSetor(setorEscolhido) {
+  const container = document.getElementById("frequencias-container");
+  container.innerHTML = ""; // Limpar frequências anteriores
+
+  // Filtrar os servidores pelo setor escolhido
+  const servidoresDoSetor = Object.values(servidores_freq).filter(
+    (servidor) => servidor.setor === setorEscolhido
+  );
+
+  if (servidoresDoSetor.length === 0) {
+    container.innerHTML = "<p>Nenhum servidor encontrado para o setor selecionado.</p>";
+    return;
+  }
+
+  // Carregar as frequências via AJAX
+  servidoresDoSetor.forEach((servidor) => {
+    const dados = {
+      nome: servidor.nome,
+      cargo: servidor.cargo,
+      vinculo: servidor.vinculo,
+      mes: 1, // Mês fixo para este exemplo
+    };
+
+    // Fazer a requisição AJAX para obter a frequência
+    fetch("https://siupa.com.br/siiupa/mpdf/modelo/frequenciapdf.php", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: new URLSearchParams(dados).toString(),
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error("Erro ao carregar a frequência.");
+        return response.text();
+      })
+      .then((html) => {
+        // Criar um novo elemento de página para exibir a frequência
+        const page = document.createElement("div");
+        page.style.marginBottom = "20px";
+        page.style.padding = "20px";
+        page.style.border = "1px solid #ddd";
+        page.innerHTML = html; // Inserir o HTML retornado no container
+
+        container.appendChild(page);
+      })
+      .catch((error) => {
+        console.error("Erro ao carregar a frequência:", error);
+      });
+  });
+}
+
+// Evento para o botão "Gerar Frequências"
+document.getElementById("gerar-frequencias").addEventListener("click", () => {
+  const setorSelecionado = document.getElementById("setor-select").value;
+
+  if (!setorSelecionado) {
+    alert("Por favor, selecione um setor!");
+    return;
+  }
+
+  gerarFrequenciasPorSetor(setorSelecionado);
+});
+</script>
 </div>
 </div>
 
