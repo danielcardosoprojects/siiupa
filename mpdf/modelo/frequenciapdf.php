@@ -170,7 +170,7 @@ function DiaSemana($mes, $dia)
     } else {
         $diaa = $dia + 1;
     }
-    $diasemana = jddayofweek(cal_to_jd(CAL_GREGORIAN, $mes, $diaa, 2024), 0);    // função que descobre o dia da semana
+    $diasemana = jddayofweek(cal_to_jd(CAL_GREGORIAN, $mes, $diaa, 2025), 0);    // função que descobre o dia da semana
     $nomesemana = array(1 => '<strong>DOMINGO</strong>', 2 => 'SEGUNDA', 3 => 'TERÇA', 4 => 'QUARTA', 5 => 'QUINTA', 6 => 'SEXTA', 0 => '<strong>SÁBADO</strong>');
 
     return $nomesemana[$diasemana];
