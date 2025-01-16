@@ -391,7 +391,7 @@ include_once('../bd/nivel.php');
                     // echo "<th scope='row'><a class='abreperfil' href='?setor=adm&sub=rh&subsub=perfil&id=$dados->idfuncionario'>$dados->idfuncionario</a></th>";
 
                     //CONTA LINHA
-                    echo "<td>$contalinha</td>";
+                    //echo "<td>$contalinha</td>";
                     // echo "<td id='matriculaFunc_$dados->idfuncionario'><span class='matriculaFunc' data-id='$dados->idfuncionario'>$dados->matricula</span><i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->matricula'></span></i></td>";
 
                     //NOME
