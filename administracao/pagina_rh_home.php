@@ -180,11 +180,23 @@ include_once('../bd/nivel.php');
 
     <?php
     // $sql = "SELECT * FROM u940659928_siupa.tb_funcionario";
+    if (isset($_GET["buscasetor"])) {
+
+        $buscasetor = $_GET['buscasetor'];
+        if ($buscasetor == 'undefined') {
+            $bsetorsql = "";
+        } else {
+            $bsetorsql = " AND s.setor = '$buscasetor'";
+        }
+    } else {
+        $buscasetor = "";
+        $bsetorsql = "";
+    }
     if (isset($_GET["nome"])) {
         $gw = $_GET['nome'];
-        $where = "WHERE f.nome LIKE '%" . $gw . "%' AND status = 'ATIVO'";
+        $where = "WHERE f.nome LIKE '%" . $gw . "%' AND status = 'ATIVO'".$bsetorsql;
     } else {
-        $where = "WHERE f.nome LIKE '%%' AND status = 'ATIVO'";
+        $where = "WHERE f.nome LIKE '%%' AND status = 'ATIVO'".$bsetorsql;
     }
 
     if (isset($_GET["func"])) {
@@ -199,18 +211,7 @@ include_once('../bd/nivel.php');
         $fc = "";
         $fcsql = "";
     }
-    if (isset($_GET["buscasetor"])) {
 
-        $buscasetor = $_GET['buscasetor'];
-        if ($buscasetor == 'undefined') {
-            $bsetorsql = "";
-        } else {
-            $bsetorsql = " AND s.setor = '$buscasetor'";
-        }
-    } else {
-        $buscasetor = "";
-        $bsetorsql = "";
-    }
 
     if (isset($_GET["orderby"])) {
         $orderby = $_GET["orderby"];
