@@ -143,6 +143,7 @@ $(document).ready(function () {
         ],
         "order": [], // Remove a ordenação inicial
         "drawCallback": function (settings) {
+            console.log('teste');
             var api = this.api();
             var start = api.page.info().start; // Ponto inicial da página atual
             api.column(0, { page: 'current' }).nodes().each(function (cell, i) {
