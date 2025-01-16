@@ -306,7 +306,7 @@ include_once('../bd/nivel.php');
 
                 <th scope="col">NOME<img src="/siiupa/imagens/tablesorter.svg"></th>
                 <th scope="col">CPF</th>
-                <th scope="col">COREN</th>
+                <th scope="col">CONS.</th>
                 <th scope="col">CARGO<img src="/siiupa/imagens/tablesorter.svg"></th>
 
                 <th scope="col">SETOR<img src="imagens/tablesorter.svg"></th>
