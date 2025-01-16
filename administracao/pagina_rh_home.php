@@ -194,9 +194,9 @@ include_once('../bd/nivel.php');
     }
     if (isset($_GET["nome"])) {
         $gw = $_GET['nome'];
-        $where = "WHERE f.nome LIKE '%" . $gw . "%' AND status = 'ATIVO'".$bsetorsql;
+        $where = "WHERE f.nome LIKE '%" . $gw . "%' AND status = 'ATIVO'";
     } else {
-        $where = "WHERE f.nome LIKE '%%' AND status = 'ATIVO'".$bsetorsql;
+        $where = "WHERE f.nome LIKE '%%' AND status = 'ATIVO'";
     }
 
     if (isset($_GET["func"])) {
