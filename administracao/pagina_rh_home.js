@@ -133,6 +133,16 @@ $(document).ready(function () {
         "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Tudo"]],
         language: {
             url: "/siiupa/js/dataTables/pt-BR.json"
-        }
+        },
+        "columnDefs": [
+            {
+                "targets": 0, // Define a primeira coluna como a coluna de índice
+                "orderable": false, // Impede a ordenação nesta coluna
+                "searchable": false, // Impede a pesquisa nesta coluna
+                "render": function (data, type, row, meta) {
+                    return meta.row + 1; // Retorna o número da linha (baseado no índice da tabela)
+                }
+            }
+        ]
     });
 });
