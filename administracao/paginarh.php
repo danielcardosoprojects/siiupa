@@ -298,6 +298,7 @@
     <div id="subsubconteudo">
 
         <?php
+        echo $_GET["buscasetor"];
         function console_log($data)
         {
             echo '<script>';
