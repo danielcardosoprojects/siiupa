@@ -392,6 +392,7 @@ include_once('../bd/nivel.php');
 
                     //CONTA LINHA
                     //echo "<td>$contalinha</td>";
+                    echo "<td></td>";
                     // echo "<td id='matriculaFunc_$dados->idfuncionario'><span class='matriculaFunc' data-id='$dados->idfuncionario'>$dados->matricula</span><i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->matricula'></span></i></td>";
 
                     //NOME
