@@ -136,11 +136,11 @@ $(document).ready(function () {
         },
         "columnDefs": [
             {
-                "targets": 0, // Define a primeira coluna como a coluna de índice
-                "orderable": false, // Impede a ordenação nesta coluna
-                "searchable": false, // Impede a pesquisa nesta coluna
+                "targets": 0, // Adiciona a numeração na primeira coluna (indice 0)
+                "orderable": false, // Desabilita a ordenação nesta coluna
+                "searchable": false, // Desabilita a busca nesta coluna
                 "render": function (data, type, row, meta) {
-                    return meta.row + 1; // Retorna o número da linha (baseado no índice da tabela)
+                    return meta.row + 1; // Adiciona a numeração com base no índice da linha
                 }
             }
         ]
