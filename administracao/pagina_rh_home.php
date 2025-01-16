@@ -542,7 +542,7 @@ include_once('../bd/nivel.php');
     $rConsultaSetores = $bdContagemSetores->consulta($sqlCS);
     foreach ($rConsultaSetores as $rCS) {
         $tituloCS = $rCS->setor;
-        echo "<a class='contagem_cargo btn btn-sm btn-light' href='/siiupa/?setor=adm&sub=rh&busca=1&nome=&func=undefined&buscasetor=$tituloCS'>$tituloCS: $rCS->totalS</a>";
+        echo "<a class='contagem_cargo btn btn-sm btn-success' href='/siiupa/?setor=adm&sub=rh&busca=1&nome=&func=undefined&buscasetor=$tituloCS'>$tituloCS: $rCS->totalS</a>";
     }
 
     ?>
