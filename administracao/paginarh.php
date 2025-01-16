@@ -296,9 +296,9 @@
 if (isset($_GET['buscasetor'])) {
     // Armazena o valor no $_SESSION
     $_SESSION['buscasetor'] = $_GET['buscasetor'];
-    echo "Valor armazenado na sessão: " . $_SESSION['buscasetor'];
+    
 } else {
-    echo "O parâmetro 'buscasetor' não foi passado na URL.";
+    $_SESSION['buscasetor'] = "";
 }
 ?>
 

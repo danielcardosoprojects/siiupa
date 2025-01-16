@@ -180,9 +180,9 @@ include_once('../bd/nivel.php');
 
     <?php
     // $sql = "SELECT * FROM u940659928_siupa.tb_funcionario";
-    if (isset($_GET["buscasetor"])) {
+    if (($_SESSION["buscasetor"]) != "") {
 
-        $buscasetor = $_GET['buscasetor'];
+        $buscasetor = $_SESSION['buscasetor'];
         if ($buscasetor == 'undefined') {
             $bsetorsql = "";
         } else {
