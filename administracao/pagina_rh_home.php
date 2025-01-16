@@ -238,7 +238,7 @@ include_once('../bd/nivel.php');
     //busca u940659928_siupa.tb_funcionario
     $sqlbusca = "SELECT  DATE_FORMAT(f.data_nasc,'%d\/%m\/%Y') as data_nascbr, f.*, DATE_FORMAT(f.admissao,'%d\/%m\/%Y') as admissaoBR, f.id AS idfuncionario, c.descricao AS cargo, c.id, s.setor FROM u940659928_siupa.tb_funcionario AS f INNER JOIN u940659928_siupa.tb_cargo AS c ON f.fk_cargo = c.id INNER JOIN u940659928_siupa.tb_setor AS s ON f.fk_setor = s.id $where $fcsql $bsetorsql $orderby";
 
-    echo "Query string completa: " . $_SERVER['QUERY_STRING'];
+    echo "Valor armazenado na sessão: " . $_SESSION['buscasetor'];
 
 
 
