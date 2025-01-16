@@ -136,13 +136,18 @@ $(document).ready(function () {
         },
         "columnDefs": [
             {
-                "targets": 0, // Adiciona a numeração na primeira coluna (indice 0)
+                "targets": 0, // Primeira coluna (números das linhas)
                 "orderable": false, // Desabilita a ordenação nesta coluna
-                "searchable": false, // Desabilita a busca nesta coluna
-                "render": function (data, type, row, meta) {
-                    return meta.row + 1; // Adiciona a numeração com base no índice da linha
-                }
+                "searchable": false // Desabilita a busca nesta coluna
             }
-        ]
+        ],
+        "order": [], // Remove a ordenação inicial
+        "drawCallback": function (settings) {
+            var api = this.api();
+            var start = api.page.info().start; // Ponto inicial da página atual
+            api.column(0, { page: 'current' }).nodes().each(function (cell, i) {
+                cell.innerHTML = start + i + 1; // Atualiza os números
+            });
+        }
     });
 });
