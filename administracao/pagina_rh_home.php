@@ -312,7 +312,7 @@ include_once('../bd/nivel.php');
                 <th scope="col">SETOR<img src="imagens/tablesorter.svg"></th>
                 <th scope="col">VINCULO<img src="/siiupa/imagens/tablesorter.svg"></th>
                 <!-- <th scope="col">Férias 2022<img src="/siiupa/imagens/tablesorter.svg"></th> -->
-                <th scope="col">Férias 2024</th>
+                
                 <th scope="col">Férias 2025</th>
 
                 <!-- <th scope="col">Data Inicio</th> -->
@@ -434,7 +434,7 @@ include_once('../bd/nivel.php');
 
                     // echo "<td class='edita' data-idfunc='$dados->idfuncionario' data-campo='CNES' data-valor='$dados->CNES'>$dados->CNES</td>";
 
-                    echo "<td></td>";
+                    
                     // echo "<td>$dados->CNES</td>";
 
 
