@@ -412,7 +412,7 @@ include_once('../bd/nivel.php');
                     //<a class='eleicaobtn-link' target='_blank' href='https://siupa.com.br/siiupa/administracao/pagina_rh_eleicao2022.php?nome=$dados->nome&cargo=$dados->cargo&cpf=$dados->cpf'>Eleição</a> 
                     //                    echo "<td>$dados->data_nascbr</td>";
                     
-                    echo "<td id='cpf_$dados->id'></td>";
+                    echo "<td id='cpf_$dados->idfuncionario'></td>";
                     ?>
                     <script>
                         document.
