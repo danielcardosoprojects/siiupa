@@ -336,6 +336,7 @@ include_once('../bd/nivel.php');
             if (mysqli_num_rows($resultbusca) > 0) {
                 while ($rownomes = mysqli_fetch_assoc($resultbusca)) {
                     $dados = (object) $rownomes;
+                    $dados->cpf_f = formatarCPF($dados->cpf);
                     $conta_serv = 0;
                     //from u940659928_siupa.tb_ferias
                     $queryf = "SELECT ferias.id, func.nome, c.titulo, s.setor, DATE_FORMAT(ferias.datainicio, '%d\/%m\/%Y'), DATE_FORMAT(ferias.datafim, '%d\/%m\/%Y'), ferias.ref_mes, ferias.ref_ano, func.vinculo, ferias.observacao FROM u940659928_siupa.tb_ferias AS ferias INNER JOIN u940659928_siupa.tb_funcionario AS func ON (ferias.fk_funcionario = func.id) INNER JOIN u940659928_siupa.tb_cargo AS c ON (func.fk_cargo = c.id) INNER JOIN u940659928_siupa.tb_setor AS s ON (func.fk_setor = s.id) WHERE func.status='ATIVO' AND ref_ano = 2025 AND ferias.fk_funcionario = '$dados->idfuncionario'";
@@ -408,7 +409,7 @@ include_once('../bd/nivel.php');
                     //<a class='eleicaobtn-link' target='_blank' href='https://siupa.com.br/siiupa/administracao/pagina_rh_eleicao2022.php?nome=$dados->nome&cargo=$dados->cargo&cpf=$dados->cpf'>Eleição</a> 
                     //                    echo "<td>$dados->data_nascbr</td>";
 
-                    echo "<td id='cpf_$dados->id'>".formatarCPF($dados->cpf)."</td>";
+                    echo "<td id='cpf_$dados->id'>$dados->cpf_f</td>";
                     echo "<td>$dados->conselho_n</td>";
                     echo "<td><!-- $dados->fk_cargo -->$dados->cargo <i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->cargo'></span></i></td>";
 
