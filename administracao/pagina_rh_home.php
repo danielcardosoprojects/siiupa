@@ -407,8 +407,8 @@ include_once('../bd/nivel.php');
 
                     //<a class='eleicaobtn-link' target='_blank' href='https://siupa.com.br/siiupa/administracao/pagina_rh_eleicao2022.php?nome=$dados->nome&cargo=$dados->cargo&cpf=$dados->cpf'>Eleição</a> 
                     //                    echo "<td>$dados->data_nascbr</td>";
-                    
-                    echo "<td>" . formatarCPF($dados->cpf) . "</td>";
+
+                    echo "<td id='cpf_$dados->id'>$dados->cpf/td>";
                     echo "<td>$dados->conselho_n</td>";
                     echo "<td><!-- $dados->fk_cargo -->$dados->cargo <i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->cargo'></span></i></td>";
 
@@ -668,7 +668,36 @@ $idunico = uniqid();
 
 
     })
-    console.log(servidores_freq)
+    console.log(servidores_freq);
+
+    function formatarCPF(cpf) {
+        // Remove caracteres não numéricos
+        cpf = cpf.replace(/\D/g, "");
+
+        // Verifica o tamanho
+        if (cpf.length !== 11) {
+            return "CPF inválido"; // Ou retorne o valor original, dependendo do caso de uso
+        }
+
+        // Aplica a formatação
+        return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
+    }
+
+    function aplicarMascaraCPF(input) {
+        let cpf = input.value;
+        cpf = formatarCPF(cpf);
+        input.value = cpf;
+
+        // Adiciona/remove classe de erro visualmente, se necessário
+        if (cpf === "CPF inválido") {
+            input.classList.add("cpf-invalido"); // Adicione a classe de erro
+        } else {
+            input.classList.remove("cpf-invalido"); // Remove a classe de erro
+        }
+    }
+
+
+
 </script>
 <?php
 function mes($entrada)
@@ -704,23 +733,23 @@ function mes($entrada)
 
 
 function formatarCPF(string $cpf)
-                    {
-                        // Remove qualquer caractere que não seja número
-                        $cpf = preg_replace('/\D/', '', $cpf);
+{
+    // Remove qualquer caractere que não seja número
+    $cpf = preg_replace('/\D/', '', $cpf);
 
-                        // Verifica se o CPF tem 11 dígitos (após a limpeza)
-                        if (strlen($cpf) != 11) {
-                            return "CPF inválido (número de dígitos incorreto)."; // Ou lançar uma exceção, dependendo da sua necessidade
-                        }
+    // Verifica se o CPF tem 11 dígitos (após a limpeza)
+    if (strlen($cpf) != 11) {
+        return "CPF inválido (número de dígitos incorreto)."; // Ou lançar uma exceção, dependendo da sua necessidade
+    }
 
-                        // Formata o CPF usando sprintf
-                        return sprintf(
-                            '%s.%s.%s-%s',
-                            substr($cpf, 0, 3),
-                            substr($cpf, 3, 3),
-                            substr($cpf, 6, 3),
-                            substr($cpf, 9, 2)
-                        );
-                    }
+    // Formata o CPF usando sprintf
+    return sprintf(
+        '%s.%s.%s-%s',
+        substr($cpf, 0, 3),
+        substr($cpf, 3, 3),
+        substr($cpf, 6, 3),
+        substr($cpf, 9, 2)
+    );
+}
 
 ?>
