@@ -238,7 +238,7 @@ include_once('../bd/nivel.php');
     //busca u940659928_siupa.tb_funcionario
     $sqlbusca = "SELECT  DATE_FORMAT(f.data_nasc,'%d\/%m\/%Y') as data_nascbr, f.*, DATE_FORMAT(f.admissao,'%d\/%m\/%Y') as admissaoBR, f.id AS idfuncionario, c.descricao AS cargo, c.id, s.setor FROM u940659928_siupa.tb_funcionario AS f INNER JOIN u940659928_siupa.tb_cargo AS c ON f.fk_cargo = c.id INNER JOIN u940659928_siupa.tb_setor AS s ON f.fk_setor = s.id $where $fcsql $bsetorsql $orderby";
 
-   
+
 
 
 
@@ -263,8 +263,8 @@ include_once('../bd/nivel.php');
 <!--  IMPRIME RESULTADO-->
 <div id="imprime_resultado">
     <h1>
-<?php echo $_SESSION['buscasetor']; ?>
-</h1>
+        <?php echo $_SESSION['buscasetor']; ?>
+    </h1>
     <style>
         #tabela_funcionarios_filter {
             width: 100%;
@@ -312,7 +312,7 @@ include_once('../bd/nivel.php');
                 <th scope="col">SETOR<img src="imagens/tablesorter.svg"></th>
                 <th scope="col">VINCULO<img src="/siiupa/imagens/tablesorter.svg"></th>
                 <!-- <th scope="col">Férias 2022<img src="/siiupa/imagens/tablesorter.svg"></th> -->
-                
+
                 <th scope="col">Férias 2025</th>
 
                 <!-- <th scope="col">Data Inicio</th> -->
@@ -407,7 +407,26 @@ include_once('../bd/nivel.php');
 
                     //<a class='eleicaobtn-link' target='_blank' href='https://siupa.com.br/siiupa/administracao/pagina_rh_eleicao2022.php?nome=$dados->nome&cargo=$dados->cargo&cpf=$dados->cpf'>Eleição</a> 
                     //                    echo "<td>$dados->data_nascbr</td>";
-                    echo "<td>$dados->cpf</td>";
+                    function formatarCPF(string $cpf): string
+                    {
+                        // Remove qualquer caractere que não seja número
+                        $cpf = preg_replace('/\D/', '', $cpf);
+
+                        // Verifica se o CPF tem 11 dígitos (após a limpeza)
+                        if (strlen($cpf) != 11) {
+                            return "CPF inválido (número de dígitos incorreto)."; // Ou lançar uma exceção, dependendo da sua necessidade
+                        }
+
+                        // Formata o CPF usando sprintf
+                        return sprintf(
+                            '%s.%s.%s-%s',
+                            substr($cpf, 0, 3),
+                            substr($cpf, 3, 3),
+                            substr($cpf, 6, 3),
+                            substr($cpf, 9, 2)
+                        );
+                    }
+                    echo "<td>" . formatarCPF($dados->cpf) . "</td>";
                     echo "<td>$dados->conselho_n</td>";
                     echo "<td><!-- $dados->fk_cargo -->$dados->cargo <i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->cargo'></span></i></td>";
 
@@ -434,7 +453,7 @@ include_once('../bd/nivel.php');
 
                     // echo "<td class='edita' data-idfunc='$dados->idfuncionario' data-campo='CNES' data-valor='$dados->CNES'>$dados->CNES</td>";
 
-                    
+
                     // echo "<td>$dados->CNES</td>";
 
 
@@ -548,80 +567,78 @@ include_once('../bd/nivel.php');
     ?>
 </div>
 <select id="setor-select">
-  <option value="">Selecione um setor</option>
-  <option value="Enfermagem - Enfermeiros(as)">Enfermagem - Enfermeiros(as)</option>
-  <option value="Enfermagem - Tec. de Enfermagem">Enfermagem - Tec. de Enfermagem</option>
-  <!-- Adicione outros setores aqui -->
+    <option value="">Selecione um setor</option>
+    <option value="Enfermagem - Enfermeiros(as)">Enfermagem - Enfermeiros(as)</option>
+    <option value="Enfermagem - Tec. de Enfermagem">Enfermagem - Tec. de Enfermagem</option>
+    <!-- Adicione outros setores aqui -->
 </select>
 <button id="gerar-frequencias">Gerar Frequências</button>
 
 <div id="frequencias-container"></div>
 <script>
+    // Função para gerar frequências por setor
+    function gerarFrequenciasPorSetor(setorEscolhido) {
+        const container = document.getElementById("frequencias-container");
+        container.innerHTML = ""; // Limpar frequências anteriores
 
+        // Filtrar os servidores pelo setor escolhido
+        const servidoresDoSetor = Object.values(servidores_freq).filter(
+            (servidor) => servidor.setor === setorEscolhido
+        );
 
-// Função para gerar frequências por setor
-function gerarFrequenciasPorSetor(setorEscolhido) {
-  const container = document.getElementById("frequencias-container");
-  container.innerHTML = ""; // Limpar frequências anteriores
+        if (servidoresDoSetor.length === 0) {
+            container.innerHTML = "<p>Nenhum servidor encontrado para o setor selecionado.</p>";
+            return;
+        }
 
-  // Filtrar os servidores pelo setor escolhido
-  const servidoresDoSetor = Object.values(servidores_freq).filter(
-    (servidor) => servidor.setor === setorEscolhido
-  );
+        // Carregar as frequências via AJAX
+        servidoresDoSetor.forEach((servidor) => {
+            const dados = {
+                nome: servidor.nome,
+                cargo: servidor.cargo,
+                vinculo: servidor.vinculo,
+                mes: 1, // Mês fixo para este exemplo
+            };
 
-  if (servidoresDoSetor.length === 0) {
-    container.innerHTML = "<p>Nenhum servidor encontrado para o setor selecionado.</p>";
-    return;
-  }
+            // Fazer a requisição AJAX para obter a frequência
+            fetch("https://siupa.com.br/siiupa/mpdf/modelo/frequenciapdf.php", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: new URLSearchParams(dados).toString(),
+                })
+                .then((response) => {
+                    if (!response.ok) throw new Error("Erro ao carregar a frequência.");
+                    return response.text();
+                })
+                .then((html) => {
+                    // Criar um novo elemento de página para exibir a frequência
+                    const page = document.createElement("div");
+                    page.style.marginBottom = "20px";
+                    page.style.padding = "20px";
+                    page.style.border = "1px solid #ddd";
+                    page.innerHTML = html; // Inserir o HTML retornado no container
 
-  // Carregar as frequências via AJAX
-  servidoresDoSetor.forEach((servidor) => {
-    const dados = {
-      nome: servidor.nome,
-      cargo: servidor.cargo,
-      vinculo: servidor.vinculo,
-      mes: 1, // Mês fixo para este exemplo
-    };
+                    container.appendChild(page);
+                })
+                .catch((error) => {
+                    console.error("Erro ao carregar a frequência:", error);
+                });
+        });
+    }
 
-    // Fazer a requisição AJAX para obter a frequência
-    fetch("https://siupa.com.br/siiupa/mpdf/modelo/frequenciapdf.php", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: new URLSearchParams(dados).toString(),
-    })
-      .then((response) => {
-        if (!response.ok) throw new Error("Erro ao carregar a frequência.");
-        return response.text();
-      })
-      .then((html) => {
-        // Criar um novo elemento de página para exibir a frequência
-        const page = document.createElement("div");
-        page.style.marginBottom = "20px";
-        page.style.padding = "20px";
-        page.style.border = "1px solid #ddd";
-        page.innerHTML = html; // Inserir o HTML retornado no container
+    // Evento para o botão "Gerar Frequências"
+    document.getElementById("gerar-frequencias").addEventListener("click", () => {
+        const setorSelecionado = document.getElementById("setor-select").value;
 
-        container.appendChild(page);
-      })
-      .catch((error) => {
-        console.error("Erro ao carregar a frequência:", error);
-      });
-  });
-}
+        if (!setorSelecionado) {
+            alert("Por favor, selecione um setor!");
+            return;
+        }
 
-// Evento para o botão "Gerar Frequências"
-document.getElementById("gerar-frequencias").addEventListener("click", () => {
-  const setorSelecionado = document.getElementById("setor-select").value;
-
-  if (!setorSelecionado) {
-    alert("Por favor, selecione um setor!");
-    return;
-  }
-
-  gerarFrequenciasPorSetor(setorSelecionado);
-});
+        gerarFrequenciasPorSetor(setorSelecionado);
+    });
 </script>
 </div>
 </div>
