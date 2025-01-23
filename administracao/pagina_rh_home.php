@@ -407,25 +407,7 @@ include_once('../bd/nivel.php');
 
                     //<a class='eleicaobtn-link' target='_blank' href='https://siupa.com.br/siiupa/administracao/pagina_rh_eleicao2022.php?nome=$dados->nome&cargo=$dados->cargo&cpf=$dados->cpf'>Eleição</a> 
                     //                    echo "<td>$dados->data_nascbr</td>";
-                    function formatarCPF(string $cpf): string
-                    {
-                        // Remove qualquer caractere que não seja número
-                        $cpf = preg_replace('/\D/', '', $cpf);
-
-                        // Verifica se o CPF tem 11 dígitos (após a limpeza)
-                        if (strlen($cpf) != 11) {
-                            return "CPF inválido (número de dígitos incorreto)."; // Ou lançar uma exceção, dependendo da sua necessidade
-                        }
-
-                        // Formata o CPF usando sprintf
-                        return sprintf(
-                            '%s.%s.%s-%s',
-                            substr($cpf, 0, 3),
-                            substr($cpf, 3, 3),
-                            substr($cpf, 6, 3),
-                            substr($cpf, 9, 2)
-                        );
-                    }
+                    
                     echo "<td>" . formatarCPF($dados->cpf) . "</td>";
                     echo "<td>$dados->conselho_n</td>";
                     echo "<td><!-- $dados->fk_cargo -->$dados->cargo <i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->cargo'></span></i></td>";
@@ -720,4 +702,25 @@ function mes($entrada)
     return $entrada;
 }
 
+
+function formatarCPF(string $cpf): string
+                    {
+                        // Remove qualquer caractere que não seja número
+                        $cpf = preg_replace('/\D/', '', $cpf);
+
+                        // Verifica se o CPF tem 11 dígitos (após a limpeza)
+                        if (strlen($cpf) != 11) {
+                            return "CPF inválido (número de dígitos incorreto)."; // Ou lançar uma exceção, dependendo da sua necessidade
+                        }
+
+                        // Formata o CPF usando sprintf
+                        return sprintf(
+                            '%s.%s.%s-%s',
+                            substr($cpf, 0, 3),
+                            substr($cpf, 3, 3),
+                            substr($cpf, 6, 3),
+                            substr($cpf, 9, 2)
+                        );
+                    }
+                    
 ?>
