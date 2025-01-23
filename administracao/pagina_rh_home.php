@@ -415,7 +415,7 @@ include_once('../bd/nivel.php');
                     echo "<td id='cpf_$dados->idfuncionario'></td>";
                     ?>
                     <script>
-                        document.getElementById('cpf_<?=$dados->idfuncionario?>').innerHTML = '<?=$dados->cpf?>';
+                        document.getElementById('cpf_<?=$dados->idfuncionario?>').innerHTML = '<?=$dados->cpf?>'.replace(/\D/g, '').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2');
                     </script>
                     <?php
                     echo "<td>$dados->conselho_n</td>";
