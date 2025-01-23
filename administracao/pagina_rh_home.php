@@ -415,7 +415,7 @@ include_once('../bd/nivel.php');
                     echo "<td id='cpf_$dados->idfuncionario'></td>";
                     ?>
                     <script>
-                        document.
+                        document.getElementById('cpf_<?=$dados->idfuncionario?>').innerHTML = '<?=$dados->cpf?>';
                     </script>
                     <?php
                     echo "<td>$dados->conselho_n</td>";
