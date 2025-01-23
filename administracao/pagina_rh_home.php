@@ -373,6 +373,7 @@ include_once('../bd/nivel.php');
                     servidores[$dados->idfuncionario]=[];                    
                     servidores[$dados->idfuncionario]['nome'] = '$dados->nome'; 
                     servidores[$dados->idfuncionario]['data_nasc'] = '$dados->data_nascbr';
+                    servidores[$dados->idfuncionario]['cpf'] = '$dados->cpf';
                     servidores[$dados->idfuncionario]['matricula'] = '$dados->matricula'; 
                     servidores[$dados->idfuncionario]['admissao'] = '$dados->admissaoBR'; 
                     servidores[$dados->idfuncionario]['cargo'] = '$dados->cargo';
@@ -410,8 +411,13 @@ include_once('../bd/nivel.php');
 
                     //<a class='eleicaobtn-link' target='_blank' href='https://siupa.com.br/siiupa/administracao/pagina_rh_eleicao2022.php?nome=$dados->nome&cargo=$dados->cargo&cpf=$dados->cpf'>Eleição</a> 
                     //                    echo "<td>$dados->data_nascbr</td>";
-
-                    echo "<td>$dados->cpf</td>";
+                    
+                    echo "<td id='cpf_$dados->id'></td>";
+                    ?>
+                    <script>
+                        document.
+                    </script>
+                    <?php
                     echo "<td>$dados->conselho_n</td>";
                     echo "<td><!-- $dados->fk_cargo -->$dados->cargo <i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->cargo'></span></i></td>";
 
