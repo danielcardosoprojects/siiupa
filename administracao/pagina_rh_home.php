@@ -703,7 +703,7 @@ function mes($entrada)
 }
 
 
-function formatarCPF(string $cpf): string
+function formatarCPF(string $cpf)
                     {
                         // Remove qualquer caractere que não seja número
                         $cpf = preg_replace('/\D/', '', $cpf);
