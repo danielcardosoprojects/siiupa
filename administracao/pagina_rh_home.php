@@ -235,10 +235,15 @@ include_once('../bd/nivel.php');
     $inicio = $pc - 1;
     $inicio = $inicio * $total_reg;
 
-    
+    $cpf_formatasql = "CONCAT(
+        SUBSTRING(REPLACE(REPLACE(REPLACE(cpf, '.', ''), '-', ''), ' ', ''), 1, 3), '.', 
+        SUBSTRING(REPLACE(REPLACE(REPLACE(cpf, '.', ''), '-', ''), ' ', ''), 4, 3), '.', 
+        SUBSTRING(REPLACE(REPLACE(REPLACE(cpf, '.', ''), '-', ''), ' ', ''), 7, 3), '-', 
+        SUBSTRING(REPLACE(REPLACE(REPLACE(cpf, '.', ''), '-', ''), ' ', ''), 10, 2)
+    ) AS cpf_formatado";
 
     //busca u940659928_siupa.tb_funcionario
-    $sqlbusca = "SELECT  DATE_FORMAT(f.data_nasc,'%d\/%m\/%Y') as data_nascbr, f.*, DATE_FORMAT(f.admissao,'%d\/%m\/%Y') as admissaoBR, f.id AS idfuncionario, c.descricao AS cargo, c.id, s.setor FROM u940659928_siupa.tb_funcionario AS f INNER JOIN u940659928_siupa.tb_cargo AS c ON f.fk_cargo = c.id INNER JOIN u940659928_siupa.tb_setor AS s ON f.fk_setor = s.id AND s.setor $where $fcsql $bsetorsql $orderby";
+    $sqlbusca = "SELECT  DATE_FORMAT(f.data_nasc,'%d\/%m\/%Y') as data_nascbr, f.*, DATE_FORMAT(f.admissao,'%d\/%m\/%Y') as admissaoBR, f.id AS idfuncionario, c.descricao AS cargo, c.id, s.setor FROM u940659928_siupa.tb_funcionario AS f INNER JOIN u940659928_siupa.tb_cargo AS c ON f.fk_cargo = c.id INNER JOIN u940659928_siupa.tb_setor AS s ON f.fk_setor = s.id $where $fcsql $bsetorsql $cpf_formatasql $orderby";
 
 
 
