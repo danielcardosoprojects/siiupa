@@ -101,39 +101,39 @@
     }
 
 
-/* CSS */
-#seleciona_todos {
-  background-color: #fff;
-  border: 1px solid #d5d9d9;
-  border-radius: 8px;
-  box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
-  box-sizing: border-box;
-  color: #0f1111;
-  cursor: pointer;
-  display: inline-block;
-  font-family: "Amazon Ember",sans-serif;
-  font-size: 13px;
-  line-height: 29px;
-  padding: 0 10px 0 11px;
-  position: relative;
-  text-align: center;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  vertical-align: middle;
-  width: 100px;
-}
+    /* CSS */
+    #seleciona_todos {
+        background-color: #fff;
+        border: 1px solid #d5d9d9;
+        border-radius: 8px;
+        box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+        box-sizing: border-box;
+        color: #0f1111;
+        cursor: pointer;
+        display: inline-block;
+        font-family: "Amazon Ember", sans-serif;
+        font-size: 13px;
+        line-height: 29px;
+        padding: 0 10px 0 11px;
+        position: relative;
+        text-align: center;
+        text-decoration: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+        vertical-align: middle;
+        width: 100px;
+    }
 
-#seleciona_todos:hover {
-  background-color: #f7fafa;
-}
+    #seleciona_todos:hover {
+        background-color: #f7fafa;
+    }
 
-#seleciona_todos:focus {
-  border-color: #008296;
-  box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
-  outline: 0;
-}
+    #seleciona_todos:focus {
+        border-color: #008296;
+        box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+        outline: 0;
+    }
 
     #bloco-de-notas {
         position: absolute;
@@ -167,6 +167,16 @@
         padding: 10px;
         width: 100%;
         height: 100%;
+    }
+
+    #tabelathead {
+        position: sticky;
+        top: 0;
+        /* Define a distância do topo */
+        background-color: #fff;
+        /* Opcional: Define uma cor de fundo para o thead */
+        z-index: 1;
+        /* Opcional: Garante que o thead fique acima do conteúdo da tabela */
     }
 </style>
 <?php
@@ -253,7 +263,7 @@ STATUS:
     <span type="button" class="btn btn btn-outline-dark" id="addservidor">
         ➕ Adicionar Servidor</span>
     <span id="excluir_varios">Excluir vários</span><span id="confirmar_exclusao" title="Confirmar exclusão" style='display:none'>✅</span><span id="cancelar_exclusao" style='display:none' title="Cancelar exclusão">❌</span> <span id="seleciona_todos" style="display:none; cursor:pointer;">Selecionar todos<span>
-    
+
 </p>
 
 
