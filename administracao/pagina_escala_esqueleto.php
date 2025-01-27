@@ -816,7 +816,7 @@
 
 
 
-                $sqlserv = "SELECT f.conselho_tipo, f.conselho_n, c.funcao_upa, c.titulo, f.fk_cargo, f.nome, ef.* FROM u940659928_siupa.tb_escala_funcionario as ef INNER JOIN u940659928_siupa.tb_funcionario AS f ON (ef.fk_funcionario = f.id) INNER JOIN u940659928_siupa.tb_cargo AS c ON (f.fk_cargo = c.id) WHERE ef.fk_escala=$idescala order by ef.posicao ASC, f.nome ASC, ef.id ASC";
+                $sqlserv = "SELECT f.vinculo, f.conselho_tipo, f.conselho_n, c.funcao_upa, c.titulo, f.fk_cargo, f.nome, ef.* FROM u940659928_siupa.tb_escala_funcionario as ef INNER JOIN u940659928_siupa.tb_funcionario AS f ON (ef.fk_funcionario = f.id) INNER JOIN u940659928_siupa.tb_cargo AS c ON (f.fk_cargo = c.id) WHERE ef.fk_escala=$idescala order by ef.posicao ASC, f.nome ASC, ef.id ASC";
                 $buscaserv = new BD;
                 $resultadoserv = $buscaserv->consulta($sqlserv);
                 $feriaslegenda = "";
