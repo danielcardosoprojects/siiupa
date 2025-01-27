@@ -865,7 +865,13 @@
 
                         if ($i == $serv->ferias_inicio) {
                             $dias = $serv->ferias_fim - $serv->ferias_inicio + 1;
-                            echo "<td colspan='$dias' style='letter-spacing: .15rem;'>FÉRIAS/RECESSO REGULAMENTARES</td>";
+                            if($serv->vinculo == "EFETIVO") {
+                                $textoferias = "FERIAS REGULAMENTARES";
+                            } else {
+                                $textoferias = "RECESSO";
+                            }
+                            
+                            echo "<td colspan='$dias' style='letter-spacing: .15rem;'>$textoferias</td>";
                             $i = $i + $dias - 1;
                             continue;
                         }
