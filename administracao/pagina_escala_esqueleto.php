@@ -871,7 +871,7 @@
                                 $textoferias = "RECESSO";
                             }
                             
-                            echo "<td colspan='$dias' style='letter-spacing: .15rem;'>$textoferias</td>";
+                            echo "<td colspan='$dias' style='letter-spacing: .15rem;'>$serv->vinculo-$textoferias</td>";
                             $i = $i + $dias - 1;
                             continue;
                         }
