@@ -862,7 +862,7 @@
                         $diasemanaext = new data;
                         $diasemanaext->data = "$ano-$mes-$i";
                         $diadasemanaext = $diasemanaext->diasemanaext();
-
+                        $textoferias = "FERIAS REGULAMENTARES";
                         if ($i == $serv->ferias_inicio) {
                             $dias = $serv->ferias_fim - $serv->ferias_inicio + 1;
                             if($serv->vinculo == "EFETIVO") {
