@@ -156,6 +156,7 @@ function sanitize_title($title)
 		<a href="/siiupa/farmacia/item" id="janelaItem" class="btn btn-outline-primary btn-sm" role="button" aria-pressed="true"><img src="/siiupa/imagens/icones/remedio.svg" height="20px"> Itens</a>
 		<a href="/siiupa/farmacia/setor" id="janelaSetor" class="btn btn-outline-primary btn-sm" role="button" aria-pressed="true"><img src="/siiupa/imagens/icones/add_setor.svg" height="20px"> Setores</a>
 		<a href="/siiupa/farmacia/profissional" id="janelaProfissional" class="btn btn-outline-primary btn-sm" role="button" aria-pressed="true"><img src="/siiupa/imagens/icones/add_setor.svg" height="20px"> Profissionais Solicitantes</a>
+		<a href="/siiupa/farmacia/profissionais" id="janelaProfissionais" class="btn btn-outline-primary btn-sm" role="button" aria-pressed="true"><img src="/siiupa/imagens/icones/add_setor.svg" height="20px"> Profissionais Solicitantes 2</a>
 
 
 	<?php
@@ -197,6 +198,8 @@ function sanitize_title($title)
 			include("paginafarm_item_entrada.php");
 		} elseif ($sub == "lote") {
 			include("paginafarm_lote.php");
+		} elseif ($sub == "profissionais") {
+			include("paginafarm_profissionais.html");
 		}
 	} else {
 		@include("paginafarm_home.php");
