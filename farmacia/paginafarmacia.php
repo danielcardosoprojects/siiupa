@@ -103,7 +103,7 @@ function sanitize_title($title)
 		autoOpen: false,
 		modal: false,
 		title: 'Profissional',
-		width: '100%',
+		width: 'auto',
 	})
 	$("#dialogSetor").dialog({
 		autoOpen: false,
