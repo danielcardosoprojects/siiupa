@@ -99,6 +99,9 @@
         carregarProfissionais();
 
         // Formulário de cadastro e edição
+
+        document.getElementById("formCadastro").onsubmit = function(){console.log('teste')};
+
         $('#formCadastro').on('submit', function (e) {
             e.preventDefault();
             console.log(entrou);
