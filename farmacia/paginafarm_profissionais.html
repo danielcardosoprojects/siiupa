@@ -33,7 +33,7 @@
 </div>
 
 <!-- Modal de Cadastro e Edição -->
-<div class="modal fade" id="modalCadastro" tabindex="-100" aria-labelledby="modalCadastroLabel" aria-hidden="true">
+<div class="modal fade" id="modalCadastro" tabindex="-1" aria-labelledby="modalCadastroLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -101,7 +101,7 @@
         // Formulário de cadastro e edição
         $('#formCadastro').on('submit', function (e) {
             e.preventDefault();
-            console.log(entrou);
+            console.log('entrou');
 
             const id = $('#id_profissional').val();
             const nome = $('#nome').val();
