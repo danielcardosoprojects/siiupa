@@ -65,7 +65,7 @@
 <script>
     $(document).ready(function () {
         const apiProfissionais = "https://www.siupa.com.br/siiupa/api/api.php/records/tb_farmprofissional";
-        const apiCargos = "https://www.siupa.com.br/siiupa/api/api.php/records/tb_cargo";
+        const apiCargos = "https://www.siupa.com.br/siiupa/api/api.php/records/tb_cargo?order=descricao,asc";
         const table = $('#profissionais').DataTable();
 
         // Carregar profissionais na tabela
@@ -89,7 +89,7 @@
             $.get(apiCargos, function (data) {
                 $('#funcao').empty();
                 data.records.forEach(function (item) {
-                    $('#funcao').append(new Option(item.titulo, item.titulo));
+                    $('#funcao').append(new Option(item.descricao, item.descricao));
                 });
             });
         }
@@ -146,6 +146,7 @@
         window.editar = function (id) {
             $.get(`${apiProfissionais}/${id}`, function (data) {
                 const profissional = data;
+                console.log(data);
                 $('#nome').val(profissional.profissional);
                 $('#funcao').val(profissional.funcao);
                 $('#registro').val(profissional.n_conselho);
