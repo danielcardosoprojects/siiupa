@@ -64,6 +64,7 @@
 
 <script>
     $(document).ready(function () {
+        console.log(sessionStorage.token);
         const apiProfissionais = "https://www.siupa.com.br/siiupa/api/api.php/records/tb_farmprofissional";
         const apiCargos = "https://www.siupa.com.br/siiupa/api/api.php/records/tb_cargo?order=descricao,asc";
         const table = $('#profissionais').DataTable();
