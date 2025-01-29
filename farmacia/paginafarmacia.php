@@ -101,7 +101,7 @@ function sanitize_title($title)
 	})
 	$("#dialogProfissional").dialog({
 		autoOpen: false,
-		modal: true,
+		modal: false,
 		title: 'Profissional',
 		width: 'auto',
 	})
