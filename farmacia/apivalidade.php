@@ -1,3 +1,3 @@
 <?php
-require('asdasd.php');
+include('asdasd.php');
 ?>
