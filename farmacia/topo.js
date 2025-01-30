@@ -148,7 +148,7 @@ class MeuTopo extends HTMLElement {
         console.log(dataAtual);
 
         try {
-            const response = await fetch(`https://www.siupa.com.br/siiupa/api/api.php/records/tb_farmestoque?filter=estoque,gt,0&filter=data_validade,lt,${ultimoDiaMes}`);
+            const response = await fetch(`https://www.siupa.com.br/siiupa/api/api.php/records/tb_farmestoque?filter=data_validade,lt,${ultimoDiaMes}?filter=estoque,gt,0`);
             const data = await response.json();
             
             
