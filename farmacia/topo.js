@@ -40,10 +40,6 @@ class MeuTopo extends HTMLElement {
             console.error("Erro ao validar usuário:", error);
             window.location.href = "/";
         }
-    }
-
-    async contarItensVencidos() {
-        // Obtém a data atual no formato YYYY-MM-DD
         const dataAtual = new Date().toISOString().split("T")[0];
     
         try {
@@ -59,15 +55,15 @@ class MeuTopo extends HTMLElement {
             return 0; // Retorna 0 em caso de erro
         }
     }
+
+
+    
     
     
     
 
     render() {
-        
-    contarItensVencidos().then(total => {
-        console.log("Total de itens vencidos:", total);
-    });
+
         const style = document.createElement("style");
         style.textContent = `
             @import url("https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css");
