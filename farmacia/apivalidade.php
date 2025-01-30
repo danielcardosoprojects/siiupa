@@ -1,3 +1,5 @@
 <?php
-include('asdasd.php');
+include("/siiupa/bd/conectabd.php");
+
+
 ?>
