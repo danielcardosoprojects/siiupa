@@ -13,7 +13,7 @@ class MeuTopo extends HTMLElement {
 
         // Se não houver token, redireciona para a raiz
         if (!token) {
-            window.location.href = "/";
+            //window.location.href = "/";
             return;
         }
 
@@ -145,10 +145,10 @@ class MeuTopo extends HTMLElement {
           
             const ultimoDiaMes =  `${ano}-${mesFormatado}-${dia}`;
           
-        console.log(dataAtual);
+        
 
         try {
-            const response = await fetch(`https://www.siupa.com.br/siiupa/api/api.php/records/tb_farmestoque?filter=data_validade,lt,2025-01-31&filter=estoque,gt,0`);
+            const response = await fetch(`https://www.siupa.com.br/siiupa/api/api.php/records/tb_farmestoque?filter=data_validade,lt,${ultimoDiaMes}&filter=estoque,gt,0`);
             const data = await response.json();
             
             
