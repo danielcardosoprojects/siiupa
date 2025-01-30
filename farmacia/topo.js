@@ -9,7 +9,7 @@ class MeuTopo extends HTMLElement {
     async validarUsuario() {
         // Captura o token da query string
         const params = new URLSearchParams(window.location.search);
-        const token = sessionStorage("token");
+        const token = sessionStorage.token;
         //const token = params.get("token");
 
         // Se não houver token, redireciona para a raiz
