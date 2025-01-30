@@ -3,7 +3,7 @@ class MeuTopo extends HTMLElement {
         super();
         this.attachShadow({ mode: 'open' });
         this.validarUsuario();
-        this.contarItensVencidos();
+        
     }
 
     async validarUsuario() {
