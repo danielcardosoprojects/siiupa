@@ -40,20 +40,7 @@ class MeuTopo extends HTMLElement {
             console.error("Erro ao validar usuário:", error);
             window.location.href = "/";
         }
-        const dataAtual = new Date().toISOString().split("T")[0];
-    
-        try {
-            // Faz a requisição para a API
-            const response = await fetch(`https://www.siupa.com.br/siiupa/api/api.php/records/tb_farmestoque?filter=data_validade,lt,${dataAtual}`);
-            const data = await response.json();
-    
-            // Retorna a quantidade de registros vencidos
-            const totalVencidos = data.records ? data.records.length : 0;
-            return totalVencidos;
-        } catch (error) {
-            console.error("Erro ao buscar itens vencidos:", error);
-            return 0; // Retorna 0 em caso de erro
-        }
+        
     }
 
 
