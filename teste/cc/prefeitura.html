@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta de Contracheques</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        /* Ajuste para evitar problemas de overflow */
+html, body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    color: #1c1e21;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    overflow-y: auto;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* Configuração para o contêiner principal */
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 1000px;
+    width: 100%;
+    margin-top: 20px; /* Espaço para evitar conteúdo escondido */
+}
+
+/* Título */
+h1 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+h4 {
+    width:100%;
+    text-align:center;
+}
+
+/* Estilos para inputs, selects e botão */
+input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #dddfe2;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Botão com efeito de hover */
+button {
+    background-color: #1877f2;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #165bca;
+}
+
+/* Cards em estilo flexível */
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    flex: 1 1 45%; /* Ajuste para cards lado a lado */
+    max-width: 45%;
+}
+
+.loading {
+    display: none;
+    text-align: center;
+}
+
+.loading img {
+    width: 50px;
+}
+
+/* Layout */
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Consulta de Contracheques</h1>
+        <h4>Agora basta apertar em obter token. 👇</h4>
+        <input type="hidden" id="usuarioInput" placeholder="Usuário" value="danielcardoso" >
+        <input type="hidden" id="senhaInput" placeholder="Senha" value="c*123c12">
+        <button id="getTokenButton">Obter Token</button>
+
+        <input type="text" id="tokenInput" placeholder="Token" readonly>
+        <hr>
+        <label for="competenciaSelect">Selecione uma competência:</label>
+        <select id="competenciaSelect"></select>
+        <select id="exercicioInput">
+            <option value="2024">2024</option>
+            <option value="2023">2023</option>
+            <option value="2022">2022</option>
+            <option value="2021">2021</option>
+        </select>
+        <input type="text" id="matriculaInput" placeholder="Matrícula">
+       
+        <button id="searchButton">Buscar</button>
+        <div class="loading">
+            <img src="loading.gif" alt="Carregando...">
+        </div>
+        <a id="fichaFinanceira" href="#">Ficha Financeira</a>
+        <div id="cardsContainer"></div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const showLoading = () => document.querySelector('.loading').style.display = 'block';
+        const stopLoading = () => document.querySelector('.loading').style.display = 'none';
+
+        document.getElementById("getTokenButton").addEventListener("click", async () => {
+            const usuario = document.getElementById("usuarioInput").value;
+            const senha = document.getElementById("senhaInput").value;
+
+            try {
+                showLoading();
+                const response = await axios.post("https://apionline.layoutsistemas.com.br/api/token/", {
+                    username: usuario,
+                    password: senha
+                });
+                stopLoading();
+
+                const token = response.data.access;
+                document.getElementById("tokenInput").value = "Bearer " + token;
+            } catch (error) {
+                console.error("Erro ao obter o token:", error);
+                stopLoading();
+            }
+        });
+
+
+
+        document.getElementById("searchButton").addEventListener("click", async () => {
+            document.getElementById("cardsContainer").innerHTML = "";
+            const token = document.getElementById("tokenInput").value;
+            const exercicio = document.getElementById("exercicioInput").value;
+            const matricula = document.getElementById("matriculaInput").value;
+            const apiUrl = `https://apionline.layoutsistemas.com.br/api/contracheques/?matricula=${matricula}&entidade=792&exercicio=${exercicio}`;
+
+            try {
+                showLoading();
+                const response = await axios.get(apiUrl, {
+                    headers: {
+                        "Authorization": token
+                    }
+                });
+                stopLoading();
+
+                const contracheques = response.data.results;
+                contracheques.forEach(contracheque => {
+                    const card = document.createElement("div");
+                    card.classList.add("card");
+                    card.innerHTML = `
+                        <h3>${contracheque.competencia_display}</h3>
+                        <p>Tipo: ${contracheque.tipo_descricao}</p>
+                        <a href="#" id="link${contracheque.id}">Ver PDF</a>
+                    `;
+                    document.getElementById("cardsContainer").appendChild(card);
+
+                    document.getElementById(`link${contracheque.id}`).addEventListener("click", async (event) => {
+                        event.preventDefault();
+                        const pdfApiUrl = `https://apionline.layoutsistemas.com.br/api/contra_cheques/relatorio/?contra_cheque=${contracheque.id}&matricula=${matricula}`;
+
+                        try {
+                            const pdfResponse = await axios.get(pdfApiUrl, {
+                                responseType: "arraybuffer",
+                                headers: {
+                                    "Authorization": token
+                                }
+                            });
+
+                            const pdfBlob = new Blob([pdfResponse.data], { type: "application/pdf" });
+                            const pdfUrl = URL.createObjectURL(pdfBlob);
+                            window.open(pdfUrl, "_blank");
+                        } catch (error) {
+                            console.error("Erro ao buscar PDF:", error);
+                        }
+                    });
+                });
+
+            } catch (error) {
+                console.error("Erro ao buscar contracheques:", error);
+                stopLoading();
+            }
+        });
+
+        document.getElementById('fichaFinanceira').addEventListener("click", async (event) => {
+            event.preventDefault();
+            const matricula = document.getElementById("matriculaInput").value;
+            const token = document.getElementById("tokenInput").value;
+            const ffUrl = `https://apionline.layoutsistemas.com.br/api/ficha_financeiras/relatorio/?ficha_financeira=s886&matricula=${matricula}`;
+
+            try {
+                const pdfResponse = await axios.get(ffUrl, {
+                    responseType: "arraybuffer",
+                    headers: {
+                        "Authorization": token
+                    }
+                });
+
+                const pdfBlob = new Blob([pdfResponse.data], { type: "application/pdf" });
+                const pdfUrl = URL.createObjectURL(pdfBlob);
+                window.open(pdfUrl, "_blank");
+            } catch (error) {
+                console.error("Erro ao buscar PDF:", error);
+            }
+        });
+
+        const preencherSelectComDadosDaAPI = () => {
+            const apiUrl = "https://apitransparencia.layoutsistemas.com.br/api/transparencias/?id=&exercicio=&ano=&mes=&entidade=477";
+            const select = document.getElementById("competenciaSelect");
+
+            axios.get(apiUrl)
+                .then(response => {
+                    const apiResponse = response.data;
+                    apiResponse.results.sort((a, b) => b.id - a.id);
+
+                    apiResponse.results.forEach(item => {
+                        const option = document.createElement("option");
+                        option.value = item.id;
+                        option.textContent = item.competencia_display;
+                        select.appendChild(option);
+                    });
+
+                    let competenciaSelect = document.getElementById("competenciaSelect").value;
+                    carregarServidores(`https://apitransparencia.layoutsistemas.com.br/api/servidores/?departamento=001050&entidade=477&transparencia=${competenciaSelect}&page=1&page_size=2000`);
+                    carregarServidores2(`https://apitransparencia.layoutsistemas.com.br/api/servidores/?departamento=001051&entidade=477&transparencia=${competenciaSelect}&page=1&page_size=2000`);
+                })
+                .catch(error => {
+                    console.error("Erro ao buscar dados da API:", error);
+                });
+        };
+
+        const getQueryStringValue = (key) => new URLSearchParams(window.location.search).get(key);
+
+        window.onload = () => {
+            preencherSelectComDadosDaAPI();
+            const valorM = getQueryStringValue('m');
+            document.getElementById('matriculaInput').value = valorM || '';
+        };
+    </script>
+</body>
+</html>
