@@ -116,12 +116,52 @@ class MeuTopo extends HTMLElement {
                 <a href="/siiupa/farmacia/movimento/saida" id="cadastrarMovimentoS" class="btn btn-danger btn-lg active bt_menu_farm" role="button" aria-pressed="true"><img src="/siiupa/imagens/icones/movimento.svg" height="20px">Saída de Item</a>
                 <a href="/siiupa/farmacia/movimentos/" id="filtrarMovimentoS" class="btn btn-warning btn-lg active bt_menu_farm" role="button" aria-pressed="true"><img src="/siiupa/imagens/icones/calendario2.svg" height="20px">Filtrar movimentos</a>
                 <a href="/siiupa/farmacia/ranking/" id="filtrarMovimentoS" class="btn btn-secondary btn-lg active bt_menu_farm" role="button" aria-pressed="true"><img src="/siiupa/imagens/icones/rank.fw.png" height="20px"> Ranking</a>
+                <a href="/siiupa/farmacia/validade/" id="filtrarMovimentoS" class="btn btn-dark btn-lg active bt_menu_farm" role="button" aria-pressed="true"><img src="/siiupa/imagens/icones/sino.fw.png" height="20px"> Validade: <span id="totalVencidos"></span></a>
+                
             </div>
         `;
 
         this.shadowRoot.appendChild(style);
         this.shadowRoot.appendChild(header);
     }
+
+    connectedCallback() {
+        this.contarItensVencidos();
+    }
+
+    async contarItensVencidos() {
+        const dataAtual = new Date().toISOString().split("T")[0];
+       
+            const data = new Date();
+            const ano = data.getFullYear();
+            const mes = data.getMonth();
+          
+            // Cria um novo objeto Date com o dia 0 do próximo mês.
+            // Isso retorna o último dia do mês atual.
+            const ultimoDia = new Date(ano, mes + 1, 0);
+          
+            const dia = ultimoDia.getDate();
+            const mesFormatado = mes + 1 < 10 ? `0${mes + 1}` : mes + 1;
+          
+            const ultimoDiaMes =  `${ano}-${mesFormatado}-${dia}`;
+          
+        console.log(dataAtual);
+
+        try {
+            const response = await fetch(`https://www.siupa.com.br/siiupa/api/api.php/records/tb_farmestoque?filter=estoque,gt,0&filter=data_validade,lt,${ultimoDiaMes}`);
+            const data = await response.json();
+            
+            
+            const totalVencidos = data.records ? data.records.length : 0;
+            
+            // Atualiza o elemento dentro do Shadow DOM
+            this.shadowRoot.getElementById("totalVencidos").textContent = totalVencidos;
+        } catch (error) {
+            console.error("Erro ao buscar itens vencidos:", error);
+            this.shadowRoot.getElementById("totalVencidos").textContent = "Erro";
+        }
+    }
+
 }
 
 customElements.define("meu-topo", MeuTopo);
