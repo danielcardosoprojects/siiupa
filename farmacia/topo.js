@@ -38,7 +38,7 @@ class MeuTopo extends HTMLElement {
             this.render();
         } catch (error) {
             console.error("Erro ao validar usuário:", error);
-            window.location.href = "/";
+            //ttwindow.location.href = "/";
         }
         
     }
@@ -148,7 +148,7 @@ class MeuTopo extends HTMLElement {
         console.log(dataAtual);
 
         try {
-            const response = await fetch(`https://www.siupa.com.br/siiupa/api/api.php/records/tb_farmestoque?filter=data_validade,lt,${ultimoDiaMes}?filter=estoque,gt,0`);
+            const response = await fetch(`https://www.siupa.com.br/siiupa/api/api.php/records/tb_farmestoque?filter=data_validade,lt,2025-01-31&filter=estoque,gt,0`);
             const data = await response.json();
             
             
