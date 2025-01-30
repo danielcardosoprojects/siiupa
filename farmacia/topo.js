@@ -24,7 +24,7 @@ class MeuTopo extends HTMLElement {
 
             // Se não houver usuário correspondente, redireciona para a raiz
             if (!data.records || data.records.length === 0) {
-                window.location.href = "/";
+                //window.location.href = "/";
                 return;
             }
 
