@@ -1,3 +1,3 @@
 <?php
-echo "teste";
+require('asdasd.php');
 ?>
