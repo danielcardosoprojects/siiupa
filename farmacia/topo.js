@@ -9,11 +9,12 @@ class MeuTopo extends HTMLElement {
     async validarUsuario() {
         // Captura o token da query string
         const params = new URLSearchParams(window.location.search);
-        const token = params.get("token");
+        const token = sessionStorage("token");
+        //const token = params.get("token");
 
         // Se não houver token, redireciona para a raiz
         if (!token) {
-            //window.location.href = "/";
+            window.location.href = "/";
             return;
         }
 
@@ -24,7 +25,7 @@ class MeuTopo extends HTMLElement {
 
             // Se não houver usuário correspondente, redireciona para a raiz
             if (!data.records || data.records.length === 0) {
-                //window.location.href = "/";
+                window.location.href = "/";
                 return;
             }
 
@@ -38,7 +39,7 @@ class MeuTopo extends HTMLElement {
             this.render();
         } catch (error) {
             console.error("Erro ao validar usuário:", error);
-            //ttwindow.location.href = "/";
+            window.location.href = "/";
         }
         
     }
