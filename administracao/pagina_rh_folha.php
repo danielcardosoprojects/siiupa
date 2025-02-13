@@ -387,7 +387,7 @@ $tab->tfechalinha();
 
 $tab->tabrelinha();
 
-$tab->tpopulalinha("<h5 class='text-center' style='font-size:16px' id='titulo_folha' data-titulo='Folha de Pagamento $mes-$ano'>Folha de Pagamento </br><strong>$mes/$ano</strong></h5><h6 class='text-center' style='font-size:14px'>$vinculo_mostra $setor_mostra</h6>", '', $mesclacolunas = '3');
+$tab->tpopulalinha("<h5 class='text-center' style='font-size:24px' id='titulo_folha' data-titulo='Folha de Pagamento $mes-$ano'>Folha de Pagamento </br><strong>$mes/$ano</strong></h5><h6 class='text-center' style='font-size:14px'>$vinculo_mostra $setor_mostra</h6>", '', $mesclacolunas = '3');
 $tab->tpopulalinha("");
 $tab->tfechalinha();
 $tab->fechaTabela();
@@ -738,7 +738,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 target.scrollIntoView({ behavior: "smooth", block: "center" });
 
                 // Faz o elemento piscar em verde
-                target.style.transition = "background-color 0.5s ease-in-out";
+                target.style.transition = "background-color 1s ease-in-out";
                 target.style.backgroundColor = "lightgreen";
                 setTimeout(() => target.style.backgroundColor = "", 1500);
             } else {
