@@ -729,6 +729,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // Obtém o ID da âncora na URL (depois do #)
         let hash = window.location.hash.substring(1); // Exemplo: "6769"
         if (hash) {
+            $.notify("Rolando a página para o servidor alterado...", "info");
             let target = document.getElementById(hash);
             if (target) {
                 target.scrollIntoView({ behavior: "smooth", block: "center" });
