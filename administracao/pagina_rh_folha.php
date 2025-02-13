@@ -723,3 +723,23 @@ function mes($entrada)
         });
     });
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    function scrollToTarget() {
+        // Obtém o ID da âncora na URL (depois do #)
+        let hash = window.location.hash.substring(1); // Exemplo: "6769"
+        if (hash) {
+            let target = document.getElementById(hash);
+            if (target) {
+                target.scrollIntoView({ behavior: "smooth", block: "center" });
+            } else {
+                // Se o elemento ainda não existir, tenta de novo após um tempo
+                setTimeout(scrollToTarget, 500);
+            }
+        }
+    }
+
+    // Espera 2 segundos e então tenta rolar
+    setTimeout(scrollToTarget, 2000);
+});
+</script>
