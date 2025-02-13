@@ -245,7 +245,7 @@ if (isset($_GET['acao'])) {
             $last_id = mysqli_insert_id($conn);
             echo "New record created successfully. Last inserted ID is: " . $last_id;
             print("<script>alert('Sucesso!');
-        var link2 = '?setor=adm&sub=rh&subsub=rhfolhaexibe&id=$idfolha';
+        var link2 = '?setor=adm&sub=rh&subsub=rhfolhaexibe&id=$idfolha#$last_id';
         window.location.replace(link2);
         
         </script>");
