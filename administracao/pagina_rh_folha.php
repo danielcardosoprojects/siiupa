@@ -729,12 +729,20 @@ document.addEventListener("DOMContentLoaded", function() {
         // Obtém o ID da âncora na URL (depois do #)
         let hash = window.location.hash.substring(1); // Exemplo: "6769"
         if (hash) {
-            $.notify("Rolando a página para o servidor alterado...", "info");
             let target = document.getElementById(hash);
             if (target) {
+                // Exibe notificação
+                $.notify("Rolando a página para o servidor alterado...", "info");
+
+                // Rola suavemente até o elemento
                 target.scrollIntoView({ behavior: "smooth", block: "center" });
+
+                // Faz o elemento piscar em verde
+                target.style.transition = "background-color 0.5s ease-in-out";
+                target.style.backgroundColor = "lightgreen";
+                setTimeout(() => target.style.backgroundColor = "", 1500);
             } else {
-                // Se o elemento ainda não existir, tenta de novo após um tempo
+                // Se o elemento ainda não existir, tenta novamente após 500ms
                 setTimeout(scrollToTarget, 500);
             }
         }
@@ -744,3 +752,4 @@ document.addEventListener("DOMContentLoaded", function() {
     setTimeout(scrollToTarget, 2000);
 });
 </script>
+
