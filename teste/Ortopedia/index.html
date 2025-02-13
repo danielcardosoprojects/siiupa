@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabela de Fraturas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input {
+            margin-bottom: 10px;
+            padding: 8px;
+            width: 100%;
+            font-size: 16px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Lista de Fraturas por Grupo</h2>
+    <input type="text" id="searchInput" placeholder="Digite o nome do osso ou fratura..." onkeyup="filtrarTabela()">
+
+    <table id="fraturasTable">
+        <thead>
+            <tr>
+                <th>Fratura Específica</th>
+                <th>Grupo Anatômico</th>
+                <th>Grande Grupo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Fratura de mandíbula</td><td>Crânio e Face</td><td>Cabeça e Pescoço</td></tr>
+            <tr><td>Fratura nasal</td><td>Crânio e Face</td><td>Cabeça e Pescoço</td></tr>
+            <tr><td>Fratura orbitária</td><td>Crânio e Face</td><td>Cabeça e Pescoço</td></tr>
+            <tr><td>Fratura cervical</td><td>Coluna Vertebral</td><td>Coluna Vertebral</td></tr>
+            <tr><td>Fratura torácica</td><td>Coluna Vertebral</td><td>Coluna Vertebral</td></tr>
+            <tr><td>Fratura de costela</td><td>Tórax e Costelas</td><td>Tórax</td></tr>
+            <tr><td>Fratura esternal</td><td>Tórax e Costelas</td><td>Tórax</td></tr>
+            <tr><td>Fratura de clavícula</td><td>Ombro e Braço</td><td>Membro Superior</td></tr>
+            <tr><td>Fratura de escápula</td><td>Ombro e Braço</td><td>Membro Superior</td></tr>
+            <tr><td>Fratura de úmero</td><td>Ombro e Braço</td><td>Membro Superior</td></tr>
+            <tr><td>Fratura de rádio</td><td>Antebraço</td><td>Membro Superior</td></tr>
+            <tr><td>Fratura de ulna</td><td>Antebraço</td><td>Membro Superior</td></tr>
+            <tr><td>Fratura de tíbia</td><td>Perna</td><td>Membro Inferior</td></tr>
+            <tr><td>Fratura de fíbula</td><td>Perna</td><td>Membro Inferior</td></tr>
+            <tr><td>Fratura de fêmur proximal</td><td>Pelve e Quadril</td><td>Membro Inferior</td></tr>
+            <tr><td>Fratura de patela</td><td>Coxa e Joelho</td><td>Membro Inferior</td></tr>
+            <tr><td>Fratura de metacarpos</td><td>Punho e Mão</td><td>Membro Superior</td></tr>
+            <tr><td>Fratura de metatarso</td><td>Tornozelo e Pé</td><td>Membro Inferior</td></tr>
+        </tbody>
+    </table>
+
+    <script>
+        function filtrarTabela() {
+            var input, filtro, tabela, tr, td, i, j, txtValor;
+            input = document.getElementById("searchInput");
+            filtro = input.value.toLowerCase();
+            tabela = document.getElementById("fraturasTable");
+            tr = tabela.getElementsByTagName("tr");
+
+            for (i = 1; i < tr.length; i++) {
+                tr[i].style.display = "none";
+                td = tr[i].getElementsByTagName("td");
+                for (j = 0; j < td.length; j++) {
+                    if (td[j]) {
+                        txtValor = td[j].textContent || td[j].innerText;
+                        if (txtValor.toLowerCase().indexOf(filtro) > -1) {
+                            tr[i].style.display = "";
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
