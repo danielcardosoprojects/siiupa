@@ -749,7 +749,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // Espera 2 segundos e então tenta rolar
-    setTimeout(scrollToTarget, 2000);
+    setTimeout(scrollToTarget, 500);
 });
 </script>
 
