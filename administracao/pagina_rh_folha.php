@@ -387,7 +387,7 @@ $tab->tfechalinha();
 
 $tab->tabrelinha();
 
-$tab->tpopulalinha("<h5 class='text-center' style='font-size:24px' id='titulo_folha' data-titulo='Folha de Pagamento $mes-$ano'>Folha de Pagamento </br><strong>$mes/$ano</strong></h5><h6 class='text-center' style='font-size:14px'>$vinculo_mostra $setor_mostra</h6>", '', $mesclacolunas = '3');
+$tab->tpopulalinha("<h5 class='text-center' style='font-size:14px' id='titulo_folha' data-titulo='Folha de Pagamento $mes-$ano'>Folha de Pagamento </br><strong>$mes/$ano</strong></h5><h6 class='text-center' style='font-size:20px'>$vinculo_mostra $setor_mostra</h6>", '', $mesclacolunas = '3');
 $tab->tpopulalinha("");
 $tab->tfechalinha();
 $tab->fechaTabela();
