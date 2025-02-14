@@ -13,6 +13,35 @@
     #loader img {
         border-radius: 50%;
     }
+    .tipo_afastamento {
+    background-color: #a934ff;
+    padding: .1rem .2rem;
+    font-size: .7rem;
+    border-radius: .2rem;
+    color: #fff;
+    cursor: default;
+    border-color: #0d6efd;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.inativo {
+    background-color: #ffc133;
+    padding: .2rem .3rem;
+    font-size: .7rem;
+    border-radius: .2rem;
+    color: #ff6433;
+    cursor: default;
+    border-color: #0d6efd;
+}
+.ativo {
+    background-color: green;
+    padding: .2rem .3rem;
+    font-size: .7rem;
+    border-radius: .2rem;
+    color: #fff;
+    cursor: default;
+    border-color: #0d6efd;
+}
 </style>
 
 <div id="loader">
@@ -99,7 +128,8 @@
                 afastamentos.records.forEach(record => {
                     const cargo = cargosMap[record.fk_funcionario.fk_cargo] || 'N/A';
                     const setor = setoresMap[record.fk_funcionario.fk_setor] || 'N/A';
-                    const afastamento = tiposAfastamentosMap[record.fk_afastamentos] || 'N/A';
+                    
+                    const afastamento = "<span class='tipo_afastamento'>"+tiposAfastamentosMap[record.fk_afastamentos]+"</span>" || 'N/A';
                     const dataInicio = formatDateBR(record.data_inicio);
                     const dataFim = formatDateBR(record.data_fim);
                     const duracao = calculateDuration(record.data_inicio, record.data_fim);

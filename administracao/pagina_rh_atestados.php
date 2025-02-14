@@ -12,22 +12,208 @@ include_once('../bd/nivel.php');
 
 <hr>
 <br>
+
+<div class="d-flex">
+        <input type="text" id="searchInput" class="form-control me-2" placeholder="<?= isset($_GET['nome']) ? $_GET['nome'] : "Digite um nome" ?>" required>
+        <button id="searchButton" class="btn btn-primary">Pesquisar</button>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            function realizarPesquisa() {
+                const nome = encodeURIComponent(document.getElementById("searchInput").value.trim());
+                if (nome) {
+                    const urlBase = "https://siupa.com.br/siiupa/?setor=adm&sub=rh&subsub=atestados&pagina=1";
+                    window.location.href = `${urlBase}&nome=${nome}`;
+                }
+            }
+
+            document.getElementById("searchButton").addEventListener("click", realizarPesquisa);
+            document.getElementById("searchInput").addEventListener("keypress", function(event) {
+                if (event.key === "Enter") {
+                    event.preventDefault();
+                    realizarPesquisa();
+                }
+            });
+        });
+    </script>
+
+<!-- BUSCA ANTIGA
+ 
 <strong>Busca afastamento:</strong>
-<form id="pesquisaAtestados">
+<form id="pesquisaAtestadosx" method="POST" action="">
     <input id="entrada" type="txt" placeholder="O que você quer buscar?">
     <input type="submit" value="Pesquisar"></input>
 </form>
 <hr>
 <strong id="quantidade"></strong>
 <span id="saidaTxt">Nenhum resultado...</span><br><br>
-
+-->
 
 
 <div id="todos_atestados">
     <?php
+    if(isset($_GET['nome'])){
+        $pesquisaNome = $_GET['nome'];
+    } else {
+        $pesquisaNome = '';
+    }
+
+     $atestadoContagem = new BD;
+     $sqlContagem = "
+     SELECT 
+         COUNT(*) as total 
+     FROM 
+         u940659928_siupa.tb_afastamento as A 
+     INNER JOIN 
+         u940659928_siupa.tb_funcionario as f 
+         ON (A.fk_funcionario = f.id) 
+     INNER JOIN 
+         u940659928_siupa.tb_cargo AS c 
+         ON (f.fk_cargo = c.id) 
+     INNER JOIN 
+         u940659928_siupa.tb_afastamentos as afs 
+         ON (A.fk_afastamentos = afs.id)
+     WHERE f.nome LIKE '%$pesquisaNome%'
+ 
+ ";
+ $resultadoAtestadoContagem = $atestadoContagem->consulta($sqlContagem);
+ $contagem = $resultadoAtestadoContagem[0];
+ $totalRegistros = $contagem->total;
+
+ echo "<div class='btn btn-primary' style='margin-top:10px'>
+  Encontrados <span class='badge badge-light'>$totalRegistros</span>
+</div>";
+// Número de registros por página
+$registrosPorPagina = 10;
+
+// Calcula o número total de páginas
+
+$totalPaginas = ceil($totalRegistros / $registrosPorPagina);
+// Determina a página atual (padrão é 1 se não for especificada)
+$paginaAtual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+
+// Calcula o offset para a consulta SQL
+$offset = ($paginaAtual - 1) * $registrosPorPagina;
+
+// AQUI COMEÇA A PAGINAÇÃO HTML
+
+// Número máximo de botões visíveis
+$maxBotaoVisiveis = 10;
+
+// Calcula o intervalo de páginas a serem exibidas
+$inicio = max(1, $paginaAtual - floor($maxBotaoVisiveis / 2));
+$fim = min($totalPaginas, $inicio + $maxBotaoVisiveis - 1);
+
+// Ajusta o início se o fim ultrapassar o total de páginas
+if ($fim - $inicio < $maxBotaoVisiveis - 1) {
+    $inicio = max(1, $fim - $maxBotaoVisiveis + 1);
+}
+
+echo "<nav aria-label='Navegação de páginas'>";
+echo "<ul class='pagination justify-content-center'>";
+
+// Botão "Primeiro"
+if ($paginaAtual > 1) {
+    echo "<li class='page-item'>";
+    echo "<a class='page-link' href='?setor=adm&sub=rh&subsub=atestados&pagina=1&nome=$pesquisaNome' aria-label='Primeiro'>";
+    echo "<span aria-hidden='true'>« Primeiro</span>";
+    echo "</a>";
+    echo "</li>";
+} else {
+    echo "<li class='page-item disabled'>";
+    echo "<span class='page-link' aria-hidden='true'>« Primeiro</span>";
+    echo "</li>";
+}
+
+// Botão "Anterior"
+if ($paginaAtual > 1) {
+    echo "<li class='page-item'>";
+    echo "<a class='page-link' href='?setor=adm&sub=rh&subsub=atestados&pagina=" . ($paginaAtual - 1) . "&nome=$pesquisaNome' aria-label='Anterior'>";
+    echo "<span aria-hidden='true'>‹</span>";
+    echo "</a>";
+    echo "</li>";
+} else {
+    echo "<li class='page-item disabled'>";
+    echo "<span class='page-link' aria-hidden='true'>‹</span>";
+    echo "</li>";
+}
+
+// Números das páginas
+for ($i = $inicio; $i <= $fim; $i++) {
+    if ($i == $paginaAtual) {
+        echo "<li class='page-item active' aria-current='page'>";
+        echo "<span class='page-link'>$i</span>";
+        echo "</li>";
+    } else {
+        echo "<li class='page-item'>";
+        echo "<a class='page-link' href='?setor=adm&sub=rh&subsub=atestados&pagina=$i&nome=$pesquisaNome'>$i</a>";
+        echo "</li>";
+    }
+}
+
+// Botão "Próximo"
+if ($paginaAtual < $totalPaginas) {
+    echo "<li class='page-item'>";
+    echo "<a class='page-link' href='?setor=adm&sub=rh&subsub=atestados&pagina=" . ($paginaAtual + 1) . "&nome=$pesquisaNome'' aria-label='Próximo'>";
+    echo "<span aria-hidden='true'>›</span>";
+    echo "</a>";
+    echo "</li>";
+} else {
+    echo "<li class='page-item disabled'>";
+    echo "<span class='page-link' aria-hidden='true'>›</span>";
+    echo "</li>";
+}
+
+// Botão "Último"
+if ($paginaAtual < $totalPaginas) {
+    echo "<li class='page-item'>";
+    echo "<a class='page-link' href='?setor=adm&sub=rh&subsub=atestados&pagina=$totalPaginas&nome=$pesquisaNome' aria-label='Último'>";
+    echo "<span aria-hidden='true'>Último »</span>";
+    echo "</a>";
+    echo "</li>";
+} else {
+    echo "<li class='page-item disabled'>";
+    echo "<span class='page-link' aria-hidden='true'>Último »</span>";
+    echo "</li>";
+}
+
+echo "</ul>";
+echo "</nav>";
+
+// AQUI TERMINA A PAGINAÇÃO HTML
+
+// Consulta SQL principal com LIMIT e OFFSET para paginação
+
     $consulta_atestado = new BD;
-    $sqlConsulta_Atestados = "SELECT A.id as idAfastamento, afs.afastamento,afs.id as afastamento_id, A.*, f.nome, f.id as idf, c.titulo FROM u940659928_siupa.tb_afastamento as A inner join u940659928_siupa.tb_funcionario as f ON (A.fk_funcionario = f.id) inner join u940659928_siupa.tb_cargo AS c on (f.fk_cargo = c.id) inner join u940659928_siupa.tb_afastamentos as afs on (A.fk_afastamentos = afs.id) order by A.id DESC";
+    $sqlConsulta_Atestados = "
+    SELECT 
+        A.id as idAfastamento, 
+        afs.afastamento, 
+        afs.id as afastamento_id, 
+        A.*, 
+        f.nome, 
+        f.id as idf, 
+        c.titulo 
+    FROM 
+        u940659928_siupa.tb_afastamento as A 
+    INNER JOIN 
+        u940659928_siupa.tb_funcionario as f 
+        ON (A.fk_funcionario = f.id) 
+    INNER JOIN 
+        u940659928_siupa.tb_cargo AS c 
+        ON (f.fk_cargo = c.id) 
+    INNER JOIN 
+        u940659928_siupa.tb_afastamentos as afs 
+        ON (A.fk_afastamentos = afs.id) 
+ WHERE f.nome LIKE '%$pesquisaNome%'
+    ORDER BY 
+        A.id DESC 
+    LIMIT $registrosPorPagina OFFSET $offset
+";
     $resultadoConsulta_Atestados = $consulta_atestado->consulta($sqlConsulta_Atestados);
+
+   
 
     foreach ($resultadoConsulta_Atestados as $resultado_atestado) {
 
@@ -83,7 +269,78 @@ include_once('../bd/nivel.php');
         //echo "<hr>";
     }
     ?>
+<?php
+echo "<nav aria-label='Navegação de páginas'>";
+echo "<ul class='pagination justify-content-center'>";
 
+// Botão "Primeiro"
+if ($paginaAtual > 1) {
+    echo "<li class='page-item'>";
+    echo "<a class='page-link' href='?setor=adm&sub=rh&subsub=atestados&pagina=1&nome=$pesquisaNome' aria-label='Primeiro'>";
+    echo "<span aria-hidden='true'>« Primeiro</span>";
+    echo "</a>";
+    echo "</li>";
+} else {
+    echo "<li class='page-item disabled'>";
+    echo "<span class='page-link' aria-hidden='true'>« Primeiro</span>";
+    echo "</li>";
+}
+
+// Botão "Anterior"
+if ($paginaAtual > 1) {
+    echo "<li class='page-item'>";
+    echo "<a class='page-link' href='?setor=adm&sub=rh&subsub=atestados&pagina=" . ($paginaAtual - 1) . "&nome=$pesquisaNome' aria-label='Anterior'>";
+    echo "<span aria-hidden='true'>‹</span>";
+    echo "</a>";
+    echo "</li>";
+} else {
+    echo "<li class='page-item disabled'>";
+    echo "<span class='page-link' aria-hidden='true'>‹</span>";
+    echo "</li>";
+}
+
+// Números das páginas
+for ($i = $inicio; $i <= $fim; $i++) {
+    if ($i == $paginaAtual) {
+        echo "<li class='page-item active' aria-current='page'>";
+        echo "<span class='page-link'>$i</span>";
+        echo "</li>";
+    } else {
+        echo "<li class='page-item'>";
+        echo "<a class='page-link' href='?setor=adm&sub=rh&subsub=atestados&pagina=$i&nome=$pesquisaNome'>$i</a>";
+        echo "</li>";
+    }
+}
+
+// Botão "Próximo"
+if ($paginaAtual < $totalPaginas) {
+    echo "<li class='page-item'>";
+    echo "<a class='page-link' href='?setor=adm&sub=rh&subsub=atestados&pagina=" . ($paginaAtual + 1) . "&nome=$pesquisaNome' aria-label='Próximo'>";
+    echo "<span aria-hidden='true'>›</span>";
+    echo "</a>";
+    echo "</li>";
+} else {
+    echo "<li class='page-item disabled'>";
+    echo "<span class='page-link' aria-hidden='true'>›</span>";
+    echo "</li>";
+}
+
+// Botão "Último"
+if ($paginaAtual < $totalPaginas) {
+    echo "<li class='page-item'>";
+    echo "<a class='page-link' href='?setor=adm&sub=rh&subsub=atestados&pagina=$totalPaginas&nome=$pesquisaNome' aria-label='Último'>";
+    echo "<span aria-hidden='true'>Último »</span>";
+    echo "</a>";
+    echo "</li>";
+} else {
+    echo "<li class='page-item disabled'>";
+    echo "<span class='page-link' aria-hidden='true'>Último »</span>";
+    echo "</li>";
+}
+
+echo "</ul>";
+echo "</nav>";
+?>
 </div>
 <div id="dialogCadastraAtestado" title="Cadastrar novo afastamento">
     <div id="dialogCadastraAtestadoConteudo"></div>

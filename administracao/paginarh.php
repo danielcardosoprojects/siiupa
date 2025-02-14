@@ -171,6 +171,7 @@
 
     .bt_menu_rh {
         border-radius: 20rem;
+        font-size: 12px;
     }
 </style>
 
@@ -261,10 +262,21 @@
                 <img src="/siiupa/imagens/icones/doente2.svg" width="20">
                 Afastamentos</a>
 
+                <a href="?setor=adm&sub=rh&subsub=afastamentos" id="bAtestados" class="btn btn-warning btn-lg bt_menu_rh">
+                <img src="/siiupa/imagens/icones/doente2.svg" width="20">
+                Afastamentos 2 (testes)</a>
+
+            
+
+
 
             <a href="?setor=adm&sub=rh&subsub=acionamentos" id="bAcionamentos" class="btn bg-verdeClaro btn-lg bt_menu_rh">
                 <img src="/siiupa/imagens/icones/dinheiro2.svg" width="25">
                 Acionamentos</a>
+
+                <a href="?setor=adm&sub=rh&subsub=atestados" id="bAtestados" class="btn btn-dark btn-lg bt_menu_rh">
+                <img src="/siiupa/imagens/icones/trocas.png" width="20">
+                Trocas</a>
 
             <a href="?setor=adm&sub=rh&subsub=ferias" id="bFerias" class="btn btn-lg bt_menu_rh">
                 <img src="/siiupa/imagens/icones/ferias3.svg" width="20">
@@ -358,7 +370,8 @@ if (isset($_GET['buscasetor'])) {
                 include_once('pagina_rh_alimentacao.php');
                 break;
             case 'atestados':
-                echo "<script>$(document).ready(function() {loadPage('pagina_rh_atestados');});</script>";
+                include_once('pagina_rh_atestados.php');
+                //echo "<script>$(document).ready(function() {loadPage('pagina_rh_atestados');});</script>";
                 break;
             case 'afastamentos':
                 echo "<script>$(document).ready(function() {loadPage('pagina_rh_afastamento');});</script>";
