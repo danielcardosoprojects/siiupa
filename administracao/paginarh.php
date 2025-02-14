@@ -171,6 +171,7 @@
 
     .bt_menu_rh {
         border-radius: 20rem;
+        font-size: 12px;
     }
 </style>
 
