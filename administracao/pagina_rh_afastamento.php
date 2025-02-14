@@ -128,7 +128,8 @@
                 afastamentos.records.forEach(record => {
                     const cargo = cargosMap[record.fk_funcionario.fk_cargo] || 'N/A';
                     const setor = setoresMap[record.fk_funcionario.fk_setor] || 'N/A';
-                    const afastamento = "<span class='tipo_afastamento'>"+tiposAfastamentos[record.fk_afastamentos]+"</span>" || 'N/A';
+                    
+                    const afastamento = "<span class='tipo_afastamento'>"+tiposAfastamentosMap[record.fk_afastamentos]+"</span>" || 'N/A';
                     const dataInicio = formatDateBR(record.data_inicio);
                     const dataFim = formatDateBR(record.data_fim);
                     const duracao = calculateDuration(record.data_inicio, record.data_fim);
