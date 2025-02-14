@@ -56,7 +56,15 @@ $paginaAtual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 // Calcula o offset para a consulta SQL
 $offset = ($paginaAtual - 1) * $registrosPorPagina;
 
-
+echo "<div class='paginacao'>";
+for ($i = 1; $i <= $totalPaginas; $i++) {
+    if ($i == $paginaAtual) {
+        echo "<strong>$i</strong> ";
+    } else {
+        echo "<a href='?pagina=$i'>$i</a> ";
+    }
+}
+echo "</div>";
 
 // Consulta SQL principal com LIMIT e OFFSET para paginação
 
