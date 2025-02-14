@@ -17,6 +17,35 @@
             transform: translate(-50%, -50%);
             z-index: 1000;
         }
+        .tipo_afastamento {
+    background-color: #a934ff;
+    padding: .1rem .2rem;
+    font-size: .7rem;
+    border-radius: .2rem;
+    color: #fff;
+    cursor: default;
+    border-color: #0d6efd;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.inativo {
+    background-color: #ffc133;
+    padding: .2rem .3rem;
+    font-size: .7rem;
+    border-radius: .2rem;
+    color: #ff6433;
+    cursor: default;
+    border-color: #0d6efd;
+}
+.ativo {
+    background-color: green;
+    padding: .2rem .3rem;
+    font-size: .7rem;
+    border-radius: .2rem;
+    color: #fff;
+    cursor: default;
+    border-color: #0d6efd;
+}
     </style>
 </head>
 <body>
@@ -78,7 +107,7 @@
 
                 afastamentos.forEach(record => {
                     const cargo = cargos[record.fk_funcionario.fk_cargo] || 'N/A';
-                    const afastamento = tiposAfastamentos[record.fk_afastamentos] || 'N/A';
+                    const afastamento = "<span class='tipo_afastamento'>"+tiposAfastamentos[record.fk_afastamentos]+"</span>" || 'N/A';
 
                     table.row.add([
                         record.id,
