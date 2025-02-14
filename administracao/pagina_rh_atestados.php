@@ -198,7 +198,7 @@ if(isset($_GET['nome'])){
     INNER JOIN 
         u940659928_siupa.tb_afastamentos as afs 
         ON (A.fk_afastamentos = afs.id) 
-    WHERE f.nome LIKE %$pesquisaNome%
+ WHERE f.nome LIKE '%$pesquisaNome%'
     ORDER BY 
         A.id DESC 
     LIMIT $registrosPorPagina OFFSET $offset
