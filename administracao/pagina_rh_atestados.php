@@ -80,9 +80,21 @@ $offset = ($paginaAtual - 1) * $registrosPorPagina;
         A.id DESC 
     LIMIT $registrosPorPagina OFFSET $offset
 ";
-    $resultadoConsulta_Atestados = $consulta_atestado->consulta($sqlConsulta_Atestados);
+    $resultadoContagem = $consulta_atestado->consulta($sqlConsulta_Atestados);
+    $totalRegistros = $resultadoContagem[0]['total'];
 
-   
+    // Calcula o número total de páginas
+    $totalPaginas = ceil($totalRegistros / $registrosPorPagina);
+   // Links de navegação entre as páginas
+echo "<div class='paginacao'>";
+for ($i = 1; $i <= $totalPaginas; $i++) {
+    if ($i == $paginaAtual) {
+        echo "<strong>$i</strong> ";
+    } else {
+        echo "<a href='?pagina=$i'>$i</a> ";
+    }
+}
+echo "</div>";
 
     foreach ($resultadoConsulta_Atestados as $resultado_atestado) {
 
