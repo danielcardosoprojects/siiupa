@@ -13,20 +13,26 @@ include_once('../bd/nivel.php');
 <hr>
 <br>
 
-<form id="searchForm" class="d-flex">
+<div class="d-flex">
         <input type="text" id="searchInput" class="form-control me-2" placeholder="Digite um nome" required>
-        <button type="submit" class="btn btn-primary">Pesquisar</button>
-    </form>
+        <button id="searchButton" class="btn btn-primary">Pesquisar</button>
+    </div>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            document.getElementById("searchForm").addEventListener("submit", function(event) {
-                event.preventDefault(); // Evita recarregar a página
-                
+            function realizarPesquisa() {
                 const nome = encodeURIComponent(document.getElementById("searchInput").value.trim());
                 if (nome) {
                     const urlBase = "https://siupa.com.br/siiupa/?setor=adm&sub=rh&subsub=atestados&pagina=1";
                     window.location.href = `${urlBase}&nome=${nome}`;
+                }
+            }
+
+            document.getElementById("searchButton").addEventListener("click", realizarPesquisa);
+            document.getElementById("searchInput").addEventListener("keypress", function(event) {
+                if (event.key === "Enter") {
+                    event.preventDefault();
+                    realizarPesquisa();
                 }
             });
         });
