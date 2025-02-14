@@ -29,6 +29,25 @@ include_once('../bd/nivel.php');
     $sqlConsulta_Atestados = "SELECT A.id as idAfastamento, afs.afastamento,afs.id as afastamento_id, A.*, f.nome, f.id as idf, c.titulo FROM u940659928_siupa.tb_afastamento as A inner join u940659928_siupa.tb_funcionario as f ON (A.fk_funcionario = f.id) inner join u940659928_siupa.tb_cargo AS c on (f.fk_cargo = c.id) inner join u940659928_siupa.tb_afastamentos as afs on (A.fk_afastamentos = afs.id) order by A.id DESC";
     $resultadoConsulta_Atestados = $consulta_atestado->consulta($sqlConsulta_Atestados);
 
+    $atestadoContagem = new BD;
+    $sqlContagem = "
+    SELECT 
+        COUNT(*) as total 
+    FROM 
+        u940659928_siupa.tb_afastamento as A 
+    INNER JOIN 
+        u940659928_siupa.tb_funcionario as f 
+        ON (A.fk_funcionario = f.id) 
+    INNER JOIN 
+        u940659928_siupa.tb_cargo AS c 
+        ON (f.fk_cargo = c.id) 
+    INNER JOIN 
+        u940659928_siupa.tb_afastamentos as afs 
+        ON (A.fk_afastamentos = afs.id)
+";
+$resultadoAtestadoContagem = $atestadoContagem->consulta($sqlContagem);
+var_dump($resultadoAtestadoContagem);
+
     foreach ($resultadoConsulta_Atestados as $resultado_atestado) {
 
         $firstDate  = new DateTime($resultado_atestado->data_inicio);
