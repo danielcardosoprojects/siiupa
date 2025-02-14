@@ -13,7 +13,7 @@ include_once('../bd/nivel.php');
 <hr>
 <br>
 <strong>Busca afastamento:</strong>
-<form id="pesquisaAtestados">
+<form id="pesquisaAtestadosx" method="GET" action="">
     <input id="entrada" type="txt" placeholder="O que você quer buscar?">
     <input type="submit" value="Pesquisar"></input>
 </form>
