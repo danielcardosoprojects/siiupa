@@ -14,7 +14,7 @@ include_once('../bd/nivel.php');
 <br>
 
 <div class="d-flex">
-        <input type="text" id="searchInput" class="form-control me-2" placeholder="Digite um nome" required>
+        <input type="text" id="searchInput" class="form-control me-2" placeholder="<?= isset($_GET['nome']) ? $_GET['nome'] : "Digite um nome" ?>" required>
         <button id="searchButton" class="btn btn-primary">Pesquisar</button>
     </div>
 
