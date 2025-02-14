@@ -43,6 +43,7 @@ include_once('../bd/nivel.php');
  ";
  $resultadoAtestadoContagem = $atestadoContagem->consulta($sqlContagem);
  var_dump($resultadoAtestadoContagem);
+ var_dump($_GET['pagina']);
 
 // Número de registros por página
 $registrosPorPagina = 10;
