@@ -56,15 +56,26 @@ $paginaAtual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 // Calcula o offset para a consulta SQL
 $offset = ($paginaAtual - 1) * $registrosPorPagina;
 
-echo "<div class='paginacao'>";
+echo "<nav aria-label='Navegação de páginas'>";
+echo "<ul class='pagination justify-content-center'>";
+
 for ($i = 1; $i <= $totalPaginas; $i++) {
+    // Verifica se a página atual é a mesma que está sendo iterada
     if ($i == $paginaAtual) {
-        echo "<strong>$i</strong> ";
+        // Botão ativo (página atual)
+        echo "<li class='page-item active' aria-current='page'>";
+        echo "<span class='page-link'>$i</span>";
+        echo "</li>";
     } else {
-        echo "<a href='?pagina=$i'>$i</a> ";
+        // Botão inativo (outras páginas)
+        echo "<li class='page-item'>";
+        echo "<a class='page-link' href='?pagina=$i'>$i</a>";
+        echo "</li>";
     }
 }
-echo "</div>";
+
+echo "</ul>";
+echo "</nav>";
 
 // Consulta SQL principal com LIMIT e OFFSET para paginação
 
