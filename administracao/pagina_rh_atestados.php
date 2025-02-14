@@ -42,7 +42,7 @@ include_once('../bd/nivel.php');
          ON (A.fk_afastamentos = afs.id)
  ";
  $resultadoAtestadoContagem = $atestadoContagem->consulta($sqlContagem);
- print_r($resultadoAtestadoContagem[0]);
+ print_r($resultadoAtestadoContagem[0]['total']);
 
 // Número de registros por página
 $registrosPorPagina = 10;
