@@ -24,7 +24,13 @@ include_once('../bd/nivel.php');
 
 
 <div id="todos_atestados">
-<?php
+    <?php
+    /*$consulta_atestado = new BD;
+    $sqlConsulta_Atestados = "SELECT A.id as idAfastamento, afs.afastamento,afs.id as afastamento_id, A.*, f.nome, f.id as idf, c.titulo FROM u940659928_siupa.tb_afastamento as A inner join u940659928_siupa.tb_funcionario as f ON (A.fk_funcionario = f.id) inner join u940659928_siupa.tb_cargo AS c on (f.fk_cargo = c.id) inner join u940659928_siupa.tb_afastamentos as afs on (A.fk_afastamentos = afs.id) order by A.id DESC";
+    $resultadoConsulta_Atestados = $consulta_atestado->consulta($sqlConsulta_Atestados);
+*/
+
+
 // Instância do objeto BD
 $consulta_atestado = new BD;
 
@@ -91,41 +97,8 @@ $totalRegistros = $resultadoContagem[0]['total'];
 $totalPaginas = ceil($totalRegistros / $registrosPorPagina);
 
 // Exibe os resultados da página atual
-foreach ($resultadoConsulta_Atestados as $resultado_atestado) {
-    $firstDate  = new DateTime($resultado_atestado->data_inicio);
-    $secondDate = new DateTime($resultado_atestado->data_fim);
-    $intvl = $firstDate->diff($secondDate);
-    $totalDias = $intvl->format('%R%a') + 1;
-    $dias = $intvl->d;
-    $dias = $dias + 1;
-
-    // Verifica se está ativo ou inativo
-    $dt_atual = date("Y-m-d");
-    $hoje = new DateTime($dt_atual);
-    if ($secondDate->format('c') >= $hoje->format('c')) {
-        $classe_css = "ativo";
-        $texto_etiqueta = "Ativo";
-    } else {
-        $classe_css = "inativo";
-        $texto_etiqueta = "Inativo";
-    }
-
-    $afastamentoUtf8 = $resultado_atestado->afastamento;
-
-    echo "<div class='box_atestados table-hover' style='width:auto;' name='$resultado_atestado->nome'><span class='$classe_css'>$texto_etiqueta</span> <span class='tipo_afastamento'>$afastamentoUtf8</span><br>";
-    echo "<span class='nome_funcionario'><a href='?setor=adm&sub=rh&subsub=atestado_exibe&idafastamento=$resultado_atestado->idAfastamento'>";
-    echo $resultado_atestado->nome . "</a></span> - <span class='nome_cargo'>" . utf8_encode($resultado_atestado->titulo) . "</span><br>";
-    echo "De: <input class='data' type='date' value='" . $resultado_atestado->data_inicio . "' readonly> Até: <input class='data' type='date' value='" . $resultado_atestado->data_fim . "' readonly><br>";
-    echo "(" . $totalDias . " dias) | " . $intvl->y . " ano(s), " . $intvl->m . " mes(es) e " . $dias . " dia(s)";
-    echo "<br>";
-    $afastamentoObs = utf8_decode($resultado_atestado->afastamento_obs);
-    echo "📝 $afastamentoObs";
-    echo "<br>";
-
-    echo "<button class='bt_editaAtestado form-control' style='width:100px;float:left;margin-right:5px;' data-idatestado='$resultado_atestado->id' data-idfuncionario='$resultado_atestado->fk_funcionario' data-data_inicio='$resultado_atestado->data_inicio' data-data_fim='$resultado_atestado->data_fim' data-afastamento='$resultado_atestado->afastamento' data-afastamentoid='$resultado_atestado->afastamento_id' data-nome='$resultado_atestado->nome' data-cargo='$resultado_atestado->titulo' data-afastamento_obs='$resultado_atestado->afastamento_obs'>Editar</button>";
-
-    echo "</div>";
-    echo "<p class='limpaFloat'></p>";
+foreach ($resultadoConsulta_Atestados as $linha) {
+    echo "ID: " . $linha['idAfastamento'] . " - Nome: " . $linha['nome'] . "<br>";
 }
 
 // Links de navegação entre as páginas
@@ -138,7 +111,64 @@ for ($i = 1; $i <= $totalPaginas; $i++) {
     }
 }
 echo "</div>";
-?>
+
+
+
+
+    foreach ($resultadoConsulta_Atestados as $resultado_atestado) {
+
+        $firstDate  = new DateTime($resultado_atestado->data_inicio);
+        $secondDate = new DateTime($resultado_atestado->data_fim);
+        $intvl = $firstDate->diff($secondDate);
+        $totalDias = $intvl->format('%R%a') + 1;
+        $dias = $intvl->d;
+        $dias = $dias + 1;
+        //verifica se está ativo ou nome
+        $dt_atual = date("Y-m-d");
+        $hoje = new DateTime($dt_atual);
+
+        //compara o formato completo da data se é maior ou igual a hoje
+        if ($secondDate->format('c') >= $hoje->format('c')) {
+            $classe_css = "ativo";
+            $texto_etiqueta = "Ativo";
+        } else {
+            $classe_css = "inativo";
+            $texto_etiqueta = "Inativo";
+        }
+
+
+        $afastamentoUtf8 = $resultado_atestado->afastamento;
+
+       
+        
+        echo "<div class='box_atestados table-hover ' style='width:auto;' name='$resultado_atestado->nome'><span class='$classe_css' > $texto_etiqueta</span> <span class='tipo_afastamento'>  $afastamentoUtf8 </span><br>";
+        echo "<span class='nome_funcionario'><a href='?setor=adm&sub=rh&subsub=atestado_exibe&idafastamento=$resultado_atestado->idAfastamento'> ";
+
+        echo $resultado_atestado->nome . "</a></span> - <span class='nome_cargo'>" . utf8_encode($resultado_atestado->titulo) . "</span><br>";
+        echo "De: <input class='data' type='date' value='" . $resultado_atestado->data_inicio . "' readonly> Até: <input class='data'  type='date' value='" . $resultado_atestado->data_fim . "' readonly><br>";
+
+        echo "(" . $totalDias . " dias) | " . $intvl->y . " ano(s), " . $intvl->m . " mes(es) e " . $dias . " dia(s)";
+        echo "<br>";
+        $afastamentoObs = utf8_decode($resultado_atestado->afastamento_obs);
+        echo "📝 $afastamentoObs";
+        echo "<br>";
+
+
+        echo "<button class='bt_editaAtestado form-control' style='width:100px;float:left;margin-right:5px;' data-idatestado='$resultado_atestado->id' data-idfuncionario='$resultado_atestado->fk_funcionario' data-data_inicio='$resultado_atestado->data_inicio' data-data_fim='$resultado_atestado->data_fim' data-afastamento='$resultado_atestado->afastamento' data-afastamentoid='$resultado_atestado->afastamento_id' data-nome='$resultado_atestado->nome' data-cargo='$resultado_atestado->titulo' data-afastamento_obs='$resultado_atestado->afastamento_obs'>Editar</button>";
+        
+
+
+
+
+
+
+
+
+        echo "</div>";
+        echo "<p class='limpaFloat'></p>";
+        //echo "<hr>";
+    }
+    ?>
 
 </div>
 <div id="dialogCadastraAtestado" title="Cadastrar novo afastamento">
