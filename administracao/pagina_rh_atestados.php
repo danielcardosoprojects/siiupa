@@ -56,26 +56,92 @@ $paginaAtual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 // Calcula o offset para a consulta SQL
 $offset = ($paginaAtual - 1) * $registrosPorPagina;
 
+// AQUI COMEÇA A PAGINAÇÃO HTML
+
+// Número máximo de botões visíveis
+$maxBotaoVisiveis = 10;
+
+// Calcula o intervalo de páginas a serem exibidas
+$inicio = max(1, $paginaAtual - floor($maxBotaoVisiveis / 2));
+$fim = min($totalPaginas, $inicio + $maxBotaoVisiveis - 1);
+
+// Ajusta o início se o fim ultrapassar o total de páginas
+if ($fim - $inicio < $maxBotaoVisiveis - 1) {
+    $inicio = max(1, $fim - $maxBotaoVisiveis + 1);
+}
+
 echo "<nav aria-label='Navegação de páginas'>";
 echo "<ul class='pagination justify-content-center'>";
 
-for ($i = 1; $i <= $totalPaginas; $i++) {
-    // Verifica se a página atual é a mesma que está sendo iterada
+// Botão "Primeiro"
+if ($paginaAtual > 1) {
+    echo "<li class='page-item'>";
+    echo "<a class='page-link' href='?setor=adm&sub=rh&subsub=atestados&pagina=1' aria-label='Primeiro'>";
+    echo "<span aria-hidden='true'>« Primeiro</span>";
+    echo "</a>";
+    echo "</li>";
+} else {
+    echo "<li class='page-item disabled'>";
+    echo "<span class='page-link' aria-hidden='true'>« Primeiro</span>";
+    echo "</li>";
+}
+
+// Botão "Anterior"
+if ($paginaAtual > 1) {
+    echo "<li class='page-item'>";
+    echo "<a class='page-link' href='?setor=adm&sub=rh&subsub=atestados&pagina=" . ($paginaAtual - 1) . "' aria-label='Anterior'>";
+    echo "<span aria-hidden='true'>‹</span>";
+    echo "</a>";
+    echo "</li>";
+} else {
+    echo "<li class='page-item disabled'>";
+    echo "<span class='page-link' aria-hidden='true'>‹</span>";
+    echo "</li>";
+}
+
+// Números das páginas
+for ($i = $inicio; $i <= $fim; $i++) {
     if ($i == $paginaAtual) {
-        // Botão ativo (página atual)
         echo "<li class='page-item active' aria-current='page'>";
         echo "<span class='page-link'>$i</span>";
         echo "</li>";
     } else {
-        // Botão inativo (outras páginas)
         echo "<li class='page-item'>";
-        echo "<a class='page-link' href='?pagina=$i'>$i</a>";
+        echo "<a class='page-link' href='?setor=adm&sub=rh&subsub=atestados&pagina=$i'>$i</a>";
         echo "</li>";
     }
 }
 
+// Botão "Próximo"
+if ($paginaAtual < $totalPaginas) {
+    echo "<li class='page-item'>";
+    echo "<a class='page-link' href='?setor=adm&sub=rh&subsub=atestados&pagina=" . ($paginaAtual + 1) . "' aria-label='Próximo'>";
+    echo "<span aria-hidden='true'>›</span>";
+    echo "</a>";
+    echo "</li>";
+} else {
+    echo "<li class='page-item disabled'>";
+    echo "<span class='page-link' aria-hidden='true'>›</span>";
+    echo "</li>";
+}
+
+// Botão "Último"
+if ($paginaAtual < $totalPaginas) {
+    echo "<li class='page-item'>";
+    echo "<a class='page-link' href='?setor=adm&sub=rh&subsub=atestados&pagina=$totalPaginas' aria-label='Último'>";
+    echo "<span aria-hidden='true'>Último »</span>";
+    echo "</a>";
+    echo "</li>";
+} else {
+    echo "<li class='page-item disabled'>";
+    echo "<span class='page-link' aria-hidden='true'>Último »</span>";
+    echo "</li>";
+}
+
 echo "</ul>";
 echo "</nav>";
+
+// AQUI TERMINA A PAGINAÇÃO HTML
 
 // Consulta SQL principal com LIMIT e OFFSET para paginação
 
