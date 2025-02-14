@@ -261,7 +261,7 @@
                 <img src="/siiupa/imagens/icones/doente2.svg" width="20">
                 Afastamentos</a>
 
-                <a href="?setor=adm&sub=rh&subsub=atestados" id="bAtestados" class="btn btn-warning btn-lg bt_menu_rh">
+                <a href="?setor=adm&sub=rh&subsub=afastamentos" id="bAtestados" class="btn btn-warning btn-lg bt_menu_rh">
                 <img src="/siiupa/imagens/icones/doente2.svg" width="20">
                 Afastamentos 2 (testes)</a>
 
@@ -274,7 +274,7 @@
                 Acionamentos</a>
 
                 <a href="?setor=adm&sub=rh&subsub=atestados" id="bAtestados" class="btn btn-dark btn-lg bt_menu_rh">
-                <img src="/siiupa/imagens/icones/doente2.svg" width="20">
+                <img src="/siiupa/imagens/icones/trocas.svg" width="20">
                 Trocas</a>
 
             <a href="?setor=adm&sub=rh&subsub=ferias" id="bFerias" class="btn btn-lg bt_menu_rh">
