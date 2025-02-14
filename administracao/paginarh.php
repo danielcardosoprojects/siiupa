@@ -173,7 +173,7 @@
         border-radius: 20rem;
     }
 </style>
-
+<?=print_r($_GET);?>
 <div style="text-align:left;">
 
     <h1 text-color="#fff" style="float:left; font-family: 'Oswald', sans-serif;" id="tituloRH">Recursos Humanos
