@@ -19,14 +19,16 @@ include_once('../bd/nivel.php');
     </form>
 
     <script>
-        document.getElementById("buscaNomeAtestado").addEventListener("submit", function(event) {
-            event.preventDefault(); // Evita recarregar a página
-            
-            const nome = encodeURIComponent(document.getElementById("searchInput").value.trim());
-            if (nome) {
-                const urlBase = "https://siupa.com.br/siiupa/?setor=adm&sub=rh&subsub=atestados";
-                window.location.href = `${urlBase}&nome=${nome}`;
-            }
+         document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("searchForm").addEventListener("submit", function(event) {
+                event.preventDefault(); // Evita recarregar a página
+                
+                const nome = encodeURIComponent(document.getElementById("searchInput").value.trim());
+                if (nome) {
+                    const urlBase = "https://siupa.com.br/siiupa/?setor=adm&sub=rh&subsub=atestados&pagina=1";
+                    window.location.href = `${urlBase}&nome=${nome}`;
+                }
+            });
         });
     </script>
 
