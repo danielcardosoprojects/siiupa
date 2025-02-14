@@ -24,65 +24,121 @@ include_once('../bd/nivel.php');
 
 
 <div id="todos_atestados">
-    <?php
-    $consulta_atestado = new BD;
-    $sqlConsulta_Atestados = "SELECT A.id as idAfastamento, afs.afastamento,afs.id as afastamento_id, A.*, f.nome, f.id as idf, c.titulo FROM u940659928_siupa.tb_afastamento as A inner join u940659928_siupa.tb_funcionario as f ON (A.fk_funcionario = f.id) inner join u940659928_siupa.tb_cargo AS c on (f.fk_cargo = c.id) inner join u940659928_siupa.tb_afastamentos as afs on (A.fk_afastamentos = afs.id) order by A.id DESC";
-    $resultadoConsulta_Atestados = $consulta_atestado->consulta($sqlConsulta_Atestados);
+<?php
+// Instância do objeto BD
+$consulta_atestado = new BD;
 
-    foreach ($resultadoConsulta_Atestados as $resultado_atestado) {
+// Número de registros por página
+$registrosPorPagina = 10;
 
-        $firstDate  = new DateTime($resultado_atestado->data_inicio);
-        $secondDate = new DateTime($resultado_atestado->data_fim);
-        $intvl = $firstDate->diff($secondDate);
-        $totalDias = $intvl->format('%R%a') + 1;
-        $dias = $intvl->d;
-        $dias = $dias + 1;
-        //verifica se está ativo ou nome
-        $dt_atual = date("Y-m-d");
-        $hoje = new DateTime($dt_atual);
+// Determina a página atual (padrão é 1 se não for especificada)
+$paginaAtual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 
-        //compara o formato completo da data se é maior ou igual a hoje
-        if ($secondDate->format('c') >= $hoje->format('c')) {
-            $classe_css = "ativo";
-            $texto_etiqueta = "Ativo";
-        } else {
-            $classe_css = "inativo";
-            $texto_etiqueta = "Inativo";
-        }
+// Calcula o offset para a consulta SQL
+$offset = ($paginaAtual - 1) * $registrosPorPagina;
 
+// Consulta SQL principal com LIMIT e OFFSET para paginação
+$sqlConsulta_Atestados = "
+    SELECT 
+        A.id as idAfastamento, 
+        afs.afastamento, 
+        afs.id as afastamento_id, 
+        A.*, 
+        f.nome, 
+        f.id as idf, 
+        c.titulo 
+    FROM 
+        u940659928_siupa.tb_afastamento as A 
+    INNER JOIN 
+        u940659928_siupa.tb_funcionario as f 
+        ON (A.fk_funcionario = f.id) 
+    INNER JOIN 
+        u940659928_siupa.tb_cargo AS c 
+        ON (f.fk_cargo = c.id) 
+    INNER JOIN 
+        u940659928_siupa.tb_afastamentos as afs 
+        ON (A.fk_afastamentos = afs.id) 
+    ORDER BY 
+        A.id DESC 
+    LIMIT $registrosPorPagina OFFSET $offset
+";
 
-        $afastamentoUtf8 = $resultado_atestado->afastamento;
+// Executa a consulta para obter os registros da página atual
+$resultadoConsulta_Atestados = $consulta_atestado->consulta($sqlConsulta_Atestados);
 
-       
-        
-        echo "<div class='box_atestados table-hover ' style='width:auto;' name='$resultado_atestado->nome'><span class='$classe_css' > $texto_etiqueta</span> <span class='tipo_afastamento'>  $afastamentoUtf8 </span><br>";
-        echo "<span class='nome_funcionario'><a href='?setor=adm&sub=rh&subsub=atestado_exibe&idafastamento=$resultado_atestado->idAfastamento'> ";
+// Consulta para contar o número total de registros
+$sqlContagem = "
+    SELECT 
+        COUNT(*) as total 
+    FROM 
+        u940659928_siupa.tb_afastamento as A 
+    INNER JOIN 
+        u940659928_siupa.tb_funcionario as f 
+        ON (A.fk_funcionario = f.id) 
+    INNER JOIN 
+        u940659928_siupa.tb_cargo AS c 
+        ON (f.fk_cargo = c.id) 
+    INNER JOIN 
+        u940659928_siupa.tb_afastamentos as afs 
+        ON (A.fk_afastamentos = afs.id)
+";
 
-        echo $resultado_atestado->nome . "</a></span> - <span class='nome_cargo'>" . utf8_encode($resultado_atestado->titulo) . "</span><br>";
-        echo "De: <input class='data' type='date' value='" . $resultado_atestado->data_inicio . "' readonly> Até: <input class='data'  type='date' value='" . $resultado_atestado->data_fim . "' readonly><br>";
+// Executa a consulta de contagem
+$resultadoContagem = $consulta_atestado->consulta($sqlContagem);
+$totalRegistros = $resultadoContagem[0]['total'];
 
-        echo "(" . $totalDias . " dias) | " . $intvl->y . " ano(s), " . $intvl->m . " mes(es) e " . $dias . " dia(s)";
-        echo "<br>";
-        $afastamentoObs = utf8_decode($resultado_atestado->afastamento_obs);
-        echo "📝 $afastamentoObs";
-        echo "<br>";
+// Calcula o número total de páginas
+$totalPaginas = ceil($totalRegistros / $registrosPorPagina);
 
+// Exibe os resultados da página atual
+foreach ($resultadoConsulta_Atestados as $resultado_atestado) {
+    $firstDate  = new DateTime($resultado_atestado->data_inicio);
+    $secondDate = new DateTime($resultado_atestado->data_fim);
+    $intvl = $firstDate->diff($secondDate);
+    $totalDias = $intvl->format('%R%a') + 1;
+    $dias = $intvl->d;
+    $dias = $dias + 1;
 
-        echo "<button class='bt_editaAtestado form-control' style='width:100px;float:left;margin-right:5px;' data-idatestado='$resultado_atestado->id' data-idfuncionario='$resultado_atestado->fk_funcionario' data-data_inicio='$resultado_atestado->data_inicio' data-data_fim='$resultado_atestado->data_fim' data-afastamento='$resultado_atestado->afastamento' data-afastamentoid='$resultado_atestado->afastamento_id' data-nome='$resultado_atestado->nome' data-cargo='$resultado_atestado->titulo' data-afastamento_obs='$resultado_atestado->afastamento_obs'>Editar</button>";
-        
-
-
-
-
-
-
-
-
-        echo "</div>";
-        echo "<p class='limpaFloat'></p>";
-        //echo "<hr>";
+    // Verifica se está ativo ou inativo
+    $dt_atual = date("Y-m-d");
+    $hoje = new DateTime($dt_atual);
+    if ($secondDate->format('c') >= $hoje->format('c')) {
+        $classe_css = "ativo";
+        $texto_etiqueta = "Ativo";
+    } else {
+        $classe_css = "inativo";
+        $texto_etiqueta = "Inativo";
     }
-    ?>
+
+    $afastamentoUtf8 = $resultado_atestado->afastamento;
+
+    echo "<div class='box_atestados table-hover' style='width:auto;' name='$resultado_atestado->nome'><span class='$classe_css'>$texto_etiqueta</span> <span class='tipo_afastamento'>$afastamentoUtf8</span><br>";
+    echo "<span class='nome_funcionario'><a href='?setor=adm&sub=rh&subsub=atestado_exibe&idafastamento=$resultado_atestado->idAfastamento'>";
+    echo $resultado_atestado->nome . "</a></span> - <span class='nome_cargo'>" . utf8_encode($resultado_atestado->titulo) . "</span><br>";
+    echo "De: <input class='data' type='date' value='" . $resultado_atestado->data_inicio . "' readonly> Até: <input class='data' type='date' value='" . $resultado_atestado->data_fim . "' readonly><br>";
+    echo "(" . $totalDias . " dias) | " . $intvl->y . " ano(s), " . $intvl->m . " mes(es) e " . $dias . " dia(s)";
+    echo "<br>";
+    $afastamentoObs = utf8_decode($resultado_atestado->afastamento_obs);
+    echo "📝 $afastamentoObs";
+    echo "<br>";
+
+    echo "<button class='bt_editaAtestado form-control' style='width:100px;float:left;margin-right:5px;' data-idatestado='$resultado_atestado->id' data-idfuncionario='$resultado_atestado->fk_funcionario' data-data_inicio='$resultado_atestado->data_inicio' data-data_fim='$resultado_atestado->data_fim' data-afastamento='$resultado_atestado->afastamento' data-afastamentoid='$resultado_atestado->afastamento_id' data-nome='$resultado_atestado->nome' data-cargo='$resultado_atestado->titulo' data-afastamento_obs='$resultado_atestado->afastamento_obs'>Editar</button>";
+
+    echo "</div>";
+    echo "<p class='limpaFloat'></p>";
+}
+
+// Links de navegação entre as páginas
+echo "<div class='paginacao'>";
+for ($i = 1; $i <= $totalPaginas; $i++) {
+    if ($i == $paginaAtual) {
+        echo "<strong>$i</strong> ";
+    } else {
+        echo "<a href='?pagina=$i'>$i</a> ";
+    }
+}
+echo "</div>";
+?>
 
 </div>
 <div id="dialogCadastraAtestado" title="Cadastrar novo afastamento">
