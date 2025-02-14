@@ -12,6 +12,26 @@ include_once('../bd/nivel.php');
 
 <hr>
 <br>
+
+<form id="searchForm" class="d-flex">
+        <input type="text" id="searchInput" class="form-control me-2" placeholder="Digite um nome" required>
+        <button type="submit" class="btn btn-primary">Pesquisar</button>
+    </form>
+
+    <script>
+        document.getElementById("searchForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Evita recarregar a página
+            
+            const nome = encodeURIComponent(document.getElementById("searchInput").value.trim());
+            if (nome) {
+                const urlBase = "https://siupa.com.br/siiupa/?setor=adm&sub=rh&subsub=atestados";
+                window.location.href = `${urlBase}&nome=${nome}`;
+            }
+        });
+    </script>
+
+<!-- BUSCA ANTIGA
+ 
 <strong>Busca afastamento:</strong>
 <form id="pesquisaAtestadosx" method="POST" action="">
     <input id="entrada" type="txt" placeholder="O que você quer buscar?">
@@ -20,7 +40,7 @@ include_once('../bd/nivel.php');
 <hr>
 <strong id="quantidade"></strong>
 <span id="saidaTxt">Nenhum resultado...</span><br><br>
-
+-->
 
 
 <div id="todos_atestados">
