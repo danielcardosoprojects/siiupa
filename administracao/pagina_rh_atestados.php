@@ -43,8 +43,7 @@ include_once('../bd/nivel.php');
  ";
  $resultadoAtestadoContagem = $atestadoContagem->consulta($sqlContagem);
  $contagem = $resultadoAtestadoContagem[0];
- echo "<strong>Total de afastamentos: </strong>". $contagem->total. "<br>";
-
+ $totalRegistros = $contagem->total;
 // Número de registros por página
 $registrosPorPagina = 10;
 
