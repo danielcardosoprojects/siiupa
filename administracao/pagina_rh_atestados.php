@@ -13,13 +13,13 @@ include_once('../bd/nivel.php');
 <hr>
 <br>
 
-<form id="buscaNomeAtestado" class="d-flex">
+<form id="searchForm" class="d-flex">
         <input type="text" id="searchInput" class="form-control me-2" placeholder="Digite um nome" required>
         <button type="submit" class="btn btn-primary">Pesquisar</button>
     </form>
 
     <script>
-         document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function() {
             document.getElementById("searchForm").addEventListener("submit", function(event) {
                 event.preventDefault(); // Evita recarregar a página
                 
