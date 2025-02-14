@@ -29,7 +29,7 @@ include_once('../bd/nivel.php');
     $sqlConsulta_Atestados = "SELECT A.id as idAfastamento, afs.afastamento,afs.id as afastamento_id, A.*, f.nome, f.id as idf, c.titulo FROM u940659928_siupa.tb_afastamento as A inner join u940659928_siupa.tb_funcionario as f ON (A.fk_funcionario = f.id) inner join u940659928_siupa.tb_cargo AS c on (f.fk_cargo = c.id) inner join u940659928_siupa.tb_afastamentos as afs on (A.fk_afastamentos = afs.id) order by A.id DESC";
     $resultadoConsulta_Atestados = $consulta_atestado->consulta($sqlConsulta_Atestados);
 
-
+$resultadoContagem = new BD;
 // Número de registros por página
 $registrosPorPagina = 10;
 
@@ -39,34 +39,6 @@ $paginaAtual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 // Calcula o offset para a consulta SQL
 $offset = ($paginaAtual - 1) * $registrosPorPagina;
 
-// Consulta SQL principal com LIMIT e OFFSET para paginação
-$sqlConsulta_Atestados = "
-    SELECT 
-        A.id as idAfastamento, 
-        afs.afastamento, 
-        afs.id as afastamento_id, 
-        A.*, 
-        f.nome, 
-        f.id as idf, 
-        c.titulo 
-    FROM 
-        u940659928_siupa.tb_afastamento as A 
-    INNER JOIN 
-        u940659928_siupa.tb_funcionario as f 
-        ON (A.fk_funcionario = f.id) 
-    INNER JOIN 
-        u940659928_siupa.tb_cargo AS c 
-        ON (f.fk_cargo = c.id) 
-    INNER JOIN 
-        u940659928_siupa.tb_afastamentos as afs 
-        ON (A.fk_afastamentos = afs.id) 
-    ORDER BY 
-        A.id DESC 
-    LIMIT $registrosPorPagina OFFSET $offset
-";
-
-// Executa a consulta para obter os registros da página atual
-$resultadoConsulta_Atestados = $consulta_atestado->consulta($sqlConsulta_Atestados);
 
 // Consulta para contar o número total de registros
 $sqlContagem = "
@@ -92,10 +64,7 @@ $totalRegistros = $resultadoContagem[0]['total'];
 // Calcula o número total de páginas
 $totalPaginas = ceil($totalRegistros / $registrosPorPagina);
 
-// Exibe os resultados da página atual
-foreach ($resultadoConsulta_Atestados as $linha) {
-    echo "ID: " . $linha['idAfastamento'] . " - Nome: " . $linha['nome'] . "<br>";
-}
+
 
 // Links de navegação entre as páginas
 echo "<div class='paginacao'>";
