@@ -81,9 +81,9 @@ include_once('../bd/nivel.php');
  $contagem = $resultadoAtestadoContagem[0];
  $totalRegistros = $contagem->total;
 
- echo "<button type='button' class='btn btn-primary'>
+ echo "<div class='btn btn-primary'>
   Encontrados <span class='badge badge-light'>$totalRegistros</span>
-</button>";
+</div>";
 // Número de registros por página
 $registrosPorPagina = 10;
 
