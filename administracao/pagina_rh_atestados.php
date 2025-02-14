@@ -25,14 +25,46 @@ include_once('../bd/nivel.php');
 
 <div id="todos_atestados">
     <?php
-    $consulta_atestado = new BD;
-    $sqlConsulta_Atestados = "SELECT A.id as idAfastamento, afs.afastamento,afs.id as afastamento_id, A.*, f.nome, f.id as idf, c.titulo FROM u940659928_siupa.tb_afastamento as A inner join u940659928_siupa.tb_funcionario as f ON (A.fk_funcionario = f.id) inner join u940659928_siupa.tb_cargo AS c on (f.fk_cargo = c.id) inner join u940659928_siupa.tb_afastamentos as afs on (A.fk_afastamentos = afs.id) order by A.id DESC";
-    $resultadoConsulta_Atestados = $consulta_atestado->consulta($sqlConsulta_Atestados);
+     $atestadoContagem = new BD;
+     $sqlContagem = "
+     SELECT 
+         COUNT(*) as total 
+     FROM 
+         u940659928_siupa.tb_afastamento as A 
+     INNER JOIN 
+         u940659928_siupa.tb_funcionario as f 
+         ON (A.fk_funcionario = f.id) 
+     INNER JOIN 
+         u940659928_siupa.tb_cargo AS c 
+         ON (f.fk_cargo = c.id) 
+     INNER JOIN 
+         u940659928_siupa.tb_afastamentos as afs 
+         ON (A.fk_afastamentos = afs.id)
+ ";
+ $resultadoAtestadoContagem = $atestadoContagem->consulta($sqlContagem);
+ var_dump($resultadoAtestadoContagem);
 
-    $atestadoContagem = new BD;
-    $sqlContagem = "
+// Número de registros por página
+$registrosPorPagina = 10;
+
+// Determina a página atual (padrão é 1 se não for especificada)
+$paginaAtual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
+
+// Calcula o offset para a consulta SQL
+$offset = ($paginaAtual - 1) * $registrosPorPagina;
+
+// Consulta SQL principal com LIMIT e OFFSET para paginação
+
+    $consulta_atestado = new BD;
+    $sqlConsulta_Atestados = "
     SELECT 
-        COUNT(*) as total 
+        A.id as idAfastamento, 
+        afs.afastamento, 
+        afs.id as afastamento_id, 
+        A.*, 
+        f.nome, 
+        f.id as idf, 
+        c.titulo 
     FROM 
         u940659928_siupa.tb_afastamento as A 
     INNER JOIN 
@@ -43,10 +75,14 @@ include_once('../bd/nivel.php');
         ON (f.fk_cargo = c.id) 
     INNER JOIN 
         u940659928_siupa.tb_afastamentos as afs 
-        ON (A.fk_afastamentos = afs.id)
+        ON (A.fk_afastamentos = afs.id) 
+    ORDER BY 
+        A.id DESC 
+    LIMIT $registrosPorPagina OFFSET $offset
 ";
-$resultadoAtestadoContagem = $atestadoContagem->consulta($sqlContagem);
-var_dump($resultadoAtestadoContagem);
+    $resultadoConsulta_Atestados = $consulta_atestado->consulta($sqlConsulta_Atestados);
+
+   
 
     foreach ($resultadoConsulta_Atestados as $resultado_atestado) {
 
