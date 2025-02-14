@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<meta charset="UTF-8">
 <?php
 header('Content-Type: text/html; charset=UTF-8');
 function mesext($entrada)
@@ -32,13 +33,13 @@ function mesext($entrada)
     return $entrada;
 }
 ?>
-<html lang="pt">
-
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Escalas Seleciona várias</title>
     <script src="/siiupa/js/jquery-3.6.0.js"></script>
     <!-- <link rel="stylesheet" href="/siiupa/bootstrap-5.0.0-beta3-dist/css/bootstrap.min.css"> -->
     <style>

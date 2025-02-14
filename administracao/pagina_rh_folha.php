@@ -387,7 +387,7 @@ $tab->tfechalinha();
 
 $tab->tabrelinha();
 
-$tab->tpopulalinha("<h5 class='text-center' style='font-size:16px' id='titulo_folha' data-titulo='Folha de Pagamento $mes-$ano'>Folha de Pagamento </br><strong>$mes/$ano</strong></h5><h6 class='text-center' style='font-size:14px'>$vinculo_mostra $setor_mostra</h6>", '', $mesclacolunas = '3');
+$tab->tpopulalinha("<h5 class='text-center' style='font-size:14px' id='titulo_folha' data-titulo='Folha de Pagamento $mes-$ano'>Folha de Pagamento </br><strong>$mes/$ano</strong></h5><h6 class='text-center' style='font-size:20px'>$vinculo_mostra $setor_mostra</h6>", '', $mesclacolunas = '3');
 $tab->tpopulalinha("");
 $tab->tfechalinha();
 $tab->fechaTabela();
@@ -723,3 +723,33 @@ function mes($entrada)
         });
     });
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    function scrollToTarget() {
+        // Obtém o ID da âncora na URL (depois do #)
+        let hash = window.location.hash.substring(1); // Exemplo: "6769"
+        if (hash) {
+            let target = document.getElementById(hash);
+            if (target) {
+                // Exibe notificação
+                $.notify("Rolando a página para o servidor alterado...", "info");
+
+                // Rola suavemente até o elemento
+                target.scrollIntoView({ behavior: "smooth", block: "center" });
+
+                // Faz o elemento piscar em verde
+                target.style.transition = "background-color 1s ease-in-out";
+                target.style.backgroundColor = "lightgreen";
+                setTimeout(() => target.style.backgroundColor = "", 1500);
+            } else {
+                // Se o elemento ainda não existir, tenta novamente após 500ms
+                setTimeout(scrollToTarget, 500);
+            }
+        }
+    }
+
+    // Espera 2 segundos e então tenta rolar
+    setTimeout(scrollToTarget, 500);
+});
+</script>
+
