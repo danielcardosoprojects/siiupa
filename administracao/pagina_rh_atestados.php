@@ -47,6 +47,9 @@ include_once('../bd/nivel.php');
 // Número de registros por página
 $registrosPorPagina = 10;
 
+// Calcula o número total de páginas
+
+$totalPaginas = ceil($totalRegistros / $registrosPorPagina);
 // Determina a página atual (padrão é 1 se não for especificada)
 $paginaAtual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
 
