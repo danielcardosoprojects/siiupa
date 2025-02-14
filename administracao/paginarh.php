@@ -173,7 +173,7 @@
         border-radius: 20rem;
     }
 </style>
-<?=print_r($_GET);?>
+
 <div style="text-align:left;">
 
     <h1 text-color="#fff" style="float:left; font-family: 'Oswald', sans-serif;" id="tituloRH">Recursos Humanos
@@ -358,7 +358,8 @@ if (isset($_GET['buscasetor'])) {
                 include_once('pagina_rh_alimentacao.php');
                 break;
             case 'atestados':
-                echo "<script>$(document).ready(function() {loadPage('pagina_rh_atestados');});</script>";
+                include_once('pagina_rh_atestados.php');
+                //echo "<script>$(document).ready(function() {loadPage('pagina_rh_atestados');});</script>";
                 break;
             case 'afastamentos':
                 echo "<script>$(document).ready(function() {loadPage('pagina_rh_afastamento');});</script>";
