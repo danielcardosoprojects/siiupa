@@ -275,7 +275,7 @@
                 Acionamentos</a>
 
                 <a href="?setor=adm&sub=rh&subsub=atestados" id="bAtestados" class="btn btn-dark btn-lg bt_menu_rh">
-                <img src="/siiupa/imagens/icones/trocas.svg" width="20">
+                <img src="/siiupa/imagens/icones/trocas.png" width="20">
                 Trocas</a>
 
             <a href="?setor=adm&sub=rh&subsub=ferias" id="bFerias" class="btn btn-lg bt_menu_rh">
