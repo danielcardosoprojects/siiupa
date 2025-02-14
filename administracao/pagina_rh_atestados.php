@@ -112,7 +112,7 @@ echo "<ul class='pagination justify-content-center'>";
 // Botão "Primeiro"
 if ($paginaAtual > 1) {
     echo "<li class='page-item'>";
-    echo "<a class='page-link' href='?setor=adm&sub=rh&subsub=atestados&pagina=1' aria-label='Primeiro'>";
+    echo "<a class='page-link' href='?setor=adm&sub=rh&subsub=atestados&pagina=1&nome=$pesquisaNome' aria-label='Primeiro'>";
     echo "<span aria-hidden='true'>« Primeiro</span>";
     echo "</a>";
     echo "</li>";
@@ -125,7 +125,7 @@ if ($paginaAtual > 1) {
 // Botão "Anterior"
 if ($paginaAtual > 1) {
     echo "<li class='page-item'>";
-    echo "<a class='page-link' href='?setor=adm&sub=rh&subsub=atestados&pagina=" . ($paginaAtual - 1) . "' aria-label='Anterior'>";
+    echo "<a class='page-link' href='?setor=adm&sub=rh&subsub=atestados&pagina=" . ($paginaAtual - 1) . "&nome=$pesquisaNome' aria-label='Anterior'>";
     echo "<span aria-hidden='true'>‹</span>";
     echo "</a>";
     echo "</li>";
@@ -143,7 +143,7 @@ for ($i = $inicio; $i <= $fim; $i++) {
         echo "</li>";
     } else {
         echo "<li class='page-item'>";
-        echo "<a class='page-link' href='?setor=adm&sub=rh&subsub=atestados&pagina=$i'>$i</a>";
+        echo "<a class='page-link' href='?setor=adm&sub=rh&subsub=atestados&pagina=$i&nome=$pesquisaNome'>$i</a>";
         echo "</li>";
     }
 }
@@ -151,7 +151,7 @@ for ($i = $inicio; $i <= $fim; $i++) {
 // Botão "Próximo"
 if ($paginaAtual < $totalPaginas) {
     echo "<li class='page-item'>";
-    echo "<a class='page-link' href='?setor=adm&sub=rh&subsub=atestados&pagina=" . ($paginaAtual + 1) . "' aria-label='Próximo'>";
+    echo "<a class='page-link' href='?setor=adm&sub=rh&subsub=atestados&pagina=" . ($paginaAtual + 1) . "&nome=$pesquisaNome'' aria-label='Próximo'>";
     echo "<span aria-hidden='true'>›</span>";
     echo "</a>";
     echo "</li>";
@@ -164,7 +164,7 @@ if ($paginaAtual < $totalPaginas) {
 // Botão "Último"
 if ($paginaAtual < $totalPaginas) {
     echo "<li class='page-item'>";
-    echo "<a class='page-link' href='?setor=adm&sub=rh&subsub=atestados&pagina=$totalPaginas' aria-label='Último'>";
+    echo "<a class='page-link' href='?setor=adm&sub=rh&subsub=atestados&pagina=$totalPaginas&nome=$pesquisaNome' aria-label='Último'>";
     echo "<span aria-hidden='true'>Último »</span>";
     echo "</a>";
     echo "</li>";
@@ -272,7 +272,7 @@ echo "<ul class='pagination justify-content-center'>";
 // Botão "Primeiro"
 if ($paginaAtual > 1) {
     echo "<li class='page-item'>";
-    echo "<a class='page-link' href='?setor=adm&sub=rh&subsub=atestados&pagina=1' aria-label='Primeiro'>";
+    echo "<a class='page-link' href='?setor=adm&sub=rh&subsub=atestados&pagina=1&nome=$pesquisaNome' aria-label='Primeiro'>";
     echo "<span aria-hidden='true'>« Primeiro</span>";
     echo "</a>";
     echo "</li>";
@@ -285,7 +285,7 @@ if ($paginaAtual > 1) {
 // Botão "Anterior"
 if ($paginaAtual > 1) {
     echo "<li class='page-item'>";
-    echo "<a class='page-link' href='?setor=adm&sub=rh&subsub=atestados&pagina=" . ($paginaAtual - 1) . "' aria-label='Anterior'>";
+    echo "<a class='page-link' href='?setor=adm&sub=rh&subsub=atestados&pagina=" . ($paginaAtual - 1) . "&nome=$pesquisaNome' aria-label='Anterior'>";
     echo "<span aria-hidden='true'>‹</span>";
     echo "</a>";
     echo "</li>";
@@ -303,7 +303,7 @@ for ($i = $inicio; $i <= $fim; $i++) {
         echo "</li>";
     } else {
         echo "<li class='page-item'>";
-        echo "<a class='page-link' href='?setor=adm&sub=rh&subsub=atestados&pagina=$i'>$i</a>";
+        echo "<a class='page-link' href='?setor=adm&sub=rh&subsub=atestados&pagina=$i&nome=$pesquisaNome'>$i</a>";
         echo "</li>";
     }
 }
@@ -311,7 +311,7 @@ for ($i = $inicio; $i <= $fim; $i++) {
 // Botão "Próximo"
 if ($paginaAtual < $totalPaginas) {
     echo "<li class='page-item'>";
-    echo "<a class='page-link' href='?setor=adm&sub=rh&subsub=atestados&pagina=" . ($paginaAtual + 1) . "' aria-label='Próximo'>";
+    echo "<a class='page-link' href='?setor=adm&sub=rh&subsub=atestados&pagina=" . ($paginaAtual + 1) . "&nome=$pesquisaNome' aria-label='Próximo'>";
     echo "<span aria-hidden='true'>›</span>";
     echo "</a>";
     echo "</li>";
@@ -324,7 +324,7 @@ if ($paginaAtual < $totalPaginas) {
 // Botão "Último"
 if ($paginaAtual < $totalPaginas) {
     echo "<li class='page-item'>";
-    echo "<a class='page-link' href='?setor=adm&sub=rh&subsub=atestados&pagina=$totalPaginas' aria-label='Último'>";
+    echo "<a class='page-link' href='?setor=adm&sub=rh&subsub=atestados&pagina=$totalPaginas&nome=$pesquisaNome' aria-label='Último'>";
     echo "<span aria-hidden='true'>Último »</span>";
     echo "</a>";
     echo "</li>";
