@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,100 +8,115 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
         /* Ajuste para evitar problemas de overflow */
-html, body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f2f5;
-    color: #1c1e21;
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    overflow-y: auto;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-}
+        html,
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f2f5;
+            color: #1c1e21;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            overflow-y: auto;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
 
-/* Configuração para o contêiner principal */
-.container {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    max-width: 1000px;
-    width: 100%;
-    margin-top: 20px; /* Espaço para evitar conteúdo escondido */
-}
+        /* Configuração para o contêiner principal */
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 1000px;
+            width: 100%;
+            margin-top: 20px;
+            /* Espaço para evitar conteúdo escondido */
+        }
 
-/* Título */
-h1 {
-    margin-bottom: 20px;
-    text-align: center;
-}
-h4 {
-    width:100%;
-    text-align:center;
-}
+        /* Título */
+        h1 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
 
-/* Estilos para inputs, selects e botão */
-input, select, button {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #dddfe2;
-    border-radius: 5px;
-    font-size: 16px;
-}
+        h4 {
+            width: 100%;
+            text-align: center;
+        }
 
-/* Botão com efeito de hover */
-button {
-    background-color: #1877f2;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
+        /* Estilos para inputs, selects e botão */
+        input,
+        select,
+        button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #dddfe2;
+            border-radius: 5px;
+            font-size: 16px;
+        }
 
-button:hover {
-    background-color: #165bca;
-}
+        /* Botão com efeito de hover */
+        button {
+            background-color: #1877f2;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
 
-/* Cards em estilo flexível */
-.card-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-}
+        .botaoMatriculas {
+            background-color: #18f21f;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
 
-.card {
-    border: 1px solid #ccc;
-    padding: 10px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    flex: 1 1 45%; /* Ajuste para cards lado a lado */
-    max-width: 45%;
-}
+        button:hover {
+            background-color: #165bca;
+        }
 
-.loading {
-    display: none;
-    text-align: center;
-}
+        /* Cards em estilo flexível */
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
 
-.loading img {
-    width: 50px;
-}
+        .card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            flex: 1 1 45%;
+            /* Ajuste para cards lado a lado */
+            max-width: 45%;
+        }
 
-/* Layout */
+        .loading {
+            display: none;
+            text-align: center;
+        }
 
+        .loading img {
+            width: 50px;
+        }
+
+        /* Layout */
     </style>
 </head>
+
 <body>
     <div class="container">
         <a href="prefeitura.html">Ver Prefeitura</a>
         <h1>Consulta de Contracheques</h1>
         <h2>Secretaria de Saúde</h2>
-        <h4>Agora basta apertar em obter token. 👇</h4>
-        <input type="hidden" id="usuarioInput" placeholder="Usuário" value="danielcardoso" >
+        
+
+        <h4>1º: Clique em obter token.</h4>
+        <input type="hidden" id="usuarioInput" placeholder="Usuário" value="danielcardoso">
         <input type="hidden" id="senhaInput" placeholder="Senha" value="c*123c12">
         <button id="getTokenButton">Obter Token</button>
 
@@ -115,9 +131,19 @@ button:hover {
             <option value="2022">2022</option>
             <option value="2021">2021</option>
         </select>
+<br>
+        <h4>2º: Clique em consultar matrículas. Após selecione a matricula desejada de acordo com o ano escolhido.</h4>
+        <h5>A busca será feita com base no CPF, se você já sabe qual a matrícula, pode digitá-la no campo de matricula.</h5>
+        <h5>O Campo CPF é opcional.</h5>
+<br>
+       <label>CPF: <input type="text" id="cpfInput" placeholder="CPF"></label>
+        <button onclick="consultarMatriculas()">Consultar Matrículas</button>
+        <div id="matriculasContainer"></div>
         <input type="text" id="matriculaInput" placeholder="Matrícula">
-       
-        <button id="searchButton">Buscar</button>
+<br>
+<h4>3º: Após selecionada a matrícula, clique em buscar.</h4>
+<br>
+        <button id="searchButton" class="btn-">Buscar</button>
         <div class="loading">
             <img src="loading.gif" alt="Carregando...">
         </div>
@@ -128,6 +154,23 @@ button:hover {
     <script>
         const showLoading = () => document.querySelector('.loading').style.display = 'block';
         const stopLoading = () => document.querySelector('.loading').style.display = 'none';
+
+        // Obtém a query string da URL atual
+        const queryString = window.location.search;
+
+        // Cria um objeto URLSearchParams para manipular os parâmetros
+        const urlParams = new URLSearchParams(queryString);
+
+        // Obtém o valor do parâmetro 'cpf' da query string
+        const cpf = urlParams.get('cpf');
+
+        // Exibe o CPF no console (ou faz algo com ele)
+        if (cpf) {
+            document.getElementById("cpfInput").value = cpf.replace(/\D/g, '');;
+        } else {
+            console.log('Nenhum CPF encontrado na query string.');
+        }
+
 
         document.getElementById("getTokenButton").addEventListener("click", async () => {
             const usuario = document.getElementById("usuarioInput").value;
@@ -259,6 +302,48 @@ button:hover {
             const valorM = getQueryStringValue('m');
             document.getElementById('matriculaInput').value = valorM || '';
         };
+
+
+        //Consulta matriculas pelo CPF
+        async function consultarMatriculas() {
+            const cpf = document.getElementById('cpfInput').value;
+            if (!cpf) {
+                alert('Por favor, insira um CPF.');
+                return;
+            }
+            const token_cpf = document.getElementById("tokenInput").value;
+            const url = `https://apionline.layoutsistemas.com.br/api/matriculas/?cpf=${cpf}&entidade=796`;
+            const headers = {
+                Authorization: token_cpf
+            };
+
+            try {
+                const response = await axios.get(url, { headers });
+                const matriculas = response.data.results;
+
+                // Ordena as matrículas em ordem decrescente
+                matriculas.sort((a, b) => b.matricula.localeCompare(a.matricula));
+
+                // Exibe as matrículas como botões
+                const container = document.getElementById('matriculasContainer');
+                container.innerHTML = ''; // Limpa o conteúdo anterior
+
+                matriculas.forEach(matricula => {
+                    const button = document.createElement('button');
+                    button.textContent = matricula.matricula;
+                    button.style.margin = '5px';
+                    button.className = 'botaoMatriculas';
+                    button.onclick = () => {
+                        document.getElementById('matriculaInput').value = matricula.matricula;
+                    };
+                    container.appendChild(button);
+                });
+            } catch (error) {
+                console.error('Erro ao consultar a API:', error);
+                alert('Erro ao consultar as matrículas. Verifique se você clicou em obter token.');
+            }
+        }
     </script>
 </body>
+
 </html>
