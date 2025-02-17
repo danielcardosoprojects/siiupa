@@ -503,7 +503,8 @@ class Grade
 ?>
 
 <div class=''>
-    <a target="_blank" href="/siiupa/teste/cc/?m=<?=$perfil->matricula;?>&cpf=<?=$perfil->cpf;?>">CC</a>
+    <?php $token = $_GET['token']; ?>
+    <a target="_blank" href="/siiupa/teste/cc/?m=<?=$perfil->matricula;?>&cpf=<?=$perfil->cpf;?>&<?=$token;?>">CC</a>
     <?php $linkfrequencia = '/siiupa/gerapdf.php?&matricula=' . urlencode($perfil->matricula) . '&admissao=' . urlencode($perfil->admissao) . '&nome=' . urlencode($perfil->nome) . '&cargo=' . urlencode($perfil->cargo_desc) . '&vinculo=' . urlencode($perfil->vinculo);     ?>
     <a target="_blank" href='<?php echo $linkfrequencia; ?>' id='gerafrequencia' class='btn btn-outline-success'>
         <img src="/siiupa/imagens/icones/note_add.svg">
