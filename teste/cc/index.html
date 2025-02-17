@@ -351,6 +351,7 @@ obterToken();
                     button.className = 'botaoMatriculas';
                     button.onclick = () => {
                         document.getElementById('matriculaInput').value = matricula.matricula;
+                        document.getElementById('matriculaInput').scrollIntoView();
                     };
                     container.appendChild(button);
                 });
