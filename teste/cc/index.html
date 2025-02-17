@@ -114,15 +114,30 @@
         <h1>Consulta de Contracheques</h1>
         <h2>Secretaria de Saúde</h2>
         
-
+        <div style="display:none">
         <h4>1º: Clique em obter token.</h4>
         <input type="hidden" id="usuarioInput" placeholder="Usuário" value="danielcardoso">
         <input type="hidden" id="senhaInput" placeholder="Senha" value="c*123c12">
         <button id="getTokenButton">Obter Token</button>
+    </div>
 
         <input type="text" id="tokenInput" placeholder="Token" readonly>
         <hr>
-        <label for="competenciaSelect">Selecione uma competência:</label>
+        <br>
+        <h4>1º: Clique em consultar matrículas. Após selecione a matricula desejada de acordo com o ano escolhido.</h4>
+        <h5>A busca será feita com base no CPF, se você já sabe qual a matrícula, pode digitá-la no campo de matricula.</h5>
+        <h5>O Campo CPF é opcional.</h5>
+<br>
+       <label>CPF: <input type="text" id="cpfInput" placeholder="CPF"></label>
+        <button onclick="consultarMatriculas()">Consultar Matrículas</button>
+        <div id="matriculasContainer"></div>
+
+<hr>
+<h4>2º: Após selecionada a matrícula, selecione o ano. (Quanto maior, mais recente)</h4>
+
+      <input type="text" id="matriculaInput" placeholder="Matrícula">
+<br>
+<label for="competenciaSelect">Selecione uma competência:</label>
         <select id="competenciaSelect"></select>
         <select id="exercicioInput">
             <option value="2025">2025</option>
@@ -131,25 +146,17 @@
             <option value="2022">2022</option>
             <option value="2021">2021</option>
         </select>
-<br>
-        <h4>2º: Clique em consultar matrículas. Após selecione a matricula desejada de acordo com o ano escolhido.</h4>
-        <h5>A busca será feita com base no CPF, se você já sabe qual a matrícula, pode digitá-la no campo de matricula.</h5>
-        <h5>O Campo CPF é opcional.</h5>
-<br>
-       <label>CPF: <input type="text" id="cpfInput" placeholder="CPF"></label>
-        <button onclick="consultarMatriculas()">Consultar Matrículas</button>
-        <div id="matriculasContainer"></div>
-        <input type="text" id="matriculaInput" placeholder="Matrícula">
-<br>
-<h4>3º: Após selecionada a matrícula, clique em buscar.</h4>
-<br>
+        <hr>
+        <h4>3º: Clique em buscar.</h4>
         <button id="searchButton" class="btn-">Buscar</button>
         <div class="loading">
             <img src="loading.gif" alt="Carregando...">
         </div>
+
+        <hr>
         <a id="fichaFinanceira" href="#">Ficha Financeira</a>
         <div id="cardsContainer"></div>
-    </div>
+        
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         const showLoading = () => document.querySelector('.loading').style.display = 'block';
