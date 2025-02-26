@@ -96,5 +96,17 @@
                  </div>
              </div>
          </div>
+         <div class="col-sm">
+             <div class="card" style="width: 18rem;text-align:center">
+             <br>
+                 <img src="imagens/icones/recepcao.svg" class="card-img-top" alt="..." height="150px">
+                 <div class="card-body">
+                    <br>
+                     <a href="https://siupa-recep.vercel.app/" class="btn btn-primary">Recepção</a>
+                     <br>
+
+                 </div>
+             </div>
+         </div>
      </div>
  </div>
