@@ -17,8 +17,8 @@
         }
         .state-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-            gap: 0;
+            
+            gap: 2px;
             width: 100%;
             height: 100%;
             max-width: 100%;
@@ -60,11 +60,132 @@
     </style>
 </head>
 <body>
+   
 
     <div class="state-container" id="stateContainer">
+        Botões
         <!-- Botões dos estados serão inseridos aqui pelo JavaScript -->
     </div>
 
+
+    <table>
+        <thead>
+            <tr>
+                <th>UF</th>
+                <th>Quantidade</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>AC</td>
+                <td id="ac_qtd"></td>
+            </tr>
+            <tr>
+                <td>AL</td>
+                <td id="al_qtd"></td>
+            </tr>
+            <tr>
+                <td>AP</td>
+                <td id="ap_qtd"></td>
+            </tr>
+            <tr>
+                <td>AM</td>
+                <td id="am_qtd"></td>
+            </tr>
+            <tr>
+                <td>BA</td>
+                <td id="ba_qtd"></td>
+            </tr>
+            <tr>
+                <td>CE</td>
+                <td id="ce_qtd"></td>
+            </tr>
+            <tr>
+                <td>DF</td>
+                <td id="df_qtd"></td>
+            </tr>
+            <tr>
+                <td>ES</td>
+                <td id="es_qtd"></td>
+            </tr>
+            <tr>
+                <td>GO</td>
+                <td id="go_qtd"></td>
+            </tr>
+            <tr>
+                <td>MA</td>
+                <td id="ma_qtd"></td>
+            </tr>
+            <tr>
+                <td>MT</td>
+                <td id="mt_qtd"></td>
+            </tr>
+            <tr>
+                <td>MS</td>
+                <td id="ms_qtd"></td>
+            </tr>
+            <tr>
+                <td>MG</td>
+                <td id="mg_qtd"></td>
+            </tr>
+            <tr>
+                <td>PA</td>
+                <td id="pa_qtd"></td>
+            </tr>
+            <tr>
+                <td>PB</td>
+                <td id="pb_qtd"></td>
+            </tr>
+            <tr>
+                <td>PR</td>
+                <td id="pr_qtd"></td>
+            </tr>
+            <tr>
+                <td>PE</td>
+                <td id="pe_qtd"></td>
+            </tr>
+            <tr>
+                <td>PI</td>
+                <td id="pi_qtd"></td>
+            </tr>
+            <tr>
+                <td>RJ</td>
+                <td id="rj_qtd"></td>
+            </tr>
+            <tr>
+                <td>RN</td>
+                <td id="rn_qtd"></td>
+            </tr>
+            <tr>
+                <td>RS</td>
+                <td id="rs_qtd"></td>
+            </tr>
+            <tr>
+                <td>RO</td>
+                <td id="ro_qtd"></td>
+            </tr>
+            <tr>
+                <td>RR</td>
+                <td id="rr_qtd"></td>
+            </tr>
+            <tr>
+                <td>SC</td>
+                <td id="sc_qtd"></td>
+            </tr>
+            <tr>
+                <td>SP</td>
+                <td id="sp_qtd"></td>
+            </tr>
+            <tr>
+                <td>SE</td>
+                <td id="se_qtd"></td>
+            </tr>
+            <tr>
+                <td>TO</td>
+                <td id="to_qtd"></td>
+            </tr>
+        </tbody>
+    </table>
     <script>
         const estados = [
             { uf: "AC", atalho: "a" }, { uf: "AL", atalho: "b" },
@@ -122,6 +243,10 @@
             counts[uf] += increment;
             if (counts[uf] < 0) counts[uf] = 0;
             document.getElementById(`count-${uf}`).innerText = counts[uf];
+            
+            document.getElementById(`${uf.toLowerCase()}_qtd`).innerHTML = counts[uf];
+            
+    
         }
 
         // Atalhos de teclado para incrementar contagens

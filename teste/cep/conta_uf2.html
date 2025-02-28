@@ -36,8 +36,8 @@
         }
 
         iframe {
-            width: 100%;
-            height: 100%;
+            width: 300px;
+            height: 100vh;
             border: none; /* Remove a borda padrão do iframe */
         }
 
@@ -49,21 +49,33 @@
             display: block;
             margin-top: 5px; /* Para garantir o espaçamento após os botões */
         }
+        table, td {
+            border: solid #000 1px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <!-- Lado esquerdo (conteúdo principal) -->
         <div class="left">
+            <form id="dateForm">
+                <label for="date">Escolha uma data:</label>
+                <input type="date" id="date" name="date" value="2025-01-01" required>
+                <button type="submit">Enviar</button>
+              </form>
             
             <!-- Coloque o conteúdo da sua página principal aqui -->
             <div id="buttons">
+                
                 <button id="previousButton" onclick="navigateImage(-1)">Anterior</button>
                 <button id="nextButton" onclick="navigateImage(1)">Próximo</button>
                 <div id="dateDisplay" class="date-display">Dia: 01/09/2024</div>
             </div>
            
             <img id="imageDisplay" src="" alt="Imagem escaneada">
+            
+        </div>
+        <div class="meio">
             
         </div>
 
@@ -74,9 +86,45 @@
     </div>
 
     <script>
+                 // Função para lidar com o envio do formulário
+    document.getElementById("dateForm").addEventListener("submit", function (event) {
+      event.preventDefault(); // Impede o envio padrão do formulário
+
+      // Obtém o valor da data selecionada
+      const dateValue = document.getElementById("date").value;
+
+      // Extrai o ano (AAAA) e o mês (MM) da data
+      const [year, month] = dateValue.split("-");
+
+      // Recarrega a página com os parâmetros de consulta
+      window.location.href = `?datePrefix=${year}&month=${month}`;
+    });
+
+    // Função para exibir os parâmetros da query string (opcional)
+    function exibirParametros(anoOuMes = "mes") {
+      const params = new URLSearchParams(window.location.search);
+      const datePrefix = params.get("datePrefix");
+      const month = params.get("month");
+
+      if (datePrefix && month) {
+        console.log(`Ano (datePrefix): ${datePrefix}`);
+        console.log(`Mês (month): ${month}`);
+        if(anoOuMes == "ano"){
+            return datePrefix;
+        } else {
+            return month;
+        }
+      }
+    }
+
+    // Chama a função para exibir os parâmetros ao carregar a página
+    exibirParametros();
+
         let currentImageIndex = 1;
-        const totalImages = 61; // Total de imagens (20240901 a 20241031)
-        const imageBaseUrl = "202412/"; // Substitua pelo caminho correto
+        const totalImages = 61;     // Total de imagens (20240901 a 20241031)
+        const datePrefix = exibirParametros("ano");  //Ajuste o ano aqui em String
+        const month = exibirParametros("mes");          //Ajuste o mes aqui em String
+        const imageBaseUrl = `${datePrefix}${month}/`; // Substitua pelo caminho correto
 
         function updateImage() {
             const imageUrl = `${imageBaseUrl}${getImageName(currentImageIndex)}`;
@@ -87,8 +135,9 @@
         }
 
         function getImageName(index) {
-            const datePrefix = "2024";
-            const month = 12;
+            alert();
+            //const datePrefix = "2025";
+            //const month = "01";
             const day = String(index).padStart(2, '0');
             return `${datePrefix}${month}${day}.png`;
         }
@@ -100,8 +149,8 @@
         }
 
         function getDateFromIndex(index) {
-            const datePrefix = "2024";
-            const month = 12;
+            //const datePrefix = "2025";
+            //const month = "01";
             const day = String(index).padStart(2, '0');
             return `${day}/${month}/${datePrefix}`;
         }
@@ -112,7 +161,7 @@
                 const imageHeight = img.height;
                 const imageWidth = img.width;
                 const cropHeight = 0; // Pegando a metade inferior da imagem
-                const cropWidth = imageWidth / 2; // Pegando a metade esquerda da imagem
+                const cropWidth = imageWidth / 4; // Pegando a metade esquerda da imagem
 
                 img.style.objectPosition = `-${cropWidth}px -${cropHeight}px`; // Move a imagem para exibir o terceiro quadrante
             };
@@ -144,7 +193,11 @@
         });
 
         // Inicializa a primeira imagem
-        updateImage();
+      
+
+
+
+    updateImage();
     </script>
 </body>
 </html>
