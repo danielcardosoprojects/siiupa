@@ -37,6 +37,9 @@ function abreviaNome($nome)
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cherry+Swash:wght@700&display=swap');
 
+        body {
+            background-color: #000;
+        }
         .star {
             margin: 100px;
             position: relative;
