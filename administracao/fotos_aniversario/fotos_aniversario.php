@@ -135,7 +135,7 @@ function abreviaNome($nome)
             text-align: center;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
 
-            background-color: rgba(255, 255, 255, 0.2);
+            
             padding: 10px;
             border: 5px solid #fff;
             border-radius: 10px;
