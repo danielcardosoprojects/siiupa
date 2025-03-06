@@ -39,6 +39,7 @@ function abreviaNome($nome)
 
         body {
             background-color: #000;
+            background-image: url('fundopagina.jpg');
         }
         .star {
             margin: 100px;
