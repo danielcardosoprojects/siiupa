@@ -99,10 +99,13 @@ function abreviaNome($nome)
         .nome {
             margin-top: 20px;
             /* background-color: #8080c0; */
+           
+
+
+
+        }
+        .box {
             border-radius: 50%;
-
-
-
         }
 
         .nome,
@@ -229,7 +232,7 @@ function abreviaNome($nome)
                     background-size: cover;
                 }
             </style>
-            <div id="conteudo_<?= $nome->id; ?>">
+            <div id="conteudo_<?= $nome->id; ?>" class="box">
                 <div class="fundo_na_foto">
                     <div class="foto_<?= $nome->id; ?>">
 
