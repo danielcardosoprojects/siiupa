@@ -265,10 +265,12 @@ function abreviaNome($nome)
     </div>
     <script src="html2canvas.min.js"></script>
     <script>
-        function teste(id) {
+        function geraImagem(id) {
             html2canvas(document.querySelector(`#conteudo_${id}`)).then(canvas => {
-                flexbox = document.getElementsByClassName("flexbox")
-                flexbox[0].prepend(canvas)
+                let link = document.createElement('a');
+                link.download = `aniversariante_${id}.png`;
+                link.href = canvas.toDataURL();
+                link.click();
             });
         }
     </script>
