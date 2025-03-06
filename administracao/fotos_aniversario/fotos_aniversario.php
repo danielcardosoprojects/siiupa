@@ -163,7 +163,7 @@ function abreviaNome($nome)
                 $fundoConteudo = "fundos4.jpg";
             } elseif ($nome->sexo == "F") {
 
-                $fundoConteudo = "fundos4rosa.jpg";
+                $fundoConteudo = "fundos4rosa2.jpg";
             }
 
         ?>
