@@ -105,7 +105,7 @@ function abreviaNome($nome)
 
         }
         .box {
-            border-radius: 50%;
+            border-radius: 15%;
         }
 
         .nome,
