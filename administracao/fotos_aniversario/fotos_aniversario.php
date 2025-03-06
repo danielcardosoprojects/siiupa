@@ -150,13 +150,13 @@ function abreviaNome($nome)
             $nome_func = abreviaNome(utf8_encode($nome->nome));
             if (file_exists("../rh/$nome->id/foto_perfil.jpg")) {
                 //$foto = "../rh/$nome->id/foto_perfil.jpg";
-                $foto = "papai_noel.png";
+                $foto = "semfoto.png";
             } elseif (file_exists("../rh/$nome->id/foto_perfil")) {
                 $foto = "../rh/$nome->id/foto_perfil";
             } elseif (file_exists("../rh/$nome->id/foto_perfil.png")) {
                 $foto = "../rh/$nome->id/foto_perfil.png";
             } else {
-                $foto = "papai_noel.png";
+                $foto = "semfoto.png";
             }
             $fundoConteudo = "fundos4.jpg";
             if ($nome->sexo == 'M') {
@@ -208,7 +208,7 @@ function abreviaNome($nome)
                     </div>
                 </div>
 
-                <span class="nome"><a href="http://siupa.online/siiupa/?setor=adm&sub=rh&subsub=perfil&id=<?= $nome->id; ?>" target="_blank"><?= $nome_func; ?></a><br><a href="#" onclick="teste(<?=$nome->id?>)"><?= $data_nascExec ?></a></span>
+                <span class="nome"><a href="/siiupa/?setor=adm&sub=rh&subsub=perfil&id=<?= $nome->id; ?>" target="_blank"><?= $nome_func; ?></a><br><a href="#" onclick="teste(<?=$nome->id?>)"><?= $data_nascExec ?></a></span>
 
 
 
