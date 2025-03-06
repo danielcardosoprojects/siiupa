@@ -291,6 +291,12 @@
             <a href="?setor=adm&sub=rh&subsub=listaepi" id="bListaEpi" class="">
                 <img src="/siiupa/imagens/icones/mascara.svg" width="36px">
                 Lista de EPI</a>
+            <?php
+            $mesAtual = date("m");
+            ?>
+                <a href="/siiupa/administracao/fotos_aniversario/fotos_aniversario.php?mes=<?=$mesAtual?>" id="bListaEpi" class="">
+                <img src="/siiupa/imagens/icones/birthday.png" width="36px">
+                Aniversariantes do Mês</a>
 
 
 
