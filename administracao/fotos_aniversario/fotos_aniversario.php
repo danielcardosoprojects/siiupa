@@ -91,7 +91,7 @@ function abreviaNome($nome)
 
         .nome {
             margin-top: 20px;
-            background-color: #8080c0;
+            /* background-color: #8080c0; */
             
 
 
