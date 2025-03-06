@@ -117,6 +117,16 @@ function abreviaNome($nome)
             font-style: normal;
 
         }
+        h1 {
+            color: #fff;
+
+            text-decoration: none;
+            font-size: 20px;
+            font-family: "Playwrite IT Moderna", cursive;
+            font-optical-sizing: auto;
+
+            font-style: normal;
+        }
 
         .flexbox {
             display: flex;
@@ -140,8 +150,9 @@ function abreviaNome($nome)
 
 <body>
 
-
+<h1>Aniversariantes</h1>
     <div class="flexbox">
+        
         <?php
         $mes = $_GET['mes'];
         $nomeBd = new BD;
