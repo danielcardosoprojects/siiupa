@@ -91,6 +91,8 @@ function abreviaNome($nome)
 
         .nome {
             margin-top: 20px;
+            background-color: #8080c0;
+            
 
 
         }
@@ -130,8 +132,9 @@ function abreviaNome($nome)
  
     <div class="flexbox">
         <?php
+        $mes=$_GET['mes'];
         $nomeBd = new BD;
-        $sqlNome = "SELECT id, nome, data_nasc, sexo FROM u940659928_siupa.tb_funcionario WHERE status='ATIVO' and fk_cargo NOT IN ('20') and month(data_nasc) = '03' order by month(data_nasc), day(data_nasc) ASC;";
+        $sqlNome = "SELECT id, nome, data_nasc, sexo FROM u940659928_siupa.tb_funcionario WHERE status='ATIVO' and fk_cargo NOT IN ('20') and month(data_nasc) = '$mes' order by month(data_nasc), day(data_nasc) ASC;";
         $nomes = $nomeBd->consulta($sqlNome);
         //var_dump($nomes);
         $i = 0;
