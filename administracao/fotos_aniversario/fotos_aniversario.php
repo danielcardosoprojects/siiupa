@@ -31,6 +31,9 @@ function abreviaNome($nome)
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cherry+Swash:wght@700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playwrite+IT+Moderna:wght@100..400&display=swap" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Cherry+Swash:wght@700&display=swap');
 
@@ -92,7 +95,7 @@ function abreviaNome($nome)
         .nome {
             margin-top: 20px;
             /* background-color: #8080c0; */
-            
+
 
 
         }
@@ -101,9 +104,13 @@ function abreviaNome($nome)
         .nome a {
 
             color: #fff;
-            font-family: 'Cherry Swash', cursive;
+
             text-decoration: none;
             font-size: 20px;
+            font-family: "Playwrite IT Moderna", cursive;
+            font-optical-sizing: auto;
+
+            font-style: normal;
 
         }
 
@@ -129,10 +136,10 @@ function abreviaNome($nome)
 
 <body>
 
- 
+
     <div class="flexbox">
         <?php
-        $mes=$_GET['mes'];
+        $mes = $_GET['mes'];
         $nomeBd = new BD;
         $sqlNome = "SELECT id, nome, data_nasc, sexo FROM u940659928_siupa.tb_funcionario WHERE status='ATIVO' and fk_cargo NOT IN ('20') and month(data_nasc) = '$mes' order by month(data_nasc), day(data_nasc) ASC;";
         $nomes = $nomeBd->consulta($sqlNome);
@@ -208,7 +215,7 @@ function abreviaNome($nome)
                     </div>
                 </div>
 
-                <span class="nome"><a href="/siiupa/?setor=adm&sub=rh&subsub=perfil&id=<?= $nome->id; ?>" target="_blank"><?= $nome_func; ?></a><br><a href="#" onclick="teste(<?=$nome->id?>)"><?= $data_nascExec ?></a></span>
+                <span class="nome"><a href="/siiupa/?setor=adm&sub=rh&subsub=perfil&id=<?= $nome->id; ?>" target="_blank"><?= $nome_func; ?></a><br><a href="#" onclick="teste(<?= $nome->id ?>)"><?= $data_nascExec ?></a></span>
 
 
 
