@@ -121,11 +121,12 @@ function abreviaNome($nome)
             color: #fff;
 
             text-decoration: none;
-            font-size: 20px;
+            font-size: 30px;
             font-family: "Playwrite IT Moderna", cursive;
             font-optical-sizing: auto;
 
             font-style: normal;
+            font-weight: bold;
             width: 100%;
             text-align: center;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
