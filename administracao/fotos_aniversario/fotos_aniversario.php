@@ -139,7 +139,7 @@ function abreviaNome($nome)
             padding: 10px;
             border: 5px solid #fff;
             border-radius: 10px;
-            background-color: rgba(255, 0, 0, 0.7);
+            background: linear-gradient(90deg, rgba(72, 255, 0, 0.7), rgba(0, 255, 255, 0.7));
             display: inline-block;
 
         }
