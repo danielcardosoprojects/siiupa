@@ -128,6 +128,8 @@ function abreviaNome($nome)
             font-style: normal;
             width: 100%;
             text-align: center;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+
         }
 
         .flexbox {
