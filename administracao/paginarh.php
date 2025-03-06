@@ -294,7 +294,7 @@
             <?php
             $mesAtual = date("m");
             ?>
-                <a href="/siiupa/administracao/fotos_aniversario/fotos_aniversario.php?mes=<?=$mesAtual?>" id="bListaEpi" class="">
+                <a href="/siiupa/administracao/fotos_aniversario/fotos_aniversario.php?mes=<?=$mesAtual?>" id="bListaEpi" class="" target="_blank">
                 <img src="/siiupa/imagens/icones/birthday.png" width="20px">
                 Aniversariantes do Mês</a>
 
