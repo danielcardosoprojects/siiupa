@@ -156,6 +156,8 @@
 
         <hr>
         <a id="fichaFinanceira" href="#">Ficha Financeira</a>
+        <a id="cedulaC" href="#">Cédula C 2024</a>
+        
         <div id="cardsContainer"></div>
 
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -253,12 +255,12 @@
                                 const pdfBlob = new Blob([pdfResponse.data], { type: "application/pdf" });
                                 const pdfUrl = URL.createObjectURL(pdfBlob);
 
-                                      // Criar um link temporário e simular um clique
-        const link = document.createElement("a");
-        link.href = pdfUrl;
-        link.target = "_blank"; // Abre em nova guia
-        link.rel = "noopener noreferrer";
-        link.click();
+                                // Criar um link temporário e simular um clique
+                                const link = document.createElement("a");
+                                link.href = pdfUrl;
+                                link.target = "_blank"; // Abre em nova guia
+                                link.rel = "noopener noreferrer";
+                                link.click();
                             } catch (error) {
                                 console.error("Erro ao buscar/extrair PDF:", error);
                             }
@@ -277,6 +279,32 @@
                 const matricula = document.getElementById("matriculaInput").value;
                 const token = document.getElementById("tokenInput").value;
                 const ffUrl = `https://apionline.layoutsistemas.com.br/api/ficha_financeiras/relatorio/?ficha_financeira=s886&matricula=${matricula}`;
+
+                try {
+                    const pdfResponse = await axios.get(ffUrl, {
+                        responseType: "arraybuffer",
+                        headers: {
+                            "Authorization": token
+                        }
+                    });
+
+                    const pdfBlob = new Blob([pdfResponse.data], { type: "application/pdf" });
+                    const pdfUrl = URL.createObjectURL(pdfBlob);
+                    window.open(pdfUrl, "_blank");
+                } catch (error) {
+                    console.error("Erro ao buscar PDF:", error);
+                }
+            });
+
+            document.getElementById('cedulaC').addEventListener("click", async (event) => {
+                event.preventDefault();
+                const cpf = document.getElementById("cpfInput").value;
+                if(cpf == "") {
+                    alert("informe o cpf");
+                    return
+                }
+                const token = document.getElementById("tokenInput").value;
+                const ffUrl = `https://apionline.layoutsistemas.com.br/api/declaracao_rendimentos/relatorio/?declaracao_rendimento=%20%20%20%20%20%20%20%20775&cpf=${cpf}`;
 
                 try {
                     const pdfResponse = await axios.get(ffUrl, {
