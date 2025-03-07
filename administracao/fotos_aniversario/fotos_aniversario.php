@@ -99,9 +99,13 @@ function abreviaNome($nome)
         .nome {
             margin-top: 20px;
             /* background-color: #8080c0; */
+           
 
 
 
+        }
+        .box {
+            border-radius: 15%;
         }
 
         .nome,
@@ -130,6 +134,13 @@ function abreviaNome($nome)
             width: 100%;
             text-align: center;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 1);
+
+            
+            padding: 10px;
+            border: 5px solid #fff;
+            border-radius: 10px;
+            background: linear-gradient(90deg, rgba(72, 255, 0, 0.7), rgba(0, 255, 255, 0.7));
+            display: inline-block;
 
         }
 
@@ -228,7 +239,7 @@ function abreviaNome($nome)
                     background-size: cover;
                 }
             </style>
-            <div id="conteudo_<?= $nome->id; ?>">
+            <div id="conteudo_<?= $nome->id; ?>" class="box">
                 <div class="fundo_na_foto">
                     <div class="foto_<?= $nome->id; ?>">
 
@@ -254,10 +265,12 @@ function abreviaNome($nome)
     </div>
     <script src="html2canvas.min.js"></script>
     <script>
-        function teste(id) {
+        function geraImagem(id) {
             html2canvas(document.querySelector(`#conteudo_${id}`)).then(canvas => {
-                flexbox = document.getElementsByClassName("flexbox")
-                flexbox[0].prepend(canvas)
+                let link = document.createElement('a');
+                link.download = `aniversariante_${id}.png`;
+                link.href = canvas.toDataURL();
+                link.click();
             });
         }
     </script>
