@@ -338,7 +338,7 @@
         $tab->abreThead();
         $tab->fechaThead();
         $tab->tabrelinha();
-        $tab->tpopulalinha('<img src="/siiupa/imagens/gov_logo_2021.png" width="200px">');
+        $tab->tpopulalinha('<img src="/siiupa/imagens/gov_logo_'.$resultado[0]->ano.'.png" width="200px">');
         $tab->tpopulalinha('PREFEITURA MUNICIPAL DE CASTANHAL<br>SECRETARIA MUNICIPAL DE SAÚDE-SESMA<br>COORDENAÇÃO DE URGÊNCIA E EMERGÊNCIA<br>UPA III - GOVERNADOR ALMIR GABRIEL', $mesclalinhas = '3');
         $tab->tpopulalinha('<img src="/siiupa/imagens/upa_hor_logo.JPG" height="45px">');
         $tab->tfechalinha();
