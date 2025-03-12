@@ -376,7 +376,7 @@ $tab->abreTabela('tabelaCabecalho', $class = 'table table-sm border-white table-
 $tab->abreThead();
 $tab->fechaThead();
 $tab->tabrelinha();
-echo "<td class='cabecalho_folha'><img src='/siiupa/imagens/gov_logo_2021.png' height='45px';></td>";
+echo "<td class='cabecalho_folha'><img src='/siiupa/imagens/gov_logo_2025.png' height='45px';></td>";
 echo "<td class='cabecalho_folha logo_centro'>PREFEITURA MUNICIPAL DE CASTANHAL<br>SECRETARIA MUNICIPAL DE SAÚDE<br>COORDENAÇÃO DE URGÊNCIA E EMERGÊNCIA<br>UPA III - GOVERNADOR ALMIR GABRIEL</td>";
 echo "<td class='cabecalho_folha logo_direito'><img src='/siiupa/imagens/upa_hor_logo.JPG' height='45px'></td>";
 
