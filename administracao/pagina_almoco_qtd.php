@@ -301,7 +301,7 @@ if ($stmt = $conn->prepare($query)) {
         var valor = chaveValor[1];
         data[chave] = valor;
         proximodia = parseInt(data.dia) + parseInt(1);
-        link = "pagina_almoco.php?dia=" + proximodia + "&mes=" + data.mes + "&ano=" + data.ano;
+        link = "pagina_almoco_qtd.php?dia=" + proximodia + "&mes=" + data.mes + "&ano=" + data.ano;
     });
     console.log(link);
         totalAlmoco = '<?=$totalAlmoco;?>';
