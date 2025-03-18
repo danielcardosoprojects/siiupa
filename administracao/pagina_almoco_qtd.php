@@ -306,7 +306,7 @@ if ($stmt = $conn->prepare($query)) {
     console.log(link);
         totalAlmoco = '<?=$totalAlmoco;?>';
         totalJanta = '<?=$totalJanta;?>';
-        hoje = `${tdia}/${data.mes}/${data.ano} Almoço: ${totalAlmoco} Janta: ${totalJanta}`;
+        hoje = `<?=$_GET['dia']?>/${data.mes}/${data.ano} Almoço: ${totalAlmoco} Janta: ${totalJanta}`;
         
         //window.prompt('Basta copiar', hoje);
         //window.print();
