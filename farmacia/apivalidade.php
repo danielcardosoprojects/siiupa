@@ -16,3 +16,4 @@ $rVal->execute();
 $qtdVal = $rVal->rowCount();
 
 echo $qtdVal;
+?>
