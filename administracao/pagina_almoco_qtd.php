@@ -286,6 +286,8 @@ if ($stmt = $conn->prepare($query)) {
 
 ?>
 <input type="text" width="100%" name="texto" id="texto" value="<?=$diax;?>/<?=$mes;?>/<?=$ano;?> Almoço: <?=$totalAlmoco;?> Janta: <?=$totalJanta;?>">
+<button id="copiar">Copiar</button>
+
 <button id="proximo">Próximo</button>
 <script>
     // window.onload = function() {
@@ -316,7 +318,20 @@ botao.addEventListener("click", function() {
   // Redirecione para o link especificado
   window.location.href = link;
 });
+const botaoCopiar = document.getElementById("copiar");
+const inputTexto = document.getElementById("texto");
 
+// Adiciona um evento de clique ao botão
+botaoCopiar.addEventListener("click", function () {
+  // Seleciona o conteúdo do input
+  inputTexto.select();
+  inputTexto.setSelectionRange(0, 99999); // Para dispositivos móveis
+
+  // Copia o conteúdo para a área de transferência
+  document.execCommand("copy");
+
+  // Opcional: Exibe uma mensagem de sucesso
+  alert("Conteúdo copiado: " + inputTexto.value);
         
 </script>
 
