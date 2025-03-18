@@ -1,3 +1,51 @@
+<style>
+    h2 {
+        color: #000;
+    }
+    table {
+        font-size: 14px;
+        font-family: calibri;
+        color: #000;
+    }
+
+    td {
+        border: 1px solid #000;
+        color: #000;
+    }
+
+    .ass {
+        width: 300px;
+    }
+
+    .total {
+        text-align: right;
+    }
+
+    @media print {
+        .table {
+            -webkit-column-count: 2;
+            /* Chrome, Safari, Opera */
+            -moz-column-count: 2;
+            /* Firefox */
+            column-count: 2;
+        }
+
+    }
+
+    @media print {
+        .pagebreak {
+            page-break-before: always;
+        }
+
+        /* page-break-after works, as well */
+    }
+
+    thead {
+        display: table-row-group;
+    }
+</style>
+
+
 <?php
 header('Content-type: text/html; charset=utf-8');
 include_once('../bd/conectabd.php');
@@ -237,7 +285,7 @@ if ($stmt = $conn->prepare($query)) {
 }
 
 ?>
-<input type="text" name="texto" id="texto" value="<?=$dia;?>/<?=$mes;?>/<?=$ano;?> Almoço: <?=$totalAlmoco;?> Janta: <?=$totalJanta;?>">
+<input type="text" width="100%" name="texto" id="texto" value="<?=$dia;?>/<?=$mes;?>/<?=$ano;?> Almoço: <?=$totalAlmoco;?> Janta: <?=$totalJanta;?>">
 <script>
     // window.onload = function() {
     
@@ -258,8 +306,9 @@ if ($stmt = $conn->prepare($query)) {
         hoje = `${data.dia}/${data.mes}/${data.ano} Almoço: ${totalAlmoco} Janta: ${totalJanta}`;
         
         //window.prompt('Basta copiar', hoje);
-       // window.print();
-         //   setTimeout(() => {window.location.href = link;}, 2000);
+        //window.print();
+          //  setTimeout(() => {window.location.href = link;}, 2000);
+
         
 </script>
 
