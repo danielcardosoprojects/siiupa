@@ -285,7 +285,7 @@ if ($stmt = $conn->prepare($query)) {
 }
 
 ?>
-<input type="text" width="100%" name="texto" id="texto" value="<?=$dia;?>/<?=$mes;?>/<?=$ano;?> Almoço: <?=$totalAlmoco;?> Janta: <?=$totalJanta;?>">
+<input type="text" style="width:100%" name="texto" id="texto" value="<?=$dia;?>/<?=$mes;?>/<?=$ano;?> Almoço: <?=$totalAlmoco;?> Janta: <?=$totalJanta;?>"></input>
 <button id="copiar">Copiar</button>
 
 <button id="proximo">Próximo</button>
