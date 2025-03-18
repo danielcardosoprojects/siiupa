@@ -285,7 +285,8 @@ if ($stmt = $conn->prepare($query)) {
 }
 
 ?>
-<input type="text" width="100%" name="texto" id="texto" value="<?=$dia;?>/<?=$mes;?>/<?=$ano;?> Almoço: <?=$totalAlmoco;?> Janta: <?=$totalJanta;?>">
+<input type="text" width="100%" name="texto" id="texto" value="<?=$diax;?>/<?=$mes;?>/<?=$ano;?> Almoço: <?=$totalAlmoco;?> Janta: <?=$totalJanta;?>">
+<button id="proximo">Próximo</button>
 <script>
     // window.onload = function() {
     
@@ -308,6 +309,13 @@ if ($stmt = $conn->prepare($query)) {
         //window.prompt('Basta copiar', hoje);
         //window.print();
           //  setTimeout(() => {window.location.href = link;}, 2000);
+          const botao = document.getElementById("proximo");
+
+// Adicione um evento de clique ao botão
+botao.addEventListener("click", function() {
+  // Redirecione para o link especificado
+  window.location.href = link;
+});
 
         
 </script>
