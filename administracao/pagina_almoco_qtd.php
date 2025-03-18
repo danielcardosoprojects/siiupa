@@ -332,7 +332,7 @@ botaoCopiar.addEventListener("click", function () {
 
   // Opcional: Exibe uma mensagem de sucesso
   alert("Conteúdo copiado: " + inputTexto.value);
-}
+});
         
 </script>
 
