@@ -420,7 +420,14 @@ include_once('../bd/nivel.php');
                         document.getElementById('cpf_<?=$dados->idfuncionario?>').innerHTML = '<?=$dados->cpf?>'.replace(/\D/g, '').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2');
                     </script>
                     <?php
-                    echo "<td>$dados->sexo</td>";
+                        $dados_sexo = "";
+                    if($dados->sexo == "F") {
+                        $dados_sexo = "FEMININO"
+
+                    } else {
+                        $dados_sexo = "MASCULINO";
+                    }
+                    echo "<td>$dados_sexo</td>";
                     // echo "<td>$dados->conselho_n</td>";
                     echo "<td><!-- $dados->fk_cargo -->$dados->cargo <i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->cargo'></span></i></td>";
 
