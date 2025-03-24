@@ -285,7 +285,7 @@ if ($stmt = $conn->prepare($query)) {
 }
 
 ?>
-<input type="text" style="width:100%" name="texto" id="texto" value="<?=$dia;?>/<?=$mes;?>/<?=$ano;?> Almoço: <?=$totalAlmoco;?> Janta: <?=$totalJanta;?>"></input>
+<input type="text" style="width:100%" name="texto" id="texto" value="<?=$_GET['dia'];?>/<?=$mes;?>/<?=$ano;?> Almoço: <?=$totalAlmoco;?> Janta: <?=$totalJanta;?>"></input>
 <button id="copiar">Copiar</button>
 
 <button id="proximo">Próximo</button>
@@ -301,12 +301,12 @@ if ($stmt = $conn->prepare($query)) {
         var valor = chaveValor[1];
         data[chave] = valor;
         proximodia = parseInt(data.dia) + parseInt(1);
-        link = "pagina_almoco.php?dia=" + proximodia + "&mes=" + data.mes + "&ano=" + data.ano;
+        link = "pagina_almoco_qtd.php?dia=" + proximodia + "&mes=" + data.mes + "&ano=" + data.ano;
     });
     console.log(link);
         totalAlmoco = '<?=$totalAlmoco;?>';
         totalJanta = '<?=$totalJanta;?>';
-        hoje = `${data.dia}/${data.mes}/${data.ano} Almoço: ${totalAlmoco} Janta: ${totalJanta}`;
+        hoje = `<?=$_GET['dia']?>/${data.mes}/${data.ano} Almoço: ${totalAlmoco} Janta: ${totalJanta}`;
         
         //window.prompt('Basta copiar', hoje);
         //window.print();
@@ -331,8 +331,8 @@ botaoCopiar.addEventListener("click", function () {
   document.execCommand("copy");
 
   // Opcional: Exibe uma mensagem de sucesso
-  alert("Conteúdo copiado: " + inputTexto.value);
-}
+ 
+});
         
 </script>
 
