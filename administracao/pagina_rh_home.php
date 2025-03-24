@@ -422,8 +422,7 @@ include_once('../bd/nivel.php');
                     <?php
                         $dados_sexo = "";
                     if($dados->sexo == "F") {
-                        $dados_sexo = "FEMININO"
-
+                        $dados_sexo = "FEMININO";
                     } else {
                         $dados_sexo = "MASCULINO";
                     }
