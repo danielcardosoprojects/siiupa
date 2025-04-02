@@ -54,8 +54,8 @@ if ($_GET['acao'] == 'arquivos') {
     $base_dir = realpath($_SERVER["DOCUMENT_ROOT"]); // Ex: /home/.../public_html
     $arquivo_limpo = ltrim(urldecode($arquivo), '/'); // tira barra inicial se tiver
 
-    //$caminho_completo = $base_dir . '/' . $arquivo_limpo;
-    $caminho_completo = "/home/u940659928/domains/siupa.com.br/public_html/siiupa/administracao/rh/14/20250402_Catalogo de transistores.pdf";
+    $caminho_completo = $base_dir . '/' . $arquivo_limpo;
+    
     if (file_exists($caminho_completo)) {
         if (is_file($caminho_completo)) {
             if (unlink($caminho_completo)) {
