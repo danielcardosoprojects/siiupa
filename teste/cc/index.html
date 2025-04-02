@@ -323,28 +323,27 @@
             });
 
             const preencherSelectComDadosDaAPI = () => {
-                const apiUrl = "https://apitransparencia.layoutsistemas.com.br/api/transparencias/?id=&exercicio=&ano=&mes=&entidade=477";
-                const select = document.getElementById("exercicioInput");
+                // const apiUrl = "https://apitransparencia.layoutsistemas.com.br/api/transparencias/?id=&exercicio=&ano=&mes=&entidade=477";
+                // const select = document.getElementById("exercicioInput");
 
-                axios.get(apiUrl)
-                    .then(response => {
-                        const apiResponse = response.data;
-                        apiResponse.results.sort((a, b) => b.id - a.id);
+                // axios.get(apiUrl)
+                //     .then(response => {
+                //         const apiResponse = response.data;
+                //         apiResponse.results.sort((a, b) => b.id - a.id);
 
-                        apiResponse.results.forEach(item => {
-                            const option = document.createElement("option");
-                            option.value = item.id;
-                            option.textContent = item.competencia_display;
-                            select.appendChild(option);
-                        });
+                //         apiResponse.results.forEach(item => {
+                //             const option = document.createElement("option");
+                //             option.value = item.id;
+                //             option.textContent = item.competencia_display;
+                //             select.appendChild(option);
+                //         });
 
-                        let competenciaSelect = document.getElementById("exercicioInput").value;
-                        carregarServidores(`https://apitransparencia.layoutsistemas.com.br/api/servidores/?departamento=001050&entidade=477&transparencia=${competenciaSelect}&page=1&page_size=2000`);
-                        carregarServidores2(`https://apitransparencia.layoutsistemas.com.br/api/servidores/?departamento=001051&entidade=477&transparencia=${competenciaSelect}&page=1&page_size=2000`);
-                    })
-                    .catch(error => {
-                        console.error("Erro ao buscar dados da API:", error);
-                    });
+                //         let competenciaSelect = document.getElementById("exercicioInput").value;
+                        
+                //     })
+                //     .catch(error => {
+                //         console.error("Erro ao buscar dados da API:", error);
+                //     });
             };
 
             const getQueryStringValue = (key) => new URLSearchParams(window.location.search).get(key);
