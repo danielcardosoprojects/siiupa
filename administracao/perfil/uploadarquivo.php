@@ -56,4 +56,5 @@ if ($_GET['acao'] == 'arquivos') {
     if (file_exists($file_delete)) {
         unlink($file_delete);
     }
+    echo $file_delete;
 }
