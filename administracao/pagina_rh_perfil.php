@@ -729,11 +729,13 @@ class Grade
                     const tokenLayout = response.data.access;
                     document.getElementById("tokenLayoutInput").value = "Bearer " + tokenLayout;
                     console.log(tokenLayout);
-                    consultarMatriculas(tokenLayout);
+                    
                 } catch (error) {
                     console.error("Erro ao obter o token:", error);
                     // stopLoading();
                     // alert("Erro ao obter o token. Verifique o console para mais detalhes.");
+                } finally {
+                    consultarMatriculas(tokenLayout);
                 }
             }
             obterToken(); 
