@@ -711,7 +711,7 @@ class Grade
     
     async function obterToken() {
                 const usuario = "danielcardoso";
-                const senha = "upaupa";
+                const senha = "c*123c12";
 
                 if (!usuario || !senha) {
                     alert("Por favor, preencha o usuário e a senha.");
