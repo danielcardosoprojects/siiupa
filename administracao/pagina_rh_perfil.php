@@ -728,11 +728,11 @@ class Grade
 
                     const token = response.data.access;
                     document.getElementById("tokenLayoutInput").value = "Bearer " + token;
-                    cosole.log(token);
+                    console.log(token);
                 } catch (error) {
                     console.error("Erro ao obter o token:", error);
                     // stopLoading();
-                    alert("Erro ao obter o token. Verifique o console para mais detalhes.");
+                    // alert("Erro ao obter o token. Verifique o console para mais detalhes.");
                 }
             }
             obterToken();
