@@ -701,7 +701,7 @@ class Grade
 
   document.getElementById("btnEditarFuncionario").addEventListener("click", async function (e) {
     e.preventDefault();
-    console.log('11')
+
 
     const id = document.getElementById("funcionarioId").value;
 
@@ -734,6 +734,8 @@ class Grade
       });
 
       alert("Funcionário atualizado com sucesso!");
+      location.reload();
+
 
       const modalEl = document.getElementById('modalEditarFuncionario');
       const modal = bootstrap.Modal.getInstance(modalEl);
