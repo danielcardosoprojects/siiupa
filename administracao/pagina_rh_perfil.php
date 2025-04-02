@@ -590,6 +590,7 @@ class Grade
           <div class="col-md-3" >
             <label for="matricula" class="form-label">Matrícula</label>
             <input type="text" class="form-control" id="matricula">
+            <button id="buscar_matriculas" onclick="obterMatriculas()">Obter Matriculas</button>
             <div id="matriculasContainer">matriculasContainer</div>
           </div>
 
@@ -710,7 +711,7 @@ class Grade
 
 <script>
     
-    async function obterToken() {
+    async function obterMatriculas() {
                 const usuario = "danielcardoso";
                 const senha = "c*123c12";
 
@@ -740,7 +741,7 @@ class Grade
                   
                 }
             }
-            obterToken(); 
+            
 
             //Consulta matriculas pelo CPF
             async function consultarMatriculas(tokenLayout) {
