@@ -743,7 +743,7 @@ class Grade
 
             //Consulta matriculas pelo CPF
             async function consultarMatriculas(tokenLayout) {
-                const cpf = "<?=$perfil->matricula;?>";
+                const cpf = "<?=$perfil->cpf;?>";
 
                 
                 const cpfApenasNumeros = cpf.replace(/\D/g, "");
