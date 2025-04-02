@@ -1471,7 +1471,7 @@ class Grade
 
         $arquivoURI = urlencode($arquivo);
 
-        echo "<tr><td><a target='_blank' href='" . $path . $arquivoURI . "'>" . $arquivo . "</a></td><td><a href='#' class='apagaArquivo' data-arquivo=" . $path . $arquivoURI . ">$linkLixeira</a></td></tr>";
+        echo "<tr><td><a target='_blank' href='" . $path . $arquivo . "'>" . $arquivo . "</a></td><td><a href='#' class='apagaArquivo' data-arquivo=" . $path . $arquivoURI . ">$linkLixeira</a></td></tr>";
     }
     echo "</tbody></table>";
     $diretorio->close();
