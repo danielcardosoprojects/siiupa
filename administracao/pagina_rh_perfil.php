@@ -701,6 +701,7 @@ class Grade
 
   document.getElementById("btnEditarFuncionario").addEventListener("click", async function (e) {
     e.preventDefault();
+    console.log('11')
 
     const id = document.getElementById("funcionarioId").value;
 
