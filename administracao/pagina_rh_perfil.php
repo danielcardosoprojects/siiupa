@@ -1469,7 +1469,7 @@ class Grade
         }
         $linkLixeira = "<img src='/siiupa/imagens/icones/lixeira.svg' width='15px'>";
 
-        echo "<tr><td><a target='_blank' href='" . $path . urlencode($arquivo) . "'>" . $arquivo . "</a></td><td><a href='#' class='apagaArquivo' data-arquivo=" . $path . $arquivo . ">$linkLixeira</a></td></tr>";
+        echo "<tr><td><a target='_blank' href='" . $path . urlencode($arquivo) . "'>" . urlencode($arquivo) . "</a></td><td><a href='#' class='apagaArquivo' data-arquivo=" . $path . $arquivo . ">$linkLixeira</a></td></tr>";
     }
     echo "</tbody></table>";
     $diretorio->close();
