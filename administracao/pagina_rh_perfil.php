@@ -648,7 +648,7 @@ class Grade
 
           <div class="modal-footer mt-4">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-success">Salvar</button>
+            <button type="submit" class="btn btn-success" id="btnEditarFuncionario">Salvar</button>
           </div>
         </form>
       </div>
@@ -699,7 +699,7 @@ class Grade
     }
   }
 
-  document.getElementById("formEditarFuncionario").addEventListener("submit", async function (e) {
+  document.getElementById("btnEditarFuncionario").addEventListener("click", async function (e) {
     e.preventDefault();
 
     const id = document.getElementById("funcionarioId").value;
