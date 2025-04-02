@@ -795,6 +795,12 @@ class Grade
 
       alert("Funcionário atualizado com sucesso!");
       location.reload();
+      $.notify(
+                `Atualizado com sucesso`, {
+                    position: "top right",
+                    className: "success"
+                }
+            );
 
 
       const modalEl = document.getElementById('modalEditarFuncionario');
