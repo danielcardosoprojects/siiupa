@@ -324,7 +324,7 @@
 
             const preencherSelectComDadosDaAPI = () => {
                 const apiUrl = "https://apitransparencia.layoutsistemas.com.br/api/transparencias/?id=&exercicio=&ano=&mes=&entidade=477";
-                const select = document.getElementById("competenciaSelect");
+                const select = document.getElementById("exercicioInput");
 
                 axios.get(apiUrl)
                     .then(response => {
@@ -338,7 +338,7 @@
                             select.appendChild(option);
                         });
 
-                        let competenciaSelect = document.getElementById("competenciaSelect").value;
+                        let competenciaSelect = document.getElementById("exercicioInput").value;
                         carregarServidores(`https://apitransparencia.layoutsistemas.com.br/api/servidores/?departamento=001050&entidade=477&transparencia=${competenciaSelect}&page=1&page_size=2000`);
                         carregarServidores2(`https://apitransparencia.layoutsistemas.com.br/api/servidores/?departamento=001051&entidade=477&transparencia=${competenciaSelect}&page=1&page_size=2000`);
                     })
