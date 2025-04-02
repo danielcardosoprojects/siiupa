@@ -509,7 +509,7 @@ class Grade
 
 <div class=''>
     <?php $token = $_GET['token']; ?>
-    <a target="_blank" href="/siiupa/teste/cc/?m=<?=$perfil->matricula;?>&cpf=<?=$perfil->cpf;?>&<?=$token;?>">CC</a>
+   
 
     <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modalCC">
   Contracheque
@@ -1448,7 +1448,7 @@ class Grade
 
           
             <div class="iframe-container" style="width: 100%; height: 600px;">
-  <iframe style="width: 100%; height: 100%; border: none;" src="https://siupa.com.br/siiupa/teste/cc/?m=&cpf=045.521.952-47&eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3NpdXBhLmNvbS5iciIsImF1ZCI6Imh0dHBzOi8vc2l1cGEuY29tLmJyIiwiaWF0IjoxNzQzNTk5Nzk0LCJleHAiOjE3NDM2MDMzOTQsImlkVXN1YXJpbyI6IjEiLCJuYmYiOjEzNTcwMDAwMDB9.jzQB3sb3YpxZDD-uQnp8RvP8j3-HtdK5MD8RS-qjCqg"></iframe>
+  <iframe style="width: 100%; height: 100%; border: none;" src="/siiupa/teste/cc/?m=<?=$perfil->matricula;?>&cpf=<?=$perfil->cpf;?>&<?=$token;?>"></iframe>
 </div>
           <div class="modal-footer mt-4">
             <button type="button" class="btn" data-bs-dismiss="modal">Fechar</button>
