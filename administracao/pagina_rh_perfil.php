@@ -591,7 +591,7 @@ class Grade
             <label for="matricula" class="form-label">Matrícula</label>
             <input type="text" class="form-control" id="matricula">
             <button id="buscar_matriculas" onclick="obterMatriculas()">Obter Matriculas</button>
-            <div id="matriculasContainer">matriculasContainer</div>
+            <div id="matriculasContainer"></div>
           </div>
 
           <div class="col-md-3">
@@ -778,8 +778,8 @@ class Grade
                         button.style.margin = '5px';
                         button.className = 'botaoMatriculas';
                         button.onclick = () => {
-                            document.getElementById('matriculaInput').value = matricula.matricula;
-                            document.getElementById('matriculaInput').scrollIntoView();
+                            document.getElementById('matricula').value = matricula.matricula;
+                            container.innerHTML = '';
                         };
                         container.appendChild(button);
                     });
