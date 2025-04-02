@@ -510,6 +510,12 @@ class Grade
 <div class=''>
     <?php $token = $_GET['token']; ?>
     <a target="_blank" href="/siiupa/teste/cc/?m=<?=$perfil->matricula;?>&cpf=<?=$perfil->cpf;?>&<?=$token;?>">CC</a>
+
+    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modalCC">
+  Contracheque
+</button>
+
+
     <?php $linkfrequencia = '/siiupa/gerapdf.php?&matricula=' . urlencode($perfil->matricula) . '&admissao=' . urlencode($perfil->admissao) . '&nome=' . urlencode($perfil->nome) . '&cargo=' . urlencode($perfil->cargo_desc) . '&vinculo=' . urlencode($perfil->vinculo);     ?>
     <a target="_blank" href='<?php echo $linkfrequencia; ?>' id='gerafrequencia' class='btn btn-outline-success'>
         <img src="/siiupa/imagens/icones/note_add.svg">
@@ -1428,6 +1434,32 @@ class Grade
   <input type="submit" name="submitArquivo" class="submitArquivo btn btn-sm" value="Enviar">
 </form>
 
+<!-- Dialog Contracheque CC -->
+<div class="modal fade" id="modalCC" tabindex="-1" aria-labelledby="modalCCLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Contracheque</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formEditarFuncionario" class="row g-3">
+          <input type="hidden" id="funcionarioId">
+
+          teste
+          <div class="modal-footer mt-4">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-success" id="btnEditarFuncionario">Salvar</button>
+            <div id="editaFuncionario_loading" class="spinner-border text-primary" role="status">
+        <span class="sr-only"></span>
+    </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- fim Dialog Contracheque CC -->
 
 
     <div id="arquivostemporarios"></div>
