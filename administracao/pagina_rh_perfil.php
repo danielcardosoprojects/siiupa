@@ -726,16 +726,58 @@ class Grade
                     });
                     // stopLoading();
 
-                    const token = response.data.access;
-                    document.getElementById("tokenLayoutInput").value = "Bearer " + token;
-                    console.log(token);
+                    const tokenLayout = response.data.access;
+                    document.getElementById("tokenLayoutInput").value = "Bearer " + tokenLayout;
+                    console.log(tokenLayout);
+                    consultarMatriculas(tokenLayout);
                 } catch (error) {
                     console.error("Erro ao obter o token:", error);
                     // stopLoading();
                     // alert("Erro ao obter o token. Verifique o console para mais detalhes.");
                 }
             }
-            obterToken();
+            obterToken(); 
+
+            //Consulta matriculas pelo CPF
+            async function consultarMatriculas(tokenLayout) {
+                const cpf = document.getElementById('cpf').value;
+                if (!cpf) {
+                    alert('Por favor, insira um CPF.');
+                    return;
+                }
+                const token_cpf = tokenLayout;
+                const url = `https://apionline.layoutsistemas.com.br/api/matriculas/?cpf=${cpf}&entidade=796`;
+                const headers = {
+                    Authorization: token_cpf
+                };
+
+                try {
+                    const response = await axios.get(url, { headers });
+                    const matriculas = response.data.results;
+
+                    // Ordena as matrículas em ordem decrescente
+                    matriculas.sort((a, b) => b.matricula.localeCompare(a.matricula));
+
+                    // Exibe as matrículas como botões
+                    const container = document.getElementById('matriculasContainer');
+                    container.innerHTML = ''; // Limpa o conteúdo anterior
+
+                    // matriculas.forEach(matricula => {
+                    //     const button = document.createElement('button');
+                    //     button.textContent = matricula.matricula;
+                    //     button.style.margin = '5px';
+                    //     button.className = 'botaoMatriculas';
+                    //     button.onclick = () => {
+                    //         document.getElementById('matriculaInput').value = matricula.matricula;
+                    //         document.getElementById('matriculaInput').scrollIntoView();
+                    //     };
+                    //     container.appendChild(button);
+                    // });
+                } catch (error) {
+                    console.error('Erro ao consultar a API:', error);
+                    alert('Erro ao consultar as matrículas. Verifique se você clicou em obter token.');
+                }
+            }
     
     $('#editaFuncionario_loading').hide();
   function getQueryParam(param) {
