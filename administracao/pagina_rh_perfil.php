@@ -590,7 +590,7 @@ class Grade
           <div class="col-md-3" >
             <label for="matricula" class="form-label">Matrícula</label>
             <input type="text" class="form-control" id="matricula">
-            <button id="buscar_matriculas" onclick="obterMatriculas()">Obter Matriculas</button>
+            <button id="buscar_matriculas" onclick="obterMatriculas()" style="margin-top:2px">Obter Matriculas</button>
             <div id="matriculasContainer"></div>
           </div>
 
@@ -776,7 +776,7 @@ class Grade
                         const button = document.createElement('button');
                         button.textContent = matricula.matricula;
                         button.style.margin = '5px';
-                        button.className = 'botaoMatriculas';
+                        button.className = 'btn btn-outline-secondary';
                         button.onclick = () => {
                             document.getElementById('matricula').value = matricula.matricula;
                             container.innerHTML = '';
