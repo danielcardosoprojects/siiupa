@@ -537,6 +537,219 @@ class Grade
         <img src="/siiupa/imagens/icones/inventory.svg">
         Solicitação CNES
     </a>
+
+    <!-- Botão que abre o modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalEditarFuncionario">
+  Editar dados
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="modalEditarFuncionario" tabindex="-1" aria-labelledby="modalEditarFuncionarioLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Editar Funcionário</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body">
+        <form id="formEditarFuncionario" class="row g-3">
+          <input type="hidden" id="funcionarioId">
+
+          <!-- Campos principais -->
+          <div class="col-md-6">
+            <label for="nome" class="form-label">Nome</label>
+            <input type="text" class="form-control" id="nome">
+          </div>
+
+          <div class="col-md-6">
+            <label for="funcao_upa" class="form-label">Função</label>
+            <input type="text" class="form-control" id="funcao_upa">
+          </div>
+
+          <div class="col-md-6">
+            <label for="cpf" class="form-label">CPF</label>
+            <input type="text" class="form-control" id="cpf">
+          </div>
+
+          <div class="col-md-6">
+            <label for="cns" class="form-label">CNS</label>
+            <input type="text" class="form-control" id="cns">
+          </div>
+
+          <div class="col-md-6">
+            <label for="matricula" class="form-label">Matrícula</label>
+            <input type="text" class="form-control" id="matricula">
+          </div>
+
+          <div class="col-md-6">
+            <label for="admissao" class="form-label">Admissão</label>
+            <input type="text" class="form-control" id="admissao">
+          </div>
+
+          <div class="col-md-6">
+            <label for="desligamento" class="form-label">Desligamento</label>
+            <input type="text" class="form-control" id="desligamento">
+          </div>
+
+          <div class="col-md-6">
+            <label for="data_nasc" class="form-label">Data Nasc.</label>
+            <input type="text" class="form-control" id="data_nasc">
+          </div>
+
+          <div class="col-md-6">
+            <label for="municipio_uf_nascimento" class="form-label">Município/UF Nasc.</label>
+            <input type="text" class="form-control" id="municipio_uf_nascimento">
+          </div>
+
+          <div class="col-md-6">
+            <label for="sexo" class="form-label">Sexo</label>
+            <input type="text" class="form-control" id="sexo">
+          </div>
+
+          <div class="col-md-6">
+            <label for="mae" class="form-label">Nome da Mãe</label>
+            <input type="text" class="form-control" id="mae">
+          </div>
+
+          <div class="col-md-6">
+            <label for="pai" class="form-label">Nome do Pai</label>
+            <input type="text" class="form-control" id="pai">
+          </div>
+
+          <div class="col-md-4">
+            <label for="telefone" class="form-label">Telefone</label>
+            <input type="text" class="form-control" id="telefone">
+          </div>
+
+          <div class="col-md-4">
+            <label for="telefone2" class="form-label">Telefone 2</label>
+            <input type="text" class="form-control" id="telefone2">
+          </div>
+
+          <div class="col-md-4">
+            <label for="telefone3" class="form-label">Telefone 3</label>
+            <input type="text" class="form-control" id="telefone3">
+          </div>
+
+          <div class="col-md-6">
+            <label for="email" class="form-label">E-mail</label>
+            <input type="email" class="form-control" id="email">
+          </div>
+
+          <div class="col-md-6">
+            <label for="ram" class="form-label">Ramal</label>
+            <input type="text" class="form-control" id="ram">
+          </div>
+
+          <div class="col-md-12">
+            <label for="notepad" class="form-label">Anotações</label>
+            <textarea class="form-control" id="notepad" rows="3"></textarea>
+          </div>
+
+          <div class="modal-footer mt-4">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" class="btn btn-success">Salvar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
+
+  const token = getQueryParam("token");
+  const funcionarioId = getQueryParam("id");
+
+  async function carregarFuncionario(id) {
+    try {
+      const response = await axios.get(`https://api-siupa.vercel.app/funcionarios/${id}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      const f = response.data;
+      document.getElementById("funcionarioId").value = f.id;
+      document.getElementById("nome").value = f.nome || "";
+      document.getElementById("funcao_upa").value = f.funcao_upa || "";
+      document.getElementById("cpf").value = f.cpf || "";
+      document.getElementById("cns").value = f.cns || "";
+      document.getElementById("matricula").value = f.matricula || "";
+      document.getElementById("admissao").value = f.admissao || "";
+      document.getElementById("desligamento").value = f.desligamento || "";
+      document.getElementById("data_nasc").value = f.data_nasc || "";
+      document.getElementById("municipio_uf_nascimento").value = f.municipio_uf_nascimento || "";
+      document.getElementById("sexo").value = f.sexo || "";
+      document.getElementById("mae").value = f.mae || "";
+      document.getElementById("pai").value = f.pai || "";
+      document.getElementById("telefone").value = f.telefone || "";
+      document.getElementById("telefone2").value = f.telefone2 || "";
+      document.getElementById("telefone3").value = f.telefone3 || "";
+      document.getElementById("email").value = f.email || "";
+      document.getElementById("ram").value = f.ram || "";
+      document.getElementById("notepad").value = f.notepad || "";
+
+    } catch (error) {
+      alert("Erro ao carregar dados do funcionário.");
+      console.error(error);
+    }
+  }
+
+  document.getElementById("formEditarFuncionario").addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    const id = document.getElementById("funcionarioId").value;
+
+    const data = {
+      nome: document.getElementById("nome").value,
+      funcao_upa: document.getElementById("funcao_upa").value,
+      cpf: document.getElementById("cpf").value,
+      cns: document.getElementById("cns").value,
+      matricula: document.getElementById("matricula").value,
+      admissao: document.getElementById("admissao").value,
+      desligamento: document.getElementById("desligamento").value,
+      data_nasc: document.getElementById("data_nasc").value,
+      municipio_uf_nascimento: document.getElementById("municipio_uf_nascimento").value,
+      sexo: document.getElementById("sexo").value,
+      mae: document.getElementById("mae").value,
+      pai: document.getElementById("pai").value,
+      telefone: document.getElementById("telefone").value,
+      telefone2: document.getElementById("telefone2").value,
+      telefone3: document.getElementById("telefone3").value,
+      email: document.getElementById("email").value,
+      ram: document.getElementById("ram").value,
+      notepad: document.getElementById("notepad").value,
+    };
+
+    try {
+      await axios.put(`https://api-siupa.vercel.app/funcionarios/${id}`, data, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      });
+
+      alert("Funcionário atualizado com sucesso!");
+
+      const modalEl = document.getElementById('modalEditarFuncionario');
+      const modal = bootstrap.Modal.getInstance(modalEl);
+      modal.hide();
+
+    } catch (error) {
+      alert("Erro ao atualizar funcionário.");
+      console.error(error);
+    }
+  });
+
+  // Carregar automaticamente ao abrir a página
+  if (funcionarioId && token) {
+    carregarFuncionario(funcionarioId);
+  }
+</script>
+
 </div>
 
 
