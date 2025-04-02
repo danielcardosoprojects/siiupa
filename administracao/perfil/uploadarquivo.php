@@ -52,7 +52,7 @@ if ($_GET['acao'] == 'arquivos') {
     $arquivo = $_POST['arquivo'];
 
     $base_dir = realpath($_SERVER["DOCUMENT_ROOT"]);
-    $file_delete = $base_dir . '/' . ltrim($arquivo, '/');
+    $file_delete = $base_dir . '/' . ltrim(urldecode($arquivo), '/');
 
     if (is_file($file_delete)) {
         if (unlink($file_delete)) {
