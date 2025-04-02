@@ -751,7 +751,7 @@ class Grade
                     alert('Por favor, insira um CPF.');
                     return;
                 }
-                const token_cpf = tokenLayout;
+                const token_cpf = `Bearer ${tokenLayout}`;
                 const url = `https://apionline.layoutsistemas.com.br/api/matriculas/?cpf=${cpfApenasNumeros}&entidade=796`;
                 const headers = {
                     Authorization: token_cpf
