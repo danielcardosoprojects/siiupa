@@ -550,7 +550,7 @@ class Grade
     </a>
 
     <!-- Botão que abre o modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalEditarFuncionario">
+<button type="button" class="btn-primary" data-bs-toggle="modal" data-bs-target="#modalEditarFuncionario">
   Editar dados
 </button>
 
