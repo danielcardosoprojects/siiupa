@@ -276,7 +276,7 @@
         //UPLOAD DE ARQUIVO
         $('.apagaArquivo').click(function(e) {
             e.preventDefault();
-            arquivo = '/siiupa/' + $(this).data('arquivo');
+            const arquivo = $(this).data('arquivo'); // já vem com o caminho completo
             $.alert(arquivo);
             $.ajax({
                 type: 'POST',
