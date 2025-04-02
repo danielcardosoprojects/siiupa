@@ -793,7 +793,7 @@ class Grade
         }
       });
 
-      alert("Funcionário atualizado com sucesso!");
+    //   alert("Funcionário atualizado com sucesso!");
       location.reload();
       $.notify(
                 `Atualizado com sucesso`, {
