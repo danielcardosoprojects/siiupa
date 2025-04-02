@@ -335,37 +335,39 @@
         });
 
         //UPLOAD DE FOTO DO PERFIL
-        $('.submitArquivo').on('click', function() {
+        $('.submitArquivo').on('click', function () {
+  var files = $('.file').prop('files'); // isso agora é uma lista
+  var idf = $('.file').data('idf');
 
-            var file_data = $('.file').prop('files')[0];
-            var idf = $('.file').data('idf');
-            console.log(file_data);
-            if (file_data != undefined) {
-                var form_data = new FormData();
-                form_data.append('file', file_data);
-                console.log(form_data);
-                $.ajax({
-                    type: 'POST',
-                    url: '/siiupa/administracao/perfil/uploadarquivo.php?acao=arquivos&id=' + idf,
-                    contentType: false,
-                    processData: false,
-                    data: form_data,
-                    success: function(response) {
-                        if (response == 'success') {
-                            //alert('File uploaded successfully.');
-                            window.close();
-                        } else {
+  if (files.length > 0) {
+    var form_data = new FormData();
 
-                            $('#testando').html(response);
-                            alert('Something went wrong. Please try again.');
-                        }
-                        location.reload();
-                        $('.file').val('');
-                    }
-                });
-            }
-            return false;
-        });
+    for (let i = 0; i < files.length; i++) {
+      form_data.append('file[]', files[i]); // adiciona todos
+    }
+
+    $.ajax({
+      type: 'POST',
+      url: '/siiupa/administracao/perfil/uploadarquivo.php?acao=arquivos&id=' + idf,
+      contentType: false,
+      processData: false,
+      data: form_data,
+      success: function (response) {
+        if (response == 'success') {
+          alert('Arquivos enviados com sucesso.');
+          location.reload();
+        } else {
+          $('#testando').html(response);
+          alert('Erro no envio.');
+        }
+        $('.file').val('');
+      }
+    });
+  }
+
+  return false;
+});
+
 
 
 
@@ -1412,38 +1414,22 @@ class Grade
     echo "<div class='copiar btn btn-sm btn-info' data-text='C:\wamp64\www\siiupa\administracao\\rh\\$perfil->id\'>C:\\wamp64\\www\\siiupa\\administracao\\rh\\$perfil->id</div>";
 
     ?>
-    <form nctype="multipart/form-data">
-        <p><input type="file" name="file" class="file btn btn-primary btn-sm" data-idf="<?php echo $perfil->id; ?>" value="foto_perfil" required></p>
-        <input type="submit" name="submitArquivo" class="submitArquivo btn btn-sm" value="Enviar">
+<form enctype="multipart/form-data">
+  <p>
+    <input 
+      type="file" 
+      name="file[]" 
+      class="file btn btn-primary btn-sm" 
+      data-idf="<?php echo $perfil->id; ?>" 
+      multiple 
+      required
+    >
+  </p>
+  <input type="submit" name="submitArquivo" class="submitArquivo btn btn-sm" value="Enviar">
+</form>
 
-    </form>
 
 
-
-    <script>
-        $(function() {
-            setInterval(function() {}, 5000);
-            $('#Scan_loading').hide();
-
-            function Scan_Att() {
-                $('#arquivostemporarios').load('./ScanKyocera/executa_scan.php');
-            }
-            $('#Scan_executa').click(function() {
-
-                $('#Scan_loading').show();
-            });
-            $('#btn_att_scan').click(function() {
-
-                Scan_Att();
-                $('#Scan_loading').hide();
-            });
-            Scan_Att();
-        });
-    </script>
-    <a href='magnet:xt' id="Scan_executa" class='btn btn-warning btn-sm'>ESCANEAR DOCUMENTO</a><button id="btn_att_scan" class='btn btn-warning btn-sm'>Atualizar</button><br>
-    <div id="Scan_loading" class="spinner-border text-primary" role="status">
-        <span class="sr-only"></span>
-    </div>
     <div id="arquivostemporarios"></div>
     <div id='testando'></div>
     <!-- Inclua o Axios no seu HTML -->
