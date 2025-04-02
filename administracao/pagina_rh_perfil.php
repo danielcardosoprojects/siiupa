@@ -590,6 +590,7 @@ class Grade
           <div class="col-md-3" >
             <label for="matricula" class="form-label">Matrícula</label>
             <input type="text" class="form-control" id="matricula">
+            <div id="matriculasContainer">matriculasContainer</div>
           </div>
 
           <div class="col-md-3">
@@ -996,7 +997,7 @@ class Grade
 
     ?>
 
-    <div id="matriculasContainer">matriculasContainer</div>
+  
     <table id='sistema' class='table table-hover'>
         <thead>
             <tr>
