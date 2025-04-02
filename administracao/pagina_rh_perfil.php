@@ -741,12 +741,15 @@ class Grade
             //Consulta matriculas pelo CPF
             async function consultarMatriculas(tokenLayout) {
                 const cpf = document.getElementById('cpf').value;
+
+                
+                const cpfApenasNumeros = cpf.replace(/\D/g, "");
                 if (!cpf) {
                     alert('Por favor, insira um CPF.');
                     return;
                 }
                 const token_cpf = tokenLayout;
-                const url = `https://apionline.layoutsistemas.com.br/api/matriculas/?cpf=${cpf}&entidade=796`;
+                const url = `https://apionline.layoutsistemas.com.br/api/matriculas/?cpf=${cpfApenasNumeros}&entidade=796`;
                 const headers = {
                     Authorization: token_cpf
                 };
