@@ -564,7 +564,7 @@ class Grade
             <input type="text" class="form-control" id="nome">
           </div>
 
-          <div class="" class="none">
+          <div class="none">
             <label for="funcao_upa" class="form-label">Função</label>
             <input type="text" class="form-control" id="funcao_upa">
           </div>
@@ -579,28 +579,28 @@ class Grade
             <input type="text" class="form-control" id="cns">
           </div>
 
-          <div class="" >
+          <div class="col-md-3" >
             <label for="matricula" class="form-label">Matrícula</label>
             <input type="text" class="form-control" id="matricula">
           </div>
 
-          <div class="">
+          <div class="col-md-3">
             <label for="admissao" class="form-label">Admissão</label>
             <input type="text" class="form-control" id="admissao">
           </div>
 
-          <div class="">
+          <div class="col-md-3">
             <label for="desligamento" class="form-label">Desligamento</label>
             <input type="text" class="form-control" id="desligamento">
           </div>
 
-          <div class="">
+          <div class="col-md-3">
             <label for="data_nasc" class="form-label">Data Nasc.</label>
             <input type="text" class="form-control" id="data_nasc">
           </div>
 
           <div class="">
-            <label for="municipio_uf_nascimento" class="form-label">Município/UF Nasc.</label>
+            <label for="municipio_uf_nascimento" class="form-label">Município-UF Nasc.</label>
             <input type="text" class="form-control" id="municipio_uf_nascimento">
           </div>
 
@@ -631,27 +631,27 @@ class Grade
             <label for="end_numero" class="form-label">end_numero</label>
             <input type="text" class="form-control" id="end_numero">
           </div>
-          <div class="">
+          <div class="col-md-3">
             <label for="end_compl" class="form-label">end_compl</label>
             <input type="text" class="form-control" id="end_compl">
           </div>
-          <div class="">
+          <div class="col-md-3">
             <label for="end_bairro" class="form-label">end_bairro</label>
             <input type="text" class="form-control" id="end_bairro">
           </div>
-          <div class="">
+          <div class="col-md-3">
             <label for="end_cidade" class="form-label">end_cidade</label>
             <input type="text" class="form-control" id="end_cidade">
           </div>
-          <div class="">
+          <div class="col-md-3">
             <label for="end_uf" class="form-label">end_uf</label>
             <input type="text" class="form-control" id="end_uf">
           </div>
-          <div class="">
+          <div class="col-md-6">
             <label for="conselho_tipo" class="form-label">conselho_tipo</label>
             <input type="text" class="form-control" id="conselho_tipo">
           </div>
-          <div class="">
+          <div class="col-md-6">
             <label for="conselho_n" class="form-label">conselho_n</label>
             <input type="text" class="form-control" id="conselho_n">
           </div>
