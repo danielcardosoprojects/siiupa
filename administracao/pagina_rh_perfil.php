@@ -511,7 +511,7 @@ class Grade
     <?php $token = $_GET['token']; ?>
    
 
-    <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modalCC">
+    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalCC">
   Contracheque
 </button>
 
@@ -550,7 +550,7 @@ class Grade
     </a>
 
     <!-- Botão que abre o modal -->
-<button type="button" class="btn-primary" data-bs-toggle="modal" data-bs-target="#modalEditarFuncionario">
+<button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalEditarFuncionario">
   Editar dados
 </button>
 
