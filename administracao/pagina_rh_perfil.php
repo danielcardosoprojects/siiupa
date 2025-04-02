@@ -705,7 +705,38 @@ class Grade
     </div>
   </div>
 </div>
+<input type="hidden" value="" id="tokenLayoutInput">
+
 <script>
+    
+    async function obterToken() {
+                const usuario = "danielcardoso";
+                const senha = "upaupa";
+
+                if (!usuario || !senha) {
+                    alert("Por favor, preencha o usuário e a senha.");
+                    return;
+                }
+
+                try {
+                    // showLoading();
+                    const response = await axios.post("https://apionline.layoutsistemas.com.br/api/token/", {
+                        username: usuario,
+                        password: senha
+                    });
+                    // stopLoading();
+
+                    const token = response.data.access;
+                    document.getElementById("tokenLayoutInput").value = "Bearer " + token;
+                    cosole.log(token);
+                } catch (error) {
+                    console.error("Erro ao obter o token:", error);
+                    // stopLoading();
+                    alert("Erro ao obter o token. Verifique o console para mais detalhes.");
+                }
+            }
+            obterToken();
+    
     $('#editaFuncionario_loading').hide();
   function getQueryParam(param) {
     const urlParams = new URLSearchParams(window.location.search);
