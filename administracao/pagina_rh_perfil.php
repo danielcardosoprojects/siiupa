@@ -688,6 +688,9 @@ class Grade
           <div class="modal-footer mt-4">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
             <button type="submit" class="btn btn-success" id="btnEditarFuncionario">Salvar</button>
+            <div id="editaFuncionario_loading" class="spinner-border text-primary" role="status">
+        <span class="sr-only"></span>
+    </div>
           </div>
         </form>
       </div>
@@ -695,6 +698,7 @@ class Grade
   </div>
 </div>
 <script>
+    $('#editaFuncionario_loading').hide();
   function getQueryParam(param) {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(param);
@@ -749,7 +753,7 @@ class Grade
 
   document.getElementById("btnEditarFuncionario").addEventListener("click", async function (e) {
     e.preventDefault();
-
+    $('#editaFuncionario_loading').show();
 
     const id = document.getElementById("funcionarioId").value;
 
