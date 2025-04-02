@@ -759,6 +759,7 @@ class Grade
                 };
 
                 try {
+                    console.log("TOken para consultar matricula", token_cpf)
                     const response = await axios.get(url, { headers });
                     const matriculas = response.data.results;
 
@@ -769,17 +770,17 @@ class Grade
                     const container = document.getElementById('matriculasContainer');
                     container.innerHTML = ''; // Limpa o conteúdo anterior
 
-                    // matriculas.forEach(matricula => {
-                    //     const button = document.createElement('button');
-                    //     button.textContent = matricula.matricula;
-                    //     button.style.margin = '5px';
-                    //     button.className = 'botaoMatriculas';
-                    //     button.onclick = () => {
-                    //         document.getElementById('matriculaInput').value = matricula.matricula;
-                    //         document.getElementById('matriculaInput').scrollIntoView();
-                    //     };
-                    //     container.appendChild(button);
-                    // });
+                    matriculas.forEach(matricula => {
+                        const button = document.createElement('button');
+                        button.textContent = matricula.matricula;
+                        button.style.margin = '5px';
+                        button.className = 'botaoMatriculas';
+                        button.onclick = () => {
+                            document.getElementById('matriculaInput').value = matricula.matricula;
+                            document.getElementById('matriculaInput').scrollIntoView();
+                        };
+                        container.appendChild(button);
+                    });
                 } catch (error) {
                     console.error('Erro ao consultar a API:', error);
                     alert('Erro ao consultar as matrículas. Verifique se você clicou em obter token.');
@@ -994,6 +995,8 @@ class Grade
     echo "<div class='copiar btn btn-sm btn-grey' data-text='C:\wamp64\www\siiupa\administracao\\rh\\$perfil->id\'>Pasta Windows</div>";
 
     ?>
+
+    <div id="matriculasContainer">matriculasContainer</div>
     <table id='sistema' class='table table-hover'>
         <thead>
             <tr>
