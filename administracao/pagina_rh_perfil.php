@@ -744,7 +744,8 @@ class Grade
 
                 
                 const cpfApenasNumeros = cpf.replace(/\D/g, "");
-                if (!cpf) {
+                console.log(cpfApenasNumeros);
+                if (!cpfApenasNumeros) {
                     alert('Por favor, insira um CPF.');
                     return;
                 }
