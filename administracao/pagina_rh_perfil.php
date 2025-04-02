@@ -591,7 +591,7 @@ class Grade
             <label for="matricula" class="form-label">Matrícula</label>
             <input type="text" class="form-control" id="matricula">
             <button id="buscar_matriculas" onclick="obterMatriculas()" style="margin-top:2px">Obter Matriculas</button>
-            <div id="buscaMatricula_loagin" class="spinner-border text-primary" role="status">
+            <div id="buscaMatricula_loagin" class="spinner-border text-primary" role="status"></div>
             <div id="matriculasContainer"></div>
           </div>
 
