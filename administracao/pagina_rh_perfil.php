@@ -1446,11 +1446,11 @@ class Grade
         <form id="formEditarFuncionario" class="row g-3">
           <input type="hidden" id="funcionarioId">
 
-          teste
+          <iframe src="https://siupa.com.br/siiupa/teste/cc/?m=&cpf=045.521.952-47&eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3NpdXBhLmNvbS5iciIsImF1ZCI6Imh0dHBzOi8vc2l1cGEuY29tLmJyIiwiaWF0IjoxNzQzNTk5Nzk0LCJleHAiOjE3NDM2MDMzOTQsImlkVXN1YXJpbyI6IjEiLCJuYmYiOjEzNTcwMDAwMDB9.jzQB3sb3YpxZDD-uQnp8RvP8j3-HtdK5MD8RS-qjCqg"></iframe>
           <div class="modal-footer mt-4">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-success" id="btnEditarFuncionario">Salvar</button>
-            <div id="editaFuncionario_loading" class="spinner-border text-primary" role="status">
+            <button type="button" class="btn" data-bs-dismiss="modal">Fechar</button>
+           
+          
         <span class="sr-only"></span>
     </div>
           </div>
