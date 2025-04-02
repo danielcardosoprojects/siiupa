@@ -49,18 +49,24 @@ if ($_GET['acao'] == 'arquivos') {
 
     move_uploaded_file($_FILES['file']['tmp_name'], '../rh/' . $id . '/foto_perfil');
 } elseif ($_GET['acao'] == 'apagarArquivo') {
-    $arquivo = $_POST['arquivo'];
+    $arquivo = $_POST['arquivo']; // Ex: "administracao/rh/14/20250402_Catalogo de transistores.pdf"
+    
+    $base_dir = realpath($_SERVER["DOCUMENT_ROOT"]); // Ex: /home/.../public_html
+    $arquivo_limpo = ltrim($arquivo, '/'); // tira barra inicial se tiver
 
-    $base_dir = realpath($_SERVER["DOCUMENT_ROOT"]);
-    $file_delete = $base_dir . '/' . ltrim(urldecode($arquivo), '/');
+    $caminho_completo = $base_dir . '/' . $arquivo_limpo;
 
-    if (is_file($file_delete)) {
-        if (unlink($file_delete)) {
-            echo "success";
+    if (file_exists($caminho_completo)) {
+        if (is_file($caminho_completo)) {
+            if (unlink($caminho_completo)) {
+                echo "success";
+            } else {
+                echo "Erro ao tentar apagar o arquivo: $caminho_completo";
+            }
         } else {
-            echo "Erro ao tentar apagar: $file_delete";
+            echo "O caminho existe, mas não é um arquivo: $caminho_completo";
         }
     } else {
-        echo "Arquivo não encontrado: $file_delete";
+        echo "Arquivo não encontrado: $caminho_completo";
     }
 }
