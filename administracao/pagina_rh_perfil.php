@@ -9,6 +9,9 @@
     .copiar {
         cursor: pointer;
     }
+    .none {
+        display: none;
+    }
 
     .valor {
         background-color: green;
@@ -556,65 +559,104 @@ class Grade
           <input type="hidden" id="funcionarioId">
 
           <!-- Campos principais -->
-          <div class="col-md-6">
+          <div class="">
             <label for="nome" class="form-label">Nome</label>
             <input type="text" class="form-control" id="nome">
           </div>
 
-          <div class="col-md-6">
+          <div class="" class="none">
             <label for="funcao_upa" class="form-label">Função</label>
             <input type="text" class="form-control" id="funcao_upa">
           </div>
 
-          <div class="col-md-6">
+          <div class="">
             <label for="cpf" class="form-label">CPF</label>
             <input type="text" class="form-control" id="cpf">
           </div>
 
-          <div class="col-md-6">
+          <div class="">
             <label for="cns" class="form-label">CNS</label>
             <input type="text" class="form-control" id="cns">
           </div>
 
-          <div class="col-md-6">
+          <div class="" >
             <label for="matricula" class="form-label">Matrícula</label>
             <input type="text" class="form-control" id="matricula">
           </div>
 
-          <div class="col-md-6">
+          <div class="">
             <label for="admissao" class="form-label">Admissão</label>
             <input type="text" class="form-control" id="admissao">
           </div>
 
-          <div class="col-md-6">
+          <div class="">
             <label for="desligamento" class="form-label">Desligamento</label>
             <input type="text" class="form-control" id="desligamento">
           </div>
 
-          <div class="col-md-6">
+          <div class="">
             <label for="data_nasc" class="form-label">Data Nasc.</label>
             <input type="text" class="form-control" id="data_nasc">
           </div>
 
-          <div class="col-md-6">
+          <div class="">
             <label for="municipio_uf_nascimento" class="form-label">Município/UF Nasc.</label>
             <input type="text" class="form-control" id="municipio_uf_nascimento">
           </div>
 
-          <div class="col-md-6">
+          <div class="">
             <label for="sexo" class="form-label">Sexo</label>
-            <input type="text" class="form-control" id="sexo">
+            
+            <select id="sexo">
+                <option value="M">Masculino</option>
+                <option value="F">Feminino</option>
+            </select>
           </div>
 
-          <div class="col-md-6">
+          <div class="">
             <label for="mae" class="form-label">Nome da Mãe</label>
             <input type="text" class="form-control" id="mae">
           </div>
 
-          <div class="col-md-6">
+          <div class="">
             <label for="pai" class="form-label">Nome do Pai</label>
             <input type="text" class="form-control" id="pai">
           </div>
+
+          <div class="col-md-10">
+            <label for="end_rua" class="form-label">end_rua</label>
+            <input type="text" class="form-control" id="end_rua">
+          </div>
+          <div class="col-md-2">
+            <label for="end_numero" class="form-label">end_numero</label>
+            <input type="text" class="form-control" id="end_numero">
+          </div>
+          <div class="">
+            <label for="end_compl" class="form-label">end_compl</label>
+            <input type="text" class="form-control" id="end_compl">
+          </div>
+          <div class="">
+            <label for="end_bairro" class="form-label">end_bairro</label>
+            <input type="text" class="form-control" id="end_bairro">
+          </div>
+          <div class="">
+            <label for="end_cidade" class="form-label">end_cidade</label>
+            <input type="text" class="form-control" id="end_cidade">
+          </div>
+          <div class="">
+            <label for="end_uf" class="form-label">end_uf</label>
+            <input type="text" class="form-control" id="end_uf">
+          </div>
+          <div class="">
+            <label for="conselho_tipo" class="form-label">conselho_tipo</label>
+            <input type="text" class="form-control" id="conselho_tipo">
+          </div>
+          <div class="">
+            <label for="conselho_n" class="form-label">conselho_n</label>
+            <input type="text" class="form-control" id="conselho_n">
+          </div>
+
+          
 
           <div class="col-md-4">
             <label for="telefone" class="form-label">Telefone</label>
@@ -631,15 +673,12 @@ class Grade
             <input type="text" class="form-control" id="telefone3">
           </div>
 
-          <div class="col-md-6">
+          <div class="">
             <label for="email" class="form-label">E-mail</label>
             <input type="email" class="form-control" id="email">
           </div>
 
-          <div class="col-md-6">
-            <label for="ram" class="form-label">Ramal</label>
-            <input type="text" class="form-control" id="ram">
-          </div>
+      
 
           <div class="col-md-12">
             <label for="notepad" class="form-label">Anotações</label>
@@ -686,6 +725,15 @@ class Grade
       document.getElementById("sexo").value = f.sexo || "";
       document.getElementById("mae").value = f.mae || "";
       document.getElementById("pai").value = f.pai || "";
+      document.getElementById("end_rua").value = f.end_rua || "";
+      document.getElementById("end_numero").value = f.end_numero || "";
+      document.getElementById("end_compl").value = f.end_compl || "";
+      document.getElementById("end_bairro").value = f.end_bairro || "";
+      document.getElementById("end_cidade").value = f.end_cidade || "";
+      document.getElementById("end_uf").value = f.end_uf || "";
+      document.getElementById("conselho_tipo").value = f.conselho_tipo || "";
+      document.getElementById("conselho_n").value = f.conselho_n || "";
+      document.getElementById("pai").value = f.pai || "";
       document.getElementById("telefone").value = f.telefone || "";
       document.getElementById("telefone2").value = f.telefone2 || "";
       document.getElementById("telefone3").value = f.telefone3 || "";
@@ -718,6 +766,14 @@ class Grade
       sexo: document.getElementById("sexo").value,
       mae: document.getElementById("mae").value,
       pai: document.getElementById("pai").value,
+      end_rua: document.getElementById("end_rua").value,
+      end_numero: document.getElementById("end_numero").value,
+      end_compl: document.getElementById("end_compl").value,
+      end_bairro: document.getElementById("end_bairro").value,
+      end_cidade: document.getElementById("end_cidade").value,
+      end_uf: document.getElementById("end_uf").value,
+      conselho_tipo: document.getElementById("conselho_tipo").value,
+      conselho_n: document.getElementById("conselho_n").value,
       telefone: document.getElementById("telefone").value,
       telefone2: document.getElementById("telefone2").value,
       telefone3: document.getElementById("telefone3").value,
