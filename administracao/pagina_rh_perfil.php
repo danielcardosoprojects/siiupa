@@ -569,12 +569,12 @@ class Grade
             <input type="text" class="form-control" id="funcao_upa">
           </div>
 
-          <div class="">
+          <div class="col-md-6">
             <label for="cpf" class="form-label">CPF</label>
             <input type="text" class="form-control" id="cpf">
           </div>
 
-          <div class="">
+          <div class="col-md-6">
             <label for="cns" class="form-label">CNS</label>
             <input type="text" class="form-control" id="cns">
           </div>
