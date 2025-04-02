@@ -52,7 +52,7 @@ if ($_GET['acao'] == 'arquivos') {
     $arquivo = $_POST['arquivo']; // Ex: "administracao/rh/14/20250402_Catalogo de transistores.pdf"
     
     $base_dir = realpath($_SERVER["DOCUMENT_ROOT"]); // Ex: /home/.../public_html
-    $arquivo_limpo = ltrim($arquivo, '/'); // tira barra inicial se tiver
+    $arquivo_limpo = ltrim(urldecode($arquivo), '/'); // tira barra inicial se tiver
 
     $caminho_completo = $base_dir . '/' . $arquivo_limpo;
 
