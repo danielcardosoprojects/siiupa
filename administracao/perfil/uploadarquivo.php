@@ -50,12 +50,16 @@ if ($_GET['acao'] == 'arquivos') {
     move_uploaded_file($_FILES['file']['tmp_name'], '../rh/' . $id . '/foto_perfil');
 } elseif ($_GET['acao'] == 'apagarArquivo') {
     $arquivo = $_POST['arquivo'];
+
     $base_dir = realpath($_SERVER["DOCUMENT_ROOT"]);
     $file_delete = $base_dir . '/' . ltrim($arquivo, '/');
 
-    if (file_exists($file_delete)) {
-        unlink($file_delete);
-        echo "success";
+    if (is_file($file_delete)) {
+        if (unlink($file_delete)) {
+            echo "success";
+        } else {
+            echo "Erro ao tentar apagar: $file_delete";
+        }
     } else {
         echo "Arquivo não encontrado: $file_delete";
     }
