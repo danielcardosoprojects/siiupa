@@ -54,7 +54,7 @@ if ($_GET['acao'] == 'arquivos') {
     $base_dir = realpath($_SERVER["DOCUMENT_ROOT"]); // Ex: /home/.../public_html
     $arquivo_limpo = ltrim(urldecode($arquivo), '/'); // tira barra inicial se tiver
 
-    $caminho_completo = $base_dir . '\/siiupa\/' . $arquivo_limpo;
+    $caminho_completo = $base_dir . "/"."siiupa/" . $arquivo_limpo;
     
     if (file_exists($caminho_completo)) {
         if (is_file($caminho_completo)) {
