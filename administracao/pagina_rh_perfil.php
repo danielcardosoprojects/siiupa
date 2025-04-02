@@ -591,6 +591,7 @@ class Grade
             <label for="matricula" class="form-label">Matrícula</label>
             <input type="text" class="form-control" id="matricula">
             <button id="buscar_matriculas" onclick="obterMatriculas()" style="margin-top:2px">Obter Matriculas</button>
+            <div id="buscaMatricula_loagin" class="spinner-border text-primary" role="status">
             <div id="matriculasContainer"></div>
           </div>
 
@@ -710,8 +711,9 @@ class Grade
 <input type="hidden" value="" id="tokenLayoutInput">
 
 <script>
-    
+    $("#buscaMatricula_loagin").hide();
     async function obterMatriculas() {
+        $("#buscaMatricula_loagin").show();
                 const usuario = "danielcardoso";
                 const senha = "c*123c12";
 
@@ -733,11 +735,13 @@ class Grade
                     console.log(tokenLayout);
                     consultarMatriculas(tokenLayout);
                     
+                    
                 } catch (error) {
                     console.error("Erro ao obter o token:", error);
                     // stopLoading();
                     // alert("Erro ao obter o token. Verifique o console para mais detalhes.");
                 } finally {
+                    $("#buscaMatricula_loagin").hide();
                   
                 }
             }
@@ -746,7 +750,7 @@ class Grade
             //Consulta matriculas pelo CPF
             async function consultarMatriculas(tokenLayout) {
                 const cpf = "<?=$perfil->cpf;?>";
-
+                $("#buscaMatricula_loagin").show();
                 
                 const cpfApenasNumeros = cpf.replace(/\D/g, "");
                 console.log(cpfApenasNumeros);
@@ -782,10 +786,13 @@ class Grade
                             container.innerHTML = '';
                         };
                         container.appendChild(button);
+                        $("#buscaMatricula_loagin").hide();
                     });
                 } catch (error) {
                     console.error('Erro ao consultar a API:', error);
                     alert('Erro ao consultar as matrículas. Verifique se você clicou em obter token.');
+                } finally {
+                    $("#buscaMatricula_loagin").hide();
                 }
             }
     
