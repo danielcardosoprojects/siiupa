@@ -288,7 +288,7 @@
                 success: function(response) {
                     if (response == 'success') {
                         //alert('File uploaded successfully.');
-                        
+                        location.reload();
                     } else {
 
                         //$('#testando').html(response);
