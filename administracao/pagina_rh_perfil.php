@@ -697,8 +697,8 @@ class Grade
           </div>
 
           <div class="modal-footer mt-4">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" class="btn btn-success" id="btnEditarFuncionario">Salvar</button>
+            <button type="button" data-bs-dismiss="modal">Cancelar</button>
+            <button type="submit" id="btnEditarFuncionario">Salvar</button>
             <div id="editaFuncionario_loading" class="spinner-border text-primary" role="status">
         <span class="sr-only"></span>
     </div>
