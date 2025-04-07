@@ -33,11 +33,11 @@ if ($stmt = $conn->prepare($query)) {
         <tbody>
             <tr>
                 <td>$nome</td>
+                <td>$cpf</td>
                 <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>$cbo</td>
+                <td>$carga_horaria_semana</td>
+                <td>$vinculo</td>
             </tr>
         </tbody>
     </table>
