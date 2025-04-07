@@ -6,13 +6,13 @@ $idfunc = $_GET['id'];
 
 echo "<div style='color:dark'>";
 
-$query = "SELECT f.nome, f.cpf, f.cns, f.conselho_tipo, f.conselho_n f.sexo, f.mae, f.pai, DATE_FORMAT( f.data_nasc, \"%d/%m/%Y\" ), f.municipio_uf_nascimento, f.vinculo, c.cbo, c.descricao, c.carga_horaria, DATE_FORMAT( f.admissao, \"%d/%m/%Y\" ) FROM u940659928_siupa.tb_funcionario as f INNER JOIN u940659928_siupa.tb_cargo AS c on (fk_cargo = c.id) WHERE STATUS = \"ATIVO\" and f.id=$idfunc";
+$query = "SELECT f.nome, f.cpf, f.cns, f.sexo, f.mae, f.pai, DATE_FORMAT( f.data_nasc, \"%d/%m/%Y\" ), f.municipio_uf_nascimento, f.vinculo, c.cbo, c.descricao, c.carga_horaria, DATE_FORMAT( f.admissao, \"%d/%m/%Y\" ) FROM u940659928_siupa.tb_funcionario as f INNER JOIN u940659928_siupa.tb_cargo AS c on (fk_cargo = c.id) WHERE STATUS = \"ATIVO\" and f.id=$idfunc";
 
 
 
 if ($stmt = $conn->prepare($query)) {
     $stmt->execute();
-    $stmt->bind_result($nome, $cpf, $cns, $conselho_tipo, $conselho_n, $sexo, $mae, $pai, $data_nasc, $municipio_uf_nascimento, $vinculo, $cbo, $descricao, $carga_horaria_mes, $admissao);
+    $stmt->bind_result($nome, $cpf, $cns, $sexo, $mae, $pai, $data_nasc, $municipio_uf_nascimento, $vinculo, $cbo, $descricao, $carga_horaria_mes, $admissao);
     while ($stmt->fetch()) {
         //printf("%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s\n", $nome, $cpf, $cns, $sexo, $mae, $pai, $data_nasc, $municipio_uf_nascimento, $vinculo, $descricao, $admissao);
         $carga_horaria_semana = $carga_horaria_mes/4;
