@@ -44,7 +44,10 @@ if ($stmt = $conn->prepare($query)) {
                 <td style='border:solid 1px #000; text-align:center'>$vinculo</td>
             </tr>
         </tbody>
-    </table>
+    </table>";
+
+    echo `<button onclick="copiarParaExcel('$nome','$cpf','$conselho_tipo $conselho_n','$cbo','$carga_horaria_mes','$vinculo')">Copiar para Excel</button>`;
+echo "
     <br />
     <br />
     <br />
@@ -93,3 +96,24 @@ if ($stmt = $conn->prepare($query)) {
     $stmt->close();
 }
 echo "</div>";
+
+echo "<script>function copiarParaExcel(...itens) {
+  // Junta os itens com tabulações (\t), que o Excel entende como separador de colunas
+  const texto = itens.join('\t');
+
+  // Cria uma área de transferência temporária
+  const textarea = document.createElement('textarea');
+  textarea.value = texto;
+  document.body.appendChild(textarea);
+  textarea.select();
+
+  try {
+    document.execCommand('copy');
+    //alert('Copiado com sucesso! Cole no Excel (Ctrl+V).');
+  } catch (err) {
+    console.error('Erro ao copiar: ', err);
+  }
+
+  document.body.removeChild(textarea);
+}
+</script>"
