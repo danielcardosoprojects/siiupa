@@ -36,7 +36,7 @@ if ($stmt = $conn->prepare($query)) {
                 <td>$cpf</td>
                 <td></td>
                 <td>$cbo</td>
-                <td>$carga_horaria_semana</td>
+                <td>$carga_horaria_mes</td>
                 <td>$vinculo</td>
             </tr>
         </tbody>
