@@ -34,7 +34,7 @@ if ($stmt = $conn->prepare($query)) {
     
         <tbody>
             <tr>
-                <td style='border:solid 1px #000; text-align:center'>$nome</td>
+                <td style='border:solid 1px #000; text-align:center'>".strtoupper($nome)."</td>
                 <td style='border:solid 1px #000; text-align:center'>$cpf</td>
                 <td style='border:solid 1px #000; text-align:center'>$conselho_tipo $conselho_n</td>
  
