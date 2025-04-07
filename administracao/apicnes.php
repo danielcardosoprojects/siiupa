@@ -32,12 +32,12 @@ if ($stmt = $conn->prepare($query)) {
     
         <tbody>
             <tr>
-                <td style='border:solid 1px #000'>$nome</td>
-                <td style='border:solid 1px #000'>$cpf</td>
-                <td style='border:solid 1px #000'>$conselho_tipo $conselho_n</td>
-                <td style='border:solid 1px #000'>$cbo</td>
-                <td style='border:solid 1px #000'>$carga_horaria_mes</td>
-                <td style='border:solid 1px #000'>$vinculo</td>
+                <td style='border:solid 1px #000; text-align:center'>$nome</td>
+                <td style='border:solid 1px #000; text-align:center'>$cpf</td>
+                <td style='border:solid 1px #000; text-align:center'>$conselho_tipo $conselho_n</td>
+                <td style='border:solid 1px #000; text-align:center'>$cbo</td>
+                <td style='border:solid 1px #000; text-align:center'>$carga_horaria_mes</td>
+                <td style='border:solid 1px #000; text-align:center'>$vinculo</td>
             </tr>
         </tbody>
     </table>
