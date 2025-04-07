@@ -46,7 +46,7 @@ if ($stmt = $conn->prepare($query)) {
         </tbody>
     </table>
 
-    <button onclick=\"copiarParaExcel('$nome','$cpf','$conselho_tipo $conselho_n','$cbo','$carga_horaria_mes','$vinculo')\">Copiar para Excel</button>
+    <button onclick=\"copiarParaExcel('".strtoupper($nome)."','$cpf','$conselho_tipo $conselho_n','$cbo','$carga_horaria_mes','$vinculo')\">Copiar para Excel</button>
     <br />
     <br />
     <br />
