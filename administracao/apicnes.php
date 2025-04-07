@@ -28,6 +28,7 @@ if ($stmt = $conn->prepare($query)) {
                     <th>...</th>
                     <th>CBO</th>
                     <th>CH SEMANAL</th>
+                    <th>...</th>
                     <th>VÍNCULO</th>
                 </tr>
             </thead>
@@ -41,6 +42,7 @@ if ($stmt = $conn->prepare($query)) {
                 <td style='border:solid 1px #000; text-align:center'></td>
                 <td style='border:solid 1px #000; text-align:center'>$cbo</td>
                 <td style='border:solid 1px #000; text-align:center'>$carga_horaria_mes</td>
+                <td style='border:solid 1px #000; text-align:center'></td>
                 <td style='border:solid 1px #000; text-align:center'>$vinculo</td>
             </tr>
         </tbody>
