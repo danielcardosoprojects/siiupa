@@ -24,6 +24,8 @@ if ($stmt = $conn->prepare($query)) {
                     <th>NOME</th>
                     <th>CPF</th>
                     <th>REGISTRO NO CONSELHO</th>
+                    <th>...</th>
+                    <th>...</th>
                     <th>CBO</th>
                     <th>CH SEMANAL</th>
                     <th>VÍNCULO</th>
@@ -35,6 +37,8 @@ if ($stmt = $conn->prepare($query)) {
                 <td style='border:solid 1px #000; text-align:center'>$nome</td>
                 <td style='border:solid 1px #000; text-align:center'>$cpf</td>
                 <td style='border:solid 1px #000; text-align:center'>$conselho_tipo $conselho_n</td>
+                <td style='border:solid 1px #000; text-align:center'></td>
+                <td style='border:solid 1px #000; text-align:center'></td>
                 <td style='border:solid 1px #000; text-align:center'>$cbo</td>
                 <td style='border:solid 1px #000; text-align:center'>$carga_horaria_mes</td>
                 <td style='border:solid 1px #000; text-align:center'>$vinculo</td>
