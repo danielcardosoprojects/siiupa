@@ -18,7 +18,7 @@ if ($stmt = $conn->prepare($query)) {
         $carga_horaria_semana = $carga_horaria_mes/4;
 
    echo "
-        <table style='border:1'>
+        <table style='border:solid 1px #000'>
             <thead>
                 <tr>
                     <th>NOME</th>
