@@ -32,7 +32,7 @@ if ($stmt = $conn->prepare($query)) {
     
         <tbody>
             <tr>
-                <td></td>
+                <td>$nome</td>
                 <td></td>
                 <td></td>
                 <td></td>
