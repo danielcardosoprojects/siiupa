@@ -44,10 +44,9 @@ if ($stmt = $conn->prepare($query)) {
                 <td style='border:solid 1px #000; text-align:center'>$vinculo</td>
             </tr>
         </tbody>
-    </table>";
+    </table>
 
-    echo `<button onclick="copiarParaExcel('$nome','$cpf','$conselho_tipo $conselho_n','$cbo','$carga_horaria_mes','$vinculo')">Copiar para Excel</button>`;
-echo "
+    <button onclick=\"copiarParaExcel('$nome','$cpf','$conselho_tipo $conselho_n','$cbo','$carga_horaria_mes','$vinculo')\">Copiar para Excel</button>
     <br />
     <br />
     <br />
