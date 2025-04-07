@@ -24,18 +24,19 @@ if ($stmt = $conn->prepare($query)) {
                     <th>NOME</th>
                     <th>CPF</th>
                     <th>REGISTRO NO CONSELHO</th>
-                    <th>CBO</th><th>CH SEMANAL</th>
+                    <th>CBO</th>
+                    <th>CH SEMANAL</th>
                     <th>VÍNCULO</th></tr></thead>
     
         <tbody>
             <tr>
-                <td><?=$nome;?></td>
-                <td><?=$cpf;?></td>
-                <td><?=$conselho_tipo;?> <?=$conselho_n;?></td>
-                <td><?=$cbo;?></td>
-                <td><?=$carga_horaria_mes;?></td>
-                <td></td><td><?=$vinculo;?></td>
-            </tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><</td>
+                <td></td>
+                           </tr>
         </tbody>
     </table>
         <?php
