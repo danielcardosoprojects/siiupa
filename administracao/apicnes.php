@@ -18,9 +18,25 @@ if ($stmt = $conn->prepare($query)) {
         $carga_horaria_semana = $carga_horaria_mes/4;
 
         ?>
-        <table><thead><tr><th>NOME</th><th>CPF</th><th>REGISTRO NO CONSELHO</th><th>CBO</th><th>CH SEMANAL</th><th>VÍNCULO</th></tr></thead>
+        <table>
+            <thead>
+                <tr>
+                    <th>NOME</th>
+                    <th>CPF</th>
+                    <th>REGISTRO NO CONSELHO</th>
+                    <th>CBO</th><th>CH SEMANAL</th>
+                    <th>VÍNCULO</th></tr></thead>
     
-        <tbody><tr><?=$nome;?><td><?=$cpf;?></td><td><?=$conselho_tipo;?> <?=$conselho_n;?></td><td><?=$cbo;?></td><td><?=$carga_horaria_mes;?></td><td></td><td><?=$vinculo;?></td></tr></tbody>
+        <tbody>
+            <tr>
+                <td><?=$nome;?></td>
+                <td><?=$cpf;?></td>
+                <td><?=$conselho_tipo;?> <?=$conselho_n;?></td>
+                <td><?=$cbo;?></td>
+                <td><?=$carga_horaria_mes;?></td>
+                <td></td><td><?=$vinculo;?></td>
+            </tr>
+        </tbody>
     </table>
         <?php
         echo "<strong>UPA CASTANHAL - CNES 7474423 - SOLICITAÇÃO DE CADASTRO CNES - PROFISSIONAL ".strtoupper($nome)."</strong></br></br>
