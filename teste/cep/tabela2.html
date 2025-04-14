@@ -145,7 +145,7 @@
 
         let dataFormated = new Date(data);
 
-        let dataCelula = data.split("-", 3);
+        let dataCelula = data.split("-", 2);
 
         let anoMes = `${dataCelula[0]}-${dataCelula[1]}`;
         console.log(anoMes);
@@ -153,7 +153,7 @@
       }
       // Chamar a função para renderizar a tabela
     </script>
-    <input type="date" id="dateInput" placeholder="Selecione uma data" />
+    <input type="month" id="dateInput" placeholder="Selecione uma data" />
     <button id="filtro" onclick="filtrar()">Filtrar</button>
   </body>
 </html>
