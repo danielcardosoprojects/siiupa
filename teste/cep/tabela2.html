@@ -1,121 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Organização de Dados em Tabela</title>
     <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
 
-        table, th, td {
-            border: 1px solid #ddd;
-        }
+      table,
+      th,
+      td {
+        border: 1px solid #ddd;
+      }
 
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
+      th,
+      td {
+        padding: 10px;
+        text-align: left;
+      }
     </style>
-</head>
-<body>
-
-<script>
-    // Função para obter os dados da API
-    async function fetchData(url) {
+  </head>
+  <body>
+    <script>
+      // Função para obter os dados da API
+      async function fetchData(url) {
         const response = await fetch(url);
         const data = await response.json();
         return data.records;
-    }
+      }
 
-    // Função para organizar os dados em uma tabela
-    async function renderTable() {
-        const bairrosData = await fetchData('https://siupa.com.br/siiupa/api/api.php/records/tb_bairros');
-        const cepData = await fetchData('https://siupa.com.br/siiupa/api/api.php/records/tb_cep');
+      // Função para organizar os dados em uma tabela
+      async function renderTable(anoMes) {
+        const bairrosData = await fetchData(
+          "https://siupa.com.br/siiupa/api/api.php/records/tb_bairros"
+        );
+        const cepData = await fetchData(
+          `https://siupa.com.br/siiupa/api/api.php/records/tb_cep?filter=data,cs,${anoMes}`
+        );
 
         // Mapear os IDs dos bairros para seus nomes
-        const bairrosMap = new Map(bairrosData.map(bairro => [bairro.id, bairro.bairro]));
+        const bairrosMap = new Map(
+          bairrosData.map((bairro) => [bairro.id, bairro.bairro])
+        );
 
         // Criar a tabela
-        const table = document.createElement('table');
+        const table = document.createElement("table");
 
         // Cabeçalho da tabela
-        const thead = document.createElement('thead');
-        const headerRow = document.createElement('tr');
-        const headers = ['Data', , 'ANO', 'MES', 'quadrimestre', 'Bairro', 'ID do Bairro'];
-        headers.forEach(headerText => {
-            const th = document.createElement('th');
-            th.appendChild(document.createTextNode(headerText));
-            headerRow.appendChild(th);
+        const thead = document.createElement("thead");
+        const headerRow = document.createElement("tr");
+        const headers = [
+          "Data",
+          ,
+          "ANO",
+          "MES",
+          "quadrimestre",
+          "Bairro",
+          "ID do Bairro",
+        ];
+        headers.forEach((headerText) => {
+          const th = document.createElement("th");
+          th.appendChild(document.createTextNode(headerText));
+          headerRow.appendChild(th);
         });
         thead.appendChild(headerRow);
         table.appendChild(thead);
 
         // Corpo da tabela
-        const tbody = document.createElement('tbody');
-        cepData.forEach(cep => {
-            const bairros = JSON.parse(cep.bairros);
+        const tbody = document.createElement("tbody");
+        cepData.forEach((cep) => {
+          const bairros = JSON.parse(cep.bairros);
 
-            Object.keys(bairros).forEach(bairroId => {
-                const row = document.createElement('tr');
+          Object.keys(bairros).forEach((bairroId) => {
+            const row = document.createElement("tr");
 
-                // Adicionar data
-                const dateCell = document.createElement('td');
-                dateCell.appendChild(document.createTextNode(cep.data));
-                row.appendChild(dateCell);
+            // Adicionar data
+            const dateCell = document.createElement("td");
+            dateCell.appendChild(document.createTextNode(cep.data));
+            row.appendChild(dateCell);
 
-                let dataDados = new Date(cep.data);
-                    
-                    
-                    dataCelula = cep.data.split('-',3);
-                    console.log(dataCelula);
+            let dataDados = new Date(cep.data);
 
-                    const anoCell = document.createElement('td');
-                    anoCell.appendChild(document.createTextNode(dataCelula[0]));
-                    row.appendChild(anoCell);
+            dataCelula = cep.data.split("-", 3);
+            console.log(dataCelula);
 
-                    const mesCell = document.createElement('td');
+            const anoCell = document.createElement("td");
+            anoCell.appendChild(document.createTextNode(dataCelula[0]));
+            row.appendChild(anoCell);
 
-                    let meses = [
-                        "jan", "fev", "mar", "abr", "mai", "jun", "jul", "ago", "set", "out", "nov", "dez"
-                    ];
-                    let mesNum = parseFloat(dataCelula[1]-1);
-                    let mesAbrev = meses[mesNum];
-                    mesCell.appendChild(document.createTextNode(mesAbrev));
-                    row.appendChild(mesCell);
+            const mesCell = document.createElement("td");
 
-                    const quadrimestreCell = document.createElement('td');
+            let meses = [
+              "jan",
+              "fev",
+              "mar",
+              "abr",
+              "mai",
+              "jun",
+              "jul",
+              "ago",
+              "set",
+              "out",
+              "nov",
+              "dez",
+            ];
+            let mesNum = parseFloat(dataCelula[1] - 1);
+            let mesAbrev = meses[mesNum];
+            mesCell.appendChild(document.createTextNode(mesAbrev));
+            row.appendChild(mesCell);
 
-                    let quadrimestre = (mesNum < 4) ? 1 : ((mesNum < 8)? 2 : 3);
-                    quadrimestreCell.appendChild(document.createTextNode(quadrimestre));
-                    row.appendChild(quadrimestreCell);
+            const quadrimestreCell = document.createElement("td");
 
-                // Adicionar nome do bairro
-                const bairroNomeCell = document.createElement('td');
-                const bairroNome = bairrosMap.get(parseInt(bairroId));
-                bairroNomeCell.appendChild(document.createTextNode(bairroNome));
-                row.appendChild(bairroNomeCell);
+            let quadrimestre = mesNum < 4 ? 1 : mesNum < 8 ? 2 : 3;
+            quadrimestreCell.appendChild(document.createTextNode(quadrimestre));
+            row.appendChild(quadrimestreCell);
 
-                // Adicionar ID do bairro
-                const bairroIdCell = document.createElement('td');
-                bairroIdCell.appendChild(document.createTextNode(bairros[bairroId]));
-                row.appendChild(bairroIdCell);
+            // Adicionar nome do bairro
+            const bairroNomeCell = document.createElement("td");
+            const bairroNome = bairrosMap.get(parseInt(bairroId));
+            bairroNomeCell.appendChild(document.createTextNode(bairroNome));
+            row.appendChild(bairroNomeCell);
 
-                tbody.appendChild(row);
-            });
+            // Adicionar ID do bairro
+            const bairroIdCell = document.createElement("td");
+            bairroIdCell.appendChild(
+              document.createTextNode(bairros[bairroId])
+            );
+            row.appendChild(bairroIdCell);
+
+            tbody.appendChild(row);
+          });
         });
         table.appendChild(tbody);
 
         // Adicionar a tabela ao corpo do documento
         document.body.appendChild(table);
-    }
+      }
+      function filtrar() {
+        let data = document.getElementById("dateInput").value;
 
-    // Chamar a função para renderizar a tabela
-    renderTable();
-</script>
+        let dataFormated = new Date(data);
 
-</body>
+        let dataCelula = data.split("-", 3);
+
+        let anoMes = `${dataCelula[0]}-${dataCelula[1]}`;
+        console.log(anoMes);
+        renderTable(anoMes);
+      }
+      // Chamar a função para renderizar a tabela
+    </script>
+    <input type="date" id="dateInput" placeholder="Selecione uma data" />
+    <button id="filtro" onclick="filtrar()">Filtrar</button>
+  </body>
 </html>
