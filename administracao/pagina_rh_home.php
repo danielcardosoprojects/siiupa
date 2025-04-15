@@ -649,28 +649,23 @@ include_once('../bd/nivel.php');
 </button>
 <!-- Dialog Contracheque CC -->
 <div class="modal fade" id="modalCC" tabindex="-1" aria-labelledby="modalCCLabel" aria-hidden="false">
-    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+    <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Contracheque</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
             </div>
             <div class="modal-body">
-
-                <iframe style="width: 100%; height: 200%; border: none;" src="https://ferias-siupa.vercel.app/funcionario/14?token=<?= $token; ?>"></iframe>
-
-                <div class="modal-footer mt-4">
-                    <button type="button" class="btn" data-bs-dismiss="modal">Fechar</button>
-
-
-                    <span class="sr-only"></span>
-                </div>
+                <iframe style="width: 100%; height: 100vh; border: none;" src="https://ferias-siupa.vercel.app/funcionario/14?token=<?= $token; ?>"></iframe>
             </div>
-
+            <div class="modal-footer mt-4">
+                <button type="button" class="btn" data-bs-dismiss="modal">Fechar</button>
+                <span class="sr-only"></span>
+            </div>
         </div>
     </div>
 </div>
-</div>
+
 <!-- fim Dialog Contracheque CC -->
 <div id="dialogFotoPerfil"></div>
 <?php
