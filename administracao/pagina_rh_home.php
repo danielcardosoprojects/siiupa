@@ -645,7 +645,7 @@ include_once('../bd/nivel.php');
 </div>
 </div>
 <!-- Dialog Contracheque CC -->
-<div class="modal fade" id="modalCC" tabindex="-1" aria-labelledby="modalCCLabel" aria-hidden="true">
+<div class="modal fade" id="modalCC" tabindex="-1" aria-labelledby="modalCCLabel" aria-hidden="false">
     <div class="modal-dialog modal-xl modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
