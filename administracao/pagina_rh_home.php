@@ -657,7 +657,7 @@ include_once('../bd/nivel.php');
             </div>
             <div class="modal-body">
 
-                <iframe style="width: 100%; height: 100%; border: none;" src="https://ferias-siupa.vercel.app/funcionario/14?token=<?= $token; ?>"></iframe>
+                <iframe style="width: 100%; height: 200%; border: none;" src="https://ferias-siupa.vercel.app/funcionario/14?token=<?= $token; ?>"></iframe>
 
                 <div class="modal-footer mt-4">
                     <button type="button" class="btn" data-bs-dismiss="modal">Fechar</button>
