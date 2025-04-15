@@ -339,7 +339,7 @@ include_once('../bd/nivel.php');
             if (mysqli_num_rows($resultbusca) > 0) {
                 while ($rownomes = mysqli_fetch_assoc($resultbusca)) {
                     $dados = (object) $rownomes;
-                    
+
                     $conta_serv = 0;
                     //from u940659928_siupa.tb_ferias
                     $queryf = "SELECT ferias.id, func.nome, c.titulo, s.setor, DATE_FORMAT(ferias.datainicio, '%d\/%m\/%Y'), DATE_FORMAT(ferias.datafim, '%d\/%m\/%Y'), ferias.ref_mes, ferias.ref_ano, func.vinculo, ferias.observacao FROM u940659928_siupa.tb_ferias AS ferias INNER JOIN u940659928_siupa.tb_funcionario AS func ON (ferias.fk_funcionario = func.id) INNER JOIN u940659928_siupa.tb_cargo AS c ON (func.fk_cargo = c.id) INNER JOIN u940659928_siupa.tb_setor AS s ON (func.fk_setor = s.id) WHERE func.status='ATIVO' AND ref_ano = 2025 AND ferias.fk_funcionario = '$dados->idfuncionario'";
@@ -395,7 +395,7 @@ include_once('../bd/nivel.php');
                         servidores_freq[conta_serv]['setor'] = '<?= $dados->setor ?>';
                         //conta_serv++;
                     </script>
-            <?php
+                    <?php
                     $conta_serv += 1;
 
                     echo "<tr>";
@@ -409,19 +409,19 @@ include_once('../bd/nivel.php');
 
                     //NOME
                     $token = $_SESSION['token'];
-                    echo "<td><a target='_blank' class='abreperfil'  rel='noreferrer noopener' href='?setor=adm&sub=rh&subsub=perfil&id=$dados->idfuncionario&token=$token'>$dados->nome</a><i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->nome'></span></i><a href='/siiupa/administracao/apicnes.php?id=$dados->idfuncionario' target='_blank'>CNES</a></td>";
+                    echo "<td>    <button type='button' class='btn btn-outline-secondary' data-bs-toggle='modal data-bs-target='#modalCC'><a target='_blank' class='abreperfil'  rel='noreferrer noopener' href='?setor=adm&sub=rh&subsub=perfil&id=$dados->idfuncionario&token=$token'>$dados->nome</a><i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->nome'></span></i><a href='/siiupa/administracao/apicnes.php?id=$dados->idfuncionario' target='_blank'>CNES</a></td>";
 
                     //<a class='eleicaobtn-link' target='_blank' href='https://siupa.com.br/siiupa/administracao/pagina_rh_eleicao2022.php?nome=$dados->nome&cargo=$dados->cargo&cpf=$dados->cpf'>Eleição</a> 
                     //                    echo "<td>$dados->data_nascbr</td>";
-                    
+
                     echo "<td id='cpf_$dados->idfuncionario'></td>";
                     ?>
                     <script>
-                        document.getElementById('cpf_<?=$dados->idfuncionario?>').innerHTML = '<?=$dados->cpf?>'.replace(/\D/g, '').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+                        document.getElementById('cpf_<?= $dados->idfuncionario ?>').innerHTML = '<?= $dados->cpf ?>'.replace(/\D/g, '').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2');
                     </script>
-                    <?php
-                        $dados_sexo = "";
-                    if($dados->sexo == "F") {
+            <?php
+                    $dados_sexo = "";
+                    if ($dados->sexo == "F") {
                         $dados_sexo = "FEMININO";
                     } else {
                         $dados_sexo = "MASCULINO";
@@ -644,7 +644,31 @@ include_once('../bd/nivel.php');
 </script>
 </div>
 </div>
+<!-- Dialog Contracheque CC -->
+<div class="modal fade" id="modalCC" tabindex="-1" aria-labelledby="modalCCLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Contracheque</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body">
 
+                <iframe style="width: 100%; height: 100%; border: none;" src="/siiupa/teste/cc/?m=<?= $perfil->matricula; ?>&cpf=<?= $perfil->cpf; ?>&<?= $token; ?>"></iframe>
+
+                <div class="modal-footer mt-4">
+                    <button type="button" class="btn" data-bs-dismiss="modal">Fechar</button>
+
+
+                    <span class="sr-only"></span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</div>
+<!-- fim Dialog Contracheque CC -->
 <div id="dialogFotoPerfil"></div>
 <?php
 $idunico = uniqid();
@@ -715,9 +739,6 @@ $idunico = uniqid();
             input.classList.remove("cpf-invalido"); // Remove a classe de erro
         }
     }
-
-
-
 </script>
 <?php
 function mes($entrada)
