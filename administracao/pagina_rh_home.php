@@ -644,6 +644,9 @@ include_once('../bd/nivel.php');
 </script>
 </div>
 </div>
+<button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalCC">
+    Contracheque
+</button>
 <!-- Dialog Contracheque CC -->
 <div class="modal fade" id="modalCC" tabindex="-1" aria-labelledby="modalCCLabel" aria-hidden="false">
     <div class="modal-dialog modal-xl modal-dialog-scrollable">
