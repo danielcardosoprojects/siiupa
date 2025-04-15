@@ -305,7 +305,7 @@ include_once('../bd/nivel.php');
                 <!--  <th scope="col">ID</th>-->
                 <th scope="col">#</th>
                 <!-- <th scope="col">MATRICULA</th> -->
-
+                <th scope="col">Férias</th>
                 <th scope="col">NOME<img src="/siiupa/imagens/tablesorter.svg"></th>
                 <th scope="col">CPF</th>
                 <th scope="col">SEXO</th>
@@ -409,7 +409,8 @@ include_once('../bd/nivel.php');
 
                     //NOME
                     $token = $_SESSION['token'];
-                    echo "<td>    <button class='btn btn-success' onclick='abrirModalFerias($dados->idfuncionario)'>Férias</button><a target='_blank' class='abreperfil'  rel='noreferrer noopener' href='?setor=adm&sub=rh&subsub=perfil&id=$dados->idfuncionario&token=$token'>$dados->nome</a><i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->nome'></span></i></td>";
+                    echo "<td><button class='btn btn-success' onclick='abrirModalFerias($dados->idfuncionario)'>Férias</button></td>";
+                    echo "<td>    <a target='_blank' class='abreperfil'  rel='noreferrer noopener' href='?setor=adm&sub=rh&subsub=perfil&id=$dados->idfuncionario&token=$token'>$dados->nome</a><i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->nome'></span></i></td>";
                     //<a href='/siiupa/administracao/apicnes.php?id=$dados->idfuncionario' target='_blank'>CNES</a>
                     //<a class='eleicaobtn-link' target='_blank' href='https://siupa.com.br/siiupa/administracao/pagina_rh_eleicao2022.php?nome=$dados->nome&cargo=$dados->cargo&cpf=$dados->cpf'>Eleição</a> 
                     //                    echo "<td>$dados->data_nascbr</td>";
