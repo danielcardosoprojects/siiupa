@@ -304,7 +304,8 @@ include_once('../bd/nivel.php');
                 <!-- <th scope="col">=)</th> -->
                 <!--  <th scope="col">ID</th>-->
                 <th scope="col">#</th>
-                <!-- <th scope="col">MATRICULA</th> -->
+                <th scope="col">MATRICULA</th>
+                 
                 <th scope="col">Férias</th>
                 <th scope="col">NOME<img src="/siiupa/imagens/tablesorter.svg"></th>
                 <th scope="col">CPF</th>
@@ -405,7 +406,7 @@ include_once('../bd/nivel.php');
                     //CONTA LINHA
                     //echo "<td>$contalinha</td>";
                     echo "<td></td>";
-                    // echo "<td id='matriculaFunc_$dados->idfuncionario'><span class='matriculaFunc' data-id='$dados->idfuncionario'>$dados->matricula</span><i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->matricula'></span></i></td>";
+                    echo "<td id='matriculaFunc_$dados->idfuncionario'><span class='matriculaFunc' data-id='$dados->idfuncionario'>$dados->matricula</span><i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->matricula'></span></i></td>";
 
                     //NOME
                     $token = $_SESSION['token'];
