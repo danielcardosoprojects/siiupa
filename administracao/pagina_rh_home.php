@@ -446,7 +446,7 @@ include_once('../bd/nivel.php');
                     } else {
                         $dataAdmissao = "";
                     }
-                    echo "<td>$dados->vinculo <i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->vinculo'></span></i> <!-- $dataAdmissao --></td>";
+                    echo "<td>$dados->vinculo <i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->vinculo'></span></i> </td>";
                     echo "<td>$dados->carga_horaria</td>";
                     echo "<td>";
                     $ferias23 = new BD;
