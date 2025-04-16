@@ -80,6 +80,11 @@ include('../conexao/verifica_login.php');
 	<!-- DATA TABLES -->
 	<script type="text/javascript" src="/siiupa/js/dataTables/datatables.min.js"></script>
 
+
+	<!-- Gera tabela em excel xlsx -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+
 	<link href="/siiupa/js/dataTables/datatables.min.css" rel="stylesheet">
 
 	<!-- Notificações  -->
