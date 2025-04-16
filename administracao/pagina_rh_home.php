@@ -238,7 +238,7 @@ include_once('../bd/nivel.php');
 
 
     //busca u940659928_siupa.tb_funcionario
-    $sqlbusca = "SELECT  DATE_FORMAT(f.data_nasc,'%d\/%m\/%Y') as data_nascbr, f.*, DATE_FORMAT(f.admissao,'%d\/%m\/%Y') as admissaoBR, f.id AS idfuncionario, c.descricao AS cargo, c.id, s.setor FROM u940659928_siupa.tb_funcionario AS f INNER JOIN u940659928_siupa.tb_cargo AS c ON f.fk_cargo = c.id INNER JOIN u940659928_siupa.tb_setor AS s ON f.fk_setor = s.id $where $fcsql $bsetorsql $orderby";
+    $sqlbusca = "SELECT  DATE_FORMAT(f.data_nasc,'%d\/%m\/%Y') as data_nascbr, f.*, DATE_FORMAT(f.admissao,'%d\/%m\/%Y') as admissaoBR, f.id AS idfuncionario, c.descricao AS cargo, c.id, c.carga_horaria s.setor FROM u940659928_siupa.tb_funcionario AS f INNER JOIN u940659928_siupa.tb_cargo AS c ON f.fk_cargo = c.id INNER JOIN u940659928_siupa.tb_setor AS s ON f.fk_setor = s.id $where $fcsql $bsetorsql $orderby";
 
 
 
@@ -315,7 +315,7 @@ include_once('../bd/nivel.php');
                 <th scope="col">SETOR<img src="imagens/tablesorter.svg"></th>
                 <th scope="col">VINCULO<img src="/siiupa/imagens/tablesorter.svg"></th>
                 <!-- <th scope="col">Férias 2022<img src="/siiupa/imagens/tablesorter.svg"></th> -->
-
+                <th scope="col">CH</th>
                 <th scope="col">Férias 2025</th>
 
                 <!-- <th scope="col">Data Inicio</th> -->
@@ -439,7 +439,7 @@ include_once('../bd/nivel.php');
                         $dataAdmissao = "";
                     }
                     echo "<td>$dados->vinculo <i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->vinculo'></span></i> <!-- $dataAdmissao --></td>";
-                    // echo "<td>$ref_mes</td>";
+                    echo "<td>$dados->carga_horaria</td>";
                     echo "<td>";
                     $ferias23 = new BD;
                     $sqlF23 = "SELECT * FROM u940659928_siupa.tb_ferias where fk_funcionario = '$dados->idfuncionario' and ref_ano = '2025';";
