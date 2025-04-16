@@ -647,7 +647,7 @@ include_once('../bd/nivel.php');
 </div>
 </div>
 
-<!-- Dialog Contracheque CC -->
+<!-- Dialog Ferias CC -->
 <div class="modal fade" id="modalFerias" tabindex="-1" aria-labelledby="modalFeriasLabel" aria-hidden="true">
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content">

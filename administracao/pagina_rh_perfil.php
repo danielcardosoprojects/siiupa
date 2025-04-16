@@ -9,6 +9,7 @@
     .copiar {
         cursor: pointer;
     }
+
     .none {
         display: none;
     }
@@ -335,38 +336,38 @@
         });
 
         //UPLOAD DE FOTO DO PERFIL
-        $('.submitArquivo').on('click', function () {
-  var files = $('.file').prop('files'); // isso agora é uma lista
-  var idf = $('.file').data('idf');
+        $('.submitArquivo').on('click', function() {
+            var files = $('.file').prop('files'); // isso agora é uma lista
+            var idf = $('.file').data('idf');
 
-  if (files.length > 0) {
-    var form_data = new FormData();
+            if (files.length > 0) {
+                var form_data = new FormData();
 
-    for (let i = 0; i < files.length; i++) {
-      form_data.append('file[]', files[i]); // adiciona todos
-    }
+                for (let i = 0; i < files.length; i++) {
+                    form_data.append('file[]', files[i]); // adiciona todos
+                }
 
-    $.ajax({
-      type: 'POST',
-      url: '/siiupa/administracao/perfil/uploadarquivo.php?acao=arquivos&id=' + idf,
-      contentType: false,
-      processData: false,
-      data: form_data,
-      success: function (response) {
-        if (response == 'success') {
-          alert('Arquivos enviados com sucesso.');
-          location.reload();
-        } else {
-          $('#testando').html(response);
-          alert('Erro no envio.');
-        }
-        $('.file').val('');
-      }
-    });
-  }
+                $.ajax({
+                    type: 'POST',
+                    url: '/siiupa/administracao/perfil/uploadarquivo.php?acao=arquivos&id=' + idf,
+                    contentType: false,
+                    processData: false,
+                    data: form_data,
+                    success: function(response) {
+                        if (response == 'success') {
+                            alert('Arquivos enviados com sucesso.');
+                            location.reload();
+                        } else {
+                            $('#testando').html(response);
+                            alert('Erro no envio.');
+                        }
+                        $('.file').val('');
+                    }
+                });
+            }
 
-  return false;
-});
+            return false;
+        });
 
 
 
@@ -509,11 +510,11 @@ class Grade
 
 <div class=''>
     <?php $token = $_GET['token']; ?>
-   
+
 
     <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalCC">
-  Contracheque
-</button>
+        Contracheque
+    </button>
 
 
     <?php $linkfrequencia = '/siiupa/gerapdf.php?&matricula=' . urlencode($perfil->matricula) . '&admissao=' . urlencode($perfil->admissao) . '&nome=' . urlencode($perfil->nome) . '&cargo=' . urlencode($perfil->cargo_desc) . '&vinculo=' . urlencode($perfil->vinculo);     ?>
@@ -550,372 +551,375 @@ class Grade
     </a>
 
     <!-- Botão que abre o modal -->
-<button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalEditarFuncionario">
-  Editar dados
-</button>
+    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalEditarFuncionario">
+        Editar dados
+    </button>
 
-<!-- Modal -->
-<div class="modal fade" id="modalEditarFuncionario" tabindex="-1" aria-labelledby="modalEditarFuncionarioLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Editar Funcionário</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-      </div>
-      <div class="modal-body">
-        <form id="formEditarFuncionario" class="row g-3">
-          <input type="hidden" id="funcionarioId">
+    <!-- Modal -->
+    <div class="modal fade" id="modalEditarFuncionario" tabindex="-1" aria-labelledby="modalEditarFuncionarioLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar Funcionário</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formEditarFuncionario" class="row g-3">
+                        <input type="hidden" id="funcionarioId">
 
-          <!-- Campos principais -->
-          <div class="">
-            <label for="nome" class="form-label">Nome</label>
-            <input type="text" class="form-control" id="nome">
-          </div>
+                        <!-- Campos principais -->
+                        <div class="">
+                            <label for="nome" class="form-label">Nome</label>
+                            <input type="text" class="form-control" id="nome">
+                        </div>
 
-          <div class="none">
-            <label for="funcao_upa" class="form-label">Função</label>
-            <input type="text" class="form-control" id="funcao_upa">
-          </div>
+                        <div class="none">
+                            <label for="funcao_upa" class="form-label">Função</label>
+                            <input type="text" class="form-control" id="funcao_upa">
+                        </div>
 
-          <div class="col-md-6">
-            <label for="cpf" class="form-label">CPF</label>
-            <input type="text" class="form-control" id="cpf">
-          </div>
+                        <div class="col-md-6">
+                            <label for="cpf" class="form-label">CPF</label>
+                            <input type="text" class="form-control" id="cpf">
+                        </div>
 
-          <div class="col-md-6">
-            <label for="cns" class="form-label">CNS</label>
-            <input type="text" class="form-control" id="cns">
-          </div>
+                        <div class="col-md-6">
+                            <label for="cns" class="form-label">CNS</label>
+                            <input type="text" class="form-control" id="cns">
+                        </div>
 
-          <div class="col-md-3" >
-            <label for="matricula" class="form-label">Matrícula</label>
-            <input type="text" class="form-control" id="matricula">
-            <button id="buscar_matriculas" onclick="obterMatriculas()" style="margin-top:2px">Obter Matriculas</button>
-            <div id="buscaMatricula_loagin" class="spinner-border text-primary" role="status"></div>
-            <div id="matriculasContainer"></div>
-          </div>
+                        <div class="col-md-3">
+                            <label for="matricula" class="form-label">Matrícula</label>
+                            <input type="text" class="form-control" id="matricula">
+                            <button id="buscar_matriculas" onclick="obterMatriculas()" style="margin-top:2px">Obter Matriculas</button>
+                            <div id="buscaMatricula_loagin" class="spinner-border text-primary" role="status"></div>
+                            <div id="matriculasContainer"></div>
+                        </div>
 
-          <div class="col-md-3">
-            <label for="admissao" class="form-label">Admissão</label>
-            <input type="text" class="form-control" id="admissao">
-          </div>
+                        <div class="col-md-3">
+                            <label for="admissao" class="form-label">Admissão</label>
+                            <input type="text" class="form-control" id="admissao">
+                        </div>
 
-          <div class="col-md-3">
-            <label for="desligamento" class="form-label">Desligamento</label>
-            <input type="text" class="form-control" id="desligamento">
-          </div>
+                        <div class="col-md-3">
+                            <label for="desligamento" class="form-label">Desligamento</label>
+                            <input type="text" class="form-control" id="desligamento">
+                        </div>
 
-          <div class="col-md-3">
-            <label for="data_nasc" class="form-label">Data Nasc.</label>
-            <input type="text" class="form-control" id="data_nasc">
-          </div>
+                        <div class="col-md-3">
+                            <label for="data_nasc" class="form-label">Data Nasc.</label>
+                            <input type="text" class="form-control" id="data_nasc">
+                        </div>
 
-          <div class="">
-            <label for="municipio_uf_nascimento" class="form-label">Município-UF Nasc.</label>
-            <input type="text" class="form-control" id="municipio_uf_nascimento">
-          </div>
+                        <div class="">
+                            <label for="municipio_uf_nascimento" class="form-label">Município-UF Nasc.</label>
+                            <input type="text" class="form-control" id="municipio_uf_nascimento">
+                        </div>
 
-          <div class="">
-            <label for="sexo" class="form-label">Sexo</label>
-            
-            <select id="sexo">
-                <option value="M">Masculino</option>
-                <option value="F">Feminino</option>
-            </select>
-          </div>
+                        <div class="">
+                            <label for="sexo" class="form-label">Sexo</label>
 
-          <div class="">
-            <label for="mae" class="form-label">Nome da Mãe</label>
-            <input type="text" class="form-control" id="mae">
-          </div>
+                            <select id="sexo">
+                                <option value="M">Masculino</option>
+                                <option value="F">Feminino</option>
+                            </select>
+                        </div>
 
-          <div class="">
-            <label for="pai" class="form-label">Nome do Pai</label>
-            <input type="text" class="form-control" id="pai">
-          </div>
+                        <div class="">
+                            <label for="mae" class="form-label">Nome da Mãe</label>
+                            <input type="text" class="form-control" id="mae">
+                        </div>
 
-          <div class="col-md-10">
-            <label for="end_rua" class="form-label">end_rua</label>
-            <input type="text" class="form-control" id="end_rua">
-          </div>
-          <div class="col-md-2">
-            <label for="end_numero" class="form-label">end_numero</label>
-            <input type="text" class="form-control" id="end_numero">
-          </div>
-          <div class="col-md-3">
-            <label for="end_compl" class="form-label">end_compl</label>
-            <input type="text" class="form-control" id="end_compl">
-          </div>
-          <div class="col-md-3">
-            <label for="end_bairro" class="form-label">end_bairro</label>
-            <input type="text" class="form-control" id="end_bairro">
-          </div>
-          <div class="col-md-3">
-            <label for="end_cidade" class="form-label">end_cidade</label>
-            <input type="text" class="form-control" id="end_cidade">
-          </div>
-          <div class="col-md-3">
-            <label for="end_uf" class="form-label">end_uf</label>
-            <input type="text" class="form-control" id="end_uf">
-          </div>
-          <div class="col-md-6">
-            <label for="conselho_tipo" class="form-label">conselho_tipo</label>
-            <input type="text" class="form-control" id="conselho_tipo">
-          </div>
-          <div class="col-md-6">
-            <label for="conselho_n" class="form-label">conselho_n</label>
-            <input type="text" class="form-control" id="conselho_n">
-          </div>
+                        <div class="">
+                            <label for="pai" class="form-label">Nome do Pai</label>
+                            <input type="text" class="form-control" id="pai">
+                        </div>
 
-          
+                        <div class="col-md-10">
+                            <label for="end_rua" class="form-label">end_rua</label>
+                            <input type="text" class="form-control" id="end_rua">
+                        </div>
+                        <div class="col-md-2">
+                            <label for="end_numero" class="form-label">end_numero</label>
+                            <input type="text" class="form-control" id="end_numero">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="end_compl" class="form-label">end_compl</label>
+                            <input type="text" class="form-control" id="end_compl">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="end_bairro" class="form-label">end_bairro</label>
+                            <input type="text" class="form-control" id="end_bairro">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="end_cidade" class="form-label">end_cidade</label>
+                            <input type="text" class="form-control" id="end_cidade">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="end_uf" class="form-label">end_uf</label>
+                            <input type="text" class="form-control" id="end_uf">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="conselho_tipo" class="form-label">conselho_tipo</label>
+                            <input type="text" class="form-control" id="conselho_tipo">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="conselho_n" class="form-label">conselho_n</label>
+                            <input type="text" class="form-control" id="conselho_n">
+                        </div>
 
-          <div class="col-md-4">
-            <label for="telefone" class="form-label">Telefone</label>
-            <input type="text" class="form-control" id="telefone">
-          </div>
 
-          <div class="col-md-4">
-            <label for="telefone2" class="form-label">Telefone 2</label>
-            <input type="text" class="form-control" id="telefone2">
-          </div>
 
-          <div class="col-md-4">
-            <label for="telefone3" class="form-label">Telefone 3</label>
-            <input type="text" class="form-control" id="telefone3">
-          </div>
+                        <div class="col-md-4">
+                            <label for="telefone" class="form-label">Telefone</label>
+                            <input type="text" class="form-control" id="telefone">
+                        </div>
 
-          <div class="">
-            <label for="email" class="form-label">E-mail</label>
-            <input type="email" class="form-control" id="email">
-          </div>
+                        <div class="col-md-4">
+                            <label for="telefone2" class="form-label">Telefone 2</label>
+                            <input type="text" class="form-control" id="telefone2">
+                        </div>
 
-      
+                        <div class="col-md-4">
+                            <label for="telefone3" class="form-label">Telefone 3</label>
+                            <input type="text" class="form-control" id="telefone3">
+                        </div>
 
-          <div class="col-md-12">
-            <label for="notepad" class="form-label">Anotações</label>
-            <textarea class="form-control" id="notepad" rows="3"></textarea>
-          </div>
+                        <div class="">
+                            <label for="email" class="form-label">E-mail</label>
+                            <input type="email" class="form-control" id="email">
+                        </div>
 
-          <div class="modal-footer mt-4">
-            <button type="button" data-bs-dismiss="modal">Cancelar</button>
-            <button type="submit" id="btnEditarFuncionario">Salvar</button>
-            <div id="editaFuncionario_loading" class="spinner-border text-primary" role="status">
-        <span class="sr-only"></span>
+
+
+                        <div class="col-md-12">
+                            <label for="notepad" class="form-label">Anotações</label>
+                            <textarea class="form-control" id="notepad" rows="3"></textarea>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer mt-4">
+                    <button type="button" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" id="btnEditarFuncionario">Salvar</button>
+                    <div id="editaFuncionario_loading" class="spinner-border text-primary" role="status">
+                        <span class="sr-only"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</div>
-<input type="hidden" value="" id="tokenLayoutInput">
+    <input type="hidden" value="" id="tokenLayoutInput">
 
-<script>
-    $("#buscaMatricula_loagin").hide();
-    async function obterMatriculas() {
-        $("#buscaMatricula_loagin").show();
-                const usuario = "danielcardoso";
-                const senha = "c*123c12";
+    <script>
+        $("#buscaMatricula_loagin").hide();
+        async function obterMatriculas() {
+            $("#buscaMatricula_loagin").show();
+            const usuario = "danielcardoso";
+            const senha = "c*123c12";
 
-                if (!usuario || !senha) {
-                    alert("Por favor, preencha o usuário e a senha.");
-                    return;
-                }
-
-                try {
-                    // showLoading();
-                    const response = await axios.post("https://apionline.layoutsistemas.com.br/api/token/", {
-                        username: usuario,
-                        password: senha
-                    });
-                    // stopLoading();
-
-                    const tokenLayout = response.data.access;
-                    document.getElementById("tokenLayoutInput").value = "Bearer " + tokenLayout;
-                    console.log(tokenLayout);
-                    consultarMatriculas(tokenLayout);
-                    
-                    
-                } catch (error) {
-                    console.error("Erro ao obter o token:", error);
-                    // stopLoading();
-                    // alert("Erro ao obter o token. Verifique o console para mais detalhes.");
-                } finally {
-                    $("#buscaMatricula_loagin").hide();
-                  
-                }
+            if (!usuario || !senha) {
+                alert("Por favor, preencha o usuário e a senha.");
+                return;
             }
-            
 
-            //Consulta matriculas pelo CPF
-            async function consultarMatriculas(tokenLayout) {
-                const cpf = "<?=$perfil->cpf;?>";
-                $("#buscaMatricula_loagin").show();
-                
-                const cpfApenasNumeros = cpf.replace(/\D/g, "");
-                console.log(cpfApenasNumeros);
-                if (!cpfApenasNumeros) {
-                    alert('Por favor, insira um CPF.');
-                    return;
-                }
-                const token_cpf = `Bearer ${tokenLayout}`;
-                const url = `https://apionline.layoutsistemas.com.br/api/matriculas/?cpf=${cpfApenasNumeros}&entidade=796`;
-                const headers = {
-                    Authorization: token_cpf
-                };
+            try {
+                // showLoading();
+                const response = await axios.post("https://apionline.layoutsistemas.com.br/api/token/", {
+                    username: usuario,
+                    password: senha
+                });
+                // stopLoading();
 
-                try {
-                    console.log("TOken para consultar matricula", token_cpf)
-                    const response = await axios.get(url, { headers });
-                    const matriculas = response.data.results;
+                const tokenLayout = response.data.access;
+                document.getElementById("tokenLayoutInput").value = "Bearer " + tokenLayout;
+                console.log(tokenLayout);
+                consultarMatriculas(tokenLayout);
 
-                    // Ordena as matrículas em ordem decrescente
-                    matriculas.sort((a, b) => b.matricula.localeCompare(a.matricula));
 
-                    // Exibe as matrículas como botões
-                    const container = document.getElementById('matriculasContainer');
-                    container.innerHTML = ''; // Limpa o conteúdo anterior
+            } catch (error) {
+                console.error("Erro ao obter o token:", error);
+                // stopLoading();
+                // alert("Erro ao obter o token. Verifique o console para mais detalhes.");
+            } finally {
+                $("#buscaMatricula_loagin").hide();
 
-                    matriculas.forEach(matricula => {
-                        const button = document.createElement('button');
-                        button.textContent = matricula.matricula;
-                        button.style.margin = '5px';
-                        button.className = 'btn btn-outline-secondary';
-                        button.onclick = () => {
-                            document.getElementById('matricula').value = matricula.matricula;
-                            container.innerHTML = '';
-                        };
-                        container.appendChild(button);
-                        $("#buscaMatricula_loagin").hide();
-                    });
-                } catch (error) {
-                    console.error('Erro ao consultar a API:', error);
-                    alert('Erro ao consultar as matrículas. Verifique se você clicou em obter token.');
-                } finally {
-                    $("#buscaMatricula_loagin").hide();
-                }
             }
-    
-    $('#editaFuncionario_loading').hide();
-  function getQueryParam(param) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(param);
-  }
-
-  const token = getQueryParam("token");
-  const funcionarioId = getQueryParam("id");
-
-  async function carregarFuncionario(id) {
-    try {
-      const response = await axios.get(`https://api-siupa.vercel.app/funcionarios/${id}`, {
-        headers: {
-          Authorization: `Bearer ${token}`
         }
-      });
 
-      const f = response.data;
-      document.getElementById("funcionarioId").value = f.id;
-      document.getElementById("nome").value = f.nome || "";
-      document.getElementById("funcao_upa").value = f.funcao_upa || "";
-      document.getElementById("cpf").value = f.cpf || "";
-      document.getElementById("cns").value = f.cns || "";
-      document.getElementById("matricula").value = f.matricula || "";
-      document.getElementById("admissao").value = f.admissao || "";
-      document.getElementById("desligamento").value = f.desligamento || "";
-      document.getElementById("data_nasc").value = f.data_nasc || "";
-      document.getElementById("municipio_uf_nascimento").value = f.municipio_uf_nascimento || "";
-      document.getElementById("sexo").value = f.sexo || "";
-      document.getElementById("mae").value = f.mae || "";
-      document.getElementById("pai").value = f.pai || "";
-      document.getElementById("end_rua").value = f.end_rua || "";
-      document.getElementById("end_numero").value = f.end_numero || "";
-      document.getElementById("end_compl").value = f.end_compl || "";
-      document.getElementById("end_bairro").value = f.end_bairro || "";
-      document.getElementById("end_cidade").value = f.end_cidade || "";
-      document.getElementById("end_uf").value = f.end_uf || "";
-      document.getElementById("conselho_tipo").value = f.conselho_tipo || "";
-      document.getElementById("conselho_n").value = f.conselho_n || "";
-      document.getElementById("pai").value = f.pai || "";
-      document.getElementById("telefone").value = f.telefone || "";
-      document.getElementById("telefone2").value = f.telefone2 || "";
-      document.getElementById("telefone3").value = f.telefone3 || "";
-      document.getElementById("email").value = f.email || "";
-      document.getElementById("ram").value = f.ram || "";
-      document.getElementById("notepad").value = f.notepad || "";
 
-    } catch (error) {
-      alert("Erro ao carregar dados do funcionário.");
-      console.error(error);
-    }
-  }
+        //Consulta matriculas pelo CPF
+        async function consultarMatriculas(tokenLayout) {
+            const cpf = "<?= $perfil->cpf; ?>";
+            $("#buscaMatricula_loagin").show();
 
-  document.getElementById("btnEditarFuncionario").addEventListener("click", async function (e) {
-    e.preventDefault();
-    $('#editaFuncionario_loading').show();
+            const cpfApenasNumeros = cpf.replace(/\D/g, "");
+            console.log(cpfApenasNumeros);
+            if (!cpfApenasNumeros) {
+                alert('Por favor, insira um CPF.');
+                return;
+            }
+            const token_cpf = `Bearer ${tokenLayout}`;
+            const url = `https://apionline.layoutsistemas.com.br/api/matriculas/?cpf=${cpfApenasNumeros}&entidade=796`;
+            const headers = {
+                Authorization: token_cpf
+            };
 
-    const id = document.getElementById("funcionarioId").value;
+            try {
+                console.log("TOken para consultar matricula", token_cpf)
+                const response = await axios.get(url, {
+                    headers
+                });
+                const matriculas = response.data.results;
 
-    const data = {
-      nome: document.getElementById("nome").value,
-      funcao_upa: document.getElementById("funcao_upa").value,
-      cpf: document.getElementById("cpf").value,
-      cns: document.getElementById("cns").value,
-      matricula: document.getElementById("matricula").value,
-      admissao: document.getElementById("admissao").value,
-      desligamento: document.getElementById("desligamento").value,
-      data_nasc: document.getElementById("data_nasc").value,
-      municipio_uf_nascimento: document.getElementById("municipio_uf_nascimento").value,
-      sexo: document.getElementById("sexo").value,
-      mae: document.getElementById("mae").value,
-      pai: document.getElementById("pai").value,
-      end_rua: document.getElementById("end_rua").value,
-      end_numero: document.getElementById("end_numero").value,
-      end_compl: document.getElementById("end_compl").value,
-      end_bairro: document.getElementById("end_bairro").value,
-      end_cidade: document.getElementById("end_cidade").value,
-      end_uf: document.getElementById("end_uf").value,
-      conselho_tipo: document.getElementById("conselho_tipo").value,
-      conselho_n: document.getElementById("conselho_n").value,
-      telefone: document.getElementById("telefone").value,
-      telefone2: document.getElementById("telefone2").value,
-      telefone3: document.getElementById("telefone3").value,
-      email: document.getElementById("email").value,
-      ram: document.getElementById("ram").value,
-      notepad: document.getElementById("notepad").value,
-    };
+                // Ordena as matrículas em ordem decrescente
+                matriculas.sort((a, b) => b.matricula.localeCompare(a.matricula));
 
-    try {
-      await axios.put(`https://api-siupa.vercel.app/funcionarios/${id}`, data, {
-        headers: {
-          Authorization: `Bearer ${token}`
+                // Exibe as matrículas como botões
+                const container = document.getElementById('matriculasContainer');
+                container.innerHTML = ''; // Limpa o conteúdo anterior
+
+                matriculas.forEach(matricula => {
+                    const button = document.createElement('button');
+                    button.textContent = matricula.matricula;
+                    button.style.margin = '5px';
+                    button.className = 'btn btn-outline-secondary';
+                    button.onclick = () => {
+                        document.getElementById('matricula').value = matricula.matricula;
+                        container.innerHTML = '';
+                    };
+                    container.appendChild(button);
+                    $("#buscaMatricula_loagin").hide();
+                });
+            } catch (error) {
+                console.error('Erro ao consultar a API:', error);
+                alert('Erro ao consultar as matrículas. Verifique se você clicou em obter token.');
+            } finally {
+                $("#buscaMatricula_loagin").hide();
+            }
         }
-      });
 
-    //   alert("Funcionário atualizado com sucesso!");
-      location.reload();
-      $.notify(
-                `Atualizado com sucesso`, {
-                    position: "top right",
-                    className: "success"
-                }
-            );
+        $('#editaFuncionario_loading').hide();
+
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        const token = getQueryParam("token");
+        const funcionarioId = getQueryParam("id");
+
+        async function carregarFuncionario(id) {
+            try {
+                const response = await axios.get(`https://api-siupa.vercel.app/funcionarios/${id}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+
+                const f = response.data;
+                document.getElementById("funcionarioId").value = f.id;
+                document.getElementById("nome").value = f.nome || "";
+                document.getElementById("funcao_upa").value = f.funcao_upa || "";
+                document.getElementById("cpf").value = f.cpf || "";
+                document.getElementById("cns").value = f.cns || "";
+                document.getElementById("matricula").value = f.matricula || "";
+                document.getElementById("admissao").value = f.admissao || "";
+                document.getElementById("desligamento").value = f.desligamento || "";
+                document.getElementById("data_nasc").value = f.data_nasc || "";
+                document.getElementById("municipio_uf_nascimento").value = f.municipio_uf_nascimento || "";
+                document.getElementById("sexo").value = f.sexo || "";
+                document.getElementById("mae").value = f.mae || "";
+                document.getElementById("pai").value = f.pai || "";
+                document.getElementById("end_rua").value = f.end_rua || "";
+                document.getElementById("end_numero").value = f.end_numero || "";
+                document.getElementById("end_compl").value = f.end_compl || "";
+                document.getElementById("end_bairro").value = f.end_bairro || "";
+                document.getElementById("end_cidade").value = f.end_cidade || "";
+                document.getElementById("end_uf").value = f.end_uf || "";
+                document.getElementById("conselho_tipo").value = f.conselho_tipo || "";
+                document.getElementById("conselho_n").value = f.conselho_n || "";
+                document.getElementById("pai").value = f.pai || "";
+                document.getElementById("telefone").value = f.telefone || "";
+                document.getElementById("telefone2").value = f.telefone2 || "";
+                document.getElementById("telefone3").value = f.telefone3 || "";
+                document.getElementById("email").value = f.email || "";
+                document.getElementById("ram").value = f.ram || "";
+                document.getElementById("notepad").value = f.notepad || "";
+
+            } catch (error) {
+                alert("Erro ao carregar dados do funcionário.");
+                console.error(error);
+            }
+        }
+
+        document.getElementById("btnEditarFuncionario").addEventListener("click", async function(e) {
+            e.preventDefault();
+            $('#editaFuncionario_loading').show();
+
+            const id = document.getElementById("funcionarioId").value;
+
+            const data = {
+                nome: document.getElementById("nome").value,
+                funcao_upa: document.getElementById("funcao_upa").value,
+                cpf: document.getElementById("cpf").value,
+                cns: document.getElementById("cns").value,
+                matricula: document.getElementById("matricula").value,
+                admissao: document.getElementById("admissao").value,
+                desligamento: document.getElementById("desligamento").value,
+                data_nasc: document.getElementById("data_nasc").value,
+                municipio_uf_nascimento: document.getElementById("municipio_uf_nascimento").value,
+                sexo: document.getElementById("sexo").value,
+                mae: document.getElementById("mae").value,
+                pai: document.getElementById("pai").value,
+                end_rua: document.getElementById("end_rua").value,
+                end_numero: document.getElementById("end_numero").value,
+                end_compl: document.getElementById("end_compl").value,
+                end_bairro: document.getElementById("end_bairro").value,
+                end_cidade: document.getElementById("end_cidade").value,
+                end_uf: document.getElementById("end_uf").value,
+                conselho_tipo: document.getElementById("conselho_tipo").value,
+                conselho_n: document.getElementById("conselho_n").value,
+                telefone: document.getElementById("telefone").value,
+                telefone2: document.getElementById("telefone2").value,
+                telefone3: document.getElementById("telefone3").value,
+                email: document.getElementById("email").value,
+                ram: document.getElementById("ram").value,
+                notepad: document.getElementById("notepad").value,
+            };
+
+            try {
+                await axios.put(`https://api-siupa.vercel.app/funcionarios/${id}`, data, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+
+                //   alert("Funcionário atualizado com sucesso!");
+                location.reload();
+                $.notify(
+                    `Atualizado com sucesso`, {
+                        position: "top right",
+                        className: "success"
+                    }
+                );
 
 
-      const modalEl = document.getElementById('modalEditarFuncionario');
-      const modal = bootstrap.Modal.getInstance(modalEl);
-      modal.hide();
+                const modalEl = document.getElementById('modalEditarFuncionario');
+                const modal = bootstrap.Modal.getInstance(modalEl);
+                modal.hide();
 
-    } catch (error) {
-      alert("Erro ao atualizar funcionário.");
-      console.error(error);
-    }
-  });
+            } catch (error) {
+                alert("Erro ao atualizar funcionário.");
+                console.error(error);
+            }
+        });
 
-  // Carregar automaticamente ao abrir a página
-  if (funcionarioId && token) {
-    carregarFuncionario(funcionarioId);
-  }
-</script>
+        // Carregar automaticamente ao abrir a página
+        if (funcionarioId && token) {
+            carregarFuncionario(funcionarioId);
+        }
+    </script>
 
 </div>
 
@@ -1005,7 +1009,7 @@ class Grade
 
     ?>
 
-  
+
     <table id='sistema' class='table table-hover'>
         <thead>
             <tr>
@@ -1512,182 +1516,181 @@ class Grade
     echo "<div class='copiar btn btn-sm btn-info' data-text='C:\wamp64\www\siiupa\administracao\\rh\\$perfil->id\'>C:\\wamp64\\www\\siiupa\\administracao\\rh\\$perfil->id</div>";
 
     ?>
-<form enctype="multipart/form-data">
-  <p>
-    <input 
-      type="file" 
-      name="file[]" 
-      class="file btn btn-primary btn-sm" 
-      data-idf="<?php echo $perfil->id; ?>" 
-      multiple 
-      required
-    >
-  </p>
-  <input type="submit" name="submitArquivo" class="submitArquivo btn btn-sm" value="Enviar">
-</form>
+    <form enctype="multipart/form-data">
+        <p>
+            <input
+                type="file"
+                name="file[]"
+                class="file btn btn-primary btn-sm"
+                data-idf="<?php echo $perfil->id; ?>"
+                multiple
+                required>
+        </p>
+        <input type="submit" name="submitArquivo" class="submitArquivo btn btn-sm" value="Enviar">
+    </form>
 
-<!-- Dialog Contracheque CC -->
-<div class="modal fade" id="modalCC" tabindex="-1" aria-labelledby="modalCCLabel" aria-hidden="true">
-  <div class="modal-dialog modal-xl modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Contracheque</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
-      </div>
-      <div class="modal-body">
-        <form id="formEditarFuncionario" class="row g-3">
-          <input type="hidden" id="funcionarioId">
+    <!-- Dialog Contracheque CC -->
+    <div class="modal fade" id="modalCC" tabindex="-1" aria-labelledby="modalCCLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Contracheque</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="formEditarFuncionario" class="row g-3">
+                        <input type="hidden" id="funcionarioId">
 
-          
-            <div class="iframe-container" style="width: 100%; height: 600px;">
-  <iframe style="width: 100%; height: 100%; border: none;" src="/siiupa/teste/cc/?m=<?=$perfil->matricula;?>&cpf=<?=$perfil->cpf;?>&<?=$token;?>"></iframe>
-</div>
-          <div class="modal-footer mt-4">
-            <button type="button" class="btn" data-bs-dismiss="modal">Fechar</button>
-           
-          
-        <span class="sr-only"></span>
+
+                        <div class="iframe-container" style="width: 100%; height: 600px;">
+                            <iframe style="width: 100%; height: 100%; border: none;" src="/siiupa/teste/cc/?m=<?= $perfil->matricula; ?>&cpf=<?= $perfil->cpf; ?>&<?= $token; ?>"></iframe>
+                        </div>
+                        <div class="modal-footer mt-4">
+                            <button type="button" class="btn" data-bs-dismiss="modal">Fechar</button>
+
+
+                            <span class="sr-only"></span>
+                        </div>
+                </div>
+                </form>
+            </div>
+        </div>
     </div>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
 </div>
 <!-- fim Dialog Contracheque CC -->
 
 
-    <div id="arquivostemporarios"></div>
-    <div id='testando'></div>
-    <!-- Inclua o Axios no seu HTML -->
+<div id="arquivostemporarios"></div>
+<div id='testando'></div>
+<!-- Inclua o Axios no seu HTML -->
 
-    <div id="dialogAcionamentos">Teste acionamentos</div>
-    <script>
-       
-    </script>
-    <script>
-        // Fazendo uma requisição GET
-        axios.get('https://siupa.com.br/siiupa/api/rh/api.php/records/tb_acionamento?join=tb_acionamentos&page=3,4')
-            .then(response => {
-                console.log('Dados da resposta:', response.data);
-            })
-            .catch(error => {
-                console.error('Erro na requisição:', error);
-            });
-    </script>
+<div id="dialogAcionamentos">Teste acionamentos</div>
+<script>
 
-    <?php
-    //$path = "../rh/" . $perfil->id . "/";
-    $path = "administracao/rh/$perfil->id/";
+</script>
+<script>
+    // Fazendo uma requisição GET
+    axios.get('https://siupa.com.br/siiupa/api/rh/api.php/records/tb_acionamento?join=tb_acionamentos&page=3,4')
+        .then(response => {
+            console.log('Dados da resposta:', response.data);
+        })
+        .catch(error => {
+            console.error('Erro na requisição:', error);
+        });
+</script>
+
+<?php
+//$path = "../rh/" . $perfil->id . "/";
+$path = "administracao/rh/$perfil->id/";
 
 
-    if (!file_exists($path)) {
-        mkdir($path, 0755);
+if (!file_exists($path)) {
+    mkdir($path, 0755);
+}
+
+$diretorio = dir($path);
+
+
+echo "Lista de Arquivos do diretório '<strong>" . $path . "</strong>':<br />";
+echo "<table><theady><th>Nome do arquivo</th><th>Apagar</th></thead><tbody>";
+while ($arquivo = $diretorio->read()) {
+    if ($arquivo == '.' || $arquivo == '..') {
+        continue;
     }
+    $linkLixeira = "<img src='/siiupa/imagens/icones/lixeira.svg' width='15px'>";
 
-    $diretorio = dir($path);
+    $arquivoURI = urlencode($arquivo);
 
-
-    echo "Lista de Arquivos do diretório '<strong>" . $path . "</strong>':<br />";
-    echo "<table><theady><th>Nome do arquivo</th><th>Apagar</th></thead><tbody>";
-    while ($arquivo = $diretorio->read()) {
-        if ($arquivo == '.' || $arquivo == '..') {
-            continue;
-        }
-        $linkLixeira = "<img src='/siiupa/imagens/icones/lixeira.svg' width='15px'>";
-
-        $arquivoURI = urlencode($arquivo);
-
-        echo "<tr><td><a target='_blank' href='" . $path . $arquivo . "'>" . $arquivo . "</a></td><td><a href='#' class='apagaArquivo' data-arquivo=" . $path . $arquivoURI . ">$linkLixeira</a></td></tr>";
-    }
-    echo "</tbody></table>";
-    $diretorio->close();
+    echo "<tr><td><a target='_blank' href='" . $path . $arquivo . "'>" . $arquivo . "</a></td><td><a href='#' class='apagaArquivo' data-arquivo=" . $path . $arquivoURI . ">$linkLixeira</a></td></tr>";
+}
+echo "</tbody></table>";
+$diretorio->close();
 
 
 
 
-    /* HISTORICO */
-    $sqlhist = "SELECT  * FROM u940659928_siupa.tb_historico WHERE fk_funcionario = $perfil->id ORDER BY data_registro DESC";
-    $resulthist = mysqli_query($conn, $sqlhist);
+/* HISTORICO */
+$sqlhist = "SELECT  * FROM u940659928_siupa.tb_historico WHERE fk_funcionario = $perfil->id ORDER BY data_registro DESC";
+$resulthist = mysqli_query($conn, $sqlhist);
 
-    echo "<div class='alert alert-success' role='alert'>";
-    negrita("Histórico: ");
-    echo mysqli_num_rows($resulthist) . " registro(s).";
-    echo "</div>";
-
-
-    if (mysqli_num_rows($resulthist) > 0) {
-        while ($hist = mysqli_fetch_object($resulthist)) {
-            $DataRegpuro = new DateTime($hist->data_registro);
-
-            $DataReg = $DataRegpuro->format('d/m/Y H:i:s');
-
-    ?>
+echo "<div class='alert alert-success' role='alert'>";
+negrita("Histórico: ");
+echo mysqli_num_rows($resulthist) . " registro(s).";
+echo "</div>";
 
 
-            <div class="accordion accordion-flush" id="accordionFlushHist" style="border-color:midnightblue;">
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="flush-heading<?php echo $hist->id; ?>">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<?php echo $hist->id; ?>" aria-expanded="false" aria-controls="flush-collapse<?php echo $hist->id; ?>">
-                            <?php
-                            negrita($DataReg);
-                            echo " - ";
-                            echo $hist->titulo;
+if (mysqli_num_rows($resulthist) > 0) {
+    while ($hist = mysqli_fetch_object($resulthist)) {
+        $DataRegpuro = new DateTime($hist->data_registro);
 
-                            if ($hist->data_inicio != "") {
-                                $historicoprazo = "<br>De: " . $hist->data_inicio . " a " . $hist->data_fim;
-                            } else {
-                                $historicoprazo = "";
-                            }
+        $DataReg = $DataRegpuro->format('d/m/Y H:i:s');
 
-                            ?>
-                        </button>
-                    </h2>
-                    <div id="flush-collapse<?php echo $hist->id; ?>" class="accordion-collapse collapse" aria-labelledby="flush-heading<?php echo $hist->id; ?>" data-bs-parent="#accordionFlushHist">
-                        <div class="accordion-body"> <?php echo $hist->descricao . $historicoprazo; ?></div>
-                    </div>
+?>
+
+
+        <div class="accordion accordion-flush" id="accordionFlushHist" style="border-color:midnightblue;">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-heading<?php echo $hist->id; ?>">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapse<?php echo $hist->id; ?>" aria-expanded="false" aria-controls="flush-collapse<?php echo $hist->id; ?>">
+                        <?php
+                        negrita($DataReg);
+                        echo " - ";
+                        echo $hist->titulo;
+
+                        if ($hist->data_inicio != "") {
+                            $historicoprazo = "<br>De: " . $hist->data_inicio . " a " . $hist->data_fim;
+                        } else {
+                            $historicoprazo = "";
+                        }
+
+                        ?>
+                    </button>
+                </h2>
+                <div id="flush-collapse<?php echo $hist->id; ?>" class="accordion-collapse collapse" aria-labelledby="flush-heading<?php echo $hist->id; ?>" data-bs-parent="#accordionFlushHist">
+                    <div class="accordion-body"> <?php echo $hist->descricao . $historicoprazo; ?></div>
                 </div>
             </div>
+        </div>
 
-            <div id="dialogPerfil"></div>
-            
+        <div id="dialogPerfil"></div>
 
-    <?php
-        }
-    } else {
-        echo "0 results";
+
+<?php
     }
+} else {
+    echo "0 results";
+}
 
 
-    mysqli_close($conn);
-    function mes($entrada)
-    {
-        switch ($entrada) {
-            case 1:
-                return "Janeiro";
-            case 2:
-                return "Fevereiro";
-            case 3:
-                return "Março";
-            case 4:
-                return "Abril";
-            case 5:
-                return "Maio";
-            case 6:
-                return "Junho";
-            case 7:
-                return "Julho";
-            case 8:
-                return "Agosto";
-            case 9:
-                return "Setembro";
-            case 10:
-                return "Outubro";
-            case 11:
-                return "Novembro";
-            case 12:
-                return "Dezembro";
-        }
-        return $entrada;
+mysqli_close($conn);
+function mes($entrada)
+{
+    switch ($entrada) {
+        case 1:
+            return "Janeiro";
+        case 2:
+            return "Fevereiro";
+        case 3:
+            return "Março";
+        case 4:
+            return "Abril";
+        case 5:
+            return "Maio";
+        case 6:
+            return "Junho";
+        case 7:
+            return "Julho";
+        case 8:
+            return "Agosto";
+        case 9:
+            return "Setembro";
+        case 10:
+            return "Outubro";
+        case 11:
+            return "Novembro";
+        case 12:
+            return "Dezembro";
     }
-    ?>
+    return $entrada;
+}
+?>
