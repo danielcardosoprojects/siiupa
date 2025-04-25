@@ -84,7 +84,7 @@ include_once('../bd/nivel.php');
             <!-- <a href="administracao/gera_tabela_excel.php" target="_blank" id="exportar_excel_funcionarios" class="btn btn-outline-success">
                 Gerar Excel
             </a> -->
-            <button onclick="exportarTabela()" class="btn btn-outline-success">Exportar para Excel</button>
+            <button onclick="exportarTabela()" class="btn btn-outline-success btnExcel">Exportar para Excel</button>
             <script>
     function exportarTabela() {
       const tabela = document.getElementById("tabela_funcionarios");
