@@ -97,10 +97,10 @@ include_once('../bd/nivel.php');
                     XLSX.writeFile(workbook, "Lista Servidores SIUPA.xlsx");
                 }
             </script>
-            <a href="#" id="gerarFrequencias" class="btn btn-outline-success">
+            <!-- <a href="#" id="gerarFrequencias" class="btn btn-outline-success">
                 <img src="/siiupa/imagens/icones/frequencia.svg" width="20px">
                 Gerar Frequencias
-            </a>
+            </a> -->
             <a href="/siiupa/?setor=adm&sub=rh&subsub=servidores_inativos" id="servidoresInativos" class="btn btn-outline-success">
                 Servidores Inativos
             </a>
