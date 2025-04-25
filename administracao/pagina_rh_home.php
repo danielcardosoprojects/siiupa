@@ -85,16 +85,18 @@ include_once('../bd/nivel.php');
                 Gerar Excel
             </a> -->
             <button onclick="exportarTabela()" class="btn btn-outline-success btnExcel">
-            <span class="ui-icon ui-icon-arrowthickstop-1-s"></span>
-    
-            Exportar para Excel</button>
+                <span class="ui-icon ui-icon-arrowthickstop-1-s"></span>
+
+                Exportar para Excel</button>
             <script>
-    function exportarTabela() {
-      const tabela = document.getElementById("tabela_funcionarios");
-      const workbook = XLSX.utils.table_to_book(tabela, { sheet: "Planilha1" });
-      XLSX.writeFile(workbook, "Lista Servidores SIUPA.xlsx");
-    }
-  </script
+                function exportarTabela() {
+                    const tabela = document.getElementById("tabela_funcionarios");
+                    const workbook = XLSX.utils.table_to_book(tabela, {
+                        sheet: "Planilha1"
+                    });
+                    XLSX.writeFile(workbook, "Lista Servidores SIUPA.xlsx");
+                }
+            </script>
             <a href="#" id="gerarFrequencias" class="btn btn-outline-success">
                 <img src="/siiupa/imagens/icones/frequencia.svg" width="20px">
                 Gerar Frequencias
@@ -315,7 +317,7 @@ include_once('../bd/nivel.php');
                 <!--  <th scope="col">ID</th>-->
                 <th scope="col">#</th>
                 <th scope="col">MATRICULA</th>
-                 
+
                 <th scope="col">Férias</th>
                 <th scope="col">NOME<img src="/siiupa/imagens/tablesorter.svg"></th>
                 <th scope="col">CPF</th>
