@@ -1,8 +1,4 @@
 <?php
-var_dump($_SESSION);
-echo "teste";
-
-
 
 
 ?>
@@ -807,7 +803,8 @@ class Grade
             return urlParams.get(param);
         }
 
-        const token = getQueryParam("token");
+        //const token = getQueryParam("token");
+        const token = "<?= $_SESSION['token']; ?>";
         const funcionarioId = getQueryParam("id");
 
         async function carregarFuncionario(id) {
