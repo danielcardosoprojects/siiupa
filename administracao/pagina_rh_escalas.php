@@ -138,6 +138,8 @@ include_once('tabelas.php');
             <img src='imagens/icones/impressora.svg' width='15px'></a>
             <a class='' href='administracao/pagina_escala_esqueletofolha.php?id=$escalasmes->id&setorExt=$escalasmes->setor&mesExt=$mesextenso&anoExt=$escalasmes->ano' target='_blank'>
             <span class='ui-icon ui-icon-bookmark'></span></a>
+            <a class='' href='https://painel-controle-siupa.vercel.app/frequencias/$escalasmes->id/$escalasmes->ano"."$escalasmes->mes' target='_blank'>
+            Gerar Frequencias</a>
             
             <br></strong>";
         }
