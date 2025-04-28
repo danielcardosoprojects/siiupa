@@ -159,7 +159,7 @@ if ($acao == 'enviar') {
         echo "para atualizar";
         $dataentrada = implode("-", array_reverse(explode("/", $dataentrada)));
         $dataobito = implode("-", array_reverse(explode("/", $dataobito)));
-        $query = "UPDATE db_producao.tb_obitos SET $att_campo = '$att_valor' WHERE id='$id'";
+        $query = "UPDATE u940659928_siupa.tb_obitos SET $att_campo = '$att_valor' WHERE id='$id'";
         if (mysqli_query($conn, $query)) {
             $last_id = mysqli_insert_id($conn);
             print("<script>alert('Atualizado com Sucesso!');
@@ -174,7 +174,7 @@ if ($acao == 'enviar') {
         $dataentrada = implode("-", array_reverse(explode("/", $dataentrada)));
         $dataobito = implode("-", array_reverse(explode("/", $dataobito)));
 
-        $query = "INSERT INTO db_producao.tb_obitos (dataentrada, nomefalecido, numeroregistro, dataobito, ndeclaracao_obito, obs) VALUES ('$dataentrada', '$nomefalecido', '$numeroregistro', '$dataobito','$ndeclaracao_obito', '$obs')";
+        $query = "INSERT INTO u940659928_siupa.tb_obitos (dataentrada, nomefalecido, numeroregistro, dataobito, ndeclaracao_obito, obs) VALUES ('$dataentrada', '$nomefalecido', '$numeroregistro', '$dataobito','$ndeclaracao_obito', '$obs')";
         if (mysqli_query($conn, $query)) {
             $last_id = mysqli_insert_id($conn);
             echo "Novo Registro adicionado com sucesso. Ultimo ID inserido foi: " . $last_id;
@@ -207,7 +207,7 @@ echo '
         </thead>
         <tbody>
         ';
-$query = "SELECT id, DATE_FORMAT(dataentrada, '%Y-%m-%d %H:%i'), DATE_FORMAT(dataentrada, '%d\/%m\/%Y %H:%i'), nomefalecido, numeroregistro, DATE_FORMAT(dataobito, '%Y-%m-%dT%H:%i'), DATE_FORMAT(dataobito, '%d\/%m\/%Y  %H:%i'), ndeclaracao_obito, obs  FROM db_producao.tb_obitos ORDER BY id DESC";
+$query = "SELECT id, DATE_FORMAT(dataentrada, '%Y-%m-%d %H:%i'), DATE_FORMAT(dataentrada, '%d\/%m\/%Y %H:%i'), nomefalecido, numeroregistro, DATE_FORMAT(dataobito, '%Y-%m-%dT%H:%i'), DATE_FORMAT(dataobito, '%d\/%m\/%Y  %H:%i'), ndeclaracao_obito, obs  FROM u940659928_siupa.tb_obitos ORDER BY id DESC";
 
 
 if ($stmt = $conn->prepare($query)) {
