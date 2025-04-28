@@ -1198,7 +1198,7 @@ class Grade
 
 
             echo "<tr>";
-            echo "<td><span class='valor'>$mesPeriodo</span></td><td><span class='afastamento' style='text-align:center'>$dadosAfastamentos->afastamento</span></td><td>" . $espaco . $dadosAfastamentos->nome  . $hifen . $data_inicio->format("d/m/Y") . $entredata . $hifen . $periodo . " dia(s)</td>";
+            echo "<td><span class='valor'>$mesPeriodo</span></td><td><span class='afastamento' style='text-align:center'>$dadosAfastamentos->afastamento</span></td><td>" . $espaco . $dadosAfastamentos->nome  . $hifen . $data_inicio->format("d/m/Y") . $entredata . $hifen . $periodo . $dadosAfastamentos->afastamento_obs." dia(s)</td>";
             echo "</tr>";
         }
         $bancoAfastamentos->close();
