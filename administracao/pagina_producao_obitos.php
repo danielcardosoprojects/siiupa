@@ -1,5 +1,5 @@
 <?php
-//@include_once("../bd/conectabd.php"); 
+@include_once("../bd/conectabd.php"); 
 
 function pula($entrada)
 {
