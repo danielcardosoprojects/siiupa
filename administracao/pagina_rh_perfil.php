@@ -846,7 +846,7 @@ class Grade
                 document.getElementById("notepad").value = f.notepad || "";
 
             } catch (error) {
-                alert("Erro ao carregar dados do funcionário.");
+               // alert("Erro ao carregar dados do funcionário.");
                 console.error(error);
             }
         }
