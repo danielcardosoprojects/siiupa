@@ -141,11 +141,11 @@ include_once('tabelas.php');
             }
            
             echo "$tipo_escala <strong><a href='?setor=adm&sub=rhescala_exibe&id=$escalasmes->id&mes=$escalasmes->mes&ano=$escalasmes->ano&oficial=$escalasmes->oficial'>$escalasmes->setor</a>
-            <a class='' href='administracao/pagina_escala_esqueleto.php?id=$escalasmes->id&setorExt=$escalasmes->setor&mesExt=$mesextenso&anoExt=$escalasmes->ano' target='_blank'>
+            <a title='Imprimir esta escala' class='' href='administracao/pagina_escala_esqueleto.php?id=$escalasmes->id&setorExt=$escalasmes->setor&mesExt=$mesextenso&anoExt=$escalasmes->ano' target='_blank'>
             <img src='imagens/icones/impressora.svg' width='15px'></a>
-            <a class='' href='administracao/pagina_escala_esqueletofolha.php?id=$escalasmes->id&setorExt=$escalasmes->setor&mesExt=$mesextenso&anoExt=$escalasmes->ano' target='_blank'>
+            <a title='Gerar rascunho para folha' class='' href='administracao/pagina_escala_esqueletofolha.php?id=$escalasmes->id&setorExt=$escalasmes->setor&mesExt=$mesextenso&anoExt=$escalasmes->ano' target='_blank'>
             <span class='ui-icon ui-icon-bookmark'></span></a>
-            <a class='' href='https://painel-controle-siupa.vercel.app/frequencias/$escalasmes->id/$escalasmes->ano"."$mesParaFrequencias' target='_blank'>
+            <a title='Gerar todas as frequências desta escala' class='' href='https://painel-controle-siupa.vercel.app/frequencias/$escalasmes->id/$escalasmes->ano"."$mesParaFrequencias' target='_blank'>
              <span class='ui-icon ui-icon-calculator'></span></a>
             
             <br></strong>";
