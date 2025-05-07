@@ -164,8 +164,8 @@ if ($acao == 'enviar') {
     echo "enviado";
     if ($id != "") {
         echo "para atualizar";
-        $dataentrada = DateTime::createFromFormat('d/m/Y H:i', $dataentrada)->format('Y-m-d H:i:s');
-        $dataobito = DateTime::createFromFormat('d/m/Y H:i', $dataobito)->format('Y-m-d H:i:s');
+        $dataentrada = str_replace('T', ' ', $dataentrada) . ':00';
+        $dataobito = str_replace('T', ' ', $dataobito) . ':00';
         $query = "UPDATE u940659928_siupa.tb_obitos SET $att_campo = '$att_valor' WHERE id='$id'";
 
 
