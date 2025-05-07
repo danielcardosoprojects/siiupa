@@ -120,6 +120,12 @@ $numeroregistro = pega('numeroregistro');
 $dataobito = pega('dataobito');
 $ndeclaracao_obito = pega('ndeclaracao_obito');
 $obs = pega('obs');
+$diag_a = pega('diag_a');
+$diag_b = pega('diag_b');
+$diag_c = pega('diag_c');
+$diag_d = pega('diag_d');
+$diag_e = pega('diag_e');
+$diag_f = pega('diag_f');
 
 $att_campo = pega('att_campo');
 $att_valor = pega('att_valor');
@@ -144,6 +150,15 @@ pula(2);
 $form->input('Data do Óbito', 'datetime-local', 'dataobito', $dataobito);
 
 $form->input('Nº D.O:', 'text', 'ndeclaracao_obito', $ndeclaracao_obito);
+pula(2);
+
+$form->input('Causa da morte - A', 'text', 'numeroregistro', $diag_a);
+$form->input('Causa da morte - B', 'text', 'numeroregistro', $diag_b);
+$form->input('Causa da morte - C', 'text', 'numeroregistro', $diag_c);
+$form->input('Causa da morte - D', 'text', 'numeroregistro', $diag_d);
+$form->input('Causa da morte - E', 'text', 'numeroregistro', $diag_e);
+$form->input('Causa da morte - F', 'text', 'numeroregistro', $diag_f);
+
 
 //$form->input('Observação', 'text', 'obs', $ndeclaracao_obito);
 pula(2);
