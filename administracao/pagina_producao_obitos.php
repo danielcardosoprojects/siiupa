@@ -240,12 +240,12 @@ echo '
         </thead>
         <tbody>
         ';
-$query = "SELECT id, DATE_FORMAT(dataentrada, '%Y-%m-%d %H:%i'), DATE_FORMAT(dataentrada, '%d\/%m\/%Y %H:%i'), nomefalecido, numeroregistro, DATE_FORMAT(dataobito, '%Y-%m-%dT%H:%i'), DATE_FORMAT(dataobito, '%d\/%m\/%Y  %H:%i'), ndeclaracao_obito, obs  FROM u940659928_siupa.tb_obitos ORDER BY id DESC";
+$query = "SELECT id, DATE_FORMAT(dataentrada, '%Y-%m-%d %H:%i'), DATE_FORMAT(dataentrada, '%d\/%m\/%Y %H:%i'), nomefalecido, numeroregistro, DATE_FORMAT(dataobito, '%Y-%m-%dT%H:%i'), DATE_FORMAT(dataobito, '%d\/%m\/%Y  %H:%i'), ndeclaracao_obito, diag_a, diag_b, diag_c, diag_d, diag_e, diag_f, obs  FROM u940659928_siupa.tb_obitos ORDER BY id DESC";
 
 
 if ($stmt = $conn->prepare($query)) {
     $stmt->execute();
-    $stmt->bind_result($id, $dataentrada, $dataentrada_br, $nomefalecido, $numeroregistro, $dataobito, $dataobito_br, $ndeclaracao_obito, $obs);
+    $stmt->bind_result($id, $dataentrada, $dataentrada_br, $nomefalecido, $numeroregistro, $dataobito, $dataobito_br, $ndeclaracao_obito, $diag_a, $diag_b, $diag_c, $diag_d, $diag_e, $diag_f, $obs);
     while ($stmt->fetch()) {
         $link = "?setor=adm&sub=producao&subsub=obitos&id=$id&dataentrada=$dataentrada&nomefalecido=$nomefalecido&numeroregistro=$numeroregistro&dataobito=$dataobito";
         printf("<tr>
@@ -255,6 +255,12 @@ if ($stmt = $conn->prepare($query)) {
         <td style='text-align:center'class='numeroregistro editavel' data-idfalecido='$id' data-campo='numeroregistro'  data-tipo='text'>%s</td>
         <td style='text-align:center' class='dataobito editavel' data-idfalecido='$id' data-campo='dataobito'  data-tipo='datetime-local' data-date='%s'>%s</td>
         <td class='ndeclaracao_obito editavel' data-idfalecido='$id' data-campo='ndeclaracao_obito'  data-tipo='text'>%s</td>
+        <td class='diag_a editavel' data-idfalecido='$id' data-campo='diag_a'  data-tipo='text'>%s</td>
+        <td class='diag_b editavel' data-idfalecido='$id' data-campo='diag_b'  data-tipo='text'>%s</td>
+        <td class='diag_c editavel' data-idfalecido='$id' data-campo='diag_c'  data-tipo='text'>%s</td>
+        <td class='diag_d editavel' data-idfalecido='$id' data-campo='diag_d'  data-tipo='text'>%s</td>
+        <td class='diag_e editavel' data-idfalecido='$id' data-campo='diag_e'  data-tipo='text'>%s</td>
+        <td class='diag_f editavel' data-idfalecido='$id' data-campo='diag_f'  data-tipo='text'>%s</td>
         <td class='obs editavel' data-idfalecido='$id' data-campo='obs'  data-tipo='text'>%s</td>
 
       </tr>", $id, $dataentrada, $dataentrada_br, $nomefalecido, $numeroregistro, $dataobito, $dataobito_br, $ndeclaracao_obito, $obs);
