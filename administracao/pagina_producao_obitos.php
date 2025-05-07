@@ -157,12 +157,12 @@ $form->input('Data do Óbito', 'datetime-local', 'dataobito', $dataobito);
 $form->input('Nº D.O:', 'text', 'ndeclaracao_obito', $ndeclaracao_obito);
 pula(2);
 
-$form->inputNR('Causa da morte - A', 'text', 'numeroregistro', $diag_a);
-$form->inputNR('Causa da morte - B', 'text', 'numeroregistro', $diag_b);
-$form->inputNR('Causa da morte - C', 'text', 'numeroregistro', $diag_c);
-$form->inputNR('Causa da morte - D', 'text', 'numeroregistro', $diag_d);
-$form->inputNR('Causa da morte - E', 'text', 'numeroregistro', $diag_e);
-$form->inputNR('Causa da morte - F', 'text', 'numeroregistro', $diag_f);
+$form->inputNR('Causa da morte - A', 'text', 'diag_a', $diag_a);
+$form->inputNR('Causa da morte - B', 'text', 'diag_b', $diag_b);
+$form->inputNR('Causa da morte - C', 'text', 'diag_c', $diag_c);
+$form->inputNR('Causa da morte - D', 'text', 'diag_d', $diag_d);
+$form->inputNR('Causa da morte - E', 'text', 'diag_e', $diag_e);
+$form->inputNR('Causa da morte - F', 'text', 'diag_f', $diag_f);
 
 
 //$form->input('Observação', 'text', 'obs', $ndeclaracao_obito);
