@@ -40,8 +40,8 @@ class Formulario
             //console.log($("#formularioobito").serialize());
             var link = '?setor=adm&sub=producao&subsub=obitos&acao=enviar&' + $("#formularioobito").serialize();
             $.get(link, function(data) {
-                
-                window.location.replace('?setor=adm&sub=producao&subsub=obitos');
+
+                //window.location.replace('?setor=adm&sub=producao&subsub=obitos');
 
 
             });
@@ -163,10 +163,10 @@ if ($acao == 'enviar') {
     if ($id != "") {
         echo "para atualizar";
         $dataentrada = DateTime::createFromFormat('d/m/Y H:i', $dataentrada)->format('Y-m-d H:i:s');
-$dataobito = DateTime::createFromFormat('d/m/Y H:i', $dataobito)->format('Y-m-d H:i:s');
+        $dataobito = DateTime::createFromFormat('d/m/Y H:i', $dataobito)->format('Y-m-d H:i:s');
         $query = "UPDATE u940659928_siupa.tb_obitos SET $att_campo = '$att_valor' WHERE id='$id'";
 
-        
+
         if (mysqli_query($conn, $query)) {
             $last_id = mysqli_insert_id($conn);
             print("<script>alert('Atualizado com Sucesso!');
@@ -180,7 +180,7 @@ $dataobito = DateTime::createFromFormat('d/m/Y H:i', $dataobito)->format('Y-m-d 
         echo "para adicionar";
         $dataentrada = DateTime::createFromFormat('d/m/Y H:i', $dataentrada)->format('Y-m-d H:i:s');
         $dataobito = DateTime::createFromFormat('d/m/Y H:i', $dataobito)->format('Y-m-d H:i:s');
-echo $query;
+
         $query = "INSERT INTO u940659928_siupa.tb_obitos (dataentrada, nomefalecido, numeroregistro, dataobito, ndeclaracao_obito, obs) VALUES ('$dataentrada', '$nomefalecido', '$numeroregistro', '$dataobito','$ndeclaracao_obito', '$obs')";
 
         if (mysqli_query($conn, $query)) {
