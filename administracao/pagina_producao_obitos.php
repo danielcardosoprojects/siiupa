@@ -39,9 +39,10 @@ class Formulario
             //alert();
             //console.log($("#formularioobito").serialize());
             var link = '?setor=adm&sub=producao&subsub=obitos&acao=enviar&' + $("#formularioobito").serialize();
+            window.location.replace(link);
             $.get(link, function(data) {
 
-                //window.location.replace('?setor=adm&sub=producao&subsub=obitos');
+               // window.location.replace('?setor=adm&sub=producao&subsub=obitos');
                 console.log(data);
 
 
