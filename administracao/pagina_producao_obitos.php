@@ -39,11 +39,11 @@ class Formulario
             //alert();
             //console.log($("#formularioobito").serialize());
             var link = '?setor=adm&sub=producao&subsub=obitos&acao=enviar&' + $("#formularioobito").serialize();
-            window.location.replace(link);
+            
             $.get(link, function(data) {
 
-               // window.location.replace('?setor=adm&sub=producao&subsub=obitos');
-                console.log(data);
+               window.location.replace('?setor=adm&sub=producao&subsub=obitos');
+               
 
 
             });
@@ -187,7 +187,7 @@ if ($acao == 'enviar') {
 
         $query = "INSERT INTO u940659928_siupa.tb_obitos (dataentrada, nomefalecido, numeroregistro, dataobito, ndeclaracao_obito, obs) VALUES ('$dataentrada', '$nomefalecido', '$numeroregistro', '$dataobito','$ndeclaracao_obito', '$obs')";
         echo $dataentrada;
-        echo "<script>console.log('$query');</script>";
+        
         if (mysqli_query($conn, $query)) {
             $last_id = mysqli_insert_id($conn);
             echo "Novo Registro adicionado com sucesso. Ultimo ID inserido foi: " . $last_id;
