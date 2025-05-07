@@ -205,8 +205,8 @@ if ($acao == 'enviar') {
         $dataentrada = str_replace('T', ' ', $dataentrada) . ':00';
         $dataobito = str_replace('T', ' ', $dataobito) . ':00';
 
-        $query = "INSERT INTO u940659928_siupa.tb_obitos (dataentrada, nomefalecido, numeroregistro, dataobito, ndeclaracao_obito, obs) VALUES ('$dataentrada', '$nomefalecido', '$numeroregistro', '$dataobito','$ndeclaracao_obito', '$obs')";
-        echo $dataentrada;
+        $query = "INSERT INTO u940659928_siupa.tb_obitos (dataentrada, nomefalecido, numeroregistro, dataobito, ndeclaracao_obito, diag_a, diag_b, diag_c, diag_d, diag_e, diag_f, obs) VALUES ('$dataentrada', '$nomefalecido', '$numeroregistro', '$dataobito','$ndeclaracao_obito', '$diag_a', '$diag_b', '$diag_c', '$diag_d', '$diag_e', '$diag_f', '$obs')";
+        
         
         if (mysqli_query($conn, $query)) {
             $last_id = mysqli_insert_id($conn);
