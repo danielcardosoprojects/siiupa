@@ -261,7 +261,7 @@ if ($stmt = $conn->prepare($query)) {
         <td class='diag_d editavel' data-idfalecido='$id' data-campo='diag_d'  data-tipo='text'>%s</td>
         <td class='diag_e editavel' data-idfalecido='$id' data-campo='diag_e'  data-tipo='text'>%s</td>
         <td class='diag_f editavel' data-idfalecido='$id' data-campo='diag_f'  data-tipo='text'>%s</td>
-        <td class='obs editavel' data-idfalecido='$id' data-campo='obs'  data-tipo='text'>%s
+        <td class='obs' data-idfalecido='$id' data-campo='obs'  data-tipo='text'>%s
         <span class='teste editavel' data-idfalecido='$id' data-campo='teste'  data-tipo='text'>teste</span></td>
 
       </tr>", $id, $dataentrada, $dataentrada_br, $nomefalecido, $numeroregistro, $dataobito, $dataobito_br, $ndeclaracao_obito, $diag_a, $diag_b, $diag_c, $diag_d, $diag_e, $diag_f, $obs);
