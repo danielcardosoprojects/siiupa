@@ -42,6 +42,7 @@ class Formulario
             $.get(link, function(data) {
 
                 //window.location.replace('?setor=adm&sub=producao&subsub=obitos');
+                console.log(data);
 
 
             });
