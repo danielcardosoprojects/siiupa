@@ -1,6 +1,5 @@
-
 <?php
-@include_once("../bd/conectabd.php"); 
+@include_once("../bd/conectabd.php");
 
 function pula($entrada)
 {
@@ -11,19 +10,22 @@ function pula($entrada)
 
 class Formulario
 {
-    function input($label, $tipo, $nomeid, $valor, $classe = "", $extras="")
+    function input($label, $tipo, $nomeid, $valor, $classe = "", $extras = "")
     {
 
         echo "<label>$label <input type='$tipo' name='$nomeid' id='$nomeid' value='$valor' class='form-control $classe'  $extras required></label>";
     }
 
-    function select_abre($label, $nomeid){
+    function select_abre($label, $nomeid)
+    {
         echo "<select class='form-select' name='$nomeid' id='$nomeid'>";
     }
-    function option($valor, $texto){
+    function option($valor, $texto)
+    {
         echo "<option value='$valor'>$texto</option>";
     }
-    function select_fecha(){
+    function select_fecha()
+    {
         echo "</select>";
     }
 }
@@ -44,29 +46,31 @@ class Formulario
 
             });
 
-            
+
 
         });
 
 
         function Atualiza(idfalecido, campo, novo_valor, celula) {
-           
-            if (celula.data('tipo') == 'datetime-local') {
-                    
-                    var data_input = novo_valor;
-                    var novo_valor_br = data_input.replace(/(\d*)-(\d*)-(\d*)T(\d*):(\d*).*/, '$3\/$2\/$1 $4:$5');
-                    var novo_valor = data_input.replace(/(\d*)-(\d*)-(\d*)T(\d*):(\d*).*/, '$1-$2-$3 $4:$5:00');
-                    celula.data('date', data_input);
-                    //
 
-                }
+            if (celula.data('tipo') == 'datetime-local') {
+
+                var data_input = novo_valor;
+                var novo_valor_br = data_input.replace(/(\d*)-(\d*)-(\d*)T(\d*):(\d*).*/, '$3\/$2\/$1 $4:$5');
+                var novo_valor = data_input.replace(/(\d*)-(\d*)-(\d*)T(\d*):(\d*).*/, '$1-$2-$3 $4:$5:00');
+                celula.data('date', data_input);
+                //
+
+            }
             var link = '?setor=adm&sub=producao&subsub=obitos&acao=enviar&id=' + idfalecido + '&att_campo=' + campo + '&att_valor=' + novo_valor;
-            if (celula.data('tipo') == 'datetime-local') {novo_valor = novo_valor_br;}
+            if (celula.data('tipo') == 'datetime-local') {
+                novo_valor = novo_valor_br;
+            }
             $.get(link, function(data) {
-                
+
                 celula.html(novo_valor);
-              
-              
+
+
 
 
             });
@@ -142,9 +146,9 @@ $form->input('Nº D.O:', 'text', 'ndeclaracao_obito', $ndeclaracao_obito);
 //$form->input('Observação', 'text', 'obs', $ndeclaracao_obito);
 pula(2);
 $form->select_abre('Observação', 'obs');
-$form->option('UPA','UPA');
-$form->option('DOMICILIO','DOMICILIO');
-$form->option('IML','IML');
+$form->option('UPA', 'UPA');
+$form->option('DOMICILIO', 'DOMICILIO');
+$form->option('IML', 'IML');
 $form->select_fecha();
 pula(2);
 
@@ -176,13 +180,13 @@ if ($acao == 'enviar') {
         $dataobito = implode("-", array_reverse(explode("/", $dataobito)));
 
         $query = "INSERT INTO u940659928_siupa.tb_obitos (dataentrada, nomefalecido, numeroregistro, dataobito, ndeclaracao_obito, obs) VALUES ('$dataentrada', '$nomefalecido', '$numeroregistro', '$dataobito','$ndeclaracao_obito', '$obs')";
-        echo $query;
+
         if (mysqli_query($conn, $query)) {
             $last_id = mysqli_insert_id($conn);
             echo "Novo Registro adicionado com sucesso. Ultimo ID inserido foi: " . $last_id;
             print("<script>alert('Sucesso!');
-                    //var link2 = '?setor=adm&sub=rhfolhas';
-                    //window.location.replace(link2);
+                    var link2 = '?setor=adm&sub=producao&subsub=obitos';
+            window.location.replace(link2);
 
                     $('#formularioobito ').trigger('reset');
 
