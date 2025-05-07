@@ -180,6 +180,7 @@ if ($acao == 'enviar') {
         }
     } else {
         echo "para adicionar";
+        
         $dataentrada = DateTime::createFromFormat('d/m/Y H:i', $dataentrada)->format('Y-m-d H:i:s');
         $dataobito = DateTime::createFromFormat('d/m/Y H:i', $dataobito)->format('Y-m-d H:i:s');
 
