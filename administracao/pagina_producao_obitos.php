@@ -15,6 +15,11 @@ class Formulario
 
         echo "<label>$label <input type='$tipo' name='$nomeid' id='$nomeid' value='$valor' class='form-control $classe'  $extras required></label>";
     }
+    function inputNR($label, $tipo, $nomeid, $valor, $classe = "", $extras = "")
+    {
+
+        echo "<label>$label <input type='$tipo' name='$nomeid' id='$nomeid' value='$valor' class='form-control $classe'  $extras></label>";
+    }
 
     function select_abre($label, $nomeid)
     {
@@ -152,12 +157,12 @@ $form->input('Data do Óbito', 'datetime-local', 'dataobito', $dataobito);
 $form->input('Nº D.O:', 'text', 'ndeclaracao_obito', $ndeclaracao_obito);
 pula(2);
 
-$form->input('Causa da morte - A', 'text', 'numeroregistro', $diag_a);
-$form->input('Causa da morte - B', 'text', 'numeroregistro', $diag_b);
-$form->input('Causa da morte - C', 'text', 'numeroregistro', $diag_c);
-$form->input('Causa da morte - D', 'text', 'numeroregistro', $diag_d);
-$form->input('Causa da morte - E', 'text', 'numeroregistro', $diag_e);
-$form->input('Causa da morte - F', 'text', 'numeroregistro', $diag_f);
+$form->inputNR('Causa da morte - A', 'text', 'numeroregistro', $diag_a);
+$form->inputNR('Causa da morte - B', 'text', 'numeroregistro', $diag_b);
+$form->inputNR('Causa da morte - C', 'text', 'numeroregistro', $diag_c);
+$form->inputNR('Causa da morte - D', 'text', 'numeroregistro', $diag_d);
+$form->inputNR('Causa da morte - E', 'text', 'numeroregistro', $diag_e);
+$form->inputNR('Causa da morte - F', 'text', 'numeroregistro', $diag_f);
 
 
 //$form->input('Observação', 'text', 'obs', $ndeclaracao_obito);
