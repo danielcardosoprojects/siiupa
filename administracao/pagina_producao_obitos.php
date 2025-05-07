@@ -235,6 +235,7 @@ echo '
             <th scope="col">NUMERO PRONTUÁRIO</th>
             <th scope="col">DATA DO OBITO</th>
             <th scope="col">Nº DECL. OBITO</th>
+            <th scope="col" colspan="6">Causas da morte</th>
             <th scope="col">Observação</th>
           </tr>
         </thead>
