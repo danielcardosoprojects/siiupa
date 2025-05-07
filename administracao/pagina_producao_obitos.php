@@ -47,7 +47,7 @@ class Formulario
             console.log(link);            
             $.get(link, function(data) {
 
-               //window.location.replace('?setor=adm&sub=producao&subsub=obitos');
+               window.location.replace('?setor=adm&sub=producao&subsub=obitos');
                
 
 
