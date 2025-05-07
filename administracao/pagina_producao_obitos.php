@@ -180,12 +180,13 @@ if ($acao == 'enviar') {
         }
     } else {
         echo "para adicionar";
-
+        
+        echo $dataentrada;
         $dataentrada = DateTime::createFromFormat('d/m/Y H:i', $dataentrada)->format('Y-m-d H:i:s');
         $dataobito = DateTime::createFromFormat('d/m/Y H:i', $dataobito)->format('Y-m-d H:i:s');
 
         $query = "INSERT INTO u940659928_siupa.tb_obitos (dataentrada, nomefalecido, numeroregistro, dataobito, ndeclaracao_obito, obs) VALUES ('$dataentrada', '$nomefalecido', '$numeroregistro', '$dataobito','$ndeclaracao_obito', '$obs')";
-        echo $dataentrada;
+        
         echo "<script>console.log('$query');</script>";
         if (mysqli_query($conn, $query)) {
             $last_id = mysqli_insert_id($conn);
