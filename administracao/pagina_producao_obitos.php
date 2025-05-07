@@ -176,6 +176,7 @@ if ($acao == 'enviar') {
         $dataobito = implode("-", array_reverse(explode("/", $dataobito)));
 
         $query = "INSERT INTO u940659928_siupa.tb_obitos (dataentrada, nomefalecido, numeroregistro, dataobito, ndeclaracao_obito, obs) VALUES ('$dataentrada', '$nomefalecido', '$numeroregistro', '$dataobito','$ndeclaracao_obito', '$obs')";
+        echo $query;
         if (mysqli_query($conn, $query)) {
             $last_id = mysqli_insert_id($conn);
             echo "Novo Registro adicionado com sucesso. Ultimo ID inserido foi: " . $last_id;
