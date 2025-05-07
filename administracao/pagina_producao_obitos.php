@@ -184,6 +184,7 @@ if ($acao == 'enviar') {
         $dataobito = DateTime::createFromFormat('d/m/Y H:i', $dataobito)->format('Y-m-d H:i:s');
 
         $query = "INSERT INTO u940659928_siupa.tb_obitos (dataentrada, nomefalecido, numeroregistro, dataobito, ndeclaracao_obito, obs) VALUES ('$dataentrada', '$nomefalecido', '$numeroregistro', '$dataobito','$ndeclaracao_obito', '$obs')";
+        echo $query;
         echo "<script>console.log('$query');</script>";
         if (mysqli_query($conn, $query)) {
             $last_id = mysqli_insert_id($conn);
