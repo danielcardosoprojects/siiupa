@@ -3,6 +3,26 @@
 @include("../bd/conectabd.php"); ?>
 <script type="text/javascript" src="./js/script.js"></script>
 <style type="text/css">
+    .tagStatus .ATIVO {
+        background-color: #0d6efd;
+        padding: .1rem .2rem;
+        font-size: .7rem;
+        border-radius: .2rem;
+        color: #fff;
+        cursor: default;
+        border-color: #0d6efd;
+        text-transform: uppercase;
+    }
+    .tagStatus .INATIVO {
+        background-color: #dc3545;
+        padding: .1rem .2rem;
+        font-size: .7rem;
+        border-radius: .2rem;
+        color: #fff;
+        cursor: default;
+        border-color: #0d6efd;
+        text-transform: uppercase;
+    }
     .valor {
         background-color: green;
         padding: .1rem .2rem;
@@ -775,7 +795,7 @@ if (isset($_GET['acao'])) {
                         echo "<tr>";
                         // echo "<td><span class='material-icons'>account_circle</span></td>";
                         echo "<th scope='row'><a class='abreperfil' href='/siiupa/administracao/pagina_rh_folha_adicionaservidor.php?setor=adm&sub=rh&subsub=rhfolhaadicionaservidor&acao=seleciona&idservidor=$dados->idfuncionario&idfolha=$dados->idfolha&subacao=adicionar#offcanvasExample'>$dados->idfuncionario</a></th>";
-                        echo "<td>$dados->status</td>";
+                        echo "<td class='tagStatus'><span class='$dados->status'>$dados->status</span></td>";
                         echo "<td>$dados->nome  <a  class='copiarNome' data-text='$dados->nome' href='#'><i><span class='material-icons'>content_copy</span></i></a></td>";
                         echo "<td>$dados->fk_cargo - $dados->cargo</td>";
                         echo "<td>$dados->setor</td>";
