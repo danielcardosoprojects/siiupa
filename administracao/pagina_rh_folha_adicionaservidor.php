@@ -734,6 +734,9 @@ if (isset($_GET['acao'])) {
         <?php
         if (isset($_GET['nome'])) {
             $nome = $_GET['nome'];
+            if($nome == ""){
+                $nome = "555";
+            }
             $where = "WHERE f.nome LIKE '%" . $nome . "%' ORDER BY f.nome ASC ";
         } else {
             $where = "WHERE status='ATIVO'";
