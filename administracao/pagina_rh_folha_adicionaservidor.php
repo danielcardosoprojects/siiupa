@@ -754,6 +754,7 @@ if (isset($_GET['acao'])) {
                 <tr>
                     <!-- <th scope="col">AÇÃO</th> -->
                     <th scope="col">ID</th>
+                    <th scope="col">Status</th>
                     <th scope="col">NOME</th>
                     <th scope="col">CARGO</th>
                     <th scope="col">SETOR</th>
@@ -774,6 +775,7 @@ if (isset($_GET['acao'])) {
                         echo "<tr>";
                         // echo "<td><span class='material-icons'>account_circle</span></td>";
                         echo "<th scope='row'><a class='abreperfil' href='/siiupa/administracao/pagina_rh_folha_adicionaservidor.php?setor=adm&sub=rh&subsub=rhfolhaadicionaservidor&acao=seleciona&idservidor=$dados->idfuncionario&idfolha=$dados->idfolha&subacao=adicionar#offcanvasExample'>$dados->idfuncionario</a></th>";
+                        echo "<td>$dados->status</td>";
                         echo "<td>$dados->nome  <a  class='copiarNome' data-text='$dados->nome' href='#'><i><span class='material-icons'>content_copy</span></i></a></td>";
                         echo "<td>$dados->fk_cargo - $dados->cargo</td>";
                         echo "<td>$dados->setor</td>";
