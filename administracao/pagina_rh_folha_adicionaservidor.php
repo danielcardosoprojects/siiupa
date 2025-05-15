@@ -734,12 +734,10 @@ if (isset($_GET['acao'])) {
         <?php
         if (isset($_GET['nome'])) {
             $nome = $_GET['nome'];
-            if($nome == ""){
-                $nome = "555";
-            }
+
             $where = "WHERE f.nome LIKE '%" . $nome . "%' ORDER BY f.nome ASC ";
         } else {
-            $where = "WHERE status='ATIVO'";
+            $where = "WHERE status='ATIVO' ORDER BY f.id DESC";
         }
         $sqlbusca = "SELECT  f.*, f.id AS idfuncionario, c.descricao AS cargo, c.id, s.setor FROM u940659928_siupa.tb_funcionario AS f INNER JOIN u940659928_siupa.tb_cargo AS c ON f.fk_cargo = c.id INNER JOIN u940659928_siupa.tb_setor AS s ON f.fk_setor = s.id $where  ";
         $resultbusca = mysqli_query($conn, $sqlbusca);
