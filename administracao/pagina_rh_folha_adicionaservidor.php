@@ -745,7 +745,7 @@ if (isset($_GET['acao'])) {
 
 
 
-        echo mysqli_num_rows($resultbusca) . " resultado(s).";
+        echo mysqli_num_rows($resultbusca) . " resultado(s). Atenção: São exibidos tanto os servidores ativos quanto os inativos.";
 
         ?>
 
