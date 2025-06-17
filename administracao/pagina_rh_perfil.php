@@ -1040,7 +1040,7 @@ class Grade
         </thead>
         <tbody>
             <td><?php diveditavelopt($perfil->id, 'fk_cargo', $perfil->cargo_desc); ?></td><!-- VALOR CARGO -->
-            <td><span class='copiar' data-text="<?php echo preg_replace('/[^0-9]/', '', $texto);?>"><?php echo diveditavel($perfil->id, 'cpf', $perfil->cpf); ?></span></td><!-- VALOR CPF -->
+            <td><span class='copiar' data-text="<?php echo preg_replace('/[^0-9]/', '', $perfil->cpf);?>"><?php echo diveditavel($perfil->id, 'cpf', $perfil->cpf); ?></span></td><!-- VALOR CPF -->
             <td><?php echo diveditavelopt($perfil->id, 'conselho_tipo', $perfil->conselho_tipo); ?></td><!-- VALOR TIPO CONSELHO -->
         </tbody>
         <thead>
