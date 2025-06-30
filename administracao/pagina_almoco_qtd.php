@@ -193,7 +193,7 @@ if ($stmt = $conn->prepare($query)) {
     $setorgrupo = "";
     global $i;
     global $totalgeral;
-    echo "<table class='table'>";
+    echo "<table class='table' display>";
     while ($stmt->fetch()) {
         if ($setorgrupo == $setor) {
 
@@ -290,7 +290,11 @@ if ($stmt = $conn->prepare($query)) {
 
 <button id="proximo">Próximo</button>
 <script>
-    // window.onload = function() {
+    window.onload = function() {
+        tabelas = document.getElementsByTagName("table");
+        tabelas[0].style.display = "none";
+        tabelas[1].style.display = "none";
+    }
     
     var query = location.search.slice(1);
     var partes = query.split('&');
