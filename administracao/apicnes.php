@@ -6,7 +6,7 @@ $idfunc = $_GET['id'];
 
 echo "<div style='color:dark'>";
 
-$query = "SELECT f.nome, f.cpf, f.cns, f.conselho_tipo, f.conselho_n, f.sexo, f.mae, f.pai, DATE_FORMAT( f.data_nasc, \"%d/%m/%Y\" ), f.municipio_uf_nascimento, f.vinculo, c.cbo, c.descricao, c.carga_horaria, DATE_FORMAT( f.admissao, \"%d/%m/%Y\" ) FROM u940659928_siupa.tb_funcionario as f INNER JOIN u940659928_siupa.tb_cargo AS c on (fk_cargo = c.id) WHERE STATUS = \"ATIVO\" and f.id=$idfunc";
+$query = "SELECT f.nome, f.cpf, f.cns, f.conselho_tipo, f.conselho_n, f.sexo, f.mae, f.pai, DATE_FORMAT( f.data_nasc, \"%d/%m/%Y\" ), f.municipio_uf_nascimento, f.vinculo, c.cbo, c.descricao, c.carga_horaria, DATE_FORMAT( f.admissao, \"%d/%m/%Y\" ) FROM u940659928_siupa.tb_funcionario as f INNER JOIN u940659928_siupa.tb_cargo AS c on (fk_cargo = c.id) WHERE f.id=$idfunc";
 
 
 
