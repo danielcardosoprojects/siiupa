@@ -53,6 +53,10 @@
             collapsible: true,
             active: 2
         });
+            $(".accordionEscalas").accordion({
+            collapsible: true,
+            active: 2
+        });
         $(".accordionExtras").accordion({
             collapsible: true,
             active: 2
@@ -1403,10 +1407,12 @@ class Grade
 
     //
     ////////////////// ESCALAS INICIO
-                $id_servidor = $_GET['idservidor'];
+        $grade->iniciacoluna();
+
+                $id_servidor = $_GET['id'];
                 echo '<hr>';
                 echo '
-                <div class="accordionescalas">
+                <div class="accordionEscalas">
                 <h3>ESCALAS DO SERVIDOR</h3>
                 <div>';
 
@@ -1452,6 +1458,7 @@ class Grade
 
 
                 ////////////////// ESCALAS FIM
+                    $grade->fimcoluna();
 
     $grade->fimlinha();
 
