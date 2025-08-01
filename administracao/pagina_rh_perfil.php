@@ -1402,6 +1402,56 @@ class Grade
     $grade->fimcoluna();
 
     //
+    ////////////////// ESCALAS INICIO
+                $id_servidor = $_GET['idservidor'];
+                echo '<hr>';
+                echo '
+                <div class="accordionescalas">
+                <h3>ESCALAS DO SERVIDOR</h3>
+                <div>';
+
+                echo '<table class="table table-bordered table-hover table-striped">
+                <thead>';
+
+                echo "<th>Setor</th>";
+                echo "<th>Mês/Ano</th>";
+                for ($i = 1; $i <= 31; $i++) {
+
+                    echo '<th>';
+                    echo $i;
+                    echo '</th>';
+                }
+                $query = "SELECT s.setor, e.legenda as legendas, ef.d1, ef.* FROM u940659928_siupa.tb_escala_funcionario as ef inner join (u940659928_siupa.tb_escalas as e) on (fk_escala = e.id) inner join (u940659928_siupa.tb_setor as s) on (e.fk_setor = s.id) where ef.fk_funcionario = $id_servidor order by ef.id desc";
+
+                echo '</thead><tbody>';
+                if ($banco_escalas = $conn->query($query)) {
+
+                    while ($dadosEscala = $banco_escalas->fetch_object()) {
+                        echo "<tr>";
+                        echo "<td>$dadosEscala->setor</td>";
+                        echo "<td>" . mes($dadosEscala->mes) . "/$dadosEscala->ano</td>";
+                        for ($i = 1; $i <= 31; $i++) {
+                            $dia_escala = $dadosEscala->{"d$i"};
+
+                            //$legendas = utf8_decode(strip_tags($dadosEscala->legendas));//Tira as tags HTML e depois codifica pra UTF
+
+                            $legendas =  utf8_decode(preg_replace("/<\/*[a-zA-Z0-9_]+>/", " | ",  $dadosEscala->legendas));
+
+                            echo "<td title='$legendas'>$dia_escala</td>";
+                        }
+                        echo "</tr>";
+                    }
+                    $banco_escalas->close();
+                }
+
+                echo '
+                </tbody>
+                </table>
+                </div>
+                </div>';
+
+
+                ////////////////// ESCALAS FIM
 
     $grade->fimlinha();
 
