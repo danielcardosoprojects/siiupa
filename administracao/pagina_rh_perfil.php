@@ -1427,7 +1427,7 @@ class Grade
                     echo $i;
                     echo '</th>';
                 }
-                $query = "SELECT s.setor, e.legenda as legendas, ef.d1, ef.* FROM u940659928_siupa.tb_escala_funcionario as ef inner join (u940659928_siupa.tb_escalas as e) on (fk_escala = e.id) inner join (u940659928_siupa.tb_setor as s) on (e.fk_setor = s.id) where ef.fk_funcionario = $id_servidor order by ef.id desc";
+                $query = "SELECT s.setor, e.legenda as legendas, ef.d1, ef.* FROM u940659928_siupa.tb_escala_funcionario as ef inner join (u940659928_siupa.tb_escalas as e) on (fk_escala = e.id) inner join (u940659928_siupa.tb_setor as s) on (e.fk_setor = s.id) where ef.fk_funcionario = $id_servidor and ef.oficial = 'sim' order by ef.id desc";
 
                 echo '</thead><tbody>';
                 if ($banco_escalas = $conn->query($query)) {
