@@ -523,7 +523,7 @@ if (isset($_GET['acao'])) {
                     } elseif ($resultado_acionamento->turno == "plantao_24h") {
                         $turnoAcionamento = "P";
                     }
-                    echo "<td>$resultado_acionamento->nome</td><td>$dataAcionamento</td><td class='colunaHorasAcionamento'>$resultado_acionamento->qtd_horas $turnoAcionamento</td><td class='coluna_valor'>R$ $resultado_acionamento->valor,00</td><td>" . utf8_encode($resultado_acionamento->acionamento) . "</td>";
+                    echo "<td>$resultado_acionamento->nome</td><td>$dataAcionamento</td><td class='colunaHorasAcionamento'>$resultado_acionamento->qtd_horas $turnoAcionamento</td><td class='coluna_valor'>R$ $resultado_acionamento->valor,00</td><td>" . $resultado_acionamento->acionamento . "</td>";
                     echo "<td>";
                     if ($resultado_acionamento->fk_afastamento != 0) {
                         $consulta_afastamento = new BD;
@@ -587,11 +587,11 @@ if (isset($_GET['acao'])) {
                         echo "<td>$dadosEscala->setor</td>";
                         echo "<td>" . mes($dadosEscala->mes) . "/$dadosEscala->ano</td>";
                         for ($i = 1; $i <= 31; $i++) {
-                            $dia_escala = utf8_decode($dadosEscala->{"d$i"});
+                            $dia_escala = $dadosEscala->{"d$i"};
 
                             //$legendas = utf8_decode(strip_tags($dadosEscala->legendas));//Tira as tags HTML e depois codifica pra UTF
 
-                            $legendas =  utf8_decode(preg_replace("/<\/*[a-zA-Z0-9_]+>/", " | ",  $dadosEscala->legendas));
+                            $legendas =  preg_replace("/<\/*[a-zA-Z0-9_]+>/", " | ",  $dadosEscala->legendas);
 
                             echo "<td title='$legendas'>$dia_escala</td>";
                         }
