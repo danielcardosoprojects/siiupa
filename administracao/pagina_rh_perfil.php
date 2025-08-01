@@ -1441,7 +1441,7 @@ class Grade
 
                             //$legendas = utf8_decode(strip_tags($dadosEscala->legendas));//Tira as tags HTML e depois codifica pra UTF
 
-                            $legendas =  utf8_decode(preg_replace("/<\/*[a-zA-Z0-9_]+>/", " | ",  $dadosEscala->legendas));
+                            $legendas =  preg_replace("/<\/*[a-zA-Z0-9_]+>/", " | ",  $dadosEscala->legendas);
 
                             echo "<td title='$legendas'>$dia_escala</td>";
                         }
