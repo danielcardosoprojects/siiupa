@@ -381,37 +381,7 @@
 
 <!--------------------------------------------------- FIM IMRPIMIR ------------------------------------------------->
 
-<!--------------------------------------------------- SUCESSO --------------------------------------------------->
-<div class="alert alert-success" role="alert">
-    <?php
-    // $sql = "SELECT * FROM u940659928_siupa.tb_funcionario";
-    if (isset($_GET["where"])) {
-        $gw = $_GET['where'];
-        $where = "WHERE f.nome LIKE '%" . $gw . "%'";
-    } elseif (isset($_GET["id"])) {
-        $gw = $_GET['id'];
-        $where = "WHERE f.id = '" . $gw . "'";
-    } else {
-        $where = "";
-    }
 
-    if (isset($_GET["orderby"])) {
-        $orderby = $_GET["orderby"];
-        if ($orderby == 1) {
-            $tipoorder = "ASC";
-        }
-    }
-
-
-    $orderby = "ORDER BY id desc";
-    $sql = "SELECT  DATE_FORMAT(f.admissao,'%d\/%m\/%Y') as admissaobr, DATE_FORMAT(f.data_nasc,'%d\/%m\/%Y') as data_nascbr, f.*, c.titulo AS cargo, c.descricao AS cargo_desc, s.setor FROM u940659928_siupa.tb_funcionario AS f INNER JOIN u940659928_siupa.tb_cargo AS c ON f.fk_cargo = c.id INNER JOIN u940659928_siupa.tb_setor AS s ON f.fk_setor = s.id $where $orderby";
-    $result = mysqli_query($conn, $sql);
-
-    //echo mysqli_num_rows($result) . " resultado(s).";
-
-    ?>
-</div>
-<!--------------- FIM SUCESSO --------------->
 
 
 <?php
