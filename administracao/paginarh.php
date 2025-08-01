@@ -262,11 +262,11 @@
                 <img src="/siiupa/imagens/icones/doente2.svg" width="20">
                 Afastamentos</a>
 
-                <a href="?setor=adm&sub=rh&subsub=afastamentos" id="bAtestados" class="btn btn-warning btn-lg bt_menu_rh">
+            <a href="?setor=adm&sub=rh&subsub=afastamentos" id="bAtestados" class="btn btn-warning btn-lg bt_menu_rh">
                 <img src="/siiupa/imagens/icones/doente2.svg" width="20">
                 Afastamentos 2 (testes)</a>
 
-            
+
 
 
 
@@ -274,7 +274,7 @@
                 <img src="/siiupa/imagens/icones/dinheiro2.svg" width="25">
                 Acionamentos</a>
 
-                <a href="?setor=adm&sub=rh&subsub=atestados" id="bAtestados" class="btn btn-dark btn-lg bt_menu_rh">
+            <a href="?setor=adm&sub=rh&subsub=atestados" id="bAtestados" class="btn btn-dark btn-lg bt_menu_rh">
                 <img src="/siiupa/imagens/icones/trocas.png" width="20">
                 Trocas</a>
 
@@ -294,7 +294,7 @@
             <?php
             $mesAtual = date("m");
             ?>
-                <a href="/siiupa/administracao/fotos_aniversario/fotos_aniversario.php?mes=<?=$mesAtual?>" id="bListaEpi" class="" target="_blank">
+            <a href="/siiupa/administracao/fotos_aniversario/fotos_aniversario.php?mes=<?= $mesAtual ?>" id="bListaEpi" class="" target="_blank">
                 <img src="/siiupa/imagens/icones/birthday.png" width="20px">
                 Aniversariantes do Mês</a>
 
@@ -310,21 +310,20 @@
 
     </nav>
 
-<?php
-if (isset($_GET['buscasetor'])) {
-    // Armazena o valor no $_SESSION
-    $_SESSION['buscasetor'] = $_GET['buscasetor'];
-    
-} else {
-    $_SESSION['buscasetor'] = "";
-}
-?>
+    <?php
+    if (isset($_GET['buscasetor'])) {
+        // Armazena o valor no $_SESSION
+        $_SESSION['buscasetor'] = $_GET['buscasetor'];
+    } else {
+        $_SESSION['buscasetor'] = "";
+    }
+    ?>
 
 
     <div id="subsubconteudo">
 
         <?php
-    
+
         function console_log($data)
         {
             echo '<script>';
@@ -389,6 +388,9 @@ if (isset($_GET['buscasetor'])) {
                 include_once('pagina_rh_acionamento_exibe.php');
                 break;
             case 'atestado_exibe':
+                include_once('pagina_rh_atestados_exibe.php');
+                break;
+            case 'trocas':
                 include_once('pagina_rh_atestados_exibe.php');
                 break;
             case 'perfil_criar':
