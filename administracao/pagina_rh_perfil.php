@@ -971,7 +971,7 @@ class Grade
     </form>
     <?php
 
-    echo "<table class='table'>
+    echo "<table class='table table-sm'>
         <tbody>
             <tr>
                 <td>";
@@ -1012,7 +1012,7 @@ class Grade
     ?>
 
 
-    <table id='sistema' class='table table-hover'>
+    <table id='sistema' class='table table-sm table-hover'>
         <thead>
             <tr>
                 <th>STATUS</th>
@@ -1060,7 +1060,7 @@ class Grade
     </table>
 
 
-    <table id='dados' class='table table-hover table-bordered'>
+    <table id='dados' class='table table-sm table-hover table-bordered'>
         <thead>
             <tr>
                 <th>SEXO</th>
@@ -1087,7 +1087,7 @@ class Grade
     <?php
 
     ?>
-    <table id='endereco' class='table table-hover table-bordered'>
+    <table id='endereco' class='table table-sm table-hover table-bordered'>
         <thead>
             <tr>
                 <th>Rua</th>
@@ -1120,7 +1120,7 @@ class Grade
     pulalinha(1);
 
     ?>
-    <table id='telefones' class='table table-hover table-bordered'>
+    <table id='telefones' class='table table-sm table-hover table-bordered'>
         <thead>
             <tr>
                 <th>Telefone 1</th>
@@ -1202,7 +1202,7 @@ class Grade
 
 
             echo "<tr>";
-            echo "<td><span class='valor'>$mesPeriodo</span></td><td><span class='afastamento' style='text-align:center'>$dadosAfastamentos->afastamento</span></td><td>" . $espaco . $dadosAfastamentos->nome  . $hifen . $data_inicio->format("d/m/Y") . $entredata . $hifen . $periodo . $dadosAfastamentos->afastamento_obs." dia(s)</td>";
+            echo "<td><span class='valor'>$mesPeriodo</span></td><td><span class='afastamento' style='text-align:center'>$dadosAfastamentos->afastamento</span></td><td>" . $espaco . $dadosAfastamentos->nome  . $hifen . $data_inicio->format("d/m/Y") . $entredata . $hifen . $periodo . utf8_decode($dadosAfastamentos->afastamento_obs)." dia(s)</td>";
             echo "</tr>";
         }
         $bancoAfastamentos->close();
