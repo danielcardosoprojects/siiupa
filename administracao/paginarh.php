@@ -391,7 +391,7 @@
                 include_once('pagina_rh_atestados_exibe.php');
                 break;
             case 'trocas':
-                include_once('pagina_rh_atestados_exibe.php');
+                include_once('pagina_rh_trocas.php');
                 break;
             case 'perfil_criar':
                 include_once('pagina_rh_perfil_criar.php');
