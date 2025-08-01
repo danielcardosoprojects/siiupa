@@ -407,7 +407,7 @@
     $sql = "SELECT  DATE_FORMAT(f.admissao,'%d\/%m\/%Y') as admissaobr, DATE_FORMAT(f.data_nasc,'%d\/%m\/%Y') as data_nascbr, f.*, c.titulo AS cargo, c.descricao AS cargo_desc, s.setor FROM u940659928_siupa.tb_funcionario AS f INNER JOIN u940659928_siupa.tb_cargo AS c ON f.fk_cargo = c.id INNER JOIN u940659928_siupa.tb_setor AS s ON f.fk_setor = s.id $where $orderby";
     $result = mysqli_query($conn, $sql);
 
-    echo mysqli_num_rows($result) . " resultado(s).";
+    //echo mysqli_num_rows($result) . " resultado(s).";
 
     ?>
 </div>
