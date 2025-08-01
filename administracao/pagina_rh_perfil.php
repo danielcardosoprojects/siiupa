@@ -1036,7 +1036,7 @@ class Grade
             </tr>
         </tbody>
     </table>
-    <table id="detalhes_cargo" class="table table-hover table-bordered">
+    <table id="detalhes_cargo" class="table table-sm table-hover table-bordered">
         <thead>
             <th>Cargo</th>
             <th>CPF</th>
