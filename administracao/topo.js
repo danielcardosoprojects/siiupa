@@ -10,8 +10,8 @@ class MeuTopo extends HTMLElement {
     const params = new URLSearchParams(window.location.search);
     //const token =
     //"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3NpdXBhLmNvbS5iciIsImF1ZCI6Imh0dHBzOi8vc2l1cGEuY29tLmJyIiwiaWF0IjoxNzU0MDkyMzk2LCJleHAiOjE3NTQxMDY3OTYsImlkVXN1YXJpbyI6IjEiLCJuYmYiOjEzNTcwMDAwMDB9.SyVpAfuorkSEsLNHftwWR8EvyvSyOY54LMRI4fkp_-k";
-    //const token = sessionStorage.token;
-    const token = params.get("token");
+    const token = sessionStorage.token;
+    //const token = params.get("token");
 
     // Se não houver token, redireciona para a raiz
     if (!token) {
