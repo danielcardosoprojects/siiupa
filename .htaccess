@@ -38,7 +38,7 @@ RewriteRule ^farmacia/item-entrada/([A-Za-zÀ-ü0-9,_-]+)$ index.php?setor=farm&
 RewriteRule ^farmacia/cadastraritem$ farmacia/paginafarm_item.php [L]
 
 RewriteRule ^farmacia/profissional$ farmacia/paginafarm_profissional.php [L]
-RewriteRule ^farmacia/profissionais$ farmacia/paginafarm_profissionais.html [L]
+RewriteRule ^farmacia/profissionaiss$ farmacia/paginafarm_profissionais.html [L]
 
 
 RewriteRule ^farmacia/registra/profissional/([a-z,0-9,A-Z,_-]+)?$ farmacia/paginafarm_inserebd.php?acao=$1 [L]
