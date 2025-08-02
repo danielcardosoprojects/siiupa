@@ -8,7 +8,7 @@ RewriteRule ^adm/rh/folha/([a-z,0-9,A-Z,_-]+)#?/?([a-z,0-9,A-Z,_-]+)?$ index.php
 RewriteRule ^css\/([a-z,0-9,A-Z,_-]+)$ css/$1 [L]
 
 
-RewriteRule ^adm/trocas$ farmacia/pagina_rh_trocas.html [L]
+RewriteRule ^adm/trocas$ administracao/pagina_rh_trocas.html [L]
 
 RewriteRule ^farmacia\/?$ index.php?setor=farm [L]
 RewriteRule ^farmacia\/([a-z,0-9,A-Z,_-]+)/$ index.php?setor=farm&sub=$1 [L]
