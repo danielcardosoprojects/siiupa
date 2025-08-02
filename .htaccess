@@ -8,7 +8,7 @@ RewriteRule ^adm/rh/folha/([a-z,0-9,A-Z,_-]+)#?/?([a-z,0-9,A-Z,_-]+)?$ index.php
 RewriteRule ^css\/([a-z,0-9,A-Z,_-]+)$ css/$1 [L]
 
 
-RewriteRule ^adm/trocas$ /siiupa/administracao/pagina_rh_trocas.html [L]
+RewriteRule ^administracao/trocas$ /siiupa/administracao/pagina_rh_trocas.html [L]
 
 RewriteRule ^farmacia\/?$ index.php?setor=farm [L]
 RewriteRule ^farmacia\/([a-z,0-9,A-Z,_-]+)/$ index.php?setor=farm&sub=$1 [L]
@@ -38,7 +38,7 @@ RewriteRule ^farmacia/item-entrada/([A-Za-zÀ-ü0-9,_-]+)$ index.php?setor=farm&
 RewriteRule ^farmacia/cadastraritem$ farmacia/paginafarm_item.php [L]
 
 RewriteRule ^farmacia/profissional$ farmacia/paginafarm_profissional.php [L]
-RewriteRule ^farmacia/profissionaiss$ farmacia/paginafarm_profissionais.html [L]
+RewriteRule ^farmacia/profissionais$ farmacia/paginafarm_profissionais.html [L]
 
 
 RewriteRule ^farmacia/registra/profissional/([a-z,0-9,A-Z,_-]+)?$ farmacia/paginafarm_inserebd.php?acao=$1 [L]
