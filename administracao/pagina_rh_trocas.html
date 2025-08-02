@@ -25,11 +25,12 @@
 
     <script src="topo.js?v=4" defer></script>
   </head>
+
   <body>
     <meu-topo></meu-topo>
 
     <div class="container mt-5">
-      <h2>Gestão de Profissionais</h2>
+      <h2>Gestão de Trocas</h2>
 
       <!-- Botão para abrir o modal de cadastro -->
       <button
@@ -45,8 +46,8 @@
         <thead>
           <tr>
             <th>Profissional</th>
-            <th>Função</th>
-            <th>Registro Conselho</th>
+            <th>Datas trocadas</th>
+            <th>Registro</th>
             <th>Ações</th>
           </tr>
         </thead>
@@ -101,7 +102,8 @@
 
     <script>
       $(document).ready(function () {
-        console.log(sessionStorage.token);
+        //console.log(sessionStorage.token);
+
         const apiProfissionais =
           "https://www.siupa.com.br/siiupa/api/api.php/records/tb_farmprofissional";
         const apiCargos =
@@ -109,21 +111,107 @@
         const table = $("#profissionais").DataTable();
 
         // Carregar profissionais na tabela
+        const apiTrocas =
+          "https://siupa.com.br/siiupa/api/api.php/records/tb_trocaplantao?join=tb_funcionario,tb_cargo&include=id,func1,func2,tb_funcionario.nome,tb_cargo.titulo,data1,data2,turno1,turno2";
+
         function carregarProfissionais() {
-          $.get(apiProfissionais, function (data) {
-            table.clear();
+          const trocas = {}; // objeto por pessoa
+          table.clear();
+
+          $.get(apiTrocas, function (data) {
             data.records.forEach(function (item) {
-              table.row
-                .add([
-                  item.profissional,
-                  item.funcao,
-                  item.n_conselho,
-                  `<button class="btn btn-warning btn-sm" onclick="editar(${item.id})">Editar</button>
-                         <button class="btn btn-danger btn-sm" onclick="excluir(${item.id})">Excluir</button>`,
-                ])
-                .draw();
+              const trocaId = String(item.id);
+              const id1 = String(item.func1?.id ?? "");
+              const id2 = String(item.func2?.id ?? "");
+              const nome1 = item.func1?.nome || "";
+              const nome2 = item.func2?.nome || "";
+
+              function garantePessoa(id, nome) {
+                if (!trocas[id]) {
+                  trocas[id] = {
+                    nome: nome,
+                    trocas: {},
+                  };
+                }
+              }
+
+              garantePessoa(id1, nome1);
+              garantePessoa(id2, nome2);
+
+              // para func1, com quem trocou é func2
+              if (id1) {
+                trocas[id1].trocas[trocaId] = {
+                  id: trocaId,
+                  data: item.data1,
+                  comquem: id2,
+                  nome: nome2, // nome de quem está trocando
+                };
+              }
+              // para func2, com quem trocou é func1
+              if (id2) {
+                trocas[id2].trocas[trocaId] = {
+                  id: trocaId,
+                  data: item.data2,
+                  comquem: id1,
+                  nome: nome1,
+                };
+              }
+
+              // popula a tabela (mostrando func1)
+              //       table.row
+              //         .add([
+              //           nome1,
+              //           item.func1?.fk_cargo?.titulo || "",
+              //           item.data1 || "",
+              //           `<button class="btn btn-warning btn-sm" onclick="editar(${item.id})">Editar</button>
+              //    <button class="btn btn-danger btn-sm" onclick="excluir(${item.id})">Excluir</button>`,
+              //         ])
+              //         .draw();
             });
+
+            console.log(trocas);
+            popularTabelaComTrocas(trocas);
+            // ex: JSON.stringify(trocas) se precisar
           });
+        }
+        function formatarDataBR(dataISO) {
+          if (!dataISO) return "";
+          const partes = dataISO.split("-");
+          if (partes.length !== 3) return dataISO; // caso não seja no formato esperado
+          return `${partes[2]}/${partes[1]}/${partes[0]}`;
+        }
+
+        function popularTabelaComTrocas(trocas) {
+          table.clear();
+
+          Object.keys(trocas).forEach(function (idPessoa) {
+            const pessoa = trocas[idPessoa];
+            const nomePessoa = pessoa.nome;
+
+            // pega todas as datas formatadas
+            const datas = Object.values(pessoa.trocas).map((t) =>
+              formatarDataBR(t.data)
+            );
+
+            // remove duplicatas e ordena
+            const datasUnicas = [...new Set(datas)].sort((a, b) => {
+              // converte para Date pra ordenar corretamente
+              const [d1, m1, y1] = a.split("/");
+              const [d2, m2, y2] = b.split("/");
+              return new Date(y1, m1 - 1, d1) - new Date(y2, m2 - 1, d2);
+            });
+
+            const datasStr = datasUnicas.join(", ");
+
+            table.row.add([
+              nomePessoa,
+              datasStr,
+              "", // terceira coluna (pode deixar vazia por enquanto)
+              "", // quarta coluna (também vazia ou com valor)
+            ]);
+          });
+
+          table.draw();
         }
 
         // Carregar cargos para o select

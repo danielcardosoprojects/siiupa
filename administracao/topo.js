@@ -8,14 +8,13 @@ class MeuTopo extends HTMLElement {
   async validarUsuario() {
     // Captura o token da query string
     const params = new URLSearchParams(window.location.search);
-    //const token =
-    //"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3NpdXBhLmNvbS5iciIsImF1ZCI6Imh0dHBzOi8vc2l1cGEuY29tLmJyIiwiaWF0IjoxNzU0MDkyMzk2LCJleHAiOjE3NTQxMDY3OTYsImlkVXN1YXJpbyI6IjEiLCJuYmYiOjEzNTcwMDAwMDB9.SyVpAfuorkSEsLNHftwWR8EvyvSyOY54LMRI4fkp_-k";
-    const token = sessionStorage.token;
+
+    //const token = sessionStorage.token;
     //const token = params.get("token");
 
     // Se não houver token, redireciona para a raiz
     if (!token) {
-      //window.location.href = "/";
+      window.location.href = "/";
       return;
     }
 
@@ -175,43 +174,6 @@ class MeuTopo extends HTMLElement {
 
     this.shadowRoot.appendChild(style);
     this.shadowRoot.appendChild(header);
-  }
-
-  connectedCallback() {
-    this.contarItensVencidos();
-  }
-
-  async contarItensVencidos() {
-    const dataAtual = new Date().toISOString().split("T")[0];
-
-    const data = new Date();
-    const ano = data.getFullYear();
-    const mes = data.getMonth();
-
-    // Cria um novo objeto Date com o dia 0 do próximo mês.
-    // Isso retorna o último dia do mês atual.
-    const ultimoDia = new Date(ano, mes + 1, 0);
-
-    const dia = ultimoDia.getDate();
-    const mesFormatado = mes + 1 < 10 ? `0${mes + 1}` : mes + 1;
-
-    const ultimoDiaMes = `${ano}-${mesFormatado}-${dia}`;
-
-    try {
-      const response = await fetch(
-        `https://www.siupa.com.br/siiupa/api/api.php/records/tb_farmestoque?filter=data_validade,lt,${ultimoDiaMes}&filter=estoque,gt,0`
-      );
-      const data = await response.json();
-
-      const totalVencidos = data.records ? data.records.length : 0;
-
-      // Atualiza o elemento dentro do Shadow DOM
-      this.shadowRoot.getElementById("totalVencidos").textContent =
-        totalVencidos;
-    } catch (error) {
-      console.error("Erro ao buscar itens vencidos:", error);
-      this.shadowRoot.getElementById("totalVencidos").textContent = "Erro";
-    }
   }
 }
 
