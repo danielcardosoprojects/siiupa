@@ -7,6 +7,9 @@ RewriteRule ^adm/rh/folha/([a-z,0-9,A-Z,_-]+)$ index.php?setor=adm&sub=rh&subsub
 RewriteRule ^adm/rh/folha/([a-z,0-9,A-Z,_-]+)#?/?([a-z,0-9,A-Z,_-]+)?$ index.php?setor=adm&sub=rh&subsub=rhfolhaexibe&id=$1#$2 [L]
 RewriteRule ^css\/([a-z,0-9,A-Z,_-]+)$ css/$1 [L]
 
+
+RewriteRule ^adm/trocas$ farmacia/pagina_rh_trocas.html [L]
+
 RewriteRule ^farmacia\/?$ index.php?setor=farm [L]
 RewriteRule ^farmacia\/([a-z,0-9,A-Z,_-]+)/$ index.php?setor=farm&sub=$1 [L]
 RewriteRule ^farmacia\estoque/?$ index.php?setor=farm&sub=estoque [L]
@@ -64,5 +67,7 @@ RewriteRule ^farmacia/item/atualiza-lote/?$ farmacia/paginafarm_inserebd.php?aca
 
 RewriteRule ^farmacia/bdjson/([a-z,0-9,A-Z,_-]+)?$ farmacia/paginafarm_bdjson.php?acao=$1 [L]
 RewriteRule ^farmacia/bd$ farmacia/paginafarm_inserebd.php [L]
+
+
 
 </IfModule>
