@@ -641,7 +641,7 @@ function mes($entrada)
                         var self = this;
 
                     },
-                    columnClass: 'medium',
+                    columnClass: 'large',
                 });
             });
 
