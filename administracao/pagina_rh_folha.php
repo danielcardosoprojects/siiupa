@@ -177,6 +177,9 @@ if ($stmt = $conn->prepare($querymesano)) {
             <path fill-rule="evenodd" d="M7.646.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 1.707V10.5a.5.5 0 0 1-1 0V1.707L5.354 3.854a.5.5 0 1 1-.708-.708l3-3z" />
         </svg> Exportar para Excel
     </a>
+    <a href="#" id="comparador_funcionarios" class="btn btn-outline-info">
+        Verificar funcionários que não estão nesta folha.
+    </a>
 
 </div>
 
@@ -484,21 +487,21 @@ if ($stmt = $conn->prepare($query)) {
             //             matricula: matricula
             //         };
 
-            //         const url<?=$fcpfn?> = 'https://siupa.com.br/siiupa/api/rh/api.php/records/tb_funcionario/<?=$func_id?>';
+            //         const url<?= $fcpfn ?> = 'https://siupa.com.br/siiupa/api/rh/api.php/records/tb_funcionario/<?= $func_id ?>';
 
-            //         const dadosAtualizados<?=$fcpfn?> = {
+            //         const dadosAtualizados<?= $fcpfn ?> = {
             //             matricula: matricula
             //         };
 
-            //         const opcoes<?=$fcpfn?> = {
+            //         const opcoes<?= $fcpfn ?> = {
             //             method: 'PUT', // Método HTTP PATCH para atualização parcial
             //             headers: {
             //                 'Content-Type': 'application/json',
             //             },
-            //             body: JSON.stringify(dadosAtualizados<?=$fcpfn?>),
+            //             body: JSON.stringify(dadosAtualizados<?= $fcpfn ?>),
             //         };
 
-            //         fetch(url<?=$fcpfn?>, opcoes<?=$fcpfn?>)
+            //         fetch(url<?= $fcpfn ?>, opcoes<?= $fcpfn ?>)
             //             .then(response => {
             //                 if (!response.ok) {
             //                     throw new Error(`Erro na requisição: ${response.status}`);
@@ -629,6 +632,19 @@ function mes($entrada)
                 loadCanvas(this.href)
             });
 
+            $("#comparador_funcionarios").click(function(e) {
+                e.preventDefault();
+                $.confirm({
+                    title: 'Funcionarios que não estão nesta folha',
+                    content: 'url:https://siupa.com.br/siiupa/administracao/pagina_rh_folha_comparador.html?id=<?= $idfolha ?>',
+                    onContentReady: function() {
+                        var self = this;
+
+                    },
+                    columnClass: 'medium',
+                });
+            });
+
 
             var busca = null;
             var boxes = $(".box_nomes"); //boxes onde contem os dados a serem pesquisados
@@ -724,32 +740,34 @@ function mes($entrada)
     });
 </script>
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    function scrollToTarget() {
-        // Obtém o ID da âncora na URL (depois do #)
-        let hash = window.location.hash.substring(1); // Exemplo: "6769"
-        if (hash) {
-            let target = document.getElementById(hash);
-            if (target) {
-                // Exibe notificação
-                $.notify("Rolando a página para o servidor alterado...", "info");
+    document.addEventListener("DOMContentLoaded", function() {
+        function scrollToTarget() {
+            // Obtém o ID da âncora na URL (depois do #)
+            let hash = window.location.hash.substring(1); // Exemplo: "6769"
+            if (hash) {
+                let target = document.getElementById(hash);
+                if (target) {
+                    // Exibe notificação
+                    $.notify("Rolando a página para o servidor alterado...", "info");
 
-                // Rola suavemente até o elemento
-                target.scrollIntoView({ behavior: "smooth", block: "center" });
+                    // Rola suavemente até o elemento
+                    target.scrollIntoView({
+                        behavior: "smooth",
+                        block: "center"
+                    });
 
-                // Faz o elemento piscar em verde
-                target.style.transition = "background-color 1s ease-in-out";
-                target.style.backgroundColor = "lightgreen";
-                setTimeout(() => target.style.backgroundColor = "", 1500);
-            } else {
-                // Se o elemento ainda não existir, tenta novamente após 500ms
-                setTimeout(scrollToTarget, 500);
+                    // Faz o elemento piscar em verde
+                    target.style.transition = "background-color 1s ease-in-out";
+                    target.style.backgroundColor = "lightgreen";
+                    setTimeout(() => target.style.backgroundColor = "", 1500);
+                } else {
+                    // Se o elemento ainda não existir, tenta novamente após 500ms
+                    setTimeout(scrollToTarget, 500);
+                }
             }
         }
-    }
 
-    // Espera 2 segundos e então tenta rolar
-    setTimeout(scrollToTarget, 500);
-});
+        // Espera 2 segundos e então tenta rolar
+        setTimeout(scrollToTarget, 500);
+    });
 </script>
-
