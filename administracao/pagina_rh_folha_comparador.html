@@ -35,7 +35,7 @@
   </head>
   <body>
     <h1>Comparador de Funcionários</h1>
-    <button onclick="comparar()">Comparar APIs</button>
+    <button onclick="comparar()">Verificar</button>
 
     <table id="resultado">
       <thead>
@@ -53,8 +53,18 @@
 
     <script>
       async function comparar() {
-        const url1 =
-          "https://www.siupa.com.br/siiupa/api/api.php/records/tb_folha/?filter=fk_folhas,eq,50&join=tb_funcionario&include=fk_funcionario,tb_funcionario.nome";
+        // Pega a string da URL atual
+        const url = window.location.href;
+
+        // Cria um objeto de parâmetros a partir da URL
+        const params = new URLSearchParams(window.location.search);
+
+        // Pega o valor do parâmetro "id"
+        const idfolha = params.get("id");
+
+        console.log("ID encontrado:", idfolha);
+
+        const url1 = `https://www.siupa.com.br/siiupa/api/api.php/records/tb_folha/?filter=fk_folhas,eq,${idfolha}&join=tb_funcionario&include=fk_funcionario,tb_funcionario.nome`;
         const url2 =
           "https://www.siupa.com.br/siiupa/api/api.php/records/tb_funcionario?filter=status,eq,ATIVO&include=id,nome&filter=fk_cargo,neq,20";
 
