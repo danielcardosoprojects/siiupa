@@ -289,11 +289,7 @@ if ($stmt = $conn->prepare($query)) {
 
 <button id="proximo">Próximo</button>
 <table>
-    <thead>
-        <th>DATA</th>
-        <th>ALMOÇO</th>
-        <th>JANTA</th>
-    </thead>
+
     <tbody>
         <td><?= $_GET['dia']; ?>/<?= $mes; ?>/<?= $ano; ?></td>
         <td><?= $totalAlmoco; ?></td>
