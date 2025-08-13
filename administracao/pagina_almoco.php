@@ -306,5 +306,7 @@ if ($stmt = $conn->prepare($query)) {
 
     //window.prompt('Basta copiar', hoje);
     window.print();
-    //setTimeout(() => {window.location.href = link;}, 2000);
+    setTimeout(() => {
+        window.location.href = link;
+    }, 2000);
 </script>
