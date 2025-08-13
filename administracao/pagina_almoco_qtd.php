@@ -2,6 +2,7 @@
     h2 {
         color: #000;
     }
+
     table {
         font-size: 14px;
         font-family: calibri;
@@ -49,7 +50,7 @@
 <?php
 header('Content-type: text/html; charset=utf-8');
 include_once('../bd/conectabd.php');
-$diax = $_GET['dia']+1;
+$diax = $_GET['dia'] + 1;
 $mes = $_GET['mes'];
 $ano = $_GET['ano'];
 
@@ -69,10 +70,8 @@ if (isset($_GET['ano'])) {
 }
 ?>
 <script>
-document.title = "<?php echo "Lista almoço dia $dia - $mes $ano";?>";
-
-
-    </script>
+    document.title = "<?php echo "Lista almoço dia $dia - $mes $ano"; ?>";
+</script>
 <?php
 echo "<div><h2>LISTA ALMOÇO $tdia/$mes/$ano - <a href='?dia=$diax&mes=$mes&ano=$ano'>.</a></h2></div>";
 $query = "SELECT s.setor, f.nome, ef.id FROM u940659928_siupa.tb_escala_funcionario AS ef INNER JOIN u940659928_siupa.tb_funcionario AS f ON (ef.fk_funcionario = f.id) INNER JOIN u940659928_siupa.tb_setor as s ON (f.fk_setor = s.id) Where ef.oficial = 'sim' and ef.mes=$mes and ef.ano=$ano and (ef.$dia like '%D%' OR ef.$dia like '%P%'  OR ef.$dia like '%M%') and f.id NOT IN ('107'/*walter */, '409'/* Euriene */, '410'/*Marlilson */)/*exclui adm e direcao*/ ORDER BY s.setor ASC, f.nome ASC";
@@ -137,38 +136,38 @@ if ($stmt = $conn->prepare($query)) {
     echo "<tr>";
     echo "<td COLSPAN='2' class='total'>2</td>";
     echo "</tr>";
-    $totalgeral = $totalgeral + 2 + 2;
+    $totalgeral = $totalgeral + 2;
     //fim guarda
 
-     //BIOMEDIOCOS PADRÕES
-     echo "<thead>";
-     echo "<th>OUTROS    </th>";
-     echo "<th></th>";
-     echo "</thead>";
-     echo "<tbody>";
-     echo "<tr>";
-     echo "<td>BIOMÉDICO(A)</td>";
-     echo "<td class='ass'></td>";
-     echo "</tr>";
+    //BIOMEDIOCOS PADRÕES
+    echo "<thead>";
+    echo "<th>OUTROS    </th>";
+    echo "<th></th>";
+    echo "</thead>";
+    echo "<tbody>";
+    echo "<tr>";
+    echo "<td>BIOMÉDICO(A)</td>";
+    echo "<td class='ass'></td>";
+    echo "</tr>";
 
-     echo "<tr>";
-     echo "<td>MOTORISTA</td>";
-     echo "<td class='ass'></td>";
-     echo "</tr>";
+    echo "<tr>";
+    echo "<td>MOTORISTA</td>";
+    echo "<td class='ass'></td>";
+    echo "</tr>";
 
-     echo "<tr>";
-     echo "<td COLSPAN='2' class='total'>2</td>";
-     echo "</tr>";
-     echo "</tbody>";
-       echo "<br/>";
-     //fimbiomedico
-     echo "<thead>";
-     echo "<th>Total    </th>";
-     echo "<th></th>";
-     echo "</thead>";
+    echo "<tr>";
+    echo "<td COLSPAN='2' class='total'>2</td>";
+    echo "</tr>";
+    echo "</tbody>";
+    echo "<br/>";
+    //fimbiomedico
+    echo "<thead>";
+    echo "<th>Total    </th>";
+    echo "<th></th>";
+    echo "</thead>";
 
 
-     echo "<tbody>";
+    echo "<tbody>";
     echo "<tr>";
     echo "<td COLSPAN='2' class='total'>Total geral: $totalgeral</td>";
     $totalAlmoco = $totalgeral;
@@ -212,9 +211,9 @@ if ($stmt = $conn->prepare($query)) {
 
             $i = 1;
             $totalgeral = $totalgeral + 1;
-    
+
             echo "<thead>";
-      
+
             echo "<th >$setor</th>";
             echo "<th></th>";
             echo "</thead>";
@@ -258,16 +257,16 @@ if ($stmt = $conn->prepare($query)) {
     echo "<td>Biomédico(A)(PRO-ANALISYS)</td>";
     echo "<td class='ass'></td>";
     echo "</tr>";
-    
+
     echo "<tr>";
     echo "<td>Motorista(HMC)</td>";
     echo "<td class='ass'></td>";
     echo "</tr>";
-   
+
     echo "<tr>";
     echo "<td COLSPAN='2' class='total'>2</td>";
     echo "</tr>";
-    $totalgeral = $totalgeral + 2 + 2;
+    $totalgeral = $totalgeral + 2;
     //fim guarda
     echo "<thead>";
     echo "<th>Total    </th>";
@@ -285,7 +284,7 @@ if ($stmt = $conn->prepare($query)) {
 }
 
 ?>
-<input type="text" style="width:100%" name="texto" id="texto" value="<?=$_GET['dia'];?>/<?=$mes;?>/<?=$ano;?> Almoço: <?=$totalAlmoco;?> Janta: <?=$totalJanta;?>"></input>
+<input type="text" style="width:100%" name="texto" id="texto" value="<?= $_GET['dia']; ?>/<?= $mes; ?>/<?= $ano; ?> Almoço: <?= $totalAlmoco; ?> Janta: <?= $totalJanta; ?>"></input>
 <button id="copiar">Copiar</button>
 
 <button id="proximo">Próximo</button>
@@ -295,7 +294,7 @@ if ($stmt = $conn->prepare($query)) {
         tabelas[0].style.display = "none";
         tabelas[1].style.display = "none";
     }
-    
+
     var query = location.search.slice(1);
     var partes = query.split('&');
     var data = {};
@@ -308,35 +307,33 @@ if ($stmt = $conn->prepare($query)) {
         link = "pagina_almoco_qtd.php?dia=" + proximodia + "&mes=" + data.mes + "&ano=" + data.ano;
     });
     console.log(link);
-        totalAlmoco = '<?=$totalAlmoco;?>';
-        totalJanta = '<?=$totalJanta;?>';
-        hoje = `<?=$_GET['dia']?>/${data.mes}/${data.ano} Almoço: ${totalAlmoco} Janta: ${totalJanta}`;
-        
-        //window.prompt('Basta copiar', hoje);
-        //window.print();
-          //  setTimeout(() => {window.location.href = link;}, 2000);
-          const botao = document.getElementById("proximo");
+    totalAlmoco = '<?= $totalAlmoco; ?>';
+    totalJanta = '<?= $totalJanta; ?>';
+    hoje = `<?= $_GET['dia'] ?>/${data.mes}/${data.ano} Almoço: ${totalAlmoco} Janta: ${totalJanta}`;
 
-// Adicione um evento de clique ao botão
-botao.addEventListener("click", function() {
-  // Redirecione para o link especificado
-  window.location.href = link;
-});
-const botaoCopiar = document.getElementById("copiar");
-const inputTexto = document.getElementById("texto");
+    //window.prompt('Basta copiar', hoje);
+    //window.print();
+    //  setTimeout(() => {window.location.href = link;}, 2000);
+    const botao = document.getElementById("proximo");
 
-// Adiciona um evento de clique ao botão
-botaoCopiar.addEventListener("click", function () {
-  // Seleciona o conteúdo do input
-  inputTexto.select();
-  inputTexto.setSelectionRange(0, 99999); // Para dispositivos móveis
+    // Adicione um evento de clique ao botão
+    botao.addEventListener("click", function() {
+        // Redirecione para o link especificado
+        window.location.href = link;
+    });
+    const botaoCopiar = document.getElementById("copiar");
+    const inputTexto = document.getElementById("texto");
 
-  // Copia o conteúdo para a área de transferência
-  document.execCommand("copy");
+    // Adiciona um evento de clique ao botão
+    botaoCopiar.addEventListener("click", function() {
+        // Seleciona o conteúdo do input
+        inputTexto.select();
+        inputTexto.setSelectionRange(0, 99999); // Para dispositivos móveis
 
-  // Opcional: Exibe uma mensagem de sucesso
- 
-});
-        
+        // Copia o conteúdo para a área de transferência
+        document.execCommand("copy");
+
+        // Opcional: Exibe uma mensagem de sucesso
+
+    });
 </script>
-
