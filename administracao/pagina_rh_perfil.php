@@ -1007,7 +1007,7 @@ class Grade
 
     $grade->fimlinha();
     echo "</table>";
-    echo "<div class='copiar btn btn-sm btn-grey' data-text='C:\wamp64\www\siiupa\administracao\\rh\\$perfil->id\'>Pasta Windows</div>";
+    
 
     ?>
 
