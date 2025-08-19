@@ -737,17 +737,19 @@ function mes($entrada)
                 filename: $("#titulo_folha").data("titulo") + ".xls", // do include extension
                 preserveColors: true
             });
-        });
-    });
-</script>
-<script>
-        function exportarTabela() {
+
+         
                     const tabela = document.getElementById("tabela_folha");
                     const workbook = XLSX.utils.table_to_book(tabela, {
                         sheet: "Planilha1"
                     });
                     XLSX.writeFile(workbook, "Lista Servidores SIUPA.xlsx");
-                }
+                
+        });
+    });
+</script>
+<script>
+
     document.addEventListener("DOMContentLoaded", function() {
         function scrollToTarget() {
             // Obtém o ID da âncora na URL (depois do #)
