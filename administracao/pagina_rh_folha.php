@@ -58,6 +58,13 @@ class Tabela
 
 <script type="text/javascript" src="/siiupa/js/script.js"></script>
 <script>
+    function exportarTabela() {
+                    const tabela = document.getElementById("tabela_folha");
+                    const workbook = XLSX.utils.table_to_book(tabela, {
+                        sheet: "Planilha1"
+                    });
+                    XLSX.writeFile(workbook, "Lista Servidores SIUPA.xlsx");
+                }
     function consultarMatricula(cpf) {
         const url = `https://siupa.com.br/siiupa/administracao/api/consulta_matricula.php?cpf=${cpf}`;
 
@@ -410,7 +417,7 @@ if ($stmt = $conn->prepare($query)) {
 
 
     echo '
-<table class="table  table-bordered  border-dark table-sm table-hover table-striped Tabela_folha" style="font-size:12px">
+<table id="tabela_folha" class="table  table-bordered  border-dark table-sm table-hover table-striped Tabela_folha" style="font-size:12px">
         <thead>
           <tr>
             <th scope="col">N#</th>
