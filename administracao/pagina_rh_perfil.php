@@ -536,10 +536,10 @@ class Grade
         Cadastrar Férias
     </a>
 
-    <button onClick="abrirModalFerias(<?=$perfil->id?>)" class="btn-danger">
+    <a href="btnVacations" data-idfuncionario="<?=$perfil->id?>" class="btn-danger">
         <img src="/siiupa/imagens/icones/houseboat.svg">
         Cadastrar Férias
-    </button>
+</a>
     <!-- <script>
         document.addEventListener("keydown", function(event) {
             // Verifica se a tecla pressionada foi "f" ou "F"
@@ -1627,7 +1627,7 @@ class Grade
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
             </div>
             <div class="modal-body">
-                <iframe id="iframeFerias" style="width: 80%; height: 80vh; border: none;" src=""></iframe>
+                <iframe id="iframeFerias" style="width: 50%; height: 80vh; border: none;" src=""></iframe>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn" data-bs-dismiss="modal">Fechar</button>
@@ -1636,6 +1636,11 @@ class Grade
     </div>
 </div>
 <script>
+    //Ferias em novo estilo
+    btnVacations = document.getElementById('btnVacations');
+    btnVacations.addEventListener('click', function() {
+        abrirModalFerias(<?= $perfil->id; ?>);
+    });
     function abrirModalFerias(idFuncionario) {
         const token = '<?= $token; ?>'; // Usa o token gerado no PHP
         const iframe = document.getElementById('iframeFerias');
