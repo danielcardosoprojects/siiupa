@@ -535,6 +535,11 @@ class Grade
         <img src="/siiupa/imagens/icones/houseboat.svg">
         Cadastrar Férias
     </a>
+
+    <a href="" onclick="abrirModalFerias(<?=$perfil->id?>)"class="btn btn-danger">
+        <img src="/siiupa/imagens/icones/houseboat.svg">
+        Cadastrar Férias
+    </a>
     <!-- <script>
         document.addEventListener("keydown", function(event) {
             // Verifica se a tecla pressionada foi "f" ou "F"
@@ -1613,7 +1618,36 @@ class Grade
     </div>
 </div>
 <!-- fim Dialog Contracheque CC -->
+<!-- Dialog Ferias -->
+<div class="modal fade" id="modalFerias" tabindex="-1" aria-labelledby="modalFeriasLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Férias</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+            </div>
+            <div class="modal-body">
+                <iframe id="iframeFerias" style="width: 100%; height: 100vh; border: none;" src=""></iframe>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" data-bs-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function abrirModalFerias(idFuncionario) {
+        const token = '<?= $token; ?>'; // Usa o token gerado no PHP
+        const iframe = document.getElementById('iframeFerias');
+        const modal = new bootstrap.Modal(document.getElementById('modalFerias'));
 
+        iframe.src = `https://ferias-siupa.vercel.app/funcionario/${idFuncionario}?token=${token}`;
+        modal.show();
+    }
+</script>
+
+
+<!-- fim Dialog Ferias -->
 
 <div id="arquivostemporarios"></div>
 <div id='testando'></div>
