@@ -318,7 +318,7 @@ include_once('../bd/nivel.php');
                 <th scope="col">#</th>
                 <th scope="col">MATRICULA</th>
 
-                <th scope="col">Férias</th>
+                <!-- <th scope="col">Férias</th> -->
                 <th scope="col">NOME<img src="/siiupa/imagens/tablesorter.svg"></th>
                 <th scope="col">CPF</th>
                 <th scope="col">SEXO</th>
@@ -329,7 +329,7 @@ include_once('../bd/nivel.php');
                 <th scope="col">VINCULO<img src="/siiupa/imagens/tablesorter.svg"></th>
                 <!-- <th scope="col">Férias 2022<img src="/siiupa/imagens/tablesorter.svg"></th> -->
                 <th scope="col">CH</th>
-                <th scope="col">Férias 2025</th>
+                <!-- <th scope="col">Férias 2025</th> -->
 
                 <!-- <th scope="col">Data Inicio</th> -->
                 <!-- <th scope="col">Data Fim</th> -->
@@ -420,20 +420,34 @@ include_once('../bd/nivel.php');
                     echo "<td></td>";
                     echo "<td id='matriculaFunc_$dados->idfuncionario'><span class='matriculaFunc' data-id='$dados->idfuncionario'>$dados->matricula</span><i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->matricula'></span></i></td>";
 
-                    //NOME
+                    
+                    
+                    
+                    //BUTTON VACATIONS
+                    // echo "<td><button class='btn btn-success' onclick='abrirModalFerias($dados->idfuncionario)'>Férias</button></td>";
+
+                    //LINE NAME
                     $token = $_SESSION['token'];
-                    echo "<td><button class='btn btn-success' onclick='abrirModalFerias($dados->idfuncionario)'>Férias</button></td>";
                     echo "<td>    <a target='_blank' class='abreperfil'  rel='noreferrer noopener' href='?setor=adm&sub=rh&subsub=perfil&id=$dados->idfuncionario&token=$token'>$dados->nome</a><i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->nome'></span></i></td>";
+
+                    //LINK TO CNES
                     //<a href='/siiupa/administracao/apicnes.php?id=$dados->idfuncionario' target='_blank'>CNES</a>
+                    //LINK TO ELECTION DOCUMENT
                     //<a class='eleicaobtn-link' target='_blank' href='https://siupa.com.br/siiupa/administracao/pagina_rh_eleicao2022.php?nome=$dados->nome&cargo=$dados->cargo&cpf=$dados->cpf'>Eleição</a> 
+
+                    //LINE BIRTH
                     //                    echo "<td>$dados->data_nascbr</td>";
 
+                    //COLUMN WITH DOC CPF
                     echo "<td id='cpf_$dados->idfuncionario'></td>";
                     ?>
                     <script>
                         document.getElementById('cpf_<?= $dados->idfuncionario ?>').innerHTML = '<?= $dados->cpf ?>'.replace(/\D/g, '').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2');
                     </script>
+
+                    
             <?php
+            //COL WITH GENDER
                     $dados_sexo = "";
                     if ($dados->sexo == "F") {
                         $dados_sexo = "FEMININO";
