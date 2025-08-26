@@ -130,7 +130,7 @@ $(function () {
 
 });//fim do function que carrega o script após o carregamento da página
 $(document).ready(function () {
-    $('#tabela_funcionarios').DataTable({
+    $('#tabela_funcionariosx').DataTable({
         "dom": '<"top"<"teste"f><"teste"l>ip>rt<"bottom"p><"clear">',
         "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Tudo"]],
         language: {
