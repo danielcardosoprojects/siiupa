@@ -536,7 +536,7 @@ class Grade
         Cadastrar Férias
     </a>
 
-    <a href="btnVacations" data-idfuncionario="<?=$perfil->id?>" class="btn-danger">
+    <a href="#" id="btnVacations" data-idfuncionario="<?=$perfil->id?>" class="btn btn-danger">
         <img src="/siiupa/imagens/icones/houseboat.svg">
         Cadastrar Férias
 </a>
@@ -1638,11 +1638,13 @@ class Grade
 <script>
     //Ferias em novo estilo
     btnVacations = document.getElementById('btnVacations');
-    btnVacations.addEventListener('click', function() {
+    btnVacations.addEventListener('click', function(e) {
+        e.preventDefault();
         abrirModalFerias(<?= $perfil->id; ?>);
     });
     function abrirModalFerias(idFuncionario) {
-        const token = '<?= $token; ?>'; // Usa o token gerado no PHP
+        // const token = '<?= $token; ?>'; // Usa o token gerado no PHP
+        const token = localStorage.getItem('token'); // Usa o token armazenado no localStorage
         const iframe = document.getElementById('iframeFerias');
         const modal = new bootstrap.Modal(document.getElementById('modalFerias'));
 
