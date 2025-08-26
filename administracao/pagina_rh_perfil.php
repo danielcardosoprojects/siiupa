@@ -536,10 +536,10 @@ class Grade
         Cadastrar Férias
     </a>
 
-    <a href="" onclick="abrirModalFerias(<?=$perfil->id?>)"class="btn btn-danger">
+    <button onClick="abrirModalFerias(<?=$perfil->id?>)" class="btn btn-danger">
         <img src="/siiupa/imagens/icones/houseboat.svg">
         Cadastrar Férias
-    </a>
+    </button>
     <!-- <script>
         document.addEventListener("keydown", function(event) {
             // Verifica se a tecla pressionada foi "f" ou "F"
