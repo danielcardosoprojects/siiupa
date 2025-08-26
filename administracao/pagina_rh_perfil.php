@@ -536,7 +536,7 @@ class Grade
         Cadastrar Férias
     </a>
 
-    <button onClick="abrirModalFerias(<?=$perfil->id?>)" class="btn btn-danger">
+    <button onClick="abrirModalFerias(<?=$perfil->id?>)" class="btn-danger">
         <img src="/siiupa/imagens/icones/houseboat.svg">
         Cadastrar Férias
     </button>
@@ -1627,7 +1627,7 @@ class Grade
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
             </div>
             <div class="modal-body">
-                <iframe id="iframeFerias" style="width: 100%; height: 100vh; border: none;" src=""></iframe>
+                <iframe id="iframeFerias" style="width: 80%; height: 80vh; border: none;" src=""></iframe>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn" data-bs-dismiss="modal">Fechar</button>
