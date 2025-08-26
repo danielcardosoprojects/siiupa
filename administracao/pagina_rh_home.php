@@ -467,17 +467,19 @@ include_once('../bd/nivel.php');
                     }
                     echo "<td>$dados->vinculo <i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->vinculo'></span></i> </td>";
                     echo "<td>$dados->carga_horaria</td>";
-                    echo "<td>";
-                    $ferias23 = new BD;
-                    $sqlF23 = "SELECT * FROM u940659928_siupa.tb_ferias where fk_funcionario = '$dados->idfuncionario' and ref_ano = '2025';";
-                    $rF23 = $ferias23->consulta($sqlF23);
-                    $meses = [];
-                    foreach ($rF23 as $ferias23) {
-                        $meses[] = mes($ferias23->ref_mes);
-                    }
-                    echo implode('/', $meses);
+                  
+                    //COLS VACATIONS
+                    // echo "<td>";
+                    // $ferias23 = new BD;
+                    // $sqlF23 = "SELECT * FROM u940659928_siupa.tb_ferias where fk_funcionario = '$dados->idfuncionario' and ref_ano = '2025';";
+                    // $rF23 = $ferias23->consulta($sqlF23);
+                    // $meses = [];
+                    // foreach ($rF23 as $ferias23) {
+                    //     $meses[] = mes($ferias23->ref_mes);
+                    // }
+                    // echo implode('/', $meses);
 
-                    echo "</td>";
+                    // echo "</td>";
 
 
 
