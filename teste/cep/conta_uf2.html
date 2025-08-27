@@ -11,6 +11,7 @@
             margin: 0;
             padding: 0;
             height: 150vh; /* Faz a altura ocupar toda a tela */
+            background-color:#000;
         }
         #buttons {
            position: fixed;
@@ -19,6 +20,7 @@
         .container {
             display: flex;
             width: 100%;
+       
         }
 
         .left {
@@ -26,7 +28,8 @@
             padding: 20px;
             border-right: 2px solid #ccc;
             overflow-y: auto; /* Para permitir rolagem se necessário */
-            max-width: 50%; /* Limita o tamanho da área à esquerda */
+            max-width: 40%; /* Limita o tamanho da área à esquerda */
+                 filter: invert(100%);
         }
 
         .right {
@@ -94,10 +97,10 @@
       const dateValue = document.getElementById("date").value;
 
       // Extrai o ano (AAAA) e o mês (MM) da data
-      const [year, month] = dateValue.split("-");
+      const [year, month, day] = dateValue.split("-");
 
       // Recarrega a página com os parâmetros de consulta
-      window.location.href = `?datePrefix=${year}&month=${month}`;
+      window.location.href = `?datePrefix=${year}&month=${month}&complete=${dateValue}`;
     });
 
     // Função para exibir os parâmetros da query string (opcional)
@@ -105,10 +108,12 @@
       const params = new URLSearchParams(window.location.search);
       const datePrefix = params.get("datePrefix");
       const month = params.get("month");
+      const complete = params.get("complete");
 
       if (datePrefix && month) {
         console.log(`Ano (datePrefix): ${datePrefix}`);
         console.log(`Mês (month): ${month}`);
+        document.getElementById("date").value = complete;
         if(anoOuMes == "ano"){
             return datePrefix;
         } else {

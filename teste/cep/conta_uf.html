@@ -11,16 +11,16 @@
             padding: 0;
             display: flex;
             justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f4f4f4;
+ 
+ 
+            background-color: #000;
         }
         .state-container {
-            display: grid;
             
-            gap: 2px;
+            
+            gap: 0px;
             width: 100%;
-            height: 100%;
+            height: 70%;
             max-width: 100%;
             max-height: 100%;
             margin: 0;
@@ -28,16 +28,16 @@
         .state-button {
             border: 1px solid black;
             display: flex;
-            align-items: center;
+          
             justify-content: space-between;
             padding: 0;
             margin: 0;
             cursor: pointer;
             text-align: center;
-            font-size: 16px;
+            font-size: 12px;
             font-weight: bold;
-            width: 100%;
-            height: 100%;
+            width: 50%;
+            height: 70%;
             box-sizing: border-box;
         }
         .state-button button {
@@ -57,6 +57,9 @@
             font-weight: normal;
             font-size: 14px;
         }
+        #resultsTable {
+            color:#fff;
+        }
     </style>
 </head>
 <body>
@@ -68,7 +71,7 @@
     </div>
 
 
-    <table>
+    <table id="resultsTable">
         <thead>
             <tr>
                 <th>UF</th>
