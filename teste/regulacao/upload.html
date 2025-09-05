@@ -1,0 +1,173 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload e Inserção de JSONs</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        #log { white-space: pre-wrap; border: 1px solid #ccc; padding: 10px; height: 200px; overflow-y: scroll; }
+        progress { width: 100%; }
+    </style>
+</head>
+<body>
+    <h1>Carregar e Inserir JSONs na API</h1>
+    <input type="file" id="files" multiple accept=".json">
+    <button onclick="processFiles()">Processar e Inserir</button>
+    <progress id="progress" value="0" max="100"></progress>
+    <div id="log"></div>
+
+    <script>
+        const API_URL = 'https://www.siupa.com.br/siiupa/api/api.php/records/tb_regulacao_ser';
+        const BATCH_SIZE = 50; // Envia em lotes para evitar falhas
+        const MAX_RETRIES = 3;
+
+        function log(message) {
+            const logDiv = document.getElementById('log');
+            logDiv.innerHTML += message + '\n';
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+
+        // Função para converter formato "HH:MM - DD/MM/YYYY" para "YYYY-MM-DD HH:MM:SS"
+        function convertDateFormat(dateStr) {
+            try {
+                const [time, date] = dateStr.split(' - ').map(s => s.trim());
+                const [hours, minutes] = time.split(':');
+                const [day, month, year] = date.split('/');
+                return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')} ${hours.padStart(2, '0')}:${minutes.padStart(2, '0')}:00`;
+            } catch (error) {
+                log(`Erro ao converter data "${dateStr}": ${error.message}`);
+                return null; // Retorna null para indicar erro, será tratado no processamento
+            }
+        }
+
+        async function insertBatch(batch, retry = 0) {
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(batch)
+                });
+                if (!response.ok) throw new Error(`Erro HTTP: ${response.status}`);
+                return await response.json();
+            } catch (error) {
+                if (retry < MAX_RETRIES) {
+                    log(`Falha no batch, retry ${retry + 1}/${MAX_RETRIES}: ${error.message}`);
+                    return insertBatch(batch, retry + 1);
+                }
+                log(`Falha permanente no batch: ${error.message}`);
+                return { records: [] }; // Retorna vazio em falha
+            }
+        }
+
+        async function getTotalRecords() {
+            const response = await fetch(API_URL + '?size=1');
+            const data = await response.json();
+            return data.meta?.filterCount || 0;
+        }
+
+        async function processFiles() {
+            const files = document.getElementById('files').files;
+            if (files.length === 0) return log('Selecione arquivos JSON.');
+
+            let totalRecords = 0;
+            let successfulInserts = 0;
+            const progress = document.getElementById('progress');
+            progress.value = 0;
+            progress.max = files.length;
+
+            for (let i = 0; i < files.length; i++) {
+                const file = files[i];
+                log(`Processando arquivo: ${file.name}`);
+
+                const reader = new FileReader();
+                reader.onload = async (e) => {
+                    try {
+                        const data = JSON.parse(e.target.result);
+                        if (!Array.isArray(data)) throw new Error('JSON não é um array.');
+
+                        // Converter datas no array de registros
+                        const formattedData = data.map(record => {
+                            const formattedDate = convertDateFormat(record['Dt solicitação']);
+                            if (!formattedDate) return null; // Marca como inválido
+                            return {
+                                dt_solicitacao: formattedDate,
+                                executante: record.Executante,
+                                paciente: record.Paciente,
+                                procedimento: record.Procedimento,
+                                situacao: record.Situação,
+                                solicitante: record.Solicitante
+                            };
+                        }).filter(record => record !== null); // Remove registros com data inválida
+
+                        totalRecords += data.length;
+                        const validRecords = formattedData.length;
+                        log(`Registros encontrados: ${data.length}, válidos: ${validRecords}`);
+
+                        // Dividir em batches
+                        for (let j = 0; j < formattedData.length; j += BATCH_SIZE) {
+                            const batch = formattedData.slice(j, j + BATCH_SIZE);
+                            const result = await insertBatch(batch);
+                            successfulInserts += result.records?.length || 0;
+                        }
+
+                        progress.value = i + 1;
+                    } catch (error) {
+                        log(`Erro no arquivo ${file.name}: ${error.message}`);
+                    }
+
+                    if (i === files.length - 1) {
+                        // Verificação final
+                        const dbTotal = await getTotalRecords();
+                        log(`\nConclusão:\nTotal lidos: ${totalRecords}\nInseridos com sucesso: ${successfulInserts}\nTotal no banco: ${dbTotal}`);
+                        if (successfulInserts === totalRecords) {
+                            log('Todos os dados foram carregados com sucesso!');
+                        } else {
+                            log('Atenção: Nem todos os registros foram inseridos. Verifique logs.');
+                        }
+                    }
+                };
+                reader.readAsText(file);
+            }
+        }
+    </script>
+</body>
+</html>
