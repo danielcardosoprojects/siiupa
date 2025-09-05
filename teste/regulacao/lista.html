@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Lista de Registros</title>
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.datatables.net/2.0.8/css/dataTables.dataTables.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.datatables.net/buttons/3.0.2/css/buttons.dataTables.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.datatables.net/responsive/3.0.0/css/responsive.dataTables.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      table {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Registros da Tabela tb_regulacao_ser</h1>
+
+    <table id="table" class="display responsive nowrap" style="width: 100%">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Dt Solicitação</th>
+          <th>Executante</th>
+          <th>Paciente</th>
+          <th>Procedimento</th>
+          <th>Situação</th>
+          <th>Solicitante</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdn.datatables.net/responsive/3.0.0/js/dataTables.responsive.min.js"
+    ></script>
+
+    <script
+      type="text/javascript"
+      src="https://cdn.datatables.net/buttons/3.0.2/js/dataTables.buttons.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.html5.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.print.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.datatables.net/buttons/3.0.2/js/buttons.colVis.min.js"
+    ></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+
+    <script>
+      const API_URL =
+        "https://www.siupa.com.br/siiupa/api/api.php/records/tb_regulacao_ser";
+
+      $(document).ready(function () {
+        $("#table").DataTable({
+          // Configurações do layout da tabela
+          dom: "Blfrtip", // 'B': Buttons, 'l': length changing, 'f': filtering input, 'r': processing display, 't': table, 'i': info, 'p': pagination
+
+          // Configura os botões de exportação
+          buttons: [
+            {
+              extend: "copyHtml5",
+              exportOptions: {
+                columns: ":visible",
+              },
+            },
+            {
+              extend: "excelHtml5",
+              exportOptions: {
+                columns: ":visible",
+              },
+            },
+            {
+              extend: "pdfHtml5",
+              exportOptions: {
+                columns: ":visible",
+              },
+            },
+            "print",
+            "colvis",
+          ],
+
+          // Tradução para português
+          language: {
+            url: "//cdn.datatables.net/plug-ins/1.13.4/i18n/pt-BR.json",
+            buttons: {
+              pageLength: {
+                _: "Mostrar %d registros",
+                "-1": "Mostrar todos",
+              },
+            },
+          },
+
+          // Configurações do AJAX
+          ajax: {
+            url: API_URL,
+            dataSrc: "records", // Indica onde estão os dados no JSON
+          },
+
+          // Define as colunas
+          columns: [
+            { data: "id" },
+            { data: "dt_solicitacao" },
+            { data: "executante" },
+            { data: "paciente" },
+            { data: "procedimento" },
+            { data: "situacao" },
+            { data: "solicitante" },
+          ],
+
+          // Ativa a funcionalidade de responsividade
+          responsive: true,
+        });
+      });
+    </script>
+  </body>
+</html>

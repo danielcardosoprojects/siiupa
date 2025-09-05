@@ -1,0 +1,107 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Registros</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
+        input { margin-bottom: 10px; width: 200px; }
+    </style>
+</head>
+<body>
+    <h1>Registros da Tabela tb_regulacao_ser</h1>
+    <input type="text" id="filterPaciente" placeholder="Filtrar por Paciente">
+    <input type="text" id="filterSituacao" placeholder="Filtrar por Situação">
+    <button onclick="loadRecords()">Atualizar Lista</button>
+    <table id="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Dt Solicitação</th>
+                <th>Executante</th>
+                <th>Paciente</th>
+                <th>Procedimento</th>
+                <th>Situação</th>
+                <th>Solicitante</th>
+            </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+    </table>
+
+    <script>
+        const API_URL = 'https://www.siupa.com.br/siiupa/api/api.php/records/tb_regulacao_ser';
+
+        async function loadRecords() {
+            const paciente = document.getElementById('filterPaciente').value;
+            const situacao = document.getElementById('filterSituacao').value;
+            let url = API_URL;
+            if (paciente || situacao) {
+                url += '?filter=' + (paciente ? `paciente,like,%${paciente}%` : '') + (situacao ? `&situacao,like,%${situacao}%` : '');
+            }
+
+            const response = await fetch(url);
+            const data = await response.json();
+            const tbody = document.getElementById('tbody');
+            tbody.innerHTML = '';
+
+            data.records.forEach(record => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td>${record.id}</td>
+                    <td>${record.dt_solicitacao}</td>
+                    <td>${record.executante}</td>
+                    <td>${record.paciente}</td>
+                    <td>${record.procedimento}</td>
+                    <td>${record.situacao}</td>
+                    <td>${record.solicitante}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // Carrega inicialmente
+        loadRecords();
+    </script>
+</body>
+</html>
