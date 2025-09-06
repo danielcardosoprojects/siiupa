@@ -195,7 +195,7 @@ document.addEventListener("keydown", (event) => {
     }
 
     proximoCampo();
-    campoPosicao.value = parseFloat(campoPosicao.value) - 26;
+    campoPosicao.value = parseFloat(campoPosicao.value) - 20;
     atualizarPosicao();
   }
   if (event.key === "b") {
