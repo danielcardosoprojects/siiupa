@@ -274,7 +274,7 @@
                 <img src="/siiupa/imagens/icones/dinheiro2.svg" width="25">
                 Acionamentos</a>
 
-            <a href="/siiupa/administracao/trocas?token=<?= $_SESSION['token'] ?>" id="bTrocas" class="btn btn-dark btn-lg bt_menu_rh">
+            <a href="https://painel-controle-siupa.vercel.app/trocas?token=<?= $_SESSION['token'] ?>" id="bTrocas" class="btn btn-dark btn-lg bt_menu_rh">
                 <img src="/siiupa/imagens/icones/trocas.png" width="20">
                 Trocas</a>
 
