@@ -384,6 +384,7 @@ include_once('../bd/nivel.php');
                     $foto_perfil = 'administracao/rh/' . $dados->idfuncionario . '/foto_perfil';
                     echo "
                     <script>
+                    servidor[$dados->idfuncionario] = $dados;
                     servidores[$dados->idfuncionario]=[];                    
                     servidores[$dados->idfuncionario]['nome'] = '$dados->nome'; 
                     servidores[$dados->idfuncionario]['data_nasc'] = '$dados->data_nascbr';
