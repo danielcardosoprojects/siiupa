@@ -808,7 +808,7 @@ $idunico = uniqid();
 
   try {
     document.execCommand('copy');
-    alert('Copiado com sucesso! Cole no Excel (Ctrl+V).');
+    //alert('Copiado com sucesso! Cole no Excel (Ctrl+V).');
   } catch (err) {
     console.error('Erro ao copiar: ', err);
   }
