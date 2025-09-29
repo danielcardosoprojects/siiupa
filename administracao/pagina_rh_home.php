@@ -396,9 +396,10 @@ include_once('../bd/nivel.php');
                     servidores[$dados->idfuncionario]['vinculo'] = '$dados->vinculo';
                     servidores[$dados->idfuncionario]['setor'] = '$dados->setor';
 </script>";
+var_dump($dados);
             ?>
                     <script>
-                        console.log("<?= json_encode($dados)?>");
+                        
                         conta_serv = "<?= $dados->nome ?>";
                         servidores_freq[conta_serv] = [];
                         servidores_freq[conta_serv]['nome'] = '<?= $dados->nome ?>';
