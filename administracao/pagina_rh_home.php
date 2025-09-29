@@ -435,7 +435,7 @@ include_once('../bd/nivel.php');
 
                     //LINE NAME
                     $token = $_SESSION['token'];
-                    echo "<td>    <a target='_blank' class='abreperfil'  rel='noreferrer noopener' href='?setor=adm&sub=rh&subsub=perfil&id=$dados->idfuncionario&token=$token'>$dados->nome</a><i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->nome'></span><span class='ui-icon ui-icon-copy copiarCNES' data-text='$dados->idfuncionario'></span>/i></td>";
+                    echo "<td>    <a target='_blank' class='abreperfil'  rel='noreferrer noopener' href='?setor=adm&sub=rh&subsub=perfil&id=$dados->idfuncionario&token=$token'>$dados->nome</a><i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->nome'></i></span><i><span class='ui-icon ui-icon-copy copiarCNES' data-text='$dados->idfuncionario'></span></i></td>";
 
                     //LINK TO CNES
                     //<a href='/siiupa/administracao/apicnes.php?id=$dados->idfuncionario' target='_blank'>CNES</a>
