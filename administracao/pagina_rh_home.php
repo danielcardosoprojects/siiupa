@@ -525,7 +525,7 @@ include_once('../bd/nivel.php');
                 const idFunc = $(this).attr('data-text');
                copiarParaCNES(
                 servidores[idFunc]['nomeMaiusculo'],
-                servidores[idFunc]['cpf'],
+                formatarCPF(servidores[idFunc]['cpf']),
                 servidores[idFunc]['conselho_tipo']+ ' ' +
                 servidores[idFunc]['conselho_n'],
                 servidores[idFunc]['cbo'],
