@@ -526,7 +526,7 @@ include_once('../bd/nivel.php');
                copiarParaCNES(
                 servidores[idFunc]['nomeMaiusculo'],
                 servidores[idFunc]['cpf'],
-                servidores[idFunc]['conselho_tipo'],
+                servidores[idFunc]['conselho_tipo']+ ' ' +
                 servidores[idFunc]['conselho_n'],
                 servidores[idFunc]['cbo'],
                 servidores[idFunc]['carga_horaria'],
