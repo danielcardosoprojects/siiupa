@@ -387,16 +387,20 @@ include_once('../bd/nivel.php');
                     
                     servidores[$dados->idfuncionario]=[];                    
                     servidores[$dados->idfuncionario]['nome'] = '$dados->nome'; 
+                    servidores[$dados->idfuncionario]['nomeMaiusculo'] = '$dados->nome'.toUpperCase(); 
                     servidores[$dados->idfuncionario]['data_nasc'] = '$dados->data_nascbr';
                     servidores[$dados->idfuncionario]['cpf'] = '$dados->cpf';
                     servidores[$dados->idfuncionario]['matricula'] = '$dados->matricula'; 
                     servidores[$dados->idfuncionario]['admissao'] = '$dados->admissaoBR'; 
                     servidores[$dados->idfuncionario]['cargo'] = '$dados->cargo';
-                    
+                    servidores[$dados->idfuncionario]['cbo'] = '$dados->cbo';
+                    servidores[$dados->idfuncionario]['carga_horaria'] = '$dados->carga_horaria';
+                    servidores[$dados->idfuncionario]['conselho_tipo'] = '$dados->conselho_tipo';
+                    servidores[$dados->idfuncionario]['conselho_n'] = '$dados->conselho_n';
                     servidores[$dados->idfuncionario]['vinculo'] = '$dados->vinculo';
                     servidores[$dados->idfuncionario]['setor'] = '$dados->setor';
 </script>";
-var_dump($dados);
+
             ?>
                     <script>
                         
@@ -431,7 +435,7 @@ var_dump($dados);
 
                     //LINE NAME
                     $token = $_SESSION['token'];
-                    echo "<td>    <a target='_blank' class='abreperfil'  rel='noreferrer noopener' href='?setor=adm&sub=rh&subsub=perfil&id=$dados->idfuncionario&token=$token'>$dados->nome</a><i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->nome'></span></i></td>";
+                    echo "<td>    <a target='_blank' class='abreperfil'  rel='noreferrer noopener' href='?setor=adm&sub=rh&subsub=perfil&id=$dados->idfuncionario&token=$token'>$dados->nome</a><i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->nome'></span><span class='ui-icon ui-icon-copy copiarCNES' data-text='$dados->idfuncionario'></span>/i></td>";
 
                     //LINK TO CNES
                     //<a href='/siiupa/administracao/apicnes.php?id=$dados->idfuncionario' target='_blank'>CNES</a>
@@ -515,6 +519,20 @@ var_dump($dados);
                 tempInput.remove();
 
                 $(this).notify("Texto copiado: " + textToCopy, "success");
+            });
+
+             $('.copiarCNES').click(function() {
+                const idFunc = $(this).attr('data-text');
+               copiarParaCNES(
+                servidores[idFunc]['nomeMaiusculo'],
+                servidores[idFunc]['cpf'],
+                servidores[idFunc]['conselho_tipo'],
+                servidores[idFunc]['conselho_n'],
+                servidores[idFunc]['cbo'],
+                servidores[idFunc]['carga_horaria'],
+                servidores[idFunc]['vinculo']);
+
+                $(this).notify("Texto copiado para ser colado na planilha do CNES", "success");
             });
         });
     </script>
@@ -751,7 +769,7 @@ $idunico = uniqid();
 
 
     })
-    console.log(servidores_freq);
+    
 
     function formatarCPF(cpf) {
         // Remove caracteres não numéricos
@@ -778,6 +796,27 @@ $idunico = uniqid();
             input.classList.remove("cpf-invalido"); // Remove a classe de erro
         }
     }
+    function copiarParaCNES(...itens) {
+  // Junta os itens com tabulações (\t), que o Excel entende como separador de colunas
+  const texto = itens.join('\t');
+
+  // Cria uma área de transferência temporária
+  const textarea = document.createElement('textarea');
+  textarea.value = texto;
+  document.body.appendChild(textarea);
+  textarea.select();
+
+  try {
+    document.execCommand('copy');
+    alert('Copiado com sucesso! Cole no Excel (Ctrl+V).');
+  } catch (err) {
+    console.error('Erro ao copiar: ', err);
+  }
+
+  document.body.removeChild(textarea);
+}
+
+    
 </script>
 <?php
 function mes($entrada)
