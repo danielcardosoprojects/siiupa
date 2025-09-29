@@ -398,7 +398,7 @@ include_once('../bd/nivel.php');
 </script>";
             ?>
                     <script>
-                        console.log("<?= $dados?>");
+                        console.log("<?= json_encode($dados)?>");
                         conta_serv = "<?= $dados->nome ?>";
                         servidores_freq[conta_serv] = [];
                         servidores_freq[conta_serv]['nome'] = '<?= $dados->nome ?>';
