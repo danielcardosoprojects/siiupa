@@ -208,7 +208,7 @@ include_once('../bd/nivel.php');
         $gw = $_GET['nome'];
         $where = "WHERE f.nome LIKE '%" . $gw . "%' AND status = 'ATIVO'";
     } else {
-        $where = "WHERE f.nome LIKE '%%' AND status = 'INATIVO'";
+        $where = "WHERE f.nome LIKE '%%' AND status = 'ATIVO'";
     }
 
     if (isset($_GET["func"])) {
@@ -403,7 +403,6 @@ include_once('../bd/nivel.php');
 
             ?>
                     <script>
-                        
                         conta_serv = "<?= $dados->nome ?>";
                         servidores_freq[conta_serv] = [];
                         servidores_freq[conta_serv]['nome'] = '<?= $dados->nome ?>';
@@ -427,9 +426,9 @@ include_once('../bd/nivel.php');
                     echo "<td></td>";
                     echo "<td id='matriculaFunc_$dados->idfuncionario'><span class='matriculaFunc' data-id='$dados->idfuncionario'>$dados->matricula</span><i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->matricula'></span></i></td>";
 
-                    
-                    
-                    
+
+
+
                     //BUTTON VACATIONS
                     // echo "<td><button class='btn btn-success' onclick='abrirModalFerias($dados->idfuncionario)'>Férias</button></td>";
 
@@ -452,9 +451,9 @@ include_once('../bd/nivel.php');
                         document.getElementById('cpf_<?= $dados->idfuncionario ?>').innerHTML = '<?= $dados->cpf ?>'.replace(/\D/g, '').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d)/, '$1.$2').replace(/(\d{3})(\d{1,2})$/, '$1-$2');
                     </script>
 
-                    
+
             <?php
-            //COL WITH GENDER
+                    //COL WITH GENDER
                     $dados_sexo = "";
                     if ($dados->sexo == "F") {
                         $dados_sexo = "FEMININO";
@@ -474,7 +473,7 @@ include_once('../bd/nivel.php');
                     }
                     echo "<td>$dados->vinculo <i><span class='ui-icon ui-icon-copy copiarTexto' data-text='$dados->vinculo'></span></i> </td>";
                     echo "<td>$dados->carga_horaria</td>";
-                  
+
                     //COLS VACATIONS
                     // echo "<td>";
                     // $ferias23 = new BD;
@@ -521,16 +520,16 @@ include_once('../bd/nivel.php');
                 $(this).notify("Texto copiado: " + textToCopy, "success");
             });
 
-             $('.copiarCNES').click(function() {
+            $('.copiarCNES').click(function() {
                 const idFunc = $(this).attr('data-text');
-               copiarParaCNES(
-                servidores[idFunc]['nomeMaiusculo'],
-                formatarCPF(servidores[idFunc]['cpf']),
-                servidores[idFunc]['conselho_tipo']+ ' ' +
-                servidores[idFunc]['conselho_n'],
-                servidores[idFunc]['cbo'],
-                servidores[idFunc]['carga_horaria'],
-                servidores[idFunc]['vinculo']);
+                copiarParaCNES(
+                    servidores[idFunc]['nomeMaiusculo'],
+                    formatarCPF(servidores[idFunc]['cpf']),
+                    servidores[idFunc]['conselho_tipo'] + ' ' +
+                    servidores[idFunc]['conselho_n'],
+                    servidores[idFunc]['cbo'],
+                    servidores[idFunc]['carga_horaria'],
+                    servidores[idFunc]['vinculo']);
 
                 $(this).notify("Texto copiado para ser colado na planilha do CNES", "success");
             });
@@ -769,7 +768,7 @@ $idunico = uniqid();
 
 
     })
-    
+
 
     function formatarCPF(cpf) {
         // Remove caracteres não numéricos
@@ -796,27 +795,26 @@ $idunico = uniqid();
             input.classList.remove("cpf-invalido"); // Remove a classe de erro
         }
     }
+
     function copiarParaCNES(...itens) {
-  // Junta os itens com tabulações (\t), que o Excel entende como separador de colunas
-  const texto = itens.join('\t');
+        // Junta os itens com tabulações (\t), que o Excel entende como separador de colunas
+        const texto = itens.join('\t');
 
-  // Cria uma área de transferência temporária
-  const textarea = document.createElement('textarea');
-  textarea.value = texto;
-  document.body.appendChild(textarea);
-  textarea.select();
+        // Cria uma área de transferência temporária
+        const textarea = document.createElement('textarea');
+        textarea.value = texto;
+        document.body.appendChild(textarea);
+        textarea.select();
 
-  try {
-    document.execCommand('copy');
-    //alert('Copiado com sucesso! Cole no Excel (Ctrl+V).');
-  } catch (err) {
-    console.error('Erro ao copiar: ', err);
-  }
+        try {
+            document.execCommand('copy');
+            //alert('Copiado com sucesso! Cole no Excel (Ctrl+V).');
+        } catch (err) {
+            console.error('Erro ao copiar: ', err);
+        }
 
-  document.body.removeChild(textarea);
-}
-
-    
+        document.body.removeChild(textarea);
+    }
 </script>
 <?php
 function mes($entrada)
