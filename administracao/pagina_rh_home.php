@@ -208,7 +208,7 @@ include_once('../bd/nivel.php');
         $gw = $_GET['nome'];
         $where = "WHERE f.nome LIKE '%" . $gw . "%' AND status = 'ATIVO'";
     } else {
-        $where = "WHERE f.nome LIKE '%%' AND status = 'ATIVO'";
+        $where = "WHERE f.nome LIKE '%%' AND status = 'INATIVO'";
     }
 
     if (isset($_GET["func"])) {
