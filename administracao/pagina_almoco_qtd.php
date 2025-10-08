@@ -288,14 +288,18 @@ if ($stmt = $conn->prepare($query)) {
 <button id="copiar">Copiar</button>
 
 <button id="proximo">Próximo</button>
-<table>
 
+
+<table id="tabela">
     <tbody>
-        <td><?= $_GET['dia']; ?>/<?= $mes; ?>/<?= $ano; ?></td>
-        <td><?= $totalAlmoco; ?></td>
-        <td><?= $totalJanta; ?></td>
+        <tr>
+            <td><?= $_GET['dia']; ?>/<?= $mes; ?>/<?= $ano; ?></td>
+            <td><?= $totalAlmoco; ?></td>
+            <td><?= $totalJanta; ?></td>
+        </tr>
     </tbody>
 </table>
+
 <button id="copiarAeJ">Copiar</button>
 <script>
     window.onload = function() {
@@ -348,8 +352,7 @@ if ($stmt = $conn->prepare($query)) {
         // Opcional: Exibe uma mensagem de sucesso
 
     });
-
-        botaoCopiarAeJ.addEventListener('click', function() {
+document.getElementById('copiarAeJ').addEventListener('click', function() {
     const linha = document.querySelector('#tabela tbody tr'); // seleciona a linha
     if (!linha) return;
 
