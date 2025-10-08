@@ -362,7 +362,7 @@ document.getElementById('copiarAeJ').addEventListener('click', function() {
 
     // copia para a área de transferência
     navigator.clipboard.writeText(textoFinal)
-        .then(() => alert('Linha copiada: ' + textoFinal))
+        .then(() =>  window.location.href = link)
         .catch(err => console.error('Erro ao copiar:', err));
 });
 </script>
