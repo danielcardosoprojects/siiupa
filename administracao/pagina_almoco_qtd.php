@@ -296,6 +296,7 @@ if ($stmt = $conn->prepare($query)) {
         <td><?= $totalJanta; ?></td>
     </tbody>
 </table>
+<button id="copiarAeJ">Copiar</button>
 <script>
     window.onload = function() {
         tabelas = document.getElementsByTagName("table");
@@ -331,6 +332,9 @@ if ($stmt = $conn->prepare($query)) {
     });
     const botaoCopiar = document.getElementById("copiar");
     const inputTexto = document.getElementById("texto");
+        const botaoCopiarAeJ = document.getElementById("copiarAeJ");
+
+    
 
     // Adiciona um evento de clique ao botão
     botaoCopiar.addEventListener("click", function() {
@@ -344,4 +348,18 @@ if ($stmt = $conn->prepare($query)) {
         // Opcional: Exibe uma mensagem de sucesso
 
     });
+
+        botaoCopiarAeJ.addEventListener('click', function() {
+    const linha = document.querySelector('#tabela tbody tr'); // seleciona a linha
+    if (!linha) return;
+
+    // pega o texto de todas as células
+    const textos = Array.from(linha.querySelectorAll('td')).map(td => td.innerText.trim());
+    const textoFinal = textos.join('\t'); // separa por tabulação (excel-friendly)
+
+    // copia para a área de transferência
+    navigator.clipboard.writeText(textoFinal)
+        .then(() => alert('Linha copiada: ' + textoFinal))
+        .catch(err => console.error('Erro ao copiar:', err));
+});
 </script>
