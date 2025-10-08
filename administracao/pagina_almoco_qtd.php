@@ -74,7 +74,7 @@ if (isset($_GET['ano'])) {
 </script>
 <?php
 echo "<div><h2>LISTA ALMOÇO $tdia/$mes/$ano - <a href='?dia=$diax&mes=$mes&ano=$ano'>.</a></h2></div>";
-$query = "SELECT s.setor, f.nome, ef.id FROM u940659928_siupa.tb_escala_funcionario AS ef INNER JOIN u940659928_siupa.tb_funcionario AS f ON (ef.fk_funcionario = f.id) INNER JOIN u940659928_siupa.tb_setor as s ON (f.fk_setor = s.id) Where ef.oficial = 'sim' and ef.mes=$mes and ef.ano=$ano and (ef.$dia like '%D%' OR ef.$dia like '%P%'  OR ef.$dia like '%M%') and f.id NOT IN ('107'/*walter */, '409'/* Euriene */, '410'/*Marlilson */, '407'/*kATAOKA*/)/*exclui adm e direcao*/ ORDER BY s.setor ASC, f.nome ASC";
+$query = "SELECT s.setor, f.nome, ef.id FROM u940659928_siupa.tb_escala_funcionario AS ef INNER JOIN u940659928_siupa.tb_funcionario AS f ON (ef.fk_funcionario = f.id) INNER JOIN u940659928_siupa.tb_setor as s ON (f.fk_setor = s.id) Where ef.oficial = 'sim' and ef.mes=$mes and ef.ano=$ano and (ef.$dia like '%D%' OR ef.$dia like '%P%'  OR ef.$dia like '%M%') and f.id NOT IN ('107'/*walter */, '409'/* Euriene */, '410'/*Marlilson *//*, '407'*//*kATAOKA*/)/*exclui adm e direcao*/ ORDER BY s.setor ASC, f.nome ASC";
 //echo $query;
 
 
