@@ -173,11 +173,8 @@ if ($stmt = $conn->prepare($querymesano)) {
 }
 ?>
 <div class="">
-    <a href="?setor=adm&sub=rh&subsub=folhas" id="voltarasfolhas" class="btn btn-secondary">
-        <img src="/siiupa/imagens/icones/back.svg">
-        Voltar às Folhas
-    </a>
-    <hr id="inicio_folha">
+ 
+    
     <?php
     if ($status_folha == "aberta") {
 
@@ -188,7 +185,10 @@ if ($stmt = $conn->prepare($querymesano)) {
     } else {
     }
     ?>
-
+   <a href="?setor=adm&sub=rh&subsub=folhas" id="voltarasfolhas" class="btn btn-secondary">
+        <img src="/siiupa/imagens/icones/back.svg">
+        Voltar às Folhas
+    </a>
     <a href="#" id="imprimirfolha" class="btn btn-outline-info">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-printer" viewBox="0 0 16 16">
             <path d="M2.5 8a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1z" />
@@ -332,7 +332,7 @@ if ($status_folha == "aberta") {
     <img src="/siiupa/imagens/icones/personadd.svg">
     Adicionar servidor nesta folha
 </a> -->
-
+<hr id="inicio_folha">
 
     <a class="btn btn-success" id="btAddServidor" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
         <img src="/siiupa/imagens/icones/personadd.svg">
