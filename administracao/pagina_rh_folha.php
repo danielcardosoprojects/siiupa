@@ -130,20 +130,21 @@ class Tabela
         border: solid 1px green;
         border-color: blue;
     }
-      #btnTopo {
+       #btnTopo {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color:rgb(0, 67, 139);
+    background-color: #007bff;
     color: white;
-    border: none;
     border-radius: 50%;
     width: 50px;
     height: 50px;
     font-size: 22px;
+    line-height: 50px;
+    text-align: center;
     cursor: pointer;
     box-shadow: 0 3px 8px rgba(0,0,0,0.3);
-    display: none; /* Começa escondido */
+    display: none; /* começa escondido */
     transition: all 0.3s ease;
     z-index: 1000;
   }
@@ -639,25 +640,22 @@ function mes($entrada)
 }
 ?>
 <script>
-    const btn = document.getElementById("btnTopo");
+        const btn = document.getElementById("btnTopo");
 
-    // Mostrar o botão quando o usuário rolar 200px
-    window.onscroll = function() {
+    // Mostrar a div quando o usuário rolar 200px
+    window.addEventListener("scroll", () => {
       if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-        btn.style.display = "block";
+        btn.style.display = "flex";
       } else {
         btn.style.display = "none";
       }
-    };
+    });
 
     // Ao clicar, rola suavemente até o topo
-    btn.onclick = function() {
+    btn.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
-    function loadCanvas(link) {
-        $("#servCanvas").html(' <div class="spinner-border text-primary" role="status"></div>');
-        $("#servCanvas").load(link);
-    }
+    });
+  </scrip
     $(function() {
         $(document).ready(function() {
             $("#btAddServidor").click(function(e) {
