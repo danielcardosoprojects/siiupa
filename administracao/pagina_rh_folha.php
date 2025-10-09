@@ -588,7 +588,8 @@ echo "</div>"; ///                   FECHA AREA DE IMPRESSAO
 ?>
 
 
- <div id="btnTopo" title="Voltar ao topo">↑</div>
+ 
+ <img src="imagens/icones/siiupa.png" id="btnTopo" title="Voltar ao topo" />
 
 
 <div class="offcanvas offcanvas-end w-75" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
