@@ -642,7 +642,10 @@ function mes($entrada)
 ?>
 <script>
         
-
+    function loadCanvas(link) {
+        $("#servCanvas").html(' <div class="spinner-border text-primary" role="status"></div>');
+        $("#servCanvas").load(link);
+    }
     $(function() {
         $(document).ready(function() {
             $("#btAddServidor").click(function(e) {
