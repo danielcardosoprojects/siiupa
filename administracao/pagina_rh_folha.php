@@ -655,7 +655,7 @@ function mes($entrada)
     btn.addEventListener("click", () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-  </scrip
+
     $(function() {
         $(document).ready(function() {
             $("#btAddServidor").click(function(e) {
