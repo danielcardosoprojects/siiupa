@@ -134,7 +134,7 @@ class Tabela
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: #007bff;
+    background-color:rgb(0, 67, 139);
     color: white;
     border: none;
     border-radius: 50%;
@@ -587,7 +587,9 @@ echo "</div>"; ///                   FECHA AREA DE IMPRESSAO
 ?>
 
 
- <button id="btnTopo" title="Voltar ao topo">↑</button>
+ <div id="btnTopo" title="Voltar ao topo">↑</div>
+
+
 <div class="offcanvas offcanvas-end w-75" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
     <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasExampleLabel">Editar Servidor</h5>
