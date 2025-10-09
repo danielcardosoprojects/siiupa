@@ -641,21 +641,7 @@ function mes($entrada)
 }
 ?>
 <script>
-        const btn = document.getElementById("btnTopo");
-
-    // Mostrar a div quando o usuário rolar 200px
-    window.addEventListener("scroll", () => {
-      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-        btn.style.display = "flex";
-      } else {
-        btn.style.display = "none";
-      }
-    });
-
-    // Ao clicar, rola suavemente até o topo
-    btn.addEventListener("click", () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+        
 
     $(function() {
         $(document).ready(function() {
@@ -817,5 +803,21 @@ function mes($entrada)
 
         // Espera 2 segundos e então tenta rolar
         setTimeout(scrollToTarget, 500);
+    });
+
+    const btn = document.getElementById("btnTopo");
+
+    // Mostrar a div quando o usuário rolar 200px
+    window.addEventListener("scroll", () => {
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        btn.style.display = "flex";
+      } else {
+        btn.style.display = "none";
+      }
+    });
+
+    // Ao clicar, rola suavemente até o topo
+    btn.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 </script>
