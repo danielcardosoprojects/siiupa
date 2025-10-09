@@ -130,6 +130,28 @@ class Tabela
         border: solid 1px green;
         border-color: blue;
     }
+      #btnTopo {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 22px;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+    display: none; /* Começa escondido */
+    transition: all 0.3s ease;
+    z-index: 1000;
+  }
+
+  #btnTopo:hover {
+    background-color: #0056b3;
+    transform: scale(1.1);
+  }
 </style>
 
 <?php
@@ -565,7 +587,7 @@ echo "</div>"; ///                   FECHA AREA DE IMPRESSAO
 ?>
 
 
-
+ <button id="btnTopo" title="Voltar ao topo">↑</button>
 <div class="offcanvas offcanvas-end w-75" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
     <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="offcanvasExampleLabel">Editar Servidor</h5>
@@ -615,6 +637,21 @@ function mes($entrada)
 }
 ?>
 <script>
+    const btn = document.getElementById("btnTopo");
+
+    // Mostrar o botão quando o usuário rolar 200px
+    window.onscroll = function() {
+      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+        btn.style.display = "block";
+      } else {
+        btn.style.display = "none";
+      }
+    };
+
+    // Ao clicar, rola suavemente até o topo
+    btn.onclick = function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
     function loadCanvas(link) {
         $("#servCanvas").html(' <div class="spinner-border text-primary" role="status"></div>');
         $("#servCanvas").load(link);
