@@ -356,6 +356,9 @@
             case 'perfil':
                 include_once('pagina_rh_perfil.php');
                 break;
+            case 'perfil2':
+                include_once('pagina_rh_perfil2.php');
+                break;
             case 'servidores_inativos':
                 include_once('servidores_inativos.php');
                 break;
