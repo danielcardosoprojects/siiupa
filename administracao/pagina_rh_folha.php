@@ -159,7 +159,7 @@ class Tabela
     
     background-color:rgb(19, 153, 30);
     color: white;
-    border-radius: 50%;
+    border-radius: 2%;
     width: 50px;
     height: 50px;
     font-size: 22px;
@@ -172,7 +172,7 @@ class Tabela
     z-index: 1000;
       align-items: center; /* <-- centraliza verticalmente */
   justify-content: center; /* <-- centraliza horizontalmente */  }
-    #btAddServidor2:hover {
+    #btAddServidor:hover {
     background-color:rgb(125, 179, 0);
     transform: scale(1.1);
     }
