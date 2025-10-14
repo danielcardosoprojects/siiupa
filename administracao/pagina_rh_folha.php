@@ -677,7 +677,7 @@ function mes($entrada)
     }
     $(function() {
         $(document).ready(function() {
-            $("#btAddServidor").click(function(e) {
+            $("#btAddServidor, #btAddServidor2").click(function(e) {
                 e.preventDefault();
                 loadCanvas('administracao/pagina_rh_folha_adicionaservidor.php?idfolha=<?= $idfolha ?>')
             });
