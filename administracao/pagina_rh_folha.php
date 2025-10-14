@@ -168,7 +168,7 @@ class Tabela
     cursor: pointer;
     box-shadow: 0 3px 8px rgba(0,0,0,0.3);
     transition: all 0.3s ease;
-    z-index: 1000;
+    z-index: 999;
     align-items: center; /* <-- centraliza verticalmente */
     justify-content: center; /* <-- centraliza horizontalmente */
     text-decoration: none;
