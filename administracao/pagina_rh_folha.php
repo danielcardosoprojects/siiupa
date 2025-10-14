@@ -153,6 +153,30 @@ class Tabela
     background-color: #0056b3;
     transform: scale(1.1);
   }
+
+  #btAddServidor2 {
+        position: fixed;
+    bottom: 20px;
+    right: 45px;
+    background-color:rgb(102, 255, 0);
+    color: white;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 22px;
+    line-height: 50px;
+    text-align: center;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+    display: none; /* começa escondido */
+    transition: all 0.3s ease;
+    z-index: 1000;
+  }
+    #btAddServidor2:hover {
+    background-color:rgb(125, 179, 0);
+    transform: scale(1.1);
+    }
+
 </style>
 
 <?php
@@ -337,6 +361,10 @@ if ($status_folha == "aberta") {
     <a class="btn btn-success" id="btAddServidor" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
         <img src="/siiupa/imagens/icones/personadd.svg">
         Adicionar servidor nesta folha
+    </a>
+    <a class="btn btn-success" id="btAddServidor2" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+        <img src="/siiupa/imagens/icones/personadd.svg">
+    
     </a>
 
 <?php
@@ -809,19 +837,18 @@ function mes($entrada)
     });
 
     const btn = document.getElementById("btnTopo");
-    const btAddServidor = document.getElementById("btAddServidor");
+    const btAddServidor2 = document.getElementById("btAddServidor2");
 
     // Mostrar a div quando o usuário rolar 200px
     window.addEventListener("scroll", () => {
       if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
         btn.style.display = "flex";
-        btAddServidor.style.position = "fixed";
-        btAddServidor.style.bottom = "20px";
-        btAddServidor.style.left = "50%";
+        btAddServidor2.style.display = "flex";
+   
       } else {
         btn.style.display = "none";
-        btAddServidor.style.position = "relative";
-        btAddServidor.style.left = "0px";
+        btAddServidor2.style.display = "none";
+
       }
     });
 
