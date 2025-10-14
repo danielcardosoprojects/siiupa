@@ -404,7 +404,7 @@
 
 
     $orderby = "ORDER BY id desc";
-    $sql = "SELECT  DATE_FORMAT(f.admissao,'%d\/%m\/%Y') as admissaobr, DATE_FORMAT(f.data_nasc,'%d\/%m\/%Y') as data_nascbr, f.*, c.titulo AS cargo, c.descricao AS cargo_desc, s.setor FROM u940659928_siupa.tb_funcionario AS f INNER JOIN u940659928_siupa.tb_cargo AS c ON f.fk_cargo = c.id INNER JOIN u940659928_siupa.tb_setor AS s ON f.fk_setor = s.id $where $orderby";
+    $sql = "SELECT  DATE_FORMAT(f.admissao,'%d\/%m\/%Y') as admissaobr, DATE_FORMAT(f.posse_contrato, '%d\/%m\/%Y') as possecontratobr, DATE_FORMAT(f.data_nasc,'%d\/%m\/%Y') as data_nascbr, f.*, c.titulo AS cargo, c.descricao AS cargo_desc, s.setor FROM u940659928_siupa.tb_funcionario AS f INNER JOIN u940659928_siupa.tb_cargo AS c ON f.fk_cargo = c.id INNER JOIN u940659928_siupa.tb_setor AS s ON f.fk_setor = s.id $where $orderby";
     $result = mysqli_query($conn, $sql);
 
     //echo mysqli_num_rows($result) . " resultado(s).";
@@ -605,6 +605,10 @@ class Grade
                         <div class="col-md-3">
                             <label for="admissao" class="form-label">Admissão</label>
                             <input type="text" class="form-control" id="admissao">
+                        </div>
+                                     <div class="col-md-3">
+                            <label for="admissao" class="form-label">Posse/Contrato</label>
+                            <input type="text" class="form-control" id="possecontratobr">
                         </div>
 
                         <div class="col-md-3">
@@ -832,6 +836,7 @@ class Grade
                 document.getElementById("cns").value = f.cns || "";
                 document.getElementById("matricula").value = f.matricula || "";
                 document.getElementById("admissao").value = f.admissao || "";
+                document.getElementById("possecontratobr").value = f.posse_contrato || "";
                 document.getElementById("desligamento").value = f.desligamento || "";
                 document.getElementById("data_nasc").value = f.data_nasc || "";
                 document.getElementById("municipio_uf_nascimento").value = f.municipio_uf_nascimento || "";
@@ -1024,6 +1029,7 @@ class Grade
                 <th>VÍNCULO</th>
                 <th>MATRÍCULA</th>
                 <th>ADMISSÃO</th>
+                <th>POSSE/CONTRATO</th>
                 <th>CNES</th>
                 <th>DESLIGAMENTO</th>
             </tr>
@@ -1034,6 +1040,7 @@ class Grade
                 <td><?php diveditavelopt($perfil->id, 'vinculo', $perfil->vinculo); ?></td>
                 <td><?php diveditavel($perfil->id, 'matricula', $perfil->matricula); ?></td>
                 <td><?php diveditaveldata($perfil->id, 'admissao', $perfil->admissaobr); ?></td>
+                <td><?php diveditaveldata($perfil->id, 'posse_contrato', $perfil->possecontratobr); ?></td>
                 <td><?php diveditavelopt($perfil->id, 'CNES', $perfil->CNES); ?></td>
                 <td><?php diveditavel($perfil->id, 'desligamento', $perfil->desligamento); ?></td>
 
