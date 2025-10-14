@@ -154,10 +154,9 @@ class Tabela
     transform: scale(1.1);
   }
 
-  #btAddServidor2 {
-        position: fixed;
-    bottom: 20px;
-    right: 85px;
+  #btAddServidor {
+      
+    
     background-color:rgb(19, 153, 30);
     color: white;
     border-radius: 50%;
@@ -363,7 +362,7 @@ if ($status_folha == "aberta") {
         <img src="/siiupa/imagens/icones/personadd.svg" width="24px" height="24px">
 
     </a> -->
-    <a class="btn btn-success" id="btAddServidor" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+    <a class="" id="btAddServidor" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
         <img src="/siiupa/imagens/icones/personadd.svg">
         Adicionar servidor nesta folha
     </a>
