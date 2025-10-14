@@ -869,6 +869,7 @@ function abrirAdicionarServidor(e) {
       if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
         btn.style.display = "flex";
         btAddServidor.style.position = "fixed";
+        btAddServidor.style.display = "flex";
         btAddServidor.style.bottom = "20px";
         btAddServidor.style.right = "85px";
    
