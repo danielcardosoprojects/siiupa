@@ -875,6 +875,8 @@ function abrirAdicionarServidor(e) {
       } else {
         btn.style.display = "none";
         btAddServidor.style.position = "relative";
+          btAddServidor.style.bottom = "";
+        btAddServidor.style.right = "";
 
 
       }
