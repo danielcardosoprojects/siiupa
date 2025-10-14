@@ -167,7 +167,7 @@ class Tabela
     text-align: center;
     cursor: pointer;
     box-shadow: 0 3px 8px rgba(0,0,0,0.3);
-    display: none; /* começa escondido */
+    
     transition: all 0.3s ease;
     z-index: 1000;
       align-items: center; /* <-- centraliza verticalmente */
