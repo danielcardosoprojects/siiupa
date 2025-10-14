@@ -872,14 +872,17 @@ function abrirAdicionarServidor(e) {
         btAddServidor.style.display = "flex";
         btAddServidor.style.bottom = "20px";
         btAddServidor.style.right = "85px";
+        btAddServidor.innerHTML = "<img src='/siiupa/imagens/icones/personadd.svg'>";
+        btAddServidor.style.width = "50px";
+        btAddServidor.style.height = "50px";
    
       } else {
         btn.style.display = "none";
         btAddServidor.style.position = "relative";
         btAddServidor.style.bottom = "";
         btAddServidor.style.right = "";
-
-
+        btAddServidor.style.width = "";
+       btAddServidor.innerHTML =  '\n<img src="/siiupa/imagens/icones/personadd.svg">\nAdicionar servidor nesta folha\n'; 
       }
     });
 
