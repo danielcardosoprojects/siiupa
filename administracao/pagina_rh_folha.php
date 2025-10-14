@@ -171,7 +171,8 @@ class Tabela
     display: none; /* começa escondido */
     transition: all 0.3s ease;
     z-index: 1000;
-  }
+      align-items: center; /* <-- centraliza verticalmente */
+  justify-content: center; /* <-- centraliza horizontalmente */  }
     #btAddServidor2:hover {
     background-color:rgb(125, 179, 0);
     transform: scale(1.1);
