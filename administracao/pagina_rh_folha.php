@@ -695,7 +695,7 @@ function abrirAdicionarServidor(e) {
         $(document).ready(function() {
            
             $("#btAddServidor").on('click', abrirAdicionarServidor);
-            $("#btAddServidor2").on('click', abrirAdicionarServidor);
+            // $("#btAddServidor2").on('click', abrirAdicionarServidor);
             
     // $("#btAddServidor, #btAddServidor2").click(function(e) {
     //             e.preventDefault();
