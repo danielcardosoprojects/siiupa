@@ -162,6 +162,7 @@ class Tabela
   
     font-size: 22px;
     height:30px;
+    width: 100%;
     
     text-align: center;
     cursor: pointer;
@@ -875,6 +876,7 @@ function abrirAdicionarServidor(e) {
         btAddServidor.innerHTML = "<img src='/siiupa/imagens/icones/personadd.svg'>";
         btAddServidor.style.width = "50px";
         btAddServidor.style.height = "50px";
+        btAddServidor.style.borderRadius = "50%";
    
       } else {
         btn.style.display = "none";
@@ -882,7 +884,8 @@ function abrirAdicionarServidor(e) {
         btAddServidor.style.bottom = "";
         btAddServidor.style.right = "";
         btAddServidor.style.width = "";
-        btAddServidor.style.height = "40px";
+        btAddServidor.style.height = "30px";
+        btAddServidor.style.borderRadius = "5px";
        btAddServidor.innerHTML =  '\n<img src="/siiupa/imagens/icones/personadd.svg">\nAdicionar servidor nesta folha\n'; 
       }
     });
