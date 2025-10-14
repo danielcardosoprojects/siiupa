@@ -157,8 +157,8 @@ class Tabela
   #btAddServidor2 {
         position: fixed;
     bottom: 20px;
-    right: 65px;
-    background-color:rgb(102, 255, 0);
+    right: 85px;
+    background-color:rgb(19, 153, 30);
     color: white;
     border-radius: 50%;
     width: 50px;
