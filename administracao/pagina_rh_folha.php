@@ -817,7 +817,7 @@ function mes($entrada)
         btn.style.display = "flex";
         btAddServidor.style.position = "fixed";
         btAddServidor.style.bottom = "20px";
-        btAddServidor.style.left = "20px";
+        btAddServidor.style.left = "50%";
       } else {
         btn.style.display = "none";
         btAddServidor.style.position = "relative";
