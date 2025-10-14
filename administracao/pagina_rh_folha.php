@@ -155,11 +155,9 @@ class Tabela
   }
 
   #btAddServidor {
-      
-    
-    background-color:rgb(19, 153, 30);
+    background-color:rgb(15, 129, 24);
     color: white;
-    border-radius: 2%;
+    border-radius: 10%;
     width: 50px;
     height: 50px;
     font-size: 22px;
@@ -167,13 +165,15 @@ class Tabela
     text-align: center;
     cursor: pointer;
     box-shadow: 0 3px 8px rgba(0,0,0,0.3);
-    
     transition: all 0.3s ease;
     z-index: 1000;
-      align-items: center; /* <-- centraliza verticalmente */
-  justify-content: center; /* <-- centraliza horizontalmente */  }
+    align-items: center; /* <-- centraliza verticalmente */
+    justify-content: center; /* <-- centraliza horizontalmente */
+    text-decoration: none;
+    }
+
     #btAddServidor:hover {
-    background-color:rgb(125, 179, 0);
+    background-color:rgb(100, 139, 7);
     transform: scale(1.1);
     }
 
