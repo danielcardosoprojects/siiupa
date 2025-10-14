@@ -175,7 +175,7 @@ class Tabela
     }
 
     #btAddServidor:hover {
-    background-color:rgb(100, 139, 7);
+    background-color:rgb(0, 163, 35);
     transform: scale(1.1);
     }
 
