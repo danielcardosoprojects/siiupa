@@ -671,16 +671,36 @@ function mes($entrada)
 ?>
 <script>
         
-    function loadCanvas(link) {
-        $("#servCanvas").html(' <div class="spinner-border text-primary" role="status"></div>');
-        $("#servCanvas").load(link);
-    }
+    // function loadCanvas(link) {
+    //     $("#servCanvas").html(' <div class="spinner-border text-primary" role="status"></div>');
+    //     $("#servCanvas").load(link);
+    // }
+
+    $(function() {
+        function loadCanvas(link) {     
+            $("#servCanvas").html('<div class="spinner-border text-primary" role="status"></div>');
+            $("#servCanvas").load(link, function(response, status, xhr) {
+                if(status === "error") {
+                    console.error("Erro ao carregar:", xhr.status, xhr.statusText);
+                }
+            });
+        }
+        // Unificar o handler para ambos os botões
+        function abrirAdicionarServidor() {
+            loadCanvas('administracao/pagina_rh_folha_adicionaservidor.php?idfolha=<?= $idfolha ?>');
+        }
+    
+
+});
     $(function() {
         $(document).ready(function() {
-            $("#btAddServidor, #btAddServidor2").click(function(e) {
-                e.preventDefault();
-                loadCanvas('administracao/pagina_rh_folha_adicionaservidor.php?idfolha=<?= $idfolha ?>')
-            });
+            $("#btAddServidor").on('click', abrirAdicionarServidor);
+            $("#btAddServidor2").on('click', abrirAdicionarServidor);
+            
+    // $("#btAddServidor, #btAddServidor2").click(function(e) {
+    //             e.preventDefault();
+    //             loadCanvas('administracao/pagina_rh_folha_adicionaservidor.php?idfolha=<?= $idfolha ?>')
+    //         });
 
 
             $(".btEditaServidor").click(function(e) {
