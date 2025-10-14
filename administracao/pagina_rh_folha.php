@@ -159,8 +159,7 @@ class Tabela
     color: white;
       border-radius: 5px;
     padding: 5px;
-    width: 50px;
-    height: 50px;
+  
     font-size: 22px;
     
     text-align: center;
