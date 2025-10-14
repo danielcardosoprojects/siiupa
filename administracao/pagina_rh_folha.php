@@ -882,6 +882,7 @@ function abrirAdicionarServidor(e) {
         btAddServidor.style.bottom = "";
         btAddServidor.style.right = "";
         btAddServidor.style.width = "";
+        btAddServidor.style.height = "40px";
        btAddServidor.innerHTML =  '\n<img src="/siiupa/imagens/icones/personadd.svg">\nAdicionar servidor nesta folha\n'; 
       }
     });
