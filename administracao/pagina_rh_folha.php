@@ -821,6 +821,7 @@ function mes($entrada)
       } else {
         btn.style.display = "none";
         btAddServidor.style.position = "relative";
+        btAddServidor.style.left = "0px";
       }
     });
 
