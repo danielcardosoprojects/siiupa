@@ -161,6 +161,7 @@ class Tabela
     padding: 5px;
   
     font-size: 22px;
+    height:30px;
     
     text-align: center;
     cursor: pointer;
