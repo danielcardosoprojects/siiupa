@@ -157,8 +157,8 @@ class Tabela
   #btAddServidor {
     background-color:rgb(15, 129, 24);
     color: white;
-      border-radius: 10px;
-    padding: 2px;
+      border-radius: 5px;
+    padding: 5px;
     width: 50px;
     height: 50px;
     font-size: 22px;
