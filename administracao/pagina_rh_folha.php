@@ -359,7 +359,7 @@ if ($status_folha == "aberta") {
 </a> -->
 <hr id="inicio_folha">
 
-    <a class="btn btn-success" id="btAddServidor2" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+    <a class="btn btn-success" id="btAddServidor2"  href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
         <img src="/siiupa/imagens/icones/personadd.svg" width="24px" height="24px">
 
     </a>
