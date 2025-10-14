@@ -359,13 +359,13 @@ if ($status_folha == "aberta") {
 </a> -->
 <hr id="inicio_folha">
 
+    <a class="btn btn-success" id="btAddServidor2" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
+        <img src="/siiupa/imagens/icones/personadd.svg" width="24px" height="24px">
+
+    </a>
     <a class="btn btn-success" id="btAddServidor" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">
         <img src="/siiupa/imagens/icones/personadd.svg">
         Adicionar servidor nesta folha
-    </a>
-    <a class="btn btn-success" id="btAddServidor2" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample2">
-        <img src="/siiupa/imagens/icones/personadd.svg" width="24px" height="24px">
-    
     </a>
 
 <?php
