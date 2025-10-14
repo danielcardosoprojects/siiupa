@@ -820,6 +820,7 @@ function mes($entrada)
         btAddServidor.style.left = "20px";
       } else {
         btn.style.display = "none";
+        btAddServidor.style.position = "relative";
       }
     });
 
