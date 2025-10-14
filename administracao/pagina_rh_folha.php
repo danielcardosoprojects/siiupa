@@ -862,17 +862,19 @@ function abrirAdicionarServidor(e) {
     });
 
     const btn = document.getElementById("btnTopo");
-    const btAddServidor2 = document.getElementById("btAddServidor2");
+    const btAddServidor = document.getElementById("btAddServidor");
 
     // Mostrar a div quando o usuário rolar 200px
     window.addEventListener("scroll", () => {
       if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
         btn.style.display = "flex";
-        btAddServidor2.style.display = "flex";
+        btAddServidor.style.display = "flex";
+        btAddServidor.style.bottom = "20px";
+        btAddServidor.style.right = "85px";
    
       } else {
         btn.style.display = "none";
-        btAddServidor2.style.display = "none";
+
 
       }
     });
