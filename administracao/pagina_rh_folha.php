@@ -869,24 +869,24 @@ function abrirAdicionarServidor(e) {
     window.addEventListener("scroll", () => {
       if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
         btn.style.display = "flex";
-        btAddServidor.style.position = "fixed";
-        btAddServidor.style.display = "flex";
-        btAddServidor.style.bottom = "20px";
-        btAddServidor.style.right = "85px";
-        btAddServidor.innerHTML = "<img src='/siiupa/imagens/icones/personadd.svg' width='30px'>";
-        btAddServidor.style.width = "50px";
-        btAddServidor.style.height = "50px";
-        btAddServidor.style.borderRadius = "50%";
+        // btAddServidor.style.position = "fixed";
+        // btAddServidor.style.display = "flex";
+        // btAddServidor.style.bottom = "20px";
+        // btAddServidor.style.right = "85px";
+        // btAddServidor.innerHTML = "<img src='/siiupa/imagens/icones/personadd.svg' width='30px'>";
+        // btAddServidor.style.width = "50px";
+        // btAddServidor.style.height = "50px";
+        // btAddServidor.style.borderRadius = "50%";
    
       } else {
         btn.style.display = "none";
-        btAddServidor.style.position = "relative";
-        btAddServidor.style.bottom = "";
-        btAddServidor.style.right = "";
-        btAddServidor.style.width = "";
-        btAddServidor.style.height = "30px";
-        btAddServidor.style.borderRadius = "5px";
-       btAddServidor.innerHTML =  '\n<img src="/siiupa/imagens/icones/personadd.svg">\nAdicionar servidor nesta folha\n'; 
+    //     btAddServidor.style.position = "relative";
+    //     btAddServidor.style.bottom = "";
+    //     btAddServidor.style.right = "";
+    //     btAddServidor.style.width = "";
+    //     btAddServidor.style.height = "30px";
+    //     btAddServidor.style.borderRadius = "5px";
+    //    btAddServidor.innerHTML =  '\n<img src="/siiupa/imagens/icones/personadd.svg">\nAdicionar servidor nesta folha\n'; 
       }
     });
 
