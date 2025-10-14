@@ -866,7 +866,7 @@ function abrirAdicionarServidor(e) {
 
     // Mostrar a div quando o usuário rolar 200px
     window.addEventListener("scroll", () => {
-      if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+      if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
         btn.style.display = "flex";
         btAddServidor.style.position = "fixed";
         btAddServidor.style.bottom = "20px";
@@ -875,7 +875,7 @@ function abrirAdicionarServidor(e) {
       } else {
         btn.style.display = "none";
         btAddServidor.style.position = "relative";
-          btAddServidor.style.bottom = "";
+        btAddServidor.style.bottom = "";
         btAddServidor.style.right = "";
 
 
