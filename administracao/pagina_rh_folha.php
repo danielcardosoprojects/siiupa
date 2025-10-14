@@ -873,7 +873,7 @@ function abrirAdicionarServidor(e) {
         btAddServidor.style.display = "flex";
         btAddServidor.style.bottom = "20px";
         btAddServidor.style.right = "85px";
-        btAddServidor.innerHTML = "<img src='/siiupa/imagens/icones/personadd.svg'>";
+        btAddServidor.innerHTML = "<img src='/siiupa/imagens/icones/personadd.svg' width='30px'>";
         btAddServidor.style.width = "50px";
         btAddServidor.style.height = "50px";
         btAddServidor.style.borderRadius = "50%";
