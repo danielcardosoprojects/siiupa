@@ -676,7 +676,10 @@ function mes($entrada)
     //     $("#servCanvas").load(link);
     // }
 
+
     $(function() {
+        $(document).ready(function() {
+                $(function() {
         function loadCanvas(link) {     
             $("#servCanvas").html('<div class="spinner-border text-primary" role="status"></div>');
             $("#servCanvas").load(link, function(response, status, xhr) {
@@ -689,11 +692,7 @@ function mes($entrada)
         function abrirAdicionarServidor() {
             loadCanvas('administracao/pagina_rh_folha_adicionaservidor.php?idfolha=<?= $idfolha ?>');
         }
-    
-
-});
-    $(function() {
-        $(document).ready(function() {
+    });
             $("#btAddServidor").on('click', abrirAdicionarServidor);
             $("#btAddServidor2").on('click', abrirAdicionarServidor);
             
