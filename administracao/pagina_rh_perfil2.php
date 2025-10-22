@@ -1648,6 +1648,7 @@ class Grade
 <!-- CONSULTA ÚLTIMO CONTRACHEQUE -->
 <script>
 async function baixarUltimoContracheque() {
+    $("#carregador").show();
   try {
     const token = localStorage.getItem('token');
     const matricula = "<?= $perfil->matricula; ?>";
@@ -1668,7 +1669,7 @@ async function baixarUltimoContracheque() {
     const blob = new Blob([response.data], { type: "application/pdf" });
     const url = URL.createObjectURL(blob);
     window.open(url); // abre o PDF em nova aba
-
+    $("#carregador").hide();
   } catch (error) {
     console.error("Erro ao visualizar o PDF:", error);
     alert("Não foi possível gerar o PDF. Verifique o token ou a conexão.");
