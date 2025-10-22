@@ -512,6 +512,7 @@ class Grade
 <div class=''>
     <?php $token = $_GET['token']; ?>
 
+<button onclick="baixarUltimoContracheque()">Visualizar último contracheque</button>
 
     <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalCC">
         Contracheque
@@ -723,6 +724,8 @@ class Grade
 
     <script>
         $("#buscaMatricula_loagin").hide();
+
+        
         async function obterMatriculas() {
             $("#buscaMatricula_loagin").show();
             const usuario = "danielcardoso";
@@ -1642,6 +1645,37 @@ class Grade
         </div>
     </div>
 </div>
+<!-- CONSULTA ÚLTIMO CONTRACHEQUE -->
+<script>
+async function baixarUltimoContracheque() {
+  try {
+    const token = localStorage.getItem('token');
+    const matricula = "<?= $perfil->matricula; ?>";
+
+    const response = await axios.post(
+      "https://n.siupa.online/webhook/9dae916e-2f73-4e03-b0e8-f0b61e2670bf",
+      { matricula },
+      {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        responseType: "blob" // importante para receber o PDF binário
+      }
+    );
+
+    // Cria uma URL temporária para exibir o PDF no navegador
+    const blob = new Blob([response.data], { type: "application/pdf" });
+    const url = URL.createObjectURL(blob);
+    window.open(url); // abre o PDF em nova aba
+
+  } catch (error) {
+    console.error("Erro ao visualizar o PDF:", error);
+    alert("Não foi possível gerar o PDF. Verifique o token ou a conexão.");
+  }
+}
+</script>
+
 <script>
     //Ferias em novo estilo
     btnVacations = document.getElementById('btnVacations');
