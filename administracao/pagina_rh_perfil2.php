@@ -512,7 +512,7 @@ class Grade
 <div class=''>
     <?php $token = $_GET['token']; ?>
 
-<button onclick="baixarUltimoContracheque()">Visualizar último contracheque</button>
+
 
     <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalCC">
         Contracheque
@@ -561,7 +561,8 @@ class Grade
     <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalEditarFuncionario">
         Editar dados
     </button>
-
+<br>
+<button onclick="baixarUltimoContracheque()">Visualizar último contracheque</button>
     <!-- Modal -->
     <div class="modal fade" id="modalEditarFuncionario" tabindex="-1" aria-labelledby="modalEditarFuncionarioLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-scrollable">
