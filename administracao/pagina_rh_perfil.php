@@ -404,7 +404,7 @@
 
 
     $orderby = "ORDER BY id desc";
-    $sql = "SELECT  DATE_FORMAT(f.admissao,'%d\/%m\/%Y') as admissaobr, DATE_FORMAT(f.data_nasc,'%d\/%m\/%Y') as data_nascbr, f.*, c.titulo AS cargo, c.descricao AS cargo_desc, s.setor FROM u940659928_siupa.tb_funcionario AS f INNER JOIN u940659928_siupa.tb_cargo AS c ON f.fk_cargo = c.id INNER JOIN u940659928_siupa.tb_setor AS s ON f.fk_setor = s.id $where $orderby";
+    $sql = "SELECT  DATE_FORMAT(f.admissao,'%d\/%m\/%Y') as admissaobr, DATE_FORMAT(f.posse_contrato, '%d\/%m\/%Y') as possecontratobr, DATE_FORMAT(f.data_nasc,'%d\/%m\/%Y') as data_nascbr, f.*, c.titulo AS cargo, c.descricao AS cargo_desc, s.setor FROM u940659928_siupa.tb_funcionario AS f INNER JOIN u940659928_siupa.tb_cargo AS c ON f.fk_cargo = c.id INNER JOIN u940659928_siupa.tb_setor AS s ON f.fk_setor = s.id $where $orderby";
     $result = mysqli_query($conn, $sql);
 
     //echo mysqli_num_rows($result) . " resultado(s).";
@@ -513,6 +513,7 @@ class Grade
     <?php $token = $_GET['token']; ?>
 
 
+
     <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalCC">
         Contracheque
     </button>
@@ -560,7 +561,8 @@ class Grade
     <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalEditarFuncionario">
         Editar dados
     </button>
-
+<br>
+<button onclick="baixarUltimoContracheque()">Visualizar último contracheque</button>
     <!-- Modal -->
     <div class="modal fade" id="modalEditarFuncionario" tabindex="-1" aria-labelledby="modalEditarFuncionarioLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-scrollable">
@@ -605,6 +607,10 @@ class Grade
                         <div class="col-md-3">
                             <label for="admissao" class="form-label">Admissão</label>
                             <input type="text" class="form-control" id="admissao">
+                        </div>
+                                     <div class="col-md-3">
+                            <label for="admissao" class="form-label">Posse/Contrato</label>
+                            <input type="text" class="form-control" id="possecontratobr">
                         </div>
 
                         <div class="col-md-3">
@@ -719,6 +725,8 @@ class Grade
 
     <script>
         $("#buscaMatricula_loagin").hide();
+
+        
         async function obterMatriculas() {
             $("#buscaMatricula_loagin").show();
             const usuario = "danielcardoso";
@@ -832,6 +840,7 @@ class Grade
                 document.getElementById("cns").value = f.cns || "";
                 document.getElementById("matricula").value = f.matricula || "";
                 document.getElementById("admissao").value = f.admissao || "";
+                document.getElementById("possecontratobr").value = f.posse_contrato || "";
                 document.getElementById("desligamento").value = f.desligamento || "";
                 document.getElementById("data_nasc").value = f.data_nasc || "";
                 document.getElementById("municipio_uf_nascimento").value = f.municipio_uf_nascimento || "";
@@ -1024,6 +1033,7 @@ class Grade
                 <th>VÍNCULO</th>
                 <th>MATRÍCULA</th>
                 <th>ADMISSÃO</th>
+                <th>POSSE/CONTRATO</th>
                 <th>CNES</th>
                 <th>DESLIGAMENTO</th>
             </tr>
@@ -1034,6 +1044,7 @@ class Grade
                 <td><?php diveditavelopt($perfil->id, 'vinculo', $perfil->vinculo); ?></td>
                 <td><?php diveditavel($perfil->id, 'matricula', $perfil->matricula); ?></td>
                 <td><?php diveditaveldata($perfil->id, 'admissao', $perfil->admissaobr); ?></td>
+                <td><?php diveditaveldata($perfil->id, 'posse_contrato', $perfil->possecontratobr); ?></td>
                 <td><?php diveditavelopt($perfil->id, 'CNES', $perfil->CNES); ?></td>
                 <td><?php diveditavel($perfil->id, 'desligamento', $perfil->desligamento); ?></td>
 
@@ -1635,6 +1646,38 @@ class Grade
         </div>
     </div>
 </div>
+<!-- CONSULTA ÚLTIMO CONTRACHEQUE -->
+<script>
+async function baixarUltimoContracheque() {
+    $("#carregador").show();
+  try {
+    const token = localStorage.getItem('token');
+    const matricula = "<?= $perfil->matricula; ?>";
+
+    const response = await axios.post(
+      "https://n.siupa.online/webhook/9dae916e-2f73-4e03-b0e8-f0b61e2670bf",
+      { matricula },
+      {
+        headers: {
+          "Authorization": `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        responseType: "blob" // importante para receber o PDF binário
+      }
+    );
+
+    // Cria uma URL temporária para exibir o PDF no navegador
+    const blob = new Blob([response.data], { type: "application/pdf" });
+    const url = URL.createObjectURL(blob);
+    window.open(url); // abre o PDF em nova aba
+    $("#carregador").hide();
+  } catch (error) {
+    console.error("Erro ao visualizar o PDF:", error);
+    alert("Não foi possível gerar o PDF. Verifique o token ou a conexão.");
+  }
+}
+</script>
+
 <script>
     //Ferias em novo estilo
     btnVacations = document.getElementById('btnVacations');
