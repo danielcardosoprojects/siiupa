@@ -562,7 +562,7 @@ class Grade
         Editar dados
     </button>
 <br>
-<button onclick="baixarUltimoContracheque()" class="btn btn-outline-secondary">Visualizar último contracheque</button>
+<button onclick="baixarUltimoContracheque()" class="btn btn-outline-secondary" style="margin-top:5px">Visualizar último contracheque</button>
     <!-- Modal -->
     <div class="modal fade" id="modalEditarFuncionario" tabindex="-1" aria-labelledby="modalEditarFuncionarioLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-scrollable">
