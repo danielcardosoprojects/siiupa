@@ -29,7 +29,7 @@ include('../conexao/verifica_login.php');
 
 
 	<!-- TAILWIND CSS -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    
 	<!-- JQUERY -->
 
 
