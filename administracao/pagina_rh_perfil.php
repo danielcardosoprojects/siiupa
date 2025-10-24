@@ -562,7 +562,8 @@ class Grade
         Editar dados
     </button>
 <br>
-<button onclick="baixarUltimoContracheque()" class="btn btn-outline-secondary" style="margin-top:5px">Último contracheque</button>
+<button onclick="baixarUltimoContracheque('contracheque')" class="btn btn-outline-secondary" style="margin-top:5px">Último contracheque</button>
+<button onclick="baixarUltimoContracheque('fichafinanceira')" class="btn btn-outline-secondary" style="margin-top:5px">Ficha Financeira</button>
     <!-- Modal -->
     <div class="modal fade" id="modalEditarFuncionario" tabindex="-1" aria-labelledby="modalEditarFuncionarioLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-scrollable">
@@ -1648,7 +1649,7 @@ class Grade
 </div>
 <!-- CONSULTA ÚLTIMO CONTRACHEQUE -->
 <script>
-async function baixarUltimoContracheque() {
+async function baixarUltimoContracheque(service) {
     $("#carregador").show();
   try {
     const token = localStorage.getItem('token');
@@ -1656,7 +1657,7 @@ async function baixarUltimoContracheque() {
 
     const response = await axios.post(
       "https://n.siupa.online/webhook/9dae916e-2f73-4e03-b0e8-f0b61e2670bf",
-      { matricula },
+      { matricula, service },
       {
         headers: {
           "Authorization": `Bearer ${token}`,
