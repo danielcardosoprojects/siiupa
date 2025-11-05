@@ -318,7 +318,7 @@ include_once('../bd/nivel.php');
                 <th scope="col">#</th>
                 <th scope="col">MATRICULA</th>
 
-                <!-- <th scope="col">Férias</th> -->
+                <th scope="col">Férias</th>
                 <th scope="col">NOME<img src="/siiupa/imagens/tablesorter.svg"></th>
                 <th scope="col">CPF</th>
                 <th scope="col">SEXO</th>
@@ -430,7 +430,7 @@ include_once('../bd/nivel.php');
 
 
                     //BUTTON VACATIONS
-                    // echo "<td><button class='btn btn-success' onclick='abrirModalFerias($dados->idfuncionario)'>Férias</button></td>";
+                    echo "<td><button class='btn btn-success' onclick='abrirModalFerias($dados->idfuncionario)'>Férias</button></td>";
 
                     //LINE NAME
                     $token = $_SESSION['token'];
