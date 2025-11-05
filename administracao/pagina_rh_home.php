@@ -704,7 +704,7 @@ include_once('../bd/nivel.php');
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
             </div>
             <div class="modal-body">
-                <iframe id="iframeFerias" style="width: 80%; height: 100vh; border: none;" src=""></iframe>
+                <iframe id="iframeFerias" style="width: 80%; height: 80vh; border: none;" src=""></iframe>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn" data-bs-dismiss="modal">Fechar</button>
