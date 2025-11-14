@@ -813,6 +813,15 @@ function abrirAdicionarServidor(e) {
 
         $('#exportar_excel_folha').click(function(e) {
             e.preventDefault();
+                 function exportarTabela() {
+                    const tabela = document.getElementById("tabela_folha");
+                    const workbook = XLSX.utils.table_to_book(tabela, {
+                        sheet: "Planilha1"
+                    });
+                    XLSX.writeFile(workbook, "Folha de Pagamento UPA.xlsx");
+                }
+
+                exportarTabela()
 
             $(".Tabela_folha").table2excel({
                 filename: $("#titulo_folha").data("titulo") + ".xls", // do include extension
