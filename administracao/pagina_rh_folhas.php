@@ -76,7 +76,7 @@ echo '
 
 if ($stmt = $conn->prepare($query)) {
   $stmt->execute();
-  $stmt->bind_result($flsid, $ref_ano, $ref_mes, $periodoinicio, $periodofim, $status);
+  $stmt->bind_result($flsid, $ref_mes, $ref_ano, $periodoinicio, $periodofim, $status);
   while ($stmt->fetch()) {
     if (isset($valor_geral)) {
       $valor_anterior = $valor_geral;
@@ -158,14 +158,14 @@ if ($stmt = $conn->prepare($query)) {
     printf('
         
         <tr>
-        <th scope="row"><a href="?setor=adm&sub=rh&subsub=rhfolhaexibe&id=%s&ref_mes=%s&ref_ano=%s">%s %s</a></th>
         <td>%s</td>
+        <th scope="row"><a href="?setor=adm&sub=rh&subsub=rhfolhaexibe&id=%s&ref_mes=%s&ref_ano=%s">%s %s</a></th>
         <td class="coluna_valor">%s</td>
         <td>%s</td>
         <td>%s</td>
         
 
-      </tr>', $flsid, $ref_mes, $ref_ano, $status, $ref_mes, $ref_ano, $valor_geral_reais, $periodoinicio, $periodofim);
+      </tr>', $flsid, $ref_ano, $ref_mes, $status, $ref_mes, $ref_ano, $valor_geral_reais, $periodoinicio, $periodofim);
   }
   $stmt->close();
 }
