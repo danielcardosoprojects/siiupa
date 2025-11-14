@@ -165,7 +165,7 @@ if ($stmt = $conn->prepare($query)) {
         <td>%s</td>
         
 
-      </tr>', $ref_ano, $flsid, $ref_mes, $status, $ref_mes, $ref_ano, $valor_geral_reais, $periodoinicio, $periodofim);
+      </tr>', $ref_ano, $flsid, $ref_mes, $ref_ano, $status, $ref_mes, $valor_geral_reais, $periodoinicio, $periodofim);
   }
   $stmt->close();
 }
