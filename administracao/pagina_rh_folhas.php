@@ -53,7 +53,7 @@ function trataNaoNumericos($naoNumericos)
     return floatval($naoNumericos);
   }
 }
-$query = "SELECT fls.id, fls.ref_mes, fls.ref_ano, DATE_FORMAT(fls.periodoinicio,'%d\/%m\/%Y'), DATE_FORMAT(fls.periodofim,'%d\/%m\/%Y'), fls.status FROM u940659928_siupa.tb_folhas AS fls order by periodoinicio DESC";
+$query = "SELECT fls.id, fls.ref_mes, fls.ref_ano, DATE_FORMAT(fls.periodoinicio,'%d\/%m\/%Y'), DATE_FORMAT(fls.periodofim,'%d\/%m\/%Y'), fls.status FROM u940659928_siupa.tb_folhas AS fls order by periodoinicio DESC LIMIT 24";
 echo '
 <table class="table table-hover table-sm">
         <thead>
@@ -86,11 +86,11 @@ if ($stmt = $conn->prepare($query)) {
     $valor_geral = 0;
 
 
-    $queryx = "SELECT fl.id as id_linha, func.id,func.nome, cargo.funcao_upa, fl.adc_not, fl.ext_6, fl.ext_12, fl.ext_24, fl.acionamento, fl.transferencia, fl.fixos, fl.obs, cargo.valor_plantao, cargo.valor_acionamento, cargo.valor_transferencia FROM u940659928_siupa.tb_folha AS fl INNER JOIN u940659928_siupa.tb_funcionario AS func ON (fl.fk_funcionario = func.id) INNER JOIN u940659928_siupa.tb_cargo AS cargo ON (func.fk_cargo = cargo.id) WHERE fl.fk_folhas = '12' ORDER BY func.nome ASC LIMIT 24";
-    echo $queryx;
+    $queryx = "SELECT fl.id as id_linha, func.id,func.nome, cargo.funcao_upa, fl.adc_not, fl.ext_6, fl.ext_12, fl.ext_24, fl.acionamento, fl.transferencia, fl.fixos, fl.obs, cargo.valor_plantao, cargo.valor_acionamento, cargo.valor_transferencia FROM u940659928_siupa.tb_folha AS fl INNER JOIN u940659928_siupa.tb_funcionario AS func ON (fl.fk_funcionario = func.id) INNER JOIN u940659928_siupa.tb_cargo AS cargo ON (func.fk_cargo = cargo.id) WHERE fl.fk_folhas = '12' ORDER BY func.nome ASC";
+    
     $consultaValores = new BD;
-    $sqlConsultaValores = "SELECT fl.id as id_linha, func.id,func.nome, cargo.funcao_upa, fl.adc_not, fl.ext_6, fl.ext_12, fl.ext_24, fl.acionamento, fl.transferencia, fl.fixos, fl.obs, cargo.valor_plantao, cargo.valor_acionamento, cargo.valor_transferencia FROM u940659928_siupa.tb_folha AS fl INNER JOIN u940659928_siupa.tb_funcionario AS func ON (fl.fk_funcionario = func.id) INNER JOIN u940659928_siupa.tb_cargo AS cargo ON (func.fk_cargo = cargo.id) WHERE fl.fk_folhas = '$flsid' ORDER BY func.nome ASC LIMIT 24";
-    echo $sqlConsultaValores;
+    $sqlConsultaValores = "SELECT fl.id as id_linha, func.id,func.nome, cargo.funcao_upa, fl.adc_not, fl.ext_6, fl.ext_12, fl.ext_24, fl.acionamento, fl.transferencia, fl.fixos, fl.obs, cargo.valor_plantao, cargo.valor_acionamento, cargo.valor_transferencia FROM u940659928_siupa.tb_folha AS fl INNER JOIN u940659928_siupa.tb_funcionario AS func ON (fl.fk_funcionario = func.id) INNER JOIN u940659928_siupa.tb_cargo AS cargo ON (func.fk_cargo = cargo.id) WHERE fl.fk_folhas = '$flsid' ORDER BY func.nome ASC";
+    
     $resultadoConsultaValores = $consultaValores->consulta($sqlConsultaValores);
 
     foreach ($resultadoConsultaValores as $resultadoValores) {
