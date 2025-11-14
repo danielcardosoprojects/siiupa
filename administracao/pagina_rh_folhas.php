@@ -58,8 +58,8 @@ echo '
 <table class="table table-hover table-sm">
         <thead>
           <tr>
+          <th scope="col">ANO</th>
           <th scope="col">MÊS REFERÊNCIA</th>
-            <th scope="col">ANO</th>
             <th scope="col" class="col">VALOR</th>
             <th scope="col">INICIO</th>
             <th scope="col">FIM</th>
@@ -76,7 +76,7 @@ echo '
 
 if ($stmt = $conn->prepare($query)) {
   $stmt->execute();
-  $stmt->bind_result($flsid, $ref_mes, $ref_ano, $periodoinicio, $periodofim, $status);
+  $stmt->bind_result($flsid, $ref_ano, $ref_mes, $periodoinicio, $periodofim, $status);
   while ($stmt->fetch()) {
     if (isset($valor_geral)) {
       $valor_anterior = $valor_geral;
