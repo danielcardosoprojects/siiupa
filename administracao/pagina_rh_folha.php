@@ -788,7 +788,7 @@ function abrirAdicionarServidor(e) {
 
             });
         });
-        $(window).scrollTop($('#inicio_folha').offset().top);
+        //$(window).scrollTop($('#inicio_folha').offset().top);
         $("#imprimirfolha").click(function() {
             var elem = $('#folha_impressao');
             var mywindow = window.open('', 'PRINT', 'height=400,width=600');
