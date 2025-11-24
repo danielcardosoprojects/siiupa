@@ -475,7 +475,7 @@ include_once('../bd/nivel.php');
                     echo "<td>$dados->carga_horaria</td>";
 
                     //COLS VACATIONS
-                    echo "<td> $dataAdmissao";
+                    echo "<td> $dataAdmissao </br>";
                     $ferias23 = new BD;
                     $sqlF23 = "SELECT * FROM u940659928_siupa.tb_ferias where fk_funcionario = '$dados->idfuncionario' and ref_ano = '2026';";
                     $rF23 = $ferias23->consulta($sqlF23);
