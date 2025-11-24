@@ -519,7 +519,7 @@ class Grade
     </button>
 
 
-    <?php $linkfrequencia = '/siiupa/gerapdf.php?&matricula=' . urlencode($perfil->matricula) . '&admissao=' . urlencode($perfil->admissao) . '&nome=' . urlencode($perfil->nome) . '&cargo=' . urlencode($perfil->cargo_desc) . '&vinculo=' . urlencode($perfil->vinculo);     ?>
+    <?php $linkfrequencia = '/siiupa/gerapdf.php?&matricula=' . urlencode($perfil->matricula) . '&admissao=' . urlencode($perfil->admissao) . '&posse_contrato=' . urlencode($perfil->posse_contrato) . '&nome=' . urlencode($perfil->nome) . '&cargo=' . urlencode($perfil->cargo_desc) . '&vinculo=' . urlencode($perfil->vinculo);     ?>
     <a target="_blank" href='<?php echo $linkfrequencia; ?>' id='gerafrequencia' class='btn btn-outline-success'>
         <img src="/siiupa/imagens/icones/note_add.svg">
         Gerar Frequencia

@@ -41,6 +41,10 @@ ini_set('display_errors', 0);
 //?mes=07&matricula=1777&admissao=11/02/2014&nome=Daniel Cardoso de Oliveira&cargo=Ag. Administrativo&vinculo=efetivo
 $mes = $_GET['mes'];
 $matricula = $_GET['matricula'];
+
+$nomefunc = $_GET['nome'];
+$cargo = $_GET['cargo'];
+$vinculo = $_GET['vinculo'];
 if ($_GET['admissao'] != null) {
     $admissaoeng = $_GET['admissao'];
     $admissaosep = explode("-", $admissaoeng);
@@ -49,10 +53,21 @@ if ($_GET['admissao'] != null) {
 } else {
     $admissao = "";
 }
-$nomefunc = $_GET['nome'];
-$cargo = $_GET['cargo'];
-$vinculo = $_GET['vinculo'];
 
+if ($_GET['posse_contrato'] != null) {
+    $posse_contratoeng = $_GET['posse_contrato'];
+    $posse_contratosep = explode("-", $posse_contratoeng);
+    $posse_contratobr = $posse_contratosep[2] . '/' . $posse_contratosep[1] . '/' . $posse_contratosep[0];
+    $posse_contrato = $posse_contratobr;
+} else {
+    $posse_contrato = "";
+}
+
+if($vinculo == "EFETIVO"){
+    $admissao_exibida = $admissao;;
+} else{
+    $admissao_exibida = $posse_contrato;
+}
 ?>
 
 <!-- <div style='background-color:red;position: absolute; top: 60px;  right: 60px;'><barcode code="<?php echo $nomefunc; ?>" type="QR" class="barcode" size="0.8" error="M" disableborder="1" /></div> -->
@@ -66,7 +81,7 @@ $vinculo = $_GET['vinculo'];
 <div style='font-size:12px;font-family: "Times New Roman", Times, serif;'>
     Referência: <strong><?php echo GetNomeMes($mes); ?>-2025</strong><br />
 
-    Matricula : <strong><?php //echo $matricula; ?></strong><span style="color:white;">____________________</span>Data de Admissão: <strong><?php //echo $admissao; ?></strong><br />
+    Matricula : <strong><?php echo $matricula; ?></strong><span style="color:white;">____________________</span>Data de Admissão: <strong><?php echo $admissao_exibida; ?></strong><br />
     Nome: <strong><?php echo strtoupper($nomefunc); ?></strong> <span style="color:white;">______</span>Cargo/Função: <strong><?php echo $cargo; ?></strong><br />
     Lotação : 
     <strong>UPA <?php echo $vinculo; ?></strong>
