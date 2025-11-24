@@ -485,7 +485,7 @@ include_once('../bd/nivel.php');
                     }
                     echo implode('/', $meses);
 
-                    echo "</td>";
+                    echo " $dataAdmissao</td>";
 
 
 
