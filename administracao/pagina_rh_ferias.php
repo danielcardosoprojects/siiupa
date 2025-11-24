@@ -14,6 +14,12 @@ if (isset($_GET['ano_ferias'])) {
   $ano_ferias = '2025';
 }
 
+if (isset($_GET['vinculo'])) {
+  $filtra_vinculo = "and func.vinculo = '$_GET[vinculo]'";
+} else {
+  $filtra_vinculo = "";
+}
+
 ?>
 <div style="display:flex;gap:20px;">
   <h1><a class="btn btn-lg btn-outline-success" href="/siiupa/?setor=adm&sub=rh&subsub=ferias&ano_ferias=2022">2022</a></h1>
@@ -21,6 +27,12 @@ if (isset($_GET['ano_ferias'])) {
   <h1><a class="btn btn-lg btn-outline-success" href="/siiupa/?setor=adm&sub=rh&subsub=ferias&ano_ferias=2024">2024</a></h1>
   <h1><a class="btn btn-lg btn-outline-success" href="/siiupa/?setor=adm&sub=rh&subsub=ferias&ano_ferias=2025">2025</a></h1>
   <h1><a class="btn btn-lg btn-outline-success" href="/siiupa/?setor=adm&sub=rh&subsub=ferias&ano_ferias=2026">2026</a></h1>
+</div>
+
+<div style="display:flex;gap:20px;">
+  <h2><a class="btn btn-lg btn-outline-info" href="/siiupa/?setor=adm&sub=rh&subsub=ferias&ano_ferias=2026&vinculo=temporario">TEMPORÁRIOS</a></h2>
+  <h2><a class="btn btn-lg btn-outline-info" href="/siiupa/?setor=adm&sub=rh&subsub=ferias&ano_ferias=2026&vinculo=efetivo">EFETIVOS</a></h2>
+  
 </div>
 <?php
 
@@ -148,7 +160,7 @@ function mes($entrada)
       var boxes = $(".box_ferias"); //boxes onde contem os dados a serem pesquisados
       boxes = boxes.toArray();
       var array = [];
-      var arrayValores = [];
+      var arrayValores = [];  
       for (box in boxes) {
         array.push(boxes[box].attributes.name.value) //lista de valores a serem buscados
 
@@ -349,7 +361,7 @@ $tabela->fechaThead();
 
 
 //$query = "SELECT func.nome, c.titulo, s.setor, DATE_FORMAT(ferias.datainicio, '%d\/%m\/%Y'), DATE_FORMAT(ferias.datafim, '%d\/%m\/%Y'), ferias.ref_mes, ferias.ref_ano, func.vinculo, ferias.observacao FROM u940659928_siupa.tb_ferias AS ferias INNER JOIN u940659928_siupa.tb_funcionario AS func ON (ferias.fk_funcionario = func.id) INNER JOIN u940659928_siupa.tb_cargo AS c ON (func.fk_cargo = c.id) INNER JOIN u940659928_siupa.tb_setor AS s ON (func.fk_setor = s.id) WHERE func.status='ATIVO' $fitrasetor ORDER BY s.setor, ref_mes, c.titulo, nome ASC";
-$query = "SELECT ferias.id, func.nome, c.titulo, s.setor, DATE_FORMAT(ferias.datainicio, '%d\/%m\/%Y'), DATE_FORMAT(ferias.datafim, '%d\/%m\/%Y'), ferias.ref_mes, ferias.ref_ano, func.vinculo, ferias.observacao FROM u940659928_siupa.tb_ferias AS ferias INNER JOIN u940659928_siupa.tb_funcionario AS func ON (ferias.fk_funcionario = func.id) INNER JOIN u940659928_siupa.tb_cargo AS c ON (func.fk_cargo = c.id) INNER JOIN u940659928_siupa.tb_setor AS s ON (func.fk_setor = s.id) WHERE func.status='ATIVO' /*and func.vinculo = 'TEMPORARIO'*/ /*AND func.vinculo IN('TEMPORARIO')*/ AND ferias.ref_ano ='$ano_ferias'/* AND NOT (func.fk_setor = '17' OR func.fk_setor = '21') */ $fitrasetor ORDER BY ref_ano ASC, ref_mes ASC, func.nome ASC";
+$query = "SELECT ferias.id, func.nome, c.titulo, s.setor, DATE_FORMAT(ferias.datainicio, '%d\/%m\/%Y'), DATE_FORMAT(ferias.datafim, '%d\/%m\/%Y'), ferias.ref_mes, ferias.ref_ano, func.vinculo, ferias.observacao FROM u940659928_siupa.tb_ferias AS ferias INNER JOIN u940659928_siupa.tb_funcionario AS func ON (ferias.fk_funcionario = func.id) INNER JOIN u940659928_siupa.tb_cargo AS c ON (func.fk_cargo = c.id) INNER JOIN u940659928_siupa.tb_setor AS s ON (func.fk_setor = s.id) WHERE func.status='ATIVO' $filtra_vinculo /*AND func.vinculo IN('TEMPORARIO')*/ AND ferias.ref_ano ='$ano_ferias'/* AND NOT (func.fk_setor = '17' OR func.fk_setor = '21') */ $fitrasetor ORDER BY ref_ano ASC, ref_mes ASC, func.nome ASC";
 //echo $query;
 
 if ($stmt = $conn->prepare($query)) {
