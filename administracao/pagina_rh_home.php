@@ -329,7 +329,7 @@ include_once('../bd/nivel.php');
                 <th scope="col">VINCULO<img src="/siiupa/imagens/tablesorter.svg"></th>
                 <!-- <th scope="col">Férias 2022<img src="/siiupa/imagens/tablesorter.svg"></th> -->
                 <th scope="col">CH</th>
-                <!-- <th scope="col">Férias 2025</th> -->
+                <th scope="col">Férias 2026</th>
 
                 <!-- <th scope="col">Data Inicio</th> -->
                 <!-- <th scope="col">Data Fim</th> -->
@@ -355,7 +355,7 @@ include_once('../bd/nivel.php');
 
                     $conta_serv = 0;
                     //from u940659928_siupa.tb_ferias
-                    $queryf = "SELECT ferias.id, func.nome, c.titulo, s.setor, DATE_FORMAT(ferias.datainicio, '%d\/%m\/%Y'), DATE_FORMAT(ferias.datafim, '%d\/%m\/%Y'), ferias.ref_mes, ferias.ref_ano, func.vinculo, ferias.observacao FROM u940659928_siupa.tb_ferias AS ferias INNER JOIN u940659928_siupa.tb_funcionario AS func ON (ferias.fk_funcionario = func.id) INNER JOIN u940659928_siupa.tb_cargo AS c ON (func.fk_cargo = c.id) INNER JOIN u940659928_siupa.tb_setor AS s ON (func.fk_setor = s.id) WHERE func.status='ATIVO' AND ref_ano = 2025 AND ferias.fk_funcionario = '$dados->idfuncionario'";
+                    $queryf = "SELECT ferias.id, func.nome, c.titulo, s.setor, DATE_FORMAT(ferias.datainicio, '%d\/%m\/%Y'), DATE_FORMAT(ferias.datafim, '%d\/%m\/%Y'), ferias.ref_mes, ferias.ref_ano, func.vinculo, ferias.observacao FROM u940659928_siupa.tb_ferias AS ferias INNER JOIN u940659928_siupa.tb_funcionario AS func ON (ferias.fk_funcionario = func.id) INNER JOIN u940659928_siupa.tb_cargo AS c ON (func.fk_cargo = c.id) INNER JOIN u940659928_siupa.tb_setor AS s ON (func.fk_setor = s.id) WHERE func.status='ATIVO' AND ref_ano = 2026 AND ferias.fk_funcionario = '$dados->idfuncionario'";
 
                     if ($stmtf = $conn->prepare($queryf)) {
                         $stmtf->execute();
@@ -475,17 +475,17 @@ include_once('../bd/nivel.php');
                     echo "<td>$dados->carga_horaria</td>";
 
                     //COLS VACATIONS
-                    // echo "<td>";
-                    // $ferias23 = new BD;
-                    // $sqlF23 = "SELECT * FROM u940659928_siupa.tb_ferias where fk_funcionario = '$dados->idfuncionario' and ref_ano = '2025';";
-                    // $rF23 = $ferias23->consulta($sqlF23);
-                    // $meses = [];
-                    // foreach ($rF23 as $ferias23) {
-                    //     $meses[] = mes($ferias23->ref_mes);
-                    // }
-                    // echo implode('/', $meses);
+                    echo "<td> $dataAdmissao </br>";
+                    $ferias23 = new BD;
+                    $sqlF23 = "SELECT * FROM u940659928_siupa.tb_ferias where fk_funcionario = '$dados->idfuncionario' and ref_ano = '2026' ORDER BY ref_mes ASC;";
+                    $rF23 = $ferias23->consulta($sqlF23);
+                    $meses = [];
+                    foreach ($rF23 as $ferias23) {
+                        $meses[] = mes($ferias23->ref_mes);
+                    }
+                    echo implode('/', $meses);
 
-                    // echo "</td>";
+                    echo "</td>";
 
 
 

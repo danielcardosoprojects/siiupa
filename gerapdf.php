@@ -9,6 +9,7 @@ $mes = $_GET['mes'];
 $matricula = $_GET['matricula'];
 
 $admissao = $_GET['admissao'];
+$posse_contrato = $_GET['posse_contrato'];
 $nomefunc = $_GET['nome'];
 $cargo = $_GET['cargo'];
 $vinculo = $_GET['vinculo'];
@@ -25,7 +26,7 @@ if (!is_dir($setor)) {
 }
 
 
-$modelo = 'http://'.$_SERVER['SERVER_NAME'].'/siiupa/mpdf/modelo/frequenciapdf.php?mes='. urlencode($mes). '&matricula='. urlencode($matricula). '&admissao='. urlencode($admissao). '&nome='. urlencode($nomefunc). '&cargo=' . urlencode($cargo). '&vinculo=' . urlencode($vinculo); 
+$modelo = 'http://'.$_SERVER['SERVER_NAME'].'/siiupa/mpdf/modelo/frequenciapdf.php?mes='. urlencode($mes). '&matricula='. urlencode($matricula). '&admissao='. urlencode($admissao). '&posse_contrato='. urlencode($posse_contrato) . '&nome='. urlencode($nomefunc). '&cargo=' . urlencode($cargo). '&vinculo=' . urlencode($vinculo); 
 
 $html = file_get_contents($modelo);
 

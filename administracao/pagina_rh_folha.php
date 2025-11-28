@@ -583,7 +583,7 @@ if ($stmt = $conn->prepare($query)) {
         <td class='fmatricula' id='%s'>%s</td>
         <td class='fcpf' >%s</td>       
         <td class='fvinculo'>%s</td>
-        <td id='%s'><a href='%s#offcanvasExample'class='btEditaServidor text-dark text-decoration-none' data-bs-toggle='offcanvas' role='button' aria-controls='offcanvasExample'>%s</a></td>
+        <td id='%s' title='%s'><a href='%s#offcanvasExample'class='btEditaServidor text-dark text-decoration-none' data-bs-toggle='offcanvas' role='button' aria-controls='offcanvasExample'>%s</a></td>
         <td>%s</td>
         <td>%s</td>
         <td>%s</td>
@@ -596,7 +596,7 @@ if ($stmt = $conn->prepare($query)) {
         <td>%s</td>
         
 
-      </tr>", $nome, $i, $fcpfn,  $fmatricula, $fcpfpontos, $fvinculo, $id_linha, $link_para_alterar, $nome, $cargoTitulo, $adc_not, $ext_6, $ext_12, $ext_24, $acionamento, $transferencia, number_format($fixos, 2, ',', '.'), number_format($valor_total, 2, ',', '.'), $obs);
+      </tr>", $nome, $i, $fcpfn,  $fmatricula, $fcpfpontos, $fvinculo, $id_linha, $id_linha, $link_para_alterar, $nome, $cargoTitulo, $adc_not, $ext_6, $ext_12, $ext_24, $acionamento, $transferencia, number_format($fixos, 2, ',', '.'), number_format($valor_total, 2, ',', '.'), $obs);
         $valor_geral = $valor_geral + $valor_total;
     }
     $stmt->close();
@@ -788,7 +788,7 @@ function abrirAdicionarServidor(e) {
 
             });
         });
-        $(window).scrollTop($('#inicio_folha').offset().top);
+        //$(window).scrollTop($('#inicio_folha').offset().top);
         $("#imprimirfolha").click(function() {
             var elem = $('#folha_impressao');
             var mywindow = window.open('', 'PRINT', 'height=400,width=600');
@@ -813,6 +813,15 @@ function abrirAdicionarServidor(e) {
 
         $('#exportar_excel_folha').click(function(e) {
             e.preventDefault();
+                 function exportarTabela() {
+                    const tabela = document.getElementById("tabela_folha");
+                    const workbook = XLSX.utils.table_to_book(tabela, {
+                        sheet: "Planilha1"
+                    });
+                    XLSX.writeFile(workbook, "Folha de Pagamento UPA.xlsx");
+                }
+
+                exportarTabela()
 
             $(".Tabela_folha").table2excel({
                 filename: $("#titulo_folha").data("titulo") + ".xls", // do include extension

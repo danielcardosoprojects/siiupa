@@ -53,13 +53,13 @@ function trataNaoNumericos($naoNumericos)
     return floatval($naoNumericos);
   }
 }
-$query = "SELECT fls.id, fls.ref_mes, fls.ref_ano, DATE_FORMAT(fls.periodoinicio,'%d\/%m\/%Y'), DATE_FORMAT(fls.periodofim,'%d\/%m\/%Y'), fls.status FROM u940659928_siupa.tb_folhas AS fls order by periodoinicio DESC";
+$query = "SELECT fls.id, fls.ref_mes, fls.ref_ano, DATE_FORMAT(fls.periodoinicio,'%d\/%m\/%Y'), DATE_FORMAT(fls.periodofim,'%d\/%m\/%Y'), fls.status FROM u940659928_siupa.tb_folhas AS fls order by periodoinicio DESC LIMIT 24";
 echo '
 <table class="table table-hover table-sm">
         <thead>
           <tr>
+          <th scope="col">ANO</th>
           <th scope="col">MÊS REFERÊNCIA</th>
-            <th scope="col">ANO</th>
             <th scope="col" class="col">VALOR</th>
             <th scope="col">INICIO</th>
             <th scope="col">FIM</th>
@@ -87,9 +87,10 @@ if ($stmt = $conn->prepare($query)) {
 
 
     $queryx = "SELECT fl.id as id_linha, func.id,func.nome, cargo.funcao_upa, fl.adc_not, fl.ext_6, fl.ext_12, fl.ext_24, fl.acionamento, fl.transferencia, fl.fixos, fl.obs, cargo.valor_plantao, cargo.valor_acionamento, cargo.valor_transferencia FROM u940659928_siupa.tb_folha AS fl INNER JOIN u940659928_siupa.tb_funcionario AS func ON (fl.fk_funcionario = func.id) INNER JOIN u940659928_siupa.tb_cargo AS cargo ON (func.fk_cargo = cargo.id) WHERE fl.fk_folhas = '12' ORDER BY func.nome ASC";
-
+    
     $consultaValores = new BD;
     $sqlConsultaValores = "SELECT fl.id as id_linha, func.id,func.nome, cargo.funcao_upa, fl.adc_not, fl.ext_6, fl.ext_12, fl.ext_24, fl.acionamento, fl.transferencia, fl.fixos, fl.obs, cargo.valor_plantao, cargo.valor_acionamento, cargo.valor_transferencia FROM u940659928_siupa.tb_folha AS fl INNER JOIN u940659928_siupa.tb_funcionario AS func ON (fl.fk_funcionario = func.id) INNER JOIN u940659928_siupa.tb_cargo AS cargo ON (func.fk_cargo = cargo.id) WHERE fl.fk_folhas = '$flsid' ORDER BY func.nome ASC";
+    
     $resultadoConsultaValores = $consultaValores->consulta($sqlConsultaValores);
 
     foreach ($resultadoConsultaValores as $resultadoValores) {
@@ -157,14 +158,14 @@ if ($stmt = $conn->prepare($query)) {
     printf('
         
         <tr>
-        <th scope="row"><a href="?setor=adm&sub=rh&subsub=rhfolhaexibe&id=%s&ref_mes=%s&ref_ano=%s">%s %s</a></th>
         <td>%s</td>
+        <th scope="row"><a href="?setor=adm&sub=rh&subsub=rhfolhaexibe&id=%s&ref_mes=%s&ref_ano=%s">%s %s</a></th>
         <td class="coluna_valor">%s</td>
         <td>%s</td>
         <td>%s</td>
         
 
-      </tr>', $flsid, $ref_mes, $ref_ano, $status, $ref_mes, $ref_ano, $valor_geral_reais, $periodoinicio, $periodofim);
+      </tr>', $ref_ano, $flsid, $ref_mes, $ref_ano, $status, $ref_mes, $valor_geral_reais, $periodoinicio, $periodofim);
   }
   $stmt->close();
 }
@@ -245,7 +246,7 @@ chart.on('draw', function(data) {
   if(data.type === 'line' || data.type === 'area') {
     data.element.animate({
       d: {
-        begin: 2000 * data.index,
+        begin: 2024 * data.index,
         dur: 2000,
         from: data.path.clone().scale(1, 0).translate(0, data.chartRect.height()).stringify(),
         to: data.path.clone().stringify(),
