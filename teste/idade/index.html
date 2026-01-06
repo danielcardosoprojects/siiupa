@@ -146,7 +146,7 @@
         function getRandomBirthDate() {
             let randomDate;
             do {
-                const start = new Date(1904, 0, 1);
+                const start = new Date(1915, 0, 1);
                 const end = new Date();
                 const randomTimestamp = start.getTime() + Math.random() * (end.getTime() - start.getTime());
                 randomDate = new Date(randomTimestamp);
