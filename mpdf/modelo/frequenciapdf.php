@@ -79,7 +79,7 @@ if($vinculo == "EFETIVO"){
     </strong><br />
 </div>
 <div style='font-size:12px;font-family: "Times New Roman", Times, serif;'>
-    Referência: <strong><?php echo GetNomeMes($mes); ?>-2025</strong><br />
+    Referência: <strong><?php echo GetNomeMes($mes); ?>-2026</strong><br />
 
     Matricula : <strong><?php echo $matricula; ?></strong><span style="color:white;">____________________</span>Data de Admissão: <strong><?php echo $admissao_exibida; ?></strong><br />
     Nome: <strong><?php echo strtoupper($nomefunc); ?></strong> <span style="color:white;">______</span>Cargo/Função: <strong><?php echo $cargo; ?></strong><br />
@@ -173,7 +173,7 @@ function Mostra($mes, $dia)
     $nome_mes = GetNomeMes($mes);
     $diacorrente = 0;
 
-    $diasemana = jddayofweek(cal_to_jd(CAL_GREGORIAN, $mes, $dia, 2025), 0);    // função que descobre o dia da semana
+    $diasemana = jddayofweek(cal_to_jd(CAL_GREGORIAN, $mes, $dia, 2026), 0);    // função que descobre o dia da semana
 
 
 
@@ -185,7 +185,7 @@ function DiaSemana($mes, $dia)
     } else {
         $diaa = $dia + 1;
     }
-    $diasemana = jddayofweek(cal_to_jd(CAL_GREGORIAN, $mes, $diaa, 2025), 0);    // função que descobre o dia da semana
+    $diasemana = jddayofweek(cal_to_jd(CAL_GREGORIAN, $mes, $diaa, 2026), 0);    // função que descobre o dia da semana
     $nomesemana = array(1 => '<strong>DOMINGO</strong>', 2 => 'SEGUNDA', 3 => 'TERÇA', 4 => 'QUARTA', 5 => 'QUINTA', 6 => 'SEXTA', 0 => '<strong>SÁBADO</strong>');
 
     return $nomesemana[$diasemana];
