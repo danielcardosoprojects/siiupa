@@ -139,9 +139,10 @@ button:disabled {
 <div class="resultado" id="resultado"></div>
 
 </div>
-<a href="https://wa.me/5591982310268" target="_blank" class="whatsapp-btn">
-    Caso tenha algum problema, fale com Daniel no WhatsApp clicando aqui;
-</a>
+<button type="button" class="whatsapp-btn" onclick="enviarWhatsapp()">
+    Caso tenha algum problema, fale com Daniel no WhatsApp clicando aqui.
+</button>
+ clicando aqui.
 <script>
 
 // Máscara CPF
@@ -230,6 +231,29 @@ document.getElementById('crachaForm').addEventListener('submit', function(e){
     });
 });
 </script>
+<script>
+function enviarWhatsapp() {
+
+    const nomeCompleto = document.querySelector('[name="nome_completo"]').value;
+    const nomeCracha = document.querySelector('[name="nome_cracha"]').value;
+    const cpf = document.querySelector('[name="cpf"]').value;
+    const cargo = document.querySelector('[name="cargo"]').value;
+
+    const mensagem = 
+`Olá Daniel, estou com problema no cadastro do crachá.
+
+Nome completo: ${nomeCompleto}
+Nome desejado no crachá: ${nomeCracha}
+CPF: ${cpf}
+Cargo: ${cargo}`;
+
+    const numero = "5591982310268"; // <-- coloque seu número aqui
+    const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+
+    window.open(url, '_blank');
+}
+</script>
+
 
 </body>
 </html>
