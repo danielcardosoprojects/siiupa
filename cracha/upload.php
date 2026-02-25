@@ -19,7 +19,7 @@ if (!in_array($_FILES["foto"]["type"], $permitidos)) {
 
 // ===== TRATAMENTO DO NOME =====
 $nomeCompleto = $_POST["nome_completo"];
-$nomeCompleto = iconv('UTF-8', 'ASCII//TRANSLIT', $nomeCompleto);
+// $nomeCompleto = iconv('UTF-8', 'ASCII//TRANSLIT', $nomeCompleto);
 $nomeCompleto = preg_replace('/[^A-Za-z0-9 ]/', '', $nomeCompleto);
 $nomeCompleto = str_replace(' ', '_', trim($nomeCompleto));
 
