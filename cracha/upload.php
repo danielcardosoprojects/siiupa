@@ -60,6 +60,38 @@ if (!move_uploaded_file($arquivo['tmp_name'], $caminhoCompleto)) {
     exit;
 }
 
+
+
+// ===== ENVIAR PARA API =====
+$dados = [
+    "nome_completo" => $_POST["nome_completo"],
+    "nome_cracha" => $_POST["nome_cracha"],
+    "cpf" => $_POST["cpf"],
+    "telefone" => $_POST["telefone"],
+    "cargo" => $_POST["cargo"],
+    "foto" => $caminhoArquivo
+];
+
+$apiUrl = "https://siupa.com.br/siiupa/api/api.php/records/tb_cracha";
+
+$ch = curl_init($apiUrl);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    'Content-Type: application/json'
+]);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($dados));
+
+$response = curl_exec($ch);
+
+if ($response === false) {
+    echo "Erro CURL: " . curl_error($ch);
+    curl_close($ch);
+    exit;
+}
+
+curl_close($ch);
+
 echo json_encode([
     'success' => true,
     'file' => $nomeArquivo,
