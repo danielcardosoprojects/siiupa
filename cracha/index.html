@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Cadastro de Crachá</title>
+<style>
+body { font-family: Arial; background:#f4f4f4; padding:20px; }
+.container { background:white; padding:20px; max-width:500px; margin:auto; border-radius:8px; }
+input { width:100%; padding:10px; margin-bottom:12px; }
+button { background:#007BFF; color:white; padding:12px; border:none; cursor:pointer; width:100%; }
+.error { color:red; }
+.success { color:green; }
+</style>
+</head>
+<body>
+
+<div class="container">
+<h2>Cadastro para Crachá</h2>
+
+<form id="crachaForm" enctype="multipart/form-data">
+<input type="text" name="nome_completo" placeholder="Nome Completo" required>
+<input type="text" name="nome_cracha" placeholder="Nome desejado no crachá" required>
+<input type="text" name="cpf" id="cpf" placeholder="CPF" required>
+<input type="text" name="telefone" id="telefone" placeholder="Telefone">
+<input type="text" name="cargo" placeholder="Cargo" required>
+<input type="file" name="foto" accept="image/*" required>
+<button type="submit">Enviar</button>
+</form>
+
+<div id="msg"></div>
+</div>
+
+<script>
+// Máscara CPF
+document.getElementById('cpf').addEventListener('input', function(e){
+    let v = e.target.value.replace(/\D/g,'');
+    v = v.replace(/(\d{3})(\d)/,'$1.$2');
+    v = v.replace(/(\d{3})(\d)/,'$1.$2');
+    v = v.replace(/(\d{3})(\d{1,2})$/,'$1-$2');
+    e.target.value = v;
+});
+
+// Máscara Telefone
+document.getElementById('telefone').addEventListener('input', function(e){
+    let v = e.target.value.replace(/\D/g,'');
+    v = v.replace(/^(\d{2})(\d)/g,"($1) $2");
+    v = v.replace(/(\d)(\d{4})$/,"$1-$2");
+    e.target.value = v;
+});
+
+// Validação CPF real
+function validarCPF(cpf) {
+    cpf = cpf.replace(/[^\d]+/g,'');
+    if(cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
+    let soma = 0, resto;
+    for (let i=1; i<=9; i++) soma += parseInt(cpf.substring(i-1, i)) * (11 - i);
+    resto = (soma * 10) % 11;
+    if ((resto === 10) || (resto === 11)) resto = 0;
+    if (resto !== parseInt(cpf.substring(9, 10))) return false;
+    soma = 0;
+    for (let i = 1; i <= 10; i++) soma += parseInt(cpf.substring(i-1, i)) * (12 - i);
+    resto = (soma * 10) % 11;
+    if ((resto === 10) || (resto === 11)) resto = 0;
+    if (resto !== parseInt(cpf.substring(10, 11))) return false;
+    return true;
+}
+
+document.getElementById('crachaForm').addEventListener('submit', function(e){
+    e.preventDefault();
+
+    let cpf = document.getElementById('cpf').value;
+    if(!validarCPF(cpf)){
+        document.getElementById('msg').innerHTML = "<div class='error'>CPF inválido!</div>";
+        return;
+    }
+
+    let formData = new FormData(this);
+
+    fetch('upload.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.text())
+    .then(data => {
+        document.getElementById('msg').innerHTML = "<div class='success'>Cadastro realizado!</div>";
+        this.reset();
+    });
+});
+</script>
+
+</body>
+</html>
