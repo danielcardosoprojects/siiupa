@@ -29,7 +29,7 @@ button { background:red; color:white; border:none; padding:5px; cursor:pointer; 
 </table>
 
 <script>
-fetch('https://siupa.com.br/siiupa/api/api.php/records/tb_cracha')
+fetch('https://siupa.com.br/siiupa/api/api.php/records/tb_cracha?order=id,desc')
 .then(res => res.json())
 .then(data => {
     let tabela = document.getElementById('tabela');
