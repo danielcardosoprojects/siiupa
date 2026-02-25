@@ -6,18 +6,49 @@ if (!is_dir($uploadDir)) {
     mkdir($uploadDir, 0755, true);
 }
 
-$nomeArquivo = time() . "_" . basename($_FILES["foto"]["name"]);
+// Validação tamanho (2MB)
+if ($_FILES["foto"]["size"] > 2 * 1024 * 1024) {
+    die("A imagem deve ter no máximo 2MB.");
+}
+
+// Validação tipo
+$permitidos = ["image/jpeg", "image/png", "image/jpg"];
+if (!in_array($_FILES["foto"]["type"], $permitidos)) {
+    die("Formato inválido. Envie JPG ou PNG.");
+}
+
+// ===== TRATAMENTO DO NOME =====
+$nomeCompleto = $_POST["nome_completo"];
+
+// Remove acentos
+$nomeCompleto = iconv('UTF-8', 'ASCII//TRANSLIT', $nomeCompleto);
+
+// Remove caracteres especiais
+$nomeCompleto = preg_replace('/[^A-Za-z0-9 ]/', '', $nomeCompleto);
+
+// Substitui espaços por underline
+$nomeCompleto = str_replace(' ', '_', trim($nomeCompleto));
+
+// Data e hora atual
+date_default_timezone_set('America/Belem');
+$dataHora = date('Y-m-d_H-i-s');
+
+// Extensão original
+$ext = strtolower(pathinfo($_FILES["foto"]["name"], PATHINFO_EXTENSION));
+
+// Nome final do arquivo
+$nomeArquivo = $nomeCompleto . "_" . $dataHora . "." . $ext;
+
 $caminhoArquivo = $uploadDir . $nomeArquivo;
 
 if (move_uploaded_file($_FILES["foto"]["tmp_name"], $caminhoArquivo)) {
 
     $dados = [
-        "nome" => $_POST["nome"],
-        "cargo" => $_POST["cargo"],
-        "setor" => $_POST["setor"],
-        "matricula" => $_POST["matricula"],
-        "tipo_sanguineo" => $_POST["tipo_sanguineo"],
+        "nome_completo" => $_POST["nome_completo"],
+        "nome_cracha" => $_POST["nome_cracha"],
+        "cpf" => $_POST["cpf"],
         "telefone" => $_POST["telefone"],
+        "cargo" => $_POST["cargo"],
         "foto" => $caminhoArquivo
     ];
 
