@@ -1,8 +1,9 @@
 <?php
+
 ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
+date_default_timezone_set('America/Belem');
 
 $uploadDir = "uploads/";
 
@@ -10,12 +11,7 @@ if (!is_dir($uploadDir)) {
     mkdir($uploadDir, 0755, true);
 }
 
-// Validação tamanho (2MB)
-if ($_FILES["foto"]["size"] > 2 * 1024 * 1024) {
-    die("A imagem deve ter no máximo 2MB.");
-}
-
-// Validação tipo
+// Validar tipo
 $permitidos = ["image/jpeg", "image/png", "image/jpg"];
 if (!in_array($_FILES["foto"]["type"], $permitidos)) {
     die("Formato inválido. Envie JPG ou PNG.");
@@ -23,62 +19,92 @@ if (!in_array($_FILES["foto"]["type"], $permitidos)) {
 
 // ===== TRATAMENTO DO NOME =====
 $nomeCompleto = $_POST["nome_completo"];
-
-// Remove acentos
-//$nomeCompleto = iconv('UTF-8', 'ASCII//TRANSLIT', $nomeCompleto);
-
-// Remove caracteres especiais
+$nomeCompleto = iconv('UTF-8', 'ASCII//TRANSLIT', $nomeCompleto);
 $nomeCompleto = preg_replace('/[^A-Za-z0-9 ]/', '', $nomeCompleto);
-
-// Substitui espaços por underline
 $nomeCompleto = str_replace(' ', '_', trim($nomeCompleto));
 
-// Data e hora atual
-date_default_timezone_set('America/Belem');
 $dataHora = date('Y-m-d_H-i-s');
-
-// Extensão original
-$ext = strtolower(pathinfo($_FILES["foto"]["name"], PATHINFO_EXTENSION));
-
-// Nome final do arquivo
-$nomeArquivo = $nomeCompleto . "_" . $dataHora . "." . $ext;
-
+$nomeArquivo = $nomeCompleto . "_" . $dataHora . ".jpg";
 $caminhoArquivo = $uploadDir . $nomeArquivo;
 
-if (move_uploaded_file($_FILES["foto"]["tmp_name"], $caminhoArquivo)) {
+// ===== PROCESSAMENTO DA IMAGEM =====
+$tmpFile = $_FILES["foto"]["tmp_name"];
+$info = getimagesize($tmpFile);
 
-    $dados = [
-        "nome_completo" => $_POST["nome_completo"],
-        "nome_cracha" => $_POST["nome_cracha"],
-        "cpf" => $_POST["cpf"],
-        "telefone" => $_POST["telefone"],
-        "cargo" => $_POST["cargo"],
-        "foto" => $caminhoArquivo
-    ];
+$larguraOriginal = $info[0];
+$alturaOriginal = $info[1];
+$tipo = $info[2];
 
-    $apiUrl = "https://siupa.com.br/siiupa/api/api.php/records/tb_cracha";
+// Criar imagem original
+switch ($tipo) {
+    case IMAGETYPE_JPEG:
+        $imagemOriginal = imagecreatefromjpeg($tmpFile);
+        break;
+    case IMAGETYPE_PNG:
+        $imagemOriginal = imagecreatefrompng($tmpFile);
+        break;
+    default:
+        die("Tipo de imagem não suportado.");
+}
 
-    $ch = curl_init($apiUrl);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, [
-        'Content-Type: application/json'
-    ]);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($dados));
+// ===== REDIMENSIONAMENTO =====
+$maxLargura = 1000;
 
-    $response = curl_exec($ch);
+if ($larguraOriginal > $maxLargura) {
+    $novaLargura = $maxLargura;
+    $novaAltura = ($alturaOriginal / $larguraOriginal) * $novaLargura;
+} else {
+    $novaLargura = $larguraOriginal;
+    $novaAltura = $alturaOriginal;
+}
 
-if($response === false){
+$imagemRedimensionada = imagecreatetruecolor($novaLargura, $novaAltura);
+
+imagecopyresampled(
+    $imagemRedimensionada,
+    $imagemOriginal,
+    0, 0, 0, 0,
+    $novaLargura,
+    $novaAltura,
+    $larguraOriginal,
+    $alturaOriginal
+);
+
+// ===== SALVAR COMO JPG QUALIDADE 85 =====
+imagejpeg($imagemRedimensionada, $caminhoArquivo, 85);
+
+imagedestroy($imagemOriginal);
+imagedestroy($imagemRedimensionada);
+
+// ===== ENVIAR PARA API =====
+$dados = [
+    "nome_completo" => $_POST["nome_completo"],
+    "nome_cracha" => $_POST["nome_cracha"],
+    "cpf" => $_POST["cpf"],
+    "telefone" => $_POST["telefone"],
+    "cargo" => $_POST["cargo"],
+    "foto" => $caminhoArquivo
+];
+
+$apiUrl = "https://siupa.com.br/siiupa/api/api.php/records/tb_cracha";
+
+$ch = curl_init($apiUrl);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_POST, true);
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+    'Content-Type: application/json'
+]);
+curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($dados));
+
+$response = curl_exec($ch);
+
+if ($response === false) {
     echo "Erro CURL: " . curl_error($ch);
+    curl_close($ch);
     exit;
 }
 
-echo "Resposta API: " . $response;
 curl_close($ch);
-    
 
-    echo "Cadastro enviado com sucesso!";
-} else {
-    echo "Erro ao fazer upload da imagem.";
-}
+echo "Cadastro enviado com sucesso!";
 ?>
