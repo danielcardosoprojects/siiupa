@@ -2,16 +2,91 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cadastro de Crachá</title>
+
 <style>
-body { font-family: Arial; background:#f4f4f4; padding:20px; }
-.container { background:white; padding:20px; max-width:500px; margin:auto; border-radius:8px; }
-input { width:100%; padding:10px; margin-bottom:12px; }
-button { background:#007BFF; color:white; padding:12px; border:none; cursor:pointer; width:100%; }
-.error { color:red; }
-.success { color:green; }
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f6f9;
+    margin: 0;
+    padding: 15px;
+}
+
+.container {
+    background: #ffffff;
+    padding: 20px;
+    max-width: 500px;
+    margin: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    background: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:disabled {
+    background: #7aa7e6;
+}
+
+.loading {
+    text-align: center;
+    margin-top: 15px;
+    display: none;
+}
+
+.spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #007BFF;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    margin: 10px auto;
+}
+
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+
+.resultado {
+    margin-top: 20px;
+    padding: 15px;
+    background: #eaf7ea;
+    border-radius: 8px;
+    display: none;
+}
+
+.resultado img {
+    width: 120px;
+    border-radius: 6px;
+    margin-top: 10px;
+}
 </style>
 </head>
+
 <body>
 
 <div class="container">
@@ -23,14 +98,22 @@ button { background:#007BFF; color:white; padding:12px; border:none; cursor:poin
 <input type="text" name="cpf" id="cpf" placeholder="CPF" required>
 <input type="text" name="telefone" id="telefone" placeholder="Telefone">
 <input type="text" name="cargo" placeholder="Cargo" required>
-<input type="file" name="foto" accept="image/*" required>
-<button type="submit">Enviar</button>
+<input type="file" name="foto" id="foto" accept="image/*" required>
+
+<button type="submit" id="btnEnviar">Enviar Cadastro</button>
 </form>
 
-<div id="msg"></div>
+<div class="loading" id="loading">
+<div class="spinner"></div>
+<p>Enviando dados... Aguarde.</p>
+</div>
+
+<div class="resultado" id="resultado"></div>
+
 </div>
 
 <script>
+
 // Máscara CPF
 document.getElementById('cpf').addEventListener('input', function(e){
     let v = e.target.value.replace(/\D/g,'');
@@ -48,19 +131,19 @@ document.getElementById('telefone').addEventListener('input', function(e){
     e.target.value = v;
 });
 
-// Validação CPF real
+// Validação CPF
 function validarCPF(cpf) {
     cpf = cpf.replace(/[^\d]+/g,'');
     if(cpf.length !== 11 || /^(\d)\1+$/.test(cpf)) return false;
     let soma = 0, resto;
     for (let i=1; i<=9; i++) soma += parseInt(cpf.substring(i-1, i)) * (11 - i);
     resto = (soma * 10) % 11;
-    if ((resto === 10) || (resto === 11)) resto = 0;
+    if (resto === 10 || resto === 11) resto = 0;
     if (resto !== parseInt(cpf.substring(9, 10))) return false;
     soma = 0;
     for (let i = 1; i <= 10; i++) soma += parseInt(cpf.substring(i-1, i)) * (12 - i);
     resto = (soma * 10) % 11;
-    if ((resto === 10) || (resto === 11)) resto = 0;
+    if (resto === 10 || resto === 11) resto = 0;
     if (resto !== parseInt(cpf.substring(10, 11))) return false;
     return true;
 }
@@ -70,11 +153,19 @@ document.getElementById('crachaForm').addEventListener('submit', function(e){
 
     let cpf = document.getElementById('cpf').value;
     if(!validarCPF(cpf)){
-        document.getElementById('msg').innerHTML = "<div class='error'>CPF inválido!</div>";
+        alert("CPF inválido!");
         return;
     }
 
+    let btn = document.getElementById('btnEnviar');
+    btn.disabled = true;
+
+    document.getElementById('loading').style.display = "block";
+    document.getElementById('resultado').style.display = "none";
+
     let formData = new FormData(this);
+    let fotoInput = document.getElementById('foto');
+    let fotoPreview = URL.createObjectURL(fotoInput.files[0]);
 
     fetch('upload.php', {
         method: 'POST',
@@ -82,8 +173,30 @@ document.getElementById('crachaForm').addEventListener('submit', function(e){
     })
     .then(response => response.text())
     .then(data => {
-        document.getElementById('msg').innerHTML = "<div class='success'>Cadastro realizado!</div>";
-        this.reset();
+
+        document.getElementById('loading').style.display = "none";
+        btn.disabled = false;
+
+        if(data.includes("sucesso")){
+            document.getElementById('resultado').innerHTML = `
+                <h3>Cadastro realizado com sucesso!</h3>
+                <p><strong>Nome:</strong> ${formData.get('nome_completo')}</p>
+                <p><strong>Nome no Crachá:</strong> ${formData.get('nome_cracha')}</p>
+                <p><strong>CPF:</strong> ${formData.get('cpf')}</p>
+                <p><strong>Cargo:</strong> ${formData.get('cargo')}</p>
+                <img src="${fotoPreview}">
+            `;
+            document.getElementById('resultado').style.display = "block";
+            document.getElementById('crachaForm').reset();
+        } else {
+            alert("Erro ao cadastrar.");
+        }
+
+    })
+    .catch(() => {
+        document.getElementById('loading').style.display = "none";
+        btn.disabled = false;
+        alert("Erro na comunicação com o servidor.");
     });
 });
 </script>
