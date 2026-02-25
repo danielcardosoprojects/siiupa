@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 
 $uploadDir = "uploads/";
 
@@ -21,7 +25,7 @@ if (!in_array($_FILES["foto"]["type"], $permitidos)) {
 $nomeCompleto = $_POST["nome_completo"];
 
 // Remove acentos
-$nomeCompleto = iconv('UTF-8', 'ASCII//TRANSLIT', $nomeCompleto);
+//$nomeCompleto = iconv('UTF-8', 'ASCII//TRANSLIT', $nomeCompleto);
 
 // Remove caracteres especiais
 $nomeCompleto = preg_replace('/[^A-Za-z0-9 ]/', '', $nomeCompleto);
@@ -63,7 +67,15 @@ if (move_uploaded_file($_FILES["foto"]["tmp_name"], $caminhoArquivo)) {
     curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($dados));
 
     $response = curl_exec($ch);
-    curl_close($ch);
+
+if($response === false){
+    echo "Erro CURL: " . curl_error($ch);
+    exit;
+}
+
+echo "Resposta API: " . $response;
+curl_close($ch);
+    
 
     echo "Cadastro enviado com sucesso!";
 } else {
