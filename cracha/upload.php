@@ -2,8 +2,18 @@
 
 header('Content-Type: application/json');
 
-// pasta onde salvar
-$diretorio = 'uploads/';
+// ======================================
+// CONFIGURAÇÃO
+// ======================================
+
+$diretorio = __DIR__ . '/uploads/';
+$urlRelativa = 'uploads/';
+
+$apiUrl = "https://siupa.com.br/siiupa/api/api.php/records/tb_cracha";
+
+// ======================================
+// VALIDAÇÃO DO ARQUIVO
+// ======================================
 
 if (!isset($_FILES['foto'])) {
     echo json_encode(['success' => false, 'error' => 'Nenhuma imagem enviada']);
@@ -12,20 +22,22 @@ if (!isset($_FILES['foto'])) {
 
 $arquivo = $_FILES['foto'];
 
-// verifica erro de upload
 if ($arquivo['error'] !== UPLOAD_ERR_OK) {
     echo json_encode(['success' => false, 'error' => 'Erro no upload da imagem']);
     exit;
 }
 
-// valida tipo real da imagem
+// ======================================
+// VALIDAR TIPO REAL
+// ======================================
+
 $finfo = finfo_open(FILEINFO_MIME_TYPE);
 $mime = finfo_file($finfo, $arquivo['tmp_name']);
 finfo_close($finfo);
 
 $tiposPermitidos = [
     'image/jpeg' => 'jpg',
-    'image/png' => 'png',
+    'image/png'  => 'png',
     'image/webp' => 'webp'
 ];
 
@@ -34,45 +46,48 @@ if (!array_key_exists($mime, $tiposPermitidos)) {
     exit;
 }
 
-// pega nome completo enviado pelo form
+// ======================================
+// GERAR NOME DO ARQUIVO
+// ======================================
+
 $nomeCompleto = $_POST['nome_completo'] ?? 'usuario';
 
-// limpa nome para arquivo
 $nomeLimpo = preg_replace('/[^a-zA-Z0-9]/', '_', $nomeCompleto);
+$nomeLimpo = strtolower($nomeLimpo);
 
-// data e hora
 $dataHora = date('Y-m-d_H-i-s');
-
-// monta nome final
 $extensao = $tiposPermitidos[$mime];
+
 $nomeArquivo = $nomeLimpo . '_' . $dataHora . '.' . $extensao;
 
-$caminhoCompleto = $diretorio . $nomeArquivo;
-
-// cria pasta se não existir
 if (!is_dir($diretorio)) {
     mkdir($diretorio, 0755, true);
 }
 
-// move arquivo
-if (!move_uploaded_file($arquivo['tmp_name'], $caminhoCompleto)) {
+$caminhoFisico = $diretorio . $nomeArquivo;
+$caminhoArquivo = $urlRelativa . $nomeArquivo;
+
+// ======================================
+// MOVER ARQUIVO
+// ======================================
+
+if (!move_uploaded_file($arquivo['tmp_name'], $caminhoFisico)) {
     echo json_encode(['success' => false, 'error' => 'Erro ao salvar imagem']);
     exit;
 }
 
+// ======================================
+// ENVIAR PARA API
+// ======================================
 
-
-// ===== ENVIAR PARA API =====
 $dados = [
-    "nome_completo" => $_POST["nome_completo"],
-    "nome_cracha" => $_POST["nome_cracha"],
-    "cpf" => $_POST["cpf"],
-    "telefone" => $_POST["telefone"],
-    "cargo" => $_POST["cargo"],
-    "foto" => $caminhoArquivo
+    "nome_completo" => $_POST["nome_completo"] ?? "",
+    "nome_cracha"   => $_POST["nome_cracha"] ?? "",
+    "cpf"           => $_POST["cpf"] ?? "",
+    "telefone"      => $_POST["telefone"] ?? "",
+    "cargo"         => $_POST["cargo"] ?? "",
+    "foto"          => $caminhoArquivo
 ];
-
-$apiUrl = "https://siupa.com.br/siiupa/api/api.php/records/tb_cracha";
 
 $ch = curl_init($apiUrl);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -85,15 +100,38 @@ curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($dados));
 $response = curl_exec($ch);
 
 if ($response === false) {
-    echo "Erro CURL: " . curl_error($ch);
+    echo json_encode([
+        'success' => false,
+        'error' => 'Erro CURL: ' . curl_error($ch)
+    ]);
     curl_close($ch);
     exit;
 }
 
+$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 curl_close($ch);
+
+// ======================================
+// VERIFICAR RESPOSTA DA API
+// ======================================
+
+if ($httpCode !== 200 && $httpCode !== 201) {
+    echo json_encode([
+        'success' => false,
+        'error' => 'Erro ao cadastrar na API',
+        'api_response' => $response
+    ]);
+    exit;
+}
+
+// ======================================
+// SUCESSO TOTAL
+// ======================================
 
 echo json_encode([
     'success' => true,
+    'message' => 'Cadastro realizado com sucesso',
     'file' => $nomeArquivo,
-    'path' => $caminhoCompleto
+    'path' => $caminhoArquivo,
+    'api_response' => json_decode($response, true)
 ]);
