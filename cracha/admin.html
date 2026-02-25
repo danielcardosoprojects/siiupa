@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Painel Crachás</title>
+<style>
+table { width:100%; border-collapse:collapse; }
+th, td { border:1px solid #ccc; padding:8px; text-align:left; }
+img { width:60px; }
+button { background:red; color:white; border:none; padding:5px; cursor:pointer; }
+</style>
+</head>
+<body>
+
+<h2>Lista de Cadastros</h2>
+<table>
+<thead>
+<tr>
+<th>ID</th>
+<th>Nome</th>
+<th>Nome Crachá</th>
+<th>CPF</th>
+<th>Cargo</th>
+<th>Foto</th>
+<th>Ação</th>
+</tr>
+</thead>
+<tbody id="tabela"></tbody>
+</table>
+
+<script>
+fetch('https://siupa.com.br/siiupa/api/api.php/records/tb_cracha')
+.then(res => res.json())
+.then(data => {
+    let tabela = document.getElementById('tabela');
+    data.records.forEach(item => {
+        tabela.innerHTML += `
+        <tr>
+        <td>${item.id}</td>
+        <td>${item.nome_completo}</td>
+        <td>${item.nome_cracha}</td>
+        <td>${item.cpf}</td>
+        <td>${item.cargo}</td>
+        <td><img src="${item.foto}"></td>
+        <td><button onclick="excluir(${item.id})">Excluir</button></td>
+        </tr>
+        `;
+    });
+});
+
+function excluir(id){
+    if(confirm("Deseja excluir?")){
+        fetch('https://siupa.com.br/siiupa/api/api.php/records/tb_cracha/' + id, {
+            method: 'DELETE'
+        }).then(()=> location.reload());
+    }
+}
+</script>
+
+</body>
+</html>
