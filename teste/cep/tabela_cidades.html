@@ -39,7 +39,7 @@
         // Função para organizar os dados em uma tabela
         async function renderTable() {
             const cidadesData = await fetchData('https://siupa.com.br/siiupa/api/api.php/records/tb_cidades');
-            const cepData = await fetchData('https://siupa.com.br/siiupa/api/api.php/records/tb_cep?filter=cidades,nis,null');
+            const cepData = await fetchData('https://siupa.com.br/siiupa/api/api.php/records/tb_cep?filter=cidades,nis,null&filter=data,cs,2026');
 
             // Mapear os IDs dos cidades para seus nomes
             const cidadesMap = new Map(cidadesData.map(cidade => [cidade.id, cidade.cidade]));
