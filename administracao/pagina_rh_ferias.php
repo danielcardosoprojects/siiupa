@@ -11,7 +11,7 @@
 if (isset($_GET['ano_ferias'])) {
   $ano_ferias = $_GET['ano_ferias'];
 } else {
-  $ano_ferias = '2025';
+  $ano_ferias = '2026';
 }
 
 if (isset($_GET['vinculo'])) {
