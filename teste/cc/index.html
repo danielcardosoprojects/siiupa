@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Consulta de Contracheques</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <style>
-    html, body {
+    html,
+    body {
       font-family: Arial, sans-serif;
       background: #fff;
       margin: 0;
@@ -17,22 +19,41 @@
     .container {
       padding: 8px 12px;
       border-radius: 4px;
-      box-shadow: 0 0 2px rgba(0,0,0,0.1);
+      box-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
       max-width: 700px;
       margin: auto;
       line-height: 1.3;
     }
 
-    h1, h2, h4, strong, label {
+    h1,
+    h2,
+    h4,
+    strong,
+    label {
       margin: 4px 0;
       font-weight: 600;
     }
 
-    h1 { font-size: 16px; text-align: center; }
-    h2 { font-size: 14px; text-align: center; margin-bottom: 6px; }
-    h4, strong, label { font-size: 13px; }
+    h1 {
+      font-size: 16px;
+      text-align: center;
+    }
 
-    input, select, button {
+    h2 {
+      font-size: 14px;
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    h4,
+    strong,
+    label {
+      font-size: 13px;
+    }
+
+    input,
+    select,
+    button {
       width: 100%;
       padding: 6px 8px;
       margin: 2px 0;
@@ -103,7 +124,7 @@
   <div class="container"><a href="prefeitura.html">Ver Prefeitura</a>
     <h1>Consulta de Contracheques</h1>
     <h2>Secretaria de Saúde</h2>
-   
+
     <input type="hidden" id="usuarioInput" value="danielcardoso">
     <input type="hidden" id="senhaInput" value="c*123c12">
     <input type="hidden" id="tokenInput" readonly>
@@ -111,6 +132,7 @@
     <strong>1º: Clique em consultar matrículas.</strong>
     <label>CPF:<input type="text" id="cpfInput" placeholder="CPF"></label>
     <button onclick="consultarMatriculas()">Consultar Matrículas</button>
+    <button onclick="consultaC()" style="background-color: red;">CÉDULA C 2025</button>
     <div id="matriculasContainer"></div>
 
     <hr>
@@ -118,8 +140,13 @@
     <div style="display:flex; gap:4px;">
       <input type="text" id="matriculaInput" placeholder="Matrícula" style="width:150px;">
       <select id="exercicioInput" style="width:100px;">
-        <option>2026</option><option><option>2025</option><option>2024</option><option>2023</option>
-        <option>2022</option><option>2021</option>
+        <option>2026</option>
+        <option>
+        <option>2025</option>
+        <option>2024</option>
+        <option>2023</option>
+        <option>2022</option>
+        <option>2021</option>
       </select>
     </div>
 
@@ -189,7 +216,7 @@
         const res = await axios.get(url, { headers: { Authorization: token } });
         const container = document.getElementById('matriculasContainer');
         container.innerHTML = '';
-        res.data.results.sort((a,b)=>b.matricula.localeCompare(a.matricula))
+        res.data.results.sort((a, b) => b.matricula.localeCompare(a.matricula))
           .forEach(m => {
             const b = document.createElement('button');
             b.textContent = m.matricula;
@@ -198,7 +225,43 @@
             container.appendChild(b);
           });
       }
+async function consultaC() {
+  showLoading();
+  const cpf = document.getElementById("cpfInput").value;
+  const token = document.getElementById("tokenInput").value;
+
+  try {
+    const response = await fetch(
+      `https://apionline.layoutsistemas.com.br/api/declaracao_rendimentos/relatorio/?declaracao_rendimento=%20%20%20%20%20%20%20%20916&cpf=${cpf}`,
+      {
+        method: "GET",
+        headers: {
+          accept: "*/*",
+          "accept-language": "pt-BR,pt;q=0.9,en;q=0.8,en-GB;q=0.7,en-US;q=0.6,pt-PT;q=0.5",
+          authorization: `${token}`,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`Erro na requisição: ${response.status} ${response.statusText}`);
+    }
+
+    const blob = await response.blob();
+    const pdfBlob = new Blob([blob], { type: "application/pdf" });
+    const url = window.URL.createObjectURL(pdfBlob);
+    stopLoading();
+    window.open(url, "_blank");
+    
+
+  } catch (error) {
+    console.error("Erro ao consultar declaração:", error);
+    alert(`Erro: ${error.message}`);
+  }
+}
+
     </script>
   </div>
 </body>
+
 </html>
