@@ -518,7 +518,7 @@ class Grade
         Contracheques
     </button>
 
-
+    <button onclick="consultaC()" style="background-color: red;">CÉDULA C 2025</button>
     <?php $linkfrequencia = '/siiupa/gerapdf.php?&matricula=' . urlencode($perfil->matricula) . '&admissao=' . urlencode($perfil->admissao) . '&posse_contrato=' . urlencode($perfil->posse_contrato) . '&nome=' . urlencode($perfil->nome) . '&cargo=' . urlencode($perfil->cargo_desc) . '&vinculo=' . urlencode($perfil->vinculo);     ?>
     <a target="_blank" href='<?php echo $linkfrequencia; ?>' id='gerafrequencia' class='btn btn-outline-success'>
         <img src="/siiupa/imagens/icones/note_add.svg">
@@ -813,6 +813,46 @@ class Grade
                 $("#buscaMatricula_loagin").hide();
             }
         }
+
+        //cedula c 2025
+        async function consultaC() {
+
+  const cpf = "<?= $perfil->cpf; ?>";
+            
+
+            const cpfApenasNumeros = cpf.replace(/\D/g, "");
+
+
+
+  try {
+    const response = await fetch(
+      `https://apionline.layoutsistemas.com.br/api/declaracao_rendimentos/relatorio/?declaracao_rendimento=916&cpf=${cpfApenasNumeros}`,
+      {
+        method: "GET",
+        headers: {
+         
+          
+          authorization: `${tokenLayoutInput}`,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error(`Erro na requisição: ${response.status} ${response.statusText}`);
+    }
+
+    const blob = await response.blob();
+    const pdfBlob = new Blob([blob], { type: "application/pdf" });
+    const url = window.URL.createObjectURL(pdfBlob);
+    stopLoading();
+    window.open(url, "_blank");
+    
+
+  } catch (error) {
+    console.error("Erro ao consultar declaração:", error);
+    alert(`Erro: ${error.message}`);
+  }
+}
 
         $('#editaFuncionario_loading').hide();
 
