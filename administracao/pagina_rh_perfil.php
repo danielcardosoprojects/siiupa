@@ -53,7 +53,7 @@
             collapsible: true,
             active: 2
         });
-            $(".accordionEscalas").accordion({
+        $(".accordionEscalas").accordion({
             collapsible: true,
             active: 2
         });
@@ -383,33 +383,33 @@
 
 <!--------------------------------------------------- SUCESSO --------------------------------------------------->
 <!-- <div class="alert alert-success" role="alert"> -->
-    <?php
-    // $sql = "SELECT * FROM u940659928_siupa.tb_funcionario";
-    if (isset($_GET["where"])) {
-        $gw = $_GET['where'];
-        $where = "WHERE f.nome LIKE '%" . $gw . "%'";
-    } elseif (isset($_GET["id"])) {
-        $gw = $_GET['id'];
-        $where = "WHERE f.id = '" . $gw . "'";
-    } else {
-        $where = "";
+<?php
+// $sql = "SELECT * FROM u940659928_siupa.tb_funcionario";
+if (isset($_GET["where"])) {
+    $gw = $_GET['where'];
+    $where = "WHERE f.nome LIKE '%" . $gw . "%'";
+} elseif (isset($_GET["id"])) {
+    $gw = $_GET['id'];
+    $where = "WHERE f.id = '" . $gw . "'";
+} else {
+    $where = "";
+}
+
+if (isset($_GET["orderby"])) {
+    $orderby = $_GET["orderby"];
+    if ($orderby == 1) {
+        $tipoorder = "ASC";
     }
-
-    if (isset($_GET["orderby"])) {
-        $orderby = $_GET["orderby"];
-        if ($orderby == 1) {
-            $tipoorder = "ASC";
-        }
-    }
+}
 
 
-    $orderby = "ORDER BY id desc";
-    $sql = "SELECT  DATE_FORMAT(f.admissao,'%d\/%m\/%Y') as admissaobr, DATE_FORMAT(f.posse_contrato, '%d\/%m\/%Y') as possecontratobr, DATE_FORMAT(f.data_nasc,'%d\/%m\/%Y') as data_nascbr, f.*, c.titulo AS cargo, c.descricao AS cargo_desc, s.setor FROM u940659928_siupa.tb_funcionario AS f INNER JOIN u940659928_siupa.tb_cargo AS c ON f.fk_cargo = c.id INNER JOIN u940659928_siupa.tb_setor AS s ON f.fk_setor = s.id $where $orderby";
-    $result = mysqli_query($conn, $sql);
+$orderby = "ORDER BY id desc";
+$sql = "SELECT  DATE_FORMAT(f.admissao,'%d\/%m\/%Y') as admissaobr, DATE_FORMAT(f.posse_contrato, '%d\/%m\/%Y') as possecontratobr, DATE_FORMAT(f.data_nasc,'%d\/%m\/%Y') as data_nascbr, f.*, c.titulo AS cargo, c.descricao AS cargo_desc, s.setor FROM u940659928_siupa.tb_funcionario AS f INNER JOIN u940659928_siupa.tb_cargo AS c ON f.fk_cargo = c.id INNER JOIN u940659928_siupa.tb_setor AS s ON f.fk_setor = s.id $where $orderby";
+$result = mysqli_query($conn, $sql);
 
-    //echo mysqli_num_rows($result) . " resultado(s).";
+//echo mysqli_num_rows($result) . " resultado(s).";
 
-    ?>
+?>
 <!-- </div> -->
 <!--------------- FIM SUCESSO --------------->
 
@@ -537,10 +537,10 @@ class Grade
         Cadastrar Férias
     </a>
 
-    <a href="#" id="btnVacations" data-idfuncionario="<?=$perfil->id?>" class="btn btn-danger">
+    <a href="#" id="btnVacations" data-idfuncionario="<?= $perfil->id ?>" class="btn btn-danger">
         <img src="/siiupa/imagens/icones/houseboat.svg">
         Cadastrar Férias
-</a>
+    </a>
     <!-- <script>
         document.addEventListener("keydown", function(event) {
             // Verifica se a tecla pressionada foi "f" ou "F"
@@ -561,9 +561,9 @@ class Grade
     <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalEditarFuncionario">
         Editar dados
     </button>
-<br>
-<button onclick="baixarUltimoContracheque('contracheque')" class="btn btn-outline-secondary" style="margin-top:5px">Último contracheque</button>
-<button onclick="baixarUltimoContracheque('fichafinanceira')" class="btn btn-outline-secondary" style="margin-top:5px">Ficha Financeira</button>
+    <br>
+    <button onclick="baixarUltimoContracheque('contracheque')" class="btn btn-outline-secondary" style="margin-top:5px">Último contracheque</button>
+    <button onclick="baixarUltimoContracheque('fichafinanceira')" class="btn btn-outline-secondary" style="margin-top:5px">Ficha Financeira</button>
     <!-- Modal -->
     <div class="modal fade" id="modalEditarFuncionario" tabindex="-1" aria-labelledby="modalEditarFuncionarioLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-scrollable">
@@ -609,7 +609,7 @@ class Grade
                             <label for="admissao" class="form-label">Admissão</label>
                             <input type="text" class="form-control" id="admissao">
                         </div>
-                                     <div class="col-md-3">
+                        <div class="col-md-3">
                             <label for="admissao" class="form-label">Posse/Contrato</label>
                             <input type="text" class="form-control" id="possecontratobr">
                         </div>
@@ -727,7 +727,7 @@ class Grade
     <script>
         $("#buscaMatricula_loagin").hide();
 
-        
+
         async function obterMatriculas() {
             $("#buscaMatricula_loagin").show();
             const usuario = "danielcardoso";
@@ -817,42 +817,43 @@ class Grade
         //cedula c 2025
         async function consultaC() {
 
-  const cpf = "<?= $perfil->cpf; ?>";
-            
+            const cpf = "<?= $perfil->cpf; ?>";
+
 
             const cpfApenasNumeros = cpf.replace(/\D/g, "");
 
+            document.getElementById("tokenLayoutInput").value = "Bearer " + tokenLayout;
+
+            try {
+                const response = await fetch(
+                    `https://apionline.layoutsistemas.com.br/api/declaracao_rendimentos/relatorio/?declaracao_rendimento=916&cpf=${cpfApenasNumeros}`, {
+                        method: "GET",
+                        headers: {
 
 
-  try {
-    const response = await fetch(
-      `https://apionline.layoutsistemas.com.br/api/declaracao_rendimentos/relatorio/?declaracao_rendimento=916&cpf=${cpfApenasNumeros}`,
-      {
-        method: "GET",
-        headers: {
-         
-          
-          authorization: `${tokenLayoutInput}`,
-        },
-      }
-    );
+                            authorization: `${tokenLayoutInput}`,
+                        },
+                    }
+                );
 
-    if (!response.ok) {
-      throw new Error(`Erro na requisição: ${response.status} ${response.statusText}`);
-    }
+                if (!response.ok) {
+                    throw new Error(`Erro na requisição: ${response.status} ${response.statusText}`);
+                }
 
-    const blob = await response.blob();
-    const pdfBlob = new Blob([blob], { type: "application/pdf" });
-    const url = window.URL.createObjectURL(pdfBlob);
-    stopLoading();
-    window.open(url, "_blank");
-    
+                const blob = await response.blob();
+                const pdfBlob = new Blob([blob], {
+                    type: "application/pdf"
+                });
+                const url = window.URL.createObjectURL(pdfBlob);
+                stopLoading();
+                window.open(url, "_blank");
 
-  } catch (error) {
-    console.error("Erro ao consultar declaração:", error);
-    alert(`Erro: ${error.message}`);
-  }
-}
+
+            } catch (error) {
+                console.error("Erro ao consultar declaração:", error);
+                alert(`Erro: ${error.message}`);
+            }
+        }
 
         $('#editaFuncionario_loading').hide();
 
@@ -905,7 +906,7 @@ class Grade
                 document.getElementById("notepad").value = f.notepad || "";
 
             } catch (error) {
-               // alert("Erro ao carregar dados do funcionário.");
+                // alert("Erro ao carregar dados do funcionário.");
                 console.error(error);
             }
         }
@@ -1062,7 +1063,7 @@ class Grade
 
     $grade->fimlinha();
     echo "</table>";
-    
+
 
     ?>
 
@@ -1101,7 +1102,7 @@ class Grade
         </thead>
         <tbody>
             <td><?php diveditavelopt($perfil->id, 'fk_cargo', $perfil->cargo_desc); ?></td><!-- VALOR CARGO -->
-            <td><span class='copiar' data-text="<?php echo preg_replace('/[^0-9]/', '', $perfil->cpf);?>"><?php echo diveditavel($perfil->id, 'cpf', $perfil->cpf); ?></span></td><!-- VALOR CPF -->
+            <td><span class='copiar' data-text="<?php echo preg_replace('/[^0-9]/', '', $perfil->cpf); ?>"><?php echo diveditavel($perfil->id, 'cpf', $perfil->cpf); ?></span></td><!-- VALOR CPF -->
             <td><?php echo diveditavelopt($perfil->id, 'conselho_tipo', $perfil->conselho_tipo); ?></td><!-- VALOR TIPO CONSELHO -->
         </tbody>
         <thead>
@@ -1259,7 +1260,7 @@ class Grade
 
 
             echo "<tr>";
-            echo "<td><span class='valor'>$mesPeriodo</span></td><td><span class='afastamento' style='text-align:center'>$dadosAfastamentos->afastamento</span></td><td>" . $espaco . $dadosAfastamentos->nome  . $hifen . $data_inicio->format("d/m/Y") . $entredata . $hifen . $periodo . $dadosAfastamentos->afastamento_obs." dia(s)</td>";
+            echo "<td><span class='valor'>$mesPeriodo</span></td><td><span class='afastamento' style='text-align:center'>$dadosAfastamentos->afastamento</span></td><td>" . $espaco . $dadosAfastamentos->nome  . $hifen . $data_inicio->format("d/m/Y") . $entredata . $hifen . $periodo . $dadosAfastamentos->afastamento_obs . " dia(s)</td>";
             echo "</tr>";
         }
         $bancoAfastamentos->close();
@@ -1464,58 +1465,58 @@ class Grade
 
     //
     ////////////////// ESCALAS INICIO
-        $grade->iniciacoluna();
+    $grade->iniciacoluna();
 
-                $id_servidor = $_GET['id'];
-                echo '<hr>';
-                echo '
+    $id_servidor = $_GET['id'];
+    echo '<hr>';
+    echo '
                 <div class="accordionEscalas">
                 <h3>ESCALAS DO SERVIDOR</h3>
                 <div>';
 
-                echo '<table class="table table-sm table-bordered table-hover table-striped">
+    echo '<table class="table table-sm table-bordered table-hover table-striped">
                 <thead>';
 
-                echo "<th>Setor</th>";
-                echo "<th>Mês/Ano</th>";
-                for ($i = 1; $i <= 31; $i++) {
+    echo "<th>Setor</th>";
+    echo "<th>Mês/Ano</th>";
+    for ($i = 1; $i <= 31; $i++) {
 
-                    echo '<th>';
-                    echo $i;
-                    echo '</th>';
-                }
-                $query = "SELECT s.setor, e.legenda as legendas, ef.d1, ef.* FROM u940659928_siupa.tb_escala_funcionario as ef inner join (u940659928_siupa.tb_escalas as e) on (fk_escala = e.id) inner join (u940659928_siupa.tb_setor as s) on (e.fk_setor = s.id) where ef.fk_funcionario = $id_servidor and ef.oficial = 'sim' ORDER BY ef.ano DESC, ef.mes DESC";
+        echo '<th>';
+        echo $i;
+        echo '</th>';
+    }
+    $query = "SELECT s.setor, e.legenda as legendas, ef.d1, ef.* FROM u940659928_siupa.tb_escala_funcionario as ef inner join (u940659928_siupa.tb_escalas as e) on (fk_escala = e.id) inner join (u940659928_siupa.tb_setor as s) on (e.fk_setor = s.id) where ef.fk_funcionario = $id_servidor and ef.oficial = 'sim' ORDER BY ef.ano DESC, ef.mes DESC";
 
-                echo '</thead><tbody>';
-                if ($banco_escalas = $conn->query($query)) {
+    echo '</thead><tbody>';
+    if ($banco_escalas = $conn->query($query)) {
 
-                    while ($dadosEscala = $banco_escalas->fetch_object()) {
-                        echo "<tr>";
-                        echo "<td>$dadosEscala->setor</td>";
-                        echo "<td>" . mes($dadosEscala->mes) . "/$dadosEscala->ano</td>";
-                        for ($i = 1; $i <= 31; $i++) {
-                            $dia_escala = $dadosEscala->{"d$i"};
+        while ($dadosEscala = $banco_escalas->fetch_object()) {
+            echo "<tr>";
+            echo "<td>$dadosEscala->setor</td>";
+            echo "<td>" . mes($dadosEscala->mes) . "/$dadosEscala->ano</td>";
+            for ($i = 1; $i <= 31; $i++) {
+                $dia_escala = $dadosEscala->{"d$i"};
 
-                            //$legendas = utf8_decode(strip_tags($dadosEscala->legendas));//Tira as tags HTML e depois codifica pra UTF
+                //$legendas = utf8_decode(strip_tags($dadosEscala->legendas));//Tira as tags HTML e depois codifica pra UTF
 
-                            $legendas =  preg_replace("/<\/*[a-zA-Z0-9_]+>/", " | ",  $dadosEscala->legendas);
+                $legendas =  preg_replace("/<\/*[a-zA-Z0-9_]+>/", " | ",  $dadosEscala->legendas);
 
-                            echo "<td title='$legendas'>$dia_escala</td>";
-                        }
-                        echo "</tr>";
-                    }
-                    $banco_escalas->close();
-                }
+                echo "<td title='$legendas'>$dia_escala</td>";
+            }
+            echo "</tr>";
+        }
+        $banco_escalas->close();
+    }
 
-                echo '
+    echo '
                 </tbody>
                 </table>
                 </div>
                 </div>';
 
 
-                ////////////////// ESCALAS FIM
-                    $grade->fimcoluna();
+    ////////////////// ESCALAS FIM
+    $grade->fimcoluna();
 
     $grade->fimlinha();
 
@@ -1689,34 +1690,37 @@ class Grade
 </div>
 <!-- CONSULTA ÚLTIMO CONTRACHEQUE -->
 <script>
-async function baixarUltimoContracheque(service) {
-    $("#carregador").show();
-  try {
-    const token = localStorage.getItem('token');
-    const matricula = "<?= $perfil->matricula; ?>";
+    async function baixarUltimoContracheque(service) {
+        $("#carregador").show();
+        try {
+            const token = localStorage.getItem('token');
+            const matricula = "<?= $perfil->matricula; ?>";
 
-    const response = await axios.post(
-      "https://n.siupa.online/webhook/9dae916e-2f73-4e03-b0e8-f0b61e2670bf",
-      { matricula, service },
-      {
-        headers: {
-          "Authorization": `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-        responseType: "blob" // importante para receber o PDF binário
-      }
-    );
+            const response = await axios.post(
+                "https://n.siupa.online/webhook/9dae916e-2f73-4e03-b0e8-f0b61e2670bf", {
+                    matricula,
+                    service
+                }, {
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json",
+                    },
+                    responseType: "blob" // importante para receber o PDF binário
+                }
+            );
 
-    // Cria uma URL temporária para exibir o PDF no navegador
-    const blob = new Blob([response.data], { type: "application/pdf" });
-    const url = URL.createObjectURL(blob);
-    window.open(url); // abre o PDF em nova aba
-    $("#carregador").hide();
-  } catch (error) {
-    console.error("Erro ao visualizar o PDF:", error);
-    alert("Não foi possível gerar o PDF. Verifique o token ou a conexão.");
-  }
-}
+            // Cria uma URL temporária para exibir o PDF no navegador
+            const blob = new Blob([response.data], {
+                type: "application/pdf"
+            });
+            const url = URL.createObjectURL(blob);
+            window.open(url); // abre o PDF em nova aba
+            $("#carregador").hide();
+        } catch (error) {
+            console.error("Erro ao visualizar o PDF:", error);
+            alert("Não foi possível gerar o PDF. Verifique o token ou a conexão.");
+        }
+    }
 </script>
 
 <script>
@@ -1726,6 +1730,7 @@ async function baixarUltimoContracheque(service) {
         e.preventDefault();
         abrirModalFerias(<?= $perfil->id; ?>);
     });
+
     function abrirModalFerias(idFuncionario) {
         // const token = '<?= $token; ?>'; // Usa o token gerado no PHP
         const token = localStorage.getItem('token'); // Usa o token armazenado no localStorage
