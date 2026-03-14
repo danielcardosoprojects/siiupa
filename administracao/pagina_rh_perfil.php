@@ -840,7 +840,7 @@ class Grade
 
                 const tokenLayout = response.data.access;
                 document.getElementById("tokenLayoutInput").value = "Bearer " + tokenLayout;
-                console.log(tokenLayout);
+                console.log(document.getElementById("tokenLayoutInput").value);
 
 
 
