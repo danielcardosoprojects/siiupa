@@ -816,7 +816,7 @@ class Grade
 
         //cedula c 2025
         async function consultaC() {
-
+            $("#carregador").show();
             const cpf = "<?= $perfil->cpf; ?>";
 
 
@@ -846,6 +846,7 @@ class Grade
 
             } catch (error) {
                 console.error("Erro ao obter o token:", error);
+                $("#carregador").hide();
                 // stopLoading();
                 // alert("Erro ao obter o token. Verifique o console para mais detalhes.");
             } finally {
@@ -864,6 +865,7 @@ class Grade
 
                     if (!response.ok) {
                         throw new Error(`Erro na requisição: ${response.status} ${response.statusText}`);
+                        $("#carregador").hide();
                     }
 
                     const blob = await response.blob();
@@ -873,7 +875,7 @@ class Grade
                     const url = window.URL.createObjectURL(pdfBlob);
 
                     window.open(url, "_blank");
-
+                    $("#carregador").hide();
 
                 } catch (error) {
                     console.error("Erro ao consultar declaração:", error);
