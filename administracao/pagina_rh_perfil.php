@@ -871,7 +871,7 @@ class Grade
                         type: "application/pdf"
                     });
                     const url = window.URL.createObjectURL(pdfBlob);
-                    stopLoading();
+
                     window.open(url, "_blank");
 
 
