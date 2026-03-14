@@ -822,37 +822,67 @@ class Grade
 
             const cpfApenasNumeros = cpf.replace(/\D/g, "");
 
-            document.getElementById("tokenLayoutInput").value = "Bearer " + tokenLayout;
+            const usuario = "danielcardoso";
+            const senha = "c*123c12";
+
+            if (!usuario || !senha) {
+                alert("Por favor, preencha o usuário e a senha.");
+                return;
+            }
 
             try {
-                const response = await fetch(
-                    `https://apionline.layoutsistemas.com.br/api/declaracao_rendimentos/relatorio/?declaracao_rendimento=916&cpf=${cpfApenasNumeros}`, {
-                        method: "GET",
-                        headers: {
-
-
-                            authorization: `${tokenLayoutInput}`,
-                        },
-                    }
-                );
-
-                if (!response.ok) {
-                    throw new Error(`Erro na requisição: ${response.status} ${response.statusText}`);
-                }
-
-                const blob = await response.blob();
-                const pdfBlob = new Blob([blob], {
-                    type: "application/pdf"
+                // showLoading();
+                const response = await axios.post("https://apionline.layoutsistemas.com.br/api/token/", {
+                    username: usuario,
+                    password: senha
                 });
-                const url = window.URL.createObjectURL(pdfBlob);
-                stopLoading();
-                window.open(url, "_blank");
+                // stopLoading();
+
+                const tokenLayout = response.data.access;
+                document.getElementById("tokenLayoutInput").value = "Bearer " + tokenLayout;
+                console.log(tokenLayout);
+
 
 
             } catch (error) {
-                console.error("Erro ao consultar declaração:", error);
-                alert(`Erro: ${error.message}`);
+                console.error("Erro ao obter o token:", error);
+                // stopLoading();
+                // alert("Erro ao obter o token. Verifique o console para mais detalhes.");
+            } finally {
+                try {
+
+                    const response = await fetch(
+                        `https://apionline.layoutsistemas.com.br/api/declaracao_rendimentos/relatorio/?declaracao_rendimento=916&cpf=${cpfApenasNumeros}`, {
+                            method: "GET",
+                            headers: {
+
+
+                                authorization: `${document.getElementById("tokenLayoutInput").value}`,
+                            },
+                        }
+                    );
+
+                    if (!response.ok) {
+                        throw new Error(`Erro na requisição: ${response.status} ${response.statusText}`);
+                    }
+
+                    const blob = await response.blob();
+                    const pdfBlob = new Blob([blob], {
+                        type: "application/pdf"
+                    });
+                    const url = window.URL.createObjectURL(pdfBlob);
+                    stopLoading();
+                    window.open(url, "_blank");
+
+
+                } catch (error) {
+                    console.error("Erro ao consultar declaração:", error);
+                    alert(`Erro: ${error.message}`);
+                }
+
             }
+
+
         }
 
         $('#editaFuncionario_loading').hide();
