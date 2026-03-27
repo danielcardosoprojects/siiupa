@@ -1063,7 +1063,7 @@ class Grade
         <tbody>
             <tr>
                 <td>";
-    echo "<div class='rounded-circle float-right' style='width:90px; border:1px solid #000;height:90px;background-color:#ccc;background-image:url(\"$foto_perfil\");background-size: 80px auto;background-repeat: no-repeat;background-position:center;' title='Foto perfil' alt='Sem foto' class='img-thumbnail  float-left'></div>";
+    echo "<div class='rounded-circle float-right' style='width:90px; border:1px solid #000;height:90px;background-color:#fff;background-image:url(\"$foto_perfil\");background-size: 80px auto;background-repeat: no-repeat;background-position:center;' title='Foto perfil' alt='Sem foto' class='img-thumbnail  float-left'></div>";
 
     echo "<label for='fileProfile'><img src='/siiupa/imagens/icones/foto.jpg' height='20px' style='pointer:click'></label>";
 
