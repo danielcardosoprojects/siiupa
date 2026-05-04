@@ -90,7 +90,7 @@ function separarProntuario(val) {
 
 function consultaSeparacao() {
     if (separaProntuario) {
-        alertify.alert('Este prontuário deverá ser separado nos acidentes de trânsito.');
+        alertify.alert('Este prontuário deverá ser separado nos acidentes de trânsito e traumas.');
         separarProntuario(0);
     }
 }
@@ -407,10 +407,12 @@ $(document, ".iframe").keydown(function (event) {
                 const chave = $(this).data('chave');
                 piscarDiv(chave);
                 //elabora o alerta para separação de prontuario
-                if (categoria == "acidentesTransito") {
+                if (categoria == "acidentesTransito" || categoria == "traumas") {
                     separarProntuario(1);
 
                 };
+
+                
 
 
                 if (event.shiftKey) {
@@ -441,7 +443,7 @@ searchBox.addEventListener('keydown', function (e) {
     if (e.key === 'Enter') {
         incrementCount(this.value);
         //verifica se é cidade e da alerta
-        if (this.value.endsWith("(Cidade)")) {
+        if (this.value.endsWith("(Cidade)") && separaProntuario === 0) {
             setTimeout(() => {
 
                 alertify.alert('Este prontuário deverá ser separado em Cidades.');
