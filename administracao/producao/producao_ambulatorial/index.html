@@ -22,10 +22,11 @@
 
 <body>
 
-    
+  
 
     <div id="owl-carousel" class="owl-carousel owl-theme">
-        <div id="um" class="item"></div>
+          
+        <div id="um" class="item">    </div>
         <div id="dois" class="item">Div 2</div>
         <div id="tres" class="item">Div 3</div>
         <div id="quatro" class="item">Div 4</div>
@@ -94,7 +95,19 @@
         script.src = `scripts.js?v=${new Date().getTime()}`;
         document.body.appendChild(script);
     </script>
+    
     <span id="clearDataButton" class="float-button">Limpar Dados</span>
+<div id="ultimoLugar" style="position:absolute"></div>
+    <script>
+    // Verifica se existe o item "lastPlace" no localStorage
+    const lastPlace = localStorage.getItem("lastPlace");
+
+    // Se existir, exibe no HTML
+    if (lastPlace) {
+        document.getElementById("ultimoLugar").innerHTML = "Último Lugar: "+lastPlace;
+    }
+</script>
+
 </body>
 
 </html>
