@@ -104,7 +104,7 @@
 
     // Se existir, exibe no HTML
     if (lastPlace) {
-        document.getElementById("ultimoLugar").innerHTML = "Último Lugar: "+lastPlace;
+        document.getElementById("ultimoLugar").innerHTML = "Último: "+lastPlace+", "+localStorage.getItem('lastFaixaEtaria')+", "+localStorage.getItem('lastSexo');
     }
 </script>
 

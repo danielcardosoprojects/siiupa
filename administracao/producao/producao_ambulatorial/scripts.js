@@ -171,7 +171,7 @@ function incrementCount(selectedText) {
     const name = selectedText.replace(/\s+\(.*?\)$/, '');
     localStorage.setItem('lastPlace', name);
  
-        document.getElementById("ultimoLugar").innerHTML = "Último Lugar: "+name;
+        document.getElementById("ultimoLugar").innerHTML = "Último: "+name+", "+localStorage.getItem('lastFaixaEtaria')+", "+localStorage.getItem('lastSexo');
   
     let category;
     if (data.cities.hasOwnProperty(name)) {
@@ -409,6 +409,13 @@ $(document, ".iframe").keydown(function (event) {
                 var count = parseInt($(this).text());
                 const categoria = $(this).data('categoria');
                 const chave = $(this).data('chave');
+                console.log(categoria,chave);
+                if(categoria == "faixaEtaria"){
+                    localStorage.setItem('lastFaixaEtaria', chave);
+                }
+                if(categoria == "sexo"){
+                    localStorage.setItem('lastSexo', chave);
+                }
                 piscarDiv(chave);
                 //elabora o alerta para separação de prontuario
                 if (categoria == "acidentesTransito" || categoria == "traumas") {
