@@ -170,6 +170,9 @@ function updateTableRow(category, name) {
 function incrementCount(selectedText) {
     const name = selectedText.replace(/\s+\(.*?\)$/, '');
     localStorage.setItem('lastPlace', name);
+ 
+        document.getElementById("ultimoLugar").innerHTML = "Último Lugar: "+name;
+  
     let category;
     if (data.cities.hasOwnProperty(name)) {
         category = 'cities';
