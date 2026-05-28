@@ -53,7 +53,7 @@ let data = {
 };
 
 const letras = {
-    1: "A", 2: "S", 3: "D", 4: "F", 5: "G", 6: "H", 7: "J", 8: "K", 9: "L", 10: "c", 11: "Z", 12: "X", 13: "C", 14: "V", 15: "B"
+    1: "A", 2: "S", 3: "D", 4: "F", 5: "G", 6: "H", 7: "J", 8: "K", 9: "L", 10: "Ç", 11: "Z", 12: "X", 13: "C", 14: "V", 15: "B"
 };
 
 // Cria um evento de teclado para a tecla especificada
