@@ -264,7 +264,7 @@ include_once('../bd/nivel.php');
     $resultbusca = mysqli_query($conn, "$sqlbusca  LIMIT $inicio,$total_reg");
 
 
-    echo '<div class="alert alert-success" role="alert">';
+    echo '<div class="alert alert-success" role="alert" style="font-size:14px;">';
 
     echo $tr . " resultado(s).";
 
