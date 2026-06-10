@@ -195,7 +195,11 @@
 
                         if (diaPlantao != "" && diaPlantao != null) {
                             diaPlantao = diaPlantao.replace(/Â/g, '');
+                            if (diaPlantao.includes('D') || diaPlantao.includes('d')) {
+                                 $(`#${i}`).prepend(`<p>${nomeReduzido} (${diaPlantao})</p>`);
+                            } else {   
                             $(`#${i}`).append(`<p>${nomeReduzido} (${diaPlantao})</p>`);
+                            }
                         }
                     }
 
