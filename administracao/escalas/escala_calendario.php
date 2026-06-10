@@ -196,9 +196,9 @@
                         if (diaPlantao != "" && diaPlantao != null) {
                             diaPlantao = diaPlantao.replace(/Â/g, '');
                             if (diaPlantao.includes('D') || diaPlantao.includes('d')) {
-                                 $(`#${i}`).prepend(`<p>${nomeReduzido} (${diaPlantao})</p>`);
+                                 $(`#${i}`).prepend(`<p>(${diaPlantao}) ${nomeReduzido} </p>`);
                             } else {   
-                            $(`#${i}`).append(`<p>${nomeReduzido} (${diaPlantao})</p>`);
+                            $(`#${i}`).append(` (${diaPlantao}) <p>${nomeReduzido}</p>`);
                             }
                         }
                     }
