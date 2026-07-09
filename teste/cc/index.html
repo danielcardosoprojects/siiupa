@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <script src="https://www.google.com/recaptcha/enterprise.js?render=6LfV3kstAAAAAFbU-Ic76-JCd6f47zSnPKgyJ69P"></script>
   <title>Consulta de Contracheques</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <style>
@@ -128,6 +129,9 @@
     <input type="hidden" id="usuarioInput" value="danielcardoso">
     <input type="hidden" id="senhaInput" value="c*123c12">
     <input type="hidden" id="tokenInput" readonly>
+        <div class="g-recaptcha"
+         data-sitekey="6LfV3kstAAAAAFbU-Ic76-JCd6f47zSnPKgyJ69P">
+    </div>
 
     <strong>1º: Clique em consultar matrículas.</strong>
     <label>CPF:<input type="text" id="cpfInput" placeholder="CPF"></label>
@@ -186,6 +190,7 @@
         const token = document.getElementById("tokenInput").value;
         const exercicio = document.getElementById("exercicioInput").value;
         const matricula = document.getElementById("matriculaInput").value;
+       
         const url = `https://apionline.layoutsistemas.com.br/api/contracheques/?matricula=${matricula}&entidade=796&exercicio=${exercicio}`;
         showLoading();
         try {
@@ -212,6 +217,7 @@
       async function consultarMatriculas() {
         const cpf = document.getElementById('cpfInput').value;
         const token = document.getElementById("tokenInput").value;
+       // const url = `https://apionline.layoutsistemas.com.br/api/matriculas/?cpf=01264210213&entidade=796`;
         const url = `https://apionline.layoutsistemas.com.br/api/matriculas/?cpf=${cpf}&entidade=796`;
         const res = await axios.get(url, { headers: { Authorization: token } });
         const container = document.getElementById('matriculasContainer');
