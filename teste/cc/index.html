@@ -221,7 +221,8 @@ grecaptcha.ready(function () {
 
       async function consultarMatriculas() {
         const cpf = document.getElementById('cpfInput').value;
-        const token = document.getElementById("tokenInput").value;
+        const token = 'Bearer '+ document.getElementById("tokenInput").value;
+        console.log('Token:', token);
        // const url = `https://apionline.layoutsistemas.com.br/api/matriculas/?cpf=01264210213&entidade=796`;
         const url = `https://apionline.layoutsistemas.com.br/api/matriculas/?cpf=${cpf}&entidade=796`;
         const res = await axios.get(url, { headers: { Authorization: token } });
