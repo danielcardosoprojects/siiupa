@@ -192,7 +192,8 @@ grecaptcha.ready(function () {
       obterToken();
 
       document.getElementById("searchButton").addEventListener("click", async () => {
-        const token = document.getElementById("tokenInput").value;
+        const token = 'Bearer '+ document.getElementById("tokenInput").value;
+        console.log('Token:', token);
         const exercicio = document.getElementById("exercicioInput").value;
         const matricula = document.getElementById("matriculaInput").value;
        
@@ -240,7 +241,7 @@ grecaptcha.ready(function () {
 async function consultaC() {
   showLoading();
   const cpf = document.getElementById("cpfInput").value;
-  const token = document.getElementById("tokenInput").value;
+  const token = 'Bearer '+ document.getElementById("tokenInput").value;
 
   try {
     const response = await fetch(
