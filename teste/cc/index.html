@@ -129,9 +129,14 @@
     <input type="hidden" id="usuarioInput" value="danielcardoso">
     <input type="hidden" id="senhaInput" value="c*123c12">
     <input type="hidden" id="tokenInput" readonly>
-        <div class="g-recaptcha"
-         data-sitekey="6LfV3kstAAAAAFbU-Ic76-JCd6f47zSnPKgyJ69P">
-    </div>
+<script>
+grecaptcha.ready(function () {
+    grecaptcha.execute('6LfV3kstAAAAAFbU-Ic76-JCd6f47zSnPKgyJ69P', { action: 'submit' })
+        .then(function (token) {
+            console.log(token);
+        });
+});
+</script>
 
     <strong>1º: Clique em consultar matrículas.</strong>
     <label>CPF:<input type="text" id="cpfInput" placeholder="CPF"></label>
