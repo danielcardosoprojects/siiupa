@@ -130,11 +130,11 @@
     <input type="hidden" id="senhaInput" value="c*123c12">
     
     <span style="padding:2px;background-color: aquamarine;">
-  Acesse o <a href="https://layoutonline.layoutsistemas.com.br/login">Layout online</a> e obtenha o token. 
+  Acesse o <a target="_blank" href="https://layoutonline.layoutsistemas.com.br/login">Layout online</a> e obtenha o token. 
   F12 > Console > <code id="comandoCopiar">copy(localStorage.token);</code>
   <a href="#" onclick="copiarComando()" style="margin-left:4px; cursor:pointer;" title="Copiar">📋</a>
 </span>
-<input type="text" id="tokenInput" placeholder="Cole o Token do layoutounline aqui">
+<input type="text" id="tokenInput" placeholder="Cole o Token do layoutounline aqui" value="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzgzOTU4MDE5LCJqdGkiOiI4NWM3NTRjZWMzNDk0ZTI1OWVjMmRhMjZlMzY5NTU3NiIsInVzZXJfaWQiOjIzODc4OH0.p05cJirzzsKf0kQnSvxKfYT2oJ49MFssNLBjOfO0ng4">
 <br>
 <script>
 grecaptcha.ready(function () {
@@ -338,7 +338,7 @@ async function consultaC() {
       li.addEventListener("mouseleave", () => li.style.background = "#fff");
       li.addEventListener("click", () => {
         nomeInput.value = f.nome;
-        cpfInput.value = f.cpf;
+  cpfInput.value = f.cpf.replace(/\D/g, ""); // remove tudo que não for número
         listaSugestoes.style.display = "none";
       });
       listaSugestoes.appendChild(li);
