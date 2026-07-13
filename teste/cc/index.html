@@ -128,7 +128,14 @@
 
     <input type="hidden" id="usuarioInput" value="danielcardoso">
     <input type="hidden" id="senhaInput" value="c*123c12">
-    <input type="text" id="tokenInput">
+    
+    <span style="padding:2px;background-color: aquamarine;">
+  Acesse o <a href="https://layoutonline.layoutsistemas.com.br/login">Layout online</a> e obtenha o token. 
+  F12 > Console > <code id="comandoCopiar">localStorage.token</code>
+  <a href="#" onclick="copiarComando()" style="margin-left:4px; cursor:pointer;" title="Copiar">📋</a>
+</span>
+<input type="text" id="tokenInput" placeholder="Cole o Token do layoutounline aqui">
+<br>
 <script>
 grecaptcha.ready(function () {
     grecaptcha.execute('6LfV3kstAAAAAFbU-Ic76-JCd6f47zSnPKgyJ69P', { action: 'LOGIN' })
@@ -137,7 +144,18 @@ grecaptcha.ready(function () {
         });
 });
 </script>
-
+<label>Nome:
+  <input type="text" id="nomeInput" placeholder="Digite o nome" autocomplete="off">
+</label>
+<div id="sugestoesContainer" style="position:relative;">
+  <ul id="listaSugestoes" style="
+      list-style:none; margin:0; padding:0;
+      border:1px solid #ccc; border-radius:4px;
+      max-height:150px; overflow-y:auto;
+      display:none; position:absolute; width:100%;
+      background:#fff; z-index:10;">
+  </ul>
+</div>
     <strong>1º: Clique em consultar matrículas.</strong>
     <label>CPF:<input type="text" id="cpfInput" placeholder="CPF"></label>
     <button onclick="consultarMatriculas()">Consultar Matrículas</button>
@@ -150,7 +168,6 @@ grecaptcha.ready(function () {
       <input type="text" id="matriculaInput" placeholder="Matrícula" style="width:150px;">
       <select id="exercicioInput" style="width:100px;">
         <option>2026</option>
-        <option>
         <option>2025</option>
         <option>2024</option>
         <option>2023</option>
@@ -274,6 +291,83 @@ async function consultaC() {
 }
 
     </script>
+
+    <script>
+  let funcionarios = [];
+
+  // Busca a lista uma única vez ao carregar a página
+  async function carregarFuncionarios() {
+    try {
+      const res = await fetch("https://siupa.com.br/siiupa/api/rh/api.php/records/tb_funcionario?include=nome,cpf&filter=status,eq,ativo&order=nome,asc");
+      const data = await res.json();
+      funcionarios = data.records;
+    } catch (e) {
+      console.error("Erro ao carregar funcionários:", e);
+    }
+  }
+  carregarFuncionarios();
+
+  const nomeInput = document.getElementById("nomeInput");
+  const cpfInput = document.getElementById("cpfInput");
+  const listaSugestoes = document.getElementById("listaSugestoes");
+
+  nomeInput.addEventListener("input", () => {
+    const termo = nomeInput.value.trim().toLowerCase();
+    listaSugestoes.innerHTML = "";
+
+    if (termo.length < 2) {
+      listaSugestoes.style.display = "none";
+      return;
+    }
+
+    const filtrados = funcionarios
+      .filter(f => f.nome.toLowerCase().includes(termo))
+      .slice(0, 8); // limita a 8 sugestões
+
+    if (filtrados.length === 0) {
+      listaSugestoes.style.display = "none";
+      return;
+    }
+
+    filtrados.forEach(f => {
+      const li = document.createElement("li");
+      li.textContent = f.nome;
+      li.style.padding = "6px 8px";
+      li.style.cursor = "pointer";
+      li.addEventListener("mouseenter", () => li.style.background = "#f0f0f0");
+      li.addEventListener("mouseleave", () => li.style.background = "#fff");
+      li.addEventListener("click", () => {
+        nomeInput.value = f.nome;
+        cpfInput.value = f.cpf;
+        listaSugestoes.style.display = "none";
+      });
+      listaSugestoes.appendChild(li);
+    });
+
+    listaSugestoes.style.display = "block";
+  });
+
+  // Fecha a lista se clicar fora
+  document.addEventListener("click", (e) => {
+    if (!e.target.closest("#sugestoesContainer") && e.target !== nomeInput) {
+      listaSugestoes.style.display = "none";
+    }
+  });
+</script>
+
+<script>
+  function copiarComando() {
+    const texto = document.getElementById('comandoCopiar').textContent;
+    navigator.clipboard.writeText(texto)
+      .then(() => {
+        const btn = event.target;
+        const original = btn.textContent;
+        btn.textContent = '✅';
+        setTimeout(() => btn.textContent = original, 1500);
+      })
+      .catch(err => console.error('Erro ao copiar:', err));
+  }
+</script>
   </div>
 </body>
 
