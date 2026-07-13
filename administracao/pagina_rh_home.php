@@ -70,7 +70,7 @@ include_once('../bd/nivel.php');
     <div>
 
         <div class="">
-            <a href="/siiupa/teste/cc" id="bcadastrarFUNCIONARIO" class="btn btn-danger">
+            <a target="_blank" href="/siiupa/teste/cc" id="bcadastrarFUNCIONARIO" class="btn btn-danger">
                 
                 Contracheque
             </a>
