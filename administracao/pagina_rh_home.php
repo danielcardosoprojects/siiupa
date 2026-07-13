@@ -70,6 +70,10 @@ include_once('../bd/nivel.php');
     <div>
 
         <div class="">
+            <a href="/siiupa/teste/cc" id="bcadastrarFUNCIONARIO" class="btn btn-danger">
+                
+                Contracheque
+            </a>
             <a href="?setor=adm&sub=rh&subsub=perfil_criar" id="bcadastrarFUNCIONARIO" class="btn btn-outline-success">
                 <img src="/siiupa/imagens/icones/person_add.svg">
                 Adicionar Servidor
