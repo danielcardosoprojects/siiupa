@@ -334,6 +334,7 @@ include_once('../bd/nivel.php');
                 <!-- <th scope="col">Férias 2022<img src="/siiupa/imagens/tablesorter.svg"></th> -->
                 <th scope="col">CH</th>
                 <th scope="col">Férias 2026</th>
+                <th scope="col">N CONSELHO</th>
 
                 <!-- <th scope="col">Data Inicio</th> -->
                 <!-- <th scope="col">Data Fim</th> -->
@@ -490,6 +491,8 @@ include_once('../bd/nivel.php');
                     echo implode('/', $meses);
 
                     echo "</td>";
+
+                    echo "<td>$dados->conselho_tipo $dados->conselho_n</td>";
 
 
 
