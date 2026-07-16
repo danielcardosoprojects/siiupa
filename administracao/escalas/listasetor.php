@@ -4,7 +4,10 @@ if (isset($_GET['acao'])) {
     $acao = $_GET['acao'];
     if ($acao == 'criar') {
         $bdsetores = new BD;
-        $sqlsetores  = "SELECT  * FROM u940659928_siupa.tb_setor GROUP BY setor ASC";
+        $sqlsetores = "SELECT *
+               FROM u940659928_siupa.tb_setor
+               WHERE id IN (15,20,35,36,69)
+               ORDER BY setor ASC";
         $resultadosetores  = $bdsetores->consulta($sqlsetores);
         echo "<select class='setor form-control'>";
         foreach ($resultadosetores as $setores) {
