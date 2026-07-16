@@ -6,7 +6,7 @@ if (isset($_GET['acao'])) {
         $bdsetores = new BD;
         $sqlsetores = "SELECT *
                FROM u940659928_siupa.tb_setor
-               WHERE id IN (15,20,35,36,69)
+               WHERE id IN (3,8,1,23,33,59,60,83,84,85,86,87,88,89,90,91,5,9,6,18,80,12,82,7,10,4,11)
                ORDER BY setor ASC";
         $resultadosetores  = $bdsetores->consulta($sqlsetores);
         echo "<select class='setor form-control'>";
