@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 @include_once('../../bd/nivel.php');
 ?>
 <!DOCTYPE html>
