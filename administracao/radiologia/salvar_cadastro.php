@@ -1,6 +1,5 @@
 <?php
-session_start();
-@include_once('../../bd/nivel.php');
+
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);

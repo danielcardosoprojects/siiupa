@@ -1,6 +1,5 @@
 <?php
-session_start();
-@include_once('../../bd/nivel.php');
+
 
 $data_criacao = date('Y-m-d H:i:s');
 ?>
