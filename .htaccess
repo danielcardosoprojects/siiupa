@@ -68,6 +68,6 @@ RewriteRule ^farmacia/item/atualiza-lote/?$ farmacia/paginafarm_inserebd.php?aca
 RewriteRule ^farmacia/bdjson/([a-z,0-9,A-Z,_-]+)?$ farmacia/paginafarm_bdjson.php?acao=$1 [L]
 RewriteRule ^farmacia/bd$ farmacia/paginafarm_inserebd.php [L]
 
-
+RewriteRule ^radiologia-cadastro/?$ administracao/radiologia/cadastro_radiologia.php [L,QSA]
 
 </IfModule>
