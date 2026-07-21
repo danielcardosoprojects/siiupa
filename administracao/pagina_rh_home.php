@@ -109,6 +109,10 @@ include_once('../bd/nivel.php');
                 Servidores Inativos
             </a>
 
+                    <a href="/siiupa/?setor=adm&sub=attrx" id="attCadastralRadiologia" class="btn btn-alert">
+                Atualização cadastral Radiologia
+            </a>
+
 
         </div>
 

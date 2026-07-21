@@ -281,7 +281,11 @@
             <a href="?setor=adm&sub=rh&subsub=ferias" id="bFerias" class="btn btn-lg bt_menu_rh">
                 <img src="/siiupa/imagens/icones/ferias3.svg" width="20">
                 Férias</a>
+            <br/>
 
+                            <a href="/siiupa/?setor=adm&sub=attrx" id="attCadastralRadiologia" class="btn btn-alert">
+                Atualização cadastral Radiologia
+            </a>
 
 
             <a href="?setor=adm&sub=rh&subsub=alimentacao" id="bAlimentacao" class="btn btn-sm">
