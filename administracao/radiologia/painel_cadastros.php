@@ -1,3 +1,6 @@
+<?php
+@include_once('../../bd/nivel.php');
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
