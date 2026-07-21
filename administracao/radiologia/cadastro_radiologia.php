@@ -76,8 +76,9 @@ $data_criacao = date('Y-m-d H:i:s');
         <label for="nome">Nome</label>
         <input type="text" id="nome" name="nome" required maxlength="150">
 
-        <label for="cpf">CPF</label>
-        <input type="text" id="cpf" name="cpf" required maxlength="14" placeholder="000.000.000-00">
+       <label for="cpf">CPF</label>
+<input type="text" id="cpf" name="cpf" required maxlength="14" placeholder="000.000.000-00" inputmode="numeric">
+
 
         <label for="data_nascimento">Data de nascimento</label>
         <input type="date" id="data_nascimento" name="data_nascimento" required>
@@ -86,7 +87,7 @@ $data_criacao = date('Y-m-d H:i:s');
         <input type="text" id="endereco" name="endereco" required maxlength="255">
 
         <label for="telefone">Telefone</label>
-        <input type="tel" id="telefone" name="telefone" required maxlength="20" placeholder="(00) 00000-0000">
+<input type="text" id="telefone" name="telefone" required maxlength="15" placeholder="(00) 00000-0000" inputmode="numeric">
 
         <label for="email">E-mail</label>
         <input type="email" id="email" name="email" required maxlength="150">
@@ -101,6 +102,32 @@ $data_criacao = date('Y-m-d H:i:s');
 </div>
 
 <script>
+
+    // Máscara de CPF: ###.###.###-##
+document.getElementById('cpf').addEventListener('input', function (e) {
+    let v = e.target.value.replace(/\D/g, '').slice(0, 11);
+    v = v.replace(/(\d{3})(\d)/, '$1.$2');
+    v = v.replace(/(\d{3})(\d)/, '$1.$2');
+    v = v.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+    e.target.value = v;
+});
+
+// Máscara de telefone: (##) #####-#### ou (##) ####-####
+document.getElementById('telefone').addEventListener('input', function (e) {
+    let v = e.target.value.replace(/\D/g, '').slice(0, 11);
+    if (v.length > 10) {
+        // celular: (00) 00000-0000
+        v = v.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+    } else if (v.length > 5) {
+        // fixo: (00) 0000-0000
+        v = v.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+    } else if (v.length > 2) {
+        v = v.replace(/(\d{2})(\d{0,5})/, '($1) $2');
+    } else {
+        v = v.replace(/(\d*)/, '($1');
+    }
+    e.target.value = v;
+});
 document.getElementById('formCadastro').addEventListener('submit', function (e) {
     e.preventDefault();
     const form = e.target;

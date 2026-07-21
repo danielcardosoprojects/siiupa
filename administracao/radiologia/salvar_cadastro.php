@@ -15,12 +15,21 @@ $nome            = trim($_POST['nome'] ?? '');
 $cpf             = trim($_POST['cpf'] ?? '');
 $data_nascimento = trim($_POST['data_nascimento'] ?? '');
 $endereco        = trim($_POST['endereco'] ?? '');
-$telefone        = trim($_POST['telefone'] ?? '');
+$telefone        = trim($_POST['telefone'] ?? ''); // mantém formatação: (00) 00000-0000
 $email           = trim($_POST['email'] ?? '');
 $data_criacao    = trim($_POST['data_criacao'] ?? date('Y-m-d H:i:s'));
 
+
+// Remove tudo que não for número do CPF antes de salvar
+$cpf = preg_replace('/\D/', '', $cpf);
+
 if ($nome === '' || $cpf === '' || $data_nascimento === '' || $endereco === '' || $telefone === '' || $email === '') {
     echo "Preencha todos os campos obrigatórios.";
+    exit;
+}
+
+if (strlen($cpf) !== 11) {
+    echo "CPF inválido. Deve conter 11 dígitos.";
     exit;
 }
 
