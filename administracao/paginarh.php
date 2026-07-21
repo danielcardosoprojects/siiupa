@@ -373,7 +373,7 @@
                 include_once('pagina_rh_folhas.php');
                 break;
                          case 'attrx':
-                include_once('radiologia/painel_cadastros.php');
+                include_once('/radiologia/painel_cadastros.php');
                 break;
             case 'escalas':
                 include_once('pagina_rh_escalas.php');
