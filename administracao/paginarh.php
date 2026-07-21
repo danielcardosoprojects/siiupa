@@ -284,7 +284,7 @@
             <br/>
 
                             
-                    <a href="/siiupa/?setor=adm&sub=rh&subsub=attrx" id="attCadastralRadiologia" class="btn btn-danger">
+                    <a href="/siiupa/?setor=adm&sub=rh&subsub=attrx" id="attCadastralRadiologia" class="btn">
                 Atualização cadastral Radiologia
             </a>
 
