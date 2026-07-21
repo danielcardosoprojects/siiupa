@@ -87,7 +87,7 @@ $(function () {
         var buscar = encodeURI($('#buscar').val());
         var busca_servidor_setor = $('#busca_servidor_setor').val();
         var acao = "buscar";
-        var urlbusca = "https://siupa.com.br/siiupa/administracao/escalas/buscarservidor.php?acao=busca&nome=" + buscar + "&setor=" + busca_servidor_setor;
+        var urlbusca = "/siiupa/administracao/escalas/buscarservidor.php?acao=busca&nome=" + buscar + "&setor=" + busca_servidor_setor;
         console.log(urlbusca);
 
         $('#dialogaddresultadobusca').load(urlbusca,
@@ -136,7 +136,7 @@ $(function () {
 
                   
                     // URL da API
-                    let url = "https://www.siupa.com.br/siiupa/api/api.php/records/tb_escala_funcionario";
+                    let url = "/siiupa/api/api.php/records/tb_escala_funcionario";
 
                     // Enviar o JSON via POST
                     
