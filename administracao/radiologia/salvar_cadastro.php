@@ -60,5 +60,10 @@ try {
 
     echo "Cadastro atualizado com sucesso!";
 } catch (PDOException $e) {
-    echo "Erro ao salvar cadastro: " . $e->getMessage();
+    // errorInfo[1] traz o código específico do MySQL (1062 = entrada duplicada)
+    if ($e->errorInfo[1] == 1062) {
+        echo "Este CPF já possui atualização cadastral realizada.";
+    } else {
+        echo "Erro ao salvar cadastro: " . $e->getMessage();
+    }
 }
