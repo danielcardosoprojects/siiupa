@@ -99,6 +99,12 @@ $data_criacao = date('Y-m-d H:i:s');
     </form>
 
     <div id="mensagem"></div>
+
+    <div id="confirmacao" style="display:none; text-align:center;">
+        <p style="font-size: 40px; color: #2ecc71; margin: 10px 0;">&#10004;</p>
+        <p style="font-weight:bold; color:#2c3e50;">Cadastro enviado com sucesso!</p>
+        <p style="color:#7f8c8d; font-size:14px;">Obrigado por atualizar seus dados.</p>
+    </div>
 </div>
 
 <script>
@@ -139,10 +145,14 @@ document.getElementById('formCadastro').addEventListener('submit', function (e) 
     })
     .then(res => res.text())
     .then(resposta => {
-        document.getElementById('mensagem').innerText = resposta;
         if (resposta.includes('sucesso')) {
-            form.reset();
-            document.getElementById('data_criacao').value = '<?php echo $data_criacao; ?>';
+            // Esconde o formulário e a mensagem de erro (se houver)
+            form.style.display = 'none';
+            document.getElementById('mensagem').innerText = '';
+            // Mostra a confirmação
+            document.getElementById('confirmacao').style.display = 'block';
+        } else {
+            document.getElementById('mensagem').innerText = resposta;
         }
     })
     .catch(() => {
