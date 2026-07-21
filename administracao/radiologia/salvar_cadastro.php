@@ -1,4 +1,7 @@
 <?php
+session_start();
+@include_once('../../bd/nivel.php');
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -10,15 +13,13 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit;
 }
 
-// Recebendo e validando os dados
 $nome            = trim($_POST['nome'] ?? '');
 $cpf             = trim($_POST['cpf'] ?? '');
 $data_nascimento = trim($_POST['data_nascimento'] ?? '');
 $endereco        = trim($_POST['endereco'] ?? '');
-$telefone        = trim($_POST['telefone'] ?? ''); // mantém formatação: (00) 00000-0000
+$telefone        = trim($_POST['telefone'] ?? '');
 $email           = trim($_POST['email'] ?? '');
 $data_criacao    = trim($_POST['data_criacao'] ?? date('Y-m-d H:i:s'));
-
 
 // Remove tudo que não for número do CPF antes de salvar
 $cpf = preg_replace('/\D/', '', $cpf);
@@ -28,19 +29,19 @@ if ($nome === '' || $cpf === '' || $data_nascimento === '' || $endereco === '' |
     exit;
 }
 
-if (strlen($cpf) !== 11) {
-    echo "CPF inválido. Deve conter 11 dígitos.";
-    exit;
-}
-
 if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
     echo "E-mail inválido.";
     exit;
 }
 
+if (strlen($cpf) !== 11) {
+    echo "CPF inválido. Deve conter 11 dígitos.";
+    exit;
+}
+
 try {
     $bd = new BD;
-    $conexao = $bd->conecta(); // deve retornar um objeto PDO
+    $conexao = $bd->conecta();
 
     $sql = "INSERT INTO u940659928_siupa.tabela_atualizacaocadastral
                 (nome, cpf, data_nascimento, endereco, telefone, email, data_criacao)
@@ -60,7 +61,6 @@ try {
 
     echo "Cadastro atualizado com sucesso!";
 } catch (PDOException $e) {
-    // errorInfo[1] traz o código específico do MySQL (1062 = entrada duplicada)
     if ($e->errorInfo[1] == 1062) {
         echo "Este CPF já possui atualização cadastral realizada.";
     } else {

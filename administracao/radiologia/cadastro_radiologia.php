@@ -1,5 +1,7 @@
 <?php
-// Campo oculto "data de criação" preenchido automaticamente pelo sistema
+session_start();
+@include_once('../../bd/nivel.php');
+
 $data_criacao = date('Y-m-d H:i:s');
 ?>
 <!DOCTYPE html>
@@ -37,8 +39,7 @@ $data_criacao = date('Y-m-d H:i:s');
         }
         input[type="text"],
         input[type="email"],
-        input[type="date"],
-        input[type="tel"] {
+        input[type="date"] {
             width: 100%;
             padding: 10px;
             margin-top: 5px;
@@ -72,13 +73,12 @@ $data_criacao = date('Y-m-d H:i:s');
 <div class="container">
     <h1>Atualização Cadastral Radiologia UPA Castanhal</h1>
 
-    <form id="formCadastro" method="POST" action="salvar_cadastro.php">
+    <form id="formCadastro" method="POST" action="/siiupa/administracao/radiologia/salvar_cadastro.php">
         <label for="nome">Nome</label>
         <input type="text" id="nome" name="nome" required maxlength="150">
 
-       <label for="cpf">CPF</label>
-<input type="text" id="cpf" name="cpf" required maxlength="14" placeholder="000.000.000-00" inputmode="numeric">
-
+        <label for="cpf">CPF</label>
+        <input type="text" id="cpf" name="cpf" required maxlength="14" placeholder="000.000.000-00" inputmode="numeric">
 
         <label for="data_nascimento">Data de nascimento</label>
         <input type="date" id="data_nascimento" name="data_nascimento" required>
@@ -87,7 +87,7 @@ $data_criacao = date('Y-m-d H:i:s');
         <input type="text" id="endereco" name="endereco" required maxlength="255">
 
         <label for="telefone">Telefone</label>
-<input type="text" id="telefone" name="telefone" required maxlength="15" placeholder="(00) 00000-0000" inputmode="numeric">
+        <input type="text" id="telefone" name="telefone" required maxlength="15" placeholder="(00) 00000-0000" inputmode="numeric">
 
         <label for="email">E-mail</label>
         <input type="email" id="email" name="email" required maxlength="150">
@@ -108,8 +108,7 @@ $data_criacao = date('Y-m-d H:i:s');
 </div>
 
 <script>
-
-    // Máscara de CPF: ###.###.###-##
+// Máscara de CPF: ###.###.###-##
 document.getElementById('cpf').addEventListener('input', function (e) {
     let v = e.target.value.replace(/\D/g, '').slice(0, 11);
     v = v.replace(/(\d{3})(\d)/, '$1.$2');
@@ -122,10 +121,8 @@ document.getElementById('cpf').addEventListener('input', function (e) {
 document.getElementById('telefone').addEventListener('input', function (e) {
     let v = e.target.value.replace(/\D/g, '').slice(0, 11);
     if (v.length > 10) {
-        // celular: (00) 00000-0000
         v = v.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
     } else if (v.length > 5) {
-        // fixo: (00) 0000-0000
         v = v.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
     } else if (v.length > 2) {
         v = v.replace(/(\d{2})(\d{0,5})/, '($1) $2');
@@ -134,22 +131,21 @@ document.getElementById('telefone').addEventListener('input', function (e) {
     }
     e.target.value = v;
 });
+
 document.getElementById('formCadastro').addEventListener('submit', function (e) {
     e.preventDefault();
     const form = e.target;
     const dados = new FormData(form);
 
-    fetch('salvar_cadastro.php', {
+    fetch('/siiupa/administracao/radiologia/salvar_cadastro.php', {
         method: 'POST',
         body: dados
     })
     .then(res => res.text())
     .then(resposta => {
         if (resposta.includes('sucesso')) {
-            // Esconde o formulário e a mensagem de erro (se houver)
             form.style.display = 'none';
             document.getElementById('mensagem').innerText = '';
-            // Mostra a confirmação
             document.getElementById('confirmacao').style.display = 'block';
         } else {
             document.getElementById('mensagem').innerText = resposta;

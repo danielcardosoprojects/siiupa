@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 @include_once('../../bd/nivel.php');
 ?>
 <!DOCTYPE html>
@@ -10,7 +9,6 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel - Atualização Cadastral Radiologia UPA Castanhal</title>
 
-    <!-- DataTables + Bootstrap 5 (CDN) -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.datatables.net/1.13.11/css/dataTables.bootstrap5.min.css" rel="stylesheet">
 
@@ -50,7 +48,6 @@ session_start();
     </table>
 </div>
 
-<!-- Modal de edição -->
 <div class="modal fade" id="modalEditar" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -91,7 +88,6 @@ session_start();
     </div>
 </div>
 
-<!-- jQuery + Bootstrap + DataTables (CDN) -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.11/js/jquery.dataTables.min.js"></script>
@@ -100,7 +96,6 @@ session_start();
 <script>
 let tabela;
 
-// Aplica máscara de CPF: ###.###.###-##
 function mascaraCpf(valor) {
     let v = valor.replace(/\D/g, '').slice(0, 11);
     v = v.replace(/(\d{3})(\d)/, '$1.$2');
@@ -109,7 +104,6 @@ function mascaraCpf(valor) {
     return v;
 }
 
-// Aplica máscara de telefone: (##) #####-####
 function mascaraTelefone(valor) {
     let v = valor.replace(/\D/g, '').slice(0, 11);
     if (v.length > 10) {
@@ -124,7 +118,6 @@ function mascaraTelefone(valor) {
     return v;
 }
 
-// Formata data ISO (yyyy-mm-dd) para dd/mm/yyyy
 function formatarData(dataIso) {
     if (!dataIso) return '';
     const partes = dataIso.split(' ')[0].split('-');
@@ -134,7 +127,7 @@ function formatarData(dataIso) {
 $(document).ready(function () {
     tabela = $('#tabelaCadastros').DataTable({
         ajax: {
-            url: 'listar_cadastros.php',
+            url: '/siiupa/administracao/radiologia/listar_cadastros.php',
             dataSrc: 'data'
         },
         language: {
@@ -161,7 +154,6 @@ $(document).ready(function () {
         ]
     });
 
-    // Abrir modal de edição preenchido
     $('#tabelaCadastros tbody').on('click', '.btn-editar', function () {
         const dados = tabela.row($(this).closest('tr')).data();
 
@@ -177,15 +169,13 @@ $(document).ready(function () {
         new bootstrap.Modal(document.getElementById('modalEditar')).show();
     });
 
-    // Máscaras dentro do modal
     $('#edit_cpf').on('input', function () { this.value = mascaraCpf(this.value); });
     $('#edit_telefone').on('input', function () { this.value = mascaraTelefone(this.value); });
 
-    // Salvar edição
     $('#btnSalvarEdicao').on('click', function () {
         const dados = $('#formEditar').serialize();
 
-        $.post('editar_cadastro.php', dados, function (resposta) {
+        $.post('/siiupa/administracao/radiologia/editar_cadastro.php', dados, function (resposta) {
             $('#msgEditar').text(resposta.message);
             if (resposta.success) {
                 tabela.ajax.reload(null, false);
@@ -196,13 +186,12 @@ $(document).ready(function () {
         }, 'json');
     });
 
-    // Excluir
     $('#tabelaCadastros tbody').on('click', '.btn-excluir', function () {
         const id = $(this).data('id');
 
         if (!confirm('Tem certeza que deseja excluir este cadastro?')) return;
 
-        $.post('excluir_cadastro.php', { id: id }, function (resposta) {
+        $.post('/siiupa/administracao/radiologia/excluir_cadastro.php', { id: id }, function (resposta) {
             alert(resposta.message);
             if (resposta.success) {
                 tabela.ajax.reload(null, false);
