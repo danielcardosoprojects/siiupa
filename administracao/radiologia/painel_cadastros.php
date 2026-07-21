@@ -14,14 +14,6 @@ session_start();
 
     <style>
        
-        .container-painel {
-            max-width: 1100px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
         h1 { font-size: 22px; text-align: center; color: #2c3e50; margin-bottom: 25px; }
         table.dataTable { font-size: 14px; }
         .btn-acao { margin-right: 5px; }
