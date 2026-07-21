@@ -283,7 +283,8 @@
                 Férias</a>
             <br/>
 
-                            <a href="/siiupa/?setor=adm&sub=attrx" id="attCadastralRadiologia" class="btn btn-alert">
+                            
+                    <a href="/siiupa/?setor=adm&sub=rh&subsub=attrx" id="attCadastralRadiologia" class="btn btn-danger">
                 Atualização cadastral Radiologia
             </a>
 
