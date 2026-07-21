@@ -13,7 +13,7 @@ session_start();
     <link href="https://cdn.datatables.net/1.13.11/css/dataTables.bootstrap5.min.css" rel="stylesheet">
 
     <style>
-        body { background: #f4f6f8; padding: 30px; font-family: Arial, sans-serif; }
+       
         .container-painel {
             max-width: 1100px;
             margin: 0 auto;
