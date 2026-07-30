@@ -460,8 +460,14 @@ itens[selectedIndex].scrollIntoView({
 
 }
 
-function selecionar(item){
+function vibrar(ms = 25) {
+    if ("vibrate" in navigator) {
+        navigator.vibrate(ms);
+    }
+}
 
+function selecionar(item){
+vibrar();     
 incrementar(item);
 
 input.value="";
