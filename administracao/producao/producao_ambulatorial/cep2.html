@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>Contabilização por Localidade</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    margin:20px;
+    background:#f4f4f4;
+}
+
+.search-container{
+    position:relative;
+    max-width:700px;
+    margin:auto;
+}
+
+#search{
+    width:100%;
+    padding:14px;
+    font-size:18px;
+    border:1px solid #bbb;
+    border-radius:8px;
+    outline:none;
+}
+
+#search:focus{
+    border-color:#1976d2;
+}
+
+#autocomplete{
+
+    position:absolute;
+    top:100%;
+    left:0;
+    right:0;
+
+    background:#fff;
+
+    border:1px solid #ccc;
+    border-top:none;
+
+    display:none;
+
+    max-height:300px;
+
+    overflow-y:auto;
+
+    z-index:9999;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.15);
+
+}
+
+.item{
+
+    padding:12px;
+
+    cursor:pointer;
+
+    border-bottom:1px solid #eee;
+
+}
+
+.item:hover,
+.item.active{
+
+    background:#1976d2;
+
+    color:white;
+
+}
+
+.container{
+
+    display:flex;
+
+    gap:20px;
+
+    margin-top:25px;
+
+    flex-wrap:wrap;
+
+}
+
+.section{
+
+    flex:1;
+
+    min-width:280px;
+
+    background:white;
+
+    padding:12px;
+
+    border-radius:8px;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.12);
+
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+th{
+
+    background:#1976d2;
+
+    color:white;
+
+}
+
+th,td{
+
+    border:1px solid #ddd;
+
+    padding:8px;
+
+}
+
+tbody tr:nth-child(even){
+
+    background:#fafafa;
+
+}
+
+@media(max-width:900px){
+
+.container{
+
+    flex-direction:column;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="search-container">
+
+<input
+id="search"
+type="text"
+placeholder="Buscar Cidade, Bairro ou Estado..."
+autocomplete="off">
+
+<div id="autocomplete"></div>
+
+</div>
+
+
+<div class="container">
+
+
+<div class="section">
+
+<h2>Cidades</h2>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Nome</th>
+
+<th>Quantidade</th>
+
+</tr>
+
+</thead>
+
+<tbody id="cities"></tbody>
+
+</table>
+
+</div>
+
+
+
+<div class="section">
+
+<h2>Bairros</h2>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Nome</th>
+
+<th>Quantidade</th>
+
+</tr>
+
+</thead>
+
+<tbody id="neighborhoods"></tbody>
+
+</table>
+
+</div>
+
+
+
+<div class="section">
+
+<h2>Estados</h2>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Nome</th>
+
+<th>Quantidade</th>
+
+</tr>
+
+</thead>
+
+<tbody id="states"></tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<script>
+
+const input=document.getElementById("search");
+const autocomplete=document.getElementById("autocomplete");
+
+let data;
+
+let allData=[];
+
+let debounce;
+
+let selectedIndex=-1;
+
+function normalize(text){
+
+return text
+
+.normalize("NFD")
+
+.replace(/[\u0300-\u036f]/g,"")
+
+.toLowerCase();
+
+}
+
+async function carregarDados(){
+
+const resposta=await fetch("dados.json");
+
+data=await resposta.json();
+
+allData=[];
+
+data.cities.forEach(item=>{
+
+allData.push({
+
+name:item,
+
+category:"Cidade",
+
+table:"cities",
+
+normalized:normalize(item)
+
+});
+
+});
+
+data.neighborhoods.forEach(item=>{
+
+allData.push({
+
+name:item,
+
+category:"Bairro",
+
+table:"neighborhoods",
+
+normalized:normalize(item)
+
+});
+
+});
+
+data.states.forEach(item=>{
+
+allData.push({
+
+name:item,
+
+category:"Estado",
+
+table:"states",
+
+normalized:normalize(item)
+
+});
+
+});
+
+}
+
+carregarDados();
+
+input.addEventListener("input",()=>{
+
+clearTimeout(debounce);
+
+debounce=setTimeout(pesquisar,120);
+
+});
+
+input.addEventListener("keydown",teclas);
+
+document.addEventListener("click",(e)=>{
+
+if(!autocomplete.contains(e.target)&&e.target!==input){
+
+autocomplete.style.display="none";
+
+}
+
+});
+
+function pesquisar(){
+
+const texto=normalize(input.value.trim());
+
+autocomplete.innerHTML="";
+
+selectedIndex=-1;
+
+if(texto==""){
+
+autocomplete.style.display="none";
+
+return;
+
+}
+
+const resultados=allData
+
+.filter(item=>item.normalized.includes(texto))
+
+.slice(0,15);
+
+if(resultados.length==0){
+
+autocomplete.style.display="none";
+
+return;
+
+}
+resultados.forEach((item)=>{
+
+    const div=document.createElement("div");
+
+    div.className="item";
+
+    div.innerHTML="<strong>"+item.name+"</strong> <small>("+item.category+")</small>";
+
+    div.onclick=()=>selecionar(item);
+
+    autocomplete.appendChild(div);
+
+});
+
+autocomplete.style.display="block";
+
+}
+
+function teclas(e){
+
+const itens=autocomplete.querySelectorAll(".item");
+
+if(!itens.length) return;
+
+if(e.key==="ArrowDown"){
+
+    e.preventDefault();
+
+    selectedIndex++;
+
+    if(selectedIndex>=itens.length) selectedIndex=0;
+
+    atualizarSelecao(itens);
+
+}
+
+else if(e.key==="ArrowUp"){
+
+    e.preventDefault();
+
+    selectedIndex--;
+
+    if(selectedIndex<0) selectedIndex=itens.length-1;
+
+    atualizarSelecao(itens);
+
+}
+
+else if(e.key==="Enter"){
+
+    e.preventDefault();
+
+    if(selectedIndex>=0){
+
+        itens[selectedIndex].click();
+
+    }
+
+}
+
+}
+
+function atualizarSelecao(itens){
+
+itens.forEach(item=>item.classList.remove("active"));
+
+itens[selectedIndex].classList.add("active");
+
+itens[selectedIndex].scrollIntoView({
+
+    block:"nearest"
+
+});
+
+}
+
+function selecionar(item){
+
+incrementar(item);
+
+input.value="";
+
+autocomplete.innerHTML="";
+
+autocomplete.style.display="none";
+
+selectedIndex=-1;
+
+input.focus();
+
+}
+
+function incrementar(item){
+
+const tbody=document.getElementById(item.table);
+
+let linha=[...tbody.rows].find(r=>r.cells[0].textContent===item.name);
+
+if(linha){
+
+    linha.cells[1].textContent=
+
+    Number(linha.cells[1].textContent)+1;
+
+}else{
+
+    linha=tbody.insertRow();
+
+    linha.insertCell().textContent=item.name;
+
+    linha.insertCell().textContent=1;
+
+}
+
+ordenarTabela(tbody);
+
+}
+
+function ordenarTabela(tbody){
+
+const linhas=[...tbody.rows];
+
+linhas.sort((a,b)=>
+
+a.cells[0].textContent.localeCompare(
+
+b.cells[0].textContent,
+
+'pt-BR',
+
+{sensitivity:'base'}
+
+)
+
+);
+
+linhas.forEach(l=>tbody.appendChild(l));
+
+}
+
+</script>
+
+</body>
+
+</html>
