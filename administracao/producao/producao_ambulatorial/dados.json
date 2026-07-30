@@ -1,5 +1,5 @@
 {
-    "cities": [
+    cities: [
         'Abaetetuba', 'Abel Figueiredo', 'Acara', 'Afua', 'Agua Azul do Norte', 'Alenquer', 'Almeirim', 'Altamira', 
         'Anajas', 'Ananindeua', 'Anapu', 'Augusto Correa', 'Aurora do Para', 'Aveiro', 'Bagre', 'Baiao', 'Bannach', 
         'Barcarena', 'Belem', 'Belterra', 'Benevides', 'Bom Jesus do Tocantins', 'Bonito', 'Braganca', 'Brasil Novo', 
@@ -20,7 +20,7 @@
         'Soure', 'Tailândia', 'Terra Alta', 'Terra Santa', 'Tome-Acu', 'Tracuateua', 'Trairao', 'Tucuma', 'Tucurui', 'Ulianopolis', 
         'Urucara', 'Vigia', 'Viseu', 'Vitoria do Xingu', 'Xinguara'
     ],
-    "neighborhoods": [
+    neighborhoods: [
         'Agrovila Calucia', 'Agrovila 3 de outubro', 'Agrovila Bacabal', 'Agrovila Bacuri', 'Agrovila Boa Vista', 
         'Agrovila C. Branco', 'Agrovila Cupiuba', 'Agrovila Iracema', 'Agrovila Itaqui', 'Agrovila João Batista', 
         'Agrovila Macapazinho', 'Agrovila Nazare', 'Agrovila Pacuquara', 'Agrovila S. Terezinha', 'Agrovila S. Raimundo', 
@@ -31,7 +31,7 @@
         'Prq. dos Buritis', 'Pirapora', 'Propira', 'Rouxinol', 'Salgadinho', 'Sta Catarina', 'Santa Helena', 'Sta Terezinha', 
         'São José', 'Saudade', 'Saudade II', 'Titanlândia', 'Tókio', 'Vila do Apeú', 'Zona Rural', 'Não Identif.'
     ],
-    "states": [
+    'states': [
         'Acre', 'Alagoas', 'Amapá', 'Amazonas', 'Bahia', 'Ceará', 'Distrito Federal', 'Espírito Santo', 'Goiás', 'Maranhão', 
         'Mato Grosso', 'Mato Grosso do Sul', 'Minas Gerais', 'Pará', 'Paraíba', 'Paraná', 'Pernambuco', 'Piauí', 
         'Rio de Janeiro', 'Rio Grande do Norte', 'Rio Grande do Sul', 'Rondônia', 'Roraima', 'Santa Catarina', 'São Paulo', 
