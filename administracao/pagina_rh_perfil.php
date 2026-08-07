@@ -514,11 +514,11 @@ class Grade
 
 
 
-    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalCC">
+    <!-- <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalCC">
         Contracheques
-    </button>
+    </button> -->
 
-    <button onclick="consultaC()" style="background-color: red;">CÉDULA C 2025</button>
+    <!-- <button onclick="consultaC()" style="background-color: red;">CÉDULA C 2025</button> -->
     <?php $linkfrequencia = '/siiupa/gerapdf.php?&matricula=' . urlencode($perfil->matricula) . '&admissao=' . urlencode($perfil->admissao) . '&posse_contrato=' . urlencode($perfil->posse_contrato) . '&nome=' . urlencode($perfil->nome) . '&cargo=' . urlencode($perfil->cargo_desc) . '&vinculo=' . urlencode($perfil->vinculo);     ?>
     <a target="_blank" href='<?php echo $linkfrequencia; ?>' id='gerafrequencia' class='btn btn-outline-success'>
         <img src="/siiupa/imagens/icones/note_add.svg">
@@ -562,8 +562,8 @@ class Grade
         Editar dados
     </button>
     <br>
-    <button onclick="baixarUltimoContracheque('contracheque')" class="btn btn-outline-secondary" style="margin-top:5px">Último contracheque</button>
-    <button onclick="baixarUltimoContracheque('fichafinanceira')" class="btn btn-outline-secondary" style="margin-top:5px">Ficha Financeira</button>
+    <!-- <button onclick="baixarUltimoContracheque('contracheque')" class="btn btn-outline-secondary" style="margin-top:5px">Último contracheque</button> -->
+    <!-- <button onclick="baixarUltimoContracheque('fichafinanceira')" class="btn btn-outline-secondary" style="margin-top:5px">Ficha Financeira</button> -->
     <!-- Modal -->
     <div class="modal fade" id="modalEditarFuncionario" tabindex="-1" aria-labelledby="modalEditarFuncionarioLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-scrollable">
