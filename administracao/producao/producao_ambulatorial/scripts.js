@@ -6,7 +6,7 @@ let data = {
     "sexo": { "Feminino": 0, "Masculino": 0 },
     "cartaoSUS": { "ComCartao": 0, "SemCartao": 0 },
     "classificacaoRisco": { "Classificado": 0, "NaoClassificado": 0 },
-    "anamneseConsultas": { "PA": 0, "Peso": 0, "Glicemia": 0, "Inalacao": 0, "Crise Hipertensiva": 0, "Neutro":0, "Medico": 0, "Enfermeiro": 0, "AssistenteSocial": 0},
+    "anamneseConsultas": { "PA": 0, "Peso": 0, "Inalacao": 0, "Glicemia": 0, "Crise Hipertensiva": 0, "Neutro":0, "Medico": 0, "Enfermeiro": 0, "AssistenteSocial": 0},
     "acidentesTransito": { "MOTO_X_CARRO": 0, "MOTO_X_MOTO": 0, "MOTO_X_VEICULO_GRANDE": 0, "MOTO_QUEDA": 0, "MOTO_OUTROS": 0, "VEICULO_GRANDE": 0, "CARRO_CAPOTAMENTO": 0, "CARRO_X_CARRO": 0, "CARRO_X_VEICULO_GRANDE": 0, "CARRO_OUTROS": 0, "ATROPELAMENTO": 0, "BICICLETA": 0 },
     "causasAcidente": { "FAB": 0, "FAF": 0, "ACIDENTE_TRABALHO": 0, "GESTANTE": 0, "AGRESSAO_FISICA": 0, "SEAP": 0, "SURTO_PSICOTICO": 0 },
     "traumas": { "TRAUMA": 0 },
@@ -360,12 +360,12 @@ $(document).ready(function () {
     function proximo() {
         owl.trigger('owl.next');
         updateActiveClass();
-        if (owl.data('owlCarousel').currentItem === 11) {
+        if (owl.data('owlCarousel').currentItem === 10) {
             console.log(owl.data('owlCarousel'));
 
             setTimeout(() => {
                 searchBox.focus();
-            }, 500);
+            }, 250);
         }
         totalItems = owl.data('owlCarousel').itemsAmount - 1;
         currentItem = owl.data('owlCarousel').currentItem;
