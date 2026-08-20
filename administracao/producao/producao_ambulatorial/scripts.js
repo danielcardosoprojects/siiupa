@@ -9,7 +9,7 @@ let data = {
     "anamnese": { "PA": 0, "PulsoFC": 0, "FR": 0, "Saturacao": 0, "Temperatura": 0, "Peso": 0, "Glicemia": 0, "Inalacao": 0, "Crise Hipertensiva": 0 },
     "consultas": { "Medico": 0, "Enfermeiro": 0, "AssistenteSocial": 0 },
     "acidentesTransito": { "MOTO_X_CARRO": 0, "MOTO_X_MOTO": 0, "MOTO_X_VEICULO_GRANDE": 0, "MOTO_QUEDA": 0, "MOTO_OUTROS": 0, "VEICULO_GRANDE": 0, "CARRO_CAPOTAMENTO": 0, "CARRO_X_CARRO": 0, "CARRO_X_VEICULO_GRANDE": 0, "CARRO_OUTROS": 0, "ATROPELAMENTO": 0, "BICICLETA": 0 },
-    "causasAcidente": { "FAB": 0, "FAF": 0, "ACIDENTE_TRABALHO": 0, "GESTANTE": 0, "AGRESSAO_FISICA": 0, "SEAP": 0, "SURTO_PSICOTICO": 0},
+    "causasAcidente": { "FAB": 0, "FAF": 0, "ACIDENTE_TRABALHO": 0, "GESTANTE": 0, "AGRESSAO_FISICA": 0, "SEAP": 0, "SURTO_PSICOTICO": 0 },
     "traumas": { "TRAUMA": 0 },
     "quedas": { "PROP_ALTURA": 0, "+1m": 0, "CAMA": 0, "ESCADA": 0, "CAVALO": 0, "QUEDA_ARVORE": 0, "REDE": 0, "TELHADO": 0, "OUTROS": 0, "TENTATIVA_SUICIDIO": 0 },
     "cities": {
@@ -170,9 +170,9 @@ function updateTableRow(category, name) {
 function incrementCount(selectedText) {
     const name = selectedText.replace(/\s+\(.*?\)$/, '');
     localStorage.setItem('lastPlace', name);
- 
-        document.getElementById("ultimoLugar").innerHTML = "Último: "+name+", "+localStorage.getItem('lastFaixaEtaria')+", "+localStorage.getItem('lastSexo');
-  
+
+    document.getElementById("ultimoLugar").innerHTML = "Último: " + name + ", " + localStorage.getItem('lastFaixaEtaria') + ", " + localStorage.getItem('lastSexo');
+
     let category;
     if (data.cities.hasOwnProperty(name)) {
         category = 'cities';
@@ -329,12 +329,12 @@ $(document).ready(function () {
 
     let startX;
 
-    hammer.on('panstart', function(event) {
+    hammer.on('panstart', function (event) {
         startX = event.center.x;
-        
+
     });
 
-    hammer.on('panend', function(event) {
+    hammer.on('panend', function (event) {
         const endX = event.center.x;
         const direction = endX > startX ? 'direita' : 'esquerda';
         console.log(`Arrastou para a ${direction}`);
@@ -345,135 +345,150 @@ $(document).ready(function () {
         }
     });
 
-function updateActiveClass() {
-    $('.owl-item').removeClass('active');
-    var currentIndex = owl.data('owlCarousel').currentItem;
-    $('.owl-item').eq(currentIndex).addClass('active');
-}
-
-function teste() {
-    return owl.data('owlCarousel').currentItem;
-
-}
-
-
-
-function proximo() {
-    owl.trigger('owl.next');
-    updateActiveClass();
-    if (owl.data('owlCarousel').currentItem === 11) {
-        console.log(owl.data('owlCarousel'));
-
-        setTimeout(() => {
-            searchBox.focus();
-        }, 500);
+    function updateActiveClass() {
+        $('.owl-item').removeClass('active');
+        var currentIndex = owl.data('owlCarousel').currentItem;
+        $('.owl-item').eq(currentIndex).addClass('active');
     }
-    totalItems = owl.data('owlCarousel').itemsAmount - 1;
-    currentItem = owl.data('owlCarousel').currentItem;
-    if (currentItem == 0) {
 
+    function teste() {
+        return owl.data('owlCarousel').currentItem;
 
-        consultaSeparacao();
     }
-}
-
-function anterior() {
 
 
-    if (owl.data('owlCarousel').currentItem === 0) {
-        totalItems = owl.data('owlCarousel').itemsAmount - 1;
-        for (let i = 0; i < totalItems; i++) {
-            proximo();
-        }
-    } else {
-        owl.trigger('owl.prev');
+
+    function proximo() {
+        owl.trigger('owl.next');
         updateActiveClass();
-    }
-}
+        if (owl.data('owlCarousel').currentItem === 11) {
+            console.log(owl.data('owlCarousel'));
 
-owl.on('changed.owl.carousel', updateActiveClass);
-updateActiveClass();
-
-$(document, ".iframe").keydown(function (event) {
-    var key = String(event.key).toUpperCase();
-    console.log(key);
-    var activeItem = $(".owl-item.active .item");
-
-    if (key === 'ENTER') {
-        proximo();
-    } else if (event.key === 'ArrowLeft') {
-        anterior();
-    } else {
-        activeItem.find('.count').each(function () {
-            if ($(this).data('key') === key) {
-                var count = parseInt($(this).text());
-                const categoria = $(this).data('categoria');
-                const chave = $(this).data('chave');
-                console.log(categoria,chave);
-                if(categoria == "faixaEtaria"){
-                    localStorage.setItem('lastFaixaEtaria', chave);
-                }
-                if(categoria == "sexo"){
-                    localStorage.setItem('lastSexo', chave);
-                }
-                piscarDiv(chave);
-                //elabora o alerta para separação de prontuario
-                if (categoria == "acidentesTransito" || categoria == "traumas") {
-                    separarProntuario(1);
-
-                };
-
-                
-
-
-                if (event.shiftKey) {
-                    count = count > 0 ? count - 1 : 0;
-                    data[`${categoria}`][`${chave}`]--;
-                } else {
-                    count++;
-                    data[`${categoria}`][`${chave}`]++;
-                }
-
-                $(this).text(count);
-                saveData(); // Salva os dados sempre que houver uma alteração
-
-                if ($(this).data('multi') == "n") {
-                    proximo();
-                }
-            }
-        });
-    }
-});
-
-const searchBox = document.querySelector('.search-box');
-searchBox.addEventListener('input', function () {
-    updateSuggestions(this);
-});
-
-searchBox.addEventListener('keydown', function (e) {
-    if (e.key === 'Enter') {
-        incrementCount(this.value);
-        //verifica se é cidade e da alerta
-        if (this.value.endsWith("(Cidade)") && separaProntuario === 0) {
             setTimeout(() => {
-
-                alertify.alert('Este prontuário deverá ser separado em Cidades.');
-
+                searchBox.focus();
             }, 500);
         }
+        totalItems = owl.data('owlCarousel').itemsAmount - 1;
+        currentItem = owl.data('owlCarousel').currentItem;
+        if (currentItem == 0) {
 
-        this.value = '';
-        clearSuggestions();
-        this.blur();
+
+            consultaSeparacao();
+        }
     }
-});
 
-searchBox.addEventListener('blur', function () {
-    // this.disabled = true; // Desativar input ao perder foco
-});
+    function anterior() {
 
-// Evento de clique para o botão de limpar dados
-document.getElementById('clearDataButton').addEventListener('click', clearData);
+
+        if (owl.data('owlCarousel').currentItem === 0) {
+            totalItems = owl.data('owlCarousel').itemsAmount - 1;
+            for (let i = 0; i < totalItems; i++) {
+                proximo();
+            }
+        } else {
+            owl.trigger('owl.prev');
+            updateActiveClass();
+        }
+    }
+
+    owl.on('changed.owl.carousel', updateActiveClass);
+    updateActiveClass();
+
+    $(document, ".iframe").keydown(function (event) {
+        var key = String(event.key).toUpperCase();
+        console.log(key);
+        var activeItem = $(".owl-item.active .item");
+
+        if (key === 'ENTER') {
+            proximo();
+        } else if (event.key === "'") {
+            proximo();
+            proximo();
+            proximo();
+            proximo();
+            
+        } else if (event.key === 'ArrowLeft') {
+            anterior();
+
+        } else {
+            activeItem.find('.count').each(function () {
+                if ($(this).data('key') === key) {
+                    var count = parseInt($(this).text());
+                    const categoria = $(this).data('categoria');
+                    const chave = $(this).data('chave');
+                    console.log(categoria, chave);
+                    if (categoria == "faixaEtaria") {
+                        localStorage.setItem('lastFaixaEtaria', chave);
+                    }
+                    if (categoria == "sexo") {
+                        localStorage.setItem('lastSexo', chave);
+                    }
+                    piscarDiv(chave);
+                    //elabora o alerta para separação de prontuario
+                    if (categoria == "acidentesTransito" || categoria == "traumas") {
+                        separarProntuario(1);
+
+                    };
+                    if (categoria == "acidentesTransito") {
+                        simulateKeyPress('ENTER');
+                        simulateKeyPress('ENTER');
+
+
+                    };
+
+
+
+
+
+
+                    if (event.shiftKey) {
+                        count = count > 0 ? count - 1 : 0;
+                        data[`${categoria}`][`${chave}`]--;
+                    } else {
+                        count++;
+                        data[`${categoria}`][`${chave}`]++;
+                    }
+
+                    $(this).text(count);
+                    saveData(); // Salva os dados sempre que houver uma alteração
+
+                    if ($(this).data('multi') == "n") {
+                        proximo();
+                    }
+                }
+            });
+        }
+    });
+
+    const searchBox = document.querySelector('.search-box');
+    searchBox.addEventListener('input', function () {
+        updateSuggestions(this);
+    });
+
+    searchBox.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+            incrementCount(this.value);
+            //verifica se é cidade e da alerta
+            if (this.value.endsWith("(Cidade)") && separaProntuario === 0) {
+                setTimeout(() => {
+
+                    alertify.alert('Este prontuário deverá ser separado em Cidades.');
+
+                }, 500);
+            }
+
+            this.value = '';
+            clearSuggestions();
+            this.blur();
+        }
+    });
+
+    searchBox.addEventListener('blur', function () {
+        // this.disabled = true; // Desativar input ao perder foco
+    });
+
+    // Evento de clique para o botão de limpar dados
+    document.getElementById('clearDataButton').addEventListener('click', clearData);
 });
 
 function piscarDiv(id) {
@@ -488,7 +503,7 @@ function piscarDiv(id) {
     function toggleHighlight() {
         div.style.backgroundColor = highlightColor;
 
-        setTimeout(function() {
+        setTimeout(function () {
             div.style.backgroundColor = originalColor;
         }, 100);  // Duração do highlight (500ms)
     }
