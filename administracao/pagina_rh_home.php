@@ -259,12 +259,12 @@ include_once('../bd/nivel.php');
 
 
 
-
     // verifica o número total de registros
     $todosResultadosBusca = mysqli_query($conn, $sqlbusca);
     $tr = $todosResultadosBusca->num_rows; // verifica o número total de registros
     $tp = $tr / $total_reg; // verifica o número total de páginas
 
+    echo "$sqlbusca  LIMIT $inicio,$total_reg";
     $resultbusca = mysqli_query($conn, "$sqlbusca  LIMIT $inicio,$total_reg");
 
 
