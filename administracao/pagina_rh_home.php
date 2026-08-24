@@ -481,14 +481,14 @@ include_once('../bd/nivel.php');
 
                     //COLS VACATIONS
                     echo "<td> $dataAdmissao </br>";
-                    $ferias23 = new BD;
-                    $sqlF23 = "SELECT * FROM u940659928_siupa.tb_ferias where fk_funcionario = '$dados->idfuncionario' and ref_ano = '2026' ORDER BY ref_mes ASC;";
-                    $rF23 = $ferias23->consulta($sqlF23);
-                    $meses = [];
-                    foreach ($rF23 as $ferias23) {
-                        $meses[] = mes($ferias23->ref_mes);
-                    }
-                    echo implode('/', $meses);
+                    // $ferias23 = new BD;
+                    // $sqlF23 = "SELECT * FROM u940659928_siupa.tb_ferias where fk_funcionario = '$dados->idfuncionario' and ref_ano = '2026' ORDER BY ref_mes ASC;";
+                    // $rF23 = $ferias23->consulta($sqlF23);
+                    // $meses = [];
+                    // foreach ($rF23 as $ferias23) {
+                    //     $meses[] = mes($ferias23->ref_mes);
+                    // }
+                    // echo implode('/', $meses);
 
                     echo "</td>";
 
