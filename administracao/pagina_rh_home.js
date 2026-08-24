@@ -130,27 +130,27 @@ $(function () {
 
 });//fim do function que carrega o script após o carregamento da página
 $(document).ready(function () {
-    $('#tabela_funcionarios').DataTable({
-        "dom": '<"top"<"teste"f><"teste"l>ip>rt<"bottom"p><"clear">',
-        "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Tudo"]],
-        language: {
-            url: "/siiupa/js/dataTables/pt-BR.json"
-        },
-        "columnDefs": [
-            {
-                "targets": 0, // Primeira coluna (números das linhas)
-                "orderable": false, // Desabilita a ordenação nesta coluna
-                "searchable": false // Desabilita a busca nesta coluna
-            }
-        ],
-        "order": [], // Remove a ordenação inicial
-        "drawCallback": function (settings) {
+    // $('#tabela_funcionarios').DataTable({
+    //     "dom": '<"top"<"teste"f><"teste"l>ip>rt<"bottom"p><"clear">',
+    //     "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "Tudo"]],
+    //     language: {
+    //         url: "/siiupa/js/dataTables/pt-BR.json"
+    //     },
+    //     "columnDefs": [
+    //         {
+    //             "targets": 0, // Primeira coluna (números das linhas)
+    //             "orderable": false, // Desabilita a ordenação nesta coluna
+    //             "searchable": false // Desabilita a busca nesta coluna
+    //         }
+    //     ],
+    //     "order": [], // Remove a ordenação inicial
+    //     "drawCallback": function (settings) {
            
-            var api = this.api();
-            var start = api.page.info().start; // Ponto inicial da página atual
-            api.column(0, { page: 'current' }).nodes().each(function (cell, i) {
-                cell.innerHTML = start + i + 1; // Atualiza os números
-            });
-        }
-    });
+    //         var api = this.api();
+    //         var start = api.page.info().start; // Ponto inicial da página atual
+    //         api.column(0, { page: 'current' }).nodes().each(function (cell, i) {
+    //             cell.innerHTML = start + i + 1; // Atualiza os números
+    //         });
+    //     }
+    // });
 });
