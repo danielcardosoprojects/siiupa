@@ -512,6 +512,12 @@
                 }
             });
 
+            function copiaLegenda(var){
+                areaTexto = document.getElementsByClassName('jqte_editor');
+                textoAnterior = areaTexto[0].innerText,;
+
+            }
+
             // Append the custom button to the toolbar
             $('.jqte_toolbar').append(button);
 
