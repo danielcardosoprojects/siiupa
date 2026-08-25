@@ -63,7 +63,14 @@ class BD
    function consultaArray($sql) //consulta e retorna o resultado em objetado para utilizar no foreach
    {
 
-      $bd = new PDO("mysql:host=$this->servername;dbname=$this->database", "$this->username", "$this->password");
+      $bd = new PDO(
+    "mysql:host=$this->servername;dbname=$this->database",
+    $this->username,
+    $this->password,
+    [
+        PDO::ATTR_PERSISTENT => true
+    ]
+);
 
 
       $busca = $bd->prepare($sql);
@@ -83,7 +90,14 @@ class BD
    function consultaJSON($sql) //consulta e retorna o resultado em objetado para utilizar no foreach
    {
 
-      $bd = new PDO("mysql:host=$this->servername;dbname=$this->database", "$this->username", "$this->password");
+      $bd = new PDO(
+    "mysql:host=$this->servername;dbname=$this->database",
+    $this->username,
+    $this->password,
+    [
+        PDO::ATTR_PERSISTENT => true
+    ]
+);
 
 
       
@@ -116,15 +130,28 @@ class BD
    }
    function insere($sql)
    {
-      $bd = new PDO("mysql:host=$this->servername;dbname=$this->database", "$this->username", "$this->password");
-
+     $bd = new PDO(
+    "mysql:host=$this->servername;dbname=$this->database",
+    $this->username,
+    $this->password,
+    [
+        PDO::ATTR_PERSISTENT => true
+    ]
+);
       $busca = $bd->prepare($sql);
 
       $busca->execute();
    }
    function deleta($sql)
    {
-      $bd = new PDO("mysql:host=$this->servername;dbname=$this->database", "$this->username", "$this->password");
+      $bd = new PDO(
+    "mysql:host=$this->servername;dbname=$this->database",
+    $this->username,
+    $this->password,
+    [
+        PDO::ATTR_PERSISTENT => true
+    ]
+);
 
       $busca = $bd->prepare($sql);
 
