@@ -253,10 +253,10 @@ STATUS:
 <div id="load_status_escala" class="spinner-border text-primary d-none" role="status">
 
 </div>
-<a id="bt_esc_oficial" data-oficial="sim" data-idescala="<?php echo $idescala; ?>" data-mes="<?php echo $mes; ?>" data-ano="<?php echo $ano; ?>" class="<?php echo $bt_oficial; ?> bt_oficial" href='#' target='_blank'>
+<a id="bt_esc_oficial" data-oficial="sim" data-idescala="<?php echo $idescala; ?>" data-mes="<?php echo $mes; ?>" data-ano="<?php echo $ano; ?>" class="<?php echo $bt_oficial; ?> bt_oficial" href='#'>
     <img id='done-oficial' src='imagens/icones/done.svg' class='<?php echo $done_oficial; ?>'>OFICIAL</a>
 
-<a id="bt_esc_rascunho" data-oficial="nao" data-idescala="<?php echo $idescala; ?>" data-mes="<?php echo $mes; ?>" data-ano="<?php echo $ano; ?>" class="<?php echo $bt_rascunho; ?> bt_oficial" href='#' target='_blank'>
+<a id="bt_esc_rascunho" data-oficial="nao" data-idescala="<?php echo $idescala; ?>" data-mes="<?php echo $mes; ?>" data-ano="<?php echo $ano; ?>" class="<?php echo $bt_rascunho; ?> bt_oficial" href='#'>
     <img id='done-rascunho' src='imagens/icones/done.svg' class='<?php echo $done_rascunho; ?>'>RASCUNHO</a>
 <hr />
 <p>Ferramentas:
