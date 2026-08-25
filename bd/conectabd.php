@@ -35,8 +35,14 @@ class BD
    function consulta($sql) //consulta e retorna o resultado em objetado para utilizar no foreach
    {
 
-      $bd = new PDO("mysql:host=$this->servername;dbname=$this->database", "$this->username", "$this->password");
-
+      $bd = new PDO(
+    "mysql:host=$this->servername;dbname=$this->database",
+    $this->username,
+    $this->password,
+    [
+        PDO::ATTR_PERSISTENT => true
+    ]
+);
 
 
 
