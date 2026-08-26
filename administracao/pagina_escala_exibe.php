@@ -273,6 +273,7 @@ STATUS:
     <?php
     include("pagina_escala_esqueleto.php");
     ?>
+<!-- fim: pagina_escala_esqueleto.php -->
 
     <hr>
 
