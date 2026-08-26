@@ -269,7 +269,7 @@ STATUS:
 
 <div id="carregaesqueleto">
 
-
+<!-- INICIO: pagina_escala_esqueleto.php -->
     <?php
     include("pagina_escala_esqueleto.php");
     ?>
