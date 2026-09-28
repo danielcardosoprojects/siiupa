@@ -322,7 +322,7 @@ include_once('../bd/nivel.php');
                 <th scope="col">#</th>
                 <th scope="col">MATRICULA</th>
 
-                <th scope="col">Férias</th>
+                <th scope="col">Eleições 2026</th>
                 <th scope="col">NOME<img src="/siiupa/imagens/tablesorter.svg"></th>
                 <th scope="col">CPF</th>
                 <th scope="col">SEXO</th>
@@ -437,7 +437,7 @@ include_once('../bd/nivel.php');
                     //BUTTON VACATIONS botao de ferias
                     //echo "<td><button class='btn btn-success' onclick='abrirModalFerias($dados->idfuncionario)'>Férias</button></td>";
                     //botão eleicao
-                    echo "<td><a class='eleicaobtn-link' target='_blank' href='https://siupa.com.br/siiupa/administracao/pagina_rh_eleicao2022.php?nome=$dados->nome&cargo=$dados->cargo&cpf=$dados->cpf'>Eleição</a></td>";
+                    echo "<td><a class='eleicaobtn-link' target='_blank' href='https://siupa.com.br/siiupa/administracao/pagina_rh_eleicao2022.php?nome=$dados->nome&cargo=$dados->cargo&cpf=$dados->cpf'>Declaração</a></td>";
 
                     //LINE NAME
                     $token = $_SESSION['token'];
