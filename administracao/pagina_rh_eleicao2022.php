@@ -5,7 +5,7 @@ include_once('../bd/nivel.php');
 ?>
 
 <div style="text-align:center;width:100%">
-<img src="../imagens/documentos/cabeçalho_2022.fw.png">
+<img src="../imagens/documentos/cabecalho_2026.png">
 <br>
 <br>
 <br>
