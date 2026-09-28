@@ -444,7 +444,7 @@ include_once('../bd/nivel.php');
                     //LINK TO CNES
                     //<a href='/siiupa/administracao/apicnes.php?id=$dados->idfuncionario' target='_blank'>CNES</a>
                     //LINK TO ELECTION DOCUMENT
-                    <a class='eleicaobtn-link' target='_blank' href='https://siupa.com.br/siiupa/administracao/pagina_rh_eleicao2022.php?nome=$dados->nome&cargo=$dados->cargo&cpf=$dados->cpf'>Eleição</a>
+                    //<a class='eleicaobtn-link' target='_blank' href='https://siupa.com.br/siiupa/administracao/pagina_rh_eleicao2022.php?nome=$dados->nome&cargo=$dados->cargo&cpf=$dados->cpf'>Eleição</a>
 
                     //LINE BIRTH
                     //                    echo "<td>$dados->data_nascbr</td>";
