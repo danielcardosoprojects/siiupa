@@ -434,8 +434,10 @@ include_once('../bd/nivel.php');
 
 
 
-                    //BUTTON VACATIONS
-                    echo "<td><button class='btn btn-success' onclick='abrirModalFerias($dados->idfuncionario)'>Férias</button></td>";
+                    //BUTTON VACATIONS botao de ferias
+                    //echo "<td><button class='btn btn-success' onclick='abrirModalFerias($dados->idfuncionario)'>Férias</button></td>";
+                    //botão eleicao
+                    echo "<td><a class='eleicaobtn-link' target='_blank' href='https://siupa.com.br/siiupa/administracao/pagina_rh_eleicao2022.php?nome=$dados->nome&cargo=$dados->cargo&cpf=$dados->cpf'>Eleição</a></td>";
 
                     //LINE NAME
                     $token = $_SESSION['token'];
