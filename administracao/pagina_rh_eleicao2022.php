@@ -15,7 +15,7 @@ include_once('../bd/nivel.php');
 <br>
 <br>
 
-<p style="text-indent: 10em;text-align:justify;font-size:20px; margin:0 50px;">Declaro, respeitosamente, à essa seção eleitoral que o(a) servidor(a) <strong><?php echo $_GET['nome'].", ".$_GET['cargo'].", CPF: ". $_GET['cpf']; ?></strong>,  encontra-se em <strong>plantão de 12 horas diurno</strong> nesta Unidade de Pronto Atendimento, em atendimentos de urgência/emergência, necessitando de atendimento agilizado para retornar ao seu posto de trabalho, nesta data de 04 de outubro de 2026.</p>
+<p style="text-indent: 10em;text-align:justify;font-size:20px; margin:0 50px;">Declaro, respeitosamente, à essa seção eleitoral que o(a) servidor(a) <strong><?php echo $_GET['nome'].", ".$_GET['cargo'].", CPF: ". $_GET['cpf']; ?></strong>,  encontra-se em <strong>plantão de 12 horas diurno</strong> nesta Unidade de Pronto Atendimento, na área de urgência/emergência, necessitando de atendimento agilizado para retornar ao seu posto de trabalho, nesta data de 04 de outubro de 2026.</p>
 <br>
 <br>
 <p style="text-align:right; font-size:20px; margin-right:50px;">Castanhal(PA), 04 de outubro de 2026.</p>
