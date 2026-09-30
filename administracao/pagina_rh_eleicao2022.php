@@ -1,9 +1,10 @@
-<?php
-include_once('../bd/conectabd.php');
-session_start();
-include_once('../bd/nivel.php');
-?>
-
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Declaração de Plantão</title>
+    
+</head>
+<body>
 <div style="text-align:center;width:100%">
 <img src="../imagens/documentos/cabecalho_2026.PNG">
 <br>
@@ -35,3 +36,5 @@ Castanhal-PA
 </p>
 
 </div>
+</body>
+</html>
