@@ -1,8 +1,20 @@
+<?php
+// Remove tudo que não for número do CPF
+$cpf = preg_replace('/\D/', '', $_GET['cpf'] ?? '');
+
+// Se tiver 11 dígitos, aplica a máscara 000.000.000-00
+if (strlen($cpf) === 11) {
+    $cpf = preg_replace('/(\d{3})(\d{3})(\d{3})(\d{2})/', '$1.$2.$3-$4', $cpf);
+}
+
+// Escapa os demais dados para evitar injeção de HTML (XSS)
+$nome  = htmlspecialchars($_GET['nome']  ?? '', ENT_QUOTES, 'UTF-8');
+$cargo = htmlspecialchars($_GET['cargo'] ?? '', ENT_QUOTES, 'UTF-8');
+?>
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Declaração de Plantão</title>
-    
 </head>
 <body>
 <div style="text-align:center;width:100%">
@@ -16,13 +28,10 @@
 <br>
 <br>
 
-<p style="text-indent: 10em;text-align:justify;font-size:20px; margin:0 50px;">Declaro, respeitosamente, à essa seção eleitoral que o(a) servidor(a) <strong><?php echo $_GET['nome'].", ".$_GET['cargo'].", CPF: ". $_GET['cpf']; ?></strong>,  encontra-se em <strong>plantão de 12 horas diurno</strong> nesta Unidade de Pronto Atendimento, na área de urgência/emergência, necessitando de atendimento agilizado para retornar ao seu posto de trabalho, nesta data de 04 de outubro de 2026.</p>
+<p style="text-indent: 10em;text-align:justify;font-size:20px; margin:0 50px;">Declaro, respeitosamente, à essa seção eleitoral que o(a) servidor(a) <strong><?php echo $nome . ", " . $cargo . ", CPF: " . $cpf; ?></strong>,  encontra-se em <strong>plantão de 12 horas diurno</strong> nesta Unidade de Pronto Atendimento, na área de urgência/emergência, necessitando de atendimento agilizado para retornar ao seu posto de trabalho, nesta data de 04 de outubro de 2026.</p>
 <br>
 <br>
 <p style="text-align:right; font-size:20px; margin-right:50px;">Castanhal(PA), 04 de outubro de 2026.</p>
-
-
-
 
 <br>
 <br><br>
@@ -36,5 +45,10 @@ Castanhal-PA
 </p>
 
 </div>
+<script>
+    window.onload = function () {
+        window.print();
+    };
+</script>
 </body>
 </html>
