@@ -46,9 +46,21 @@ Castanhal-PA
 
 </div>
 <script>
-    window.onload = function () {
-        window.print();
-    };
+    window.addEventListener('load', function () {
+        var img = document.querySelector('img');
+
+        function imprimir() {
+            setTimeout(function () {
+                window.print();
+            }, 800);
+        }
+
+        if (img && img.decode) {
+            img.decode().then(imprimir).catch(imprimir);
+        } else {
+            imprimir();
+        }
+    });
 </script>
 </body>
 </html>
