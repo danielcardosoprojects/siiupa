@@ -135,7 +135,7 @@ async function loadMes(ano, mes) {
   if (cacheMes.has(key)) return cacheMes.get(key);
   let all = [], page = 1, total = 0;
   do {
-    const d = await getJSON(`/tb_escala_funcionario?join=tb_funcionario&filter=ano,eq,${ano}&filter=mes,eq,${mes}&page=${page},${CFG.PAGE_SIZE}`);
+    const d = await getJSON(`/tb_escala_funcionario?join=tb_funcionario&filter=ano,eq,${ano}&filter=mes,eq,${mes}&filter=oficial,cs,sim&page=${page},${CFG.PAGE_SIZE}`);
     all = all.concat(d.records || []);
     total = d.results || all.length;
     page++;
