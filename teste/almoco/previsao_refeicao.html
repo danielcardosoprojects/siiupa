@@ -220,11 +220,12 @@ async function render() {
     loadNF();
     $('texto').value = mensagem();
     montarTabela();
+    makeCode();
     setStatus(regs.length + ' registros na escala de ' + pad(mes) + '/' + ano + ` (fixos: ${fixA} almoço, ${fixJ} janta)`);
   } catch (e) {
     dados = null; $('folha').innerHTML = ''; $('texto').value = '';
     setStatus('Erro ao consultar a API: ' + e.message, true);
-    makeCode();
+    
   }
 }
 
