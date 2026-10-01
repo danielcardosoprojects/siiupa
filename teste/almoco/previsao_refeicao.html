@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Previsão de refeições</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e4e4e4; font-family: Arial, Helvetica, sans-serif; color: #000; }
+
+  .toolbar { position: sticky; top: 0; z-index: 5; background: #fff; border-bottom: 1px solid #bbb; padding: 10px 14px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  .toolbar button, .toolbar input { font: inherit; padding: 6px 10px; border: 1px solid #888; border-radius: 4px; background: #fff; }
+  .toolbar button { cursor: pointer; }
+  .toolbar .primary { background: #111; color: #fff; border-color: #111; }
+  .toolbar .status { margin-left: auto; font-size: 13px; color: #555; }
+  .toolbar .status.err { color: #b00020; font-weight: bold; }
+
+  .wrap { padding: 16px; }
+  .msg { max-width: 210mm; margin: 0 auto 16px; background: #fff; padding: 12px; box-shadow: 0 1px 6px rgba(0,0,0,.3); }
+  .msg h2 { margin: 0 0 8px; font-size: 15px; }
+  .msg textarea { width: 100%; height: 240px; font: 14px/1.4 monospace; padding: 8px; border: 1px solid #888; border-radius: 4px; }
+  .msg button { margin-top: 8px; font: inherit; padding: 6px 12px; border: 1px solid #111; border-radius: 4px; background: #111; color: #fff; cursor: pointer; }
+
+  .sheet { width: 210mm; margin: 0 auto 16px; background: #fff; padding: 9mm 10mm 8mm; box-shadow: 0 1px 6px rgba(0,0,0,.3); }
+  .sheet h1 { margin: 0; font-size: 16pt; }
+  .sheet .sub { margin: 1mm 0 3mm; font-size: 9pt; color: #333; border-bottom: 0.4mm solid #000; padding-bottom: 1.5mm; }
+  table { width: 100%; border-collapse: collapse; font-size: 10pt; }
+  th, td { border: 0.25mm solid #000; height: 7mm; padding: 0 1.5mm; text-align: center; }
+  thead th { background: #e6e6e6; height: auto; padding: 1mm; font-size: 9pt; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  td.dia { width: 10mm; font-weight: bold; }
+  td.sem { width: 11mm; text-align: left; font-size: 9pt; }
+  td.obs { text-align: left; }
+  tr.fds td { background: #f0f0f0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  tr.tot td { font-weight: bold; background: #e6e6e6; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  td.dif { width: 12mm; font-size: 9pt; }
+  td.prev { font-weight: bold; }
+  input.nf { width: 100%; border: none; background: transparent; text-align: center; font: inherit; padding: 0; -moz-appearance: textfield; }
+  input.nf::-webkit-outer-spin-button, input.nf::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+  input.nf:focus { outline: 2px solid #888; }
+  .dica { font-size: 8pt; color: #444; margin-top: 2mm; }
+
+  @media print {
+    body { background: #fff; }
+    .toolbar, .msg { display: none; }
+    .wrap { padding: 0; }
+    .sheet { margin: 0; box-shadow: none; }
+    input.nf:focus { outline: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button id="prev" title="Mês anterior">&larr;</button>
+  <input type="month" id="mes">
+  <button id="next" title="Próximo mês">&rarr;</button>
+  <button id="copiar" class="primary">Copiar mensagem</button>
+  <button id="imprimir">Imprimir tabela</button>
+  <span id="status" class="status"></span>
+</div>
+
+<div class="wrap">
+  <div class="msg">
+    <h2>Mensagem para WhatsApp</h2>
+    <textarea id="texto" readonly></textarea>
+    <button id="copiar2">Copiar mensagem</button>
+  </div>
+  <div id="folha"></div>
+</div>
+
+<script src="config_refeicao.js"></script>
+<script>
+const DIAS = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'];
+const MESES = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+const $ = id => document.getElementById(id);
+const pad = n => String(n).padStart(2, '0');
+const fmt = n => n.toLocaleString('pt-BR');
+const setStatus = (t, err) => { const s = $('status'); s.textContent = t || ''; s.className = 'status' + (err ? ' err' : ''); };
+const lines = t => t.split('\n').map(x => x.trim()).filter(Boolean);
+
+/* Vagas fixas: mesmos valores da página de listas (guardados no navegador) */
+function loadSettings() {
+  try { return Object.assign({}, DEFAULTS, JSON.parse(localStorage.getItem('listaRefeicao') || '{}')); }
+  catch (e) { return Object.assign({}, DEFAULTS); }
+}
+
+async function getJSON(path) {
+  const r = await fetch(CFG.API + path, { headers: CFG.HEADERS });
+  if (!r.ok) throw new Error('HTTP ' + r.status + ' em ' + path.split('?')[0]);
+  return r.json();
+}
+async function loadMes(ano, mes) {
+  let all = [], page = 1, total = 0;
+  do {
+    const d = await getJSON(`/tb_escala_funcionario?join=tb_funcionario&filter=ano,eq,${ano}&filter=mes,eq,${mes}&filter=oficial,cs,sim&page=${page},${CFG.PAGE_SIZE}`);
+    all = all.concat(d.records || []);
+    total = d.results || all.length;
+    page++;
+  } while (all.length < total && page < 50);
+  return all;
+}
+
+/* Quantidade de funcionários (sem repetir, sem os excluídos) no dia/turno */
+function contar(regs, dia, letras) {
+  const ids = new Set();
+  regs.forEach(r => {
+    const v = String(r['d' + dia] || '').toUpperCase();
+    if (!letras.some(l => v.includes(l))) return;
+    const f = r.fk_funcionario || {};
+    if (!f.nome || EXCLUIR_IDS.map(String).includes(String(f.id))) return;
+    ids.add(f.id);
+  });
+  return ids.size;
+}
+
+let dados = null;   // { ano, mes, dias: [{dia, sem, fds, a, j}], totA, totJ }
+let nf = { a: {}, j: {} };
+const nfKey = () => `nfRefeicao-${dados.ano}-${pad(dados.mes)}`;
+function loadNF() { try { nf = JSON.parse(localStorage.getItem(nfKey())) || { a: {}, j: {} }; } catch (e) { nf = { a: {}, j: {} }; } }
+function saveNF() { try { localStorage.setItem(nfKey(), JSON.stringify(nf)); } catch (e) {} }
+
+function mensagem() {
+  const t = `${MESES[dados.mes - 1]}/${dados.ano}`;
+  const l = dados.dias.map(d => `${pad(d.dia)}/${pad(dados.mes)} (${d.sem}): Almoço ${d.a} | Janta ${d.j}`);
+  return `*Previsão de refeições – ${t}*\n\n${l.join('\n')}\n\n*Total do mês:* Almoço ${fmt(dados.totA)} | Janta ${fmt(dados.totJ)}`;
+}
+
+function dif(prev, v) { if (v === undefined || v === '') return ''; const d = Number(v) - prev; return d > 0 ? '+' + d : String(d); }
+
+function montarTabela() {
+  const rows = dados.dias.map(d => `<tr class="${d.fds ? 'fds' : ''}">
+    <td class="dia">${pad(d.dia)}</td><td class="sem">${d.sem}</td>
+    <td class="prev">${d.a}</td><td><input class="nf" type="number" min="0" data-t="a" data-d="${d.dia}" value="${nf.a[d.dia] ?? ''}"></td><td class="dif" id="da${d.dia}"></td>
+    <td class="prev">${d.j}</td><td><input class="nf" type="number" min="0" data-t="j" data-d="${d.dia}" value="${nf.j[d.dia] ?? ''}"></td><td class="dif" id="dj${d.dia}"></td>
+    <td class="obs"></td></tr>`).join('');
+  $('folha').innerHTML = `<section class="sheet">
+    <h1>Previsão de refeições — ${MESES[dados.mes - 1]}/${dados.ano}</h1>
+    <div class="sub">Previsto = funcionários escalados (exceto quem não faz refeição) + vagas fixas. Preencha "Nota fiscal" com a quantidade faturada.</div>
+    <table>
+      <thead>
+        <tr><th rowspan="2">Dia</th><th rowspan="2"></th><th colspan="3">Almoço</th><th colspan="3">Janta</th><th rowspan="2">Observações</th></tr>
+        <tr><th>Previsto</th><th>Nota fiscal</th><th>Dif.</th><th>Previsto</th><th>Nota fiscal</th><th>Dif.</th></tr>
+      </thead>
+      <tbody>${rows}
+        <tr class="tot"><td colspan="2">Total</td>
+          <td>${fmt(dados.totA)}</td><td id="nfA"></td><td id="dfA"></td>
+          <td>${fmt(dados.totJ)}</td><td id="nfJ"></td><td id="dfJ"></td><td></td></tr>
+      </tbody>
+    </table>
+    <div class="dica">Dif. = nota fiscal − previsto (positivo: faturou a mais).</div>
+  </section>`;
+  recalc();
+}
+
+function recalc() {
+  let sA = 0, sJ = 0, dA = 0, dJ = 0, hA = false, hJ = false;
+  dados.dias.forEach(d => {
+    const va = nf.a[d.dia], vj = nf.j[d.dia];
+    $('da' + d.dia).textContent = dif(d.a, va);
+    $('dj' + d.dia).textContent = dif(d.j, vj);
+    if (va !== undefined && va !== '') { sA += Number(va); dA += Number(va) - d.a; hA = true; }
+    if (vj !== undefined && vj !== '') { sJ += Number(vj); dJ += Number(vj) - d.j; hJ = true; }
+  });
+  const sg = n => n > 0 ? '+' + fmt(n) : fmt(n);
+  $('nfA').textContent = hA ? fmt(sA) : ''; $('dfA').textContent = hA ? sg(dA) : '';
+  $('nfJ').textContent = hJ ? fmt(sJ) : ''; $('dfJ').textContent = hJ ? sg(dJ) : '';
+}
+
+async function render() {
+  const v = $('mes').value;
+  if (!v) return;
+  const [ano, mes] = v.split('-').map(Number);
+  setStatus('Carregando…');
+  try {
+    const regs = await loadMes(ano, mes);
+    const cfg = loadSettings();
+    const fixA = lines(cfg.fixL).length, fixJ = lines(cfg.fixJ).length;
+    const n = new Date(ano, mes, 0).getDate();
+    const dias = [];
+    for (let d = 1; d <= n; d++) {
+      const w = new Date(ano, mes - 1, d).getDay();
+      dias.push({ dia: d, sem: DIAS[w], fds: w === 0 || w === 6, a: contar(regs, d, ['D', 'M']) + fixA, j: contar(regs, d, ['N']) + fixJ });
+    }
+    dados = { ano, mes, dias, totA: dias.reduce((s, d) => s + d.a, 0), totJ: dias.reduce((s, d) => s + d.j, 0) };
+    loadNF();
+    $('texto').value = mensagem();
+    montarTabela();
+    setStatus(regs.length + ' registros na escala de ' + pad(mes) + '/' + ano + ` (fixos: ${fixA} almoço, ${fixJ} janta)`);
+  } catch (e) {
+    dados = null; $('folha').innerHTML = ''; $('texto').value = '';
+    setStatus('Erro ao consultar a API: ' + e.message, true);
+  }
+}
+
+function copiar() {
+  const ta = $('texto');
+  if (!ta.value) return;
+  const ok = () => setStatus('Mensagem copiada!');
+  if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(ta.value).then(ok, () => { ta.select(); document.execCommand('copy'); ok(); });
+  else { ta.select(); document.execCommand('copy'); ok(); }
+}
+
+function shiftMes(delta) {
+  const [a, m] = $('mes').value.split('-').map(Number);
+  const dt = new Date(a, m - 1 + delta, 1);
+  $('mes').value = `${dt.getFullYear()}-${pad(dt.getMonth() + 1)}`;
+  render();
+}
+
+$('mes').addEventListener('change', render);
+$('prev').onclick = () => shiftMes(-1);
+$('next').onclick = () => shiftMes(1);
+$('copiar').onclick = copiar;
+$('copiar2').onclick = copiar;
+$('imprimir').onclick = () => window.print();
+$('folha').addEventListener('input', e => {
+  const i = e.target;
+  if (!i.classList.contains('nf')) return;
+  nf[i.dataset.t][i.dataset.d] = i.value;
+  saveNF(); recalc();
+});
+
+const hj = new Date();
+$('mes').value = `${hj.getFullYear()}-${pad(hj.getMonth() + 1)}`;
+render();
+</script>
+</body>
+</html>
