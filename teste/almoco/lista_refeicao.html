@@ -39,6 +39,36 @@
   .sheet .total { margin-top: 2mm; padding-top: 1.5mm; border-top: 0.4mm solid #000; font-size: 11pt; font-weight: bold; display: flex; justify-content: space-between; }
   .sheet .total span { font-weight: normal; font-size: 9pt; }
   .vazio { font-size: 11pt; color: #555; padding: 4mm 0; }
+/* BUTTON TWEE */
+
+a.button.two:before, a.button.two:after{
+  opacity: 0;
+  transition: all 0.3s ease;  
+  font-size: 20px;
+}
+a.button.two:before{
+  content: '[';
+}
+a.button.two:after{
+  content: ']';
+}
+
+a.button.two:hover:before{
+  margin-right: 10px;
+  content: '[';
+  -webkit-transform: translateX(20px);
+  -moz-transform: translateX(20px);
+  transform: translateX(20px);
+  opacity: 1;
+}
+a.button.two:hover:after{
+  margin-left: 10px;
+  content: ']';
+  -webkit-transform: translateX(-20px);
+  -moz-transform: translateX(-20px);
+  transform: translateX(-20px);
+  opacity: 1;
+}
 
   @media print {
     body { background: #fff; }
@@ -57,7 +87,7 @@
   <button id="next" title="Próximo dia">&rarr;</button>
   <button id="hoje">Hoje</button>
   <button id="imprimir" class="primary">Imprimir (almoço + janta)</button>
-  <a href="previsao_refeicao.html">Previsão para o mês</a>
+  <a href="previsao_refeicao.html"  class="button two">Previsão para o mês</a>
   <span id="status" class="status"></span>
 </div>
 
