@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lista de Almoço e Janta</title>
+<style>
+  @page { size: A4; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #e4e4e4; font-family: Arial, Helvetica, sans-serif; color: #000; }
+
+  .toolbar { position: sticky; top: 0; z-index: 5; background: #fff; border-bottom: 1px solid #bbb; padding: 10px 14px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+  .toolbar button, .toolbar input { font: inherit; padding: 6px 10px; border: 1px solid #888; border-radius: 4px; background: #fff; }
+  .toolbar button { cursor: pointer; }
+  .toolbar .primary { background: #111; color: #fff; border-color: #111; }
+  .toolbar .status { margin-left: auto; font-size: 13px; color: #555; }
+  .toolbar .status.err { color: #b00020; font-weight: bold; }
+  details.cfg { background: #fff; border-bottom: 1px solid #bbb; padding: 8px 14px; font-size: 14px; }
+  details.cfg summary { cursor: pointer; }
+  .cfg-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-top: 10px; }
+  .cfg-grid label { display: flex; flex-direction: column; gap: 4px; }
+  .cfg-grid textarea, .cfg-grid input { font: inherit; padding: 6px; border: 1px solid #888; border-radius: 4px; }
+  .cfg-grid textarea { min-height: 150px; }
+
+  .pages { padding: 16px; overflow-x: auto; }
+  .sheet { width: 210mm; height: 296mm; margin: 0 auto 16px; background: #fff; padding: 9mm 10mm 8mm; display: flex; flex-direction: column; box-shadow: 0 1px 6px rgba(0,0,0,.3); --rh: 7mm; --fs: 11pt; }
+  .sheet h1 { margin: 0; font-size: 17pt; }
+  .sheet .sub { margin: 1mm 0 3mm; font-size: 9.5pt; color: #333; display: flex; justify-content: space-between; border-bottom: 0.4mm solid #000; padding-bottom: 1.5mm; }
+  .cols { flex: 1; min-height: 0; overflow: hidden; column-count: 1; column-gap: 7mm; }
+  .cols table { width: 100%; border-collapse: collapse; margin-bottom: 2mm; font-size: var(--fs); }
+  .cols table.small { break-inside: avoid; }
+  .cols tr { break-inside: avoid; }
+  .cols th, .cols td { border: 0.25mm solid #000; padding: 0 1.5mm; height: var(--rh); line-height: 1.05; }
+  .cols thead th { background: #e6e6e6; text-align: left; font-size: 0.85em; height: auto; padding: 0.7mm 1.5mm; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .cols thead th.ass { width: 42%; text-align: center; font-weight: normal; }
+  .cols td.n { width: 6mm; text-align: right; font-size: 6.5pt; color: #444; padding: 0 1mm; }
+  .cols td.nome { white-space: nowrap; overflow: hidden; text-overflow: clip; max-width: 0; }
+  .cols td.ass { width: 42%; }
+  .sheet .total { margin-top: 2mm; padding-top: 1.5mm; border-top: 0.4mm solid #000; font-size: 11pt; font-weight: bold; display: flex; justify-content: space-between; }
+  .sheet .total span { font-weight: normal; font-size: 9pt; }
+  .vazio { font-size: 11pt; color: #555; padding: 4mm 0; }
+
+  @media print {
+    body { background: #fff; }
+    .toolbar, details.cfg { display: none; }
+    .pages { padding: 0; overflow: visible; }
+    .sheet { margin: 0; box-shadow: none; break-after: page; }
+    .sheet:last-child { break-after: auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button id="prev" title="Dia anterior">&larr;</button>
+  <input type="date" id="data">
+  <button id="next" title="Próximo dia">&rarr;</button>
+  <button id="hoje">Hoje</button>
+  <button id="imprimir" class="primary">Imprimir (almoço + janta)</button>
+  <span id="status" class="status"></span>
+</div>
+
+<details class="cfg">
+  <summary>Ajustes: nome da unidade e vagas fixas</summary>
+  <div class="cfg-grid">
+    <label>Nome da unidade (aparece no cabeçalho)
+      <input id="cfgUnit" type="text">
+    </label>
+    <label>Vagas fixas do almoço (uma por linha)
+      <textarea id="cfgFixL"></textarea>
+    </label>
+    <label>Vagas fixas da janta (uma por linha)
+      <textarea id="cfgFixJ"></textarea>
+    </label>
+  </div>
+</details>
+
+<div class="pages" id="pages"></div>
+
+<script>
+/* ===== CONFIGURAÇÃO ===== */
+const CFG = {
+  API: '/siiupa/api/rh/api.php/records',   // mesmo domínio
+  HEADERS: {},                              // quando religar o token, ex.: { 'X-Authorization': 'Bearer SEU_TOKEN' }
+  PAGE_SIZE: 300
+};
+const DEFAULTS = {
+  unit: 'UPA',
+  fixL: ['Guarda 1', 'Guarda 2', 'Médico 1', 'Médico 2', 'Médico 3', 'Médico 4', 'Médico 5'].join('\n'),
+  fixJ: ['Guarda 1', 'Guarda 2', 'Médico 1', 'Médico 2', 'Médico 3', 'Médico 4'].join('\n')
+};
+const DIAS = ['domingo', 'segunda-feira', 'terça-feira', 'quarta-feira', 'quinta-feira', 'sexta-feira', 'sábado'];
+
+/* ===== UTIL ===== */
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const pad = n => String(n).padStart(2, '0');
+const setStatus = (t, err) => { const s = $('status'); s.textContent = t || ''; s.className = 'status' + (err ? ' err' : ''); };
+
+function loadSettings() {
+  try { return Object.assign({}, DEFAULTS, JSON.parse(localStorage.getItem('listaRefeicao') || '{}')); }
+  catch (e) { return Object.assign({}, DEFAULTS); }
+}
+function saveSettings() {
+  const s = { unit: $('cfgUnit').value, fixL: $('cfgFixL').value, fixJ: $('cfgFixJ').value };
+  try { localStorage.setItem('listaRefeicao', JSON.stringify(s)); } catch (e) {}
+  return s;
+}
+const lines = t => t.split('\n').map(x => x.trim()).filter(Boolean);
+
+/* ===== API ===== */
+async function getJSON(path) {
+  const r = await fetch(CFG.API + path, { headers: CFG.HEADERS });
+  if (!r.ok) throw new Error('HTTP ' + r.status + ' em ' + path.split('?')[0]);
+  return r.json();
+}
+
+let setorMap = null;
+async function loadSetores() {
+  if (setorMap) return setorMap;
+  setorMap = new Map();
+  try {
+    const d = await getJSON('/tb_setor?include=id,setor&page=1,500');
+    (d.records || []).forEach(s => setorMap.set(String(s.id), s.setor));
+  } catch (e) { console.warn('Não foi possível carregar tb_setor', e); }
+  return setorMap;
+}
+
+const cacheMes = new Map();
+async function loadMes(ano, mes) {
+  const key = ano + '-' + mes;
+  if (cacheMes.has(key)) return cacheMes.get(key);
+  let all = [], page = 1, total = 0;
+  do {
+    const d = await getJSON(`/tb_escala_funcionario?join=tb_funcionario&filter=ano,eq,${ano}&filter=mes,eq,${mes}&page=${page},${CFG.PAGE_SIZE}`);
+    all = all.concat(d.records || []);
+    total = d.results || all.length;
+    page++;
+  } while (all.length < total && page < 50);
+  cacheMes.set(key, all);
+  return all;
+}
+
+/* Funcionários do dia que atendem ao turno (letras), agrupados por setor */
+function agrupar(registros, dia, letras, mapa) {
+  const vistos = new Set(), grupos = new Map();
+  registros.forEach(r => {
+    const v = String(r['d' + dia] || '').toUpperCase();
+    if (!letras.some(l => v.includes(l))) return;
+    const f = r.fk_funcionario || {};
+    if (!f.nome || vistos.has(f.id)) return;
+    vistos.add(f.id);
+    let setor = mapa.get(String(f.fk_setor));
+    if (!setor && f.fk_cargo && Array.isArray(f.fk_cargo.tb_setor)) {
+      const s = f.fk_cargo.tb_setor.find(x => String(x.id) === String(f.fk_setor));
+      if (s) setor = s.setor;
+    }
+    if (!setor) setor = f.fk_setor ? 'Setor ' + f.fk_setor : 'Sem setor';
+    if (!grupos.has(setor)) grupos.set(setor, []);
+    grupos.get(setor).push(f.nome.trim());
+  });
+  const cmp = (a, b) => a.localeCompare(b, 'pt-BR');
+  return [...grupos.entries()].sort((a, b) => cmp(a[0], b[0])).map(([s, n]) => [s, n.sort(cmp)]);
+}
+
+/* ===== RENDER ===== */
+function sheetHTML(titulo, dataTxt, diaSemana, unit, grupos, fixos) {
+  const lista = grupos.slice();
+  if (fixos.length) lista.push(['Plantonistas fixos', fixos]);
+  const totalApi = grupos.reduce((s, g) => s + g[1].length, 0);
+  let n = 0;
+  const tabelas = lista.map(([setor, nomes]) => {
+    const rows = nomes.map(nome => `<tr><td class="n">${++n}</td><td class="nome">${esc(nome)}</td><td class="ass"></td></tr>`).join('');
+    return `<table class="${nomes.length <= 12 ? 'small' : ''}"><thead><tr><th colspan="2">${esc(setor)} (${nomes.length})</th><th class="ass">Assinatura</th></tr></thead><tbody>${rows}</tbody></table>`;
+  }).join('') || '<div class="vazio">Nenhum funcionário escalado neste turno.</div>';
+  return `<section class="sheet">
+    <h1>${titulo} — ${dataTxt}</h1>
+    <div class="sub"><span>${esc(unit)}</span><span>${diaSemana}</span></div>
+    <div class="cols">${tabelas}</div>
+    <div class="total">Total: ${n}<span>${totalApi} da escala + ${fixos.length} fixos</span></div>
+  </section>`;
+}
+
+/* Reduz altura de linha / usa 2 colunas até caber em 1 folha */
+function fitSheet(sh) {
+  const cols = sh.querySelector('.cols');
+  const over = () => cols.scrollWidth > cols.clientWidth + 2 || cols.scrollHeight > cols.clientHeight + 2;
+  const apply = (n, rh) => { cols.style.columnCount = n; sh.style.setProperty('--rh', rh + 'mm'); sh.style.setProperty('--fs', Math.min(11, rh * 1.8) + 'pt'); };
+  for (let rh = 9; rh >= 6.5; rh -= 0.25) { apply(1, rh); if (!over()) return; }
+  for (let rh = 8; rh >= 3.2; rh -= 0.2) { apply(2, rh); if (!over()) return; }
+}
+
+async function render() {
+  const val = $('data').value;
+  if (!val) return;
+  const [ano, mes, dia] = val.split('-').map(Number);
+  const dataTxt = `${pad(dia)}/${pad(mes)}/${ano}`;
+  const diaSemana = DIAS[new Date(ano, mes - 1, dia).getDay()];
+  const cfg = saveSettings();
+  setStatus('Carregando…');
+  try {
+    const [mapa, regs] = await Promise.all([loadSetores(), loadMes(ano, mes)]);
+    const almoco = agrupar(regs, dia, ['D', 'M'], mapa);
+    const janta = agrupar(regs, dia, ['N'], mapa);
+    $('pages').innerHTML =
+      sheetHTML('Lista de Almoço', dataTxt, diaSemana, cfg.unit, almoco, lines(cfg.fixL)) +
+      sheetHTML('Lista de Janta', dataTxt, diaSemana, cfg.unit, janta, lines(cfg.fixJ));
+    document.querySelectorAll('.sheet').forEach(fitSheet);
+    setStatus(regs.length + ' registros na escala de ' + pad(mes) + '/' + ano);
+  } catch (e) {
+    $('pages').innerHTML = '';
+    setStatus('Erro ao consultar a API: ' + e.message, true);
+  }
+}
+
+/* ===== EVENTOS ===== */
+function shiftDay(delta) {
+  const [a, m, d] = $('data').value.split('-').map(Number);
+  const dt = new Date(a, m - 1, d + delta);
+  $('data').value = `${dt.getFullYear()}-${pad(dt.getMonth() + 1)}-${pad(dt.getDate())}`;
+  render();
+}
+function hoje() {
+  const t = new Date();
+  $('data').value = `${t.getFullYear()}-${pad(t.getMonth() + 1)}-${pad(t.getDate())}`;
+  render();
+}
+$('data').addEventListener('change', render);
+$('prev').onclick = () => shiftDay(-1);
+$('next').onclick = () => shiftDay(1);
+$('hoje').onclick = hoje;
+$('imprimir').onclick = () => window.print();
+['cfgUnit', 'cfgFixL', 'cfgFixJ'].forEach(id => $(id).addEventListener('change', render));
+window.addEventListener('beforeprint', () => document.querySelectorAll('.sheet').forEach(fitSheet));
+
+const st = loadSettings();
+$('cfgUnit').value = st.unit; $('cfgFixL').value = st.fixL; $('cfgFixJ').value = st.fixJ;
+hoje();
+</script>
+</body>
+</html>
