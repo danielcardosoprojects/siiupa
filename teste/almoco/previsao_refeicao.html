@@ -68,7 +68,7 @@
     <h2>Mensagem para WhatsApp</h2>
     <textarea id="texto" readonly></textarea>
     <button id="copiar2">Copiar mensagem</button>
-    <div id="qrcode" style="width:100px; height:100px; margin-top:15px;"></div>
+    <div id="qrcode" style="width:100px; height:100px;"></div>
   </div>
   
   <div id="folha"></div>
@@ -91,7 +91,7 @@ function makeCode () {
 	qrcode.makeCode(elText.value);
 }
 
-makeCode();
+
 
 $("#text").
 	on("blur", function () {
@@ -224,6 +224,7 @@ async function render() {
   } catch (e) {
     dados = null; $('folha').innerHTML = ''; $('texto').value = '';
     setStatus('Erro ao consultar a API: ' + e.message, true);
+    makeCode();
   }
 }
 
