@@ -289,7 +289,7 @@
             </a>
 
 
-            <a href="?setor=adm&sub=rh&subsub=alimentacao" id="bAlimentacao" class="btn btn-sm">
+            <a href="/siiupa/teste/almoco/lista_refeicao.html" id="bAlimentacao" class="btn btn-sm">
                 <img src="/siiupa/imagens/icones/restaurant.svg">
                 Lista de Alimentação</a>
 
