@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Previsão de refeições</title>
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="qrcode.js"></script>
 <style>
   @page { size: A4; margin: 0; }
   * { box-sizing: border-box; }
@@ -62,13 +64,45 @@
 
 <div class="wrap">
   <div class="msg">
+    <input id="text" type="text" value="http://jindo.dev.naver.com/collie" style="width:80%" /><br />
     <h2>Mensagem para WhatsApp</h2>
     <textarea id="texto" readonly></textarea>
     <button id="copiar2">Copiar mensagem</button>
+    <div id="qrcode" style="width:100px; height:100px; margin-top:15px;"></div>
   </div>
+  
   <div id="folha"></div>
 </div>
+<script type="text/javascript">
+var qrcode = new QRCode(document.getElementById("qrcode"), {
+	width : 100,
+	height : 100
+});
 
+function makeCode () {		
+	var elText = document.getElementById("text");
+	
+	if (!elText.value) {
+		alert("Input a text");
+		elText.focus();
+		return;
+	}
+	
+	qrcode.makeCode(elText.value);
+}
+
+makeCode();
+
+$("#text").
+	on("blur", function () {
+		makeCode();
+	}).
+	on("keydown", function (e) {
+		if (e.keyCode == 13) {
+			makeCode();
+		}
+	});
+</script>
 <script src="config_refeicao.js"></script>
 <script>
 const DIAS = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'];
