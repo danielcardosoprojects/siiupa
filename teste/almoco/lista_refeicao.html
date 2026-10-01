@@ -163,14 +163,27 @@ function agrupar(registros, dia, letras, mapa) {
   return [...grupos.entries()].sort((a, b) => cmp(a[0], b[0])).map(([s, n]) => [s, n.sort(cmp)]);
 }
 
+/* ===== NOMES REDUZIDOS ===== */
+function reduzirNome(nomeCompleto) {
+  const p = nomeCompleto.trim().split(/\s+/).map(esc);
+  if (p.length === 1) return p[0];
+  const primeiro = p[0], ultimo = p[p.length - 1];
+  if (primeiro.toUpperCase() !== 'MARIA') return `${primeiro} <small>${ultimo}</small>`;
+  const ignorar = ['DE', 'DA', 'DOS', 'DAS', 'DO'];
+  let i = 1;
+  if (ignorar.includes(p[1].toUpperCase()) && p.length > 2) i = 2;
+  if (i === p.length - 1) return `<small>Mª.</small> ${p[i]}`;
+  return `<small>Mª.</small> ${p[i]} <small>${ultimo}</small>`;
+}
+
 /* ===== RENDER ===== */
 function sheetHTML(titulo, dataTxt, diaSemana, unit, grupos, fixos) {
   const lista = grupos.slice();
-  if (fixos.length) lista.push(['Plantonistas fixos', fixos]);
+  if (fixos.length) lista.push(['Plantonistas fixos', fixos, true]);
   const totalApi = grupos.reduce((s, g) => s + g[1].length, 0);
   let n = 0;
-  const tabelas = lista.map(([setor, nomes]) => {
-    const rows = nomes.map(nome => `<tr><td class="n">${++n}</td><td class="nome">${esc(nome)}</td><td class="ass"></td></tr>`).join('');
+  const tabelas = lista.map(([setor, nomes, fixo]) => {
+    const rows = nomes.map(nome => `<tr><td class="n">${++n}</td><td class="nome">${fixo ? esc(nome) : reduzirNome(nome)}</td><td class="ass"></td></tr>`).join('');
     return `<table class="${nomes.length <= 12 ? 'small' : ''}"><thead><tr><th colspan="2">${esc(setor)} (${nomes.length})</th><th class="ass">Assinatura</th></tr></thead><tbody>${rows}</tbody></table>`;
   }).join('') || '<div class="vazio">Nenhum funcionário escalado neste turno.</div>';
   return `<section class="sheet">
