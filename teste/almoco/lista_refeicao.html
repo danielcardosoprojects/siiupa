@@ -84,6 +84,9 @@ const CFG = {
   HEADERS: {},                              // quando religar o token, ex.: { 'X-Authorization': 'Bearer SEU_TOKEN' }
   PAGE_SIZE: 300
 };
+
+/* IDs (fk_funcionario.id) de quem não almoça nem janta. Ex.: [68, 359, 14] */
+const EXCLUIR_IDS = [107/*walter */, 409/* Euriene */, 410/*Marlilson */, 407/*kATAOKA*/, /*'14' DANIEL,*/ 201 /*EMILY*/, 17 /*FLAVIA*/, 434/*IGOR*/ ];
 const DEFAULTS = {
   unit: 'UPA',
   fixL: ['Guarda 1', 'Guarda 2', 'Médico 1', 'Médico 2', 'Médico 3', 'Médico 4', 'Médico 5'].join('\n'),
@@ -148,7 +151,7 @@ function agrupar(registros, dia, letras, mapa) {
     const v = String(r['d' + dia] || '').toUpperCase();
     if (!letras.some(l => v.includes(l))) return;
     const f = r.fk_funcionario || {};
-    if (!f.nome || vistos.has(f.id)) return;
+    if (!f.nome || vistos.has(f.id) || EXCLUIR_IDS.map(String).includes(String(f.id))) return;
     vistos.add(f.id);
     let setor = mapa.get(String(f.fk_setor));
     if (!setor && f.fk_cargo && Array.isArray(f.fk_cargo.tb_setor)) {
