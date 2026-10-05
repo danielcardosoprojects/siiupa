@@ -9,7 +9,7 @@ const axios = require('axios').default;
 
 
 // Função para fazer a primeira solicitação usando Axios
-axios.get('http://siupa.com.br/siiupa/api/rh/api.php/records/tb_funcionario', {
+axios.get('http://upasistema.online/siiupa/api/rh/api.php/records/tb_funcionario', {
     headers: {
         'Content-Type': 'application/json'
     }
@@ -32,7 +32,7 @@ axios.get('http://siupa.com.br/siiupa/api/rh/api.php/records/tb_funcionario', {
 function consultaMatricula(cpf) {
     let ncpf = manterApenasNumeros(cpf);
 
-    axios.get(`http://siupa.com.br/siiupa/administracao/api/consulta_matricula.php?cpf=${ncpf}`)
+    axios.get(`http://upasistema.online/siiupa/administracao/api/consulta_matricula.php?cpf=${ncpf}`)
         .then(response => response.data)
         .then(data => {
             console.log(data.ultimaMatricula);

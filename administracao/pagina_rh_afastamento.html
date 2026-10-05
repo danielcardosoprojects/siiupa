@@ -91,9 +91,9 @@
             showLoader();
 
             axios.all([
-                axios.get('https://siupa.com.br/siiupa/api/rh/api.php/records/tb_afastamento?order=id,desc&join=tb_funcionario'),
-                axios.get('https://siupa.com.br/siiupa/api/rh/api.php/records/tb_cargo'),
-                axios.get('https://siupa.com.br/siiupa/api/rh/api.php/records/tb_afastamentos')
+                axios.get('https://upasistema.online/siiupa/api/rh/api.php/records/tb_afastamento?order=id,desc&join=tb_funcionario'),
+                axios.get('https://upasistema.online/siiupa/api/rh/api.php/records/tb_cargo'),
+                axios.get('https://upasistema.online/siiupa/api/rh/api.php/records/tb_afastamentos')
             ]).then(axios.spread((afastamentosResponse, cargosResponse, tiposAfastamentosResponse) => {
                 const afastamentos = afastamentosResponse.data.records;
                 const cargos = cargosResponse.data.records.reduce((map, cargo) => {

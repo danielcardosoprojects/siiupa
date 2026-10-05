@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Função para carregar setores e equipamentos via API
     function loadSelectData() {
         if (setorSelect) {
-            fetch('https://siupa.com.br/siiupa/api/rh/api.php/records/tb_setor')
+            fetch('https://upasistema.online/siiupa/api/rh/api.php/records/tb_setor')
                 .then(response => response.json())
                 .then(data => {
                     data.records.forEach(setor => {
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         if (equipamentoSelect) {
-            fetch('https://siupa.com.br/siiupa/api/rh/api.php/records/tb_equipamentos_equipamentos')
+            fetch('https://upasistema.online/siiupa/api/rh/api.php/records/tb_equipamentos_equipamentos')
                 .then(response => response.json())
                 .then(data => {
                     data.records.forEach(equipamento => {
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         if (envioSelect) {
-            fetch('https://siupa.com.br/siiupa/api/rh/api.php/records/tb_equipamentos_envios')
+            fetch('https://upasistema.online/siiupa/api/rh/api.php/records/tb_equipamentos_envios')
                 .then(response => response.json())
                 .then(data => {
                     data.records.forEach(envio => {
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         if (enviosTableBody) {
-            fetch('https://siupa.com.br/siiupa/api/rh/api.php/records/tb_equipamentos_envios')
+            fetch('https://upasistema.online/siiupa/api/rh/api.php/records/tb_equipamentos_envios')
                 .then(response => response.json())
                 .then(data => {
                     data.records.forEach(envio => {
@@ -88,7 +88,7 @@ document.addEventListener('DOMContentLoaded', function() {
     envioSelect?.addEventListener('change', function() {
         const selectedEnvioId = envioSelect.value;
         if (selectedEnvioId) {
-            fetch(`https://siupa.com.br/siiupa/api/rh/api.php/records/tb_equipamentos_envios/${selectedEnvioId}`)
+            fetch(`https://upasistema.online/siiupa/api/rh/api.php/records/tb_equipamentos_envios/${selectedEnvioId}`)
                 .then(response => response.json())
                 .then(data => {
                     const envio = data;
@@ -108,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         console.log('Enviando JSON para a API:', jsonData);
 
-        fetch('https://siupa.com.br/siiupa/api/rh/api.php/records/tb_equipamentos_equipamentos', {
+        fetch('https://upasistema.online/siiupa/api/rh/api.php/records/tb_equipamentos_equipamentos', {
             method: 'POST',
             body: jsonData,
             headers: {
@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         console.log('Enviando JSON para a API:', jsonData);
 
-        fetch('https://siupa.com.br/siiupa/api/rh/api.php/records/tb_equipamentos_envios', {
+        fetch('https://upasistema.online/siiupa/api/rh/api.php/records/tb_equipamentos_envios', {
             method: 'POST',
             body: jsonData,
             headers: {

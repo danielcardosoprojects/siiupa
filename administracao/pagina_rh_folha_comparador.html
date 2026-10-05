@@ -64,9 +64,9 @@
 
         console.log("ID encontrado:", idfolha);
 
-        const url1 = `https://www.siupa.com.br/siiupa/api/api.php/records/tb_folha/?filter=fk_folhas,eq,${idfolha}&join=tb_funcionario&include=fk_funcionario,tb_funcionario.nome`;
+        const url1 = `https://www.upasistema.online/siiupa/api/api.php/records/tb_folha/?filter=fk_folhas,eq,${idfolha}&join=tb_funcionario&include=fk_funcionario,tb_funcionario.nome`;
         const url2 =
-          "https://www.siupa.com.br/siiupa/api/api.php/records/tb_funcionario?filter=status,eq,ATIVO&include=id,nome&filter=fk_cargo,neq,20";
+          "https://www.upasistema.online/siiupa/api/api.php/records/tb_funcionario?filter=status,eq,ATIVO&include=id,nome&filter=fk_cargo,neq,20";
 
         try {
           const [res1, res2] = await Promise.all([fetch(url1), fetch(url2)]);

@@ -36,10 +36,10 @@
       // Função para organizar os dados em uma tabela
       async function renderTable(anoMes) {
         const bairrosData = await fetchData(
-          "https://siupa.com.br/siiupa/api/api.php/records/tb_bairros"
+          "https://upasistema.online/siiupa/api/api.php/records/tb_bairros"
         );
         const cepData = await fetchData(
-          `https://siupa.com.br/siiupa/api/api.php/records/tb_cep?filter=data,cs,${anoMes}`
+          `https://upasistema.online/siiupa/api/api.php/records/tb_cep?filter=data,cs,${anoMes}`
         );
 
         // Mapear os IDs dos bairros para seus nomes

@@ -8,7 +8,7 @@ $(document).ready(function () {
     // Supondo que você tenha uma função para obter dados da tabela
     $('#equipamentosTable').DataTable({
         "ajax": {
-            "url": `https://www.siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos?${setorUrl}join=setor_id,tb_setor&order=id,desc`,
+            "url": `https://www.upasistema.online/siiupa/api/api.php/records/tb_equipamentos_equipamentos?${setorUrl}join=setor_id,tb_setor&order=id,desc`,
             "dataSrc": "records"
         },
         "columns": [
@@ -90,7 +90,7 @@ document.getElementById('itemForm').addEventListener('submit', function (e) {
         user_id: 1
     };
 
-    axios.post('https://www.siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos?join=setor_id,tb_setor', data)
+    axios.post('https://www.upasistema.online/siiupa/api/api.php/records/tb_equipamentos_equipamentos?join=setor_id,tb_setor', data)
         .then(response => {
             // Atualize a tabela com a nova entrada
             //$('#equipamentosTable').DataTable().ajax.reload();
@@ -129,7 +129,7 @@ document.getElementById('addItemBtn').addEventListener('click', function () {
 
 document.addEventListener('DOMContentLoaded', function () {
     // Chama a API para obter os setores
-    axios.get('https://www.siupa.com.br/siiupa/api/api.php/records/tb_setor')
+    axios.get('https://www.upasistema.online/siiupa/api/api.php/records/tb_setor')
         .then(function (response) {
             const setores = response.data.records;
             const setorSelect = document.getElementById('setor');
@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 function carregaUltimo() {
-    const ultimoUrl = 'https://siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos?order=id,desc&page=1,1';
+    const ultimoUrl = 'https://upasistema.online/siiupa/api/api.php/records/tb_equipamentos_equipamentos?order=id,desc&page=1,1';
     axios.get(ultimoUrl)
         .then(response => {
             // La richiesta è andata a buon fine

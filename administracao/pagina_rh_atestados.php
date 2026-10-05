@@ -23,7 +23,7 @@ include_once('../bd/nivel.php');
             function realizarPesquisa() {
                 const nome = encodeURIComponent(document.getElementById("searchInput").value.trim());
                 if (nome) {
-                    const urlBase = "https://siupa.com.br/siiupa/?setor=adm&sub=rh&subsub=atestados&pagina=1";
+                    const urlBase = "https://upasistema.online/siiupa/?setor=adm&sub=rh&subsub=atestados&pagina=1";
                     window.location.href = `${urlBase}&nome=${nome}`;
                 }
             }

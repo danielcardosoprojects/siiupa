@@ -20,7 +20,7 @@ class MeuTopo extends HTMLElement {
 
         // Consulta a API para validar o token
         try {
-            const response = await fetch(`https://www.siupa.com.br/siiupa/api/api.php/records/usuarios?filter=token,eq,${token}`);
+            const response = await fetch(`https://www.upasistema.online/siiupa/api/api.php/records/usuarios?filter=token,eq,${token}`);
             const data = await response.json();
 
             // Se não houver usuário correspondente, redireciona para a raiz
@@ -149,7 +149,7 @@ class MeuTopo extends HTMLElement {
         
 
         try {
-            const response = await fetch(`https://www.siupa.com.br/siiupa/api/api.php/records/tb_farmestoque?filter=data_validade,lt,${ultimoDiaMes}&filter=estoque,gt,0`);
+            const response = await fetch(`https://www.upasistema.online/siiupa/api/api.php/records/tb_farmestoque?filter=data_validade,lt,${ultimoDiaMes}&filter=estoque,gt,0`);
             const data = await response.json();
             
             

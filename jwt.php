@@ -9,8 +9,8 @@ $chaveSecreta = 'sua_chave_secreta_aqui';
 
 // Dados que serão incluídos no token (payload)
 $dados = [
-    'iss' => 'https://www.siupa.com.br', // Emissor do token
-    'aud' => 'https://www.siupa.com.br', // Público do token
+    'iss' => 'https://www.upasistema.online', // Emissor do token
+    'aud' => 'https://www.upasistema.online', // Público do token
     'iat' => time(), // Hora de criação do token
     'nbf' => time(), // Token não será aceito antes desta hora
     'exp' => time() + 3600, // Expiração do token (ex: 1 hora a partir de agora)

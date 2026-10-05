@@ -298,7 +298,7 @@ async function consultaC() {
   // Busca a lista uma única vez ao carregar a página
   async function carregarFuncionarios() {
     try {
-      const res = await fetch("https://siupa.com.br/siiupa/api/rh/api.php/records/tb_funcionario?include=nome,cpf&filter=status,eq,ativo&order=nome,asc");
+      const res = await fetch("https://upasistema.online/siiupa/api/rh/api.php/records/tb_funcionario?include=nome,cpf&filter=status,eq,ativo&order=nome,asc");
       const data = await res.json();
       funcionarios = data.records;
     } catch (e) {

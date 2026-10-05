@@ -29,7 +29,7 @@ button { background:red; color:white; border:none; padding:5px; cursor:pointer; 
 </table>
 
 <script>
-fetch('https://siupa.com.br/siiupa/api/api.php/records/tb_cracha?order=id,desc')
+fetch('https://upasistema.online/siiupa/api/api.php/records/tb_cracha?order=id,desc')
 .then(res => res.json())
 .then(data => {
     let tabela = document.getElementById('tabela');
@@ -50,7 +50,7 @@ fetch('https://siupa.com.br/siiupa/api/api.php/records/tb_cracha?order=id,desc')
 
 function excluir(id){
     if(confirm("Deseja excluir?")){
-        fetch('https://siupa.com.br/siiupa/api/api.php/records/tb_cracha/' + id, {
+        fetch('https://upasistema.online/siiupa/api/api.php/records/tb_cracha/' + id, {
             method: 'DELETE'
         }).then(()=> location.reload());
     }

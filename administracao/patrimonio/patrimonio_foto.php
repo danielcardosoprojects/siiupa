@@ -84,7 +84,7 @@
                         };
 
                         // URL da API para atualizar o recurso (substitua pela URL correta)
-                        const url = `https://www.siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos/<?= $_GET['id']; ?>`;
+                        const url = `https://www.upasistema.online/siiupa/api/api.php/records/tb_equipamentos_equipamentos/<?= $_GET['id']; ?>`;
 
                         axios.put(url, updatedData)
                             .then(response => {

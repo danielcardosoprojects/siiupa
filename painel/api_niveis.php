@@ -1,5 +1,5 @@
 <?php
-$api_url = 'https://www.siupa.com.br/siiupa/api/rh/api.php/records/tb_niveis_acesso';
+$api_url = 'https://www.upasistema.online/siiupa/api/rh/api.php/records/tb_niveis_acesso';
 
 function make_api_request($url, $method, $data = null) {
     $ch = curl_init($url);

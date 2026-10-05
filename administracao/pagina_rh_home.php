@@ -437,7 +437,7 @@ include_once('../bd/nivel.php');
                     //BUTTON VACATIONS botao de ferias
                     //echo "<td><button class='btn btn-success' onclick='abrirModalFerias($dados->idfuncionario)'>Férias</button></td>";
                     //botão eleicao
-                    echo "<td><a class='eleicaobtn-link' target='_blank' href='https://siupa.com.br/siiupa/administracao/pagina_rh_eleicao2022.php?nome=$dados->nome&cargo=$dados->cargo&cpf=$dados->cpf'>Declaração</a></td>";
+                    echo "<td><a class='eleicaobtn-link' target='_blank' href='https://upasistema.online/siiupa/administracao/pagina_rh_eleicao2022.php?nome=$dados->nome&cargo=$dados->cargo&cpf=$dados->cpf'>Declaração</a></td>";
 
                     //LINE NAME
                     $token = $_SESSION['token'];
@@ -446,7 +446,7 @@ include_once('../bd/nivel.php');
                     //LINK TO CNES
                     //<a href='/siiupa/administracao/apicnes.php?id=$dados->idfuncionario' target='_blank'>CNES</a>
                     //LINK TO ELECTION DOCUMENT
-                    //<a class='eleicaobtn-link' target='_blank' href='https://siupa.com.br/siiupa/administracao/pagina_rh_eleicao2022.php?nome=$dados->nome&cargo=$dados->cargo&cpf=$dados->cpf'>Eleição</a>
+                    //<a class='eleicaobtn-link' target='_blank' href='https://upasistema.online/siiupa/administracao/pagina_rh_eleicao2022.php?nome=$dados->nome&cargo=$dados->cargo&cpf=$dados->cpf'>Eleição</a>
 
                     //LINE BIRTH
                     //                    echo "<td>$dados->data_nascbr</td>";
@@ -662,7 +662,7 @@ include_once('../bd/nivel.php');
             };
 
             // Fazer a requisição AJAX para obter a frequência
-            fetch("https://siupa.com.br/siiupa/mpdf/modelo/frequenciapdf.php", {
+            fetch("https://upasistema.online/siiupa/mpdf/modelo/frequenciapdf.php", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/x-www-form-urlencoded",

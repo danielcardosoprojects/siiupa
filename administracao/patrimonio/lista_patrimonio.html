@@ -112,7 +112,7 @@
                 <tbody>
                     <tr v-for="equipamento in equipamentos" :key="equipamento.id">
                         <td>
-                            <img :src="equipamento.foto_frente ? `https://siupa.com.br/siiupa/administracao/patrimonio/imagem.php?largura=50&imagem=${equipamento.foto_frente}` : 'https://siupa.com.br/siiupa/administracao/patrimonio/imagem.php?largura=50&imagem=sem_foto.jpg'"
+                            <img :src="equipamento.foto_frente ? `https://upasistema.online/siiupa/administracao/patrimonio/imagem.php?largura=50&imagem=${equipamento.foto_frente}` : 'https://upasistema.online/siiupa/administracao/patrimonio/imagem.php?largura=50&imagem=sem_foto.jpg'"
                                 alt="Foto do equipamento">
                         </td>
                         <td>{{ equipamento.nome }}</td>
@@ -154,8 +154,8 @@
             methods: {
                 async carregarDados() {
                     try {
-                        const respostaSetores = await axios.get('https://www.siupa.com.br/siiupa/api/api.php/records/tb_setor?order=setor,asc');
-                        const respostaEquipamentos = await axios.get('https://www.siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos?join=setor_id,tb_setor');
+                        const respostaSetores = await axios.get('https://www.upasistema.online/siiupa/api/api.php/records/tb_setor?order=setor,asc');
+                        const respostaEquipamentos = await axios.get('https://www.upasistema.online/siiupa/api/api.php/records/tb_equipamentos_equipamentos?join=setor_id,tb_setor');
 
                         const setores = respostaSetores.data.records.reduce((acc, setor) => {
                             acc[setor.setor] = [];

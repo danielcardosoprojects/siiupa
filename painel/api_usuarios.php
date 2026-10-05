@@ -1,5 +1,5 @@
 <?php
-$api_url_usuarios = 'https://www.siupa.com.br/siiupa/api/rh/api.php/records/usuarios';
+$api_url_usuarios = 'https://www.upasistema.online/siiupa/api/rh/api.php/records/usuarios';
 
 function make_api_request_usuarios($url, $method, $data = null) {
     $ch = curl_init($url);

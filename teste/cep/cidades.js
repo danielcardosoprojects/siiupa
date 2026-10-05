@@ -104,7 +104,7 @@ dateInput.addEventListener("change",  async function() {
      const selectedDate2 = new Date(this.value).toISOString().split('T')[0];
 
      // Formata a URL com o filtro da data selecionada
-     const url = `https://siupa.com.br/siiupa/api/api.php/records/tb_cep/?filter=data,eq,${selectedDate2}&include=id`;
+     const url = `https://upasistema.online/siiupa/api/api.php/records/tb_cep/?filter=data,eq,${selectedDate2}&include=id`;
  
      try {
          // Realiza a consulta à API
@@ -412,7 +412,7 @@ function criarJSON() {
     // Exibe o JSON no console (opcional)
     console.log(jsonString);
 
-    const urlBase = 'https://siupa.com.br/siiupa/api/api.php/records/tb_cep';
+    const urlBase = 'https://upasistema.online/siiupa/api/api.php/records/tb_cep';
 
     // Obter o ID do registro a partir de um input HTML.
     const cepId = document.getElementById('id_cep').value;
@@ -446,7 +446,7 @@ function carregaHistorico() {
     const historico = document.getElementById("historico");
 
 
-    const url = 'https://siupa.com.br/siiupa/api/api.php/records/tb_cep/?order=id,desc';
+    const url = 'https://upasistema.online/siiupa/api/api.php/records/tb_cep/?order=id,desc';
 
 
     fetch(url, {

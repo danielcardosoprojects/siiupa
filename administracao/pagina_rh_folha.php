@@ -60,7 +60,7 @@ class Tabela
 <script>
 
     function consultarMatricula(cpf) {
-        const url = `https://siupa.com.br/siiupa/administracao/api/consulta_matricula.php?cpf=${cpf}`;
+        const url = `https://upasistema.online/siiupa/administracao/api/consulta_matricula.php?cpf=${cpf}`;
 
         return fetch(url)
             .then(response => {
@@ -79,7 +79,7 @@ class Tabela
     }
 
     function atualizarDadosFuncionario(id, dadosAtualizados, metodo = 'PUT') {
-        const url = `https://siupa.com.br/siiupa/api/rh/api.php/records/tb_funcionario/${id}`;
+        const url = `https://upasistema.online/siiupa/api/rh/api.php/records/tb_funcionario/${id}`;
 
         const opcoes = {
             method: metodo,
@@ -541,7 +541,7 @@ if ($stmt = $conn->prepare($query)) {
             //             matricula: matricula
             //         };
 
-            //         const url<?= $fcpfn ?> = 'https://siupa.com.br/siiupa/api/rh/api.php/records/tb_funcionario/<?= $func_id ?>';
+            //         const url<?= $fcpfn ?> = 'https://upasistema.online/siiupa/api/rh/api.php/records/tb_funcionario/<?= $func_id ?>';
 
             //         const dadosAtualizados<?= $fcpfn ?> = {
             //             matricula: matricula
@@ -718,7 +718,7 @@ function abrirAdicionarServidor(e) {
                 e.preventDefault();
                 $.confirm({
                     title: 'Funcionarios que não estão nesta folha',
-                    content: 'url:https://siupa.com.br/siiupa/administracao/pagina_rh_folha_comparador.html?id=<?= $idfolha ?>',
+                    content: 'url:https://upasistema.online/siiupa/administracao/pagina_rh_folha_comparador.html?id=<?= $idfolha ?>',
                     onContentReady: function() {
                         var self = this;
 

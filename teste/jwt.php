@@ -5,8 +5,8 @@ use Firebase\JWT\Key;
 
 $key = 'kljsjdlkajl#KJKL#k3j4lkj4kl2jkl34kJL$#wq423lk4jlk23JKL#@LK$';
 $payload = [
-    'iss' => 'https://siupa.com.br',
-    'aud' => 'https://siupa.com.br',
+    'iss' => 'https://upasistema.online',
+    'aud' => 'https://upasistema.online',
     'iat' => 1356999524,
     'nbf' => 1357000000
 ];

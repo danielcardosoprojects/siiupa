@@ -135,7 +135,7 @@ if (isset($_SESSION['token'])) {
         });
         // Função para carregar os setores da API
         function carregarSetores() {
-            axios.get('https://www.siupa.com.br/siiupa/api/api.php/records/tb_setor?order=setor,asc')
+            axios.get('https://www.upasistema.online/siiupa/api/api.php/records/tb_setor?order=setor,asc')
                 .then(function(response) {
                     const setores = response.data.records;
                     const selectSetor = document.getElementById('setor');
@@ -189,7 +189,7 @@ if (isset($_SESSION['token'])) {
 
         // Função para carregar dados do item ao editar
         function carregarItem(itemId) {
-            axios.get(`https://www.siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos/${itemId}?join=setor_id,tb_setor`)
+            axios.get(`https://www.upasistema.online/siiupa/api/api.php/records/tb_equipamentos_equipamentos/${itemId}?join=setor_id,tb_setor`)
                 .then(function(response) {
                     const item = response.data;
 
@@ -227,10 +227,10 @@ if (isset($_SESSION['token'])) {
             }
 
             // Carregar sugestões de nome, marca, modelo, número de série
-            carregarSugestoes('nome', 'https://www.siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos', 'suggestionsNome');
-            carregarSugestoes('marca', 'https://www.siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos', 'suggestionsMarca');
-            carregarSugestoes('modelo', 'https://www.siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos', 'suggestionsModelo');
-            carregarSugestoes('numeroSerie', 'https://www.siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos', 'suggestionsNumeroSerie');
+            carregarSugestoes('nome', 'https://www.upasistema.online/siiupa/api/api.php/records/tb_equipamentos_equipamentos', 'suggestionsNome');
+            carregarSugestoes('marca', 'https://www.upasistema.online/siiupa/api/api.php/records/tb_equipamentos_equipamentos', 'suggestionsMarca');
+            carregarSugestoes('modelo', 'https://www.upasistema.online/siiupa/api/api.php/records/tb_equipamentos_equipamentos', 'suggestionsModelo');
+            carregarSugestoes('numeroSerie', 'https://www.upasistema.online/siiupa/api/api.php/records/tb_equipamentos_equipamentos', 'suggestionsNumeroSerie');
         });
 
         // Submissão do formulário
@@ -256,8 +256,8 @@ if (isset($_SESSION['token'])) {
 
                 // Atualização ou adição de novo item
                 const url = itemId != 0 ?
-                    `https://www.siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos/${itemId}` :
-                    'https://www.siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos';
+                    `https://www.upasistema.online/siiupa/api/api.php/records/tb_equipamentos_equipamentos/${itemId}` :
+                    'https://www.upasistema.online/siiupa/api/api.php/records/tb_equipamentos_equipamentos';
                 const metodo = itemId != 0 ? 'put' : 'post';
 
                 axios({
@@ -317,7 +317,7 @@ if (isset($_SESSION['token'])) {
 
         document.addEventListener('DOMContentLoaded', function() {
             // Chama a API para obter os setores
-            axios.get('https://www.siupa.com.br/siiupa/api/api.php/records/tb_setor?order=setor,asc')
+            axios.get('https://www.upasistema.online/siiupa/api/api.php/records/tb_setor?order=setor,asc')
                 .then(function(response) {
                     const setores = response.data.records;
                     const setorSelect = document.getElementById('setor');
@@ -350,7 +350,7 @@ if (isset($_SESSION['token'])) {
 
 
             function carregaUltimo() {
-                const ultimoUrl = 'https://siupa.com.br/siiupa/api/api.php/records/tb_equipamentos_equipamentos?order=id,desc&page=1,1';
+                const ultimoUrl = 'https://upasistema.online/siiupa/api/api.php/records/tb_equipamentos_equipamentos?order=id,desc&page=1,1';
                 axios.get(ultimoUrl)
                     .then(response => {
                         // La richiesta è andata a buon fine

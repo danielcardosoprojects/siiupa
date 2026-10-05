@@ -16,7 +16,7 @@ const App: React.FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://www.siupa.com.br/conexao/api_login.php');
+        const response = await fetch('https://www.upasistema.online/conexao/api_login.php');
         const data = await response.json();
         console.log(data);
         // Define o tipo da resposta conforme a interface AuthData

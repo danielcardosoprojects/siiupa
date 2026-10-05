@@ -9,7 +9,7 @@ header('Content-Type: application/json');
 $diretorio = __DIR__ . '/uploads/';
 $urlRelativa = 'uploads/';
 
-$apiUrl = "https://siupa.com.br/siiupa/api/api.php/records/tb_cracha";
+$apiUrl = "https://upasistema.online/siiupa/api/api.php/records/tb_cracha";
 
 // ======================================
 // VALIDAÇÃO DO ARQUIVO

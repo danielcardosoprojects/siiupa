@@ -1787,7 +1787,7 @@ class Grade
 </script>
 <script>
     // Fazendo uma requisição GET
-    axios.get('https://siupa.com.br/siiupa/api/rh/api.php/records/tb_acionamento?join=tb_acionamentos&page=3,4')
+    axios.get('https://upasistema.online/siiupa/api/rh/api.php/records/tb_acionamento?join=tb_acionamentos&page=3,4')
         .then(response => {
             console.log('Dados da resposta:', response.data);
         })

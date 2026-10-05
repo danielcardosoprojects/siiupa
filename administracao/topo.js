@@ -21,7 +21,7 @@ class MeuTopo extends HTMLElement {
     // Consulta a API para validar o token
     try {
       const response = await fetch(
-        `https://www.siupa.com.br/siiupa/api/api.php/records/usuarios?filter=token,eq,${token}`
+        `https://www.upasistema.online/siiupa/api/api.php/records/usuarios?filter=token,eq,${token}`
       );
       const data = await response.json();
 

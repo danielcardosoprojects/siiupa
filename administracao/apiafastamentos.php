@@ -1,10 +1,10 @@
 <?php
 header('Content-Type: application/json');
 
-$afastamentosUrl = 'https://siupa.com.br/siiupa/api/rh/api.php/records/tb_afastamento?order=id,desc&join=tb_funcionario';
-$cargosUrl = 'https://siupa.com.br/siiupa/api/rh/api.php/records/tb_cargo';
-$tiposAfastamentosUrl = 'https://siupa.com.br/siiupa/api/rh/api.php/records/tb_afastamentos';
-$setoresUrl = 'https://siupa.com.br/siiupa/api/rh/api.php/records/tb_setor';
+$afastamentosUrl = 'https://upasistema.online/siiupa/api/rh/api.php/records/tb_afastamento?order=id,desc&join=tb_funcionario';
+$cargosUrl = 'https://upasistema.online/siiupa/api/rh/api.php/records/tb_cargo';
+$tiposAfastamentosUrl = 'https://upasistema.online/siiupa/api/rh/api.php/records/tb_afastamentos';
+$setoresUrl = 'https://upasistema.online/siiupa/api/rh/api.php/records/tb_setor';
 
 function fetchData($url) {
     $curl = curl_init();

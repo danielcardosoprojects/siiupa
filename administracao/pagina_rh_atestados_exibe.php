@@ -77,7 +77,7 @@ $idAfastamento = $_GET['idafastamento'];
 
 <script>
     const idAfastamentoConsulta = document.getElementById("excluirBtn").getAttribute('data-id-afastamento');
-    const apiUrlVerificaFK = `https://siupa.com.br/siiupa/api/rh/api.php/records/tb_acionamento?filter=fk_afastamento,eq,${idAfastamentoConsulta}&join=tb_funcionario&page=1`;
+    const apiUrlVerificaFK = `https://upasistema.online/siiupa/api/rh/api.php/records/tb_acionamento?filter=fk_afastamento,eq,${idAfastamentoConsulta}&join=tb_funcionario&page=1`;
 
     // Realiza a consulta usando Axios
     axios.get(apiUrlVerificaFK)
@@ -111,7 +111,7 @@ $idAfastamento = $_GET['idafastamento'];
 
                     // Criar um novo elemento span
                     let novoSpan = document.createElement('div');
-                    novoSpan.innerHTML = `<strong>📜 <a href="https://siupa.com.br/siiupa/?setor=adm&sub=rh&subsub=acionamento_exibe&id=${idAcionamento}">${dataBr} | ${qtdHoras} ${turno} | ${nome}</a></strong>`; // Adicionando HTML ao span
+                    novoSpan.innerHTML = `<strong>📜 <a href="https://upasistema.online/siiupa/?setor=adm&sub=rh&subsub=acionamento_exibe&id=${idAcionamento}">${dataBr} | ${qtdHoras} ${turno} | ${nome}</a></strong>`; // Adicionando HTML ao span
 
                     // Adicionar o novo span como filho da div #acionamentosVinculados
                     divAcionamentos.appendChild(novoSpan);
@@ -134,7 +134,7 @@ $idAfastamento = $_GET['idafastamento'];
                     if (idAfastamento) {
 
                         // Construa a URL da API com o id-funcionario
-                        var apiUrl = 'https://siupa.com.br/siiupa/api/rh/api.php/records/tb_afastamento/' + idAfastamento;
+                        var apiUrl = 'https://upasistema.online/siiupa/api/rh/api.php/records/tb_afastamento/' + idAfastamento;
 
                         // Envie uma solicitação DELETE para a API
                         fetch(apiUrl, {
@@ -145,7 +145,7 @@ $idAfastamento = $_GET['idafastamento'];
                                     alert('Afastamento excluído com sucesso.');
 
                                     // Redirecione para a nova página após a exclusão bem-sucedida
-                                    window.location.href = 'https://siupa.com.br/siiupa/?setor=adm&sub=rh&subsub=atestados';
+                                    window.location.href = 'https://upasistema.online/siiupa/?setor=adm&sub=rh&subsub=atestados';
 
                                 } else {
                                     alert('Erro ao excluir o afastamento:', response.statusText);

@@ -356,7 +356,7 @@ function criarJSON() {
   // Exibe o JSON no console (opcional)
   console.log(jsonString);
 
-  const url = "https://siupa.com.br/siiupa/api/api.php/records/tb_cep";
+  const url = "https://upasistema.online/siiupa/api/api.php/records/tb_cep";
 
   const dadosParaInserir = jsonResult;
 
@@ -385,7 +385,7 @@ function carregaHistorico() {
   const historico = document.getElementById("historico");
 
   const url =
-    "https://siupa.com.br/siiupa/api/api.php/records/tb_cep/?order=id,desc";
+    "https://upasistema.online/siiupa/api/api.php/records/tb_cep/?order=id,desc";
 
   fetch(url, {
     method: "GET",

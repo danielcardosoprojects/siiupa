@@ -58,7 +58,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/siiupa/bd/nivel.php');
     </div>
 
     <script>
-        const apiURL = 'https://siupa.com.br/siiupa/api/rh/api.php/records/tb_funcionario/?filter=status,eq,INATIVO&join=tb_cargo';
+        const apiURL = 'https://upasistema.online/siiupa/api/rh/api.php/records/tb_funcionario/?filter=status,eq,INATIVO&join=tb_cargo';
 
         document.addEventListener('DOMContentLoaded', () => {
             fetchRecords();
@@ -86,7 +86,7 @@ include_once($_SERVER['DOCUMENT_ROOT'].'/siiupa/bd/nivel.php');
                     <td>${record.cpf || ''}</td>
                     <td>${record.admissao}</td>
                     <td>${record.desligamento || ''}</td>
-                    <td><a href="https://siupa.com.br/siiupa/?setor=adm&sub=rh&subsub=perfil&id=${record.id}" target="_blank">Abrir Perfil</a></td>
+                    <td><a href="https://upasistema.online/siiupa/?setor=adm&sub=rh&subsub=perfil&id=${record.id}" target="_blank">Abrir Perfil</a></td>
                 `;
                 tableBody.appendChild(row);
             });

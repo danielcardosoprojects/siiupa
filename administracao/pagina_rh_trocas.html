@@ -105,14 +105,14 @@
         //console.log(sessionStorage.token);
 
         const apiProfissionais =
-          "https://www.siupa.com.br/siiupa/api/api.php/records/tb_farmprofissional";
+          "https://www.upasistema.online/siiupa/api/api.php/records/tb_farmprofissional";
         const apiCargos =
-          "https://www.siupa.com.br/siiupa/api/api.php/records/tb_cargo?order=descricao,asc";
+          "https://www.upasistema.online/siiupa/api/api.php/records/tb_cargo?order=descricao,asc";
         const table = $("#profissionais").DataTable();
 
         // Carregar profissionais na tabela
         const apiTrocas =
-          "https://siupa.com.br/siiupa/api/api.php/records/tb_trocaplantao?join=tb_funcionario,tb_cargo&include=id,func1,func2,tb_funcionario.nome,tb_cargo.titulo,data1,data2,turno1,turno2";
+          "https://upasistema.online/siiupa/api/api.php/records/tb_trocaplantao?join=tb_funcionario,tb_cargo&include=id,func1,func2,tb_funcionario.nome,tb_cargo.titulo,data1,data2,turno1,turno2";
 
         function carregarProfissionais() {
           const trocas = {}; // objeto por pessoa
