@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Impressos</title>
+<style>
+:root{--bg:#f3f5f4;--card:#fff;--ink:#16211d;--mute:#5d6b65;--line:#d6dcd9;--acc:#0b6e5b;--acc2:#095a4a}
+@media (prefers-color-scheme:dark){:root{--bg:#121816;--card:#1b2420;--ink:#e6ede9;--mute:#93a39b;--line:#2b3731;--acc:#3fb59c;--acc2:#5cc9b1}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:14px 20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+h1{margin:0;font-size:20px;font-weight:700}
+#q{flex:1;min-width:220px;max-width:560px;padding:10px 14px;font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:8px}
+#q:focus{outline:2px solid var(--acc);border-color:transparent}
+#count{color:var(--mute);font-size:13px}
+main{padding:20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:18px}
+.item{background:var(--card);border:1px solid var(--line);border-radius:8px;overflow:hidden;cursor:pointer;display:flex;flex-direction:column;text-align:left;padding:0;font:inherit;color:inherit}
+.item:hover,.item:focus-visible{border-color:var(--acc);outline:none;box-shadow:0 0 0 2px var(--acc)}
+.thumb{aspect-ratio:3/4;background:#e9edeb;display:flex;align-items:center;justify-content:center;color:#7b8a83;font-size:12px}
+.thumb canvas{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.name{padding:10px 12px;font-size:13px;word-break:break-word;border-top:1px solid var(--line)}
+#msg{padding:40px 20px;text-align:center;color:var(--mute);grid-column:1/-1}
+#modal{position:fixed;inset:0;background:rgba(0,0,0,.65);display:none;z-index:10;padding:2vh 2vw}
+#modal.on{display:flex}
+.box{background:var(--card);border-radius:10px;flex:1;display:flex;flex-direction:column;overflow:hidden}
+.bar{display:flex;gap:8px;align-items:center;padding:10px 14px;border-bottom:1px solid var(--line)}
+.bar strong{flex:1;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.btn{font:inherit;font-size:14px;padding:8px 14px;border-radius:6px;border:1px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer;text-decoration:none}
+.btn:hover{border-color:var(--acc)}
+.btn.p{background:var(--acc);border-color:var(--acc);color:#fff}
+.btn.p:hover{background:var(--acc2)}
+iframe{flex:1;border:0;width:100%;background:#fff}
+</style>
+</head>
+<body>
+<header>
+  <h1>Impressos</h1>
+  <input id="q" type="search" placeholder="Buscar impresso pelo nome…" autofocus autocomplete="off">
+  <span id="count"></span>
+</header>
+<main id="grid"><div id="msg">Carregando lista…</div></main>
+
+<div id="modal" role="dialog" aria-modal="true">
+  <div class="box">
+    <div class="bar">
+      <strong id="mtitle"></strong>
+      <button class="btn p" id="bprint">Imprimir</button>
+      <a class="btn" id="bopen" target="_blank" rel="noopener">Abrir em nova guia</a>
+      <button class="btn" id="bclose">Fechar</button>
+    </div>
+    <iframe id="frame" title="Visualização do PDF"></iframe>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+// ===== Configuração =====
+const BASE = "/siiupa/impressos/";   // endereço (URL) da pasta com os PDFs
+const MANIFEST = BASE + "files.json"; // opcional: lista ["a.pdf","b.pdf"]
+
+const grid = document.getElementById("grid");
+const q = document.getElementById("q");
+const count = document.getElementById("count");
+let files = [], items = [];
+
+const norm = s => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+const label = f => f.replace(/\.pdf$/i, "").replace(/[_]+/g, " ");
+const url = f => BASE + f.split("/").map(encodeURIComponent).join("/");
+
+// ===== Lista de arquivos: files.json ou listagem do servidor =====
+async function loadFiles() {
+  try {
+    const r = await fetch(MANIFEST, {cache: "no-cache"});
+    if (r.ok) return (await r.json()).filter(f => /\.pdf$/i.test(f));
+  } catch (e) {}
+  const r = await fetch(BASE, {cache: "no-cache"});
+  if (!r.ok) throw new Error("HTTP " + r.status);
+  const doc = new DOMParser().parseFromString(await r.text(), "text/html");
+  const out = [];
+  doc.querySelectorAll("a[href]").forEach(a => {
+    const h = a.getAttribute("href").split(/[?#]/)[0];
+    if (/\.pdf$/i.test(h)) out.push(decodeURIComponent(h.split("/").pop()));
+  });
+  return [...new Set(out)];
+}
+
+// ===== PDF.js (worker carregado via blob para funcionar a partir do CDN) =====
+let pdfReady;
+function initPdf() {
+  return pdfReady ||= fetch("https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js")
+    .then(r => r.text())
+    .then(t => { pdfjsLib.GlobalWorkerOptions.workerSrc = URL.createObjectURL(new Blob([t], {type: "text/javascript"})); });
+}
+
+async function thumb(el, f) {
+  try {
+    await initPdf();
+    const pdf = await pdfjsLib.getDocument(url(f)).promise;
+    const page = await pdf.getPage(1);
+    const vp0 = page.getViewport({scale: 1});
+    const vp = page.getViewport({scale: 360 / vp0.width});
+    const c = document.createElement("canvas");
+    c.width = vp.width; c.height = vp.height;
+    await page.render({canvasContext: c.getContext("2d"), viewport: vp}).promise;
+    el.replaceChildren(c);
+    pdf.destroy();
+  } catch (e) { el.textContent = "PDF"; }
+}
+
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { io.unobserve(e.target); thumb(e.target, e.target.dataset.f); }
+}), {rootMargin: "300px"});
+
+// ===== Montagem e busca =====
+function build() {
+  grid.replaceChildren();
+  items = files.slice().sort((a, b) => a.localeCompare(b, "pt-BR", {numeric: true})).map(f => {
+    const b = document.createElement("button");
+    b.className = "item"; b.type = "button"; b._k = norm(f);
+    b.innerHTML = '<div class="thumb">…</div><div class="name"></div>';
+    b.querySelector(".name").textContent = label(f);
+    const t = b.querySelector(".thumb"); t.dataset.f = f;
+    b.onclick = () => openModal(f);
+    grid.appendChild(b); io.observe(t);
+    return b;
+  });
+  const m = document.createElement("div"); m.id = "msg"; m.hidden = true;
+  m.textContent = "Nenhum impresso encontrado."; grid.appendChild(m);
+  filter();
+}
+function filter() {
+  const terms = norm(q.value).split(/\s+/).filter(Boolean);
+  let n = 0;
+  items.forEach(b => { const ok = terms.every(t => b._k.includes(t)); b.hidden = !ok; if (ok) n++; });
+  document.getElementById("msg").hidden = n > 0;
+  count.textContent = n + " de " + items.length;
+}
+q.addEventListener("input", filter);
+
+// ===== Visualização =====
+const modal = document.getElementById("modal"), frame = document.getElementById("frame");
+function openModal(f) {
+  document.getElementById("mtitle").textContent = label(f);
+  document.getElementById("bopen").href = url(f);
+  frame.src = url(f);
+  modal.classList.add("on");
+}
+function closeModal() { modal.classList.remove("on"); frame.src = "about:blank"; q.focus(); }
+document.getElementById("bclose").onclick = closeModal;
+modal.addEventListener("click", e => { if (e.target === modal) closeModal(); });
+addEventListener("keydown", e => { if (e.key === "Escape" && modal.classList.contains("on")) closeModal(); });
+document.getElementById("bprint").onclick = () => {
+  try { frame.contentWindow.focus(); frame.contentWindow.print(); }
+  catch (e) { window.open(frame.src, "_blank"); }
+};
+
+loadFiles().then(l => { files = l; files.length ? build() : (grid.innerHTML = '<div id="msg">Nenhum PDF encontrado na pasta.</div>'); })
+  .catch(e => { grid.innerHTML = '<div id="msg">Não foi possível listar a pasta (' + e.message + '). Veja as instruções para criar o arquivo files.json.</div>'; });
+</script>
+</body>
+</html>
