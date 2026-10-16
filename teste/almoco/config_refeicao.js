@@ -11,6 +11,6 @@ const CFG = {
 const EXCLUIR_IDS = [107/*walter */, 409/* Euriene */, 410/*Marlilson */, 407/*kATAOKA*/, /*'14' DANIEL,*/ 201 /*EMILY*/, 17 /*FLAVIA*/, 434/*IGOR*/ ];
 const DEFAULTS = {
   unit: 'UPA',
-  fixL: ['Guarda 1', 'Guarda 2', 'Médico 1', 'Médico 2', 'Médico 3', 'Médico 4', 'Médico 5'].join('\n'),
-  fixJ: ['Guarda 1', 'Guarda 2', 'Médico 1', 'Médico 2', 'Médico 3', 'Médico 4'].join('\n')
+  fixL: ['Guarda 1', 'Guarda 2', 'Médico 1', 'Médico 2', 'Médico 3', 'Médico 4', 'Médico 5', 'Limpeza 1', 'Limpeza 2', 'Limpeza 3', 'Limpeza 4', 'Limpeza 5'].join('\n'),
+  fixJ: ['Guarda 1', 'Guarda 2', 'Médico 1', 'Médico 2', 'Médico 3', 'Médico 4', 'Limpeza 1', 'Limpeza 2', 'Limpeza 3', 'Limpeza 4'].join('\n')
 };
