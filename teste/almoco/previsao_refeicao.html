@@ -4,8 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Previsão de refeições</title>
-<script type="text/javascript" src="jquery.min.js"></script>
-<script type="text/javascript" src="qrcode.js"></script>
 <style>
   @page { size: A4; margin: 0; }
   * { box-sizing: border-box; }
@@ -44,12 +42,11 @@
 
   @media print {
     body { background: #fff; }
-    .toolbar, .msg, #qrcode { display: none; }
+    .toolbar, .msg { display: none; }
     .wrap { padding: 0; }
     .sheet { margin: 0; box-shadow: none; }
     input.nf:focus { outline: none; }
   }
-
 </style>
 </head>
 <body>
@@ -62,49 +59,16 @@
   <button id="imprimir">Imprimir tabela</button>
   <span id="status" class="status"></span>
 </div>
-<div id="qrcode" style="width:100px; height:100px;"></div>
 
 <div class="wrap">
   <div class="msg">
-    
     <h2>Mensagem para WhatsApp</h2>
     <textarea id="texto" readonly></textarea>
     <button id="copiar2">Copiar mensagem</button>
-    
   </div>
-  
   <div id="folha"></div>
 </div>
-<script type="text/javascript">
-var qrcode = new QRCode(document.getElementById("qrcode"), {
-	width : 400,
-	height : 400
-});
 
-function makeCode () {		
-	var elText = document.getElementById("texto");
-	
-	if (!elText.value) {
-		alert("Input a text");
-		elText.focus();
-		return;
-	}
-	
-	qrcode.makeCode(elText.value);
-}
-
-
-
-$("#text").
-	on("blur", function () {
-		makeCode();
-	}).
-	on("keydown", function (e) {
-		if (e.keyCode == 13) {
-			makeCode();
-		}
-	});
-</script>
 <script src="config_refeicao.js"></script>
 <script>
 const DIAS = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'];
@@ -115,11 +79,8 @@ const fmt = n => n.toLocaleString('pt-BR');
 const setStatus = (t, err) => { const s = $('status'); s.textContent = t || ''; s.className = 'status' + (err ? ' err' : ''); };
 const lines = t => t.split('\n').map(x => x.trim()).filter(Boolean);
 
-/* Vagas fixas: mesmos valores da página de listas (guardados no navegador) */
-function loadSettings() {
-  try { return Object.assign({}, DEFAULTS, JSON.parse(localStorage.getItem('listaRefeicao') || '{}')); }
-  catch (e) { return Object.assign({}, DEFAULTS); }
-}
+/* Vagas fixas: vêm de config_refeicao.js (mesma fonte da página de listas) */
+function loadSettings() { return Object.assign({}, DEFAULTS); }
 
 async function getJSON(path) {
   const r = await fetch(CFG.API + path, { headers: CFG.HEADERS });
@@ -222,12 +183,10 @@ async function render() {
     loadNF();
     $('texto').value = mensagem();
     montarTabela();
-    makeCode();
     setStatus(regs.length + ' registros na escala de ' + pad(mes) + '/' + ano + ` (fixos: ${fixA} almoço, ${fixJ} janta)`);
   } catch (e) {
     dados = null; $('folha').innerHTML = ''; $('texto').value = '';
     setStatus('Erro ao consultar a API: ' + e.message, true);
-    
   }
 }
 

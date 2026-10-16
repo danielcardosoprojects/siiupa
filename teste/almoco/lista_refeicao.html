@@ -39,39 +39,6 @@
   .sheet .total { margin-top: 2mm; padding-top: 1.5mm; border-top: 0.4mm solid #000; font-size: 11pt; font-weight: bold; display: flex; justify-content: space-between; }
   .sheet .total span { font-weight: normal; font-size: 9pt; }
   .vazio { font-size: 11pt; color: #555; padding: 4mm 0; }
-/* BUTTON TWEE */
-.button {
-  color: chocolate;
-}
-a.button.two:before, a.button.two:after{
-  opacity: 0;
-  transition: all 0.3s ease;  
-  font-size: 20px;
-  color:chocolate;
-}
-a.button.two:before{
-  content: '[';
-}
-a.button.two:after{
-  content: ']';
-}
-
-a.button.two:hover:before{
-  margin-right: 10px;
-  content: '[';
-  -webkit-transform: translateX(20px);
-  -moz-transform: translateX(20px);
-  transform: translateX(20px);
-  opacity: 1;
-}
-a.button.two:hover:after{
-  margin-left: 10px;
-  content: ']';
-  -webkit-transform: translateX(-20px);
-  -moz-transform: translateX(-20px);
-  transform: translateX(-20px);
-  opacity: 1;
-}
 
   @media print {
     body { background: #fff; }
@@ -90,12 +57,11 @@ a.button.two:hover:after{
   <button id="next" title="Próximo dia">&rarr;</button>
   <button id="hoje">Hoje</button>
   <button id="imprimir" class="primary">Imprimir (almoço + janta)</button>
-  <a href="previsao_refeicao.html"  class="button two">Previsão para o mês</a><h4 style="color:#f00">VERIFIQUE SE HÁ ESCALA EM <span style="background-color: #ffc133;padding: .2rem .3rem;border-radius: .2rem;color: #ff6433;cursor: default;border-color: #0d6efd;">RASCUNHO</span>.</h4>
   <span id="status" class="status"></span>
 </div>
 
 <details class="cfg">
-  <summary>Ajustes: nome da unidade e vagas fixas</summary>
+  <summary>Ajustes temporários (para valores permanentes, edite config_refeicao.js)</summary>
   <div class="cfg-grid">
     <label>Nome da unidade (aparece no cabeçalho)
       <input id="cfgUnit" type="text">
@@ -122,14 +88,10 @@ const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;'
 const pad = n => String(n).padStart(2, '0');
 const setStatus = (t, err) => { const s = $('status'); s.textContent = t || ''; s.className = 'status' + (err ? ' err' : ''); };
 
-function loadSettings() {
-  try { return Object.assign({}, DEFAULTS, JSON.parse(localStorage.getItem('listaRefeicao') || '{}')); }
-  catch (e) { return Object.assign({}, DEFAULTS); }
-}
+/* Fonte única: config_refeicao.js. Os campos da tela são só ajustes temporários (não ficam salvos). */
+function loadSettings() { return Object.assign({}, DEFAULTS); }
 function saveSettings() {
-  const s = { unit: $('cfgUnit').value, fixL: $('cfgFixL').value, fixJ: $('cfgFixJ').value };
-  try { localStorage.setItem('listaRefeicao', JSON.stringify(s)); } catch (e) {}
-  return s;
+  return { unit: $('cfgUnit').value, fixL: $('cfgFixL').value, fixJ: $('cfgFixJ').value };
 }
 const lines = t => t.split('\n').map(x => x.trim()).filter(Boolean);
 
