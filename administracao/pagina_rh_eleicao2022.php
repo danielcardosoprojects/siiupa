@@ -10,7 +10,9 @@ if (strlen($cpf) === 11) {
 // Escapa os demais dados para evitar injeção de HTML (XSS)
 $nome  = htmlspecialchars($_GET['nome']  ?? '', ENT_QUOTES, 'UTF-8');
 $cargo = htmlspecialchars($_GET['cargo'] ?? '', ENT_QUOTES, 'UTF-8');
-$dirclinica = htmlspecialchars($_GET['cargo'] ?? '', ENT_QUOTES, 'UTF-8');
+
+// CORRIGIDO: antes lia $_GET['cargo']; agora lê $_GET['dirclinica']
+$dirclinica = strtolower(trim($_GET['dirclinica'] ?? ''));
 ?>
 <html>
 <head>
@@ -38,17 +40,18 @@ $dirclinica = htmlspecialchars($_GET['cargo'] ?? '', ENT_QUOTES, 'UTF-8');
 <br><br>
 <br>
 
-<p>____________________________________</br>
-<?php 
-if $dirclinica == "nao" {
-    echo "Assinatura Responsável - UPA";
+<p>____________________________________<br>
+<?php
+// CORRIGIDO: faltavam os parênteses no if (erro de sintaxe que gerava o HTTP 500)
+if ($dirclinica === "sim") {
+    echo "<i>Walter A. Ferreira Cruz</i><br>Diretor Clínico / CRM Nº 13.205<br>UPA Castanhal";
 } else {
-    echo "<i>Walter A. Ferreira Cruz</i></br>Diretor Clínico / CRM Nº 13.205</br>UPA Castanhal";
+    echo "Assinatura Responsável - UPA";
 }
 ?>
 </p>
 
-<p style="width:100%;bottom:0px;position:fixed;background-color:#fff;border-top: solid 2px #ccc;color:dimgray"></hr>UPA 3 24HS: BR 316, KM 65, S/N, Esquina Com Rua Raimundo Nonato Vasconcelos 
+<p style="width:100%;bottom:0px;position:fixed;background-color:#fff;border-top: solid 2px #ccc;color:dimgray">UPA 3 24HS: BR 316, KM 65, S/N, Esquina Com Rua Raimundo Nonato Vasconcelos
 Castanhal-PA
 </p>
 
