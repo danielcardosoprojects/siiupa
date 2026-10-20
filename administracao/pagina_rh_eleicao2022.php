@@ -10,6 +10,7 @@ if (strlen($cpf) === 11) {
 // Escapa os demais dados para evitar injeção de HTML (XSS)
 $nome  = htmlspecialchars($_GET['nome']  ?? '', ENT_QUOTES, 'UTF-8');
 $cargo = htmlspecialchars($_GET['cargo'] ?? '', ENT_QUOTES, 'UTF-8');
+$dirclinica = htmlspecialchars($_GET['cargo'] ?? '', ENT_QUOTES, 'UTF-8');
 ?>
 <html>
 <head>
@@ -38,7 +39,14 @@ $cargo = htmlspecialchars($_GET['cargo'] ?? '', ENT_QUOTES, 'UTF-8');
 <br>
 
 <p>____________________________________</br>
-Assinatura Responsável - UPA</p>
+<?php 
+if $dirclinica == "nao" {
+    echo "Assinatura Responsável - UPA";
+} else {
+    echo "<i>Walter A. Ferreira Cruz</i></br>Diretor Clínico / CRM Nº 13.205</br>UPA Castanhal";
+}
+?>
+</p>
 
 <p style="width:100%;bottom:0px;position:fixed;background-color:#fff;border-top: solid 2px #ccc;color:dimgray"></hr>UPA 3 24HS: BR 316, KM 65, S/N, Esquina Com Rua Raimundo Nonato Vasconcelos 
 Castanhal-PA
