@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Gerar Declaração</title>
+<style>
+  :root {
+    --bg: #fafafa;
+    --card: #ffffff;
+    --border: #dbdbdb;
+    --text: #262626;
+    --muted: #8e8e8e;
+    --blue: #0095f6;
+    --error: #ed4956;
+    --ig-gradient: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  .wrap { width: 100%; max-width: 380px; }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px 36px 28px;
+  }
+
+  .avatar {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    padding: 3px;
+    background: var(--ig-gradient);
+  }
+  .avatar span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #fff;
+    border: 3px solid #fff;
+    font-size: 30px;
+  }
+
+  h1 {
+    margin: 0 0 6px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.2px;
+  }
+  .sub {
+    margin: 0 0 24px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .field { margin-bottom: 10px; }
+
+  .field label.lbl {
+    display: block;
+    margin: 0 0 4px 2px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+
+  input[type="text"], select {
+    width: 100%;
+    height: 40px;
+    padding: 0 12px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font: inherit;
+    font-size: 14px;
+    color: var(--text);
+    outline: none;
+    transition: border-color .15s;
+  }
+  input[type="text"]:focus, select:focus { border-color: #a8a8a8; }
+  input.invalid { border-color: var(--error); }
+
+  select {
+    appearance: none;
+    -webkit-appearance: none;
+    padding-right: 34px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%238e8e8e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+  }
+
+  .error-msg {
+    display: none;
+    margin: 4px 0 0 2px;
+    font-size: 12px;
+    color: var(--error);
+  }
+  .error-msg.show { display: block; }
+
+  fieldset {
+    margin: 14px 0 0;
+    padding: 0;
+    border: 0;
+  }
+  legend {
+    padding: 0;
+    margin: 0 0 8px 2px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+  .radios { display: flex; gap: 10px; }
+  .radios label { flex: 1; cursor: pointer; }
+  .radios input { position: absolute; opacity: 0; pointer-events: none; }
+  .radios span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--bg);
+    font-size: 14px;
+    font-weight: 600;
+    transition: all .15s;
+  }
+  .radios input:checked + span {
+    border-color: transparent;
+    background:
+      linear-gradient(#fff, #fff) padding-box,
+      var(--ig-gradient) border-box;
+    border: 2px solid transparent;
+  }
+  .radios input:focus-visible + span { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+  button {
+    width: 100%;
+    height: 40px;
+    margin-top: 22px;
+    border: 0;
+    border-radius: 8px;
+    background: var(--blue);
+    color: #fff;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .15s, transform .05s;
+  }
+  button:hover { background: #1877f2; }
+  button:active { transform: scale(.98); }
+  button:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+
+  .foot {
+    margin-top: 14px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+  }
+
+  @media (max-width: 420px) {
+    .card { padding: 28px 22px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="card">
+    <div class="avatar"><span>📄</span></div>
+    <h1>Gerar Declaração</h1>
+    <p class="sub">Preencha os dados abaixo para emitir a declaração.</p>
+
+    <form id="form" action="pagina_rh_eleicao2022.php" method="get" novalidate>
+
+      <div class="field">
+        <label class="lbl" for="nome">Nome</label>
+        <input type="text" id="nome" name="nome" placeholder="Nome completo" autocomplete="name" required>
+        <div class="error-msg" id="err-nome">Informe o nome.</div>
+      </div>
+
+      <div class="field">
+        <label class="lbl" for="cpf">CPF</label>
+        <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" inputmode="numeric" maxlength="14" required>
+        <div class="error-msg" id="err-cpf">Informe um CPF válido.</div>
+      </div>
+
+      <div class="field">
+        <label class="lbl" for="cargo">Cargo</label>
+        <select id="cargo" name="cargo" required>
+          <option value="">Selecione o cargo</option>
+        </select>
+        <div class="error-msg" id="err-cargo">Selecione um cargo.</div>
+      </div>
+
+      <fieldset>
+        <legend>Dir. Clínica?</legend>
+        <div class="radios">
+          <label><input type="radio" name="dirclinica" value="sim"><span>Sim</span></label>
+          <label><input type="radio" name="dirclinica" value="nao" checked><span>Não</span></label>
+        </div>
+      </fieldset>
+
+      <button type="submit">GERAR DECLARAÇÃO</button>
+    </form>
+  </div>
+  <p class="foot">Os dados serão enviados ao RH.</p>
+</div>
+
+<script>
+  const dados = {"records":[{"descricao":"Agente Administrativo(a)"},{"descricao":"Auxiliar Administrativo(a)"},{"descricao":"Odontologo(a)"},{"descricao":"Tecnico(a) de Higiene Dental"},{"descricao":"Auxiliar de Portaria"},{"descricao":"Maqueiro"},{"descricao":"Servente"},{"descricao":"Assistente Social"},{"descricao":"Biomedico(a)"},{"descricao":"Farmaceutica(o) Biquimica(o)"},{"descricao":"Tecnico(a) de Laboratorio"},{"descricao":"Tecnico(a) de Radiologia"},{"descricao":"Farmaceutica(o)"},{"descricao":"Enfermeiro(a)"},{"descricao":"Tecnico(a) de Enfermagem"},{"descricao":"Medico(a)"},{"descricao":"Diretor Geral UPA"},{"descricao":"Diretor Clinico UPA"},{"descricao":"Chefe de Enfermagem"},{"descricao":"Vice-Diretor"},{"descricao":"Diretor Administrativo"},{"descricao":"Coordenacao de Apoio Administrativo"},{"descricao":"Auxiliar de Coordenacao de Apoio Administrativo"},{"descricao":"Auxiliar de Recursos Humanos UPA"},{"descricao":"BRACAL"},{"descricao":"ZELADOR"},{"descricao":"Assessor Nivel de Coordenador"},{"descricao":"Assessor Especial"},{"descricao":"Servente"},{"descricao":"Auxiliar de Saude"},{"descricao":"Terceirizado"},{"descricao":"Fisioterapeuta"},{"descricao":"Técnico de Nível Superior"}]};
+
+  // Preenche o select (remove duplicados, como "Servente")
+  const select = document.getElementById('cargo');
+  [...new Set(dados.records.map(r => r.descricao))].forEach(desc => {
+    const opt = document.createElement('option');
+    opt.value = desc;
+    opt.textContent = desc;
+    select.appendChild(opt);
+  });
+
+  // Máscara de CPF
+  const cpfInput = document.getElementById('cpf');
+  cpfInput.addEventListener('input', () => {
+    let v = cpfInput.value.replace(/\D/g, '').slice(0, 11);
+    v = v.replace(/(\d{3})(\d)/, '$1.$2')
+         .replace(/(\d{3})(\d)/, '$1.$2')
+         .replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+    cpfInput.value = v;
+  });
+
+  // Validação de CPF (dígitos verificadores)
+  function cpfValido(cpf) {
+    cpf = cpf.replace(/\D/g, '');
+    if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) return false;
+    for (let t = 9; t < 11; t++) {
+      let soma = 0;
+      for (let i = 0; i < t; i++) soma += parseInt(cpf[i]) * (t + 1 - i);
+      const dv = ((soma * 10) % 11) % 10;
+      if (dv !== parseInt(cpf[t])) return false;
+    }
+    return true;
+  }
+
+  function mostrarErro(campo, erro, ativo) {
+    campo.classList.toggle('invalid', ativo);
+    erro.classList.toggle('show', ativo);
+  }
+
+  // Valida o CPF e mostra a mensagem adequada. Retorna true se válido.
+  function validarCpfCampo() {
+    const erro = document.getElementById('err-cpf');
+    const digitos = cpfInput.value.replace(/\D/g, '');
+    let msg = '';
+    if (digitos.length === 0) msg = 'Informe o CPF.';
+    else if (digitos.length < 11) msg = 'CPF incompleto.';
+    else if (!cpfValido(digitos)) msg = 'CPF inválido. Confira os números.';
+    erro.textContent = msg;
+    mostrarErro(cpfInput, erro, msg !== '');
+    return msg === '';
+  }
+
+  // Valida assim que os 11 dígitos são digitados e ao sair do campo
+  cpfInput.addEventListener('input', () => {
+    if (cpfInput.value.replace(/\D/g, '').length === 11 || cpfInput.classList.contains('invalid')) {
+      validarCpfCampo();
+    }
+  });
+  cpfInput.addEventListener('blur', () => {
+    if (cpfInput.value) validarCpfCampo();
+  });
+
+  document.getElementById('form').addEventListener('submit', e => {
+    const nome = document.getElementById('nome');
+    const cargo = select;
+    let ok = true;
+
+    const nomeErro = nome.value.trim().length < 3;
+    mostrarErro(nome, document.getElementById('err-nome'), nomeErro);
+
+    const cpfErro = !validarCpfCampo();
+
+    const cargoErro = !cargo.value;
+    mostrarErro(cargo, document.getElementById('err-cargo'), cargoErro);
+
+    if (nomeErro || cpfErro || cargoErro) {
+      e.preventDefault();
+      return;
+    }
+    nome.value = nome.value.trim();
+  });
+</script>
+</body>
+</html>
