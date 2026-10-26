@@ -32,7 +32,7 @@ if (!isset($_SESSION['nivel'])) {
 		<a id="abrerh" href="/siiupa/administracao/patrimonio" class="nav-link">Patrimônio</a>
 		<a id="abrerh" href="?setor=adm&sub=producao" class="nav-link">Produção e Estatística</a>
 		<a id="abreadministracao" href="administracao/paginaadministracao.php" class="nav-link">Administração</a>
-		<a id="abreimpressos" href="/siiupa/impressos/index.php" target='_blank' class="nav-link">Impressos</a>
+		<a id="abreimpressos" href="/siiupa/impressos/" target='_blank' class="nav-link">Impressos</a>
 		<a href="/siiupa/enviararquivo.php" class="nav-link">Arquivos</a>
 	</div>
 	<div id="notification-icon"><img src="/siiupa/imagens/icones/bell.svg" width="24px;">
