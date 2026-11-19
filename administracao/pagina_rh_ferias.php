@@ -27,6 +27,7 @@ if (isset($_GET['vinculo'])) {
   <h1><a class="btn btn-lg btn-outline-success" href="/siiupa/?setor=adm&sub=rh&subsub=ferias&ano_ferias=2024">2024</a></h1>
   <h1><a class="btn btn-lg btn-outline-success" href="/siiupa/?setor=adm&sub=rh&subsub=ferias&ano_ferias=2025">2025</a></h1>
   <h1><a class="btn btn-lg btn-outline-success" href="/siiupa/?setor=adm&sub=rh&subsub=ferias&ano_ferias=2026">2026</a></h1>
+  <h1><a class="btn btn-lg btn-outline-success" href="/siiupa/?setor=adm&sub=rh&subsub=ferias&ano_ferias=2027">2027</a></h1>
 </div>
 
 <div style="display:flex;gap:20px;">
