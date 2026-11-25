@@ -31,8 +31,8 @@ if (isset($_GET['vinculo'])) {
 </div>
 
 <div style="display:flex;gap:20px;">
-  <h2><a class="btn btn-lg btn-outline-info" href="/siiupa/?setor=adm&sub=rh&subsub=ferias&ano_ferias=2026&vinculo=temporario">TEMPORÁRIOS</a></h2>
-  <h2><a class="btn btn-lg btn-outline-info" href="/siiupa/?setor=adm&sub=rh&subsub=ferias&ano_ferias=2026&vinculo=efetivo">EFETIVOS</a></h2>
+  <h2><a class="btn btn-lg btn-outline-info" href="/siiupa/?setor=adm&sub=rh&subsub=ferias&ano_ferias=2027&vinculo=temporario">TEMPORÁRIOS</a></h2>
+  <h2><a class="btn btn-lg btn-outline-info" href="/siiupa/?setor=adm&sub=rh&subsub=ferias&ano_ferias=2027&vinculo=efetivo">EFETIVOS</a></h2>
   
 </div>
 <?php
