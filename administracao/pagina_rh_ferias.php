@@ -288,6 +288,9 @@ function mes($entrada)
 <a href="#" id="imprimirferias" class="btn btn-success">
   Imprimir
 </a>
+
+<a href="/siiupa/administracao/ferias/imprimir_ferias.php?ano_ferias=<?= (int)$ano_ferias ?>&vinculo=<?= urlencode($_GET['vinculo'] ?? '') ?>&idsetor=<?= (int)($_GET['idsetor'] ?? 0) ?>"
+   target="_blank" class="btn btn-success">Imprimir</a>
 <?php
 echo "<div id='ferias_impressao'>"; //////////// AREA DE IMPRESSA INICIO //////////////
 echo "<h1>Férias / Recesso $ano_ferias</h1>";
