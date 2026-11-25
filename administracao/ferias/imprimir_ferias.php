@@ -250,7 +250,7 @@ $textoFiltro = implode(' | ', $partesFiltro);
       <div class="sub"><?= h($textoFiltro) ?></div>
     </div>
     <div class="meta">
-      <strong>SIIUPA - Recursos Humanos</strong>
+      <strong>SIIUPA - Administração</strong>
       Emitido em <?= date('d/m/Y \à\s H:i') ?>
     </div>
   </header>
